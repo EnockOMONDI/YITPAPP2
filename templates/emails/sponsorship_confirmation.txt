@@ -1,0 +1,34 @@
+SPONSORSHIP REQUEST CONFIRMATION
+Youth Impact Training Programme
+
+Dear {{ user.first_name|default:user.username }},
+
+Thank you for submitting your sponsorship request!
+
+We have received your application and our team will review it carefully. You can expect to hear back from us within 5-7 business days.
+
+YOUR REQUEST DETAILS:
+- Request ID: #{{ sponsorship_request.id }}
+- Program: {{ sponsorship_request.get_program_name }}
+- Amount Requested: ${{ sponsorship_request.amount_needed }}
+- Status: {{ sponsorship_request.get_status_display }}
+- Submitted: {{ sponsorship_request.created_at|date:"F d, Y H:i" }}
+
+WHAT HAPPENS NEXT?
+
+1. Review Process: Our team will carefully review your application and supporting documents
+2. Verification: We may contact you or your emergency contact for additional information
+3. Decision: You will be notified of our decision via email
+4. Next Steps: If approved, we will provide details about the sponsorship process
+
+If you have any questions or need to update your application, please contact us at info@youthimpactglobal.com and include your Request ID (#{{ sponsorship_request.id }}) in the subject line.
+
+Thank you for your interest in the Youth Impact Training Programme. We are committed to supporting individuals who demonstrate dedication to personal growth and community impact.
+
+Best regards,
+Youth Impact Global Team
+Youth Impact Training Programme
+
+---
+This is an automated message. Please do not reply directly to this email.
+Youth Impact Global | info@youthimpactglobal.com

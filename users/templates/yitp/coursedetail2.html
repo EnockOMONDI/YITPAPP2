@@ -1,0 +1,180 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="page__title-area pt-120 pb-90">
+    <div class="page__title-shape">
+      
+    </div>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 40px;
+          background-color: #f8f9fa;
+          color: #333;
+      }
+      .course-container {
+          max-width: 900px;
+          margin: 0 auto;
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1, h2, h3 {
+          color: #2c3e50;
+      }
+      h1 {
+          text-align: center;
+      }
+      .module {
+          margin-top: 20px;
+          padding: 15px;
+          background: #f1f1f1;
+          border-left: 5px solid #007bff;
+          border-radius: 5px;
+      }
+      .module h3 {
+          margin-bottom: 5px;
+      }
+      ul {
+          list-style-type: none;
+          padding: 0;
+      }
+      ul li {
+          padding: 5px 0;
+      }
+      .activity {
+          background: #dff9fb;
+          padding: 10px;
+          border-left: 5px solid #17a2b8;
+          border-radius: 5px;
+          margin-top: 10px;
+      }
+      .resources, .outcomes {
+          margin-top: 30px;
+          padding: 15px;
+          background: #eef2f3;
+          border-left: 5px solid #28a745;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+<body>
+
+<div class="course-container">
+  <h1>Understanding Purpose in Life (UPL)</h1>
+  <p><strong>Unit Title:</strong> Understanding Purpose in Life (UPL)</p>
+    <p> <strong>Objective: </strong>   To help individuals in purpose discovery, goal-setting, and aligning values with career / entrepreneurial paths.</p>
+
+  <div class="module">
+      <h3>Unit 1: Introduction to Life's Purpose (1 Hour)</h3>
+      <p><strong>Objective:</strong> Understand the concept of purpose and why it matters.</p>
+      <ul>
+          <li>What is life’s purpose?</li>
+          <li>The distinction between goals, vision, and purpose.</li>
+          <li>Examples of purpose-driven lives: Gandhi, Mandela, and Mother Teresa.</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Reflective journaling on personal experiences that felt meaningful.
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Unit 2: The Foundations of Purpose (1.5 Hours)</h3>
+      <p><strong>Objective:</strong> Explore foundational principles for finding purpose.</p>
+      <ul>
+          <li>Napoleon Hill’s Definiteness of Purpose: How clear goals fuel achievement.</li>
+          <li>Zig Ziglar’s Wheel of Life: Balancing life’s domains for purpose.</li>
+          <li>Og Mandino’s The Greatest Salesman: Habits for meaningful living.</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Self-assessment exercise using Zig Ziglar’s Wheel.
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Unit 3: Purpose and Service (1 Hour)</h3>
+      <p><strong>Objective:</strong> Discover how purpose relates to serving others.</p>
+      <ul>
+          <li>Lessons from Mother Teresa: Compassion in action.</li>
+          <li>Mandela’s vision of unity and social justice.</li>
+          <li>The role of humility and selflessness in purpose.</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Group discussion on “Who am I serving today?”
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Unit 4: Overcoming Obstacles to Purpose (1 Hour)</h3>
+      <p><strong>Objective:</strong> Learn strategies to overcome internal and external barriers.</p>
+      <ul>
+          <li>Napoleon Hill’s Fear and Faith.</li>
+          <li>Gandhi’s resilience through nonviolence.</li>
+          <li>Cultivating inner strength and clarity.</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Visualization exercise: Breaking through barriers.
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Unit 5: Practical Tools for Defining Your Purpose (1.5 Hours)</h3>
+      <p><strong>Objective:</strong> Create a personal purpose statement.</p>
+      <ul>
+          <li>Techniques from Success Afrika resources.</li>
+          <li>Identifying passions and strengths.</li>
+          <li>Aligning purpose with values and goals.</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Writing your purpose statement with peer feedback.
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Unit 6: Purpose in Action (1.5 Hours)</h3>
+      <p><strong>Objective:</strong> Learn to integrate purpose into daily living.</p>
+      <ul>
+          <li>Og Mandino’s philosophy of habits and routine.</li>
+          <li>Strategies from Success Magazine: Time management for purpose.</li>
+          <li>Real-life examples from leaders and entrepreneurs.</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Create a weekly plan aligning tasks with purpose.
+      </div>
+  </div>
+
+  <div class="resources">
+      <h3>📚 Learning Resources</h3>
+      <ul>
+          <li>Videos from Success Afrika YouTube Channel</li>
+          <li>Articles and tools from Success.com</li>
+          <li>Recommended Books:
+              <ul>
+                  <li>Think and Grow Rich by Napoleon Hill</li>
+                  <li>The Greatest Salesman in the World by Og Mandino</li>
+                  <li>See You at the Top by Zig Ziglar</li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+
+  <div class="outcomes">
+      <h3>🎯 Course Outcomes</h3>
+      <ul>
+          <li>Clear understanding of life’s purpose.</li>
+          <li>Personalized purpose statement.</li>
+          <li>Tools and strategies to live a purpose-driven life.</li>
+      </ul>
+  </div>
+<br><br>
+<br><br><a href= "{% url 'yitp:registration2' %}" class="e-btn">Register for the course</a></div>
+ </section>
+
+
+     
+   
+   {% endblock %}

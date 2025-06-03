@@ -1,0 +1,259 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Events - Youth Impact Training Programme{% endblock %}
+
+{% block content %}
+    <!-- Events Area Start -->
+    <section class="events__area pt-140 pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section__title-wrapper text-center mb-70">
+                        <h2 class="section__title">Upcoming <span class="yellow-bg-big">Events <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span></h2>
+                        <p>Join us for exciting events, workshops, and networking opportunities designed to accelerate your growth and success.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filter Section -->
+            <div class="row mb-60">
+                <div class="col-12">
+                    <div class="course__filter-wrapper white-bg p-30 mb-40" style="border-radius: 6px; box-shadow: 0px 30px 40px 0px rgba(1, 11, 60, 0.06);">
+                        <div class="row align-items-center">
+                            <!-- Event Type Filter -->
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 mb-20">
+                                <div class="events__filter-buttons">
+                                    <h6 class="mb-15" style="color: #0e1133; font-weight: 600;">Event Type:</h6>
+                                    <div class="filter-btn-group">
+                                        <a href="?type=all" class="e-btn e-btn-border {% if selected_type == 'all' %}active{% endif %}" style="margin-right: 10px; margin-bottom: 10px;">All Events</a>
+                                        <a href="?type=physical" class="e-btn e-btn-border {% if selected_type == 'physical' %}active{% endif %}" style="margin-right: 10px; margin-bottom: 10px;">Physical</a>
+                                        <a href="?type=online" class="e-btn e-btn-border {% if selected_type == 'online' %}active{% endif %}" style="margin-bottom: 10px;">Online</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Search Form -->
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 mb-20">
+                                <div class="events__search">
+                                    <h6 class="mb-15" style="color: #0e1133; font-weight: 600;">Search Events:</h6>
+                                    <form method="get" class="search-form">
+                                        <div class="input-group">
+                                            <input type="text" name="q" placeholder="Search events..." value="{{ query }}" class="form-control" style="border: 2px solid #d7d9e3; border-radius: 4px 0 0 4px;">
+                                            <button type="submit" class="e-btn" style="border-radius: 0 4px 4px 0; height: 50px;">
+                                                <i class="far fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Category Filter -->
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mb-20">
+                                <div class="events__category-filter">
+                                    <h6 class="mb-15" style="color: #0e1133; font-weight: 600;">Category:</h6>
+                                    <select class="form-select" onchange="window.location.href=this.value" style="border: 2px solid #d7d9e3; border-radius: 4px; height: 50px;">
+                                        <option value="?category=">All Categories</option>
+                                        {% for cat in categories %}
+                                        <option value="?category={{ cat.slug }}" {% if category == cat.slug %}selected{% endif %}>
+                                            {{ cat.name }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Events -->
+            {% if featured_events %}
+            <div class="row mb-60">
+                <div class="col-12">
+                    <h3 class="section__subtitle mb-40" style="color: #0e1133; font-size: 24px; font-weight: 600;">Featured Events</h3>
+                </div>
+                {% for event in featured_events %}
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                    <div class="course__item white-bg mb-30 fix" style="position: relative;">
+                        <div class="course__thumb w-img p-relative fix">
+                            <a href="{% url 'events:event_detail' event.id %}">
+                                {% if event.image %}
+                                    <img src="{{ event.image.cdn_url }}-/resize/400x300/-/quality/smart/-/format/auto/" alt="{{ event.title }}" style="border-radius: 6px 6px 0 0;">
+                                {% else %}
+                                    <img src="{% static 'assets/img/course/course-1.jpg' %}" alt="{{ event.title }}" style="border-radius: 6px 6px 0 0;">
+                                {% endif %}
+                            </a>
+                            <div class="course__tag" style="background: #fc4389;">
+                                <span style="color: white; font-size: 12px; font-weight: 500;">Featured</span>
+                            </div>
+                            <div class="course__tag" style="top: 20px; right: 20px; left: auto; background: {% if event.event_type == 'ONLINE' %}#28a745{% else %}#007bff{% endif %};">
+                                <span style="color: white; font-size: 12px; font-weight: 500;">{{ event.get_event_type_display }}</span>
+                            </div>
+                        </div>
+                        <div class="course__content" style="padding: 30px;">
+                            {% if event.category %}
+                            <div class="course__meta d-flex align-items-center justify-content-between mb-15">
+                                <div class="course__lesson">
+                                    <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-tag"></i> {{ event.category.name }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <h3 class="course__title mb-20">
+                                <a href="{% url 'events:event_detail' event.id %}" style="color: #0e1133; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ event.title }}</a>
+                            </h3>
+                            <div class="course__meta d-flex align-items-center justify-content-between mb-20">
+                                <div class="course__lesson">
+                                    <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-calendar-alt"></i> {{ event.date|date:"M d, Y H:i" }}</span>
+                                </div>
+                            </div>
+                            <div class="course__meta d-flex align-items-center justify-content-between mb-20">
+                                <div class="course__lesson">
+                                    {% if event.event_type == 'ONLINE' %}
+                                        <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-globe"></i> Online Event</span>
+                                    {% else %}
+                                        <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-map-marker-alt"></i> {{ event.location|truncatechars:30 }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <p style="color: #6d6e75; margin-bottom: 20px; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.6;">{{ event.content|striptags|truncatechars:120 }}</p>
+                            <div class="course__more d-flex justify-content-between align-items-center">
+                                <div class="course__btn">
+                                    <a href="{% url 'events:event_detail' event.id %}" class="link-btn">
+                                        View Details
+                                        <i class="far fa-arrow-right"></i>
+                                        <i class="far fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- All Events -->
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="section__subtitle mb-40" style="color: #0e1133; font-size: 24px; font-weight: 600;">
+                        {% if query %}Search Results{% else %}All Events{% endif %}
+                        {% if events %}
+                            <span style="color: #6d6e75; font-size: 16px; font-weight: 400;">({{ events.paginator.count }} event{{ events.paginator.count|pluralize }})</span>
+                        {% endif %}
+                    </h3>
+                </div>
+
+                {% for event in events %}
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                    <div class="course__item white-bg mb-30 fix">
+                        <div class="course__thumb w-img p-relative fix">
+                            <a href="{% url 'events:event_detail' event.id %}">
+                                {% if event.image %}
+                                    <img src="{{ event.image.cdn_url }}-/resize/400x300/-/quality/smart/-/format/auto/" alt="{{ event.title }}" style="border-radius: 6px 6px 0 0;">
+                                {% else %}
+                                    <img src="{% static 'assets/img/course/course-1.jpg' %}" alt="{{ event.title }}" style="border-radius: 6px 6px 0 0;">
+                                {% endif %}
+                            </a>
+                            <div class="course__tag" style="background: {% if event.event_type == 'ONLINE' %}#28a745{% else %}#007bff{% endif %};">
+                                <span style="color: white; font-size: 12px; font-weight: 500;">{{ event.get_event_type_display }}</span>
+                            </div>
+                            {% if event.views %}
+                            <div class="course__tag" style="top: 20px; right: 20px; left: auto; background: rgba(0, 0, 0, 0.7);">
+                                <span style="color: white; font-size: 12px; font-weight: 500;"><i class="far fa-eye"></i> {{ event.views }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="course__content" style="padding: 30px;">
+                            {% if event.category %}
+                            <div class="course__meta d-flex align-items-center justify-content-between mb-15">
+                                <div class="course__lesson">
+                                    <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-tag"></i> {{ event.category.name }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <h3 class="course__title mb-20">
+                                <a href="{% url 'events:event_detail' event.id %}" style="color: #0e1133; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ event.title }}</a>
+                            </h3>
+                            <div class="course__meta d-flex align-items-center justify-content-between mb-20">
+                                <div class="course__lesson">
+                                    <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-calendar-alt"></i> {{ event.date|date:"M d, Y H:i" }}</span>
+                                </div>
+                            </div>
+                            <div class="course__meta d-flex align-items-center justify-content-between mb-20">
+                                <div class="course__lesson">
+                                    {% if event.event_type == 'ONLINE' %}
+                                        <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-globe"></i> Online Event</span>
+                                    {% else %}
+                                        <span style="color: #6d6e75; font-size: 14px;"><i class="far fa-map-marker-alt"></i> {{ event.location|truncatechars:30 }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <p style="color: #6d6e75; margin-bottom: 20px; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.6;">{{ event.content|striptags|truncatechars:100 }}</p>
+                            <div class="course__more d-flex justify-content-between align-items-center">
+                                <div class="course__btn">
+                                    <a href="{% url 'events:event_detail' event.id %}" class="link-btn">
+                                        View Details
+                                        <i class="far fa-arrow-right"></i>
+                                        <i class="far fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="text-center" style="padding: 60px 0;">
+                        <h4 style="color: #0e1133; margin-bottom: 20px;">No upcoming events found</h4>
+                        <p style="color: #6d6e75; margin-bottom: 30px;">
+                            {% if query %}
+                                Try searching with different keywords or check our featured events above.
+                            {% else %}
+                                Check back later for exciting new events and opportunities!
+                            {% endif %}
+                        </p>
+                        <a href="{% url 'yitp:contact' %}" class="e-btn e-btn-3">Contact Us for More Info</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if events.has_other_pages %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="basic-pagination text-center mt-40">
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                {% if events.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ events.previous_page_number }}" aria-label="Previous">
+                                        <i class="far fa-angle-left"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+
+                                {% for num in events.paginator.page_range %}
+                                <li class="page-item {% if num == events.number %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                                {% endfor %}
+
+                                {% if events.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ events.next_page_number }}" aria-label="Next">
+                                        <i class="far fa-angle-right"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <!-- Events Area End -->
+{% endblock %}

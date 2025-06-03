@@ -1,0 +1,10 @@
+*.pyc
+__pycache__/
+.env
+.venv
+db.sqlite3
+media/
+staticfiles/
+# Do NOT include these lines if they exist:
+# blogapp/
+# *.py

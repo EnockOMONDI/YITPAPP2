@@ -1,0 +1,143 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page__title-area pt-120 pb-90">
+    <div class="page__title-shape">
+      
+    </div>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 40px;
+          background-color: #f8f9fa;
+          color: #333;
+      }
+      .unit-container {
+          max-width: 900px;
+          margin: 0 auto;
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1, h2, h3 {
+          color: #2c3e50;
+      }
+      h1 {
+          text-align: center;
+      }
+      .module {
+          margin-top: 20px;
+          padding: 15px;
+          background: #f1f1f1;
+          border-left: 5px solid #007bff;
+          border-radius: 5px;
+      }
+      .module h3 {
+          margin-bottom: 5px;
+      }
+      ul {
+          list-style-type: none;
+          padding: 0;
+      }
+      ul li {
+          padding: 5px 0;
+      }
+      .activity {
+          background: #dff9fb;
+          padding: 10px;
+          border-left: 5px solid #17a2b8;
+          border-radius: 5px;
+          margin-top: 10px;
+      }
+      .resources, .outcomes {
+          margin-top: 30px;
+          padding: 15px;
+          background: #eef2f3;
+          border-left: 5px solid #28a745;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+<body>
+
+<div class="unit-container">
+  <h1>Personal Initiative (PI)</h1>
+  <p><strong>Unit Title:</strong> Personal Initiative (PI)</p>
+  <p><strong>TIME:</strong> 2 weeks of Two Hours</p>
+
+<br>
+
+       <h2>1. unit Description</h2>
+       <p>This unit introduces the concept of personal Initiative in entrepreneurship and instils skills and competencies one is required to use identifying possible opportunities, setting up SME’s and going over hindrances with an aim of establishing successful and effectively run businesses.</p>
+
+       <h2>2. Summary of Learning Outcomes (Objectives)</h2>
+       <ul>
+           <li>Identify action principles</li>
+           <li>Identify Sources of Information</li>
+           <li>Apply the sourced information in the process of entrepreneurship</li>
+           <li>Evaluate business ideas and opportunities</li>
+           <li>Learn the planning Skills and Setting of Goals</li>
+           <li>Apply the feedback Skills in the set-up SME’s</li>
+       </ul>
+
+       <h2>3. unit Content</h2>
+       <ul>
+           <li>Action Principles</li>
+           <li>Self-Starting</li>
+           <li>Be Future Oriented</li>
+           <li>Overcome Obstacles</li>
+           <li>Be Creative</li>
+           <li>Use Your Resources</li>
+           <li>Identify Sources of Information</li>
+           <li>Identify the needs and Problems of the Market</li>
+           <li>Evaluate Business Ideas</li>
+           <li>Set A Good Goal: PI</li>
+           <li>Acquire Finances</li>
+           <li>Plan Activities</li>
+           <li>Seek Feedback</li>
+       </ul>
+
+       <h2>4. Mode of Delivery</h2>
+       <ul>
+           <li>Online Lectures and Tutorials</li>
+           <li>Individual and group assignments</li>
+           <li>Instructor led facilitation of theory</li>
+           <li>Demonstration by trainer</li>
+           <li>Practical work by trainee</li>
+           <li>Viewing of related videos</li>
+           <li>Group discussions</li>
+           <li>Responding to case studies</li>
+           <li>Exercises</li>
+           <li>Response to Questionnaires</li>
+           <li>Experiment HomeWorks</li>
+           <li>Feedback From Others</li>
+           <li>Project</li>
+       </ul>
+
+       <h2>5. Instructional Materials/Equipment</h2>
+       <p>Online tools i.e Zoom, Google Meet, Laptop computers, Internet access and Digital resources.</p>
+
+       <h2>6. unit Assessment</h2>
+       <h3>unitwork:</h3>
+       <ul>
+           <li>Attendance/Class Participation: 10%</li>
+           <li>Individual and group online presentations: 15%</li>
+           <li>Individual and group Responses to HomeWorks and Experiments: 10%</li>
+           <li>Written assignments: 15%</li>
+       </ul>
+       <p><strong>Total unit Work: 50%</strong></p>
+       <p><strong>Project Work (Enterprise): 50%</strong></p>
+       <p><strong>Total: 100%</strong></p>
+
+
+       <br><br><a href= "{% url 'yitp:registration2' %}" class="e-btn">Register for the course</a>
+    </div>
+ </section>
+
+
+     
+   
+   {% endblock %}

@@ -1,0 +1,278 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <style>
+   .card {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: #fff;
+    box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+-webkit-box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+-moz-box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    
+    
+}
+  </style>
+
+
+    <br><br><br>
+
+<section class="signup__area po-rel-z1 pt-100 pb-145">
+    <div class="sign__shape">
+
+
+    </div>
+    <div class="container">
+       <div class="row">
+          <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
+             <div class="section__title-wrapper text-center mb-55">
+                <h2 class="section__title">Youth Impact Program Registration Form</h2>
+                <p>This is a paid program costing KES 5,000, with an option for two installments. Please fill out the details accurately. 
+                    After submission, you will receive a confirmation message. Thank you!</p>
+             </div>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+             <div class="sign__wrapper white-bg">
+              
+                <div class="sign__form">
+                   <form action="https://docs.google.com/forms/d/e/1FAIpQLSeT9_hORs-v8vl_qM6H84WK3fcbFxCYiSncSMD3z_x5Iv5-Vg/formResponse"
+                   target="_self"
+                   method="POST">
+                      <div class="sign__input-wrapper mb-25">
+                         <h5>Full Name</h5>
+                         <div class="sign__input">
+                           <input id="602245453" placeholder="Full name" name="entry.602245453" class="form-control">
+                            <i class="fal fa-user"></i>
+                         </div>
+                      </div>
+                      <div class="sign__input-wrapper mb-25">
+                         <h5>Email Addresss</h5>
+                         <div class="sign__input">
+                            <input type="email" placeholder="e-mail address"   name="entry.1019204249" class="form-control" >
+                            <i class="fal fa-envelope"></i>
+                         </div>
+                      </div>
+                      
+                      <div class="sign__input-wrapper mb-20">
+                         <h5>Next of Kin</h5>
+                         <div class="sign__input">
+                             <input id="1883047082" type="text" name="entry.1883047082" class="form-control" placeholder="Next Of Kin" >
+                          
+                         </div>
+                      </div>
+                      <div class="sign__input-wrapper mb-20">
+                        <h5>Phone Number</h5>
+                        <div class="sign__input">
+                           
+                            <input   type="text" name="entry.1354631558" class="form-control" placeholder="Your Phone Number">
+                         
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>Gender</h5>
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.10226966" value="Male">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.10226966" value="Female" >
+                                    Female
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.10226966" value="Prefer not to say" >
+                                    Prefer not to say
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.10226966" value="__other_option__" >
+                                </label>
+                                <input type="text" name="entry.10226966.other_option_response" placeholder="custom value">
+                            </div>
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>Are you living with any disability? </h5>
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.1513348645" value="Yes" >
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.1513348645" value="No" >
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-10">
+                        <h5>If yes, please share your disability number</h5>
+                        <div class="sign__input">
+                            <input  type="text" name="entry.241197763" class="form-control" >
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>If you are living with any disability, what reasonable accommodation will you require?</h5>
+                        <div class="sign__input">
+                           
+                         
+                                <input  type="text" name="entry.1022454677" class="form-control" >
+                                               
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>What is your current level of education?</h5>
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="1. Early Childhood Education (Pre-primary level)">
+                                    1. Early Childhood Education (Pre-Primary Level)
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="2. Primary Education">
+                                    2. Primary Education
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="3. Junior Secondary Education">
+                                    3. Junior Secondary Education
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="4. High School (Senior Secondary Education)">
+                                    4. High School (Senior Secondary Education)
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="5. Diploma">
+                                    5. Diploma
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="6. Degree">
+                                    6. Degree
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="7. Master&#x27;s">
+                                    7. Master&#x27;s
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.652543256" value="8. Doctorate">
+                                    8. Doctorate
+                                </label>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>If you have tertiary education, kindly share the  name of the  course</h5>
+                        <div class="sign__input">
+                         
+                                <input  type="text" name="entry.2083977349" class="form-control" >
+                                          
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>What is your County of residence?</h5>
+                        <div class="sign__input">
+                        <input id="1401527582" type="text" name="entry.1401527582" class="form-control" required="">
+                     </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-20">
+                        <h5>what is your Constituency  of residence?</h5>
+                        <div class="sign__input">
+                        <input id="1401527582" type="text" name="entry.1401527582" class="form-control" required="">
+                     </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-20">
+                        <h5>What is your home Constituency?</h5>
+                        <div class="sign__input">
+                            <input id="1504549682" type="text" name="entry.1504549682" class="form-control">                    </div>
+
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>Why do you want to join the program?</h5>
+                        <div class="sign__input">
+                            <textarea  name="entry.1429023209" class="form-control" ></textarea>
+                        </div>
+                     </div>
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>Are you able to pay the KES 5,000 fee?</h5>
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.389994847" value="Yes" >
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.389994847" value="No" >
+                                    No
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="entry.389994847" value="Maybe" >
+                                    Maybe
+                                </label>
+                            </div>
+                        </div>
+                     </div>
+                     <!-- <div class="sign__input-wrapper mb-20">
+                        <h5>How did you learn about this program?</h5>
+                        <div class="sign__input">
+                            <input  type="text" name="entry.1214905365" class="form-control" >                         
+                        </div>
+                     </div> -->
+                     <div class="sign__input-wrapper mb-20">
+                        <h5>How did you learn about this program?</h5>
+                        <div class="sign__input">
+                            <input id="1883047082" type="text" name="entry.1883047082" class="form-control" placeholder="" >
+                         
+                        </div>
+                     </div>
+                    
+
+                  
+                      <button class="e-btn w-100" type="submit" value="Submit"> <span></span>Submit</button>
+                     
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+
+ {% include 'yitp/footer.html' %}
+    
+  
+ {% endblock %}

@@ -1,0 +1,239 @@
+{% extends 'yitp/basenonav.html' %}
+{% load static %}
+
+{% block title %}Login - Youth Impact Training Programme{% endblock %}
+
+{% block extra_head %}
+<style>
+/* Login form styling */
+.login__area {
+    background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+}
+
+.login__wrapper {
+    background: white;
+    border-radius: 10px;
+    padding: 60px 40px;
+    box-shadow: 0px 30px 60px 0px rgba(1, 11, 60, 0.15);
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.login__form-input {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.login__form-input input {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    border: 2px solid #eef0f6;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #6d6e75;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.login__form-input input:focus {
+    border-color: #ff5d15;
+    background: white;
+    outline: none;
+}
+
+.login__form-input i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6d6e75;
+    font-size: 16px;
+}
+
+.login__form-input input:focus + i {
+    color: #ff5d15;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    border: 1px solid #f5c6cb;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    border: 1px solid #c3e6cb;
+}
+
+.login__options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff5d15;
+}
+
+.forgot-password {
+    color: #ff5d15;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #e04a0f;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #eef0f6;
+}
+
+.register-link a {
+    color: #ff5d15;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link a:hover {
+    color: #e04a0f;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login__area {
+        padding: 20px 0;
+    }
+
+    .login__wrapper {
+        padding: 40px 30px;
+        margin: 15px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    .login__wrapper {
+        padding: 30px 20px;
+        margin: 10px;
+        max-width: 95%;
+    }
+
+    .login__options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* Ensure proper centering on very small screens */
+@media (max-width: 320px) {
+    .login__wrapper {
+        padding: 25px 15px;
+        margin: 5px;
+        max-width: 98%;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="login__area">
+    <div class="login__wrapper">
+                    <div class="login__header text-center mb-40">
+                        <h2 style="color: #0e1133; font-size: 32px; font-weight: 700; margin-bottom: 15px;">Welcome Back</h2>
+                        <p style="color: #6d6e75; margin: 0;">Sign in to your Youth Impact Training Programme account</p>
+                    </div>
+
+                    <!-- Display Form Errors -->
+                    {% if form.non_field_errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="post" class="login__form">
+                        {% csrf_token %}
+                        
+                        <div class="login__form-input">
+                            <input type="text" name="username" placeholder="Username or Email" required 
+                                   value="{{ form.username.value|default:'' }}"
+                                   class="{% if form.username.errors %}error{% endif %}">
+                            <i class="fas fa-user"></i>
+                            {% if form.username.errors %}
+                                <div class="error-message" style="margin-top: 8px; margin-bottom: 0;">
+                                    {% for error in form.username.errors %}{{ error }}{% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="login__form-input">
+                            <input type="password" name="password" placeholder="Password" required
+                                   class="{% if form.password.errors %}error{% endif %}">
+                            <i class="fas fa-lock"></i>
+                            {% if form.password.errors %}
+                                <div class="error-message" style="margin-top: 8px; margin-bottom: 0;">
+                                    {% for error in form.password.errors %}{{ error }}{% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="login__options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember" style="color: #6d6e75; font-size: 14px;">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="e-btn e-btn-3" style="width: 100%; padding: 15px; font-size: 16px; font-weight: 600;">
+                            <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                            Sign In
+                        </button>
+
+                        {% if next %}
+                            <input type="hidden" name="next" value="{{ next }}">
+                        {% endif %}
+                    </form>
+
+                    <div class="register-link">
+                        <p style="color: #6d6e75; margin-bottom: 10px;">Don't have an account?</p>
+                        <a href="{% url 'register' %}">Create your account here</a>
+                    </div>
+    </div>
+</section>
+{% endblock %}

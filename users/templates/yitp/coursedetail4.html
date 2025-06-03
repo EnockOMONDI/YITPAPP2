@@ -1,0 +1,178 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page__title-area pt-120 pb-90">
+    <div class="page__title-shape">
+
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .course-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .module {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f1f1;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .module h3 {
+            margin-bottom: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 5px 0;
+        }
+
+        .activity {
+            background: #dff9fb;
+            padding: 10px;
+            border-left: 5px solid #17a2b8;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .resources,
+        .outcomes {
+            margin-top: 30px;
+            padding: 15px;
+            background: #eef2f3;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+        }
+    </style>
+
+
+    <div class="course-container">
+        <h1>The Power of Mindset (TPM)</h1>
+        <p><strong>Unit Title:</strong> The Power of Mindset (TPM)</p>
+        <p><strong>Objective: </strong> To help individuals in Mindset shifts, confidence-building, and techniques for
+            long-term success</p>
+
+        <div class="module">
+            <h3>Topic 1: Introduction to Mindset and Its Impact (1 Hour)</h3>
+            <p><strong>Objective:</strong> Understand what mindset is and why it matters.</p>
+            <ul>
+                <li>Fixed vs. Growth Mindset (Carol Dweck overview)</li>
+                <li>Influence of mindset on success and resilience</li>
+                <li>Insights from Nelson Mandela: A mindset of perseverance and hope</li>
+            </ul>
+            <div class="activity">
+                <strong>Activity:</strong> Reflective exercise—“What beliefs shape my current mindset?”
+            </div>
+        </div>
+
+        <div class="module">
+            <h3>Topic 2: The Science of a Positive Mental Attitude (1 Hour)</h3>
+            <p><strong>Objective:</strong> Explore the principles behind maintaining a positive outlook.</p>
+            <ul>
+                <li>Napoleon Hill’s Positive Mental Attitude concept</li>
+                <li>W. Clement Stone’s Success through a PMA</li>
+                <li>The psychology of positivity and neuroplasticity</li>
+            </ul>
+            <div class="activity">
+                <strong>Activity:</strong> Gratitude journaling: Noting three positives daily.
+            </div>
+        </div>
+
+        <div class="module">
+            <h3>Topic 3: Building a Foundation for Positivity (1.5 Hours)</h3>
+            <p><strong>Objective:</strong> Learn to build habits that support a positive mindset.</p>
+            <ul>
+                <li>Zig Ziglar’s Priming the Pump: The role of self-discipline</li>
+                <li>Og Mandino’s Scrolls (from The Greatest Salesman): Daily affirmations</li>
+                <li>Gandhi’s approach to intentional living</li>
+            </ul>
+            <div class="activity">
+                <strong>Activity:</strong> Design a personal affirmation or mantra for positivity.
+            </div>
+        </div>
+
+        <div class="module">
+            <h3>Topic 4: Overcoming Negative Thinking (1.5 Hours)</h3>
+            <p><strong>Objective:</strong> Identify and counteract negative thought patterns.</p>
+            <ul>
+                <li>Napoleon Hill’s Mastering Your Fears</li>
+                <li>Strategies from Success Afrika resources</li>
+                <li>Mother Teresa’s example of transforming negativity into action</li>
+            </ul>
+            <div class="activity">
+                <strong>Activity:</strong> Group exercise—Roleplay reframing negative scenarios.
+            </div>
+        </div>
+
+        <div class="module">
+            <h3>Topic 5: Mindset in Action: Adversity and Growth (1.5 Hours)</h3>
+            <p><strong>Objective:</strong> Apply a positive mindset in challenging situations.</p>
+            <ul>
+                <li>Nelson Mandela’s long walk to freedom: Lessons in resilience</li>
+                <li>Gandhi’s strength through nonviolent resistance</li>
+                <li>Strategies for transforming obstacles into opportunities</li>
+            </ul>
+            <div class="activity">
+                <strong>Activity:</strong> Case study analysis of historical or personal challenges.
+            </div>
+        </div>
+
+        <div class="resources">
+            <h3>📚 Learning Resources</h3>
+            <ul>
+                <li>Videos from Success Afrika YouTube Channel</li>
+                <li>Tools and articles from Success.com</li>
+                <li>Recommended Books:
+                    <ul>
+                        <li>Success through a Positive Mental Attitude by Napoleon Hill and W. Clement Stone</li>
+                        <li>The Greatest Salesman in the World by Og Mandino</li>
+                        <li>See You at the Top by Zig Ziglar</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="outcomes">
+            <h3>🎯 Course Outcomes</h3>
+            <ul>
+                <li>Enhanced understanding of how to develop and maintain a positive mental attitude.</li>
+                <li>Practical strategies for applying positivity in daily life.</li>
+                <li>A personalized plan for mindset growth and sustainability.</li>
+            </ul>
+        </div>
+        <br><br><a href="{% url 'yitp:registration2' %}" class="e-btn">Register for the course</a>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

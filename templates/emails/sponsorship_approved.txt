@@ -1,0 +1,47 @@
+CONGRATULATIONS! YOUR SPONSORSHIP REQUEST HAS BEEN APPROVED
+Youth Impact Training Programme
+
+Dear {{ user.first_name|default:user.username }},
+
+✅ YOUR SPONSORSHIP REQUEST HAS BEEN APPROVED!
+
+We are delighted to inform you that your sponsorship request for the {{ sponsorship_request.get_program_name }} has been approved. This is an exciting step forward in your educational journey!
+
+APPROVED REQUEST DETAILS:
+- Request ID: #{{ sponsorship_request.id }}
+- Program: {{ sponsorship_request.get_program_name }}
+- Approved Amount: ${{ sponsorship_request.amount_needed }}
+- Approval Date: {{ sponsorship_request.reviewed_at|date:"F d, Y" }}
+- Reviewed By: {{ admin_user.get_full_name|default:admin_user.username }}
+
+{% if admin_notes %}
+MESSAGE FROM OUR TEAM:
+{{ admin_notes }}
+{% endif %}
+
+WHAT HAPPENS NEXT?
+
+1. Enrollment Confirmation: You will receive enrollment details within 2-3 business days
+2. Payment Processing: Our finance team will process the sponsorship payment directly
+3. Program Access: You will receive login credentials and program materials
+4. Orientation: Attend the mandatory program orientation session
+5. Support: Our team will be available throughout your learning journey
+
+IMPORTANT CONTACTS:
+- Program Coordinator: info@youthimpactglobal.com
+- Finance Team: finance@youthimpactglobal.com
+- Technical Support: support@youthimpactglobal.com
+
+We believe in your potential and are excited to support your educational goals. This sponsorship is an investment in your future, and we look forward to seeing the positive impact you will make.
+
+If you have any questions or concerns, please don't hesitate to contact us using the information above.
+
+Congratulations once again, and welcome to the Youth Impact Training Programme!
+
+Best regards,
+{{ admin_user.get_full_name|default:"Youth Impact Global Team" }}
+Youth Impact Training Programme
+
+---
+This is an official notification from Youth Impact Global.
+Youth Impact Global | info@youthimpactglobal.com

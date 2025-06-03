@@ -1,0 +1,44 @@
+NEW SPONSORSHIP REQUEST - ADMIN NOTIFICATION
+Youth Impact Training Programme
+
+🚨 ACTION REQUIRED: A new sponsorship request has been submitted and requires review.
+
+APPLICANT INFORMATION:
+- Full Name: {{ user.get_full_name|default:user.username }}
+- Username: {{ user.username }}
+- Email: {{ user.email }}
+- Member Since: {{ user.date_joined|date:"F d, Y" }}
+- Last Login: {{ user.last_login|date:"F d, Y H:i"|default:"Never" }}
+
+REQUEST DETAILS:
+- Request ID: #{{ sponsorship_request.id }}
+- Program: {{ sponsorship_request.get_program_name }}
+- Amount Requested: ${{ sponsorship_request.amount_needed }}
+- Financial Situation: {{ sponsorship_request.get_financial_situation_name }}
+- Status: {{ sponsorship_request.get_status_display }}
+- Submitted: {{ sponsorship_request.created_at|date:"F d, Y H:i" }}
+- Supporting Document: {% if sponsorship_request.supporting_document %}Attached ({{ sponsorship_request.supporting_document.name }}){% else %}None provided{% endif %}
+
+DETAILED EXPLANATION:
+{{ sponsorship_request.reason }}
+
+EMERGENCY CONTACT:
+- Name: {{ sponsorship_request.emergency_contact_name }}
+- Phone: {{ sponsorship_request.emergency_contact_phone }}
+- Email: {{ sponsorship_request.emergency_contact_email }}
+- Relationship: {{ sponsorship_request.emergency_contact_relationship }}
+
+REVIEW GUIDELINES:
+1. Verify Information: Cross-check provided details and supporting documents
+2. Assess Need: Evaluate the financial situation and genuine need for sponsorship
+3. Program Alignment: Ensure the request aligns with YITP objectives
+4. Contact Verification: Consider contacting the emergency contact if needed
+5. Decision Timeline: Aim to respond within 5-7 business days
+
+QUICK ACTIONS:
+- Review this request in the admin panel to approve, reject, or request more information
+- Contact applicant directly: {{ user.email }}
+
+---
+This notification was sent automatically when a new sponsorship request was submitted.
+Youth Impact Global | Admin Panel | info@youthimpactglobal.com

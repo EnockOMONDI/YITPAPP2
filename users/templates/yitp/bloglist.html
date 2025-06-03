@@ -1,0 +1,187 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Blog Posts - Youth Impact Training Programme{% endblock %}
+
+{% block content %}
+    <!-- Blog Area Start -->
+    <section class="blog__area pt-140 pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section__title text-center mb-70">Latest Blog Posts</h2>
+
+                    <!-- Search Form -->
+                    {% if query %}
+                        <div class="text-center mb-4">
+                            <p class="text-muted">Search results for: "<strong>{{ query }}</strong>"</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Featured Blog Posts -->
+            {% if featured_blog and not query %}
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h3 class="section__subtitle mb-4">Featured Posts</h3>
+                </div>
+                {% for post in featured_blog %}
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                    <div class="blog__item white-bg mb-30 transition-3 featured-post">
+                        <div class="blog__thumb w-img fix">
+                            <a href="{% url 'blogapp:blog-detail' post.pid %}">
+                                {% if post.image %}
+                                    <img src="{{ post.image.cdn_url }}" alt="{{ post.title }}">
+                                {% else %}
+                                    <img src="{% static 'assets/img/blog/default-blog.jpg' %}" alt="{{ post.title }}">
+                                {% endif %}
+                            </a>
+                            <div class="featured-badge">
+                                <span class="badge bg-primary">Featured</span>
+                            </div>
+                        </div>
+                        <div class="blog__content">
+                            {% if post.category %}
+                            <div class="blog__tag">
+                                <a href="{% url 'blogapp:category_detail' post.category.slug %}">{{ post.category.title }}</a>
+                            </div>
+                            {% endif %}
+                            <h3 class="blog__title">
+                                <a href="{% url 'blogapp:blog-detail' post.pid %}">{{ post.title|truncatechars:80 }}</a>
+                            </h3>
+                            <div class="blog__meta">
+                                <span><i class="far fa-calendar-alt"></i> <strong>{{ post.date|date:"M d, Y" }}</strong></span>
+                                <span><i class="far fa-user"></i> <strong>By {{ post.Author }}</strong></span>
+                                <span><i class="far fa-eye"></i> <strong>{{ post.views }} views</strong></span>
+                            </div>
+                            <br>
+                            <p>{{ post.content|striptags|truncatechars:120 }}</p>
+                            <div class="blog__read-time">
+                                <small class="text-muted">{{ post.get_read_time }} min read</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- All Blog Posts -->
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="section__subtitle mb-4">
+                        {% if query %}Search Results{% else %}All Posts{% endif %}
+                        <span class="text-muted">({{ blog_count.count }} post{{ blog_count.count|pluralize }})</span>
+                    </h3>
+                </div>
+
+                {% for post in blog %}
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                    <div class="blog__item white-bg mb-30 transition-3">
+                        <div class="blog__thumb w-img fix">
+                            <a href="{% url 'blogapp:blog-detail' post.pid %}">
+                                {% if post.image %}
+                                    <img src="{{ post.image.cdn_url }}" alt="{{ post.title }}">
+                                {% else %}
+                                    <img src="{% static 'assets/img/blog/default-blog.jpg' %}" alt="{{ post.title }}">
+                                {% endif %}
+                            </a>
+                            {% if post.trending %}
+                            <div class="trending-badge">
+                                <span class="badge bg-warning">Trending</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="blog__content">
+                            {% if post.category %}
+                            <div class="blog__tag">
+                                <a href="{% url 'blogapp:category_detail' post.category.slug %}">{{ post.category.title }}</a>
+                            </div>
+                            {% endif %}
+                            <h3 class="blog__title">
+                                <a href="{% url 'blogapp:blog-detail' post.pid %}">{{ post.title|truncatechars:80 }}</a>
+                            </h3>
+                            <div class="blog__meta">
+                                <span><i class="far fa-calendar-alt"></i> <strong>{{ post.date|date:"M d, Y" }}</strong></span>
+                                <span><i class="far fa-user"></i> <strong>By {{ post.Author }}</strong></span>
+                                <span><i class="far fa-eye"></i> <strong>{{ post.views }} views</strong></span>
+                            </div>
+                            <br>
+                            <p>{{ post.content|striptags|truncatechars:120 }}</p>
+                            <div class="blog__read-time">
+                                <small class="text-muted">{{ post.get_read_time }} min read</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <h4>No blog posts found</h4>
+                        <p class="text-muted">
+                            {% if query %}
+                                Try searching with different keywords.
+                            {% else %}
+                                Check back later for new content!
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="pagination__wrapper text-center mt-4">
+                        <nav aria-label="Blog pagination">
+                            <ul class="pagination justify-content-center">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}" aria-label="First">
+                                            <span aria-hidden="true">&laquo;&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% for num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <li class="page-item active">
+                                            <span class="page-link">{{ num }}</span>
+                                        </li>
+                                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}" aria-label="Last">
+                                            <span aria-hidden="true">&raquo;&raquo;</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <!-- Blog Area End -->
+{% endblock %}

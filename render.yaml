@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: django-blog
+    env: python
+    branch: deployment
+    buildCommand: ./build.sh
+    startCommand: gunicorn blog.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: DATABASE_URL
+        value: postgresql://YITPDB_owner:npg_n0zFeVa6SCxm@ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech:5432/YITPDB
+      - key: DB_NAME
+        value: YITPDB
+      - key: DB_USER
+        value: YITPDB_owner
+      - key: DB_PASSWORD
+        value: npg_n0zFeVa6SCxm
+      - key: DB_HOST
+        value: ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech
+      - key: DB_PORT
+        value: 5432
+      - key: UPLOADCARE_PUBLIC_KEY
+        value: 18ad19435c41077ca842
+      - key: UPLOADCARE_SECRET_KEY
+        value: b27f8995d2e4b66cbf02
+      - key: DEFAULT_FROM_EMAIL
+        value: noreply@youthimpactglobal.com

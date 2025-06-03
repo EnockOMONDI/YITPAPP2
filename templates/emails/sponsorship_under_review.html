@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorship Request Under Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+            color: #212529;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-radius: 0 0 8px 8px;
+        }
+        .status-badge {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .details {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .details h3 {
+            color: #ffc107;
+            margin-top: 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: bold;
+            color: #6d6e75;
+        }
+        .value {
+            color: #0e1133;
+        }
+        .admin-notes {
+            background: #e8f4fd;
+            border: 1px solid #b8daff;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .timeline {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #ff5d15;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #6d6e75;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 Your Request is Under Review</h1>
+        <p>Youth Impact Training Programme</p>
+    </div>
+    
+    <div class="content">
+        <p>Dear {{ user.first_name|default:user.username }},</p>
+        
+        <div class="status-badge">
+            🔍 Your sponsorship request is currently under detailed review
+        </div>
+        
+        <p>We wanted to update you on the status of your sponsorship request for the <strong>{{ sponsorship_request.get_program_name }}</strong>. Your application has moved to the detailed review stage, which means our team is conducting a thorough evaluation of your request.</p>
+        
+        <div class="details">
+            <h3>Request Status Update</h3>
+            
+            <div class="detail-row">
+                <span class="label">Request ID:</span>
+                <span class="value">#{{ sponsorship_request.id }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Program:</span>
+                <span class="value">{{ sponsorship_request.get_program_name }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Amount Requested:</span>
+                <span class="value">${{ sponsorship_request.amount_needed }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Current Status:</span>
+                <span class="value">{{ sponsorship_request.get_status_display }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Review Started:</span>
+                <span class="value">{{ sponsorship_request.reviewed_at|date:"F d, Y" }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Reviewing Team Member:</span>
+                <span class="value">{{ admin_user.get_full_name|default:admin_user.username }}</span>
+            </div>
+        </div>
+        
+        {% if admin_notes %}
+        <div class="admin-notes">
+            <h4>Update from Our Review Team:</h4>
+            <p>{{ admin_notes|linebreaks }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="timeline">
+            <h3>📅 Review Process Timeline</h3>
+            <ul>
+                <li><strong>✅ Application Received:</strong> {{ sponsorship_request.created_at|date:"F d, Y" }}</li>
+                <li><strong>🔍 Under Review:</strong> {{ sponsorship_request.reviewed_at|date:"F d, Y" }} (Current Stage)</li>
+                <li><strong>⏳ Final Decision:</strong> Expected within 3-5 business days</li>
+                <li><strong>📧 Notification:</strong> You will receive an email with the final decision</li>
+            </ul>
+        </div>
+        
+        <div class="details">
+            <h3>🔍 What's Happening During Review?</h3>
+            <ul>
+                <li><strong>Document Verification:</strong> Reviewing all submitted materials and supporting documents</li>
+                <li><strong>Eligibility Assessment:</strong> Confirming program requirements and financial need criteria</li>
+                <li><strong>Impact Evaluation:</strong> Assessing potential impact and alignment with program goals</li>
+                <li><strong>Budget Allocation:</strong> Reviewing available funding and budget considerations</li>
+                <li><strong>Final Approval:</strong> Senior team review and final decision making</li>
+            </ul>
+        </div>
+        
+        <div class="details">
+            <h3>📞 Need to Update Your Information?</h3>
+            <p>If you need to provide additional information or update any details in your application, please contact us immediately:</p>
+            <p><strong>Review Team:</strong> <a href="mailto:reviews@youthimpactglobal.com">reviews@youthimpactglobal.com</a></p>
+            <p><strong>General Inquiries:</strong> <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a></p>
+            <p><em>Please include your Request ID (#{{ sponsorship_request.id }}) in all communications.</em></p>
+        </div>
+        
+        <p>We appreciate your patience during this review process. Our team is committed to giving each application the thorough consideration it deserves.</p>
+        
+        <p>You will receive another email notification as soon as a final decision has been made regarding your sponsorship request.</p>
+        
+        <p>Thank you for your continued interest in the Youth Impact Training Programme.</p>
+        
+        <p>Best regards,<br>
+        <strong>{{ admin_user.get_full_name|default:"Youth Impact Global Review Team" }}</strong><br>
+        Youth Impact Training Programme</p>
+    </div>
+    
+    <div class="footer">
+        <p>This is an official status update from Youth Impact Global.</p>
+        <p>Youth Impact Global | <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a></p>
+    </div>
+</body>
+</html>

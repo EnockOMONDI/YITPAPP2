@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Sponsorship Request</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-radius: 0 0 8px 8px;
+        }
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #ff5d15;
+        }
+        .section h3 {
+            color: #0e1133;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .label {
+            font-weight: bold;
+            color: #6d6e75;
+            padding: 8px 0;
+        }
+        .value {
+            color: #0e1133;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .reason-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #ff5d15;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        .actions {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            background: #ff5d15;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 5px 10px;
+        }
+        .button.secondary {
+            background: #6c757d;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #6d6e75;
+            font-size: 14px;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚨 New Sponsorship Request</h1>
+        <p>Youth Impact Training Programme - Admin Notification</p>
+    </div>
+    
+    <div class="content">
+        <div class="alert">
+            <strong>Action Required:</strong> A new sponsorship request has been submitted and requires review.
+        </div>
+        
+        <div class="section">
+            <h3>👤 Applicant Information</h3>
+            <div class="detail-grid">
+                <div class="label">Full Name:</div>
+                <div class="value">{{ user.get_full_name|default:user.username }}</div>
+                
+                <div class="label">Username:</div>
+                <div class="value">{{ user.username }}</div>
+                
+                <div class="label">Email:</div>
+                <div class="value">{{ user.email }}</div>
+                
+                <div class="label">Member Since:</div>
+                <div class="value">{{ user.date_joined|date:"F d, Y" }}</div>
+                
+                <div class="label">Last Login:</div>
+                <div class="value">{{ user.last_login|date:"F d, Y H:i"|default:"Never" }}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>💰 Request Details</h3>
+            <div class="detail-grid">
+                <div class="label">Request ID:</div>
+                <div class="value">#{{ sponsorship_request.id }}</div>
+                
+                <div class="label">Program:</div>
+                <div class="value">{{ sponsorship_request.get_program_name }}</div>
+                
+                <div class="label">Amount Requested:</div>
+                <div class="value">${{ sponsorship_request.amount_needed }}</div>
+                
+                <div class="label">Financial Situation:</div>
+                <div class="value">{{ sponsorship_request.get_financial_situation_name }}</div>
+                
+                <div class="label">Status:</div>
+                <div class="value"><span class="status-pending">{{ sponsorship_request.get_status_display }}</span></div>
+                
+                <div class="label">Submitted:</div>
+                <div class="value">{{ sponsorship_request.created_at|date:"F d, Y H:i" }}</div>
+                
+                <div class="label">Supporting Document:</div>
+                <div class="value">
+                    {% if sponsorship_request.supporting_document %}
+                        📎 Attached ({{ sponsorship_request.supporting_document.name }})
+                    {% else %}
+                        None provided
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>📝 Detailed Explanation</h3>
+            <div class="reason-box">
+                {{ sponsorship_request.reason|linebreaks }}
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🚨 Emergency Contact</h3>
+            <div class="detail-grid">
+                <div class="label">Name:</div>
+                <div class="value">{{ sponsorship_request.emergency_contact_name }}</div>
+                
+                <div class="label">Phone:</div>
+                <div class="value">{{ sponsorship_request.emergency_contact_phone }}</div>
+                
+                <div class="label">Email:</div>
+                <div class="value">{{ sponsorship_request.emergency_contact_email }}</div>
+                
+                <div class="label">Relationship:</div>
+                <div class="value">{{ sponsorship_request.emergency_contact_relationship }}</div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <h3>⚡ Quick Actions</h3>
+            <p>Review this request in the admin panel to approve, reject, or request more information.</p>
+            <a href="#" class="button">Review in Admin Panel</a>
+            <a href="mailto:{{ user.email }}?subject=Re: Sponsorship Request #{{ sponsorship_request.id }}" class="button secondary">Contact Applicant</a>
+        </div>
+        
+        <div class="section">
+            <h3>📊 Review Guidelines</h3>
+            <ul>
+                <li><strong>Verify Information:</strong> Cross-check provided details and supporting documents</li>
+                <li><strong>Assess Need:</strong> Evaluate the financial situation and genuine need for sponsorship</li>
+                <li><strong>Program Alignment:</strong> Ensure the request aligns with YITP objectives</li>
+                <li><strong>Contact Verification:</strong> Consider contacting the emergency contact if needed</li>
+                <li><strong>Decision Timeline:</strong> Aim to respond within 5-7 business days</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>This notification was sent automatically when a new sponsorship request was submitted.</p>
+        <p>Youth Impact Global | Admin Panel | <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<br><br><br>
+        <section class="page__title-area pt-90 pb-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-8 align-items-center">
+                        <div class="page__title-content mb-50">
+                            <h2 class="page__title">Upcoming Events</h2>
+                            <h3 class="">Join us for our upcoming webinar!</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="event-item mb-40">
+                            <h3 class="event-title">Webinar: Personal Initiative Training for Entrepreneurship</h3>
+                            <p><strong>Date:</strong> March 26, 2025</p>
+                            <p><strong>Time:</strong> 10:00 AM - 12:00 PM (EAT)</p>
+                            <p><strong>Description:</strong> This webinar will cover the essential skills and competencies required for personal initiative in entrepreneurship, including identifying opportunities and overcoming challenges.</p>
+                            <a href="{% url 'yitp:contact' %}" class="e-btn">Register will open soon </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% include 'yitp/footer.html' %}
+    
+  
+        {% endblock %}

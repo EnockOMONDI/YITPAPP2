@@ -1,0 +1,734 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Registration - Youth Impact Training Programme{% endblock %}
+
+{% block extra_head %}
+<!-- Navbar Styling Fix for Dark Hero Background -->
+<style>
+/* Initial navbar styling for dark hero background */
+.header__transparent .main-menu nav ul li a {
+    color: white !important;
+    transition: color 0.3s ease;
+}
+
+.header__transparent .header__btn .e-btn {
+    color: white !important;
+    border-color: white !important;
+    transition: all 0.3s ease;
+}
+
+.header__transparent .header__btn .e-btn:hover {
+    background-color: #ff5d15 !important;
+    border-color: #ff5d15 !important;
+    color: white !important;
+}
+
+.header__transparent .cat-menu span {
+    color: white !important;
+    transition: color 0.3s ease;
+}
+
+.header__transparent .sidebar-toggle-btn .line {
+    background-color: white !important;
+    transition: background-color 0.3s ease;
+}
+
+/* Navbar styling when scrolled (sticky header) */
+.header__area.sticky .main-menu nav ul li a {
+    color: #0e1133 !important;
+}
+
+.header__area.sticky .header__btn .e-btn {
+    color: #0e1133 !important;
+    border-color: #ff5d15 !important;
+}
+
+.header__area.sticky .header__btn .e-btn:hover {
+    background-color: #ff5d15 !important;
+    border-color: #ff5d15 !important;
+    color: white !important;
+}
+
+.header__area.sticky .cat-menu span {
+    color: #0e1133 !important;
+}
+
+.header__area.sticky .sidebar-toggle-btn .line {
+    background-color: #0e1133 !important;
+}
+
+/* Active menu item styling */
+.header__transparent .main-menu nav ul li a.active {
+    color: #ff5d15 !important;
+}
+
+.header__area.sticky .main-menu nav ul li a.active {
+    color: #ff5d15 !important;
+}
+
+/* Submenu styling */
+.header__transparent .cat-submenu {
+    background-color: white !important;
+}
+
+.header__transparent .cat-submenu li a {
+    color: #0e1133 !important;
+}
+
+/* Mobile menu toggle button styling */
+.header__transparent .sidebar-toggle-btn {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.header__area.sticky .sidebar-toggle-btn {
+    border: 1px solid rgba(14, 17, 51, 0.3) !important;
+}
+
+/* Breadcrumb styling for better contrast */
+.breadcrumb-item a {
+    color: #ff5d15 !important;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+   <!-- Hero Section -->
+   <section class="page__title-area pt-140 pb-120" style="background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);">
+      <div class="container">
+         <div class="row">
+            <div class="col-xxl-12">
+               <div class="page__title-content text-center">
+                  <div class="page__title-breadcrumb mb-20">
+                     <nav>
+                        <ol class="breadcrumb justify-content-center">
+                           <li class="breadcrumb-item"><a href="{% url 'yitp:home' %}" style="color: #ff5d15;">Home</a></li>
+                           <li class="breadcrumb-item active" style="color: white;">Registration</li>
+                        </ol>
+                     </nav>
+                  </div>
+                  <h1 class="page__title" style="color: white; font-size: 48px; font-weight: 700; margin-bottom: 20px;">Join the Youth Impact Training Programme</h1>
+                  <p style="color: rgba(255,255,255,0.8); font-size: 18px; max-width: 600px; margin: 0 auto;">Transform your future with our comprehensive leadership development program designed for ambitious young people aged 15-25.</p>
+
+                  <!-- Quick Stats -->
+                  <div class="hero__stats mt-50">
+                     <div class="row justify-content-center">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                           <div class="stat__item text-center">
+                              <h3 style="color: #ff5d15; font-size: 32px; font-weight: 700; margin-bottom: 5px;">500+</h3>
+                              <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Graduates</p>
+                           </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                           <div class="stat__item text-center">
+                              <h3 style="color: #ff5d15; font-size: 32px; font-weight: 700; margin-bottom: 5px;">12 Weeks</h3>
+                              <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Program Duration</p>
+                           </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                           <div class="stat__item text-center">
+                              <h3 style="color: #ff5d15; font-size: 32px; font-weight: 700; margin-bottom: 5px;">95%</h3>
+                              <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Success Rate</p>
+                           </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                           <div class="stat__item text-center">
+                              <h3 style="color: #ff5d15; font-size: 32px; font-weight: 700; margin-bottom: 5px;">24/7</h3>
+                              <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Support</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Program Overview -->
+   <section class="program__overview pt-120 pb-60">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <div class="section__title-wrapper text-center mb-60">
+                  <h2 class="section__title" style="color: #0e1133;">What You'll <span class="yellow-bg-big">Get <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span></h2>
+                  <p style="color: #6d6e75; max-width: 600px; margin: 0 auto;">Our comprehensive program includes everything you need to develop leadership skills and create meaningful impact in your community.</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+               <div class="course__item white-bg mb-30 fix" style="text-align: center; padding: 40px 30px;">
+                  <div class="course__icon mb-30">
+                     <i class="fas fa-graduation-cap" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+                  <h4 style="color: #0e1133; margin-bottom: 15px;">12 Weeks Training</h4>
+                  <p style="color: #6d6e75; font-size: 14px;">Comprehensive leadership development curriculum with weekly sessions</p>
+               </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+               <div class="course__item white-bg mb-30 fix" style="text-align: center; padding: 40px 30px;">
+                  <div class="course__icon mb-30">
+                     <i class="fas fa-users" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+                  <h4 style="color: #0e1133; margin-bottom: 15px;">Mentorship</h4>
+                  <p style="color: #6d6e75; font-size: 14px;">One-on-one guidance from experienced leaders and industry experts</p>
+               </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+               <div class="course__item white-bg mb-30 fix" style="text-align: center; padding: 40px 30px;">
+                  <div class="course__icon mb-30">
+                     <i class="fas fa-certificate" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+                  <h4 style="color: #0e1133; margin-bottom: 15px;">Certification</h4>
+                  <p style="color: #6d6e75; font-size: 14px;">Official certificate upon successful completion of the program</p>
+               </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+               <div class="course__item white-bg mb-30 fix" style="text-align: center; padding: 40px 30px;">
+                  <div class="course__icon mb-30">
+                     <i class="fas fa-network-wired" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+                  <h4 style="color: #0e1133; margin-bottom: 15px;">Network Access</h4>
+                  <p style="color: #6d6e75; font-size: 14px;">Join our global community of young leaders and changemakers</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Registration Steps -->
+   <section class="steps__area pt-120 pb-120">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <div class="section__title-wrapper text-center mb-60">
+                  <h2 class="section__title" style="color: #0e1133;">Simple <span class="yellow-bg-big">Registration <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span> Process</h2>
+                  <p style="color: #6d6e75; max-width: 600px; margin: 0 auto;">Get started in just 3 easy steps. Our streamlined process ensures you can begin your transformation journey quickly.</p>
+               </div>
+            </div>
+         </div>
+
+         <!-- Progress Indicator -->
+         <div class="row mb-60">
+            <div class="col-12">
+               <div class="progress__indicator text-center">
+                  <div class="progress__line" style="position: relative; height: 4px; background: #eef0f6; border-radius: 2px; margin: 40px 0;">
+                     <div class="progress__fill" style="position: absolute; top: 0; left: 0; height: 100%; width: 33%; background: #ff5d15; border-radius: 2px;"></div>
+                  </div>
+                  <div class="progress__steps" style="position: relative; margin-top: -22px;">
+                     <div class="row">
+                        <div class="col-4 text-center">
+                           <div class="step__indicator active" style="width: 40px; height: 40px; border-radius: 50%; background: #ff5d15; color: white; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; margin-bottom: 10px;">1</div>
+                           <p style="color: #ff5d15; font-size: 14px; font-weight: 600;">Register</p>
+                        </div>
+                        <div class="col-4 text-center">
+                           <div class="step__indicator" style="width: 40px; height: 40px; border-radius: 50%; background: #eef0f6; color: #6d6e75; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; margin-bottom: 10px;">2</div>
+                           <p style="color: #6d6e75; font-size: 14px;">Payment</p>
+                        </div>
+                        <div class="col-4 text-center">
+                           <div class="step__indicator" style="width: 40px; height: 40px; border-radius: 50%; background: #eef0f6; color: #6d6e75; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; margin-bottom: 10px;">3</div>
+                           <p style="color: #6d6e75; font-size: 14px;">Start Learning</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="row">
+            <!-- Step 1 -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="position: relative; padding: 40px 30px; text-align: center; border: 2px solid #ff5d15;">
+
+                  <div class="step__badge" style="position: absolute; top: 5px; left: 50%; transform: translateX(-50%); background: #ff5d15; color: white; padding: 8px 20px; border-radius: 20px; font-size: 12px; font-weight: 600;">STEP 1</div>
+<br>
+                  <div class="course__icon mb-30">
+                     <i class="fas fa-user-plus" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+
+                  <div class="course__content">
+                     <h3 style="color: #0e1133; font-size: 24px; font-weight: 600; margin-bottom: 20px;">Complete Registration</h3>
+                     <p style="color: #6d6e75; margin-bottom: 25px; line-height: 1.6;">Fill out our simple registration form with your basic information. Takes less than 5 minutes to complete.</p>
+
+                     <div class="step__details mb-25">
+                        <ul style="list-style: none; padding: 0; text-align: left;">
+                           <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Personal Information</li>
+                           <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Contact Details</li>
+                           <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Program Preferences</li>
+                           <li style="color: #6d6e75; font-size: 14px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Emergency Contact</li>
+                        </ul>
+                     </div>
+
+                     <div class="step__time mb-25">
+                        <span style="background: #f8f9fa; color: #6d6e75; padding: 8px 15px; border-radius: 15px; font-size: 12px;"><i class="far fa-clock" style="margin-right: 5px;"></i>5 minutes</span>
+                     </div>
+
+                     <a href="{% url 'yitp:registration2' %}" class="e-btn e-btn-3" style="width: 100%;">
+                        <i class="fas fa-arrow-right" style="margin-right: 8px;"></i>
+                        Start Registration
+                     </a>
+
+                     <p style="color: #6d6e75; font-size: 12px; margin-top: 15px; margin-bottom: 0;"><i class="fas fa-shield-alt" style="color: #28a745; margin-right: 5px;"></i>Your information is secure and protected</p>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="position: relative; padding: 40px 30px; text-align: center;">
+                  <div class="step__badge" style="position: absolute; top: 5px; left: 50%; transform: translateX(-50%); background: #6d6e75; color: white; padding: 8px 20px; border-radius: 20px; font-size: 12px; font-weight: 600;">STEP 2</div>
+<br>
+                  <div class="course__icon mb-30">
+                     <i class="fas fa-credit-card" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+
+                  <div class="course__content">
+                     <h3 style="color: #0e1133; font-size: 24px; font-weight: 600; margin-bottom: 20px;">Secure Payment</h3>
+
+                     <div class="pricing__info mb-25">
+                        <div class="original__price" style="text-decoration: line-through; color: #6d6e75; font-size: 16px; margin-bottom: 10px;">Regular Price: KES 35,000 ($270)</div>
+                        <div class="special__price" style="color: #ff5d15; font-size: 28px; font-weight: 700; margin-bottom: 15px;">KES 5,000 ($39)</div>
+                        <div class="savings__badge" style="background: #28a745; color: white; padding: 5px 15px; border-radius: 15px; font-size: 12px; font-weight: 600; display: inline-block; margin-bottom: 20px;">Save 86%</div>
+                     </div>
+
+
+                     <div class="payment__options mb-25">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+                           <h6 style="color: #0e1133; margin-bottom: 10px; font-size: 14px; font-weight: 600;">Payment Options:</h6>
+                           <ul style="list-style: none; padding: 0; text-align: left;">
+                              <li style="color: #6d6e75; font-size: 14px; margin-bottom: 5px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Full Payment: KES 5,000</li>
+                              <li style="color: #6d6e75; font-size: 14px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>2 Installments: KES 2,500 each</li>
+                           </ul>
+                        </div>
+                     </div>
+
+                     <div class="step__time mb-25">
+                        <span style="background: #f8f9fa; color: #6d6e75; padding: 8px 15px; border-radius: 15px; font-size: 12px;"><i class="far fa-clock" style="margin-right: 5px;"></i>2 minutes</span>
+                     </div>
+
+                     <p style="color: #6d6e75; font-size: 12px; margin-bottom: 0;"><i class="fas fa-lock" style="color: #28a745; margin-right: 5px;"></i>Secure payment processing</p>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="position: relative; padding: 40px 30px; text-align: center;">
+                  <div class="step__badge" style="position: absolute; top: 5px; left: 50%; transform: translateX(-50%); background: #6d6e75; color: white; padding: 8px 20px; border-radius: 20px; font-size: 12px; font-weight: 600;">STEP 3</div>
+<br>
+                  <div class="course__icon mb-30">
+                     <i class="fas fa-rocket" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+
+                  <div class="course__content">
+                     <h3 style="color: #0e1133; font-size: 24px; font-weight: 600; margin-bottom: 20px;">Start Your Journey</h3>
+                     <p style="color: #6d6e75; margin-bottom: 25px; line-height: 1.6;">Receive your welcome package and begin your transformation with our comprehensive program.</p>
+
+                     <div class="step__details mb-25">
+                        <ul style="list-style: none; padding: 0; text-align: left;">
+                           <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Welcome Email & Schedule</li>
+                           <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Access to Learning Platform</li>
+                           <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Community Group Invitation</li>
+                           <li style="color: #6d6e75; font-size: 14px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Mentor Assignment</li>
+                        </ul>
+                     </div>
+
+                     <div class="step__time mb-25">
+                        <span style="background: #f8f9fa; color: #6d6e75; padding: 8px 15px; border-radius: 15px; font-size: 12px;"><i class="far fa-calendar" style="margin-right: 5px;"></i>Within 24 hours</span>
+                     </div>
+
+                    
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Payment Options -->
+   <section class="payment__options pt-120 pb-120" style="background: #f8f9fa;">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <div class="section__title-wrapper text-center mb-60">
+                  <h2 class="section__title" style="color: #0e1133;">Choose Your <span class="yellow-bg-big">Payment <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span> Method</h2>
+                  <p style="color: #6d6e75; max-width: 600px; margin: 0 auto;">We offer flexible payment options to make your investment in personal development accessible and convenient.</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="row justify-content-center">
+            <!-- Bank Transfer/M-Pesa -->
+            <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center; border: 2px solid #ff5d15;">
+                  <div class="payment__badge" style="background: #ff5d15; color: white; padding: 8px 20px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; margin-bottom: 25px;">POPULAR CHOICE</div>
+
+                  <div class="payment__icon mb-30">
+                     <i class="fas fa-university" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+
+                  <h3 style="color: #0e1133; font-size: 24px; font-weight: 600; margin-bottom: 25px;">Bank Transfer / M-Pesa</h3>
+
+                  <div class="payment__details" style="background: #f8f9fa; padding: 25px; border-radius: 6px; margin-bottom: 25px;">
+                     <div class="bank__info" style="text-align: left;">
+                        <div class="info__item" style="margin-bottom: 15px;">
+                           <span style="color: #6d6e75; font-size: 14px; display: block;">Bank Name:</span>
+                           <strong style="color: #0e1133; font-size: 16px;">Absa Bank</strong>
+                        </div>
+                        <div class="info__item" style="margin-bottom: 15px;">
+                           <span style="color: #6d6e75; font-size: 14px; display: block;">M-Pesa Paybill:</span>
+                           <strong style="color: #0e1133; font-size: 16px;">303030</strong>
+                        </div>
+                        <div class="info__item" style="margin-bottom: 15px;">
+                           <span style="color: #6d6e75; font-size: 14px; display: block;">Account Number:</span>
+                           <strong style="color: #0e1133; font-size: 16px;">2046381648</strong>
+                        </div>
+                        <div class="info__item">
+                           <span style="color: #6d6e75; font-size: 14px; display: block;">Account Name:</span>
+                           <strong style="color: #0e1133; font-size: 16px;">Narrow Passes</strong>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="payment__instructions" style="background: #fff3e0; padding: 20px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #ff5d15;">
+                     <h6 style="color: #0e1133; margin-bottom: 15px; font-size: 16px; font-weight: 600;">After Payment:</h6>
+                     <p style="color: #6d6e75; font-size: 14px; margin-bottom: 15px; line-height: 1.6;">Send your payment confirmation to our team for immediate processing and account activation.</p>
+                     <a href="mailto:info@youthimpactglobal.com?subject=Payment Confirmation - YITP Registration&body=Hi, I have completed my payment for the Youth Impact Training Programme. Please find my payment details below:" class="e-btn e-btn-3" style="width: 100%;">
+                        <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+                        Send Payment Confirmation
+                     </a>
+                  </div>
+
+                  <div class="payment__benefits">
+                     <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>No additional fees</li>
+                        <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Instant M-Pesa processing</li>
+                        <li style="color: #6d6e75; font-size: 14px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Local currency support</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+
+            <!-- PayPal -->
+            <div class="col-xxl-5 col-xl-5 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center;">
+                  <div class="payment__icon mb-30">
+                     <i class="fab fa-paypal" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+
+                  <h3 style="color: #0e1133; font-size: 24px; font-weight: 600; margin-bottom: 25px;">PayPal Payment</h3>
+
+                  <div class="pricing__display" style="background: #f8f9fa; padding: 25px; border-radius: 6px; margin-bottom: 25px;">
+                     <div class="price__original" style="text-decoration: line-through; color: #6d6e75; font-size: 18px; margin-bottom: 10px;">$270 USD</div>
+                     <div class="price__special" style="color: #ff5d15; font-size: 32px; font-weight: 700; margin-bottom: 15px;">$39 USD</div>
+                     <div class="installment__option" style="color: #6d6e75; font-size: 14px;">Or 2 payments of $20 each</div>
+                  </div>
+
+                  <p style="color: #6d6e75; margin-bottom: 25px; line-height: 1.6;">Secure international payment processing with instant confirmation and receipt.</p>
+
+                  <div class="payment__actions mb-25">
+                     <a href="https://www.paypal.com/ncp/payment/FUAJVJ66L978C" target="_blank" class="e-btn e-btn-3" style="width: 100%; margin-bottom: 15px;">
+                        <i class="fab fa-paypal" style="margin-right: 8px;"></i>
+                        Pay with PayPal
+                     </a>
+                     <p style="color: #6d6e75; font-size: 12px; margin: 0;"><i class="fas fa-shield-alt" style="color: #28a745; margin-right: 5px;"></i>Protected by PayPal Buyer Protection</p>
+                  </div>
+
+                  <div class="payment__benefits">
+                     <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Instant confirmation</li>
+                        <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>International cards accepted</li>
+                        <li style="color: #6d6e75; font-size: 14px;"><i class="fas fa-check" style="color: #28a745; margin-right: 10px;"></i>Automatic receipt</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Testimonials -->
+   <section class="testimonials__area pt-120 pb-120">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <div class="section__title-wrapper text-center mb-60">
+                  <h2 class="section__title" style="color: #0e1133;">What Our <span class="yellow-bg-big">Graduates <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span> Say</h2>
+                  <p style="color: #6d6e75; max-width: 600px; margin: 0 auto;">Hear from young leaders who have transformed their lives through our program.</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center; height: 100%;">
+                  <div class="testimonial__quote mb-25">
+                     <i class="fas fa-quote-left" style="font-size: 32px; color: #ff5d15; margin-bottom: 20px;"></i>
+                     <p style="color: #6d6e75; font-style: italic; line-height: 1.6; margin-bottom: 25px;">"The Youth Impact Training Programme completely changed my perspective on leadership. I went from being shy and uncertain to confidently leading community projects in my area."</p>
+                  </div>
+                  <div class="testimonial__author">
+                     <h6 style="color: #0e1133; font-weight: 600; margin-bottom: 5px;">Sarah Mwangi</h6>
+                     <span style="color: #6d6e75; font-size: 14px;">Community Leader, Nairobi</span>
+                     <div class="rating mt-15">
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center; height: 100%;">
+                  <div class="testimonial__quote mb-25">
+                     <i class="fas fa-quote-left" style="font-size: 32px; color: #ff5d15; margin-bottom: 20px;"></i>
+                     <p style="color: #6d6e75; font-style: italic; line-height: 1.6; margin-bottom: 25px;">"The mentorship and practical skills I gained helped me start my own social enterprise. Now I'm employing other young people and making a real difference."</p>
+                  </div>
+                  <div class="testimonial__author">
+                     <h6 style="color: #0e1133; font-weight: 600; margin-bottom: 5px;">David Ochieng</h6>
+                     <span style="color: #6d6e75; font-size: 14px;">Social Entrepreneur, Kisumu</span>
+                     <div class="rating mt-15">
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center; height: 100%;">
+                  <div class="testimonial__quote mb-25">
+                     <i class="fas fa-quote-left" style="font-size: 32px; color: #ff5d15; margin-bottom: 20px;"></i>
+                     <p style="color: #6d6e75; font-style: italic; line-height: 1.6; margin-bottom: 25px;">"The network I built through YITP has been invaluable. I've collaborated on projects with fellow graduates across Africa and beyond."</p>
+                  </div>
+                  <div class="testimonial__author">
+                     <h6 style="color: #0e1133; font-weight: 600; margin-bottom: 5px;">Grace Akinyi</h6>
+                     <span style="color: #6d6e75; font-size: 14px;">Youth Advocate, Mombasa</span>
+                     <div class="rating mt-15">
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- FAQ Section -->
+   <section class="faq__area pt-120 pb-120" style="background: #f8f9fa;">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <div class="section__title-wrapper text-center mb-60">
+                  <h2 class="section__title" style="color: #0e1133;">Frequently Asked <span class="yellow-bg-big">Questions <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span></h2>
+                  <p style="color: #6d6e75; max-width: 600px; margin: 0 auto;">Get answers to common questions about registration, payment, and the program.</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="row justify-content-center">
+            <div class="col-xxl-8 col-xl-8 col-lg-10">
+               <div class="faq__wrapper">
+                  <!-- FAQ Item 1 -->
+                  <div class="faq__item white-bg mb-20" style="border-radius: 6px; overflow: hidden;">
+                     <div class="faq__header" style="padding: 25px 30px; background: white; border-bottom: 1px solid #eef0f6; cursor: pointer;" onclick="toggleFaq(1)">
+                        <h6 style="color: #0e1133; margin: 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                           Who is eligible for the Youth Impact Training Programme?
+                           <i class="fas fa-chevron-down" id="faq-icon-1" style="color: #ff5d15; transition: transform 0.3s ease;"></i>
+                        </h6>
+                     </div>
+                     <div class="faq__content" id="faq-content-1" style="padding: 0 30px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                        <div style="padding: 25px 0;">
+                           <p style="color: #6d6e75; margin: 0; line-height: 1.6;">The program is designed for ambitious young people aged 15-25 who are passionate about making a positive impact in their communities. No prior experience is required - just enthusiasm and commitment to personal growth.</p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- FAQ Item 2 -->
+                  <div class="faq__item white-bg mb-20" style="border-radius: 6px; overflow: hidden;">
+                     <div class="faq__header" style="padding: 25px 30px; background: white; border-bottom: 1px solid #eef0f6; cursor: pointer;" onclick="toggleFaq(2)">
+                        <h6 style="color: #0e1133; margin: 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                           What does the 12-week program include?
+                           <i class="fas fa-chevron-down" id="faq-icon-2" style="color: #ff5d15; transition: transform 0.3s ease;"></i>
+                        </h6>
+                     </div>
+                     <div class="faq__content" id="faq-content-2" style="padding: 0 30px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                        <div style="padding: 25px 0;">
+                           <p style="color: #6d6e75; margin-bottom: 15px; line-height: 1.6;">The program includes:</p>
+                           <ul style="color: #6d6e75; margin: 0; padding-left: 20px;">
+                              <li style="margin-bottom: 8px;">Weekly interactive training sessions</li>
+                              <li style="margin-bottom: 8px;">One-on-one mentorship with industry experts</li>
+                              <li style="margin-bottom: 8px;">Practical project work and community engagement</li>
+                              <li style="margin-bottom: 8px;">Access to our global network of young leaders</li>
+                              <li>Official certification upon completion</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- FAQ Item 3 -->
+                  <div class="faq__item white-bg mb-20" style="border-radius: 6px; overflow: hidden;">
+                     <div class="faq__header" style="padding: 25px 30px; background: white; border-bottom: 1px solid #eef0f6; cursor: pointer;" onclick="toggleFaq(3)">
+                        <h6 style="color: #0e1133; margin: 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                           Can I pay in installments?
+                           <i class="fas fa-chevron-down" id="faq-icon-3" style="color: #ff5d15; transition: transform 0.3s ease;"></i>
+                        </h6>
+                     </div>
+                     <div class="faq__content" id="faq-content-3" style="padding: 0 30px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                        <div style="padding: 25px 0;">
+                           <p style="color: #6d6e75; margin: 0; line-height: 1.6;">Yes! We offer flexible payment options including 2 installments of KES 2,500 ($20) each. You can pay the first installment during registration and the second installment within 4 weeks of starting the program.</p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- FAQ Item 4 -->
+                  <div class="faq__item white-bg mb-20" style="border-radius: 6px; overflow: hidden;">
+                     <div class="faq__header" style="padding: 25px 30px; background: white; border-bottom: 1px solid #eef0f6; cursor: pointer;" onclick="toggleFaq(4)">
+                        <h6 style="color: #0e1133; margin: 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                           When does the next cohort start?
+                           <i class="fas fa-chevron-down" id="faq-icon-4" style="color: #ff5d15; transition: transform 0.3s ease;"></i>
+                        </h6>
+                     </div>
+                     <div class="faq__content" id="faq-content-4" style="padding: 0 30px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                        <div style="padding: 25px 0;">
+                           <p style="color: #6d6e75; margin: 0; line-height: 1.6;">Our next cohort begins on January 15, 2025. We run multiple cohorts throughout the year, so if you miss this one, the following cohort will start in April 2025. Early registration is recommended as spaces are limited.</p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- FAQ Item 5 -->
+                  <div class="faq__item white-bg mb-20" style="border-radius: 6px; overflow: hidden;">
+                     <div class="faq__header" style="padding: 25px 30px; background: white; border-bottom: 1px solid #eef0f6; cursor: pointer;" onclick="toggleFaq(5)">
+                        <h6 style="color: #0e1133; margin: 0; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                           Is the program conducted online or in-person?
+                           <i class="fas fa-chevron-down" id="faq-icon-5" style="color: #ff5d15; transition: transform 0.3s ease;"></i>
+                        </h6>
+                     </div>
+                     <div class="faq__content" id="faq-content-5" style="padding: 0 30px; max-height: 0; overflow: hidden; transition: all 0.3s ease;">
+                        <div style="padding: 25px 0;">
+                           <p style="color: #6d6e75; margin: 0; line-height: 1.6;">We offer a hybrid approach combining online sessions for flexibility and in-person workshops for hands-on experience. This allows participants from different locations to join while still providing valuable face-to-face interaction and networking opportunities.</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Contact Support -->
+   <section class="contact__support pt-120 pb-120">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <div class="section__title-wrapper text-center mb-60">
+                  <h2 class="section__title" style="color: #0e1133;">Need <span class="yellow-bg-big">Help? <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span></h2>
+                  <p style="color: #6d6e75; max-width: 600px; margin: 0 auto;">Our dedicated support team is here to assist you every step of the way. Get in touch with us for any questions or concerns.</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="row justify-content-center">
+            <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center;">
+                  <div class="contact__icon mb-30">
+                     <i class="fas fa-envelope" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+                  <h4 style="color: #0e1133; margin-bottom: 15px;">Email Support</h4>
+                  <p style="color: #6d6e75; margin-bottom: 25px; line-height: 1.6;">Get detailed answers to your questions via email. We typically respond within 24 hours.</p>
+                  <a href="mailto:info@youthimpactglobal.com?subject=Registration Inquiry - YITP" class="e-btn e-btn-3" style="width: 100%;">
+                     <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+                     Send Email
+                  </a>
+                  <p style="color: #6d6e75; font-size: 14px; margin-top: 15px; margin-bottom: 0;">info@youthimpactglobal.com</p>
+               </div>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center;">
+                  <div class="contact__icon mb-30">
+                     <i class="fab fa-whatsapp" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+                  <h4 style="color: #0e1133; margin-bottom: 15px;">WhatsApp Chat</h4>
+                  <p style="color: #6d6e75; margin-bottom: 25px; line-height: 1.6;">Get instant support through WhatsApp. Perfect for quick questions and immediate assistance.</p>
+                  <a href="https://wa.me/254722646958?text=Hi, I'm interested in the Youth Impact Training Programme and would like more information about registration." target="_blank" class="e-btn e-btn-3" style="width: 100%;">
+                     <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>
+                     Chat on WhatsApp
+                  </a>
+                  <p style="color: #6d6e75; font-size: 14px; margin-top: 15px; margin-bottom: 0;">Available 9 AM - 6 PM EAT</p>
+               </div>
+            </div>
+
+            <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12">
+               <div class="course__item white-bg mb-30 fix" style="padding: 40px 30px; text-align: center;">
+                  <div class="contact__icon mb-30">
+                     <i class="fas fa-phone" style="font-size: 48px; color: #ff5d15;"></i>
+                  </div>
+                  <h4 style="color: #0e1133; margin-bottom: 15px;">Phone Support</h4>
+                  <p style="color: #6d6e75; margin-bottom: 25px; line-height: 1.6;">Speak directly with our team for personalized guidance and detailed program information.</p>
+                  <a href="{% url 'yitp:contact' %}" class="e-btn e-btn-3" style="width: 100%;">
+                     <i class="fas fa-phone" style="margin-right: 8px;"></i>
+                     Contact Us
+                  </a>
+                  <p style="color: #6d6e75; font-size: 14px; margin-top: 15px; margin-bottom: 0;">Monday - Friday, 9 AM - 6 PM</p>
+               </div>
+            </div>
+         </div>
+
+         <!-- Call to Action -->
+         <div class="row mt-60">
+            <div class="col-12">
+               <div class="cta__wrapper text-center" style="background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%); padding: 60px 40px; border-radius: 10px;">
+                  <h3 style="color: white; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Ready to Transform Your Future?</h3>
+                  <p style="color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Join hundreds of young leaders who have already started their journey with the Youth Impact Training Programme.</p>
+                  <div class="cta__buttons">
+                     <a href="{% url 'yitp:registration2' %}" class="e-btn e-btn-3" style="margin-right: 20px; margin-bottom: 15px;">
+                        <i class="fas fa-user-plus" style="margin-right: 8px;"></i>
+                        Register Now
+                     </a>
+                     <a href="{% url 'yitp:contact' %}" class="e-btn" style="background: transparent; border: 2px solid white; color: white; margin-bottom: 15px;">
+                        <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                        Learn More
+                     </a>
+                  </div>
+                  <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 20px; margin-bottom: 0;"><i class="fas fa-clock" style="margin-right: 5px;"></i>Limited spots available - Register today!</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- FAQ JavaScript -->
+   <script>
+   function toggleFaq(faqNumber) {
+       const content = document.getElementById('faq-content-' + faqNumber);
+       const icon = document.getElementById('faq-icon-' + faqNumber);
+
+       if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+           content.style.maxHeight = content.scrollHeight + 'px';
+           icon.style.transform = 'rotate(180deg)';
+       } else {
+           content.style.maxHeight = '0px';
+           icon.style.transform = 'rotate(0deg)';
+       }
+   }
+   </script>
+
+{% endblock %}

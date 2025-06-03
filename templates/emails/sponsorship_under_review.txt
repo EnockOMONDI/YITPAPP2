@@ -1,0 +1,56 @@
+YOUR SPONSORSHIP REQUEST IS UNDER REVIEW
+Youth Impact Training Programme
+
+Dear {{ user.first_name|default:user.username }},
+
+🔍 Your sponsorship request is currently under detailed review.
+
+We wanted to update you on the status of your sponsorship request for the {{ sponsorship_request.get_program_name }}. Your application has moved to the detailed review stage, which means our team is conducting a thorough evaluation of your request.
+
+REQUEST STATUS UPDATE:
+- Request ID: #{{ sponsorship_request.id }}
+- Program: {{ sponsorship_request.get_program_name }}
+- Amount Requested: ${{ sponsorship_request.amount_needed }}
+- Current Status: {{ sponsorship_request.get_status_display }}
+- Review Started: {{ sponsorship_request.reviewed_at|date:"F d, Y" }}
+- Reviewing Team Member: {{ admin_user.get_full_name|default:admin_user.username }}
+
+{% if admin_notes %}
+UPDATE FROM OUR REVIEW TEAM:
+{{ admin_notes }}
+{% endif %}
+
+REVIEW PROCESS TIMELINE:
+✅ Application Received: {{ sponsorship_request.created_at|date:"F d, Y" }}
+🔍 Under Review: {{ sponsorship_request.reviewed_at|date:"F d, Y" }} (Current Stage)
+⏳ Final Decision: Expected within 3-5 business days
+📧 Notification: You will receive an email with the final decision
+
+WHAT'S HAPPENING DURING REVIEW?
+• Document Verification: Reviewing all submitted materials and supporting documents
+• Eligibility Assessment: Confirming program requirements and financial need criteria
+• Impact Evaluation: Assessing potential impact and alignment with program goals
+• Budget Allocation: Reviewing available funding and budget considerations
+• Final Approval: Senior team review and final decision making
+
+NEED TO UPDATE YOUR INFORMATION?
+If you need to provide additional information or update any details in your application, please contact us immediately:
+
+Review Team: reviews@youthimpactglobal.com
+General Inquiries: info@youthimpactglobal.com
+
+Please include your Request ID (#{{ sponsorship_request.id }}) in all communications.
+
+We appreciate your patience during this review process. Our team is committed to giving each application the thorough consideration it deserves.
+
+You will receive another email notification as soon as a final decision has been made regarding your sponsorship request.
+
+Thank you for your continued interest in the Youth Impact Training Programme.
+
+Best regards,
+{{ admin_user.get_full_name|default:"Youth Impact Global Review Team" }}
+Youth Impact Training Programme
+
+---
+This is an official status update from Youth Impact Global.
+Youth Impact Global | info@youthimpactglobal.com

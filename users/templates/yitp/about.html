@@ -1,0 +1,420 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero__area pt-150 pb-60" style="background: linear-gradient(135deg, #ffffff 0%, #ffffff ); position: relative; overflow: hidden;">
+    
+    <br><br>
+    <div class="hero__shape">
+        <div class="hero__shape-1" style="position: absolute; top: 20%; right: 10%; width: 100px; height: 100px; background: rgba(255, 93, 21, 0.1); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+        <div class="hero__shape-2" style="position: absolute; bottom: 20%; left: 10%; width: 80px; height: 80px; background: rgba(255, 93, 21, 0.15); border-radius: 50%; animation: float 8s ease-in-out infinite reverse;"></div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xxl-8 col-xl-8 col-lg-10">
+                <div class="hero__content text-center">
+                    <h1 class="hero__title mb-30" style="color:  #0e1133; font-size: 3.5rem; font-weight: 700; line-height: 1.2;">
+                        Empowering Youth, <span style="color: #ff5d15;">Transforming Futures</span>
+                    </h1>
+                    <p class="hero__text mb-40" style="color:  #0e1133; font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+                        The Youth Impact Training Programme (YITP) is designed to equip young people with the skills, knowledge, and mindset they need to thrive in today's world.
+                    </p>
+                    <br>
+                    <div class="hero__btn">
+                        <a href="{% url 'yitp:registration' %}" class="e-btn">
+                            <i class="fas fa-rocket mr-10"></i>
+                            Start Your Journey
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom CSS for animations and styling -->
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .about__card {
+        background: white;
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(14, 17, 51, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(14, 17, 51, 0.05);
+        height: 100%;
+    }
+
+    .about__card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(14, 17, 51, 0.15);
+    }
+
+    .about__card h2 {
+        color: #0e1133;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .about__card h2 i {
+        color: #ff5d15;
+        margin-right: 15px;
+        font-size: 1.5rem;
+    }
+
+    .about__card p {
+        color: #6d6e75;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .about__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .about__list li {
+        color: #6d6e75;
+        margin-bottom: 12px;
+        padding-left: 30px;
+        position: relative;
+        line-height: 1.6;
+    }
+
+    .about__list li i {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        color: #ff5d15;
+        font-size: 16px;
+    }
+
+    .section__title {
+        color: #0e1133;
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+    }
+
+    .section__title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: #ff5d15;
+        border-radius: 2px;
+    }
+
+    .stats__card {
+        text-align: center;
+        padding: 30px 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(14, 17, 51, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .stats__card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(14, 17, 51, 0.15);
+    }
+
+    .stats__number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ff5d15;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .stats__label {
+        color: #0e1133;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .cta__section {
+        background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+        border-radius: 20px;
+        padding: 60px 40px;
+        text-align: center;
+        margin: 60px 0;
+    }
+
+    .cta__section h2 {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .cta__section p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+</style>
+
+<!-- About Content Section -->
+<section class="about__content pt-60 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section__title">Who We Are</h2>
+            </div>
+        </div>
+
+        <div class="row mb-60">
+            <div class="col-lg-6 mb-30">
+                <div class="about__card">
+                    <h2><i class="fas fa-users"></i>Our Foundation</h2>
+                    <p>The Youth Impact Training Programme (YITP) is a short, practical training programme that prepares young people for success in business, employment, and personal development.</p>
+                    <ul class="about__list">
+                        <li><i class="fas fa-check-circle"></i>Training in 21st-century knowledge & soft skills</li>
+                        <li><i class="fas fa-check-circle"></i>Business mentorship from industry experts</li>
+                        <li><i class="fas fa-check-circle"></i>Opportunities for apprenticeship</li>
+                        <li><i class="fas fa-check-circle"></i>Expert guidance on youth challenges</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-30">
+                <div class="about__card">
+                    <h2><i class="fas fa-bullseye"></i>Our Origin & Mission</h2>
+                    <p>The Youth Impact Training Programme (YITP) was founded as part of the <strong>Narrow Passes' Youth Impact Forum</strong>, an initiative that helps young people solve real-world challenges under <strong>Success Afrika</strong>.</p>
+                    <h3 style="color: #0e1133; font-size: 1.2rem; margin-bottom: 15px;"><strong>Our Mission:</strong></h3>
+                    <ul class="about__list">
+                        <li><i class="fas fa-check-circle"></i>Empower young people through training, mentorship, and networking</li>
+                        <li><i class="fas fa-check-circle"></i>Help youth become problem solvers, entrepreneurs, and leaders</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Impact Statistics Section -->
+<section class="stats__area pt-120 pb-60" style="background: #f8f9fa;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section__title">Our Impact in Numbers</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-30">
+                <div class="stats__card">
+                    <span class="stats__number">500+</span>
+                    <span class="stats__label">Youth Trained</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-30">
+                <div class="stats__card">
+                    <span class="stats__number">50+</span>
+                    <span class="stats__label">Industry Partners</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-30">
+                <div class="stats__card">
+                    <span class="stats__number">3</span>
+                    <span class="stats__label">SDG Goals Supported</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-30">
+                <div class="stats__card">
+                    <span class="stats__number">100%</span>
+                    <span class="stats__label">Commitment to Excellence</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Initiatives Section -->
+<section class="initiatives__area pt-150 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section__title">Our Impact & Initiatives</h2>
+            </div>
+        </div>
+
+        <div class="row mb-60">
+            <div class="col-lg-12 mb-30">
+                <div class="about__card">
+                    <h2><i class="fas fa-rocket"></i>Youth Impact Media Initiative (YIMI)</h2>
+                    <p>The Youth Impact Training Programme (YITP) is part of the <strong>Youth Impact Media Initiative (YIMI)</strong>, which extends our mission through media and partnerships.</p>
+                    <h3 style="color: #0e1133; font-size: 1.2rem; margin-bottom: 20px;"><strong>Our Flagship Products:</strong></h3>
+                    <ul class="about__list">
+                        <li><i class="fas fa-tv"></i><strong>The Youth Impact Show</strong> – Engaging discussions on youth Agendas</li>
+                        <li><i class="fas fa-comments"></i><strong>The Youth Impact Forum</strong> – A space for learning & networking</li>
+                        <li><i class="fas fa-globe"></i><strong>The Youth Impact Summit</strong> – Large-scale leadership & career event</li>
+                        <li><i class="fas fa-graduation-cap"></i><strong>The Youth Impact Training Programme (YITP)</strong> – Our core training initiative</li>
+                        <li><i class="fas fa-trophy"></i><strong>Youth Impact Awards</strong> – Celebrating youth who transform communities and shape the world</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SDG Goals Section -->
+<section class="sdg__area pt-60 pb-60" style="background: #f8f9fa;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section__title">Our Contribution to Global Goals</h2>
+            </div>
+        </div>
+
+        <div class="row mb-60">
+            <div class="col-lg-12 mb-30">
+                <div class="about__card">
+                    <h2><i class="fas fa-globe-americas"></i>Supporting UN Sustainable Development Goals</h2>
+                    <p>The Youth Impact Training Programme (YITP) actively supports the <strong>United Nations Sustainable Development Goals (SDGs)</strong> through our comprehensive training and empowerment initiatives.</p>
+                    <div class="row mt-30">
+                        <div class="col-lg-4 mb-20">
+                            <div style="padding: 20px; background: #fff; border-radius: 8px; border-left: 4px solid #ff5d15;">
+                                <h4 style="color: #0e1133; margin-bottom: 10px;"><i class="fas fa-hand-holding-usd" style="color: #ff5d15; margin-right: 10px;"></i>SDG 1: No Poverty</h4>
+                                <p style="color: #6d6e75; margin: 0;">Helping youth gain financial independence through skills training and entrepreneurship opportunities.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-20">
+                            <div style="padding: 20px; background: #fff; border-radius: 8px; border-left: 4px solid #ff5d15;">
+                                <h4 style="color: #0e1133; margin-bottom: 10px;"><i class="fas fa-venus-mars" style="color: #ff5d15; margin-right: 10px;"></i>SDG 5: Gender Equality</h4>
+                                <p style="color: #6d6e75; margin: 0;">Ensuring equal access to training, mentorship, and leadership opportunities for all genders.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-20">
+                            <div style="padding: 20px; background: #fff; border-radius: 8px; border-left: 4px solid #ff5d15;">
+                                <h4 style="color: #0e1133; margin-bottom: 10px;"><i class="fas fa-briefcase" style="color: #ff5d15; margin-right: 10px;"></i>SDG 8: Decent Work</h4>
+                                <p style="color: #6d6e75; margin: 0;">Preparing young professionals and entrepreneurs for sustainable economic growth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partnership Section -->
+<section class="partnership__area pt-150 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section__title">Partnership & Funding</h2>
+            </div>
+        </div>
+
+        <div class="row mb-60">
+            <div class="col-lg-6 mb-30">
+                <div class="about__card">
+                    <h2><i class="fas fa-handshake"></i>How We Are Funded</h2>
+                    <p>Our sustainable funding model ensures continuous impact and growth in youth empowerment initiatives.</p>
+                    <ul class="about__list">
+                        <li><i class="fas fa-check-circle"></i>Registration fees from participants</li>
+                        <li><i class="fas fa-check-circle"></i>Grants & donations from supporters</li>
+                        <li><i class="fas fa-check-circle"></i>Strategic partnerships with NGOs, companies, and governments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-30">
+                <div class="about__card">
+                    <h2><i class="fas fa-star"></i>Why Partner With Us?</h2>
+                    <p>Join us in creating lasting impact and transforming the future of youth development across Africa and beyond.</p>
+                    <ul class="about__list">
+                        <li><i class="fas fa-users"></i>Access to a pool of skilled young talent with green skills</li>
+                        <li><i class="fas fa-award"></i>Strengthen your CSR, ESG, and Social Impact initiatives</li>
+                        <li><i class="fas fa-eye"></i>Gain visibility through our platforms and programmes</li>
+                        <li><i class="fas fa-globe"></i>Contribute to Sustainable Development Goals (SDGs)</li>
+                        <li><i class="fas fa-lightbulb"></i>Collaborate on innovative youth programs</li>
+                        <li><i class="fas fa-network-wired"></i>Network with industry experts & change-makers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="about__card">
+                    <h2><i class="fas fa-rocket"></i>Partnership Opportunities</h2>
+                    <p>We offer flexible partnership opportunities designed to maximize impact and mutual benefit.</p>
+                    <div class="row mt-30">
+                        <div class="col-lg-3 col-md-6 mb-20">
+                            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                                <i class="fas fa-dollar-sign" style="font-size: 2rem; color: #ff5d15; margin-bottom: 15px;"></i>
+                                <h4 style="color: #0e1133; margin-bottom: 10px;">Funding</h4>
+                                <p style="color: #6d6e75; margin: 0;">Financial support for programs</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-20">
+                            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                                <i class="fas fa-chalkboard-teacher" style="font-size: 2rem; color: #ff5d15; margin-bottom: 15px;"></i>
+                                <h4 style="color: #0e1133; margin-bottom: 10px;">Mentorship</h4>
+                                <p style="color: #6d6e75; margin: 0;">Expert guidance and coaching</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-20">
+                            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                                <i class="fas fa-share-alt" style="font-size: 2rem; color: #ff5d15; margin-bottom: 15px;"></i>
+                                <h4 style="color: #0e1133; margin-bottom: 10px;">Resource Sharing</h4>
+                                <p style="color: #6d6e75; margin: 0;">Tools and infrastructure support</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-20">
+                            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                                <i class="fas fa-medal" style="font-size: 2rem; color: #ff5d15; margin-bottom: 15px;"></i>
+                                <h4 style="color: #0e1133; margin-bottom: 10px;">Sponsorship</h4>
+                                <p style="color: #6d6e75; margin: 0;">Event and program sponsorship</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta__area pt-120 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="cta__section">
+                    <h2>Join Us Today!</h2>
+                    <p>Ready to be part of the youth transformation movement? Connect with us and discover how you can make a lasting impact on the next generation of leaders.</p>
+                    <div class="cta__buttons">
+                        <a href="{% url 'yitp:registration' %}" class="e-btn e-btn-white mr-20">
+                            <i class="fas fa-user-plus mr-10"></i>
+                            Join Our Program
+                        </a>
+                        <a href="{% url 'yitp:contact' %}" class="e-btn e-btn-border-white">
+                            <i class="fas fa-envelope mr-10"></i>
+                            Partner With Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

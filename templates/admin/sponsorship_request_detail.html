@@ -1,0 +1,448 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrahead %}
+<style>
+    /* YITP Design System Colors */
+    :root {
+        --yitp-primary: #0e1133;
+        --yitp-accent: #ff5d15;
+        --yitp-text: #6d6e75;
+        --yitp-light: #f8f9fa;
+        --yitp-white: #ffffff;
+        --yitp-success: #28a745;
+        --yitp-warning: #ffc107;
+        --yitp-danger: #dc3545;
+    }
+
+    .sponsorship-detail {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--yitp-light);
+        min-height: 100vh;
+    }
+
+    .detail-header {
+        background: linear-gradient(135deg, var(--yitp-primary) 0%, var(--yitp-accent) 100%);
+        color: var(--yitp-white);
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(14, 17, 51, 0.15);
+    }
+
+    .detail-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .detail-header .subtitle {
+        opacity: 0.9;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+
+    .status-pending { background: #6c757d; color: white; }
+    .status-under_review { background: #ffc107; color: #212529; }
+    .status-approved { background: #28a745; color: white; }
+    .status-rejected { background: #dc3545; color: white; }
+
+    .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .detail-section {
+        background: var(--yitp-white);
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--yitp-accent);
+    }
+
+    .detail-section.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .section-title {
+        color: var(--yitp-primary);
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-title .icon {
+        font-size: 20px;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: var(--yitp-text);
+        min-width: 140px;
+        flex-shrink: 0;
+    }
+
+    .detail-value {
+        color: var(--yitp-primary);
+        flex-grow: 1;
+        text-align: right;
+        word-break: break-word;
+    }
+
+    .user-profile {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .user-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--yitp-primary), var(--yitp-accent));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .user-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--yitp-primary);
+        margin: 0 0 5px 0;
+    }
+
+    .user-email {
+        color: var(--yitp-text);
+        font-size: 14px;
+    }
+
+    .admin-notes {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .admin-notes h4 {
+        color: #856404;
+        margin: 0 0 10px 0;
+        font-size: 16px;
+    }
+
+    .admin-notes p {
+        color: #856404;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .document-link {
+        display: inline-block;
+        background: var(--yitp-accent);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .document-link:hover {
+        background: #e54a0c;
+        transform: translateY(-2px);
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 15px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--yitp-accent);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -23px;
+        top: 5px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--yitp-accent);
+    }
+
+    .print-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--yitp-primary);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .print-button:hover {
+        background: #1a2147;
+    }
+
+    @media print {
+        .print-button { display: none; }
+        .sponsorship-detail { background: white; }
+        .detail-section { box-shadow: none; border: 1px solid #ddd; }
+    }
+
+    @media (max-width: 768px) {
+        .detail-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .detail-row {
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .detail-value {
+            text-align: left;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+    &rsaquo; <a href="{% url 'admin:users_sponsorshiprequest_changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+    &rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<button class="print-button" onclick="window.print()">🖨️ Print / Save PDF</button>
+
+<div class="sponsorship-detail">
+    <div class="detail-header">
+        <h1>📋 Sponsorship Request #{{ sponsorship_request.id }}</h1>
+        <p class="subtitle">{{ sponsorship_request.get_program_name }} • Submitted {{ sponsorship_request.created_at|date:"F d, Y" }}</p>
+        <span class="status-badge status-{{ sponsorship_request.status }}">
+            {% if sponsorship_request.status == 'pending' %}⏳{% elif sponsorship_request.status == 'under_review' %}🔍{% elif sponsorship_request.status == 'approved' %}✅{% elif sponsorship_request.status == 'rejected' %}❌{% endif %}
+            {{ sponsorship_request.get_status_display }}
+        </span>
+    </div>
+
+    <div class="detail-grid">
+        <!-- User Information -->
+        <div class="detail-section">
+            <h3 class="section-title">
+                <span class="icon">👤</span>
+                Applicant Information
+            </h3>
+            <div class="user-profile">
+                <div class="user-avatar">
+                    {{ sponsorship_request.user.first_name|first|default:sponsorship_request.user.username|first }}{{ sponsorship_request.user.last_name|first|default:"" }}
+                </div>
+                <div class="user-name">{{ sponsorship_request.user.get_full_name|default:sponsorship_request.user.username }}</div>
+                <div class="user-email">{{ sponsorship_request.user.email }}</div>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Username:</span>
+                <span class="detail-value">{{ sponsorship_request.user.username }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date Joined:</span>
+                <span class="detail-value">{{ sponsorship_request.user.date_joined|date:"F d, Y" }}</span>
+            </div>
+        </div>
+
+        <!-- Program Details -->
+        <div class="detail-section">
+            <h3 class="section-title">
+                <span class="icon">🎓</span>
+                Program & Financial Details
+            </h3>
+            <div class="detail-row">
+                <span class="detail-label">Program:</span>
+                <span class="detail-value">{{ sponsorship_request.get_program_name }}</span>
+            </div>
+            {% if sponsorship_request.program_other %}
+            <div class="detail-row">
+                <span class="detail-label">Other Program:</span>
+                <span class="detail-value">{{ sponsorship_request.program_other }}</span>
+            </div>
+            {% endif %}
+            <div class="detail-row">
+                <span class="detail-label">Amount Needed:</span>
+                <span class="detail-value" style="font-weight: bold; color: var(--yitp-accent);">${{ sponsorship_request.amount_needed }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Financial Situation:</span>
+                <span class="detail-value">{{ sponsorship_request.get_financial_situation_name }}</span>
+            </div>
+            {% if sponsorship_request.financial_situation_other %}
+            <div class="detail-row">
+                <span class="detail-label">Other Situation:</span>
+                <span class="detail-value">{{ sponsorship_request.financial_situation_other }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Reason for Request -->
+    <div class="detail-section full-width">
+        <h3 class="section-title">
+            <span class="icon">📝</span>
+            Reason for Sponsorship Request
+        </h3>
+        <div style="background: var(--yitp-light); padding: 20px; border-radius: 8px; line-height: 1.6; color: var(--yitp-primary);">
+            {{ sponsorship_request.reason|linebreaks }}
+        </div>
+    </div>
+
+    <div class="detail-grid">
+        <!-- Supporting Documents -->
+        <div class="detail-section">
+            <h3 class="section-title">
+                <span class="icon">📄</span>
+                Supporting Documentation
+            </h3>
+            {% if sponsorship_request.supporting_document %}
+                <div class="detail-row">
+                    <span class="detail-label">Document:</span>
+                    <span class="detail-value">
+                        <a href="{{ sponsorship_request.supporting_document.url }}" target="_blank" class="document-link">
+                            📎 Download Document
+                        </a>
+                    </span>
+                </div>
+            {% else %}
+                <p style="color: var(--yitp-text); font-style: italic;">No supporting documents uploaded</p>
+            {% endif %}
+        </div>
+
+        <!-- Emergency Contact -->
+        <div class="detail-section">
+            <h3 class="section-title">
+                <span class="icon">🚨</span>
+                Emergency Contact
+            </h3>
+            <div class="detail-row">
+                <span class="detail-label">Name:</span>
+                <span class="detail-value">{{ sponsorship_request.emergency_contact_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Relationship:</span>
+                <span class="detail-value">{{ sponsorship_request.emergency_contact_relationship }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Phone:</span>
+                <span class="detail-value">{{ sponsorship_request.emergency_contact_phone }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Email:</span>
+                <span class="detail-value">{{ sponsorship_request.emergency_contact_email }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Administrative Review -->
+    <div class="detail-section full-width">
+        <h3 class="section-title">
+            <span class="icon">👨‍💼</span>
+            Administrative Review & Timeline
+        </h3>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Request Submitted:</strong> {{ sponsorship_request.created_at|date:"F d, Y \a\t H:i" }}
+            </div>
+            {% if sponsorship_request.reviewed_at %}
+            <div class="timeline-item">
+                <strong>Review Started:</strong> {{ sponsorship_request.reviewed_at|date:"F d, Y \a\t H:i" }}
+                {% if sponsorship_request.reviewed_by %}
+                    by {{ sponsorship_request.reviewed_by.get_full_name|default:sponsorship_request.reviewed_by.username }}
+                {% endif %}
+            </div>
+            {% endif %}
+            <div class="timeline-item">
+                <strong>Current Status:</strong> {{ sponsorship_request.get_status_display }}
+                <span class="status-badge status-{{ sponsorship_request.status }}" style="margin-left: 10px; font-size: 12px; padding: 4px 8px;">
+                    {% if sponsorship_request.status == 'pending' %}⏳{% elif sponsorship_request.status == 'under_review' %}🔍{% elif sponsorship_request.status == 'approved' %}✅{% elif sponsorship_request.status == 'rejected' %}❌{% endif %}
+                    {{ sponsorship_request.get_status_display }}
+                </span>
+            </div>
+        </div>
+
+        {% if sponsorship_request.admin_notes %}
+        <div class="admin-notes">
+            <h4>📝 Administrative Notes:</h4>
+            <p>{{ sponsorship_request.admin_notes|linebreaks }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="text-align: center; margin-top: 30px; padding: 20px;">
+        <a href="{% url 'admin:users_sponsorshiprequest_change' sponsorship_request.id %}" 
+           style="background: var(--yitp-primary); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; margin-right: 15px; font-weight: 600;">
+            ✏️ Edit Status & Notes
+        </a>
+        <a href="{% url 'admin:users_sponsorshiprequest_changelist' %}" 
+           style="background: var(--yitp-text); color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+            ← Back to List
+        </a>
+    </div>
+</div>
+{% endblock %}

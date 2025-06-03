@@ -1,0 +1,165 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="page__title-area pt-120 pb-90">
+    <div class="page__title-shape">
+      
+    </div>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 40px;
+          background-color: #f8f9fa;
+          color: #333;
+      }
+      .course-container {
+          max-width: 900px;
+          margin: 0 auto;
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1, h2, h3 {
+          color: #2c3e50;
+      }
+      h1 {
+          text-align: center;
+      }
+      .module {
+          margin-top: 20px;
+          padding: 15px;
+          background: #f1f1f1;
+          border-left: 5px solid #007bff;
+          border-radius: 5px;
+      }
+      .module h3 {
+          margin-bottom: 5px;
+      }
+      ul {
+          list-style-type: none;
+          padding: 0;
+      }
+      ul li {
+          padding: 5px 0;
+      }
+      .activity {
+          background: #dff9fb;
+          padding: 10px;
+          border-left: 5px solid #17a2b8;
+          border-radius: 5px;
+          margin-top: 10px;
+      }
+      .resources, .outcomes {
+          margin-top: 30px;
+          padding: 15px;
+          background: #eef2f3;
+          border-left: 5px solid #28a745;
+          border-radius: 5px;
+      }
+  </style>
+</head>
+<body>
+
+<div class="course-container">
+  <h1>Entrepreneurship Skills and Business Alignment (ESBA)</h1>
+  <p><strong>Unit Title:</strong> Entrepreneurship Skills and Business Alignment (ESBA)</p>
+  <p><strong>Objective:</strong> Equip participants with foundational entrepreneurship skills and business management strategies for starting, running, and sustaining a successful business.</p>
+
+  <div class="module">
+      <h3>Topic 1: Starting a Business</h3>
+      <p><strong>Objective:</strong> Understand the essential steps in launching a business.</p>
+      <ul>
+          <li>Definitions of Entrepreneurship</li>
+          <li>Ideation: Generating and selecting business ideas</li>
+          <li>Business Plan Development</li>
+          <li>Business Structures (Types & Sizes)</li>
+          <li>Understanding Basic Financial Statements</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Develop a draft business plan based on your business idea.
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Topic 2: Building & Actualizing a Business</h3>
+      <p><strong>Objective:</strong> Learn the key elements in turning a business plan into a reality.</p>
+      <ul>
+          <li>Choosing the Right Business Premises</li>
+          <li>Alternative Ways to Source Capital</li>
+          <li>Identifying & Hiring the Right Skills & Labor</li>
+          <li>Understanding Business Licensing & Regulatory Compliance</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Group discussion on common funding sources for startups.
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Topic 3: Business Management</h3>
+      <p><strong>Objective:</strong> Explore the fundamental disciplines of managing a business effectively.</p>
+      <ul>
+          <li>Strategic Planning</li>
+          <li>Financial Management</li>
+          <li>Marketing & Sales Strategies</li>
+          <li>Operations Management</li>
+          <li>Human Resource Management</li>
+          <li>Technology & Equipment Integration</li>
+          <li>Effective Business Communication</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Create a simple business budget and marketing plan.
+      </div>
+  </div>
+
+  <div class="module">
+      <h3>Topic 4: Business Sustainability</h3>
+      <p><strong>Objective:</strong> Understand how to ensure long-term business success.</p>
+      <ul>
+          <li>Meeting Customer Needs</li>
+          <li>Industry Dynamics & Competitive Advantage</li>
+          <li>Innovation & Authenticity in Business</li>
+          <li>Avoiding Complacency & Striving for Operational Excellence</li>
+          <li>Integrity & Business Ethics</li>
+          <li>Flexibility in Business Strategies</li>
+          <li>Building Brand Loyalty & Customer Retention</li>
+      </ul>
+      <div class="activity">
+          <strong>Activity:</strong> Identify key risks in business and how to mitigate them.
+      </div>
+  </div>
+
+  <div class="resources">
+      <h3>📚 Learning Resources</h3>
+      <ul>
+          <li>Case studies on successful entrepreneurs</li>
+          <li>Business strategy insights from Harvard Business Review</li>
+          <li>Recommended Books:
+              <ul>
+                  <li>The Lean Startup by Eric Ries</li>
+                  <li>Rich Dad Poor Dad by Robert Kiyosaki</li>
+                  <li>Blue Ocean Strategy by W. Chan Kim & Renée Mauborgne</li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+
+  <div class="outcomes">
+      <h3>🎯 Course Outcomes</h3>
+      <ul>
+          <li>Ability to create a structured business plan.</li>
+          <li>Knowledge of financial planning and business structures.</li>
+          <li>Understanding of marketing, sales, and business management principles.</li>
+          <li>Strategies for business sustainability and growth.</li>
+      </ul>
+  </div>
+<br>
+<br>
+<br><br><a href= "{% url 'yitp:registration2' %}" class="e-btn">Register for the course</a>
+</div>
+ </section>
+
+{% endblock %}

@@ -1,0 +1,281 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} - Youth Impact Training Programme{% endblock %}
+
+{% block extra_head %}
+<!-- WhatsApp Chat Widget -->
+<script>
+    var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?80028';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
+    var options = {
+    "enabled":true,
+    "chatButtonSetting":{
+        "backgroundColor":"#ff5d15",
+        "ctaText":"Chat with us",
+        "borderRadius":"25",
+        "marginLeft": "0",
+        "marginRight": "20",
+        "marginBottom": "20",
+        "ctaIconWATI":false,
+        "position":"right"
+    },
+    "brandSetting":{
+        "brandName":"Youth Impact Global",
+        "brandSubTitle":"undefined",
+        "brandImg":"https://youthimpactglobal.com/{% static 'assets/img/logo/youthimpact.png' %}",
+        "welcomeText":"Hi there!\nHow can I help you?",
+        "messageText":"Hi, Im just from your website, requesting a call back",
+        "backgroundColor":"#ff5d15",
+        "ctaText":"Chat with us",
+        "borderRadius":"25",
+        "autoShow":false,
+        "phoneNumber":"2547226469s58"
+    }
+    };
+    s.onload = function() {
+        CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+</script>
+{% endblock %}
+
+{% block content %}
+    <!-- Blog Details Area Start -->
+    <section class="blog__area pt-120 pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-8 col-xl-8 col-lg-8">
+                    <div class="blog__wrapper">
+                        <div class="blog__details">
+                            {% if post.image %}
+                            <div class="blog__thumb w-img mb-40">
+                                <img src="{{ post.image.cdn_url }}-/resize/800x450/-/quality/smart/-/format/auto/" alt="{{ post.title }}" style="border-radius: 6px; width: 100%;">
+                            </div>
+                            {% endif %}
+
+                            <div class="blog__content">
+                                {% if post.category %}
+                                <div class="blog__tag">
+                                    <a href="{% url 'blogapp:category_detail' post.category.slug %}" style="background: #ff5d15; color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: 500; text-decoration: none;">{{ post.category.title }}</a>
+                                </div>
+                                {% endif %}
+
+                                <h3 class="blog__title" style="color: #0e1133; font-size: 32px; font-weight: 600; margin: 20px 0; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ post.title }}</h3>
+
+                                <div class="blog__meta" style="margin-bottom: 30px; color: #6d6e75; font-size: 14px;">
+                                    <span style="margin-right: 20px;"><i class="far fa-calendar-alt" style="color: #ff5d15; margin-right: 8px;"></i> {{ post.date|date:"M d, Y" }}</span>
+                                    <span style="margin-right: 20px;"><i class="far fa-user" style="color: #ff5d15; margin-right: 8px;"></i> By {{ post.Author }}</span>
+                                    <span style="margin-right: 20px;"><i class="far fa-eye" style="color: #ff5d15; margin-right: 8px;"></i> {{ post.views }} views</span>
+                                    <span><i class="far fa-clock" style="color: #ff5d15; margin-right: 8px;"></i> {{ post.get_read_time }} min read</span>
+                                </div>
+
+                                <div class="blog__text" style="color: #6d6e75; line-height: 1.8; font-size: 16px; word-wrap: break-word; overflow-wrap: break-word;">
+                                    {{ post.content|safe }}
+                                </div>
+
+                                <!-- Tags Section -->
+                                {% if post.tags.all %}
+                                <div class="blog__tags" style="margin: 40px 0; padding: 20px 0; border-top: 1px solid #eef0f6;">
+                                    <h6 style="color: #0e1133; margin-bottom: 15px; font-weight: 600;">Tags:</h6>
+                                    <div class="tag-list">
+                                        {% for tag in post.tags.all %}
+                                        <span style="background: #f8f9fa; color: #6d6e75; padding: 5px 12px; border-radius: 15px; font-size: 12px; margin-right: 10px; margin-bottom: 10px; display: inline-block;">#{{ tag.name }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                <!-- Call to Action -->
+                                <div class="blog__share" style="margin: 40px 0; padding: 30px; background: #f8f9fa; border-radius: 6px; text-align: center;">
+                                    <h4 style="color: #0e1133; margin-bottom: 20px; font-size: 20px; font-weight: 600;">Ready to Make an Impact?</h4>
+                                    <p style="color: #6d6e75; margin-bottom: 25px;">Join thousands of young leaders who are already transforming their communities through our training programs.</p>
+                                    <a href="{% url 'yitp:registration' %}" class="e-btn e-btn-3" style="display: inline-block;">
+                                        Join the Youth Impact Training Program
+                                        <i class="far fa-arrow-right" style="margin-left: 8px;"></i>
+                                    </a>
+                                </div>
+
+                                <!-- Comments Section -->
+                                <div class="blog__comments" style="margin-top: 60px;">
+                                    <h4 style="color: #0e1133; margin-bottom: 30px; font-size: 24px; font-weight: 600;">Comments ({{ comment.count }})</h4>
+
+                                    {% for c in comment %}
+                                    <div class="blog__comment-item" style="margin-bottom: 30px; padding: 25px; background: white; border-radius: 6px; box-shadow: 0px 10px 30px 0px rgba(1, 11, 60, 0.06);">
+                                        <div class="comment__meta" style="margin-bottom: 15px;">
+                                            <h6 style="color: #0e1133; font-size: 16px; font-weight: 600; margin-bottom: 5px;">{{ c.full_name }}</h6>
+                                            <span style="color: #6d6e75; font-size: 14px;">
+                                                <i class="far fa-calendar-alt" style="margin-right: 5px;"></i>
+                                                {{ c.date|date:"M d, Y H:i" }}
+                                            </span>
+                                        </div>
+                                        <p style="color: #6d6e75; margin: 0; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word;">{{ c.comment }}</p>
+                                    </div>
+                                    {% empty %}
+                                    <div class="text-center" style="padding: 40px 0;">
+                                        <p style="color: #6d6e75; margin: 0;">No comments yet. Be the first to share your thoughts!</p>
+                                    </div>
+                                    {% endfor %}
+
+                                    <!-- Comment Form -->
+                                    <div class="blog__comment-form" style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 6px;">
+                                        <h5 style="color: #0e1133; margin-bottom: 25px; font-size: 20px; font-weight: 600;">Leave a Comment</h5>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="contact__form-input mb-20">
+                                                        <input type="text" name="full_name" placeholder="Your Name" required style="width: 100%; padding: 15px 20px; border: 2px solid #eef0f6; border-radius: 4px; font-size: 14px; color: #6d6e75;">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="contact__form-input mb-20">
+                                                        <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 15px 20px; border: 2px solid #eef0f6; border-radius: 4px; font-size: 14px; color: #6d6e75;">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="contact__form-input mb-20">
+                                                        <textarea name="comment" rows="5" placeholder="Your Comment" required style="width: 100%; padding: 15px 20px; border: 2px solid #eef0f6; border-radius: 4px; font-size: 14px; color: #6d6e75; resize: vertical;"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="contact__form-btn">
+                                                        <button type="submit" class="e-btn e-btn-3">
+                                                            <i class="far fa-paper-plane" style="margin-right: 8px;"></i>
+                                                            Post Comment
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-xl-4 col-lg-4">
+                    <div class="blog__sidebar pl-70">
+                        <!-- Search Widget -->
+                        <div class="sidebar__widget mb-60">
+                            <div class="sidebar__widget-content">
+                                <div class="sidebar__search">
+                                    <form action="{% url 'blogapp:blog-list' %}" method="get">
+                                        <input type="text" name="q" placeholder="Search for blogs..." value="{{ request.GET.q }}">
+                                        <button type="submit"><i class="far fa-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Categories Widget -->
+                        {% if categories %}
+                        <div class="sidebar__widget mb-60">
+                            <h3 class="sidebar__widget-title" style="color: #0e1133; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Categories</h3>
+                            <div class="sidebar__widget-content">
+                                <div class="category__list">
+                                    {% for category in categories %}
+                                    <div class="category__item" style="margin-bottom: 15px;">
+                                        <a href="{% url 'blogapp:category_detail' category.slug %}" style="color: #6d6e75; font-size: 14px; text-decoration: none; display: block; padding: 10px 15px; background: #f8f9fa; border-radius: 4px; transition: all 0.3s ease;">
+                                            <i class="far fa-folder" style="margin-right: 8px; color: #ff5d15;"></i>
+                                            {{ category.title }}
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Recent Posts Widget -->
+                        {% if blogs %}
+                        <div class="sidebar__widget mb-60">
+                            <h3 class="sidebar__widget-title" style="color: #0e1133; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Recent Posts</h3>
+                            <div class="sidebar__widget-content">
+                                <div class="rc__post-wrapper">
+                                    {% for blog in blogs|slice:":5" %}
+                                    <div class="rc__post d-flex align-items-center" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eef0f6;">
+                                        <div class="rc__thumb" style="margin-right: 15px; flex-shrink: 0;">
+                                            <a href="{% url 'blogapp:blog-detail' blog.pid %}">
+                                                {% if blog.image %}
+                                                    <img src="{{ blog.image.cdn_url }}-/resize/80x60/-/quality/smart/-/format/auto/" alt="{{ blog.title }}" style="border-radius: 4px; width: 80px; height: 60px; object-fit: cover;">
+                                                {% else %}
+                                                    <img src="{% static 'assets/img/course/course-1.jpg' %}" alt="{{ blog.title }}" style="border-radius: 4px; width: 80px; height: 60px; object-fit: cover;">
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        <div class="rc__content">
+                                            <h6 style="margin-bottom: 8px;">
+                                                <a href="{% url 'blogapp:blog-detail' blog.pid %}" style="color: #0e1133; font-size: 14px; font-weight: 600; text-decoration: none; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word;">{{ blog.title|truncatechars:50 }}</a>
+                                            </h6>
+                                            <div class="rc__meta">
+                                                <span style="color: #6d6e75; font-size: 12px;">
+                                                    <i class="far fa-calendar-alt" style="margin-right: 5px;"></i>
+                                                    {{ blog.date|date:"M d, Y" }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Related Posts Widget -->
+                        {% if related_blogs %}
+                        <div class="sidebar__widget mb-60">
+                            <h3 class="sidebar__widget-title" style="color: #0e1133; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Related Posts</h3>
+                            <div class="sidebar__widget-content">
+                                <div class="rc__post-wrapper">
+                                    {% for related_blog in related_blogs|slice:":4" %}
+                                    {% if related_blog.pid != post.pid %}
+                                    <div class="rc__post d-flex align-items-center" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eef0f6;">
+                                        <div class="rc__thumb" style="margin-right: 15px; flex-shrink: 0;">
+                                            <a href="{% url 'blogapp:blog-detail' related_blog.pid %}">
+                                                {% if related_blog.image %}
+                                                    <img src="{{ related_blog.image.cdn_url }}-/resize/80x60/-/quality/smart/-/format/auto/" alt="{{ related_blog.title }}" style="border-radius: 4px; width: 80px; height: 60px; object-fit: cover;">
+                                                {% else %}
+                                                    <img src="{% static 'assets/img/course/course-1.jpg' %}" alt="{{ related_blog.title }}" style="border-radius: 4px; width: 80px; height: 60px; object-fit: cover;">
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        <div class="rc__content">
+                                            <h6 style="margin-bottom: 8px;">
+                                                <a href="{% url 'blogapp:blog-detail' related_blog.pid %}" style="color: #0e1133; font-size: 14px; font-weight: 600; text-decoration: none; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word;">{{ related_blog.title|truncatechars:50 }}</a>
+                                            </h6>
+                                            <div class="rc__meta">
+                                                <span style="color: #6d6e75; font-size: 12px;">
+                                                    <i class="far fa-calendar-alt" style="margin-right: 5px;"></i>
+                                                    {{ related_blog.date|date:"M d, Y" }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Back to Blog List -->
+                        <div class="sidebar__widget">
+                            <div class="sidebar__widget-content text-center">
+                                <a href="{% url 'blogapp:blog-list' %}" class="e-btn e-btn-3" style="display: inline-block;">
+                                    <i class="far fa-arrow-left" style="margin-right: 8px;"></i>
+                                    Back to All Blogs
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Area End -->
+{% endblock %}

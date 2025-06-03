@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorship Request Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-radius: 0 0 8px 8px;
+        }
+        .status-badge {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .details {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .details h3 {
+            color: #0e1133;
+            margin-top: 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: bold;
+            color: #6d6e75;
+        }
+        .value {
+            color: #0e1133;
+        }
+        .admin-notes {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .next-steps {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #ff5d15;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #6d6e75;
+            font-size: 14px;
+        }
+        .button {
+            display: inline-block;
+            background: #ff5d15;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📋 Sponsorship Request Update</h1>
+        <p>Youth Impact Training Programme</p>
+    </div>
+    
+    <div class="content">
+        <p>Dear {{ user.first_name|default:user.username }},</p>
+        
+        <div class="status-badge">
+            We have completed the review of your sponsorship request
+        </div>
+        
+        <p>Thank you for your interest in the Youth Impact Training Programme and for taking the time to submit a sponsorship request. We have carefully reviewed your application for the <strong>{{ sponsorship_request.get_program_name }}</strong>.</p>
+        
+        <div class="details">
+            <h3>Request Details</h3>
+            
+            <div class="detail-row">
+                <span class="label">Request ID:</span>
+                <span class="value">#{{ sponsorship_request.id }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Program:</span>
+                <span class="value">{{ sponsorship_request.get_program_name }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Amount Requested:</span>
+                <span class="value">${{ sponsorship_request.amount_needed }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Review Date:</span>
+                <span class="value">{{ sponsorship_request.reviewed_at|date:"F d, Y" }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Status:</span>
+                <span class="value">{{ sponsorship_request.get_status_display }}</span>
+            </div>
+        </div>
+        
+        {% if admin_notes %}
+        <div class="admin-notes">
+            <h4>Feedback from Our Review Team:</h4>
+            <p>{{ admin_notes|linebreaks }}</p>
+        </div>
+        {% endif %}
+        
+        <p>While we are unable to approve your current sponsorship request, we want you to know that this decision does not reflect your potential or worth. Our sponsorship program has limited resources, and we receive many more qualified applications than we can fund.</p>
+        
+        <div class="next-steps">
+            <h3>🌟 Alternative Options & Next Steps</h3>
+            <ul>
+                <li><strong>Reapply Later:</strong> You may submit a new sponsorship request after 6 months</li>
+                <li><strong>Partial Self-Funding:</strong> Consider enrolling with partial payment plans available</li>
+                <li><strong>Scholarship Opportunities:</strong> Explore other scholarship programs we can recommend</li>
+                <li><strong>Free Resources:</strong> Access our free webinars and educational materials</li>
+                <li><strong>Community Programs:</strong> Join our free community events and networking sessions</li>
+            </ul>
+        </div>
+        
+        <div class="details">
+            <h3>📞 Stay Connected</h3>
+            <p><strong>General Inquiries:</strong> <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a></p>
+            <p><strong>Program Information:</strong> <a href="mailto:programs@youthimpactglobal.com">programs@youthimpactglobal.com</a></p>
+            <p><strong>Future Opportunities:</strong> Subscribe to our newsletter for updates on new programs and funding opportunities</p>
+        </div>
+        
+        <p>We encourage you to continue pursuing your educational and professional goals. Your dedication to personal growth is commendable, and we believe you will find the right opportunity to achieve your aspirations.</p>
+        
+        <p>Thank you again for your interest in the Youth Impact Training Programme. We wish you all the best in your future endeavors.</p>
+        
+        <p>Warm regards,<br>
+        <strong>{{ admin_user.get_full_name|default:"Youth Impact Global Team" }}</strong><br>
+        Youth Impact Training Programme</p>
+    </div>
+    
+    <div class="footer">
+        <p>This is an official notification from Youth Impact Global.</p>
+        <p>Youth Impact Global | <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a></p>
+    </div>
+</body>
+</html>

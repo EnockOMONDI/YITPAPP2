@@ -1,0 +1,47 @@
+SPONSORSHIP REQUEST UPDATE
+Youth Impact Training Programme
+
+Dear {{ user.first_name|default:user.username }},
+
+We have completed the review of your sponsorship request.
+
+Thank you for your interest in the Youth Impact Training Programme and for taking the time to submit a sponsorship request. We have carefully reviewed your application for the {{ sponsorship_request.get_program_name }}.
+
+REQUEST DETAILS:
+- Request ID: #{{ sponsorship_request.id }}
+- Program: {{ sponsorship_request.get_program_name }}
+- Amount Requested: ${{ sponsorship_request.amount_needed }}
+- Review Date: {{ sponsorship_request.reviewed_at|date:"F d, Y" }}
+- Status: {{ sponsorship_request.get_status_display }}
+
+{% if admin_notes %}
+FEEDBACK FROM OUR REVIEW TEAM:
+{{ admin_notes }}
+{% endif %}
+
+While we are unable to approve your current sponsorship request, we want you to know that this decision does not reflect your potential or worth. Our sponsorship program has limited resources, and we receive many more qualified applications than we can fund.
+
+ALTERNATIVE OPTIONS & NEXT STEPS:
+
+• Reapply Later: You may submit a new sponsorship request after 6 months
+• Partial Self-Funding: Consider enrolling with partial payment plans available
+• Scholarship Opportunities: Explore other scholarship programs we can recommend
+• Free Resources: Access our free webinars and educational materials
+• Community Programs: Join our free community events and networking sessions
+
+STAY CONNECTED:
+- General Inquiries: info@youthimpactglobal.com
+- Program Information: programs@youthimpactglobal.com
+- Future Opportunities: Subscribe to our newsletter for updates on new programs and funding opportunities
+
+We encourage you to continue pursuing your educational and professional goals. Your dedication to personal growth is commendable, and we believe you will find the right opportunity to achieve your aspirations.
+
+Thank you again for your interest in the Youth Impact Training Programme. We wish you all the best in your future endeavors.
+
+Warm regards,
+{{ admin_user.get_full_name|default:"Youth Impact Global Team" }}
+Youth Impact Training Programme
+
+---
+This is an official notification from Youth Impact Global.
+Youth Impact Global | info@youthimpactglobal.com

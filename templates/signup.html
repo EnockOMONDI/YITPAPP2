@@ -1,0 +1,285 @@
+{% extends 'yitp/basenonav.html' %}
+{% load static %}
+
+{% block title %}Sign Up - Youth Impact Training Programme{% endblock %}
+
+{% block extra_head %}
+<style>
+/* Signup form styling */
+.signup__area {
+    background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+}
+
+.signup__wrapper {
+    background: white;
+    border-radius: 10px;
+    padding: 60px 40px;
+    box-shadow: 0px 30px 60px 0px rgba(1, 11, 60, 0.15);
+    max-width: 600px;
+    width: 100%;
+    margin: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.signup__form-input {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.signup__form-input input {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    border: 2px solid #eef0f6;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #6d6e75;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.signup__form-input input:focus {
+    border-color: #ff5d15;
+    background: white;
+    outline: none;
+}
+
+.signup__form-input i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6d6e75;
+    font-size: 16px;
+}
+
+.signup__form-input input:focus + i {
+    color: #ff5d15;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+    border: 1px solid #c3e6cb;
+}
+
+.password-requirements {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    border-left: 4px solid #ff5d15;
+}
+
+.password-requirements h6 {
+    color: #0e1133;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.password-requirements li {
+    color: #6d6e75;
+    font-size: 14px;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.password-requirements li:before {
+    content: "•";
+    color: #ff5d15;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff5d15;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.terms-checkbox label {
+    color: #6d6e75;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.terms-checkbox a {
+    color: #ff5d15;
+    text-decoration: none;
+}
+
+.terms-checkbox a:hover {
+    color: #e04a0f;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #eef0f6;
+}
+
+.login-link a {
+    color: #ff5d15;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    color: #e04a0f;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .signup__area {
+        padding: 20px 0;
+    }
+
+    .signup__wrapper {
+        padding: 40px 30px;
+        margin: 15px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    .signup__wrapper {
+        padding: 30px 20px;
+        margin: 10px;
+        max-width: 95%;
+    }
+}
+
+/* Ensure proper centering on very small screens */
+@media (max-width: 320px) {
+    .signup__wrapper {
+        padding: 25px 15px;
+        margin: 5px;
+        max-width: 98%;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="signup__area">
+    <div class="signup__wrapper">
+                    <div class="signup__header text-center mb-40">
+                        <h2 style="color: #0e1133; font-size: 32px; font-weight: 700; margin-bottom: 15px;">Create Your Account</h2>
+                        <p style="color: #6d6e75; margin: 0;">Join the Youth Impact Training Programme community</p>
+                    </div>
+
+
+
+                    <form method="post" class="signup__form">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="signup__form-input">
+                                    <input type="text" name="first_name" placeholder="First Name" required 
+                                           value="{{ request.POST.first_name|default:'' }}">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="signup__form-input">
+                                    <input type="text" name="last_name" placeholder="Last Name" required 
+                                           value="{{ request.POST.last_name|default:'' }}">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="signup__form-input">
+                            <input type="text" name="username" placeholder="Username" required 
+                                   value="{{ request.POST.username|default:'' }}">
+                            <i class="fas fa-at"></i>
+                        </div>
+
+                        <div class="signup__form-input">
+                            <input type="email" name="email" placeholder="Email Address" required 
+                                   value="{{ request.POST.email|default:'' }}">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+
+                        <div class="signup__form-input">
+                            <input type="password" name="password1" placeholder="Password" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+
+                        <div class="signup__form-input">
+                            <input type="password" name="password2" placeholder="Confirm Password" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+
+                        <div class="password-requirements">
+                            <h6>Password Requirements:</h6>
+                            <ul>
+                                <li>At least 8 characters long</li>
+                                <li>Must contain both letters and numbers</li>
+                                <li>Cannot be too similar to your personal information</li>
+                                <li>Cannot be a commonly used password</li>
+                            </ul>
+                        </div>
+
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">
+                                I agree to the <a href="{% url 'yitp:contact' %}">Terms of Service</a> and 
+                                <a href="{% url 'yitp:contact' %}">Privacy Policy</a> of Youth Impact Training Programme
+                            </label>
+                        </div>
+
+                        <button type="submit" class="e-btn e-btn-3" style="width: 100%; padding: 15px; font-size: 16px; font-weight: 600;">
+                            <i class="fas fa-user-plus" style="margin-right: 8px;"></i>
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="login-link">
+                        <p style="color: #6d6e75; margin-bottom: 10px;">Already have an account?</p>
+                        <a href="{% url 'login' %}">Sign in here</a>
+                    </div>
+    </div>
+</section>
+{% endblock %}

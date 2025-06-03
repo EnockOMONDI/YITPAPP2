@@ -1,0 +1,151 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+    &rsaquo; <a href="{% url 'admin:users_sponsorshiprequest_changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+    &rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div class="module aligned">
+    <div class="form-row">
+        <p>You are about to update the status of <strong>{{ queryset.count }}</strong> sponsorship request{{ queryset.count|pluralize }}:</p>
+        
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin: 20px 0; max-height: 200px; overflow-y: auto;">
+            {% for obj in queryset %}
+                <div style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                    <strong>#{{ obj.id }}</strong> - {{ obj.user.get_full_name|default:obj.user.username }} 
+                    ({{ obj.get_program_name }}, ${{ obj.amount_needed }})
+                    <span style="background: #6c757d; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; margin-left: 10px;">
+                        Current: {{ obj.get_status_display }}
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Hidden fields to preserve the action -->
+        {% for obj in queryset %}
+            <input type="hidden" name="{{ action_checkbox_name }}" value="{{ obj.pk }}">
+        {% endfor %}
+        <input type="hidden" name="action" value="{{ request.POST.action }}">
+        <input type="hidden" name="post" value="yes">
+        
+        <fieldset class="module aligned">
+            <h2>Status Update Details</h2>
+            
+            <div class="form-row">
+                <div>
+                    <label for="{{ form.new_status.id_for_label }}">{{ form.new_status.label }}:</label>
+                    {{ form.new_status }}
+                    {% if form.new_status.help_text %}
+                        <p class="help">{{ form.new_status.help_text }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div>
+                    <label for="{{ form.admin_notes.id_for_label }}">{{ form.admin_notes.label }}:</label>
+                    {{ form.admin_notes }}
+                    {% if form.admin_notes.help_text %}
+                        <p class="help">{{ form.admin_notes.help_text }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div>
+                    {{ form.send_notification }} 
+                    <label for="{{ form.send_notification.id_for_label }}">{{ form.send_notification.label }}</label>
+                    {% if form.send_notification.help_text %}
+                        <p class="help">{{ form.send_notification.help_text }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="submit-row">
+            <input type="submit" value="Update Status to {{ new_status }}" class="default" />
+            <a href="{% url 'admin:users_sponsorshiprequest_changelist' %}" class="button cancel-link">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<style>
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-row select,
+.form-row textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-row textarea {
+    min-height: 80px;
+    font-family: inherit;
+}
+
+.help {
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.submit-row {
+    margin-top: 30px;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+}
+
+.submit-row input[type="submit"] {
+    background: #417690;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.submit-row input[type="submit"]:hover {
+    background: #205067;
+}
+
+.cancel-link {
+    color: #666;
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.cancel-link:hover {
+    background: #f5f5f5;
+}
+</style>
+{% endblock %}

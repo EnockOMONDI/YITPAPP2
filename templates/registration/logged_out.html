@@ -1,0 +1,161 @@
+{% extends 'yitp/basenonav.html' %}
+{% load static %}
+
+{% block title %}Logged Out - Youth Impact Training Programme{% endblock %}
+
+{% block extra_head %}
+<style>
+/* Logout page styling */
+.logout__area {
+    background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+}
+
+.logout__wrapper {
+    background: white;
+    border-radius: 10px;
+    padding: 60px 40px;
+    box-shadow: 0px 30px 60px 0px rgba(1, 11, 60, 0.15);
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.logout__icon {
+    width: 80px;
+    height: 80px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px auto;
+}
+
+.logout__icon i {
+    font-size: 32px;
+    color: #ff5d15;
+}
+
+.logout__actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.logout__actions .e-btn {
+    min-width: 140px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logout__area {
+        padding: 20px 0;
+    }
+
+    .logout__wrapper {
+        padding: 40px 30px;
+        margin: 15px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    .logout__wrapper {
+        padding: 30px 20px;
+        margin: 10px;
+        max-width: 95%;
+    }
+
+    .logout__actions {
+        flex-direction: column;
+    }
+
+    .logout__actions .e-btn {
+        width: 100%;
+    }
+}
+
+/* Ensure proper centering on very small screens */
+@media (max-width: 320px) {
+    .logout__wrapper {
+        padding: 25px 15px;
+        margin: 5px;
+        max-width: 98%;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="logout__area">
+    <div class="logout__wrapper">
+                    <div class="logout__icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    
+                    <h2 style="color: #0e1133; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Successfully Logged Out</h2>
+                    
+                    <p style="color: #6d6e75; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                        Thank you for using the Youth Impact Training Programme platform. You have been safely logged out of your account.
+                    </p>
+                    
+                    <div style="background: #f8f9fa; padding: 25px; border-radius: 6px; margin-bottom: 30px; border-left: 4px solid #ff5d15;">
+                        <h6 style="color: #0e1133; margin-bottom: 15px; font-weight: 600;">What's Next?</h6>
+                        <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                            <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
+                                Continue browsing our programs and courses
+                            </li>
+                            <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
+                                Read our latest blog posts and success stories
+                            </li>
+                            <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px; padding-left: 20px; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
+                                Sign in again to access your account
+                            </li>
+                            <li style="color: #6d6e75; font-size: 14px; padding-left: 20px; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
+                                Contact us if you need any assistance
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="logout__actions">
+                        <a href="{% url 'login' %}" class="e-btn e-btn-3">
+                            <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                            Sign In Again
+                        </a>
+                        <a href="{% url 'yitp:home' %}" class="e-btn" style="background: transparent; border: 2px solid #ff5d15; color: #ff5d15;">
+                            <i class="fas fa-home" style="margin-right: 8px;"></i>
+                            Go to Homepage
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #eef0f6;">
+                        <p style="color: #6d6e75; font-size: 14px; margin-bottom: 15px;">Need help or have questions?</p>
+                        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                            <a href="{% url 'yitp:contact' %}" style="color: #ff5d15; text-decoration: none; font-size: 14px;">
+                                <i class="fas fa-envelope" style="margin-right: 5px;"></i>
+                                Contact Support
+                            </a>
+                            <a href="{% url 'yitp:faqs' %}" style="color: #ff5d15; text-decoration: none; font-size: 14px;">
+                                <i class="fas fa-question-circle" style="margin-right: 5px;"></i>
+                                View FAQs
+                            </a>
+                        </div>
+                    </div>
+    </div>
+</section>
+{% endblock %}

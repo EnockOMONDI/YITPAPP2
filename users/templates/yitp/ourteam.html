@@ -1,0 +1,170 @@
+
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %} 
+
+   
+   <style>
+    .card {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: #fff;
+    box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+-webkit-box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+-moz-box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    
+    
+}
+
+.team__social .btn-outline-primary {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+.team__social .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.card-title {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.card-text {
+    color: #6c757d;
+}
+   </style>
+
+
+        <!-- Page title area -->
+        <section class="page__title-area pt-90 pb-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-8 align-items-center">
+                        <div class="page__title-content mb-50">
+                            <h2 class="page__title">Meet Our Expert Team</h2>
+                            <h3 class="">Our instructors bring years of ind
+                                ustry experience and expertise to help shape the next generation of leaders.</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Team Member 1 -->
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="card team__item text-center mb-40">
+                            <div class="card-body">
+                                <div class="team__thumb mb-25">
+                                    <img src="{% static 'assets/img/hero/sylvester.jpeg' %}" alt="Sylvester Oluoch" class="card-img-top" style="max-height: 300px; width: 100%; object-fit: cover; border-radius: 8px;">
+                                </div>
+                                <div class="team__content">
+                                    <h3 class="team__title card-title">Sylvester Oluoch</h3>
+                                    <p class="card-text team__designation">Banking, Sales, Product Development</p>
+                                    <div class="team__social">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/sylvester-oluoch-a3000715/" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Team Member 2 -->
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="card team__item text-center mb-40">
+                            <div class="card-body">
+                                <div class="team__thumb mb-25">
+                                    <img src="{% static 'assets/img/hero/ruth.jpeg' %}" alt="Ruth Kinyanjui" class="card-img-top" style="max-height: 300px; width: 100%; object-fit: cover; border-radius: 8px;">
+                                </div>
+                                <div class="team__content">
+                                    <h3 class="team__title card-title">CPA Ruth Kinyanjui</h3>
+                                    <p class="card-text team__designation">Finance and Economics</p>
+                                    <div class="team__social">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/cpa-ruth-kinyanjui-99250928/" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Team Member 3 -->
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="card team__item text-center mb-40">
+                            <div class="card-body">
+                                <div class="team__thumb mb-25">
+                                    <img src="{% static 'assets/img/hero/meshack.jpeg' %}" alt="Meshack Oduke" class="card-img-top" style="max-height: 300px; width: 100%; object-fit: cover; border-radius: 8px;">
+                                </div>
+                                <div class="team__content">
+                                    <h3 class="team__title card-title">Meshack Oduke</h3>
+                                    <p class="card-text team__designation">Teacher, Trainer Of Trainers(TOT)</p>
+                                    <div class="team__social">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/oduke-meshack-3bb64638/" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Team Member 4 -->
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="card team__item text-center mb-40">
+                            <div class="card-body">
+                                <div class="team__thumb mb-25">
+                                    <img src="{% static 'assets/img/hero/levin.jpeg' %}" alt="Levin Ingati" class="card-img-top" style="max-height: 300px; width: 100%; object-fit: cover; border-radius: 8px;">
+                                </div>
+                                <div class="team__content">
+                                    <h3 class="team__title card-title">Levin Ingati</h3>
+                                    <p class="card-text team__designation">Biosystems Engineering, Sustainability Management</p>
+                                    <div class="team__social">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/levinnyonje/" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Team Member 5 -->
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="card team__item text-center mb-40">
+                            <div class="card-body">
+                                <div class="team__thumb mb-25">
+                                    <img src="{% static 'assets/img/hero/lilian.jpeg' %}" alt="Lilian Njeru" class="card-img-top" style="max-height: 300px; width: 100%; object-fit: cover; border-radius: 8px;">
+                                </div>
+                                <div class="team__content">
+                                    <h3 class="team__title card-title">Lilian Njeru</h3>
+                                    <p class="card-text team__designation">Sales Trainer, Business Development Consultant</p>
+                                    <div class="team__social">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/lilian-wambui-njeru/" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+
+        {% include 'yitp/footer.html' %}
+    
+  
+  {% endblock %}
