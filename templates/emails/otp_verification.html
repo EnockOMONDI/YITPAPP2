@@ -1,0 +1,67 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}Verify Your YITP Account - OTP Code{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ user.first_name|default:user.username }}! 👋
+</div>
+
+<div class="content-text">
+    Welcome to the <strong>Youth Impact Training Programme</strong>! We're excited to have you join our community of future leaders.
+</div>
+
+<div class="content-text">
+    To complete your registration and verify your email address, please use the verification code below:
+</div>
+
+<div class="otp-container">
+    <div class="otp-label">Your Verification Code</div>
+    <div class="otp-code">{{ otp_code }}</div>
+    <div class="otp-expiry">⏰ This code expires in {{ expiry_minutes }} minutes</div>
+</div>
+
+<div class="info-box">
+    <strong>📋 How to use this code:</strong>
+    <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
+        <li>Return to the YITP registration page</li>
+        <li>Enter this 6-digit code in the verification field</li>
+        <li>Click "Verify" to complete your registration</li>
+    </ol>
+</div>
+
+<div class="warning-box">
+    <strong>🔒 Security Notice:</strong><br>
+    • This code is valid for {{ expiry_minutes }} minutes only<br>
+    • Never share this code with anyone<br>
+    • If you didn't request this code, please ignore this email<br>
+    • Contact our support team if you need assistance
+</div>
+
+<div class="content-text">
+    Once verified, you'll have full access to:
+</div>
+
+<div class="content-text">
+    ✅ <strong>Training Programs:</strong> Access to our 9-week virtual training modules<br>
+    ✅ <strong>Community:</strong> Connect with fellow participants and mentors<br>
+    ✅ <strong>Resources:</strong> Educational content and career development tools<br>
+    ✅ <strong>Events:</strong> Workshops, webinars, and networking opportunities<br>
+    ✅ <strong>Support:</strong> Sponsorship opportunities and financial assistance
+</div>
+
+<div class="success-box">
+    <strong>🎯 Ready to transform your future?</strong><br>
+    Complete your verification now and start your journey with YITP!
+</div>
+
+<div class="content-text">
+    If you're having trouble with verification or have any questions, our support team is here to help.
+</div>
+
+<div class="content-text" style="margin-top: 30px;">
+    Best regards,<br>
+    <strong>The YITP Team</strong><br>
+    Youth Impact Training Programme
+</div>
+{% endblock %}

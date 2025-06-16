@@ -1,0 +1,42 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Email Verification Required
+
+Hello {{ user.first_name|default:user.username }}!
+
+Welcome to the Youth Impact Training Programme! We're excited to have you join our community of future leaders.
+
+To complete your registration and verify your email address, please use the verification code below:
+
+YOUR VERIFICATION CODE: {{ otp_code }}
+
+This code expires in {{ expiry_minutes }} minutes.
+
+HOW TO USE THIS CODE:
+1. Return to the YITP registration page
+2. Enter this 6-digit code in the verification field
+3. Click "Verify" to complete your registration
+
+SECURITY NOTICE:
+- This code is valid for {{ expiry_minutes }} minutes only
+- Never share this code with anyone
+- If you didn't request this code, please ignore this email
+- Contact our support team if you need assistance
+
+Once verified, you'll have full access to:
+✓ Training Programs: Access to our 9-week virtual training modules
+✓ Community: Connect with fellow participants and mentors
+✓ Resources: Educational content and career development tools
+✓ Events: Workshops, webinars, and networking opportunities
+✓ Support: Sponsorship opportunities and financial assistance
+
+Ready to transform your future? Complete your verification now and start your journey with YITP!
+
+If you're having trouble with verification or have any questions, our support team is here to help.
+
+Best regards,
+The YITP Team
+Youth Impact Training Programme
+
+---
+Contact Support: {{ support_email|default:'youthimpactglobal3@gmail.com' }}
+© 2025 Youth Impact Global. All rights reserved.

@@ -1,0 +1,68 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}YITP Account Login Notification{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ user.first_name|default:user.username }}! 🔐
+</div>
+
+<div class="content-text">
+    We're writing to inform you that your <strong>Youth Impact Training Programme</strong> account was accessed.
+</div>
+
+<div class="info-box">
+    <strong>📊 Login Details:</strong><br>
+    <strong>Date & Time:</strong> {{ login_time|date:"F d, Y" }} at {{ login_time|time:"g:i A" }}<br>
+    <strong>IP Address:</strong> {{ ip_address }}<br>
+    <strong>Device/Browser:</strong> {{ user_agent|truncatechars:100 }}
+</div>
+
+<div class="success-box">
+    <strong>✅ Was this you?</strong><br>
+    If you recognize this login activity, no action is required. You can safely ignore this email.
+</div>
+
+<div class="warning-box">
+    <strong>🚨 Didn't recognize this login?</strong><br>
+    If this wasn't you, your account may have been compromised. Please take immediate action:
+    <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
+        <li><strong>Change your password immediately</strong></li>
+        <li><strong>Review your account activity</strong></li>
+        <li><strong>Contact our support team</strong></li>
+        <li><strong>Enable two-factor authentication if available</strong></li>
+    </ol>
+</div>
+
+<div class="content-text">
+    <strong>🔒 Security Best Practices:</strong>
+</div>
+
+<div class="content-text">
+    • Use a strong, unique password for your YITP account<br>
+    • Never share your login credentials with anyone<br>
+    • Log out from shared or public computers<br>
+    • Keep your browser and device software updated<br>
+    • Be cautious of phishing emails asking for your credentials
+</div>
+
+<div class="info-box">
+    <strong>💡 Why do we send these notifications?</strong><br>
+    These security notifications help protect your account by alerting you to any login activity. This way, you can quickly identify and respond to any unauthorized access attempts.
+</div>
+
+<div class="content-text">
+    If you have any concerns about your account security or need assistance, please don't hesitate to contact our support team immediately.
+</div>
+
+<div class="content-text" style="margin-top: 30px;">
+    Stay secure,<br>
+    <strong>The YITP Security Team</strong><br>
+    Youth Impact Training Programme
+</div>
+
+<div style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; font-size: 12px; color: #6c757d;">
+    <strong>Note:</strong> This is an automated security notification. Please do not reply to this email. 
+    If you need assistance, contact us at {{ support_email|default:'youthimpactglobal3@gmail.com' }}.
+</div>
+{% endblock %}

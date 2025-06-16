@@ -1,0 +1,79 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}Welcome to YITP - Your Journey Begins Now!{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    🎉 Welcome to YITP, {{ user.first_name|default:user.username }}!
+</div>
+
+<div class="content-text">
+    Congratulations! Your account has been successfully verified and you're now part of the <strong>Youth Impact Training Programme</strong> community.
+</div>
+
+<div class="success-box">
+    <strong>🚀 Your YITP Journey Starts Here!</strong><br>
+    You've taken the first step towards transforming your future. We're thrilled to have you aboard!
+</div>
+
+<div class="content-text">
+    <strong>What's Next?</strong> Here's how to make the most of your YITP experience:
+</div>
+
+<div class="info-box">
+    <strong>📚 Step 1: Complete Your Profile</strong><br>
+    Add your bio, interests, and goals to help us personalize your experience and connect you with like-minded peers.
+</div>
+
+<a href="{{ login_url }}" class="btn">Access Your Dashboard</a>
+
+<div class="content-text">
+    <strong>🎯 What You Can Do Now:</strong>
+</div>
+
+<div class="content-text">
+    ✅ <strong>Explore Training Modules:</strong> Browse our comprehensive 9-week program curriculum<br>
+    ✅ <strong>Join the Community:</strong> Connect with fellow participants and experienced mentors<br>
+    ✅ <strong>Read Our Blog:</strong> Access valuable insights on career development and entrepreneurship<br>
+    ✅ <strong>Attend Events:</strong> Register for upcoming workshops and networking sessions<br>
+    ✅ <strong>Apply for Sponsorship:</strong> If you need financial assistance, explore our sponsorship program
+</div>
+
+<div class="warning-box">
+    <strong>💡 Pro Tip:</strong><br>
+    Set up your profile completely to unlock personalized recommendations and connect with mentors in your field of interest!
+</div>
+
+<div class="content-text">
+    <strong>🌟 Our 9-Week Program Includes:</strong>
+</div>
+
+<div class="content-text">
+    <strong>Week 1-2:</strong> Foundation & Mindset Development<br>
+    <strong>Week 3-4:</strong> Essential Soft Skills Training<br>
+    <strong>Week 5-6:</strong> Career Planning & Goal Setting<br>
+    <strong>Week 7-8:</strong> Entrepreneurship & Innovation<br>
+    <strong>Week 9:</strong> Networking & Future Opportunities
+</div>
+
+<div class="info-box">
+    <strong>📞 Need Help Getting Started?</strong><br>
+    Our support team is here to guide you every step of the way. Don't hesitate to reach out if you have any questions about the program, technical issues, or need assistance with anything else.
+</div>
+
+<div class="content-text">
+    We believe in your potential and are committed to supporting your growth. Together, we'll help you develop the skills, mindset, and network needed to succeed in your career or entrepreneurial journey.
+</div>
+
+<div class="success-box">
+    <strong>🎊 Ready to Begin?</strong><br>
+    Log in to your account and start exploring everything YITP has to offer. Your future self will thank you!
+</div>
+
+<div class="content-text" style="margin-top: 30px;">
+    Welcome to the family!<br><br>
+    <strong>The YITP Team</strong><br>
+    Youth Impact Training Programme<br>
+    <em>"Empowering young minds for a better tomorrow"</em>
+</div>
+{% endblock %}

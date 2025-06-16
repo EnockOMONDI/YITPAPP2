@@ -11,6 +11,8 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest
 from .forms import SponsorshipRequestForm
+from .otp_views import send_otp_for_registration
+from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification
 
 from django.shortcuts import render,redirect,HttpResponse
 from django.http import Http404
@@ -168,24 +170,46 @@ def register(request):
                     messages.error(request, error)
                 return render(request, 'signup.html')
 
-            # Create user
+            # Create user (inactive until OTP verification)
             user = User.objects.create_user(
                 username=username,
                 password=password1,
                 email=email,
                 first_name=first_name,
-                last_name=last_name
+                last_name=last_name,
+                is_active=False  # User will be activated after OTP verification
             )
             user.save()
 
-            # Auto-login the user
-            user = auth.authenticate(username=username, password=password1)
-            if user:
-                auth.login(request, user)
-                messages.success(request, f'Welcome {first_name}! Your account has been created successfully.')
-                return redirect('yitp:home')  # Redirect to home instead of non-existent 'blog'
-            else:
-                messages.success(request, 'Account created successfully! Please log in.')
+            # Send OTP for email verification
+            try:
+                otp_record, email_sent = send_otp_for_registration(user)
+                if email_sent:
+                    messages.success(
+                        request,
+                        f'Account created successfully! We\'ve sent a verification code to {email}. '
+                        'Please check your email and enter the code to complete your registration.'
+                    )
+                    return redirect(f'/verify-otp/?user_id={user.id}')
+                else:
+                    # If email sending fails, activate user and proceed normally
+                    user.is_active = True
+                    user.save()
+                    messages.warning(
+                        request,
+                        'Account created successfully! However, we couldn\'t send the verification email. '
+                        'Your account is now active.'
+                    )
+                    return redirect('login')
+            except Exception as e:
+                # If OTP system fails, activate user and proceed normally
+                user.is_active = True
+                user.save()
+                messages.warning(
+                    request,
+                    'Account created successfully! Email verification is temporarily unavailable. '
+                    'Your account is now active.'
+                )
                 return redirect('login')
 
         except Exception as e:
@@ -223,6 +247,13 @@ def login(request):
         if user is not None:
             if user.is_active:
                 auth.login(request, user)
+
+                # Send login notification email
+                try:
+                    send_login_notification(user, request)
+                except Exception as e:
+                    # Don't fail login if email notification fails
+                    pass
 
                 # Handle remember me functionality
                 if not remember_me:
@@ -269,7 +300,11 @@ def profile(request):
 
             # Send email notifications
             try:
-                send_sponsorship_emails(sponsorship_request)
+                # Send confirmation email to user
+                send_sponsorship_confirmation_email(sponsorship_request)
+                # Send notification email to admin
+                send_sponsorship_admin_notification(sponsorship_request)
+
                 messages.success(
                     request,
                     'Your sponsorship request has been submitted successfully! '
@@ -332,7 +367,7 @@ def send_sponsorship_emails(sponsorship_request):
         subject=admin_subject,
         body=admin_text_content,
         from_email=settings.DEFAULT_FROM_EMAIL,
-        to=['info@youthimpactglobal.com'],
+        to=[settings.ADMIN_EMAIL],
         reply_to=[user.email],
     )
     admin_email.attach_alternative(admin_html_content, "text/html")
