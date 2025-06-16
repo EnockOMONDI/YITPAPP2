@@ -9,7 +9,7 @@ from django.core.validators import validate_email
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
-from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest
+from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile
 from .forms import SponsorshipRequestForm
 from .otp_views import send_otp_for_registration
 from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification
@@ -123,6 +123,7 @@ def register(request):
             last_name = request.POST.get('last_name', '').strip()
             username = request.POST.get('username', '').strip()
             email = request.POST.get('email', '').strip()
+            phone_number = request.POST.get('phone_number', '').strip()
             password1 = request.POST.get('password1', '')
             password2 = request.POST.get('password2', '')
             terms = request.POST.get('terms')
@@ -164,6 +165,13 @@ def register(request):
             if email and User.objects.filter(email=email).exists():
                 errors.append('Email already registered. Please use a different email or sign in.')
 
+            # Validate phone number format (optional field)
+            if phone_number:
+                # Remove any non-digit characters for validation
+                phone_digits = ''.join(filter(str.isdigit, phone_number))
+                if len(phone_digits) < 10:
+                    errors.append('Please enter a valid phone number with at least 10 digits.')
+
             # If there are errors, show them
             if errors:
                 for error in errors:
@@ -180,6 +188,12 @@ def register(request):
                 is_active=False  # User will be activated after OTP verification
             )
             user.save()
+
+            # Create user profile with phone number
+            profile, created = Profile.objects.get_or_create(user=user)
+            if phone_number:
+                profile.phone_number = phone_number
+                profile.save()
 
             # Send OTP for email verification
             try:
