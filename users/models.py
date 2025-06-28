@@ -158,12 +158,7 @@ class SponsorshipRequest(models.Model):
     ]
 
     PROGRAM_CHOICES = [
-        ('goddess_care', 'Goddess Care Initiative'),
-        ('youth_empowerment', 'Youth Empowerment Program'),
-        ('community_development', 'Community Development'),
-        ('education_support', 'Education Support'),
-        ('skills_training', 'Skills Training'),
-        ('other', 'Other (Please specify)'),
+        ('youth_impact_training empowerment', 'youth impact training'),
     ]
 
     FINANCIAL_SITUATION_CHOICES = [
