@@ -1,13 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.http import JsonResponse
-from django.utils import timezone
 from .models import Course, Category, Module, Lesson
 from progress.models import Enrollment, LessonProgress
+from users.email_utils import send_enrollment_confirmation_email, send_enrollment_admin_notification
 
 
 User = get_user_model()
@@ -49,7 +48,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         # Get user profile
         try:
             context['user_profile'] = user.profile
-        except UserProfile.DoesNotExist:
+        except:
             context['user_profile'] = None
         
         return context
@@ -175,19 +174,67 @@ class EnrollView(LoginRequiredMixin, TemplateView):
     """
     def post(self, request, course_slug):
         course = get_object_or_404(Course, slug=course_slug, is_published=True)
-        
+
+        # Check payment verification for paid courses
+        if course.price > 0:
+            # Get or create user profile
+            profile, created = request.user.profile, False
+            try:
+                profile = request.user.profile
+            except:
+                from users.models import Profile
+                profile = Profile.objects.create(user=request.user)
+
+            # Check if payment is confirmed for paid courses
+            if not profile.has_confirmed_payment:
+                messages.error(
+                    request,
+                    f'Payment verification required for {course.title}. '
+                    f'This course costs KES {course.price}. Please complete your payment '
+                    f'and wait for confirmation before enrolling. Contact support for payment instructions.'
+                )
+                return redirect('courses:course_detail', slug=course_slug)
+
         # Check if already enrolled
         enrollment, created = Enrollment.objects.get_or_create(
             student=request.user,
             course=course,
             defaults={'status': 'active'}
         )
-        
+
         if created:
-            messages.success(request, f'Successfully enrolled in {course.title}!')
+            # Send enrollment confirmation email to user
+            try:
+                send_enrollment_confirmation_email(request.user, course, enrollment)
+            except Exception as e:
+                # Log error but don't fail enrollment
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Failed to send enrollment confirmation email: {str(e)}")
+
+            # Send enrollment notification to admin
+            try:
+                send_enrollment_admin_notification(request.user, course, enrollment)
+            except Exception as e:
+                # Log error but don't fail enrollment
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Failed to send enrollment admin notification: {str(e)}")
+
+            if course.price > 0:
+                messages.success(
+                    request,
+                    f'Successfully enrolled in {course.title}! Your payment has been verified. '
+                    f'Check your email for confirmation details.'
+                )
+            else:
+                messages.success(
+                    request,
+                    f'Successfully enrolled in {course.title}! Check your email for confirmation details.'
+                )
         else:
             messages.info(request, f'You are already enrolled in {course.title}.')
-        
+
         return redirect('courses:course_detail', slug=course_slug)
 
 
@@ -356,7 +403,7 @@ class MyCoursesView(LoginRequiredMixin, ListView):
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     """
-    User profile view
+    Enhanced user profile view with comprehensive LMS analytics
     """
     template_name = 'lms/courses/profile.html'
 
@@ -365,21 +412,141 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         user = self.request.user
 
         # Get or create user profile
-        profile, created = UserProfile.objects.get_or_create(user=user)
+        try:
+            profile = user.profile
+        except:
+            from users.models import Profile
+            profile, created = Profile.objects.get_or_create(user=user)
         context['profile'] = profile
 
-        # Get user statistics
-        enrollments = Enrollment.objects.filter(student=user)
+        # Get user enrollments with related data
+        enrollments = Enrollment.objects.filter(student=user).select_related('course').prefetch_related('lesson_progress')
+        context['enrollments'] = enrollments
+
+        # Basic statistics
         context['total_enrollments'] = enrollments.count()
         context['completed_courses'] = enrollments.filter(status='completed').count()
         context['active_courses'] = enrollments.filter(status='active').count()
+        context['dropped_courses'] = enrollments.filter(status='dropped').count()
 
-        # Get recent achievements
-        from progress.models import Achievement
+        # Learning analytics
+        from progress.models import Achievement, StudySession, LessonProgress
+        from django.db.models import Sum, Avg, Count
+        from datetime import datetime, timedelta
+
+        # Total learning time from lesson progress
+        total_time_seconds = LessonProgress.objects.filter(
+            enrollment__student=user
+        ).aggregate(total_time=Sum('time_spent'))['total_time'] or 0
+        context['total_learning_hours'] = round(total_time_seconds / 3600, 1)
+
+        # Study sessions analytics
+        study_sessions = StudySession.objects.filter(student=user)
+        context['total_study_sessions'] = study_sessions.count()
+
+        # Learning streak calculation (consecutive days with activity)
+        recent_activity = LessonProgress.objects.filter(
+            enrollment__student=user,
+            completed_at__isnull=False
+        ).order_by('-completed_at')
+
+        learning_streak = self.calculate_learning_streak(recent_activity)
+        context['learning_streak'] = learning_streak
+
+        # Recent achievements
         recent_achievements = Achievement.objects.filter(student=user).order_by('-earned_at')[:5]
         context['recent_achievements'] = recent_achievements
+        context['total_achievements'] = Achievement.objects.filter(student=user).count()
+
+        # Course progress details for enrolled courses
+        course_progress = []
+        for enrollment in enrollments:
+            progress_data = {
+                'enrollment': enrollment,
+                'course': enrollment.course,
+                'progress_percentage': enrollment.progress_percentage,
+                'total_lessons': enrollment.course.total_lessons,
+                'completed_lessons': enrollment.lesson_progress.filter(status='completed').count(),
+                'last_accessed': enrollment.last_accessed,
+                'can_continue': enrollment.lesson_progress.filter(status__in=['not_started', 'in_progress']).exists(),
+                'next_lesson': enrollment.lesson_progress.filter(status__in=['not_started', 'in_progress']).first(),
+            }
+            course_progress.append(progress_data)
+        context['course_progress'] = course_progress
+
+        # Payment history (mock data for now - can be enhanced with actual payment records)
+        context['payment_history'] = self.get_payment_history(user)
+
+        # Recent activity
+        context['recent_activity'] = self.get_recent_activity(user)
 
         return context
+
+    def calculate_learning_streak(self, recent_activity):
+        """Calculate consecutive days of learning activity"""
+        if not recent_activity.exists():
+            return 0
+
+        from datetime import date, timedelta
+        today = date.today()
+        streak = 0
+        current_date = today
+
+        # Group activities by date
+        activity_dates = set()
+        for activity in recent_activity:
+            activity_dates.add(activity.completed_at.date())
+
+        # Count consecutive days backwards from today
+        while current_date in activity_dates:
+            streak += 1
+            current_date -= timedelta(days=1)
+
+        return streak
+
+    def get_payment_history(self, user):
+        """Get user's payment history"""
+        # This is a placeholder - can be enhanced with actual payment records
+        payment_history = []
+        if hasattr(user, 'profile') and user.profile.payment_confirmed_at:
+            payment_history.append({
+                'date': user.profile.payment_confirmed_at,
+                'amount': user.profile.payment_amount or 0,
+                'method': user.profile.get_payment_method_display() if user.profile.payment_method else 'N/A',
+                'reference': user.profile.payment_reference or 'N/A',
+                'status': 'Confirmed'
+            })
+        return payment_history
+
+    def get_recent_activity(self, user):
+        """Get user's recent learning activity"""
+        from progress.models import LessonProgress
+        recent_progress = LessonProgress.objects.filter(
+            enrollment__student=user
+        ).select_related('lesson', 'enrollment__course').order_by('-completed_at')[:10]
+
+        activities = []
+        for progress in recent_progress:
+            if progress.completed_at:
+                activities.append({
+                    'type': 'lesson_completed',
+                    'title': f"Completed: {progress.lesson.title}",
+                    'course': progress.enrollment.course.title,
+                    'date': progress.completed_at,
+                    'icon': 'fas fa-check-circle',
+                    'color': 'success'
+                })
+            elif progress.started_at:
+                activities.append({
+                    'type': 'lesson_started',
+                    'title': f"Started: {progress.lesson.title}",
+                    'course': progress.enrollment.course.title,
+                    'date': progress.started_at,
+                    'icon': 'fas fa-play-circle',
+                    'color': 'info'
+                })
+
+        return activities[:5]  # Return only 5 most recent
 
 
 class HowItWorksView(TemplateView):

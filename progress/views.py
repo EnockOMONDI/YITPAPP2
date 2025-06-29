@@ -8,6 +8,7 @@ from django.db.models import Q, Count, Avg
 from django.utils import timezone
 from .models import Enrollment, LessonProgress, Achievement, LearningPath, StudySession
 from courses.models import Course, Lesson
+from users.email_utils import send_enrollment_confirmation_email, send_enrollment_admin_notification
 
 
 class ProgressDashboardView(LoginRequiredMixin, TemplateView):
@@ -150,6 +151,26 @@ class EnrollView(LoginRequiredMixin, View):
     def post(self, request, course_id):
         course = get_object_or_404(Course, id=course_id, is_published=True)
 
+        # Check payment verification for paid courses
+        if course.price > 0:
+            # Get or create user profile
+            profile, created = request.user.profile, False
+            try:
+                profile = request.user.profile
+            except:
+                from users.models import Profile
+                profile = Profile.objects.create(user=request.user)
+
+            # Check if payment is confirmed for paid courses
+            if not profile.has_confirmed_payment:
+                messages.error(
+                    request,
+                    f'Payment verification required for {course.title}. '
+                    f'This course costs KES {course.price}. Please complete your payment '
+                    f'and wait for confirmation before enrolling. Contact support for payment instructions.'
+                )
+                return redirect('courses:course_detail', pk=course.id)
+
         # Check if already enrolled
         enrollment, created = Enrollment.objects.get_or_create(
             student=request.user,
@@ -158,7 +179,35 @@ class EnrollView(LoginRequiredMixin, View):
         )
 
         if created:
-            messages.success(request, f'Successfully enrolled in {course.title}!')
+            # Send enrollment confirmation email to user
+            try:
+                send_enrollment_confirmation_email(request.user, course, enrollment)
+            except Exception as e:
+                # Log error but don't fail enrollment
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Failed to send enrollment confirmation email: {str(e)}")
+
+            # Send enrollment notification to admin
+            try:
+                send_enrollment_admin_notification(request.user, course, enrollment)
+            except Exception as e:
+                # Log error but don't fail enrollment
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Failed to send enrollment admin notification: {str(e)}")
+
+            if course.price > 0:
+                messages.success(
+                    request,
+                    f'Successfully enrolled in {course.title}! Your payment has been verified. '
+                    f'Check your email for confirmation details.'
+                )
+            else:
+                messages.success(
+                    request,
+                    f'Successfully enrolled in {course.title}! Check your email for confirmation details.'
+                )
         else:
             messages.info(request, 'You are already enrolled in this course.')
 

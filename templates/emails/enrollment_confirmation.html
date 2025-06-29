@@ -1,0 +1,81 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}Course Enrollment Confirmation - {{ course.title }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ user.first_name|default:user.username }}! 🎉
+</div>
+
+<div class="content-text">
+    Congratulations! You have successfully enrolled in <strong>{{ course.title }}</strong> through the Youth Impact Training Programme.
+</div>
+
+<div class="info-box">
+    <strong>📚 Course Details:</strong><br>
+    <strong>Course:</strong> {{ course.title }}<br>
+    <strong>Instructor:</strong> {{ course.instructor.get_full_name|default:course.instructor.username }}<br>
+    <strong>Difficulty:</strong> {{ course.get_difficulty_level_display }}<br>
+    <strong>Duration:</strong> {{ course.estimated_duration }} hours<br>
+    <strong>Enrollment Date:</strong> {{ enrollment_date|date:"F d, Y" }} at {{ enrollment_date|time:"g:i A" }}<br>
+    {% if course.price > 0 %}
+    <strong>Course Fee:</strong> KES {{ course.price }}<br>
+    {% else %}
+    <strong>Course Fee:</strong> Free<br>
+    {% endif %}
+</div>
+
+<div class="content-text">
+    <strong>Course Description:</strong><br>
+    {{ course.description|truncatewords:50 }}
+</div>
+
+<div class="content-text">
+    <strong>🎯 Learning Objectives:</strong><br>
+    {{ course.learning_objectives|truncatewords:30 }}
+</div>
+
+{% if course.prerequisites %}
+<div class="content-text">
+    <strong>📋 Prerequisites:</strong><br>
+    {{ course.prerequisites|truncatewords:20 }}
+</div>
+{% endif %}
+
+<div class="cta-container">
+    <a href="{{ course_url }}" class="cta-button">
+        🚀 Start Learning Now
+    </a>
+</div>
+
+<div class="content-text">
+    <strong>📖 Next Steps:</strong>
+</div>
+
+<div class="content-text">
+    <ul style="text-align: left; margin: 0; padding-left: 20px;">
+        <li>Access your course materials through your YITP dashboard</li>
+        <li>Complete modules in the recommended sequence</li>
+        <li>Participate in discussions and assignments</li>
+        <li>Track your progress and earn your certificate</li>
+        {% if course.price > 0 %}
+        <li>Ensure your payment is confirmed to maintain access</li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="content-text">
+    <strong>💡 Need Help?</strong><br>
+    If you have any questions about your enrollment or need technical support, please don't hesitate to contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a>.
+</div>
+
+<div class="content-text">
+    We're excited to support you on your learning journey with YITP!
+</div>
+
+<div class="signature">
+    Best regards,<br>
+    <strong>The YITP Team</strong><br>
+    Youth Impact Training Programme
+</div>
+{% endblock %}

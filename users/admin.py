@@ -533,10 +533,26 @@ class OTPVerificationAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone_number', 'bio_preview']
-    search_fields = ['user__username', 'user__email', 'phone_number']
-    list_filter = ['user__date_joined']
+    list_display = ['user', 'phone_number', 'payment_status', 'payment_amount', 'payment_confirmed_at', 'bio_preview']
+    search_fields = ['user__username', 'user__email', 'phone_number', 'payment_reference']
+    list_filter = ['user__date_joined', 'payment_status', 'payment_method', 'payment_confirmed_at']
     ordering = ['user__username']
+    readonly_fields = ['payment_confirmed_at']
+
+    fieldsets = (
+        ('User Information', {
+            'fields': ('user', 'phone_number', 'bio', 'image')
+        }),
+        ('Payment Information', {
+            'fields': (
+                'payment_status', 'payment_amount', 'payment_method',
+                'payment_reference', 'payment_confirmed_at', 'payment_notes'
+            ),
+            'classes': ('collapse',)
+        }),
+    )
+
+    actions = ['confirm_payment', 'mark_payment_pending', 'mark_payment_expired']
 
     def bio_preview(self, obj):
         """Display truncated bio"""
@@ -544,6 +560,43 @@ class ProfileAdmin(admin.ModelAdmin):
             return obj.bio[:50] + '...' if len(obj.bio) > 50 else obj.bio
         return 'No bio set'
     bio_preview.short_description = 'Bio Preview'
+
+    def confirm_payment(self, request, queryset):
+        """Admin action to confirm payment for selected profiles"""
+        updated = 0
+        for profile in queryset:
+            if profile.payment_status != 'confirmed':
+                profile.payment_status = 'confirmed'
+                profile.payment_confirmed_at = timezone.now()
+                profile.save(update_fields=['payment_status', 'payment_confirmed_at'])
+                updated += 1
+
+        self.message_user(
+            request,
+            f'Successfully confirmed payment for {updated} profile(s).',
+            messages.SUCCESS
+        )
+    confirm_payment.short_description = "Confirm payment for selected profiles"
+
+    def mark_payment_pending(self, request, queryset):
+        """Admin action to mark payment as pending for selected profiles"""
+        updated = queryset.update(payment_status='pending')
+        self.message_user(
+            request,
+            f'Successfully marked {updated} profile(s) as payment pending.',
+            messages.SUCCESS
+        )
+    mark_payment_pending.short_description = "Mark payment as pending"
+
+    def mark_payment_expired(self, request, queryset):
+        """Admin action to mark payment as expired for selected profiles"""
+        updated = queryset.update(payment_status='expired')
+        self.message_user(
+            request,
+            f'Successfully marked {updated} profile(s) as payment expired.',
+            messages.SUCCESS
+        )
+    mark_payment_expired.short_description = "Mark payment as expired"
 
 # Non-sponsorship models are intentionally not registered to keep admin focused on sponsorship management
 # If you need to manage these models, uncomment the lines below:

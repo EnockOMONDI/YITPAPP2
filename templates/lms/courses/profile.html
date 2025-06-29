@@ -157,6 +157,182 @@
             font-size: 1.5rem;
         }
     }
+
+    /* Enhanced Profile Styles */
+    .nav-pills .nav-link {
+        color: #1a2e53;
+        border-radius: 25px;
+        padding: 12px 24px;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: #ff5d15;
+        color: white;
+    }
+
+    .nav-pills .nav-link:hover {
+        background-color: rgba(255, 93, 21, 0.1);
+        color: #ff5d15;
+    }
+
+    /* Course Cards */
+    .course-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .course-thumbnail {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .course-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .course-placeholder {
+        height: 100%;
+        background: linear-gradient(135deg, #1a2e53, #ff5d15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .course-status-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .course-content {
+        padding: 20px;
+    }
+
+    .course-title {
+        color: #1a2e53;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .course-instructor, .enrollment-date, .last-accessed {
+        color: #6c757d;
+        font-size: 0.9em;
+        margin-bottom: 8px;
+    }
+
+    .course-progress .progress {
+        height: 8px;
+        background-color: #e9ecef;
+        border-radius: 4px;
+    }
+
+    .course-progress .progress-bar {
+        background-color: #ff5d15;
+        border-radius: 4px;
+    }
+
+    .course-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .course-actions .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    /* Search functionality */
+    .course-search input {
+        border-radius: 25px;
+        border: 2px solid #e9ecef;
+        padding: 10px 20px;
+    }
+
+    .course-search input:focus {
+        border-color: #ff5d15;
+        box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
+    }
+
+    /* Activity and Achievement Lists */
+    .activity-list, .achievements-list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .activity-item, .achievement-item {
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .activity-item:last-child, .achievement-item:last-child {
+        border-bottom: none;
+    }
+
+    .activity-icon, .achievement-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+    }
+
+    .activity-content, .achievement-content {
+        flex: 1;
+    }
+
+    .activity-title, .achievement-title {
+        margin: 0 0 5px 0;
+        font-weight: 600;
+        color: #1a2e53;
+    }
+
+    .activity-course, .achievement-description {
+        margin: 0 0 5px 0;
+        color: #6c757d;
+        font-size: 0.9em;
+    }
+
+    .activity-date, .achievement-date {
+        color: #adb5bd;
+        font-size: 0.8em;
+    }
+
+    /* Payment Status */
+    .payment-status {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .status-badge .badge {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    .payment-method, .payment-date {
+        margin-top: 15px;
+        color: #6c757d;
+    }
 </style>
 {% endblock %}
 
@@ -202,44 +378,382 @@
     </div>
 </section>
 
-<!-- Statistics Section -->
+<!-- Enhanced Learning Analytics Dashboard -->
 <section class="py-4">
     <div class="container">
-        <div class="row">
-            <div class="col-md-3 mb-4">
-                <div class="stats-card">
-                    <div class="stats-icon">
-                        <i class="fas fa-graduation-cap"></i>
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-pills mb-4 justify-content-center" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="pill" data-bs-target="#overview" type="button" role="tab">
+                    <i class="fas fa-chart-line me-2"></i>Overview
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="courses-tab" data-bs-toggle="pill" data-bs-target="#courses" type="button" role="tab">
+                    <i class="fas fa-book me-2"></i>My Courses
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="analytics-tab" data-bs-toggle="pill" data-bs-target="#analytics" type="button" role="tab">
+                    <i class="fas fa-chart-bar me-2"></i>Analytics
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="billing-tab" data-bs-toggle="pill" data-bs-target="#billing" type="button" role="tab">
+                    <i class="fas fa-credit-card me-2"></i>Billing
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="profileTabContent">
+            <!-- Overview Tab -->
+            <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                <!-- Statistics Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="stats-number">{{ total_enrollments }}</div>
+                            <h6 class="text-muted">Total Courses</h6>
+                        </div>
                     </div>
-                    <div class="stats-number">{{ total_enrollments }}</div>
-                    <h6 class="text-muted">Total Courses</h6>
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="stats-number">{{ active_courses }}</div>
+                            <h6 class="text-muted">Active Courses</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="stats-number">{{ completed_courses }}</div>
+                            <h6 class="text-muted">Completed Courses</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stats-number">{{ total_learning_hours|default:0 }}</div>
+                            <h6 class="text-muted">Learning Hours</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Analytics Row -->
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stats-number">{{ total_achievements|default:0 }}</div>
+                            <h6 class="text-muted">Achievements</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="stats-number">{{ learning_streak|default:0 }}</div>
+                            <h6 class="text-muted">Day Streak</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stats-number">{{ total_study_sessions|default:0 }}</div>
+                            <h6 class="text-muted">Study Sessions</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stats-number">
+                                {% if total_enrollments > 0 %}
+                                    {% widthratio completed_courses total_enrollments 100 %}%
+                                {% else %}
+                                    0%
+                                {% endif %}
+                            </div>
+                            <h6 class="text-muted">Success Rate</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="stats-card">
-                    <div class="stats-icon">
-                        <i class="fas fa-play-circle"></i>
+
+            <!-- My Courses Tab -->
+            <div class="tab-pane fade" id="courses" role="tabpanel">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="section-title mb-0">My Enrolled Courses</h3>
+                            <div class="course-search">
+                                <input type="text" class="form-control" id="courseSearch" placeholder="Search courses...">
+                            </div>
+                        </div>
                     </div>
-                    <div class="stats-number">{{ active_courses }}</div>
-                    <h6 class="text-muted">Active Courses</h6>
+                </div>
+
+                {% if course_progress %}
+                    <div class="row" id="courseGrid">
+                        {% for progress_data in course_progress %}
+                        <div class="col-lg-6 col-xl-4 mb-4 course-item" data-course-title="{{ progress_data.course.title|lower }}">
+                            <div class="course-card">
+                                <div class="course-thumbnail">
+                                    {% if progress_data.course.thumbnail %}
+                                        <img src="{{ progress_data.course.thumbnail.url }}" alt="{{ progress_data.course.title }}" class="img-fluid">
+                                    {% else %}
+                                        <div class="course-placeholder">
+                                            <i class="fas fa-book fa-3x"></i>
+                                        </div>
+                                    {% endif %}
+
+                                    <!-- Course Status Badge -->
+                                    <div class="course-status-badge">
+                                        {% if progress_data.enrollment.status == 'completed' %}
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check-circle me-1"></i>Completed
+                                            </span>
+                                        {% elif progress_data.enrollment.status == 'active' %}
+                                            <span class="badge bg-primary">
+                                                <i class="fas fa-play-circle me-1"></i>Active
+                                            </span>
+                                        {% elif progress_data.enrollment.status == 'dropped' %}
+                                            <span class="badge bg-secondary">
+                                                <i class="fas fa-pause-circle me-1"></i>Dropped
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="course-content">
+                                    <h5 class="course-title">{{ progress_data.course.title }}</h5>
+                                    <p class="course-instructor">
+                                        <i class="fas fa-user me-1"></i>
+                                        {{ progress_data.course.instructor.get_full_name|default:progress_data.course.instructor.username }}
+                                    </p>
+
+                                    <!-- Enrollment Date -->
+                                    <p class="enrollment-date">
+                                        <i class="fas fa-calendar me-1"></i>
+                                        Enrolled: {{ progress_data.enrollment.enrollment_date|date:"M d, Y" }}
+                                    </p>
+
+                                    <!-- Progress Bar -->
+                                    <div class="course-progress mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span class="progress-label">Progress</span>
+                                            <span class="progress-percentage">{{ progress_data.progress_percentage|floatformat:0 }}%</span>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar"
+                                                 style="width: {{ progress_data.progress_percentage }}%"
+                                                 aria-valuenow="{{ progress_data.progress_percentage }}"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">
+                                            {{ progress_data.completed_lessons }}/{{ progress_data.total_lessons }} lessons completed
+                                        </small>
+                                    </div>
+
+                                    <!-- Last Accessed -->
+                                    {% if progress_data.last_accessed %}
+                                    <p class="last-accessed">
+                                        <i class="fas fa-clock me-1"></i>
+                                        Last accessed: {{ progress_data.last_accessed|timesince }} ago
+                                    </p>
+                                    {% endif %}
+
+                                    <!-- Action Buttons -->
+                                    <div class="course-actions">
+                                        {% if progress_data.enrollment.status == 'completed' %}
+                                            <a href="{% url 'courses:course_detail' progress_data.course.slug %}" class="btn btn-outline-success btn-sm">
+                                                <i class="fas fa-eye me-1"></i>Review Course
+                                            </a>
+                                            {% if progress_data.enrollment.certificate_issued %}
+                                                <a href="#" class="btn btn-success btn-sm">
+                                                    <i class="fas fa-certificate me-1"></i>View Certificate
+                                                </a>
+                                            {% endif %}
+                                        {% elif progress_data.can_continue %}
+                                            <a href="{% url 'courses:course_detail' progress_data.course.slug %}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-play me-1"></i>Continue Learning
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url 'courses:course_detail' progress_data.course.slug %}" class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-book-open me-1"></i>Start Course
+                                            </a>
+                                        {% endif %}
+
+                                        <a href="{% url 'progress:my_progress' %}" class="btn btn-outline-secondary btn-sm">
+                                            <i class="fas fa-chart-line me-1"></i>View Progress
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-graduation-cap fa-4x text-muted mb-3"></i>
+                        <h4 class="text-muted">No courses enrolled yet</h4>
+                        <p class="text-muted">Start your learning journey today!</p>
+                        <a href="{% url 'courses:course_list' %}" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i>Browse Courses
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-pane fade" id="analytics" role="tabpanel">
+                <div class="row">
+                    <!-- Recent Activity -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">Recent Activity</h4>
+                            {% if recent_activity %}
+                                <div class="activity-list">
+                                    {% for activity in recent_activity %}
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="{{ activity.icon }} text-{{ activity.color }}"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <h6 class="activity-title">{{ activity.title }}</h6>
+                                            <p class="activity-course">{{ activity.course }}</p>
+                                            <small class="activity-date">{{ activity.date|timesince }} ago</small>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">No recent activity</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Achievements -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">Recent Achievements</h4>
+                            {% if recent_achievements %}
+                                <div class="achievements-list">
+                                    {% for achievement in recent_achievements %}
+                                    <div class="achievement-item">
+                                        <div class="achievement-icon">
+                                            <i class="fas fa-{{ achievement.badge_icon|default:'trophy' }} text-warning"></i>
+                                        </div>
+                                        <div class="achievement-content">
+                                            <h6 class="achievement-title">{{ achievement.title }}</h6>
+                                            <p class="achievement-description">{{ achievement.description }}</p>
+                                            <small class="achievement-date">{{ achievement.earned_at|date:"M d, Y" }}</small>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">No achievements yet</p>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="stats-card">
-                    <div class="stats-icon">
-                        <i class="fas fa-certificate"></i>
+
+            <!-- Billing Tab -->
+            <div class="tab-pane fade" id="billing" role="tabpanel">
+                <div class="row">
+                    <!-- Payment Status -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">Payment Status</h4>
+                            <div class="payment-status">
+                                <div class="status-badge">
+                                    {% if profile.payment_status == 'confirmed' %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>Payment Confirmed
+                                        </span>
+                                    {% elif profile.payment_status == 'pending' %}
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-clock me-1"></i>Pending Verification
+                                        </span>
+                                    {% elif profile.payment_status == 'expired' %}
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-times-circle me-1"></i>Payment Expired
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-exclamation-circle me-1"></i>Unpaid
+                                        </span>
+                                    {% endif %}
+                                </div>
+
+                                {% if profile.payment_method %}
+                                <div class="payment-method mt-3">
+                                    <strong>Payment Method:</strong> {{ profile.get_payment_method_display }}
+                                </div>
+                                {% endif %}
+
+                                {% if profile.payment_confirmed_at %}
+                                <div class="payment-date mt-2">
+                                    <strong>Confirmed:</strong> {{ profile.payment_confirmed_at|date:"M d, Y" }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="stats-number">{{ completed_courses }}</div>
-                    <h6 class="text-muted">Completed</h6>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="stats-card">
-                    <div class="stats-icon">
-                        <i class="fas fa-trophy"></i>
+
+                    <!-- Payment History -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">Payment History</h4>
+                            {% if payment_history %}
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Method</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for payment in payment_history %}
+                                            <tr>
+                                                <td>{{ payment.date|date:"M d, Y" }}</td>
+                                                <td>${{ payment.amount|floatformat:2 }}</td>
+                                                <td>{{ payment.method }}</td>
+                                                <td>
+                                                    <span class="badge bg-success">{{ payment.status }}</span>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p class="text-muted">No payment history available</p>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="stats-number">{{ recent_achievements.count }}</div>
-                    <h6 class="text-muted">Achievements</h6>
                 </div>
             </div>
         </div>
@@ -280,6 +794,60 @@
                     <div class="info-item">
                         <span class="info-label">Date of Birth</span>
                         <span class="info-value">{{ profile.date_of_birth|default:"Not provided" }}</span>
+                    </div>
+                </div>
+
+                <!-- Payment Status -->
+                <div class="profile-card">
+                    <h3 class="section-title">Payment Status</h3>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="payment-status-card">
+                                <div class="payment-status-header">
+                                    <h5>Current Status</h5>
+                                    {% if profile.payment_status == 'confirmed' %}
+                                        <span class="badge bg-success">✅ Payment Confirmed</span>
+                                    {% elif profile.payment_status == 'pending' %}
+                                        <span class="badge bg-warning">⏳ Pending Verification</span>
+                                    {% elif profile.payment_status == 'expired' %}
+                                        <span class="badge bg-danger">⚠️ Payment Expired</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">❌ Unpaid</span>
+                                    {% endif %}
+                                </div>
+
+                                {% if profile.payment_confirmed_at %}
+                                <div class="payment-detail mt-2">
+                                    <small class="text-muted">Confirmed on</small>
+                                    <p class="mb-1">{{ profile.payment_confirmed_at|date:"F d, Y" }}</p>
+                                </div>
+                                {% endif %}
+
+                                {% if profile.payment_amount %}
+                                <div class="payment-detail mt-2">
+                                    <small class="text-muted">Amount Paid</small>
+                                    <p class="mb-1">KES {{ profile.payment_amount }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            {% if profile.payment_status != 'confirmed' %}
+                            <div class="alert alert-warning">
+                                <h6 class="alert-heading">💰 Payment Required</h6>
+                                <p class="mb-2">To access paid courses, please complete your payment.</p>
+                                <small>Contact support for payment instructions and available options.</small>
+                            </div>
+                            {% else %}
+                            <div class="alert alert-success">
+                                <h6 class="alert-heading">🎉 Payment Confirmed!</h6>
+                                <p class="mb-2">You have full access to all YITP courses.</p>
+                                <small>Thank you for your payment!</small>
+                            </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
 
@@ -366,7 +934,7 @@
                             <i class="fas fa-search me-2"></i>
                             Browse Courses
                         </a>
-                        <a href="{% url 'account_email' %}" class="btn btn-outline-secondary">
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">
                             <i class="fas fa-cog me-2"></i>
                             Account Settings
                         </a>
@@ -376,4 +944,54 @@
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Course search functionality
+    const courseSearch = document.getElementById('courseSearch');
+    if (courseSearch) {
+        courseSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const courseItems = document.querySelectorAll('.course-item');
+
+            courseItems.forEach(function(item) {
+                const courseTitle = item.getAttribute('data-course-title');
+                if (courseTitle.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Tab persistence
+    const profileTabs = document.getElementById('profileTabs');
+    if (profileTabs) {
+        // Get active tab from URL hash or localStorage
+        const hash = window.location.hash;
+        const savedTab = localStorage.getItem('activeProfileTab');
+
+        if (hash && hash.startsWith('#')) {
+            const tabId = hash.substring(1) + '-tab';
+            const tabElement = document.getElementById(tabId);
+            if (tabElement) {
+                const tab = new bootstrap.Tab(tabElement);
+                tab.show();
+            }
+        } else if (savedTab) {
+            const tabElement = document.getElementById(savedTab);
+            if (tabElement) {
+                const tab = new bootstrap.Tab(tabElement);
+                tab.show();
+            }
+        }
+
+        // Save active tab to localStorage
+        profileTabs.addEventListener('shown.bs.tab', function(event) {
+            localStorage.setItem('activeProfileTab', event.target.id);
+        });
+    }
+});
+</script>
 {% endblock %}

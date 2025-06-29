@@ -1,0 +1,51 @@
+YOUTH IMPACT TRAINING PROGRAMME
+New Course Enrollment - Admin Notification
+
+YITP Admin Notification
+
+A new student has enrolled in a course through the Youth Impact Training Programme platform.
+
+STUDENT INFORMATION:
+Name: {{ user.get_full_name|default:user.username }}
+Email: {{ user.email }}
+Username: {{ user.username }}
+Date Joined: {{ user.date_joined|date:"F d, Y" }}
+
+COURSE INFORMATION:
+Course: {{ course.title }}
+Instructor: {{ course.instructor.get_full_name|default:course.instructor.username }}
+Category: {{ course.category.name|default:"Uncategorized" }}
+Difficulty: {{ course.get_difficulty_level_display }}
+Duration: {{ course.estimated_duration }} hours
+{% if course.price > 0 %}Course Fee: KES {{ course.price }}{% else %}Course Fee: Free{% endif %}
+
+ENROLLMENT DETAILS:
+Enrollment Date: {{ enrollment_date|date:"F d, Y" }} at {{ enrollment_date|time:"g:i A" }}
+Enrollment Status: Active
+Total Enrolled Students: {{ total_enrolled }} students
+{% if course.enrollment_limit %}Enrollment Limit: {{ course.enrollment_limit }} students
+Remaining Spots: {{ remaining_spots }} spots{% endif %}
+
+{% if course.price > 0 %}PAYMENT REQUIRED:
+This is a paid course. Please verify that the student's payment has been confirmed before they can access course materials.
+
+{% endif %}COURSE STATISTICS:
+- Total Modules: {{ course.total_modules }}
+- Total Lessons: {{ course.total_lessons }}
+- Course Created: {{ course.created_at|date:"F d, Y" }}
+- Last Updated: {{ course.updated_at|date:"F d, Y" }}
+- Published Status: {% if course.is_published %}Published{% else %}Draft{% endif %}
+- Featured Status: {% if course.is_featured %}Featured{% else %}Standard{% endif %}
+
+RECOMMENDED ACTIONS:
+{% if course.price > 0 %}- Verify student payment status{% endif %}
+- Monitor student progress and engagement
+- Check if additional support is needed
+- Update course capacity if approaching limit
+
+ADMIN PANEL ACCESS:
+{{ admin_url }}
+
+---
+Automated notification from YITP Learning Management System
+Youth Impact Training Programme

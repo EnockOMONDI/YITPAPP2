@@ -348,6 +348,95 @@
         font-size: 14px;
         margin-bottom: 15px !important;
     }
+
+    /* LMS Integration Styles */
+    .lms-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .lms-stat-card {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .lms-stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .lms-stat-icon {
+        font-size: 2.5rem;
+        color: #ff5d15;
+        margin-bottom: 15px;
+    }
+
+    .lms-stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1a2e53;
+        margin-bottom: 5px;
+    }
+
+    .lms-stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .lms-quick-actions {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn-lms-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ff5d15;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .btn-lms-action:hover {
+        background: #e04a0f;
+        color: white;
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .lms-stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .lms-stat-card {
+            padding: 15px;
+        }
+
+        .lms-stat-number {
+            font-size: 1.5rem;
+        }
+
+        .lms-quick-actions {
+            flex-direction: column;
+        }
+    }
 }
 </style>
 {% endblock %}
@@ -394,12 +483,133 @@
                             <span class="info__label">Last Name:</span>
                             <span class="info__value">{{ user.last_name|default:"Not provided" }}</span>
                         </div>
-                        
+
                         <div class="info__item">
                             <span class="info__label">Member Since:</span>
                             <span class="info__value">{{ user.date_joined|date:"F d, Y" }}</span>
                         </div>
-                        
+
+                        <div class="info__item">
+
+                    <!-- Payment Status Section -->
+                    <div class="profile__info">
+                        <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Payment Status</h4>
+
+                        <div class="info__item">
+                            <span class="info__label">Payment Status:</span>
+                            <span class="info__value">
+                                {% if user.profile.payment_status == 'confirmed' %}
+                                    <span style="color: #28a745; font-weight: 600;">✅ Payment Confirmed</span>
+                                {% elif user.profile.payment_status == 'pending' %}
+                                    <span style="color: #ffc107; font-weight: 600;">⏳ Pending Verification</span>
+                                {% elif user.profile.payment_status == 'expired' %}
+                                    <span style="color: #dc3545; font-weight: 600;">⚠️ Payment Expired</span>
+                                {% else %}
+                                    <span style="color: #6c757d; font-weight: 600;">❌ Unpaid</span>
+                                {% endif %}
+                            </span>
+                        </div>
+
+                        {% if user.profile.payment_confirmed_at %}
+                        <div class="info__item">
+                            <span class="info__label">Payment Confirmed:</span>
+                            <span class="info__value">{{ user.profile.payment_confirmed_at|date:"F d, Y" }} at {{ user.profile.payment_confirmed_at|time:"g:i A" }}</span>
+                        </div>
+                        {% endif %}
+
+                        {% if user.profile.payment_amount %}
+                        <div class="info__item">
+                            <span class="info__label">Amount Paid:</span>
+                            <span class="info__value">KES {{ user.profile.payment_amount }}</span>
+                        </div>
+                        {% endif %}
+
+                        {% if user.profile.payment_method %}
+                        <div class="info__item">
+                            <span class="info__label">Payment Method:</span>
+                            <span class="info__value">{{ user.profile.get_payment_method_display }}</span>
+                        </div>
+                        {% endif %}
+
+                        {% if user.profile.payment_reference %}
+                        <div class="info__item">
+                            <span class="info__label">Payment Reference:</span>
+                            <span class="info__value">{{ user.profile.payment_reference }}</span>
+                        </div>
+                        {% endif %}
+
+                        {% if user.profile.payment_status != 'confirmed' %}
+                        <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 6px; margin-top: 20px;">
+                            <h6 style="color: #856404; margin-bottom: 10px; font-weight: 600;">💰 Payment Information</h6>
+                            <p style="color: #856404; font-size: 14px; margin-bottom: 10px;">
+                                To access paid courses, please complete your payment. Contact our support team for payment instructions.
+                            </p>
+                            <p style="color: #856404; font-size: 14px; margin: 0;">
+                                <strong>Payment Options:</strong> M-Pesa, Bank Transfer, or Installment Plans available.
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- LMS Learning Overview -->
+                    {% if lms_stats %}
+                    <div class="profile__info">
+                        <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Learning Overview</h4>
+
+                        <div class="lms-stats-grid">
+                            <div class="lms-stat-card">
+                                <div class="lms-stat-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="lms-stat-content">
+                                    <div class="lms-stat-number">{{ lms_stats.total_enrollments }}</div>
+                                    <div class="lms-stat-label">Total Courses</div>
+                                </div>
+                            </div>
+                            <div class="lms-stat-card">
+                                <div class="lms-stat-icon">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div class="lms-stat-content">
+                                    <div class="lms-stat-number">{{ lms_stats.active_courses }}</div>
+                                    <div class="lms-stat-label">Active Courses</div>
+                                </div>
+                            </div>
+                            <div class="lms-stat-card">
+                                <div class="lms-stat-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="lms-stat-content">
+                                    <div class="lms-stat-number">{{ lms_stats.completed_courses }}</div>
+                                    <div class="lms-stat-label">Completed</div>
+                                </div>
+                            </div>
+                            <div class="lms-stat-card">
+                                <div class="lms-stat-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="lms-stat-content">
+                                    <div class="lms-stat-number">{{ lms_stats.total_learning_hours|floatformat:1 }}</div>
+                                    <div class="lms-stat-label">Learning Hours</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="lms-quick-actions">
+                            <a href="{% url 'profile_lms' %}" class="btn-lms-action">
+                                <i class="fas fa-chart-line"></i>
+                                View Detailed LMS Profile
+                            </a>
+                            <a href="{% url 'courses:course_list' %}" class="btn-lms-action">
+                                <i class="fas fa-search"></i>
+                                Browse Courses
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="profile__info">
                         <div class="info__item">
                             <span class="info__label">Last Login:</span>
                             <span class="info__value">

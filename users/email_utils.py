@@ -19,17 +19,83 @@ def generate_otp(length=6):
     """Generate a random OTP of specified length"""
     return ''.join(random.choices(string.digits, k=length))
 
-def send_html_email(subject, html_content, recipient_list, from_email=None, plain_text_content=None):
+def send_html_email_direct(subject, html_content, recipient_list, from_email=None, plain_text_content=None):
     """
-    Send HTML email with fallback to plain text
+    Send HTML email directly using smtplib with SSL context handling
+    This bypasses Django's email backend SSL issues
     """
+    import smtplib
+    import ssl
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+
     try:
         if from_email is None:
             from_email = settings.DEFAULT_FROM_EMAIL
-        
+
         if plain_text_content is None:
             plain_text_content = strip_tags(html_content)
-        
+
+        logger.info(f"Attempting to send email directly to {recipient_list}")
+        logger.info(f"Subject: {subject}")
+        logger.info(f"From: {from_email}")
+
+        # Create unverified SSL context to handle certificate issues
+        context = ssl.create_default_context()
+        context.check_hostname = False
+        context.verify_mode = ssl.CERT_NONE
+
+        # Connect to Gmail SMTP
+        server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+        server.starttls(context=context)
+        server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
+
+        # Create multipart message
+        msg = MIMEMultipart('alternative')
+        msg['From'] = from_email
+        msg['Subject'] = subject
+
+        # Add plain text and HTML parts
+        part1 = MIMEText(plain_text_content, 'plain')
+        part2 = MIMEText(html_content, 'html')
+
+        msg.attach(part1)
+        msg.attach(part2)
+
+        # Send to each recipient
+        for recipient in recipient_list:
+            msg['To'] = recipient
+            server.send_message(msg)
+            del msg['To']  # Remove To header for next recipient
+
+        server.quit()
+
+        logger.info(f"✅ Email sent successfully to {recipient_list}")
+        return True
+
+    except Exception as e:
+        logger.error(f"❌ Failed to send email to {recipient_list}: {str(e)}")
+        return False
+
+def send_html_email(subject, html_content, recipient_list, from_email=None, plain_text_content=None):
+    """
+    Send HTML email with fallback to plain text
+    Uses direct SMTP method as primary, Django backend as fallback
+    """
+    # Try direct method first (more reliable)
+    if send_html_email_direct(subject, html_content, recipient_list, from_email, plain_text_content):
+        return True
+
+    # Fallback to Django's email backend
+    logger.warning("Direct email failed, trying Django backend...")
+
+    try:
+        if from_email is None:
+            from_email = settings.DEFAULT_FROM_EMAIL
+
+        if plain_text_content is None:
+            plain_text_content = strip_tags(html_content)
+
         email = EmailMultiAlternatives(
             subject=subject,
             body=plain_text_content,
@@ -37,16 +103,50 @@ def send_html_email(subject, html_content, recipient_list, from_email=None, plai
             to=recipient_list
         )
         email.attach_alternative(html_content, "text/html")
-        
+
         result = email.send()
-        logger.info(f"Email sent successfully to {recipient_list}")
-        return result
+
+        if result:
+            logger.info(f"✅ Email sent via Django backend to {recipient_list}")
+            return True
+        else:
+            logger.warning(f"⚠️ Django backend returned 0 for {recipient_list}")
+            return False
+
     except Exception as e:
-        logger.error(f"Failed to send email to {recipient_list}: {str(e)}")
+        logger.error(f"❌ Django backend also failed for {recipient_list}: {str(e)}")
+        return False
+
+def test_email_configuration():
+    """
+    Test email configuration by sending a test email
+    Returns True if successful, False otherwise
+    """
+    try:
+        test_subject = "YITP Email Configuration Test"
+        test_content = """
+        <h2>Email Configuration Test</h2>
+        <p>This is a test email to verify YITP email configuration is working correctly.</p>
+        <p>If you receive this email, the configuration is successful!</p>
+        """
+
+        result = send_html_email(
+            subject=test_subject,
+            html_content=test_content,
+            recipient_list=[settings.ADMIN_EMAIL]
+        )
+
+        logger.info(f"Email configuration test result: {result}")
+        return result
+
+    except Exception as e:
+        logger.error(f"Email configuration test failed: {str(e)}")
         return False
 
 def send_otp_email(user, otp_code):
     """Send OTP verification email to user"""
+    logger.info(f"Preparing to send OTP email to {user.email}")
+
     context = {
         'user': user,
         'otp_code': otp_code,
@@ -54,18 +154,27 @@ def send_otp_email(user, otp_code):
         'site_name': 'Youth Impact Training Programme',
         'support_email': settings.ADMIN_EMAIL
     }
-    
+
     html_content = render_to_string('emails/otp_verification.html', context)
     plain_content = render_to_string('emails/otp_verification.txt', context)
-    
+
     subject = f"Your YITP Verification Code: {otp_code}"
-    
-    return send_html_email(
+
+    logger.info(f"Sending OTP email with subject: {subject}")
+
+    result = send_html_email(
         subject=subject,
         html_content=html_content,
         recipient_list=[user.email],
         plain_text_content=plain_content
     )
+
+    if result:
+        logger.info(f"✅ OTP email sent successfully to {user.email}")
+    else:
+        logger.error(f"❌ Failed to send OTP email to {user.email}")
+
+    return result
 
 def send_welcome_email(user):
     """Send welcome email to newly registered user"""
@@ -198,16 +307,93 @@ def send_sponsorship_status_admin_notification(sponsorship_request, old_status, 
         'admin_url': f"{settings.SITE_URL}/admin/users/sponsorshiprequest/{sponsorship_request.id}/change/" if hasattr(settings, 'SITE_URL') else f"/admin/users/sponsorshiprequest/{sponsorship_request.id}/change/",
         'site_name': 'Youth Impact Training Programme'
     }
-    
+
     html_content = render_to_string('emails/sponsorship_status_admin_notification.html', context)
     plain_content = render_to_string('emails/sponsorship_status_admin_notification.txt', context)
-    
+
     status_display = dict(sponsorship_request.STATUS_CHOICES).get(sponsorship_request.status, sponsorship_request.status)
     subject = f"YITP Sponsorship Status Updated - {sponsorship_request.user.get_full_name() or sponsorship_request.user.username} - {status_display}"
-    
+
     return send_html_email(
         subject=subject,
         html_content=html_content,
         recipient_list=[settings.ADMIN_EMAIL],
         plain_text_content=plain_content
     )
+
+
+def send_enrollment_confirmation_email(user, course, enrollment):
+    """Send enrollment confirmation email to user"""
+    logger.info(f"Preparing to send enrollment confirmation email to {user.email} for course {course.title}")
+
+    context = {
+        'user': user,
+        'course': course,
+        'enrollment_date': enrollment.enrollment_date,
+        'course_url': f"{settings.SITE_URL}/lms/courses/{course.slug}/" if hasattr(settings, 'SITE_URL') else f"/lms/courses/{course.slug}/",
+        'support_email': settings.ADMIN_EMAIL,
+        'site_name': 'Youth Impact Training Programme'
+    }
+
+    html_content = render_to_string('emails/enrollment_confirmation.html', context)
+    plain_content = render_to_string('emails/enrollment_confirmation.txt', context)
+
+    subject = f"Course Enrollment Confirmed: {course.title} - YITP"
+
+    logger.info(f"Sending enrollment confirmation email with subject: {subject}")
+
+    result = send_html_email(
+        subject=subject,
+        html_content=html_content,
+        recipient_list=[user.email],
+        plain_text_content=plain_content
+    )
+
+    if result:
+        logger.info(f"✅ Enrollment confirmation email sent successfully to {user.email}")
+    else:
+        logger.error(f"❌ Failed to send enrollment confirmation email to {user.email}")
+
+    return result
+
+
+def send_enrollment_admin_notification(user, course, enrollment):
+    """Send enrollment notification email to admin"""
+    logger.info(f"Preparing to send enrollment admin notification for {user.email} enrolling in {course.title}")
+
+    # Calculate enrollment statistics
+    total_enrolled = course.enrolled_students_count
+    remaining_spots = None
+    if course.enrollment_limit:
+        remaining_spots = course.enrollment_limit - total_enrolled
+
+    context = {
+        'user': user,
+        'course': course,
+        'enrollment_date': enrollment.enrollment_date,
+        'total_enrolled': total_enrolled,
+        'remaining_spots': remaining_spots,
+        'admin_url': f"{settings.SITE_URL}/admin/progress/enrollment/{enrollment.id}/change/" if hasattr(settings, 'SITE_URL') else f"/admin/progress/enrollment/{enrollment.id}/change/",
+        'site_name': 'Youth Impact Training Programme'
+    }
+
+    html_content = render_to_string('emails/enrollment_admin_notification.html', context)
+    plain_content = render_to_string('emails/enrollment_admin_notification.txt', context)
+
+    subject = f"New Enrollment: {user.get_full_name()} → {course.title} - YITP"
+
+    logger.info(f"Sending enrollment admin notification with subject: {subject}")
+
+    result = send_html_email(
+        subject=subject,
+        html_content=html_content,
+        recipient_list=[settings.ADMIN_EMAIL],
+        plain_text_content=plain_content
+    )
+
+    if result:
+        logger.info(f"✅ Enrollment admin notification sent successfully")
+    else:
+        logger.error(f"❌ Failed to send enrollment admin notification")
+
+    return result

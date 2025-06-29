@@ -15,13 +15,97 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Profile(models.Model):
+    PAYMENT_STATUS_CHOICES = [
+        ('unpaid', 'Unpaid'),
+        ('pending', 'Pending Verification'),
+        ('confirmed', 'Payment Confirmed'),
+        ('expired', 'Payment Expired'),
+    ]
+
+    PAYMENT_METHOD_CHOICES = [
+        ('mpesa', 'M-Pesa'),
+        ('bank_transfer', 'Bank Transfer'),
+        ('cash', 'Cash Payment'),
+        ('installment', 'Installment Plan'),
+        ('scholarship', 'Scholarship'),
+        ('other', 'Other'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio = models.TextField(default='Edit your Bio!')
     phone_number = models.CharField(max_length=20, blank=True, null=True, help_text="Contact phone number")
 
+    # Payment Status Fields
+    payment_status = models.CharField(
+        max_length=20,
+        choices=PAYMENT_STATUS_CHOICES,
+        default='unpaid',
+        help_text="Current payment status for YITP courses"
+    )
+    payment_confirmed_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Date and time when payment was confirmed"
+    )
+    payment_method = models.CharField(
+        max_length=20,
+        choices=PAYMENT_METHOD_CHOICES,
+        blank=True,
+        null=True,
+        help_text="Method used for payment"
+    )
+    payment_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text="Amount paid (in KES)"
+    )
+    payment_reference = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text="Payment reference number or transaction ID"
+    )
+    payment_notes = models.TextField(
+        blank=True,
+        help_text="Additional notes about payment (admin use)"
+    )
+
     def __str__(self):
         return self.user.get_username()
+
+    @property
+    def has_confirmed_payment(self):
+        """Check if user has confirmed payment status"""
+        return self.payment_status == 'confirmed'
+
+    @property
+    def payment_status_display(self):
+        """Get human-readable payment status with emoji"""
+        status_icons = {
+            'unpaid': '❌ Unpaid',
+            'pending': '⏳ Pending Verification',
+            'confirmed': '✅ Payment Confirmed',
+            'expired': '⚠️ Payment Expired',
+        }
+        return status_icons.get(self.payment_status, self.get_payment_status_display())
+
+    def confirm_payment(self, amount, method, reference=None, notes=None):
+        """Confirm payment for the user"""
+        self.payment_status = 'confirmed'
+        self.payment_confirmed_at = timezone.now()
+        self.payment_amount = amount
+        self.payment_method = method
+        if reference:
+            self.payment_reference = reference
+        if notes:
+            self.payment_notes = notes
+        self.save(update_fields=[
+            'payment_status', 'payment_confirmed_at', 'payment_amount',
+            'payment_method', 'payment_reference', 'payment_notes'
+        ])
 
 class OTPVerification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

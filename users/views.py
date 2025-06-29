@@ -9,10 +9,11 @@ from django.core.validators import validate_email
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.utils import timezone
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile
 from .forms import SponsorshipRequestForm
 from .otp_views import send_otp_for_registration
-from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification
+from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification, test_email_configuration, send_html_email
 
 from django.shortcuts import render,redirect,HttpResponse
 from django.http import Http404
@@ -298,51 +299,215 @@ def logout(request):
     return render(request, 'registration/logged_out.html')
 
 @login_required
-def profile(request):
-    """User profile view with sponsorship request functionality"""
-    # Get user's sponsorship requests
-    sponsorship_requests = SponsorshipRequest.objects.filter(user=request.user).order_by('-created_at')
+def unified_profile(request, section='overview'):
+    """
+    Unified profile view with multiple sections combining main profile and LMS functionality
+    """
+    from progress.models import Enrollment, LessonProgress, Achievement, StudySession
+    from django.db.models import Sum, Count, Avg
+    from datetime import datetime, timedelta
 
-    # Handle sponsorship request form submission
-    if request.method == 'POST':
-        form = SponsorshipRequestForm(request.POST, request.FILES)
-        form.user = request.user  # Set user for validation
+    user = request.user
 
-        if form.is_valid():
-            sponsorship_request = form.save(commit=False)
-            sponsorship_request.user = request.user
-            sponsorship_request.save()
+    # Get or create user profile
+    try:
+        profile = user.profile
+    except:
+        profile, created = Profile.objects.get_or_create(user=user)
 
-            # Send email notifications
-            try:
-                # Send confirmation email to user
-                send_sponsorship_confirmation_email(sponsorship_request)
-                # Send notification email to admin
-                send_sponsorship_admin_notification(sponsorship_request)
+    # Base context
+    context = {
+        'user': user,
+        'profile': profile,
+        'active_section': section,
+    }
 
-                messages.success(
-                    request,
-                    'Your sponsorship request has been submitted successfully! '
-                    'You will receive a confirmation email shortly, and our team will review your request.'
-                )
-            except Exception as e:
-                messages.warning(
-                    request,
-                    'Your sponsorship request was submitted, but there was an issue sending the confirmation email. '
-                    'Our team will still review your request.'
-                )
+    # Get user enrollments with related data
+    enrollments = Enrollment.objects.filter(student=user).select_related('course').prefetch_related('lesson_progress')
+    context['enrollments'] = enrollments
 
-            return redirect('profile')
+    # Basic statistics
+    context['total_enrollments'] = enrollments.count()
+    context['completed_courses'] = enrollments.filter(status='completed').count()
+    context['active_courses'] = enrollments.filter(status='active').count()
+    context['dropped_courses'] = enrollments.filter(status='dropped').count()
+
+    # Learning analytics for LMS sections
+    if section in ['overview', 'lms', 'courses', 'analytics']:
+        # Total learning time from lesson progress
+        total_time_seconds = LessonProgress.objects.filter(
+            enrollment__student=user
+        ).aggregate(total_time=Sum('time_spent'))['total_time'] or 0
+        context['total_learning_hours'] = round(total_time_seconds / 3600, 1)
+
+        # Study sessions analytics
+        study_sessions = StudySession.objects.filter(student=user)
+        context['total_study_sessions'] = study_sessions.count()
+
+        # Learning streak calculation
+        recent_activity = LessonProgress.objects.filter(
+            enrollment__student=user,
+            completed_at__isnull=False
+        ).order_by('-completed_at')
+
+        context['learning_streak'] = calculate_learning_streak(recent_activity)
+
+        # Recent achievements
+        recent_achievements = Achievement.objects.filter(student=user).order_by('-earned_at')[:5]
+        context['recent_achievements'] = recent_achievements
+        context['total_achievements'] = Achievement.objects.filter(student=user).count()
+
+        # Course progress details
+        course_progress = []
+        for enrollment in enrollments:
+            progress_data = {
+                'enrollment': enrollment,
+                'course': enrollment.course,
+                'progress_percentage': enrollment.progress_percentage,
+                'total_lessons': enrollment.course.total_lessons,
+                'completed_lessons': enrollment.lesson_progress.filter(status='completed').count(),
+                'last_accessed': enrollment.last_accessed,
+                'can_continue': enrollment.lesson_progress.filter(status__in=['not_started', 'in_progress']).exists(),
+                'next_lesson': enrollment.lesson_progress.filter(status__in=['not_started', 'in_progress']).first(),
+            }
+            course_progress.append(progress_data)
+        context['course_progress'] = course_progress
+
+        # Recent activity
+        context['recent_activity'] = get_recent_activity(user)
+
+    # Payment history for billing section
+    if section in ['overview', 'billing']:
+        context['payment_history'] = get_payment_history(user)
+
+    # Sponsorship requests for overview section
+    if section == 'overview':
+        sponsorship_requests = SponsorshipRequest.objects.filter(user=user).order_by('-created_at')
+        context['sponsorship_requests'] = sponsorship_requests
+
+        # Handle sponsorship request form submission
+        if request.method == 'POST':
+            form = SponsorshipRequestForm(request.POST, request.FILES)
+            form.user = request.user
+
+            if form.is_valid():
+                sponsorship_request = form.save(commit=False)
+                sponsorship_request.user = request.user
+                sponsorship_request.save()
+
+                # Send email notifications
+                try:
+                    send_sponsorship_confirmation_email(sponsorship_request)
+                    send_sponsorship_admin_notification(sponsorship_request)
+
+                    messages.success(
+                        request,
+                        'Your sponsorship request has been submitted successfully! '
+                        'You will receive a confirmation email shortly, and our team will review your request.'
+                    )
+                except Exception as e:
+                    messages.warning(
+                        request,
+                        'Your sponsorship request was submitted, but there was an issue sending the confirmation email. '
+                        'Our team will still review your request.'
+                    )
+
+                return redirect('profile')
+            else:
+                messages.error(request, 'Please correct the errors below and try again.')
         else:
-            messages.error(request, 'Please correct the errors below and try again.')
-    else:
-        form = SponsorshipRequestForm()
+            form = SponsorshipRequestForm()
 
-    return render(request, 'registration/profile.html', {
-        'user': request.user,
-        'sponsorship_requests': sponsorship_requests,
-        'sponsorship_form': form,
-    })
+        context['sponsorship_form'] = form
+
+    # LMS stats for overview display
+    context['lms_stats'] = {
+        'total_enrollments': context['total_enrollments'],
+        'active_courses': context['active_courses'],
+        'completed_courses': context['completed_courses'],
+        'total_achievements': context.get('total_achievements', 0),
+        'total_learning_hours': context.get('total_learning_hours', 0),
+    }
+
+    # Recent enrollments for overview
+    context['recent_enrollments'] = enrollments.order_by('-enrollment_date')[:3]
+
+    return render(request, 'registration/unified_profile.html', context)
+
+
+def calculate_learning_streak(recent_activity):
+    """Calculate consecutive days of learning activity"""
+    if not recent_activity.exists():
+        return 0
+
+    from datetime import date, timedelta
+    today = date.today()
+    streak = 0
+    current_date = today
+
+    # Group activities by date
+    activity_dates = set()
+    for activity in recent_activity:
+        activity_dates.add(activity.completed_at.date())
+
+    # Count consecutive days backwards from today
+    while current_date in activity_dates:
+        streak += 1
+        current_date -= timedelta(days=1)
+
+    return streak
+
+
+def get_payment_history(user):
+    """Get user's payment history"""
+    payment_history = []
+    if hasattr(user, 'profile') and user.profile.payment_confirmed_at:
+        payment_history.append({
+            'date': user.profile.payment_confirmed_at,
+            'amount': user.profile.payment_amount or 0,
+            'method': user.profile.get_payment_method_display() if user.profile.payment_method else 'N/A',
+            'reference': user.profile.payment_reference or 'N/A',
+            'status': 'Confirmed'
+        })
+    return payment_history
+
+
+def get_recent_activity(user):
+    """Get user's recent learning activity"""
+    from progress.models import LessonProgress
+    recent_progress = LessonProgress.objects.filter(
+        enrollment__student=user
+    ).select_related('lesson', 'enrollment__course').order_by('-completed_at')[:10]
+
+    activities = []
+    for progress in recent_progress:
+        if progress.completed_at:
+            activities.append({
+                'type': 'lesson_completed',
+                'title': f"Completed: {progress.lesson.title}",
+                'course': progress.enrollment.course.title,
+                'date': progress.completed_at,
+                'icon': 'fas fa-check-circle',
+                'color': 'success'
+            })
+        elif progress.started_at:
+            activities.append({
+                'type': 'lesson_started',
+                'title': f"Started: {progress.lesson.title}",
+                'course': progress.enrollment.course.title,
+                'date': progress.started_at,
+                'icon': 'fas fa-play-circle',
+                'color': 'info'
+            })
+
+    return activities[:5]  # Return only 5 most recent
+
+
+# Keep the old profile view for backward compatibility during transition
+@login_required
+def profile(request):
+    """Legacy profile view - redirects to unified profile"""
+    return unified_profile(request, section='overview')
 
 
 def send_sponsorship_emails(sponsorship_request):
@@ -392,3 +557,61 @@ def send_sponsorship_emails(sponsorship_request):
         admin_email.attach_file(sponsorship_request.supporting_document.path)
 
     admin_email.send()
+
+@login_required
+def test_email_delivery(request):
+    """
+    Test email delivery functionality
+    Only accessible to logged-in users for security
+    """
+    if request.method == 'POST':
+        test_email = request.POST.get('test_email', request.user.email)
+
+        try:
+            # Send test email
+            subject = "YITP Email Delivery Test"
+            html_content = f"""
+            <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #ff5d15;">🧪 YITP Email Delivery Test</h2>
+                    <p>Hello {request.user.first_name or request.user.username},</p>
+                    <p>This is a test email to verify that the YITP email delivery system is working correctly.</p>
+
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <h3 style="color: #1a2e53; margin-top: 0;">Test Details:</h3>
+                        <ul>
+                            <li><strong>Sent by:</strong> {request.user.username} ({request.user.email})</li>
+                            <li><strong>Test email:</strong> {test_email}</li>
+                            <li><strong>Timestamp:</strong> {timezone.now()}</li>
+                        </ul>
+                    </div>
+
+                    <p style="color: #28a745; font-weight: bold;">
+                        ✅ If you receive this email, the delivery system is working!
+                    </p>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+                    <p style="font-size: 12px; color: #666;">
+                        Youth Impact Training Programme - Email Delivery Test
+                    </p>
+                </div>
+            </body>
+            </html>
+            """
+
+            result = send_html_email(
+                subject=subject,
+                html_content=html_content,
+                recipient_list=[test_email]
+            )
+
+            if result:
+                messages.success(request, f'✅ Test email sent successfully to {test_email}! Please check the inbox (and spam folder).')
+            else:
+                messages.error(request, f'❌ Failed to send test email to {test_email}. Check the server logs for details.')
+
+        except Exception as e:
+            messages.error(request, f'❌ Email test failed: {str(e)}')
+
+    return render(request, 'users/test_email.html')

@@ -1,0 +1,283 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Welcome to YITP - Youth Impact Training Programme{% endblock %}
+
+{% block content %}
+<div class="welcome-hero-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="welcome-hero-content text-center">
+                    <div class="welcome-icon mb-4">
+                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #ff5d15;"></i>
+                    </div>
+                    <h1 class="welcome-title">Welcome to YITP, {{ user.first_name|default:user.username }}!</h1>
+                    <p class="welcome-subtitle">Your account has been successfully verified. You're now ready to start your learning journey with the Youth Impact Training Programme.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="welcome-content-area section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Welcome Message -->
+            <div class="col-lg-8 offset-lg-2">
+                <div class="welcome-card">
+                    <div class="card-body text-center">
+                        <h2 class="card-title mb-4">🎉 Account Verification Complete!</h2>
+                        <p class="card-text mb-4">
+                            Congratulations! Your YITP account has been successfully verified. You now have full access to our comprehensive training programmes designed to empower youth and create positive impact in communities.
+                        </p>
+                        
+                        <div class="verification-status mb-4">
+                            <div class="status-item">
+                                <i class="fas fa-user-check text-success"></i>
+                                <span class="ms-2">Account Verified</span>
+                            </div>
+                            <div class="status-item">
+                                <i class="fas fa-envelope-check text-success"></i>
+                                <span class="ms-2">Email Confirmed</span>
+                            </div>
+                            <div class="status-item">
+                                <i class="fas fa-key text-success"></i>
+                                <span class="ms-2">Access Granted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps Section -->
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="next-steps-section">
+                    <h3 class="section-title text-center mb-5">Your Next Steps</h3>
+                    <div class="row">
+                        {% for step in next_steps %}
+                        <div class="col-lg-6 col-md-6 mb-4">
+                            <div class="step-card">
+                                <div class="step-number">{{ forloop.counter }}</div>
+                                <div class="step-content">
+                                    <h5>{{ step }}</h5>
+                                    {% if forloop.counter == 1 %}
+                                        <p>Update your profile with additional information to personalize your experience.</p>
+                                        <a href="{% url 'profile' %}" class="btn btn-outline-primary btn-sm">Update Profile</a>
+                                    {% elif forloop.counter == 2 %}
+                                        <p>Explore our comprehensive course catalog and find programmes that match your interests.</p>
+                                        <a href="{% url 'yitp:web_courses_list' %}" class="btn btn-outline-primary btn-sm">Browse Courses</a>
+                                    {% elif forloop.counter == 3 %}
+                                        <p>Enroll in courses that align with your goals and start building valuable skills.</p>
+                                        <a href="/lms/courses/" class="btn btn-outline-primary btn-sm">View LMS Courses</a>
+                                    {% elif forloop.counter == 4 %}
+                                        <p>Begin your transformative learning experience with YITP's expert-designed curriculum.</p>
+                                        <a href="{% url 'yitp:home' %}" class="btn btn-outline-primary btn-sm">Get Started</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Enrollment CTA -->
+        {% if show_course_enrollment %}
+        <div class="row mt-5">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="enrollment-cta">
+                    <div class="cta-content text-center">
+                        <h3 class="cta-title">Ready to Start Learning?</h3>
+                        <p class="cta-description">
+                            Join thousands of young leaders who are making a difference in their communities through our comprehensive training programmes.
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="/lms/courses/" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-graduation-cap me-2"></i>Explore LMS Courses
+                            </a>
+                            <a href="{% url 'yitp:web_courses_list' %}" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-list me-2"></i>View All Programmes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Support Section -->
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="support-section text-center">
+                    <h4>Need Help Getting Started?</h4>
+                    <p>Our support team is here to help you make the most of your YITP experience.</p>
+                    <div class="support-options">
+                        <a href="{% url 'yitp:contact' %}" class="btn btn-outline-secondary me-3">
+                            <i class="fas fa-envelope me-2"></i>Contact Support
+                        </a>
+                        <a href="{% url 'yitp:faqs' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-question-circle me-2"></i>View FAQs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.welcome-hero-area {
+    background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);
+    color: white;
+    padding: 100px 0 80px;
+    margin-top: -20px;
+}
+
+.welcome-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.welcome-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.welcome-content-area {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.welcome-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.verification-status {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.next-steps-section {
+    background: white;
+    border-radius: 15px;
+    padding: 50px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.section-title {
+    color: #1a2e53;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.step-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    height: 100%;
+    position: relative;
+    border-left: 4px solid #ff5d15;
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #ff5d15;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.step-content {
+    margin-top: 15px;
+}
+
+.step-content h5 {
+    color: #1a2e53;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.enrollment-cta {
+    background: linear-gradient(135deg, #1a2e53 0%, #2c4a7a 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 50px;
+    text-align: center;
+}
+
+.cta-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.cta-description {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.support-section {
+    padding: 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+}
+
+.support-options {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 2rem;
+    }
+    
+    .verification-status {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .cta-buttons .btn {
+        margin: 0 !important;
+    }
+}
+</style>
+{% endblock %}

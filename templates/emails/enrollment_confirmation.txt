@@ -1,0 +1,46 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Course Enrollment Confirmation
+
+Hello {{ user.first_name|default:user.username }}!
+
+Congratulations! You have successfully enrolled in "{{ course.title }}" through the Youth Impact Training Programme.
+
+COURSE DETAILS:
+Course: {{ course.title }}
+Instructor: {{ course.instructor.get_full_name|default:course.instructor.username }}
+Difficulty: {{ course.get_difficulty_level_display }}
+Duration: {{ course.estimated_duration }} hours
+Enrollment Date: {{ enrollment_date|date:"F d, Y" }} at {{ enrollment_date|time:"g:i A" }}
+{% if course.price > 0 %}Course Fee: KES {{ course.price }}{% else %}Course Fee: Free{% endif %}
+
+COURSE DESCRIPTION:
+{{ course.description|truncatewords:50 }}
+
+LEARNING OBJECTIVES:
+{{ course.learning_objectives|truncatewords:30 }}
+
+{% if course.prerequisites %}PREREQUISITES:
+{{ course.prerequisites|truncatewords:20 }}
+
+{% endif %}NEXT STEPS:
+- Access your course materials through your YITP dashboard
+- Complete modules in the recommended sequence
+- Participate in discussions and assignments
+- Track your progress and earn your certificate
+{% if course.price > 0 %}- Ensure your payment is confirmed to maintain access{% endif %}
+
+COURSE ACCESS:
+Visit your dashboard: {{ course_url }}
+
+NEED HELP?
+If you have any questions about your enrollment or need technical support, please contact us at {{ support_email }}.
+
+We're excited to support you on your learning journey with YITP!
+
+Best regards,
+The YITP Team
+Youth Impact Training Programme
+
+---
+This is an automated message from the Youth Impact Training Programme.
+If you did not request this enrollment, please contact us immediately.

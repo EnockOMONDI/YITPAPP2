@@ -1,0 +1,987 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}My Profile - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+/* YITP Unified Profile Styles - Solid Colors Only */
+:root {
+    --yitp-primary: #6610f2;
+    --yitp-accent: #ff5d15;
+    --yitp-light: #f8f9fa;
+    --yitp-dark: #1a2e53;
+    --yitp-white: #ffffff;
+    --yitp-gray: #6c757d;
+    --yitp-success: #28a745;
+    --yitp-warning: #ffc107;
+    --yitp-danger: #dc3545;
+}
+
+.profile-header {
+    background: var(--yitp-primary);
+    color: var(--yitp-white);
+    padding: 3rem 0 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--yitp-white);
+    background: var(--yitp-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--yitp-white);
+}
+
+.profile-tabs {
+    border-bottom: 2px solid var(--yitp-light);
+    margin-bottom: 2rem;
+}
+
+.profile-tabs .nav-link {
+    border: none;
+    color: var(--yitp-gray);
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.profile-tabs .nav-link:hover {
+    color: var(--yitp-primary);
+    border-bottom-color: var(--yitp-accent);
+}
+
+.profile-tabs .nav-link.active {
+    color: var(--yitp-primary);
+    border-bottom-color: var(--yitp-primary);
+    background: none;
+}
+
+.stats-card {
+    background: var(--yitp-white);
+    border: 1px solid var(--yitp-light);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.stats-card:hover {
+    border-color: var(--yitp-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 16, 242, 0.1);
+}
+
+.stats-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--yitp-primary);
+    color: var(--yitp-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+}
+
+.stats-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--yitp-primary);
+    margin-bottom: 0.5rem;
+}
+
+.profile-card {
+    background: var(--yitp-white);
+    border: 1px solid var(--yitp-light);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    color: var(--yitp-dark);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.course-item {
+    background: var(--yitp-white);
+    border: 1px solid var(--yitp-light);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.course-item:hover {
+    border-color: var(--yitp-primary);
+    box-shadow: 0 2px 8px rgba(102, 16, 242, 0.1);
+}
+
+.progress-bar {
+    background: var(--yitp-primary);
+    height: 8px;
+    border-radius: 4px;
+}
+
+.progress {
+    background: var(--yitp-light);
+    height: 8px;
+    border-radius: 4px;
+}
+
+.btn-yitp-primary {
+    background: var(--yitp-primary);
+    border-color: var(--yitp-primary);
+    color: var(--yitp-white);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-yitp-primary:hover {
+    background: var(--yitp-dark);
+    border-color: var(--yitp-dark);
+    color: var(--yitp-white);
+}
+
+.btn-yitp-accent {
+    background: var(--yitp-accent);
+    border-color: var(--yitp-accent);
+    color: var(--yitp-white);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-yitp-accent:hover {
+    background: #e55a13;
+    border-color: #e55a13;
+    color: var(--yitp-white);
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--yitp-light);
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 500;
+    color: var(--yitp-gray);
+}
+
+.info-value {
+    color: var(--yitp-dark);
+    font-weight: 500;
+}
+
+.achievement-badge {
+    background: var(--yitp-accent);
+    color: var(--yitp-white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0.25rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--yitp-light);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--yitp-primary);
+    color: var(--yitp-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-weight: 500;
+    color: var(--yitp-dark);
+    margin-bottom: 0.25rem;
+}
+
+.activity-meta {
+    font-size: 0.875rem;
+    color: var(--yitp-gray);
+}
+
+.sponsorship-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    background: var(--yitp-warning);
+    color: var(--yitp-white);
+}
+
+.status-approved {
+    background: var(--yitp-success);
+    color: var(--yitp-white);
+}
+
+.status-rejected {
+    background: var(--yitp-danger);
+    color: var(--yitp-white);
+}
+
+.quick-action-card {
+    background: var(--yitp-light);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--yitp-dark);
+    display: block;
+    height: 100%;
+}
+
+.quick-action-card:hover {
+    background: var(--yitp-primary);
+    color: var(--yitp-white);
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.quick-action-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--yitp-accent);
+}
+
+.quick-action-card:hover .quick-action-icon {
+    color: var(--yitp-white);
+}
+
+@media (max-width: 768px) {
+    .profile-header {
+        padding: 2rem 0 1rem;
+    }
+    
+    .profile-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+    
+    .profile-tabs .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Profile Header -->
+<section class="profile-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+                {% if profile.image and profile.image.url != '/media/default.jpg' %}
+                    <img src="{{ profile.image.url }}" alt="{{ user.get_full_name }}" class="profile-avatar">
+                {% else %}
+                    <div class="profile-avatar mx-auto">
+                        {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-9">
+                <h1 class="display-5 fw-bold mb-2">
+                    {% if user.first_name %}
+                        {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                </h1>
+                <p class="lead mb-3">
+                    {% if profile.bio and profile.bio != 'Edit your Bio!' %}
+                        {{ profile.bio }}
+                    {% else %}
+                        Youth Impact Training Programme Member
+                    {% endif %}
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge bg-light text-dark">
+                        <i class="fas fa-envelope me-1"></i>{{ user.email }}
+                    </span>
+                    {% if profile.phone_number %}
+                        <span class="badge bg-light text-dark">
+                            <i class="fas fa-phone me-1"></i>{{ profile.phone_number }}
+                        </span>
+                    {% endif %}
+                    <span class="badge bg-light text-dark">
+                        <i class="fas fa-calendar me-1"></i>Joined {{ user.date_joined|date:"M Y" }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Profile Navigation Tabs -->
+<div class="container">
+    <ul class="nav nav-tabs profile-tabs" id="profileTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if active_section == 'overview' %}active{% endif %}" 
+                    id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" 
+                    type="button" role="tab" aria-controls="overview" aria-selected="{% if active_section == 'overview' %}true{% else %}false{% endif %}">
+                <i class="fas fa-home me-2"></i>Overview
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if active_section == 'courses' %}active{% endif %}" 
+                    id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses" 
+                    type="button" role="tab" aria-controls="courses" aria-selected="{% if active_section == 'courses' %}true{% else %}false{% endif %}">
+                <i class="fas fa-graduation-cap me-2"></i>My Courses
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if active_section == 'analytics' %}active{% endif %}" 
+                    id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" 
+                    type="button" role="tab" aria-controls="analytics" aria-selected="{% if active_section == 'analytics' %}true{% else %}false{% endif %}">
+                <i class="fas fa-chart-line me-2"></i>Analytics
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if active_section == 'billing' %}active{% endif %}" 
+                    id="billing-tab" data-bs-toggle="tab" data-bs-target="#billing" 
+                    type="button" role="tab" aria-controls="billing" aria-selected="{% if active_section == 'billing' %}true{% else %}false{% endif %}">
+                <i class="fas fa-credit-card me-2"></i>Billing
+            </button>
+        </li>
+    </ul>
+</div>
+
+<!-- Tab Content -->
+<div class="container">
+    <div class="tab-content" id="profileTabContent">
+
+        <!-- Overview Tab -->
+        <div class="tab-pane fade {% if active_section == 'overview' %}show active{% endif %}"
+             id="overview" role="tabpanel" aria-labelledby="overview-tab">
+
+            <!-- Learning Statistics -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stats-number">{{ lms_stats.total_enrollments }}</div>
+                        <h6 class="text-muted">Enrolled Courses</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stats-number">{{ lms_stats.completed_courses }}</div>
+                        <h6 class="text-muted">Completed</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stats-number">{{ lms_stats.total_learning_hours|floatformat:1 }}</div>
+                        <h6 class="text-muted">Learning Hours</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stats-number">{{ lms_stats.total_achievements }}</div>
+                        <h6 class="text-muted">Achievements</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Account Information -->
+                <div class="col-lg-6">
+                    <div class="profile-card">
+                        <h3 class="section-title">Account Information</h3>
+
+                        <div class="info-item">
+                            <span class="info-label">Username:</span>
+                            <span class="info-value">{{ user.username }}</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value">{{ user.email }}</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">First Name:</span>
+                            <span class="info-value">{{ user.first_name|default:"Not provided" }}</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Last Name:</span>
+                            <span class="info-value">{{ user.last_name|default:"Not provided" }}</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Phone Number:</span>
+                            <span class="info-value">{{ profile.phone_number|default:"Not provided" }}</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">Payment Status:</span>
+                            <span class="info-value">
+                                <span class="badge
+                                    {% if profile.payment_status == 'confirmed' %}bg-success
+                                    {% elif profile.payment_status == 'pending' %}bg-warning
+                                    {% elif profile.payment_status == 'expired' %}bg-danger
+                                    {% else %}bg-secondary{% endif %}">
+                                    {{ profile.get_payment_status_display }}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="col-lg-6">
+                    <div class="profile-card">
+                        <h3 class="section-title">Quick Actions</h3>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <a href="{% url 'courses:course_list' %}" class="quick-action-card">
+                                    <div class="quick-action-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <h6>Browse Courses</h6>
+                                    <p class="mb-0 small">Discover new learning opportunities</p>
+                                </a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <a href="{% url 'courses:dashboard' %}" class="quick-action-card">
+                                    <div class="quick-action-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <h6>Dashboard</h6>
+                                    <p class="mb-0 small">View your learning dashboard</p>
+                                </a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <a href="{% url 'yitp:home' %}" class="quick-action-card">
+                                    <div class="quick-action-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <h6>Homepage</h6>
+                                    <p class="mb-0 small">Return to main page</p>
+                                </a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <a href="{% url 'yitp:contact' %}" class="quick-action-card">
+                                    <div class="quick-action-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <h6>Contact Support</h6>
+                                    <p class="mb-0 small">Get help when you need it</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            {% if recent_activity %}
+            <div class="profile-card">
+                <h3 class="section-title">Recent Activity</h3>
+                {% for activity in recent_activity %}
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="{{ activity.icon }}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">{{ activity.title }}</div>
+                        <div class="activity-meta">{{ activity.course }} • {{ activity.date|timesince }} ago</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Sponsorship Requests Section -->
+            <div class="profile-card">
+                <h3 class="section-title">Sponsorship Requests</h3>
+
+                {% if sponsorship_requests %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Program</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in sponsorship_requests %}
+                                <tr>
+                                    <td>{{ request.get_program_name }}</td>
+                                    <td>${{ request.amount_needed }}</td>
+                                    <td>
+                                        <span class="sponsorship-status status-{{ request.status }}">
+                                            {{ request.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ request.created_at|date:"M d, Y" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No sponsorship requests submitted yet.</p>
+                {% endif %}
+
+                <div class="mt-3">
+                    <button type="button" class="btn btn-yitp-accent" data-bs-toggle="modal" data-bs-target="#sponsorshipModal">
+                        <i class="fas fa-plus me-2"></i>Request Sponsorship
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Courses Tab -->
+        <div class="tab-pane fade {% if active_section == 'courses' %}show active{% endif %}"
+             id="courses" role="tabpanel" aria-labelledby="courses-tab">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="section-title mb-0">My Enrolled Courses</h3>
+                <div class="course-search">
+                    <input type="text" class="form-control" id="courseSearch" placeholder="Search courses...">
+                </div>
+            </div>
+
+            {% if enrollments %}
+                <div class="row">
+                    {% for progress_data in course_progress %}
+                    <div class="col-lg-6 mb-4">
+                        <div class="course-item" data-course-title="{{ progress_data.course.title|lower }}">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h5 class="mb-1">{{ progress_data.course.title }}</h5>
+                                    <p class="text-muted mb-0">{{ progress_data.course.category.name }}</p>
+                                </div>
+                                <span class="badge
+                                    {% if progress_data.enrollment.status == 'completed' %}bg-success
+                                    {% elif progress_data.enrollment.status == 'active' %}bg-primary
+                                    {% else %}bg-secondary{% endif %}">
+                                    {{ progress_data.enrollment.get_status_display }}
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <small class="text-muted">Progress</small>
+                                    <small class="text-muted">{{ progress_data.progress_percentage }}%</small>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: {{ progress_data.progress_percentage }}%"></div>
+                                </div>
+                            </div>
+
+                            <div class="row text-center mb-3">
+                                <div class="col-4">
+                                    <div class="small text-muted">Lessons</div>
+                                    <div class="fw-bold">{{ progress_data.completed_lessons }}/{{ progress_data.total_lessons }}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">Last Accessed</div>
+                                    <div class="fw-bold">{{ progress_data.last_accessed|date:"M d"|default:"Never" }}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="small text-muted">Enrolled</div>
+                                    <div class="fw-bold">{{ progress_data.enrollment.enrollment_date|date:"M d" }}</div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <a href="{% url 'courses:course_detail' progress_data.course.slug %}" class="btn btn-yitp-primary btn-sm flex-fill">
+                                    {% if progress_data.can_continue %}
+                                        <i class="fas fa-play me-1"></i>Continue
+                                    {% else %}
+                                        <i class="fas fa-book-open me-1"></i>Start Course
+                                    {% endif %}
+                                </a>
+                                <a href="{% url 'progress:my_progress' %}" class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-chart-line me-1"></i>Progress
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-graduation-cap fa-4x text-muted mb-3"></i>
+                    <h4 class="text-muted">No courses enrolled yet</h4>
+                    <p class="text-muted">Start your learning journey today!</p>
+                    <a href="{% url 'courses:course_list' %}" class="btn btn-yitp-primary">
+                        <i class="fas fa-search me-2"></i>Browse Courses
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Analytics Tab -->
+        <div class="tab-pane fade {% if active_section == 'analytics' %}show active{% endif %}"
+             id="analytics" role="tabpanel" aria-labelledby="analytics-tab">
+
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stats-number">{{ learning_streak|default:0 }}</div>
+                        <h6 class="text-muted">Day Streak</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stats-number">{{ total_learning_hours|floatformat:1 }}</div>
+                        <h6 class="text-muted">Total Hours</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stats-number">
+                            {% if total_enrollments > 0 %}
+                                {% widthratio completed_courses total_enrollments 100 %}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        </div>
+                        <h6 class="text-muted">Success Rate</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stats-number">{{ total_achievements|default:0 }}</div>
+                        <h6 class="text-muted">Achievements</h6>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Achievements -->
+            {% if recent_achievements %}
+            <div class="profile-card">
+                <h3 class="section-title">Recent Achievements</h3>
+                <div class="d-flex flex-wrap gap-2">
+                    {% for achievement in recent_achievements %}
+                        <span class="achievement-badge">
+                            <i class="fas fa-trophy me-1"></i>{{ achievement.title }}
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Learning Progress Chart Placeholder -->
+            <div class="profile-card">
+                <h3 class="section-title">Learning Progress</h3>
+                <div class="text-center py-4">
+                    <i class="fas fa-chart-line fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Detailed analytics charts coming soon!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Billing Tab -->
+        <div class="tab-pane fade {% if active_section == 'billing' %}show active{% endif %}"
+             id="billing" role="tabpanel" aria-labelledby="billing-tab">
+
+            <!-- Payment Status -->
+            <div class="profile-card">
+                <h3 class="section-title">Payment Status</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-item">
+                            <span class="info-label">Current Status:</span>
+                            <span class="info-value">
+                                <span class="badge
+                                    {% if profile.payment_status == 'confirmed' %}bg-success
+                                    {% elif profile.payment_status == 'pending' %}bg-warning
+                                    {% elif profile.payment_status == 'expired' %}bg-danger
+                                    {% else %}bg-secondary{% endif %}">
+                                    {{ profile.get_payment_status_display }}
+                                </span>
+                            </span>
+                        </div>
+                        {% if profile.payment_method %}
+                        <div class="info-item">
+                            <span class="info-label">Payment Method:</span>
+                            <span class="info-value">{{ profile.get_payment_method_display }}</span>
+                        </div>
+                        {% endif %}
+                        {% if profile.payment_confirmed_at %}
+                        <div class="info-item">
+                            <span class="info-label">Confirmed Date:</span>
+                            <span class="info-value">{{ profile.payment_confirmed_at|date:"M d, Y" }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment History -->
+            <div class="profile-card">
+                <h3 class="section-title">Payment History</h3>
+                {% if payment_history %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Reference</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for payment in payment_history %}
+                                <tr>
+                                    <td>{{ payment.date|date:"M d, Y" }}</td>
+                                    <td>${{ payment.amount }}</td>
+                                    <td>{{ payment.method }}</td>
+                                    <td>{{ payment.reference }}</td>
+                                    <td>
+                                        <span class="badge bg-success">{{ payment.status }}</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No payment history available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sponsorship Request Modal - Only show when sponsorship form is available -->
+{% if sponsorship_form %}
+<div class="modal fade" id="sponsorshipModal" tabindex="-1" aria-labelledby="sponsorshipModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: var(--yitp-primary); color: var(--yitp-white);">
+                <h5 class="modal-title" id="sponsorshipModalLabel">
+                    <i class="fas fa-hand-holding-heart me-2"></i>Request Sponsorship
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="sponsorship_form" value="1">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ sponsorship_form.program|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ sponsorship_form.amount_needed|as_crispy_field }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ sponsorship_form.financial_situation|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6" id="program_other_field" style="display: none;">
+                            {{ sponsorship_form.program_other|as_crispy_field }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6" id="financial_other_field" style="display: none;">
+                            {{ sponsorship_form.financial_situation_other|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ sponsorship_form.supporting_document|as_crispy_field }}
+                        </div>
+                    </div>
+
+                    {{ sponsorship_form.reason|as_crispy_field }}
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-yitp-primary">
+                            <i class="fas fa-paper-plane me-2"></i>Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Course search functionality
+    const courseSearch = document.getElementById('courseSearch');
+    if (courseSearch) {
+        courseSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const courseItems = document.querySelectorAll('.course-item');
+
+            courseItems.forEach(function(item) {
+                const courseTitle = item.getAttribute('data-course-title');
+                if (courseTitle && courseTitle.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Tab persistence
+    const profileTabs = document.getElementById('profileTabs');
+    if (profileTabs) {
+        // Get active tab from URL hash or localStorage
+        const hash = window.location.hash;
+        const savedTab = localStorage.getItem('activeProfileTab');
+
+        if (hash && hash.startsWith('#')) {
+            const tabId = hash.substring(1) + '-tab';
+            const tabElement = document.getElementById(tabId);
+            if (tabElement) {
+                const tab = new bootstrap.Tab(tabElement);
+                tab.show();
+            }
+        } else if (savedTab) {
+            const tabElement = document.getElementById(savedTab);
+            if (tabElement) {
+                const tab = new bootstrap.Tab(tabElement);
+                tab.show();
+            }
+        }
+
+        // Save active tab to localStorage
+        profileTabs.addEventListener('shown.bs.tab', function(event) {
+            localStorage.setItem('activeProfileTab', event.target.id);
+        });
+    }
+
+    // Handle program selection in sponsorship form
+    const programSelect = document.getElementById('id_program');
+    const programOtherField = document.getElementById('program_other_field');
+
+    if (programSelect && programOtherField) {
+        programSelect.addEventListener('change', function() {
+            if (this.value === 'other') {
+                programOtherField.style.display = 'block';
+                document.getElementById('id_program_other').required = true;
+            } else {
+                programOtherField.style.display = 'none';
+                document.getElementById('id_program_other').required = false;
+            }
+        });
+    }
+
+    // Handle financial situation selection
+    const financialSelect = document.getElementById('id_financial_situation');
+    const financialOtherField = document.getElementById('financial_other_field');
+
+    if (financialSelect && financialOtherField) {
+        financialSelect.addEventListener('change', function() {
+            if (this.value === 'other') {
+                financialOtherField.style.display = 'block';
+                document.getElementById('id_financial_situation_other').required = true;
+            } else {
+                financialOtherField.style.display = 'none';
+                document.getElementById('id_financial_situation_other').required = false;
+            }
+        });
+    }
+
+    // Section-based URL handling
+    const urlParams = new URLSearchParams(window.location.search);
+    const section = urlParams.get('section');
+    if (section) {
+        const tabElement = document.getElementById(section + '-tab');
+        if (tabElement) {
+            const tab = new bootstrap.Tab(tabElement);
+            tab.show();
+        }
+    }
+});
+</script>
+{% endblock %}

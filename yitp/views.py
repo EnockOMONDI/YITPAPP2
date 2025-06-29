@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -32,9 +33,26 @@ def registration(request):
     return render(request, 'yitp/registration.html')
 
 def registration2(request):
-    
+
     return render(request, 'yitp/registration2.html')
 
+@login_required
+def welcome(request):
+    """
+    Welcome page for newly registered and verified users
+    Shows next steps and course enrollment options
+    """
+    context = {
+        'user': request.user,
+        'show_course_enrollment': True,
+        'next_steps': [
+            'Complete your profile information',
+            'Browse available courses',
+            'Enroll in your first course',
+            'Start your learning journey'
+        ]
+    }
+    return render(request, 'yitp/welcome.html', context)
 
 def events(request):
     

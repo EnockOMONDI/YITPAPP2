@@ -1,0 +1,185 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Email Delivery Test - YITP{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-envelope-open-text me-2"></i>
+                        Email Delivery Test
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Email Configuration Test</strong><br>
+                        Use this tool to test if the YITP email delivery system is working correctly.
+                        A test email will be sent to the specified address.
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="test_email" class="form-label">
+                                <i class="fas fa-at me-1"></i>
+                                Test Email Address
+                            </label>
+                            <input 
+                                type="email" 
+                                class="form-control" 
+                                id="test_email" 
+                                name="test_email" 
+                                value="{{ user.email }}" 
+                                required
+                                placeholder="Enter email address to test"
+                            >
+                            <div class="form-text">
+                                The test email will be sent to this address. Default is your account email.
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Send Test Email
+                            </button>
+                        </div>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="email-config-info">
+                        <h5 class="mb-3">
+                            <i class="fas fa-cog me-2"></i>
+                            Current Email Configuration
+                        </h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><strong>Backend:</strong> SMTP</li>
+                                    <li><strong>Host:</strong> smtp.gmail.com</li>
+                                    <li><strong>Port:</strong> 587</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><strong>TLS:</strong> Enabled</li>
+                                    <li><strong>From:</strong> YOUTH IMPACT GLOBAL</li>
+                                    <li><strong>Provider:</strong> Gmail</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="troubleshooting mt-4">
+                        <h6 class="mb-3">
+                            <i class="fas fa-tools me-2"></i>
+                            Troubleshooting Tips
+                        </h6>
+                        <div class="accordion" id="troubleshootingAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        Email Not Received
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            <li>Check your spam/junk folder</li>
+                                            <li>Verify the email address is correct</li>
+                                            <li>Wait a few minutes for delivery</li>
+                                            <li>Check if your email provider blocks automated emails</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                        Server Configuration Issues
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            <li>Verify Gmail app password is correct</li>
+                                            <li>Ensure 2-factor authentication is enabled</li>
+                                            <li>Check environment variables are set</li>
+                                            <li>Verify SMTP settings are correct</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'profile' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Back to Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    border: none;
+    border-radius: 15px;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%) !important;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #1a2e53 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54a0c 0%, #152340 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.3);
+}
+
+.accordion-button {
+    background-color: #f8f9fa;
+    border: none;
+    font-weight: 500;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #ff5d15;
+    color: white;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 93, 21, 0.25);
+}
+
+.form-control:focus {
+    border-color: #ff5d15;
+    box-shadow: 0 0 0 0.25rem rgba(255, 93, 21, 0.25);
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    border-color: #1976d2;
+    color: #0d47a1;
+}
+</style>
+{% endblock %}

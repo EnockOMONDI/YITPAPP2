@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-development-only')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'false'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -307,13 +307,25 @@ MESSAGE_TAGS = {
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Email Configuration
+# Standard SMTP backend with SSL handling
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'dedeexpeditions@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'dedeexpeditions@gmail.com'
+EMAIL_HOST_PASSWORD = 'roqu frlt wvof rqxk'  # Gmail app password
+DEFAULT_FROM_EMAIL = 'YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>'
+
+# Email timeout settings
+EMAIL_TIMEOUT = 30
+
+# SSL certificate handling for development
+import ssl
+import os
+if os.getenv('DJANGO_DEVELOPMENT') or DEBUG:
+    # Only disable SSL verification in development
+    ssl._create_default_https_context = ssl._create_unverified_context
 
 # Admin email for notifications
 ADMIN_EMAIL = 'youthimpactglobal3@gmail.com'
@@ -322,6 +334,7 @@ ADMIN_EMAIL = 'youthimpactglobal3@gmail.com'
 OTP_EXPIRY_MINUTES = 200
 OTP_LENGTH = 6
 
-# For development, you can use console backend to see emails in console
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# For development testing, you can temporarily use console backend
+# Uncomment the line below for local development only
+# if DEBUG and os.getenv('USE_CONSOLE_EMAIL', 'False').lower() == 'true':
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

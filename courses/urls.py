@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import RedirectView
 from . import views
 
 app_name = 'courses'
@@ -14,6 +15,8 @@ urlpatterns = [
     path('courses/<slug:course_slug>/modules/<int:module_id>/', views.ModuleDetailView.as_view(), name='module_detail'),
     path('courses/<slug:course_slug>/lessons/<int:lesson_id>/', views.LessonDetailView.as_view(), name='lesson_detail'),
     path('my-courses/', views.MyCoursesView.as_view(), name='my_courses'),
-    path('profile/', views.ProfileView.as_view(), name='profile'),
+
+    # Redirect old LMS profile to unified profile with LMS section
+    path('profile/', RedirectView.as_view(pattern_name='profile_lms', permanent=False), name='lms_profile_redirect'),
 ]
 

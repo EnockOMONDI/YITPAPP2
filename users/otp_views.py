@@ -77,9 +77,9 @@ def verify_otp_view(request):
             
             # Send welcome email
             send_welcome_email(user)
-            
+
             messages.success(request, 'Email verified successfully! Welcome to YITP!')
-            return redirect('login')
+            return redirect('yitp:welcome')
         else:
             messages.error(request, 'Invalid or expired OTP code. Please try again.')
     

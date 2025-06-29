@@ -32,7 +32,13 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
     path('logout/', user_views.logout, name='logout'),
-    path('profile/', user_views.profile, name='profile'),
+
+    # Unified profile system with section-based navigation
+    path('profile/', user_views.unified_profile, name='profile'),
+    path('profile/lms/', user_views.unified_profile, {'section': 'lms'}, name='profile_lms'),
+    path('profile/courses/', user_views.unified_profile, {'section': 'courses'}, name='profile_courses'),
+    path('profile/analytics/', user_views.unified_profile, {'section': 'analytics'}, name='profile_analytics'),
+    path('profile/billing/', user_views.unified_profile, {'section': 'billing'}, name='profile_billing'),
 
     # OTP verification views
     path('verify-otp/', verify_otp_view, name='verify_otp'),

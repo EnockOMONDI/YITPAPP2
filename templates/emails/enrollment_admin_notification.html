@@ -1,0 +1,95 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}New Course Enrollment - {{ course.title }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    YITP Admin Notification 📊
+</div>
+
+<div class="content-text">
+    A new student has enrolled in a course through the Youth Impact Training Programme platform.
+</div>
+
+<div class="info-box">
+    <strong>👤 Student Information:</strong><br>
+    <strong>Name:</strong> {{ user.get_full_name|default:user.username }}<br>
+    <strong>Email:</strong> {{ user.email }}<br>
+    <strong>Username:</strong> {{ user.username }}<br>
+    <strong>Date Joined:</strong> {{ user.date_joined|date:"F d, Y" }}<br>
+</div>
+
+<div class="info-box">
+    <strong>📚 Course Information:</strong><br>
+    <strong>Course:</strong> {{ course.title }}<br>
+    <strong>Instructor:</strong> {{ course.instructor.get_full_name|default:course.instructor.username }}<br>
+    <strong>Category:</strong> {{ course.category.name|default:"Uncategorized" }}<br>
+    <strong>Difficulty:</strong> {{ course.get_difficulty_level_display }}<br>
+    <strong>Duration:</strong> {{ course.estimated_duration }} hours<br>
+    {% if course.price > 0 %}
+    <strong>Course Fee:</strong> KES {{ course.price }}<br>
+    {% else %}
+    <strong>Course Fee:</strong> Free<br>
+    {% endif %}
+</div>
+
+<div class="info-box">
+    <strong>📅 Enrollment Details:</strong><br>
+    <strong>Enrollment Date:</strong> {{ enrollment_date|date:"F d, Y" }} at {{ enrollment_date|time:"g:i A" }}<br>
+    <strong>Enrollment Status:</strong> Active<br>
+    <strong>Total Enrolled Students:</strong> {{ total_enrolled }} students<br>
+    {% if course.enrollment_limit %}
+    <strong>Enrollment Limit:</strong> {{ course.enrollment_limit }} students<br>
+    <strong>Remaining Spots:</strong> {{ remaining_spots }} spots<br>
+    {% endif %}
+</div>
+
+{% if course.price > 0 %}
+<div class="content-text" style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>💰 Payment Required:</strong><br>
+    This is a paid course. Please verify that the student's payment has been confirmed before they can access course materials.
+</div>
+{% endif %}
+
+<div class="cta-container">
+    <a href="{{ admin_url }}" class="cta-button">
+        🔧 View in Admin Panel
+    </a>
+</div>
+
+<div class="content-text">
+    <strong>📊 Course Statistics:</strong>
+</div>
+
+<div class="content-text">
+    <ul style="text-align: left; margin: 0; padding-left: 20px;">
+        <li>Total Modules: {{ course.total_modules }}</li>
+        <li>Total Lessons: {{ course.total_lessons }}</li>
+        <li>Course Created: {{ course.created_at|date:"F d, Y" }}</li>
+        <li>Last Updated: {{ course.updated_at|date:"F d, Y" }}</li>
+        <li>Published Status: {% if course.is_published %}✅ Published{% else %}❌ Draft{% endif %}</li>
+        <li>Featured Status: {% if course.is_featured %}⭐ Featured{% else %}📚 Standard{% endif %}</li>
+    </ul>
+</div>
+
+<div class="content-text">
+    <strong>🔍 Recommended Actions:</strong>
+</div>
+
+<div class="content-text">
+    <ul style="text-align: left; margin: 0; padding-left: 20px;">
+        {% if course.price > 0 %}
+        <li>Verify student payment status</li>
+        {% endif %}
+        <li>Monitor student progress and engagement</li>
+        <li>Check if additional support is needed</li>
+        <li>Update course capacity if approaching limit</li>
+    </ul>
+</div>
+
+<div class="signature">
+    Automated notification from<br>
+    <strong>YITP Learning Management System</strong><br>
+    Youth Impact Training Programme
+</div>
+{% endblock %}

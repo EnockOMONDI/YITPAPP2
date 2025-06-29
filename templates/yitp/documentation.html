@@ -270,6 +270,7 @@
                     <a href="#registration-overview" class="child-nav"><i class="fas fa-list-ol"></i> Registration Process Steps</a>
                     <a href="#visual-flowchart" class="child-nav"><i class="fas fa-project-diagram"></i> User Registration Visual Flow Chart</a>
                     <a href="#email-workflows" class="child-nav"><i class="fas fa-envelope"></i> Email Workflow</a>
+                    <a href="#welcome-page-experience" class="child-nav"><i class="fas fa-home"></i> Welcome Page Experience</a>
                 </div>
             </div>
         </div>
@@ -296,7 +297,7 @@
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
-                        The registration workflow is fully functional and production-ready with all components working correctly including phone number storage, OTP verification, and email delivery.
+                        The registration workflow is fully functional and production-ready with all components working correctly including phone number storage, OTP verification, reliable email delivery, and the new welcome page experience.
                     </div>
                     
                     <div class="step-card">
@@ -363,8 +364,18 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">7</span>
                             <div>
-                                <h5>Welcome Email</h5>
-                                <p class="mb-0">Branded welcome email sent with program information and next steps</p>
+                                <h5>Welcome Email & Page Redirect</h5>
+                                <p class="mb-0">Branded welcome email sent and user redirected to personalized welcome page with onboarding guidance</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">8</span>
+                            <div>
+                                <h5>Welcome Page Experience</h5>
+                                <p class="mb-0">User sees welcome page with next steps, course enrollment options, and personalized onboarding flow</p>
                             </div>
                         </div>
                     </div>
@@ -400,7 +411,9 @@
                                 N --> O[Resend OTP Option]
                                 O --> G
                                 L --> P[Send Welcome Email]
-                                P --> Q[Registration Complete<br/>User Can Login]
+                                P --> R[Redirect to Welcome Page]
+                                R --> S[Welcome Page Experience<br/>Onboarding & Next Steps]
+                                S --> Q[Registration Complete<br/>User Can Access Platform]
                                 
                                 style A fill:#e3f2fd
                                 style D fill:#fff3cd
@@ -409,6 +422,8 @@
                                 style H fill:#e8f5e8
                                 style L fill:#d4edda
                                 style P fill:#e8f5e8
+                                style R fill:#fff3cd
+                                style S fill:#e3f2fd
                                 style Q fill:#c8e6c9
                         </div>
                     </div>
@@ -429,6 +444,11 @@
                 </div>
                 <div class="section-content">
                     <p class="lead">Overview of the automated email communications sent during the registration process.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Email System Status:</strong>
+                        The email delivery system has been fully optimized and is working reliably. All SSL certificate issues have been resolved, and emails are successfully delivered to user inboxes.
+                    </div>
 
                     <h4><i class="fas fa-envelope-open-text"></i> OTP Verification Email</h4>
 
@@ -498,6 +518,69 @@
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Email Features:</strong>
                         All emails use YITP branding, are mobile-responsive, and include both HTML and plain text versions for maximum compatibility.
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Welcome Page Experience Section -->
+            <div id="welcome-page-experience" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-home"></i> Welcome Page Experience</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">After successful OTP verification, users are redirected to a personalized welcome page that guides them through their next steps on the YITP platform.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> New Feature:</strong>
+                        The welcome page provides a smooth onboarding experience, replacing the previous direct login redirect with a more user-friendly introduction to the platform.
+                    </div>
+
+                    <h4><i class="fas fa-star"></i> Welcome Page Features</h4>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Personalized Greeting</h5>
+                                <p class="mb-0">Welcome message with user's name and verification confirmation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Next Steps Guidance</h5>
+                                <p class="mb-0">Clear action items including profile completion, course browsing, and enrollment options</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Course Enrollment CTAs</h5>
+                                <p class="mb-0">Direct links to browse available courses and begin the enrollment process</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Support & Resources</h5>
+                                <p class="mb-0">Access to help documentation, contact information, and platform tutorials</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> User Experience:</strong>
+                        The welcome page ensures new users understand their account status and have clear direction for their next actions, improving overall user engagement and platform adoption.
                     </div>
 
                 </div>
