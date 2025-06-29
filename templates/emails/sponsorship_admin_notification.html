@@ -1,221 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Sponsorship Request</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-        }
-        .content {
-            background: #f8f9fa;
-            padding: 30px 20px;
-            border-radius: 0 0 8px 8px;
-        }
-        .alert {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 20px 0;
-        }
-        .section {
-            background: white;
-            padding: 20px;
-            border-radius: 6px;
-            margin: 20px 0;
-            border-left: 4px solid #ff5d15;
-        }
-        .section h3 {
-            color: #0e1133;
-            margin-top: 0;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        .label {
-            font-weight: bold;
-            color: #6d6e75;
-            padding: 8px 0;
-        }
-        .value {
-            color: #0e1133;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .reason-box {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-            border-left: 3px solid #ff5d15;
-            margin: 10px 0;
-            font-style: italic;
-        }
-        .actions {
-            background: #e8f4fd;
-            padding: 20px;
-            border-radius: 6px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .button {
-            display: inline-block;
-            background: #ff5d15;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 5px 10px;
-        }
-        .button.secondary {
-            background: #6c757d;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #6d6e75;
-            font-size: 14px;
-        }
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>🚨 New Sponsorship Request</h1>
-        <p>Youth Impact Training Programme - Admin Notification</p>
-    </div>
-    
-    <div class="content">
-        <div class="alert">
-            <strong>Action Required:</strong> A new sponsorship request has been submitted and requires review.
-        </div>
-        
-        <div class="section">
-            <h3>👤 Applicant Information</h3>
-            <div class="detail-grid">
-                <div class="label">Full Name:</div>
-                <div class="value">{{ user.get_full_name|default:user.username }}</div>
-                
-                <div class="label">Username:</div>
-                <div class="value">{{ user.username }}</div>
-                
-                <div class="label">Email:</div>
-                <div class="value">{{ user.email }}</div>
-                
-                <div class="label">Member Since:</div>
-                <div class="value">{{ user.date_joined|date:"F d, Y" }}</div>
-                
-                <div class="label">Last Login:</div>
-                <div class="value">{{ user.last_login|date:"F d, Y H:i"|default:"Never" }}</div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h3>💰 Request Details</h3>
-            <div class="detail-grid">
-                <div class="label">Request ID:</div>
-                <div class="value">#{{ sponsorship_request.id }}</div>
-                
-                <div class="label">Program:</div>
-                <div class="value">{{ sponsorship_request.get_program_name }}</div>
-                
-                <div class="label">Amount Requested:</div>
-                <div class="value">${{ sponsorship_request.amount_needed }}</div>
-                
-                <div class="label">Financial Situation:</div>
-                <div class="value">{{ sponsorship_request.get_financial_situation_name }}</div>
-                
-                <div class="label">Status:</div>
-                <div class="value"><span class="status-pending">{{ sponsorship_request.get_status_display }}</span></div>
-                
-                <div class="label">Submitted:</div>
-                <div class="value">{{ sponsorship_request.created_at|date:"F d, Y H:i" }}</div>
-                
-                <div class="label">Supporting Document:</div>
-                <div class="value">
-                    {% if sponsorship_request.supporting_document %}
-                        📎 Attached ({{ sponsorship_request.supporting_document.name }})
-                    {% else %}
-                        None provided
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h3>📝 Detailed Explanation</h3>
-            <div class="reason-box">
-                {{ sponsorship_request.reason|linebreaks }}
-            </div>
-        </div>
-        
-        <div class="section">
-            <h3>🚨 Emergency Contact</h3>
-            <div class="detail-grid">
-                <div class="label">Name:</div>
-                <div class="value">{{ sponsorship_request.emergency_contact_name }}</div>
-                
-                <div class="label">Phone:</div>
-                <div class="value">{{ sponsorship_request.emergency_contact_phone }}</div>
-                
-                <div class="label">Email:</div>
-                <div class="value">{{ sponsorship_request.emergency_contact_email }}</div>
-                
-                <div class="label">Relationship:</div>
-                <div class="value">{{ sponsorship_request.emergency_contact_relationship }}</div>
-            </div>
-        </div>
-        
-        <div class="actions">
-            <h3>⚡ Quick Actions</h3>
-            <p>Review this request in the admin panel to approve, reject, or request more information.</p>
-            <a href="#" class="button">Review in Admin Panel</a>
-            <a href="mailto:{{ user.email }}?subject=Re: Sponsorship Request #{{ sponsorship_request.id }}" class="button secondary">Contact Applicant</a>
-        </div>
-        
-        <div class="section">
-            <h3>📊 Review Guidelines</h3>
-            <ul>
-                <li><strong>Verify Information:</strong> Cross-check provided details and supporting documents</li>
-                <li><strong>Assess Need:</strong> Evaluate the financial situation and genuine need for sponsorship</li>
-                <li><strong>Program Alignment:</strong> Ensure the request aligns with YITP objectives</li>
-                <li><strong>Contact Verification:</strong> Consider contacting the emergency contact if needed</li>
-                <li><strong>Decision Timeline:</strong> Aim to respond within 5-7 business days</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p>This notification was sent automatically when a new sponsorship request was submitted.</p>
-        <p>Youth Impact Global | Admin Panel | <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a></p>
-    </div>
-</body>
-</html>
+{% extends "emails/base_email.html" %}
+
+{% block title %}New YITP Sponsorship Request - {{ user.get_full_name|default:user.username }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    YITP Admin Team 👋
+</div>
+
+<div class="content-text">
+    A new sponsorship request has been submitted to the <strong>Youth Impact Training Programme</strong> and requires your review.
+</div>
+
+<div class="warning-box">
+    <strong>🚨 Action Required</strong><br>
+    A new sponsorship application is pending review in the admin panel.
+</div>
+
+<div class="info-box">
+    <strong>📋 Applicant Information:</strong><br>
+    <strong>Name:</strong> {{ user.get_full_name|default:user.username }}<br>
+    <strong>Username:</strong> {{ user.username }}<br>
+    <strong>Email:</strong> {{ user.email }}<br>
+    <strong>Registration Date:</strong> {{ user.date_joined|date:"F d, Y" }}
+</div>
+
+<div class="info-box">
+    <strong>📊 Request Details:</strong><br>
+    <strong>Request ID:</strong> #{{ sponsorship_request.id }}<br>
+    <strong>Program:</strong> {{ sponsorship_request.get_program_display }}{% if sponsorship_request.program_other %} - {{ sponsorship_request.program_other }}{% endif %}<br>
+    <strong>Amount Requested:</strong> ${{ sponsorship_request.amount_needed }}<br>
+    <strong>Financial Situation:</strong> {{ sponsorship_request.get_financial_situation_display }}{% if sponsorship_request.financial_situation_other %} - {{ sponsorship_request.financial_situation_other }}{% endif %}<br>
+    <strong>Submitted:</strong> {{ sponsorship_request.created_at|date:"F d, Y" }} at {{ sponsorship_request.created_at|time:"g:i A" }}<br>
+    <strong>Current Status:</strong> {{ sponsorship_request.get_status_display }}
+</div>
+
+<div class="info-box">
+    <strong>📞 Emergency Contact:</strong><br>
+    <strong>Name:</strong> {{ sponsorship_request.emergency_contact_name }}<br>
+    <strong>Phone:</strong> {{ sponsorship_request.emergency_contact_phone }}<br>
+    <strong>Email:</strong> {{ sponsorship_request.emergency_contact_email }}<br>
+    <strong>Relationship:</strong> {{ sponsorship_request.emergency_contact_relationship }}
+</div>
+
+<div class="content-text">
+    <strong>📝 Applicant's Reason:</strong><br>
+    {{ sponsorship_request.reason|linebreaks }}
+</div>
+
+{% if sponsorship_request.supporting_document %}
+<div class="warning-box">
+    <strong>📎 Supporting Documents:</strong><br>
+    The applicant has uploaded supporting documentation. Please review these documents in the admin panel.
+</div>
+{% else %}
+<div class="info-box">
+    <strong>📎 Supporting Documents:</strong><br>
+    No supporting documents were uploaded with this application.
+</div>
+{% endif %}
+
+<div class="success-box">
+    <strong>🔍 Review Checklist:</strong><br>
+    ☐ Verify applicant's financial need and circumstances<br>
+    ☐ Assess program goals and career objectives alignment<br>
+    ☐ Evaluate commitment level and availability<br>
+    ☐ Review supporting documentation (if provided)<br>
+    ☐ Consider potential for positive impact<br>
+    ☐ Check emergency contact information<br>
+    ☐ Make approval/rejection decision<br>
+    ☐ Add admin notes for record keeping
+</div>
+
+<a href="{{ admin_url }}" class="btn">Review Application in Admin Panel</a>
+
+<div class="warning-box">
+    <strong>⏰ Response Timeline:</strong><br>
+    Please review and respond to this application within 3-5 business days to maintain our commitment to applicants.
+</div>
+
+<div class="info-box">
+    <strong>📊 Quick Stats:</strong><br>
+    <strong>Total Applications This Month:</strong> [To be calculated]<br>
+    <strong>Pending Reviews:</strong> [To be calculated]<br>
+    <strong>Average Response Time:</strong> [To be calculated]
+</div>
+
+<div class="content-text">
+    <strong>🎯 Evaluation Criteria Reminder:</strong>
+</div>
+
+<div class="content-text">
+    • <strong>Financial Need:</strong> Genuine financial hardship or circumstances<br>
+    • <strong>Program Alignment:</strong> Clear goals that align with YITP mission<br>
+    • <strong>Commitment Level:</strong> Demonstrated commitment to complete the program<br>
+    • <strong>Impact Potential:</strong> Likelihood of positive personal and community impact<br>
+    • <strong>Support System:</strong> Adequate emergency contact and support network
+</div>
+
+<div class="content-text" style="margin-top: 30px;">
+    Best regards,<br>
+    <strong>YITP System</strong><br>
+    Youth Impact Training Programme<br>
+    <em>Automated Admin Notification</em>
+</div>
+
+<div style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; font-size: 12px; color: #6c757d;">
+    <strong>System Information:</strong><br>
+    Request ID: YITP-SPONSOR-{{ sponsorship_request.id }}<br>
+    Notification sent: {{ sponsorship_request.created_at|date:"F d, Y" }} at {{ sponsorship_request.created_at|time:"g:i A" }}<br>
+    Admin Panel: <a href="{{ admin_url }}">{{ admin_url }}</a>
+</div>
+{% endblock %}
+

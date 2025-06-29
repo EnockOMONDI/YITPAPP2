@@ -1,0 +1,460 @@
+/* YITP Django Messages Framework Styles */
+
+/* ===== MESSAGES CONTAINER ===== */
+.messages-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.message-alert {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 2px 12px rgba(14, 17, 51, 0.15);
+    pointer-events: auto;
+    animation: slideDown 0.4s ease-out;
+    position: relative;
+    overflow: hidden;
+    max-height: 60px;
+}
+
+.message-alert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.8;
+}
+
+/* ===== MESSAGE CONTENT ===== */
+.message-content {
+    padding: 10px 0;
+    min-height: 45px;
+}
+
+.message-icon {
+    margin-right: 12px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.message-text {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-right: 12px;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 14px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* ===== MESSAGE TYPES ===== */
+
+/* Success Messages - YITP Brand Colors */
+.alert-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border-left: 3px solid #155724;
+}
+
+.alert-success .message-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.alert-success .btn-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Error Messages - YITP Brand Colors */
+.alert-error,
+.alert-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border-left: 3px solid #721c24;
+}
+
+.alert-error .message-icon,
+.alert-danger .message-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.alert-error .btn-close,
+.alert-danger .btn-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Warning Messages - YITP Brand Colors */
+.alert-warning {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+    border-left: 3px solid #cc4a11;
+}
+
+.alert-warning .message-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.alert-warning .btn-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Info Messages - YITP Brand Colors */
+.alert-info {
+    background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
+    color: white;
+    border-left: 3px solid #0a0d26;
+}
+
+.alert-info .message-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.alert-info .btn-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Default Messages - YITP Brand Colors */
+.alert-debug,
+.alert-default {
+    background: linear-gradient(135deg, #6d6e75 0%, #5a5b61 100%);
+    color: white;
+    border-left: 3px solid #4a4b50;
+}
+
+.alert-debug .message-icon,
+.alert-default .message-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.alert-debug .btn-close,
+.alert-default .btn-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.message-alert.fade-out {
+    animation: slideUp 0.4s ease-in forwards;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .message-content {
+        padding: 8px 0;
+        min-height: 40px;
+    }
+
+    .message-icon {
+        margin-right: 10px;
+        font-size: 14px;
+        width: 18px;
+    }
+
+    .message-text {
+        font-size: 13px;
+        margin-right: 10px;
+    }
+
+    .btn-close {
+        font-size: 12px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .message-alert {
+        max-height: 50px;
+    }
+
+    .message-alert::before {
+        height: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .message-content {
+        padding: 6px 0;
+        min-height: 36px;
+    }
+
+    .message-icon {
+        margin-right: 8px;
+        font-size: 12px;
+        width: 16px;
+    }
+
+    .message-text {
+        font-size: 12px;
+        margin-right: 8px;
+        line-height: 1.3;
+    }
+
+    .btn-close {
+        font-size: 11px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .message-alert {
+        max-height: 45px;
+    }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+.message-alert:focus-within {
+    outline: 2px solid #ff5d15;
+    outline-offset: 2px;
+}
+
+.btn-close:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 1px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .messages-container {
+        display: none;
+    }
+}
+
+/* ===== AUTO-DISMISS PROGRESS BAR ===== */
+.message-alert[data-auto-dismiss]::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: progressBar linear;
+    animation-duration: attr(data-auto-dismiss ms, 5000ms);
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* ===== AJAX FORM RESPONSE MESSAGES ===== */
+.ajax-response {
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.ajax-response.success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.ajax-response.error {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* ===== FORM VALIDATION MESSAGES ===== */
+.form-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 5px;
+    border: 1px solid #f5c6cb;
+}
+
+.form-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 5px;
+    border: 1px solid #c3e6cb;
+}
+
+@media (max-width: 576px) {
+    .message-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+    
+    .message-icon {
+        margin-right: 0;
+        margin-bottom: 8px;
+        align-self: flex-start;
+    }
+    
+    .message-text {
+        margin-right: 0;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+    
+    .btn-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+}
+
+/* ===== MULTIPLE MESSAGES STACKING ===== */
+.message-alert + .message-alert {
+    margin-top: 2px;
+}
+
+/* ===== ACCESSIBILITY ===== */
+.message-alert:focus-within {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.btn-close:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 1px;
+    border-radius: 2px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .messages-container {
+        display: none;
+    }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+    .message-alert {
+        border: 2px solid currentColor;
+    }
+
+    .message-alert::before {
+        height: 6px;
+    }
+
+    .ajax-response {
+        border-width: 2px;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    .message-alert {
+        animation: none;
+    }
+
+    .message-alert.fade-out {
+        animation: none;
+        opacity: 0;
+    }
+
+    .message-alert[data-auto-dismiss]::after {
+        animation: none;
+    }
+
+    .ajax-response {
+        transition: none;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN FOR AJAX AND FORM MESSAGES ===== */
+@media (max-width: 768px) {
+    .ajax-response {
+        padding: 8px 12px;
+        font-size: 13px;
+        margin: 12px 0;
+    }
+
+    .form-error,
+    .form-success {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ajax-response {
+        padding: 6px 10px;
+        font-size: 12px;
+        margin: 10px 0;
+    }
+
+    .form-error,
+    .form-success {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+}
+
+/* ===== DARK MODE SUPPORT FOR AJAX MESSAGES ===== */
+@media (prefers-color-scheme: dark) {
+    .ajax-response.success {
+        background: linear-gradient(135deg, #1e7e34 0%, #28a745 100%);
+        color: #d4edda;
+    }
+
+    .ajax-response.error {
+        background: linear-gradient(135deg, #bd2130 0%, #dc3545 100%);
+        color: #f8d7da;
+    }
+}

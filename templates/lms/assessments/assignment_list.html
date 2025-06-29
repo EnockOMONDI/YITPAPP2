@@ -1,0 +1,246 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Assignments - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-tasks me-2"></i>
+                    Assignments
+                </h1>
+                <a href="{% url 'assessments:assessment_dashboard' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter and Search -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form method="get" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" 
+                       placeholder="Search assignments..." value="{{ request.GET.search }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex justify-content-end">
+                <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="status_filter" id="all" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="all">All</label>
+                    
+                    <input type="radio" class="btn-check" name="status_filter" id="pending" autocomplete="off">
+                    <label class="btn btn-outline-warning" for="pending">Pending</label>
+                    
+                    <input type="radio" class="btn-check" name="status_filter" id="submitted" autocomplete="off">
+                    <label class="btn btn-outline-success" for="submitted">Submitted</label>
+                    
+                    <input type="radio" class="btn-check" name="status_filter" id="overdue" autocomplete="off">
+                    <label class="btn btn-outline-danger" for="overdue">Overdue</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assignment Cards -->
+    <div class="row">
+        {% for assignment in assignments %}
+        <div class="col-lg-6 col-xl-4 mb-4">
+            <div class="card border-0 shadow-sm h-100 assignment-card" 
+                 data-status="{% if assignment.is_submitted %}submitted{% elif assignment.is_overdue %}overdue{% else %}pending{% endif %}">
+                <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">{{ assignment.title }}</h5>
+                    {% if assignment.is_submitted %}
+                        <span class="badge bg-success">
+                            <i class="fas fa-check me-1"></i>Submitted
+                        </span>
+                    {% elif assignment.is_overdue %}
+                        <span class="badge bg-danger">
+                            <i class="fas fa-exclamation-triangle me-1"></i>Overdue
+                        </span>
+                    {% else %}
+                        <span class="badge bg-warning">
+                            <i class="fas fa-clock me-1"></i>Pending
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-muted">{{ assignment.description|truncatewords:20 }}</p>
+                    
+                    <div class="row text-center mb-3">
+                        <div class="col-6">
+                            <div class="border-end">
+                                <strong class="d-block text-{% if assignment.is_overdue %}danger{% else %}primary{% endif %}">
+                                    {{ assignment.due_date|date:"M d" }}
+                                </strong>
+                                <small class="text-muted">Due Date</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <strong class="d-block text-secondary">{{ assignment.max_points }}</strong>
+                            <small class="text-muted">Points</small>
+                        </div>
+                    </div>
+
+                    {% if assignment.due_date %}
+                    <div class="mb-3">
+                        {% if assignment.is_overdue %}
+                            <div class="alert alert-danger py-2">
+                                <small>
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    Overdue by {{ assignment.days_overdue }} day{{ assignment.days_overdue|pluralize }}
+                                </small>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{% if assignment.days_until_due <= 1 %}danger{% elif assignment.days_until_due <= 3 %}warning{% else %}info{% endif %} py-2">
+                                <small>
+                                    <i class="fas fa-clock me-1"></i>
+                                    Due in {{ assignment.days_until_due }} day{{ assignment.days_until_due|pluralize }}
+                                </small>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% if assignment.user_submission %}
+                        <div class="mb-3">
+                            <h6 class="text-muted">Your Submission:</h6>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    Submitted: {{ assignment.user_submission.submitted_at|date:"M d, Y H:i" }}
+                                </small>
+                                {% if assignment.user_submission.grade %}
+                                    <span class="badge bg-{% if assignment.user_submission.grade >= assignment.max_points * 0.8 %}success{% elif assignment.user_submission.grade >= assignment.max_points * 0.6 %}warning{% else %}danger{% endif %}">
+                                        {{ assignment.user_submission.grade }}/{{ assignment.max_points }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Pending Review</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white border-top">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{% url 'assessments:assignment_detail' assignment.id %}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-info-circle me-1"></i>Details
+                        </a>
+                        
+                        {% if assignment.user_submission %}
+                            <a href="{% url 'assessments:assignment_detail' assignment.id %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-eye me-1"></i>View Submission
+                            </a>
+                        {% elif not assignment.is_overdue %}
+                            <a href="{% url 'assessments:submit_assignment' assignment.id %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-upload me-1"></i>Submit
+                            </a>
+                        {% else %}
+                            <button class="btn btn-danger btn-sm" disabled>
+                                <i class="fas fa-times me-1"></i>Overdue
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="text-center py-5">
+                <i class="fas fa-tasks fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">No Assignments Available</h4>
+                <p class="text-muted">Check back later for new assignments or contact your instructor.</p>
+                <a href="{% url 'assessments:assessment_dashboard' %}" class="btn btn-primary">
+                    <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="Assignment pagination">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                <i class="fas fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                <i class="fas fa-angle-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <span class="page-link">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                <i class="fas fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Filter functionality
+    $('input[name="status_filter"]').change(function() {
+        const filter = $(this).attr('id');
+        const cards = $('.assignment-card');
+        
+        cards.show();
+        
+        if (filter !== 'all') {
+            cards.each(function() {
+                if ($(this).data('status') !== filter) {
+                    $(this).parent().hide();
+                }
+            });
+        }
+    });
+
+    // Sort by due date
+    $('#sort-due-date').click(function() {
+        const container = $('.row').has('.assignment-card');
+        const cards = container.children().detach();
+        
+        cards.sort(function(a, b) {
+            const dateA = new Date($(a).find('[data-due-date]').data('due-date'));
+            const dateB = new Date($(b).find('[data-due-date]').data('due-date'));
+            return dateA - dateB;
+        });
+        
+        container.append(cards);
+    });
+});
+</script>
+{% endblock %}

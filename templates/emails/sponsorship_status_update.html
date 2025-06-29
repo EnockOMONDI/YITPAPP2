@@ -1,0 +1,141 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}YITP Sponsorship Request Update - {{ sponsorship_request.get_status_display }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Dear {{ user.first_name|default:user.username }}, 📬
+</div>
+
+<div class="content-text">
+    We have an important update regarding your <strong>Youth Impact Training Programme</strong> sponsorship request.
+</div>
+
+{% if sponsorship_request.status == 'approved' %}
+<div class="success-box">
+    <strong>🎉 Congratulations! Your sponsorship request has been APPROVED!</strong><br>
+    We're thrilled to support your journey with the Youth Impact Training Programme.
+</div>
+{% elif sponsorship_request.status == 'rejected' %}
+<div class="warning-box">
+    <strong>📋 Sponsorship Request Update</strong><br>
+    After careful consideration, we regret to inform you that your sponsorship request has not been approved at this time.
+</div>
+{% elif sponsorship_request.status == 'under_review' %}
+<div class="info-box">
+    <strong>🔍 Your application is now under detailed review</strong><br>
+    Our sponsorship committee is conducting a thorough evaluation of your request.
+</div>
+{% else %}
+<div class="info-box">
+    <strong>📊 Status Update</strong><br>
+    Your sponsorship request status has been updated.
+</div>
+{% endif %}
+
+<div class="info-box">
+    <strong>📋 Request Details:</strong><br>
+    <strong>Request ID:</strong> #{{ sponsorship_request.id }}<br>
+    <strong>Program:</strong> {{ sponsorship_request.get_program_display }}{% if sponsorship_request.program_other %} - {{ sponsorship_request.program_other }}{% endif %}<br>
+    <strong>Amount:</strong> ${{ sponsorship_request.amount_needed }}<br>
+    <strong>Previous Status:</strong> {{ old_status|title }}<br>
+    <strong>Current Status:</strong> <span style="color: {% if sponsorship_request.status == 'approved' %}#28a745{% elif sponsorship_request.status == 'rejected' %}#dc3545{% elif sponsorship_request.status == 'under_review' %}#ffc107{% else %}#6c757d{% endif %}; font-weight: bold;">{{ sponsorship_request.get_status_display }}</span>
+</div>
+
+{% if sponsorship_request.status == 'approved' %}
+<div class="content-text">
+    <strong>🎯 What This Means:</strong>
+</div>
+
+<div class="content-text">
+    ✅ <strong>Financial Support Approved:</strong> Your sponsorship of ${{ sponsorship_request.amount_needed }} has been approved<br>
+    ✅ <strong>Program Access:</strong> You now have full access to the YITP training program<br>
+    ✅ <strong>Community Membership:</strong> Welcome to our exclusive sponsored participant community<br>
+    ✅ <strong>Mentorship Opportunities:</strong> Priority access to mentors and career guidance<br>
+    ✅ <strong>Resource Library:</strong> Complete access to all training materials and resources
+</div>
+
+<div class="success-box">
+    <strong>🚀 Next Steps:</strong><br>
+    1. <strong>Program Enrollment:</strong> You will receive enrollment details within 24 hours<br>
+    2. <strong>Orientation Session:</strong> Attend the mandatory orientation for sponsored participants<br>
+    3. <strong>Goal Setting:</strong> Work with your assigned mentor to set learning objectives<br>
+    4. <strong>Progress Tracking:</strong> Regular check-ins to ensure program success
+</div>
+
+<div class="warning-box">
+    <strong>📋 Important Responsibilities:</strong><br>
+    • Maintain active participation throughout the 9-week program<br>
+    • Attend all mandatory sessions and workshops<br>
+    • Submit progress reports as requested<br>
+    • Engage positively with the YITP community<br>
+    • Complete program evaluation and feedback forms
+</div>
+
+{% elif sponsorship_request.status == 'rejected' %}
+<div class="content-text">
+    <strong>📝 Reason for Decision:</strong><br>
+    While we recognize your interest and potential, we had to make difficult decisions due to limited sponsorship funds and high demand for our program.
+</div>
+
+<div class="info-box">
+    <strong>💡 Alternative Options:</strong><br>
+    • <strong>Self-Funded Participation:</strong> Join the program with your own funding<br>
+    • <strong>Partial Scholarships:</strong> Apply for smaller scholarship opportunities<br>
+    • <strong>Future Applications:</strong> Reapply for sponsorship in the next cycle<br>
+    • <strong>Free Resources:</strong> Access our free webinars and community resources<br>
+    • <strong>Payment Plans:</strong> Explore flexible payment options for program fees
+</div>
+
+<div class="success-box">
+    <strong>🌟 Don't Give Up!</strong><br>
+    This decision doesn't reflect your potential or worth. We encourage you to explore alternative funding options and stay connected with our community.
+</div>
+
+{% elif sponsorship_request.status == 'under_review' %}
+<div class="content-text">
+    <strong>🔍 Review Process Update:</strong><br>
+    Your application has moved to the detailed review stage. Our sponsorship committee is now conducting a comprehensive evaluation of your request.
+</div>
+
+<div class="info-box">
+    <strong>📋 What's Being Reviewed:</strong><br>
+    • Financial need assessment and documentation<br>
+    • Program goals and career objectives alignment<br>
+    • Commitment level and availability for full participation<br>
+    • Potential for positive impact and community contribution<br>
+    • Emergency contact verification and support system
+</div>
+
+<div class="warning-box">
+    <strong>⏰ Timeline:</strong><br>
+    The detailed review process typically takes 2-3 additional business days. You will receive a final decision notification by email once the review is complete.
+</div>
+{% endif %}
+
+{% if sponsorship_request.admin_notes %}
+<div class="info-box">
+    <strong>📝 Additional Notes from Our Team:</strong><br>
+    {{ sponsorship_request.admin_notes|linebreaks }}
+</div>
+{% endif %}
+
+<div class="content-text">
+    If you have any questions about this update or need clarification on next steps, please don't hesitate to contact our support team.
+</div>
+
+<div class="content-text" style="margin-top: 30px;">
+    {% if sponsorship_request.status == 'approved' %}
+    Welcome to the YITP family!<br><br>
+    {% endif %}
+    Best regards,<br>
+    <strong>YITP Sponsorship Committee</strong><br>
+    Youth Impact Training Programme<br>
+    <em>"Empowering futures through education and opportunity"</em>
+</div>
+
+<div style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; font-size: 12px; color: #6c757d;">
+    <strong>Reference Number:</strong> YITP-SPONSOR-{{ sponsorship_request.id }}<br>
+    <strong>Status Updated:</strong> {{ sponsorship_request.updated_at|date:"F d, Y" }} at {{ sponsorship_request.updated_at|time:"g:i A" }}
+</div>
+{% endblock %}

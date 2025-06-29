@@ -1,0 +1,52 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Welcome to Your Journey!
+
+Welcome to YITP, {{ user.first_name|default:user.username }}!
+
+Congratulations! Your account has been successfully verified and you're now part of the Youth Impact Training Programme community.
+
+YOUR YITP JOURNEY STARTS HERE!
+You've taken the first step towards transforming your future. We're thrilled to have you aboard!
+
+WHAT'S NEXT?
+Here's how to make the most of your YITP experience:
+
+STEP 1: Complete Your Profile
+Add your bio, interests, and goals to help us personalize your experience and connect you with like-minded peers.
+
+Access Your Dashboard: {{ login_url }}
+
+WHAT YOU CAN DO NOW:
+✓ Explore Training Modules: Browse our comprehensive 9-week program curriculum
+✓ Join the Community: Connect with fellow participants and experienced mentors
+✓ Read Our Blog: Access valuable insights on career development and entrepreneurship
+✓ Attend Events: Register for upcoming workshops and networking sessions
+✓ Apply for Sponsorship: If you need financial assistance, explore our sponsorship program
+
+PRO TIP:
+Set up your profile completely to unlock personalized recommendations and connect with mentors in your field of interest!
+
+OUR 9-WEEK PROGRAM INCLUDES:
+Week 1-2: Foundation & Mindset Development
+Week 3-4: Essential Soft Skills Training
+Week 5-6: Career Planning & Goal Setting
+Week 7-8: Entrepreneurship & Innovation
+Week 9: Networking & Future Opportunities
+
+NEED HELP GETTING STARTED?
+Our support team is here to guide you every step of the way. Don't hesitate to reach out if you have any questions about the program, technical issues, or need assistance with anything else.
+
+We believe in your potential and are committed to supporting your growth. Together, we'll help you develop the skills, mindset, and network needed to succeed in your career or entrepreneurial journey.
+
+READY TO BEGIN?
+Log in to your account and start exploring everything YITP has to offer. Your future self will thank you!
+
+Welcome to the family!
+
+The YITP Team
+Youth Impact Training Programme
+"Empowering young minds for a better tomorrow"
+
+---
+Contact Support: {{ support_email|default:'youthimpactglobal3@gmail.com' }}
+© 2025 Youth Impact Global. All rights reserved.

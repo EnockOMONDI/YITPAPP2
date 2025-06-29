@@ -1,0 +1,100 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Sponsorship Request Status Update
+
+Dear {{ user.first_name|default:user.username }},
+
+We have an important update regarding your Youth Impact Training Programme sponsorship request.
+
+{% if sponsorship_request.status == 'approved' %}
+CONGRATULATIONS! YOUR SPONSORSHIP REQUEST HAS BEEN APPROVED!
+
+We're thrilled to support your journey with the Youth Impact Training Programme.
+
+WHAT THIS MEANS:
+✓ Financial Support Approved: Your sponsorship of ${{ sponsorship_request.amount_needed }} has been approved
+✓ Program Access: You now have full access to the YITP training program
+✓ Community Membership: Welcome to our exclusive sponsored participant community
+✓ Mentorship Opportunities: Priority access to mentors and career guidance
+✓ Resource Library: Complete access to all training materials and resources
+
+NEXT STEPS:
+1. Program Enrollment: You will receive enrollment details within 24 hours
+2. Orientation Session: Attend the mandatory orientation for sponsored participants
+3. Goal Setting: Work with your assigned mentor to set learning objectives
+4. Progress Tracking: Regular check-ins to ensure program success
+
+IMPORTANT RESPONSIBILITIES:
+• Maintain active participation throughout the 9-week program
+• Attend all mandatory sessions and workshops
+• Submit progress reports as requested
+• Engage positively with the YITP community
+• Complete program evaluation and feedback forms
+
+{% elif sponsorship_request.status == 'rejected' %}
+SPONSORSHIP REQUEST UPDATE
+
+After careful consideration, we regret to inform you that your sponsorship request has not been approved at this time.
+
+REASON FOR DECISION:
+While we recognize your interest and potential, we had to make difficult decisions due to limited sponsorship funds and high demand for our program.
+
+ALTERNATIVE OPTIONS:
+• Self-Funded Participation: Join the program with your own funding
+• Partial Scholarships: Apply for smaller scholarship opportunities
+• Future Applications: Reapply for sponsorship in the next cycle
+• Free Resources: Access our free webinars and community resources
+• Payment Plans: Explore flexible payment options for program fees
+
+DON'T GIVE UP!
+This decision doesn't reflect your potential or worth. We encourage you to explore alternative funding options and stay connected with our community.
+
+{% elif sponsorship_request.status == 'under_review' %}
+YOUR APPLICATION IS NOW UNDER DETAILED REVIEW
+
+Our sponsorship committee is conducting a thorough evaluation of your request.
+
+WHAT'S BEING REVIEWED:
+• Financial need assessment and documentation
+• Program goals and career objectives alignment
+• Commitment level and availability for full participation
+• Potential for positive impact and community contribution
+• Emergency contact verification and support system
+
+TIMELINE:
+The detailed review process typically takes 2-3 additional business days. You will receive a final decision notification by email once the review is complete.
+
+{% else %}
+STATUS UPDATE
+
+Your sponsorship request status has been updated.
+{% endif %}
+
+REQUEST DETAILS:
+Request ID: #{{ sponsorship_request.id }}
+Program: {{ sponsorship_request.get_program_display }}{% if sponsorship_request.program_other %} - {{ sponsorship_request.program_other }}{% endif %}
+Amount: ${{ sponsorship_request.amount_needed }}
+Previous Status: {{ old_status|title }}
+Current Status: {{ sponsorship_request.get_status_display }}
+
+{% if sponsorship_request.admin_notes %}
+ADDITIONAL NOTES FROM OUR TEAM:
+{{ sponsorship_request.admin_notes }}
+{% endif %}
+
+If you have any questions about this update or need clarification on next steps, please don't hesitate to contact our support team.
+
+{% if sponsorship_request.status == 'approved' %}
+Welcome to the YITP family!
+
+{% endif %}
+Best regards,
+YITP Sponsorship Committee
+Youth Impact Training Programme
+"Empowering futures through education and opportunity"
+
+Reference Number: YITP-SPONSOR-{{ sponsorship_request.id }}
+Status Updated: {{ sponsorship_request.updated_at|date:"F d, Y" }} at {{ sponsorship_request.updated_at|time:"g:i A" }}
+
+---
+Contact Support: {{ support_email|default:'youthimpactglobal3@gmail.com' }}
+© 2025 Youth Impact Global. All rights reserved.

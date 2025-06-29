@@ -1,0 +1,302 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}{{ progress.lesson.title }} Progress - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-play-circle me-2"></i>
+                    Lesson Progress: {{ progress.lesson.title }}
+                </h1>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'progress:course_progress' progress.lesson.module.course.id %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Course
+                    </a>
+                    <a href="{% url 'courses:lesson_detail' progress.lesson.id %}" class="btn btn-outline-primary">
+                        <i class="fas fa-play me-1"></i>Continue Lesson
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lesson Overview -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="mb-2">{{ progress.lesson.title }}</h4>
+                            <p class="text-muted mb-3">{{ progress.lesson.description|truncatewords:30 }}</p>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-{% if progress.is_completed %}success{% elif progress.progress_percentage > 0 %}warning{% else %}secondary{% endif %} me-2">
+                                    {% if progress.is_completed %}Completed{% elif progress.progress_percentage > 0 %}In Progress{% else %}Not Started{% endif %}
+                                </span>
+                                <small class="text-muted me-3">
+                                    Duration: {{ progress.lesson.duration }} minutes
+                                </small>
+                                {% if progress.completed_at %}
+                                <small class="text-muted">
+                                    Completed: {{ progress.completed_at|date:"M d, Y H:i" }}
+                                </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="position-relative d-inline-block mb-3">
+                                    <canvas id="lessonProgressChart" width="100" height="100"></canvas>
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <h5 class="text-primary mb-0">{{ progress.progress_percentage }}%</h5>
+                                    </div>
+                                </div>
+                                <p class="text-muted mb-0">Lesson Progress</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Details -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-primary mb-2">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ progress.time_spent }}</h5>
+                    <p class="card-text text-muted">Time Spent</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-success mb-2">
+                        <i class="fas fa-eye fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ progress.views_count }}</h5>
+                    <p class="card-text text-muted">Times Viewed</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-calendar fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ progress.started_at|date:"M d" }}</h5>
+                    <p class="card-text text-muted">Started On</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-info mb-2">
+                        <i class="fas fa-star fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ progress.quiz_score|default:"N/A" }}</h5>
+                    <p class="card-text text-muted">Quiz Score</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lesson Content Progress -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list-check me-2"></i>Content Progress
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if lesson_sections %}
+                        {% for section in lesson_sections %}
+                        <div class="section-item mb-3 pb-3 {% if not forloop.last %}border-bottom{% endif %}">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">
+                                    {% if section.is_completed %}
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                    {% elif section.is_started %}
+                                        <i class="fas fa-play-circle text-warning me-2"></i>
+                                    {% else %}
+                                        <i class="fas fa-circle text-muted me-2"></i>
+                                    {% endif %}
+                                    {{ section.title }}
+                                </h6>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-muted me-2">{{ section.progress_percentage }}%</span>
+                                    {% if section.type == 'video' %}
+                                        <i class="fas fa-video text-primary"></i>
+                                    {% elif section.type == 'text' %}
+                                        <i class="fas fa-file-text text-info"></i>
+                                    {% elif section.type == 'quiz' %}
+                                        <i class="fas fa-question-circle text-warning"></i>
+                                    {% else %}
+                                        <i class="fas fa-file text-secondary"></i>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="progress mb-2" style="height: 6px;">
+                                <div class="progress-bar" style="width: {{ section.progress_percentage }}%"></div>
+                            </div>
+
+                            {% if section.type == 'video' and section.watch_time %}
+                            <small class="text-muted">
+                                Watched: {{ section.watch_time }} / {{ section.duration }}
+                            </small>
+                            {% elif section.type == 'quiz' and section.score %}
+                            <small class="text-muted">
+                                Score: {{ section.score }}% ({{ section.attempts }} attempt{{ section.attempts|pluralize }})
+                            </small>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">No content sections available</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Learning Notes -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-sticky-note me-2"></i>My Notes
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if progress.notes %}
+                        <div class="notes-content mb-3">
+                            {{ progress.notes|linebreaks }}
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#notesModal">
+                            <i class="fas fa-edit me-1"></i>Edit Notes
+                        </button>
+                    {% else %}
+                        <div class="text-center py-3">
+                            <i class="fas fa-sticky-note fa-2x text-muted mb-2"></i>
+                            <p class="text-muted small">No notes yet</p>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#notesModal">
+                                <i class="fas fa-plus me-1"></i>Add Notes
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Related Lessons -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-link me-2"></i>Related Lessons
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if related_lessons %}
+                        {% for lesson in related_lessons %}
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0 me-3">
+                                {% if lesson.is_completed %}
+                                    <i class="fas fa-check-circle text-success"></i>
+                                {% elif lesson.is_started %}
+                                    <i class="fas fa-play-circle text-warning"></i>
+                                {% else %}
+                                    <i class="fas fa-circle text-muted"></i>
+                                {% endif %}
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1 small">
+                                    <a href="{% url 'courses:lesson_detail' lesson.id %}" 
+                                       class="text-decoration-none">{{ lesson.title }}</a>
+                                </h6>
+                                <small class="text-muted">{{ lesson.duration }} min</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-3">
+                            <i class="fas fa-link fa-2x text-muted mb-2"></i>
+                            <p class="text-muted small">No related lessons</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Notes Modal -->
+<div class="modal fade" id="notesModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lesson Notes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'progress:update_lesson_notes' progress.lesson.id %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Your Notes:</label>
+                        <textarea class="form-control" name="notes" id="notes" rows="6" 
+                                  placeholder="Add your notes about this lesson...">{{ progress.notes }}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Notes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+$(document).ready(function() {
+    // Lesson Progress Chart
+    const ctx = document.getElementById('lessonProgressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [{{ progress.progress_percentage }}, {{ 100|add:progress.progress_percentage|add:"-100" }}],
+                backgroundColor: ['#ff5d15', '#e9ecef'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

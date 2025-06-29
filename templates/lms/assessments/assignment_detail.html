@@ -1,0 +1,363 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ assignment.title }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-tasks me-2"></i>
+                    {{ assignment.title }}
+                </h1>
+                <a href="{% url 'assessments:assignment_list' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Back to Assignments
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Assignment Details -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Assignment Details
+                    </h5>
+                    {% if assignment.is_submitted %}
+                        <span class="badge bg-success">
+                            <i class="fas fa-check me-1"></i>Submitted
+                        </span>
+                    {% elif assignment.is_overdue %}
+                        <span class="badge bg-danger">
+                            <i class="fas fa-exclamation-triangle me-1"></i>Overdue
+                        </span>
+                    {% else %}
+                        <span class="badge bg-warning">
+                            <i class="fas fa-clock me-1"></i>Pending
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="assignment-description mb-4">
+                        {{ assignment.description|linebreaks }}
+                    </div>
+
+                    <div class="row text-center mb-4">
+                        <div class="col-md-4">
+                            <div class="border-end">
+                                <h4 class="text-{% if assignment.is_overdue %}danger{% else %}primary{% endif %}">
+                                    {{ assignment.due_date|date:"M d, Y" }}
+                                </h4>
+                                <small class="text-muted">Due Date</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border-end">
+                                <h4 class="text-secondary">{{ assignment.max_points }}</h4>
+                                <small class="text-muted">Max Points</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-info">{{ assignment.submission_type|title }}</h4>
+                            <small class="text-muted">Submission Type</small>
+                        </div>
+                    </div>
+
+                    {% if assignment.instructions %}
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-lightbulb me-2"></i>Instructions:</h6>
+                        {{ assignment.instructions|linebreaks }}
+                    </div>
+                    {% endif %}
+
+                    {% if assignment.attachments.all %}
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-3">Assignment Files:</h6>
+                        <div class="list-group">
+                            {% for attachment in assignment.attachments.all %}
+                            <a href="{{ attachment.file.url }}" class="list-group-item list-group-item-action" target="_blank">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-file me-2"></i>
+                                        {{ attachment.filename }}
+                                    </div>
+                                    <small class="text-muted">{{ attachment.file_size|filesizeformat }}</small>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Submission Section -->
+            {% if user_submission %}
+                <!-- Existing Submission -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-check-circle me-2"></i>Your Submission
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Submitted:</strong> {{ user_submission.submitted_at|date:"M d, Y H:i" }}
+                            </div>
+                            <div class="col-md-6 text-end">
+                                {% if user_submission.grade is not None %}
+                                    <span class="badge bg-{% if user_submission.grade >= assignment.max_points * 0.8 %}success{% elif user_submission.grade >= assignment.max_points * 0.6 %}warning{% else %}danger{% endif %} fs-6">
+                                        Grade: {{ user_submission.grade }}/{{ assignment.max_points }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary fs-6">Pending Review</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if user_submission.submission_text %}
+                        <div class="mb-3">
+                            <h6>Submission Text:</h6>
+                            <div class="border rounded p-3 bg-light">
+                                {{ user_submission.submission_text|linebreaks }}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if user_submission.files.all %}
+                        <div class="mb-3">
+                            <h6>Submitted Files:</h6>
+                            <div class="list-group">
+                                {% for file in user_submission.files.all %}
+                                <a href="{{ file.file.url }}" class="list-group-item list-group-item-action" target="_blank">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-file me-2"></i>
+                                            {{ file.filename }}
+                                        </div>
+                                        <small class="text-muted">{{ file.file_size|filesizeformat }}</small>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if user_submission.feedback %}
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-comment me-2"></i>Instructor Feedback:</h6>
+                            {{ user_submission.feedback|linebreaks }}
+                        </div>
+                        {% endif %}
+
+                        {% if not assignment.is_overdue and assignment.allow_resubmission %}
+                        <div class="text-end">
+                            <a href="{% url 'assessments:submit_assignment' assignment.id %}" class="btn btn-warning">
+                                <i class="fas fa-edit me-1"></i>Resubmit
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% elif not assignment.is_overdue %}
+                <!-- Submit Assignment Form -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-upload me-2"></i>Submit Assignment
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" id="submission-form">
+                            {% csrf_token %}
+                            
+                            {% if assignment.submission_type == 'text' or assignment.submission_type == 'both' %}
+                            <div class="mb-3">
+                                <label for="submission_text" class="form-label">Submission Text:</label>
+                                <textarea class="form-control" name="submission_text" id="submission_text" 
+                                          rows="8" placeholder="Enter your submission here..."></textarea>
+                            </div>
+                            {% endif %}
+
+                            {% if assignment.submission_type == 'file' or assignment.submission_type == 'both' %}
+                            <div class="mb-3">
+                                <label for="submission_files" class="form-label">Upload Files:</label>
+                                <input type="file" class="form-control" name="submission_files" 
+                                       id="submission_files" multiple>
+                                <div class="form-text">
+                                    {% if assignment.allowed_file_types %}
+                                        Allowed file types: {{ assignment.allowed_file_types }}
+                                    {% endif %}
+                                    {% if assignment.max_file_size %}
+                                        Max file size: {{ assignment.max_file_size|filesizeformat }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="confirm_submission" required>
+                                <label class="form-check-label" for="confirm_submission">
+                                    I confirm that this is my own work and I am ready to submit it.
+                                </label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-upload me-2"></i>Submit Assignment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <!-- Overdue Message -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Assignment Overdue
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-0">This assignment was due on {{ assignment.due_date|date:"M d, Y" }} and is no longer accepting submissions.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Assignment Info -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-info me-2"></i>Assignment Info
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Due Date</small>
+                        <strong class="text-{% if assignment.is_overdue %}danger{% else %}primary{% endif %}">
+                            {{ assignment.due_date|date:"M d, Y H:i" }}
+                        </strong>
+                    </div>
+
+                    {% if assignment.due_date %}
+                    <div class="mb-3">
+                        {% if assignment.is_overdue %}
+                            <div class="alert alert-danger py-2">
+                                <small>
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    Overdue by {{ assignment.days_overdue }} day{{ assignment.days_overdue|pluralize }}
+                                </small>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{% if assignment.days_until_due <= 1 %}danger{% elif assignment.days_until_due <= 3 %}warning{% else %}info{% endif %} py-2">
+                                <small>
+                                    <i class="fas fa-clock me-1"></i>
+                                    Due in {{ assignment.days_until_due }} day{{ assignment.days_until_due|pluralize }}
+                                </small>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-2">
+                        <small class="text-muted">Max Points:</small>
+                        <strong class="ms-2">{{ assignment.max_points }}</strong>
+                    </div>
+
+                    <div class="mb-2">
+                        <small class="text-muted">Submission Type:</small>
+                        <strong class="ms-2">{{ assignment.submission_type|title }}</strong>
+                    </div>
+
+                    {% if assignment.lesson %}
+                    <div class="mb-2">
+                        <small class="text-muted">Related Lesson:</small>
+                        <div class="mt-1">
+                            <a href="{% url 'courses:lesson_detail' assignment.lesson.id %}" class="btn btn-sm btn-outline-primary">
+                                {{ assignment.lesson.title }}
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Class Statistics -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>Class Statistics
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <small class="text-muted">
+                            <i class="fas fa-users me-1"></i>
+                            {{ assignment.total_submissions }} of {{ assignment.total_students }} submitted
+                        </small>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <small class="text-muted">
+                            <i class="fas fa-chart-line me-1"></i>
+                            Average grade: {{ assignment.average_grade|default:"N/A" }}
+                        </small>
+                    </div>
+                    
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar" 
+                             style="width: {{ assignment.submission_rate }}%"></div>
+                    </div>
+                    <small class="text-muted">{{ assignment.submission_rate }}% submission rate</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // File upload validation
+    $('#submission_files').change(function() {
+        const files = this.files;
+        const maxSize = {{ assignment.max_file_size|default:10485760 }}; // 10MB default
+        
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].size > maxSize) {
+                alert(`File "${files[i].name}" is too large. Maximum size is {{ assignment.max_file_size|filesizeformat|default:"10MB" }}.`);
+                this.value = '';
+                return;
+            }
+        }
+    });
+
+    // Submission confirmation
+    $('#submission-form').submit(function(e) {
+        if (!confirm('Are you sure you want to submit this assignment? You may not be able to change it later.')) {
+            e.preventDefault();
+        }
+    });
+
+    // Auto-save draft functionality (optional)
+    let autoSaveTimer;
+    $('#submission_text').on('input', function() {
+        clearTimeout(autoSaveTimer);
+        autoSaveTimer = setTimeout(function() {
+            // Auto-save draft functionality could be implemented here
+            console.log('Auto-saving draft...');
+        }, 2000);
+    });
+});
+</script>
+{% endblock %}

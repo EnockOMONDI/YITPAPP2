@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
+# import dj_database_url  # Only needed for PostgreSQL DATABASE_URL parsing in production
 from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -50,6 +50,13 @@ INSTALLED_APPS = [
     'yitp',
     'blogapp',  # Fixed to match actual directory name (blogapp)
     'events',
+       # New LMS apps
+    'courses',
+    'progress',
+    'assessments',
+    'communication',
+    'content',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +67,12 @@ INSTALLED_APPS = [
     'taggit',
     'import_export',
     'ckeditor_uploader',
+
+    # Third-party apps
+   'rest_framework',
+   'crispy_forms',
+   'crispy_bootstrap5',
+   'corsheaders',
 ]
 
 
@@ -99,22 +112,39 @@ WHITENOISE_MANIFEST_STRICT = False
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# Database configuration using environment variables
+# =============================================================================
+# LOCAL DEVELOPMENT DATABASE CONFIGURATION (SQLite)
+# =============================================================================
+# Using SQLite for local development - lightweight and no external dependencies required
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'YITPDB'),
-        'USER': os.getenv('DB_USER', 'YITPDB_owner'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'npg_n0zFeVa6SCxm'),
-        'HOST': os.getenv('DB_HOST', 'ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech'),
-        'PORT': os.getenv('DB_PORT', '5432'),
-        'OPTIONS': {'sslmode': 'require'},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-# Alternative: Use DATABASE_URL if available (for compatibility with various deployment platforms)
-if os.getenv('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+# =============================================================================
+# PRODUCTION DATABASE CONFIGURATION (PostgreSQL - Neon)
+# =============================================================================
+# UNCOMMENT THE SECTION BELOW FOR PRODUCTION DEPLOYMENT ON RENDER
+# Comment out the SQLite configuration above and uncomment this section
+
+# # Database configuration using environment variables
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DB_NAME', 'YITPDB'),
+#         'USER': os.getenv('DB_USER', 'YITPDB_owner'),
+#         'PASSWORD': os.getenv('DB_PASSWORD', 'npg_n0zFeVa6SCxm'),
+#         'HOST': os.getenv('DB_HOST', 'ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech'),
+#         'PORT': os.getenv('DB_PORT', '5432'),
+#         'OPTIONS': {'sslmode': 'require'},
+#     }
+# }
+
+# # Alternative: Use DATABASE_URL if available (for compatibility with various deployment platforms)
+# if os.getenv('DATABASE_URL'):
+#     DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -254,9 +284,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'dedeexpeditions@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@youthimpactglobal.com')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>')
+
+# Admin email for notifications
+ADMIN_EMAIL = 'youthimpactglobal3@gmail.com'
+
+# OTP Configuration
+OTP_EXPIRY_MINUTES = 200
+OTP_LENGTH = 6
 
 # For development, you can use console backend to see emails in console
 if DEBUG:

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.utils import timezone
+from datetime import timedelta
 from PIL import Image
 from django.conf import settings
 from taggit.managers import TaggableManager
@@ -17,10 +18,32 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio = models.TextField(default='Edit your Bio!')
-    website = models.CharField(max_length=40)
+    phone_number = models.CharField(max_length=20, blank=True, null=True, help_text="Contact phone number")
 
     def __str__(self):
         return self.user.get_username()
+
+class OTPVerification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    otp_code = models.CharField(max_length=10)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    is_verified = models.BooleanField(default=False)
+    is_used = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "OTP Verification"
+        verbose_name_plural = "OTP Verifications"
+
+    def __str__(self):
+        return f"OTP for {self.user.username} - {self.otp_code}"
+
+    def is_expired(self):
+        return timezone.now() > self.expires_at
+
+    def is_valid(self):
+        return not self.is_used and not self.is_expired() and not self.is_verified
     
 class Editpage(models.Model):
     SECTION_CHOICES = [
@@ -134,12 +157,7 @@ class SponsorshipRequest(models.Model):
     ]
 
     PROGRAM_CHOICES = [
-        ('goddess_care', 'Goddess Care Initiative'),
-        ('youth_empowerment', 'Youth Empowerment Program'),
-        ('community_development', 'Community Development'),
-        ('education_support', 'Education Support'),
-        ('skills_training', 'Skills Training'),
-        ('other', 'Other (Please specify)'),
+        ('youth_impact_training empowerment', 'youth impact training'),
     ]
 
     FINANCIAL_SITUATION_CHOICES = [

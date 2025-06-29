@@ -1,0 +1,218 @@
+{% extends "blogapp/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3><i class="fas fa-shield-alt"></i> Verify Your Email</h3>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="verification-icon">
+                            <i class="fas fa-envelope-open-text fa-3x text-primary mb-3"></i>
+                        </div>
+                        <h5>Email Verification Required</h5>
+                        <p class="text-muted">
+                            We've sent a 6-digit verification code to your email address. 
+                            Please enter the code below to complete your registration.
+                        </p>
+                    </div>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" id="otpForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                        
+                        <div class="mb-4">
+                            <label for="otp_code" class="form-label">
+                                <i class="fas fa-key"></i> Verification Code
+                            </label>
+                            <input type="text" 
+                                   class="form-control form-control-lg text-center" 
+                                   id="otp_code" 
+                                   name="otp_code" 
+                                   placeholder="Enter 6-digit code"
+                                   maxlength="6"
+                                   pattern="[0-9]{6}"
+                                   required
+                                   autocomplete="off"
+                                   style="letter-spacing: 0.5em; font-size: 1.5rem;">
+                            <div class="form-text">
+                                <i class="fas fa-clock"></i> Code expires in 200 minutes
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-check-circle"></i> Verify Email
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <div class="resend-section">
+                            <p class="text-muted mb-2">Didn't receive the code?</p>
+                            <button type="button" class="btn btn-outline-secondary" id="resendBtn">
+                                <i class="fas fa-redo"></i> Resend Code
+                            </button>
+                            <div id="resendMessage" class="mt-2"></div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="help-section">
+                        <h6><i class="fas fa-question-circle"></i> Need Help?</h6>
+                        <ul class="list-unstyled small text-muted">
+                            <li><i class="fas fa-check"></i> Check your spam/junk folder</li>
+                            <li><i class="fas fa-check"></i> Make sure you entered the correct email</li>
+                            <li><i class="fas fa-check"></i> Wait a few minutes for the email to arrive</li>
+                            <li><i class="fas fa-check"></i> Contact support if you continue having issues</li>
+                        </ul>
+                        <div class="text-center">
+                            <a href="mailto:youthimpactglobal3@gmail.com" class="btn btn-sm btn-outline-info">
+                                <i class="fas fa-envelope"></i> Contact Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.verification-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%) !important;
+}
+
+#otp_code:focus {
+    border-color: #ff5d15;
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+    transform: translateY(-1px);
+}
+
+.help-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#resendBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const otpInput = document.getElementById('otp_code');
+    const resendBtn = document.getElementById('resendBtn');
+    const resendMessage = document.getElementById('resendMessage');
+    let resendCooldown = false;
+
+    // Auto-focus on OTP input
+    otpInput.focus();
+
+    // Only allow numbers in OTP input
+    otpInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+        if (this.value.length === 6) {
+            // Auto-submit when 6 digits are entered
+            document.getElementById('otpForm').submit();
+        }
+    });
+
+    // Handle resend OTP
+    resendBtn.addEventListener('click', function() {
+        if (resendCooldown) return;
+
+        const userId = document.querySelector('input[name="user_id"]').value;
+        
+        // Disable button and show loading
+        resendBtn.disabled = true;
+        resendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        fetch('{% url "resend_otp" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: 'user_id=' + encodeURIComponent(userId)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                resendMessage.innerHTML = '<div class="alert alert-success alert-sm">' + data.message + '</div>';
+                
+                // Start cooldown
+                resendCooldown = true;
+                let countdown = 60;
+                
+                const updateButton = () => {
+                    resendBtn.innerHTML = `<i class="fas fa-clock"></i> Resend in ${countdown}s`;
+                    countdown--;
+                    
+                    if (countdown < 0) {
+                        resendBtn.disabled = false;
+                        resendBtn.innerHTML = '<i class="fas fa-redo"></i> Resend Code';
+                        resendCooldown = false;
+                    } else {
+                        setTimeout(updateButton, 1000);
+                    }
+                };
+                
+                updateButton();
+            } else {
+                resendMessage.innerHTML = '<div class="alert alert-danger alert-sm">' + data.message + '</div>';
+                resendBtn.disabled = false;
+                resendBtn.innerHTML = '<i class="fas fa-redo"></i> Resend Code';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            resendMessage.innerHTML = '<div class="alert alert-danger alert-sm">Failed to resend code. Please try again.</div>';
+            resendBtn.disabled = false;
+            resendBtn.innerHTML = '<i class="fas fa-redo"></i> Resend Code';
+        });
+    });
+});
+</script>
+{% endblock content %}

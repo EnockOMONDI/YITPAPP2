@@ -1,0 +1,372 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}{{ module.title }} - {{ module.course.title }} - Entrepreneurship LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    .module-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .breadcrumb-custom {
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .breadcrumb-custom a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+    }
+    
+    .breadcrumb-custom a:hover {
+        color: white;
+    }
+    
+    .lesson-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #e2e8f0;
+    }
+    
+    .lesson-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    
+    .lesson-card.completed {
+        border-left-color: #10b981;
+        background: linear-gradient(135deg, #f0fdf4, #ffffff);
+    }
+    
+    .lesson-card.in-progress {
+        border-left-color: #f59e0b;
+        background: linear-gradient(135deg, #fffbeb, #ffffff);
+    }
+    
+    .lesson-card.locked {
+        border-left-color: #6b7280;
+        background: #f8fafc;
+        opacity: 0.7;
+    }
+    
+    .lesson-status {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    
+    .status-completed {
+        background: #10b981;
+        color: white;
+    }
+    
+    .status-in-progress {
+        background: #f59e0b;
+        color: white;
+    }
+    
+    .status-not-started {
+        background: #e2e8f0;
+        color: #64748b;
+    }
+    
+    .status-locked {
+        background: #6b7280;
+        color: white;
+    }
+    
+    .lesson-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #64748b;
+    }
+    
+    .lesson-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    
+    .module-progress {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .progress-bar-custom {
+        height: 12px;
+        border-radius: 6px;
+        background: #e2e8f0;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 6px;
+        transition: width 0.3s ease;
+    }
+    
+    .btn-lesson {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        border-radius: 10px;
+        padding: 0.5rem 1rem;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-lesson:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        color: white;
+    }
+    
+    .btn-lesson:disabled {
+        background: #6b7280;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .module-info {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .info-item:last-child {
+        border-bottom: none;
+    }
+    
+    .info-label {
+        font-weight: 500;
+        color: #64748b;
+    }
+    
+    .info-value {
+        color: #1e293b;
+        font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+        .module-header {
+            padding: 1.5rem 0;
+        }
+        
+        .lesson-card {
+            padding: 1rem;
+        }
+        
+        .lesson-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Module Header -->
+<section class="module-header">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb-custom">
+            <a href="{% url 'courses:home' %}">Home</a> /
+            <a href="{% url 'courses:course_detail' slug=module.course.slug %}">{{ module.course.title }}</a> /
+            <span>{{ module.title }}</span>
+        </nav>
+        
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-5 fw-bold mb-3">{{ module.title }}</h1>
+                <p class="lead">{{ module.description }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Module Progress -->
+<section class="py-4">
+    <div class="container">
+        <div class="module-progress">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="mb-3">Module Progress</h4>
+                    <div class="progress-bar-custom">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted">0% Complete</span>
+                        <span class="text-muted">0 of {{ module.lessons.count }} lessons</span>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="d-flex flex-column gap-2">
+                        <span class="badge bg-primary fs-6">{{ module.lessons.count }} Lessons</span>
+                        <span class="text-muted">
+                            <i class="fas fa-clock me-1"></i>
+                            {{ module.estimated_duration|default:"N/A" }} minutes
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Module Information -->
+<section class="py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Lessons List -->
+                <div class="mb-4">
+                    <h3 class="mb-4">Module Lessons</h3>
+                    
+                    {% if module.lessons.all %}
+                        {% for lesson in module.lessons.all %}
+                        <div class="lesson-card {% if forloop.first %}in-progress{% else %}not-started{% endif %}">
+                            <div class="d-flex align-items-start">
+                                <div class="lesson-status {% if forloop.first %}status-in-progress{% else %}status-not-started{% endif %}">
+                                    {% if forloop.first %}
+                                        <i class="fas fa-play"></i>
+                                    {% else %}
+                                        <i class="fas fa-circle"></i>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="mb-2">{{ lesson.title }}</h5>
+                                            <p class="text-muted mb-2">{{ lesson.description|truncatewords:20 }}</p>
+                                            
+                                            <div class="lesson-meta">
+                                                <span>
+                                                    <i class="fas fa-clock"></i>
+                                                    {{ lesson.estimated_duration|default:"5" }} min
+                                                </span>
+                                                <span>
+                                                    <i class="fas fa-list"></i>
+                                                    Lesson {{ forloop.counter }}
+                                                </span>
+                                                {% if lesson.lesson_type %}
+                                                <span>
+                                                    <i class="fas fa-tag"></i>
+                                                    {{ lesson.get_lesson_type_display }}
+                                                </span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="text-end">
+                                            {% if forloop.first %}
+                                                <a href="{% url 'courses:lesson_detail' course_slug=module.course.slug lesson_id=lesson.id %}" class="btn btn-lesson">
+                                                    <i class="fas fa-play me-2"></i>Start Lesson
+                                                </a>
+                                            {% else %}
+                                                <button class="btn btn-lesson" disabled>
+                                                    <i class="fas fa-lock me-2"></i>Locked
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No lessons available</h5>
+                            <p class="text-muted">This module doesn't have any lessons yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Module Information -->
+                <div class="module-info">
+                    <h4 class="mb-3">Module Information</h4>
+                    
+                    <div class="info-item">
+                        <span class="info-label">Course</span>
+                        <span class="info-value">{{ module.course.title }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Instructor</span>
+                        <span class="info-value">{{ module.course.instructor.get_full_name|default:module.course.instructor.username }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Lessons</span>
+                        <span class="info-value">{{ module.lessons.count }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Duration</span>
+                        <span class="info-value">{{ module.estimated_duration|default:"N/A" }} minutes</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Order</span>
+                        <span class="info-value">Module {{ module.sort_order|default:"1" }}</span>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="module-info">
+                    <h4 class="mb-3">Quick Actions</h4>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'courses:course_detail' slug=module.course.slug %}" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Course
+                        </a>
+                        <a href="{% url 'courses:my_courses' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-book me-2"></i>My Courses
+                        </a>
+                        <a href="{% url 'courses:dashboard' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

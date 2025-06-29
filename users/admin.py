@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django import forms
-from .models import SponsorshipRequest
+from .models import SponsorshipRequest, OTPVerification, Profile
 
 
 # Status Update Form for Admin Actions
@@ -507,6 +507,43 @@ class SponsorshipRequestAdmin(admin.ModelAdmin):
 
         return response
     export_selected_requests.short_description = "📊 Export selected requests to CSV"
+
+
+@admin.register(OTPVerification)
+class OTPVerificationAdmin(admin.ModelAdmin):
+    list_display = ['user', 'otp_code', 'created_at', 'expires_at', 'is_verified', 'is_used', 'is_expired_status']
+    list_filter = ['is_verified', 'is_used', 'created_at']
+    search_fields = ['user__username', 'user__email', 'otp_code']
+    readonly_fields = ['user', 'otp_code', 'created_at', 'expires_at']
+    ordering = ['-created_at']
+    list_per_page = 50
+
+    def is_expired_status(self, obj):
+        """Display if OTP is expired"""
+        if obj.is_expired():
+            return format_html('<span style="color: #dc3545;">❌ Expired</span>')
+        else:
+            return format_html('<span style="color: #28a745;">✅ Valid</span>')
+    is_expired_status.short_description = 'Status'
+
+    def get_queryset(self, request):
+        """Optimize queryset with select_related"""
+        return super().get_queryset(request).select_related('user')
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'phone_number', 'bio_preview']
+    search_fields = ['user__username', 'user__email', 'phone_number']
+    list_filter = ['user__date_joined']
+    ordering = ['user__username']
+
+    def bio_preview(self, obj):
+        """Display truncated bio"""
+        if obj.bio and obj.bio != 'Edit your Bio!':
+            return obj.bio[:50] + '...' if len(obj.bio) > 50 else obj.bio
+        return 'No bio set'
+    bio_preview.short_description = 'Bio Preview'
 
 # Non-sponsorship models are intentionally not registered to keep admin focused on sponsorship management
 # If you need to manage these models, uncomment the lines below:

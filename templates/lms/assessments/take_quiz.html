@@ -1,0 +1,301 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Taking: {{ quiz.title }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Quiz Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="text-primary mb-1">{{ quiz.title }}</h4>
+                            <small class="text-muted">
+                                Question {{ current_question_number }} of {{ total_questions }}
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <div id="timer" class="h5 text-warning mb-1">
+                                <i class="fas fa-clock me-1"></i>
+                                <span id="time-remaining">{{ time_remaining }}</span>
+                            </div>
+                            <small class="text-muted">Time Remaining</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress mt-3" style="height: 8px;">
+                        <div class="progress-bar bg-primary" 
+                             style="width: {{ progress_percentage }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Form -->
+    <form method="post" id="quiz-form">
+        {% csrf_token %}
+        
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Question Card -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="card-title mb-0">
+                            Question {{ current_question_number }}
+                            {% if question.points %}
+                                <span class="badge bg-primary ms-2">{{ question.points }} points</span>
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-content mb-4">
+                            {{ question.question_text|linebreaks }}
+                        </div>
+
+                        {% if question.question_type == 'multiple_choice' %}
+                            <!-- Multiple Choice -->
+                            <div class="form-group">
+                                {% for choice in question.choices.all %}
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" 
+                                           name="answer" value="{{ choice.id }}" 
+                                           id="choice{{ choice.id }}"
+                                           {% if choice.id|stringformat:"s" == selected_answer %}checked{% endif %}>
+                                    <label class="form-check-label" for="choice{{ choice.id }}">
+                                        {{ choice.choice_text }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                        {% elif question.question_type == 'true_false' %}
+                            <!-- True/False -->
+                            <div class="form-group">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" 
+                                           name="answer" value="true" id="true"
+                                           {% if selected_answer == 'true' %}checked{% endif %}>
+                                    <label class="form-check-label" for="true">
+                                        True
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" 
+                                           name="answer" value="false" id="false"
+                                           {% if selected_answer == 'false' %}checked{% endif %}>
+                                    <label class="form-check-label" for="false">
+                                        False
+                                    </label>
+                                </div>
+                            </div>
+
+                        {% elif question.question_type == 'short_answer' %}
+                            <!-- Short Answer -->
+                            <div class="form-group">
+                                <textarea class="form-control" name="answer" rows="3" 
+                                          placeholder="Enter your answer here...">{{ selected_answer }}</textarea>
+                            </div>
+
+                        {% elif question.question_type == 'essay' %}
+                            <!-- Essay -->
+                            <div class="form-group">
+                                <textarea class="form-control" name="answer" rows="8" 
+                                          placeholder="Write your essay here...">{{ selected_answer }}</textarea>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                {% if has_previous %}
+                                    <button type="submit" name="action" value="previous" 
+                                            class="btn btn-outline-secondary">
+                                        <i class="fas fa-arrow-left me-1"></i>Previous
+                                    </button>
+                                {% endif %}
+                            </div>
+                            
+                            <div>
+                                <button type="submit" name="action" value="save" 
+                                        class="btn btn-outline-primary me-2">
+                                    <i class="fas fa-save me-1"></i>Save Answer
+                                </button>
+                                
+                                {% if has_next %}
+                                    <button type="submit" name="action" value="next" 
+                                            class="btn btn-primary">
+                                        Next<i class="fas fa-arrow-right ms-1"></i>
+                                    </button>
+                                {% else %}
+                                    <button type="submit" name="action" value="finish" 
+                                            class="btn btn-success" id="finish-quiz">
+                                        <i class="fas fa-check me-1"></i>Finish Quiz
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Question Navigator -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white border-bottom">
+                        <h6 class="card-title mb-0">
+                            <i class="fas fa-list me-2"></i>Question Navigator
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            {% for q_num in question_numbers %}
+                            <div class="col-3">
+                                <button type="submit" name="action" value="goto" 
+                                        class="btn btn-sm w-100 question-nav-btn
+                                        {% if q_num == current_question_number %}btn-primary
+                                        {% elif q_num in answered_questions %}btn-success
+                                        {% else %}btn-outline-secondary{% endif %}"
+                                        data-question="{{ q_num }}">
+                                    {{ q_num }}
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <span class="badge bg-success me-1"></span>Answered: {{ answered_count }}<br>
+                                <span class="badge bg-outline-secondary me-1"></span>Remaining: {{ remaining_count }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Instructions -->
+                {% if quiz.instructions %}
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white border-bottom">
+                        <h6 class="card-title mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>Instructions
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <small class="text-muted">
+                            {{ quiz.instructions|linebreaks }}
+                        </small>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Hidden fields for navigation -->
+        <input type="hidden" name="question_number" value="{{ current_question_number }}">
+        <input type="hidden" name="goto_question" id="goto-question" value="">
+    </form>
+</div>
+
+<!-- Auto-submit warning modal -->
+<div class="modal fade" id="timeWarningModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Time Warning
+                </h5>
+            </div>
+            <div class="modal-body">
+                <p>You have less than 5 minutes remaining! The quiz will be automatically submitted when time runs out.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    let timeRemaining = {{ time_remaining_seconds }};
+    let warningShown = false;
+    
+    // Timer countdown
+    function updateTimer() {
+        if (timeRemaining <= 0) {
+            // Auto-submit quiz
+            $('#quiz-form').append('<input type="hidden" name="action" value="auto_submit">');
+            $('#quiz-form').submit();
+            return;
+        }
+        
+        // Show warning at 5 minutes
+        if (timeRemaining <= 300 && !warningShown) {
+            $('#timeWarningModal').modal('show');
+            warningShown = true;
+        }
+        
+        const hours = Math.floor(timeRemaining / 3600);
+        const minutes = Math.floor((timeRemaining % 3600) / 60);
+        const seconds = timeRemaining % 60;
+        
+        let timeString = '';
+        if (hours > 0) {
+            timeString = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        $('#time-remaining').text(timeString);
+        
+        // Change color when time is running low
+        if (timeRemaining <= 300) {
+            $('#timer').removeClass('text-warning').addClass('text-danger');
+        }
+        
+        timeRemaining--;
+    }
+    
+    // Update timer every second
+    setInterval(updateTimer, 1000);
+    
+    // Question navigation
+    $('.question-nav-btn').click(function(e) {
+        e.preventDefault();
+        const questionNum = $(this).data('question');
+        $('#goto-question').val(questionNum);
+        $(this).closest('form').submit();
+    });
+    
+    // Finish quiz confirmation
+    $('#finish-quiz').click(function(e) {
+        if (!confirm('Are you sure you want to finish this quiz? You will not be able to change your answers after submitting.')) {
+            e.preventDefault();
+        }
+    });
+    
+    // Auto-save answers
+    $('input[name="answer"], textarea[name="answer"]').change(function() {
+        // Auto-save functionality could be implemented here
+    });
+    
+    // Prevent accidental page refresh
+    window.addEventListener('beforeunload', function(e) {
+        e.preventDefault();
+        e.returnValue = '';
+    });
+});
+</script>
+{% endblock %}

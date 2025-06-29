@@ -1,34 +1,63 @@
-SPONSORSHIP REQUEST CONFIRMATION
-Youth Impact Training Programme
+YOUTH IMPACT TRAINING PROGRAMME
+Sponsorship Request Confirmation
 
 Dear {{ user.first_name|default:user.username }},
 
-Thank you for submitting your sponsorship request!
+Thank you for submitting your sponsorship request to the Youth Impact Training Programme. We have successfully received your application and wanted to confirm the details.
 
-We have received your application and our team will review it carefully. You can expect to hear back from us within 5-7 business days.
+APPLICATION RECEIVED!
+Your sponsorship request has been submitted successfully and is now under review by our team.
 
-YOUR REQUEST DETAILS:
-- Request ID: #{{ sponsorship_request.id }}
-- Program: {{ sponsorship_request.get_program_name }}
-- Amount Requested: ${{ sponsorship_request.amount_needed }}
-- Status: {{ sponsorship_request.get_status_display }}
-- Submitted: {{ sponsorship_request.created_at|date:"F d, Y H:i" }}
+APPLICATION SUMMARY:
+Request ID: #{{ sponsorship_request.id }}
+Program: {{ sponsorship_request.get_program_display }}{% if sponsorship_request.program_other %} - {{ sponsorship_request.program_other }}{% endif %}
+Amount Requested: ${{ sponsorship_request.amount_needed }}
+Submitted: {{ sponsorship_request.created_at|date:"F d, Y" }} at {{ sponsorship_request.created_at|time:"g:i A" }}
+Current Status: {{ sponsorship_request.get_status_display }}
 
 WHAT HAPPENS NEXT?
 
-1. Review Process: Our team will carefully review your application and supporting documents
-2. Verification: We may contact you or your emergency contact for additional information
-3. Decision: You will be notified of our decision via email
-4. Next Steps: If approved, we will provide details about the sponsorship process
+1. Review Process (3-5 business days):
+Our sponsorship committee will carefully review your application, including your financial situation, program goals, and supporting documentation.
 
-If you have any questions or need to update your application, please contact us at info@youthimpactglobal.com and include your Request ID (#{{ sponsorship_request.id }}) in the subject line.
+2. Evaluation Criteria:
+• Financial need and circumstances
+• Commitment to program completion
+• Potential for positive impact
+• Alignment with YITP mission and values
 
-Thank you for your interest in the Youth Impact Training Programme. We are committed to supporting individuals who demonstrate dedication to personal growth and community impact.
+3. Decision Notification:
+You will receive an email notification once a decision has been made regarding your sponsorship request.
+
+IMPORTANT CONTACT INFORMATION:
+Emergency Contact: {{ sponsorship_request.emergency_contact_name }}
+Phone: {{ sponsorship_request.emergency_contact_phone }}
+Email: {{ sponsorship_request.emergency_contact_email }}
+Relationship: {{ sponsorship_request.emergency_contact_relationship }}
+
+WHILE YOU WAIT:
+• Continue engaging with YITP community resources
+• Attend free webinars and events
+• Connect with other participants in our forums
+• Prepare for your training program journey
+• Keep your contact information updated
+
+STATUS UPDATES:
+We will keep you informed throughout the review process. You can expect to hear from us within 3-5 business days with an update on your application status.
+
+THANK YOU FOR YOUR INTEREST!
+We appreciate your commitment to personal and professional development. Regardless of the outcome, we encourage you to stay connected with the YITP community.
+
+If you have any questions about your application or need to provide additional information, please don't hesitate to contact our support team.
 
 Best regards,
-Youth Impact Global Team
+YITP Sponsorship Team
 Youth Impact Training Programme
+"Removing barriers to education and opportunity"
+
+Reference Number: YITP-SPONSOR-{{ sponsorship_request.id }}
+Please keep this reference number for your records.
 
 ---
-This is an automated message. Please do not reply directly to this email.
-Youth Impact Global | info@youthimpactglobal.com
+Contact Support: {{ support_email|default:'youthimpactglobal3@gmail.com' }}
+© 2025 Youth Impact Global. All rights reserved.

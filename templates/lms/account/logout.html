@@ -1,0 +1,130 @@
+{% extends 'lms/base.html' %}
+{% load i18n %}
+
+{% block title %}Sign Out - Entrepreneurship LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-container {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+    
+    .auth-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 450px;
+        width: 100%;
+    }
+    
+    .auth-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .auth-header h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+    
+    .auth-header p {
+        margin: 0.5rem 0 0 0;
+        opacity: 0.9;
+    }
+    
+    .auth-body {
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .btn-auth {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .btn-auth:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    }
+    
+    .btn-secondary-auth {
+        background: #6b7280;
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        width: 100%;
+        color: white;
+    }
+    
+    .btn-secondary-auth:hover {
+        background: #4b5563;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(107, 114, 128, 0.4);
+    }
+    
+    .logout-message {
+        color: #374151;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <i class="fas fa-sign-out-alt fa-2x mb-3"></i>
+                        <h1>Sign Out</h1>
+                        <p>Come back soon!</p>
+                    </div>
+                    
+                    <div class="auth-body">
+                        <div class="logout-message">
+                            <p>Are you sure you want to sign out of your account?</p>
+                            <p>You'll need to sign in again to access your courses and progress.</p>
+                        </div>
+                        
+                        <form method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                            {% endif %}
+                            
+                            <button type="submit" class="btn btn-primary btn-auth">
+                                <i class="fas fa-sign-out-alt me-2"></i>
+                                Yes, Sign Me Out
+                            </button>
+                        </form>
+                        
+                        <a href="{% url 'courses:home' %}" class="btn btn-secondary-auth">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

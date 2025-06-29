@@ -1,0 +1,494 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Progress Analytics - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-chart-bar me-2"></i>
+                    Progress Analytics
+                </h1>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'progress:dashboard' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Dashboard
+                    </a>
+                    <a href="{% url 'progress:study_sessions' %}" class="btn btn-outline-info">
+                        <i class="fas fa-clock me-1"></i>Study Sessions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time Period Filter -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Analytics Period:</h6>
+                        <div class="btn-group" role="group" id="periodFilter">
+                            <input type="radio" class="btn-check" name="period" id="week" value="week" checked>
+                            <label class="btn btn-outline-primary" for="week">This Week</label>
+
+                            <input type="radio" class="btn-check" name="period" id="month" value="month">
+                            <label class="btn btn-outline-primary" for="month">This Month</label>
+
+                            <input type="radio" class="btn-check" name="period" id="quarter" value="quarter">
+                            <label class="btn btn-outline-primary" for="quarter">This Quarter</label>
+
+                            <input type="radio" class="btn-check" name="period" id="year" value="year">
+                            <label class="btn btn-outline-primary" for="year">This Year</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-primary mb-2">
+                        <i class="fas fa-graduation-cap fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ courses_completed }}</h5>
+                    <p class="card-text text-muted">Courses Completed</p>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up me-1"></i>{{ courses_growth }}% vs last period
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-success mb-2">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ total_study_hours }}h</h5>
+                    <p class="card-text text-muted">Study Hours</p>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up me-1"></i>{{ hours_growth }}% vs last period
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ average_score }}%</h5>
+                    <p class="card-text text-muted">Average Score</p>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up me-1"></i>{{ score_growth }}% vs last period
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-info mb-2">
+                        <i class="fas fa-fire fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ study_streak }}</h5>
+                    <p class="card-text text-muted">Day Streak</p>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up me-1"></i>{{ streak_growth }} days vs last period
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-line me-2"></i>Learning Progress Over Time
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="progressChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-pie me-2"></i>Study Time by Subject
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="subjectChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>Quiz Performance Trends
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="quizChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-calendar-alt me-2"></i>Study Activity Heatmap
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="activityHeatmap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Analytics -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list me-2"></i>Course Performance Breakdown
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if course_analytics %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Progress</th>
+                                        <th>Time Spent</th>
+                                        <th>Avg Score</th>
+                                        <th>Last Activity</th>
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for course in course_analytics %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                {% if course.thumbnail %}
+                                                    <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" 
+                                                         class="rounded me-2" width="30" height="30">
+                                                {% else %}
+                                                    <div class="bg-primary rounded me-2 d-flex align-items-center justify-content-center" 
+                                                         style="width: 30px; height: 30px;">
+                                                        <i class="fas fa-book text-white small"></i>
+                                                    </div>
+                                                {% endif %}
+                                                <span class="fw-medium">{{ course.title|truncatechars:30 }}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress me-2" style="width: 60px; height: 8px;">
+                                                    <div class="progress-bar" style="width: {{ course.progress }}%"></div>
+                                                </div>
+                                                <small>{{ course.progress }}%</small>
+                                            </div>
+                                        </td>
+                                        <td>{{ course.time_spent }}h</td>
+                                        <td>
+                                            <span class="badge bg-{% if course.avg_score >= 80 %}success{% elif course.avg_score >= 60 %}warning{% else %}danger{% endif %}">
+                                                {{ course.avg_score }}%
+                                            </span>
+                                        </td>
+                                        <td>{{ course.last_activity|timesince }} ago</td>
+                                        <td>
+                                            {% if course.trend == 'up' %}
+                                                <i class="fas fa-arrow-up text-success"></i>
+                                            {% elif course.trend == 'down' %}
+                                                <i class="fas fa-arrow-down text-danger"></i>
+                                            {% else %}
+                                                <i class="fas fa-minus text-muted"></i>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-chart-bar fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">No course analytics available yet</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Learning Insights -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>Learning Insights
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if insights %}
+                        {% for insight in insights %}
+                        <div class="insight-item mb-3 p-3 bg-light rounded">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0 me-2">
+                                    <i class="fas {{ insight.icon }} text-{{ insight.color }}"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">{{ insight.title }}</h6>
+                                    <p class="mb-0 small text-muted">{{ insight.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-3">
+                            <i class="fas fa-lightbulb fa-2x text-muted mb-2"></i>
+                            <p class="text-muted small">Keep learning to get personalized insights!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Goals Progress -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-target me-2"></i>Goals Progress
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Courses This Month</small>
+                            <small class="text-muted">{{ monthly_courses }}/{{ monthly_course_goal }}</small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {{ monthly_course_progress }}%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Study Hours This Month</small>
+                            <small class="text-muted">{{ monthly_hours }}/{{ monthly_hour_goal }}h</small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: {{ monthly_hour_progress }}%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Certificates This Year</small>
+                            <small class="text-muted">{{ yearly_certificates }}/{{ yearly_certificate_goal }}</small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" style="width: {{ yearly_certificate_progress }}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+$(document).ready(function() {
+    // Initialize charts
+    initializeProgressChart();
+    initializeSubjectChart();
+    initializeQuizChart();
+    initializeActivityHeatmap();
+
+    // Period filter
+    $('input[name="period"]').change(function() {
+        const period = $(this).val();
+        updateAllCharts(period);
+    });
+});
+
+function initializeProgressChart() {
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ progress_labels|safe }},
+            datasets: [{
+                label: 'Course Progress',
+                data: {{ progress_data|safe }},
+                borderColor: '#ff5d15',
+                backgroundColor: 'rgba(255, 93, 21, 0.1)',
+                tension: 0.4,
+                fill: true
+            }, {
+                label: 'Study Hours',
+                data: {{ hours_data|safe }},
+                borderColor: '#1a2e53',
+                backgroundColor: 'rgba(26, 46, 83, 0.1)',
+                tension: 0.4,
+                fill: true,
+                yAxisID: 'y1'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Progress (%)'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Hours'
+                    },
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                }
+            }
+        }
+    });
+}
+
+function initializeSubjectChart() {
+    const ctx = document.getElementById('subjectChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: {{ subject_labels|safe }},
+            datasets: [{
+                data: {{ subject_data|safe }},
+                backgroundColor: [
+                    '#ff5d15',
+                    '#1a2e53',
+                    '#28a745',
+                    '#ffc107',
+                    '#dc3545',
+                    '#6f42c1'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+function initializeQuizChart() {
+    const ctx = document.getElementById('quizChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ quiz_labels|safe }},
+            datasets: [{
+                label: 'Quiz Scores',
+                data: {{ quiz_data|safe }},
+                backgroundColor: 'rgba(255, 93, 21, 0.8)',
+                borderColor: '#ff5d15',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Score (%)'
+                    }
+                }
+            }
+        }
+    });
+}
+
+function initializeActivityHeatmap() {
+    // Simple heatmap implementation
+    const heatmapData = {{ heatmap_data|safe }};
+    const heatmap = document.getElementById('activityHeatmap');
+    
+    let heatmapHTML = '<div class="row text-center small text-muted mb-2">';
+    ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].forEach(day => {
+        heatmapHTML += `<div class="col">${day}</div>`;
+    });
+    heatmapHTML += '</div>';
+    
+    // Generate 12 weeks of data
+    for (let week = 0; week < 12; week++) {
+        heatmapHTML += '<div class="row mb-1">';
+        for (let day = 0; day < 7; day++) {
+            const intensity = Math.random(); // Placeholder data
+            const color = intensity > 0.7 ? '#28a745' : 
+                         intensity > 0.4 ? '#ffc107' : 
+                         intensity > 0.1 ? '#fd7e14' : '#e9ecef';
+            heatmapHTML += `<div class="col">
+                <div style="width: 15px; height: 15px; background: ${color}; 
+                           border-radius: 2px; margin: 0 auto;" 
+                     title="${Math.round(intensity * 100)}% activity"></div>
+            </div>`;
+        }
+        heatmapHTML += '</div>';
+    }
+    
+    heatmap.innerHTML = heatmapHTML;
+}
+
+function updateAllCharts(period) {
+    // AJAX calls to update all charts with new period data
+    fetch(`/lms/progress/analytics/data/?period=${period}`)
+        .then(response => response.json())
+        .then(data => {
+            // Update charts with new data
+            console.log('Updated analytics data:', data);
+        });
+}
+</script>
+{% endblock %}

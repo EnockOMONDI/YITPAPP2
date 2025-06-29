@@ -237,9 +237,15 @@
                         </div>
 
                         <div class="signup__form-input">
-                            <input type="email" name="email" placeholder="Email Address" required 
+                            <input type="email" name="email" placeholder="Email Address" required
                                    value="{{ request.POST.email|default:'' }}">
                             <i class="fas fa-envelope"></i>
+                        </div>
+
+                        <div class="signup__form-input">
+                            <input type="tel" name="phone_number" placeholder="Phone Number (Optional)"
+                                   value="{{ request.POST.phone_number|default:'' }}">
+                            <i class="fas fa-phone"></i>
                         </div>
 
                         <div class="signup__form-input">

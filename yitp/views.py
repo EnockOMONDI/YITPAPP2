@@ -7,9 +7,9 @@ def home(request):
     
     return render(request, 'yitp/index.html')
 
-def courses(request):
+def web_courses_list(request):
     
-    return render(request, 'yitp/courses.html')
+    return render(request, 'yitp/web_courses_list.html')
 
 def about(request):
     

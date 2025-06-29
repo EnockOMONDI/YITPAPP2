@@ -1,0 +1,44 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Account Login Notification
+
+Hello {{ user.first_name|default:user.username }}!
+
+We're writing to inform you that your Youth Impact Training Programme account was accessed.
+
+LOGIN DETAILS:
+Date & Time: {{ login_time|date:"F d, Y" }} at {{ login_time|time:"g:i A" }}
+IP Address: {{ ip_address }}
+Device/Browser: {{ user_agent|truncatechars:100 }}
+
+WAS THIS YOU?
+If you recognize this login activity, no action is required. You can safely ignore this email.
+
+DIDN'T RECOGNIZE THIS LOGIN?
+If this wasn't you, your account may have been compromised. Please take immediate action:
+
+1. Change your password immediately
+2. Review your account activity
+3. Contact our support team
+4. Enable two-factor authentication if available
+
+SECURITY BEST PRACTICES:
+• Use a strong, unique password for your YITP account
+• Never share your login credentials with anyone
+• Log out from shared or public computers
+• Keep your browser and device software updated
+• Be cautious of phishing emails asking for your credentials
+
+WHY DO WE SEND THESE NOTIFICATIONS?
+These security notifications help protect your account by alerting you to any login activity. This way, you can quickly identify and respond to any unauthorized access attempts.
+
+If you have any concerns about your account security or need assistance, please don't hesitate to contact our support team immediately.
+
+Stay secure,
+The YITP Security Team
+Youth Impact Training Programme
+
+---
+Note: This is an automated security notification. Please do not reply to this email.
+If you need assistance, contact us at {{ support_email|default:'youthimpactglobal3@gmail.com' }}.
+
+© 2025 Youth Impact Global. All rights reserved.

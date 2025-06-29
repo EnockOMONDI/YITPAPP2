@@ -1,0 +1,221 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}{{ enrollment.course.title }} Progress - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-chart-line me-2"></i>
+                    Course Progress: {{ enrollment.course.title }}
+                </h1>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'progress:my_progress' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Progress
+                    </a>
+                    <a href="{% url 'courses:course_detail' enrollment.course.slug %}" class="btn btn-outline-primary">
+                        <i class="fas fa-book me-1"></i>View Course
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Overview -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            {% if enrollment.course.thumbnail %}
+                                <img src="{{ enrollment.course.thumbnail.url }}" alt="{{ enrollment.course.title }}" 
+                                     class="img-fluid rounded">
+                            {% else %}
+                                <div class="bg-primary rounded d-flex align-items-center justify-content-center" 
+                                     style="height: 120px;">
+                                    <i class="fas fa-book text-white fa-3x"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-2">{{ enrollment.course.title }}</h4>
+                            <p class="text-muted mb-3">{{ enrollment.course.description|truncatewords:30 }}</p>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-{% if enrollment.status == 'completed' %}success{% elif enrollment.status == 'active' %}primary{% else %}secondary{% endif %} me-2">
+                                    {{ enrollment.get_status_display }}
+                                </span>
+                                <small class="text-muted">
+                                    Enrolled: {{ enrollment.enrolled_at|date:"M d, Y" }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="position-relative d-inline-block mb-3">
+                                    <canvas id="courseProgressChart" width="100" height="100"></canvas>
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <h5 class="text-primary mb-0">{{ enrollment.progress_percentage }}%</h5>
+                                    </div>
+                                </div>
+                                <p class="text-muted mb-0">Course Completion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-primary mb-2">
+                        <i class="fas fa-play-circle fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ completed_lessons }}/{{ total_lessons }}</h5>
+                    <p class="card-text text-muted">Lessons Completed</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-success mb-2">
+                        <i class="fas fa-question-circle fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ completed_quizzes }}/{{ total_quizzes }}</h5>
+                    <p class="card-text text-muted">Quizzes Completed</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ time_spent }}</h5>
+                    <p class="card-text text-muted">Time Spent</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-info mb-2">
+                        <i class="fas fa-star fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ average_score }}%</h5>
+                    <p class="card-text text-muted">Average Score</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Module Progress -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list me-2"></i>Module Progress
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if modules %}
+                        {% for module in modules %}
+                        <div class="module-item mb-4 pb-4 {% if not forloop.last %}border-bottom{% endif %}">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-folder-open me-2 text-primary"></i>
+                                    {{ module.title }}
+                                </h6>
+                                <div class="d-flex align-items-center">
+                                    <span class="badge bg-{% if module.is_completed %}success{% elif module.is_started %}warning{% else %}secondary{% endif %} me-2">
+                                        {% if module.is_completed %}Completed{% elif module.is_started %}In Progress{% else %}Not Started{% endif %}
+                                    </span>
+                                    <span class="text-muted">{{ module.progress_percentage }}%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="progress mb-3" style="height: 8px;">
+                                <div class="progress-bar" style="width: {{ module.progress_percentage }}%"></div>
+                            </div>
+
+                            <!-- Lessons in Module -->
+                            <div class="lessons-list">
+                                {% for lesson in module.lessons %}
+                                <div class="d-flex justify-content-between align-items-center py-2 px-3 mb-2 bg-light rounded">
+                                    <div class="d-flex align-items-center">
+                                        {% if lesson.is_completed %}
+                                            <i class="fas fa-check-circle text-success me-2"></i>
+                                        {% elif lesson.is_started %}
+                                            <i class="fas fa-play-circle text-warning me-2"></i>
+                                        {% else %}
+                                            <i class="fas fa-circle text-muted me-2"></i>
+                                        {% endif %}
+                                        <span class="{% if lesson.is_completed %}text-success{% endif %}">{{ lesson.title }}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        {% if lesson.quiz_score %}
+                                            <span class="badge bg-info me-2">{{ lesson.quiz_score }}%</span>
+                                        {% endif %}
+                                        <small class="text-muted me-2">{{ lesson.duration }} min</small>
+                                        <a href="{% url 'courses:lesson_detail' lesson.id %}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            {% if lesson.is_completed %}Review{% else %}Start{% endif %}
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">No modules available for this course</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+$(document).ready(function() {
+    // Course Progress Chart
+    const ctx = document.getElementById('courseProgressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [{{ enrollment.progress_percentage }}, {{ 100|add:enrollment.progress_percentage|add:"-100" }}],
+                backgroundColor: ['#ff5d15', '#e9ecef'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

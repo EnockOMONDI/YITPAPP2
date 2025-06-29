@@ -1,147 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sponsorship Request Confirmation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            background: linear-gradient(135deg, #0e1133 0%, #1a2e53 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-        }
-        .content {
-            background: #f8f9fa;
-            padding: 30px 20px;
-            border-radius: 0 0 8px 8px;
-        }
-        .highlight {
-            background: white;
-            padding: 20px;
-            border-radius: 6px;
-            margin: 20px 0;
-            border-left: 4px solid #ff5d15;
-        }
-        .details {
-            background: white;
-            padding: 20px;
-            border-radius: 6px;
-            margin: 20px 0;
-        }
-        .details h3 {
-            color: #0e1133;
-            margin-top: 0;
-        }
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .detail-row:last-child {
-            border-bottom: none;
-        }
-        .label {
-            font-weight: bold;
-            color: #6d6e75;
-        }
-        .value {
-            color: #0e1133;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #6d6e75;
-            font-size: 14px;
-        }
-        .button {
-            display: inline-block;
-            background: #ff5d15;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 10px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Sponsorship Request Confirmation</h1>
-        <p>Youth Impact Training Programme</p>
-    </div>
-    
-    <div class="content">
-        <p>Dear {{ user.first_name|default:user.username }},</p>
-        
-        <div class="highlight">
-            <p><strong>Thank you for submitting your sponsorship request!</strong></p>
-            <p>We have received your application and our team will review it carefully. You can expect to hear back from us within 5-7 business days.</p>
-        </div>
-        
-        <div class="details">
-            <h3>Your Request Details</h3>
-            
-            <div class="detail-row">
-                <span class="label">Request ID:</span>
-                <span class="value">#{{ sponsorship_request.id }}</span>
-            </div>
-            
-            <div class="detail-row">
-                <span class="label">Program:</span>
-                <span class="value">{{ sponsorship_request.get_program_name }}</span>
-            </div>
-            
-            <div class="detail-row">
-                <span class="label">Amount Requested:</span>
-                <span class="value">${{ sponsorship_request.amount_needed }}</span>
-            </div>
-            
-            <div class="detail-row">
-                <span class="label">Status:</span>
-                <span class="value">{{ sponsorship_request.get_status_display }}</span>
-            </div>
-            
-            <div class="detail-row">
-                <span class="label">Submitted:</span>
-                <span class="value">{{ sponsorship_request.created_at|date:"F d, Y H:i" }}</span>
-            </div>
-        </div>
-        
-        <div class="highlight">
-            <h3>What Happens Next?</h3>
-            <ul>
-                <li><strong>Review Process:</strong> Our team will carefully review your application and supporting documents</li>
-                <li><strong>Verification:</strong> We may contact you or your emergency contact for additional information</li>
-                <li><strong>Decision:</strong> You will be notified of our decision via email</li>
-                <li><strong>Next Steps:</strong> If approved, we will provide details about the sponsorship process</li>
-            </ul>
-        </div>
-        
-        <p>If you have any questions or need to update your application, please contact us at <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a> and include your Request ID (#{{ sponsorship_request.id }}) in the subject line.</p>
-        
-        <p>Thank you for your interest in the Youth Impact Training Programme. We are committed to supporting individuals who demonstrate dedication to personal growth and community impact.</p>
-        
-        <p>Best regards,<br>
-        <strong>Youth Impact Global Team</strong><br>
-        Youth Impact Training Programme</p>
-    </div>
-    
-    <div class="footer">
-        <p>This is an automated message. Please do not reply directly to this email.</p>
-        <p>Youth Impact Global | <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a></p>
-    </div>
-</body>
-</html>
+{% extends "emails/base_email.html" %}
+
+{% block title %}YITP Sponsorship Request Received - Confirmation{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Dear {{ user.first_name|default:user.username }}, 📋
+</div>
+
+<div class="content-text">
+    Thank you for submitting your sponsorship request to the <strong>Youth Impact Training Programme</strong>. We have successfully received your application and wanted to confirm the details.
+</div>
+
+<div class="success-box">
+    <strong>✅ Application Received!</strong><br>
+    Your sponsorship request has been submitted successfully and is now under review by our team.
+</div>
+
+<div class="info-box">
+    <strong>📋 Application Summary:</strong><br>
+    <strong>Request ID:</strong> #{{ sponsorship_request.id }}<br>
+    <strong>Program:</strong> {{ sponsorship_request.get_program_display }}{% if sponsorship_request.program_other %} - {{ sponsorship_request.program_other }}{% endif %}<br>
+    <strong>Amount Requested:</strong> ${{ sponsorship_request.amount_needed }}<br>
+    <strong>Submitted:</strong> {{ sponsorship_request.created_at|date:"F d, Y" }} at {{ sponsorship_request.created_at|time:"g:i A" }}<br>
+    <strong>Current Status:</strong> <span style="color: #ffc107; font-weight: bold;">{{ sponsorship_request.get_status_display }}</span>
+</div>
+
+<div class="content-text">
+    <strong>🔍 What Happens Next?</strong>
+</div>
+
+<div class="content-text">
+    <strong>1. Review Process (3-5 business days):</strong><br>
+    Our sponsorship committee will carefully review your application, including your financial situation, program goals, and supporting documentation.
+</div>
+
+<div class="content-text">
+    <strong>2. Evaluation Criteria:</strong><br>
+    • Financial need and circumstances<br>
+    • Commitment to program completion<br>
+    • Potential for positive impact<br>
+    • Alignment with YITP mission and values
+</div>
+
+<div class="content-text">
+    <strong>3. Decision Notification:</strong><br>
+    You will receive an email notification once a decision has been made regarding your sponsorship request.
+</div>
+
+<div class="warning-box">
+    <strong>📞 Important Contact Information:</strong><br>
+    <strong>Emergency Contact:</strong> {{ sponsorship_request.emergency_contact_name }}<br>
+    <strong>Phone:</strong> {{ sponsorship_request.emergency_contact_phone }}<br>
+    <strong>Email:</strong> {{ sponsorship_request.emergency_contact_email }}<br>
+    <strong>Relationship:</strong> {{ sponsorship_request.emergency_contact_relationship }}
+</div>
+
+<div class="info-box">
+    <strong>💡 While You Wait:</strong><br>
+    • Continue engaging with YITP community resources<br>
+    • Attend free webinars and events<br>
+    • Connect with other participants in our forums<br>
+    • Prepare for your training program journey<br>
+    • Keep your contact information updated
+</div>
+
+<div class="content-text">
+    <strong>📧 Status Updates:</strong><br>
+    We will keep you informed throughout the review process. You can expect to hear from us within 3-5 business days with an update on your application status.
+</div>
+
+<div class="success-box">
+    <strong>🌟 Thank You for Your Interest!</strong><br>
+    We appreciate your commitment to personal and professional development. Regardless of the outcome, we encourage you to stay connected with the YITP community.
+</div>
+
+<div class="content-text">
+    If you have any questions about your application or need to provide additional information, please don't hesitate to contact our support team.
+</div>
+
+<div class="content-text" style="margin-top: 30px;">
+    Best regards,<br>
+    <strong>YITP Sponsorship Team</strong><br>
+    Youth Impact Training Programme<br>
+    <em>"Removing barriers to education and opportunity"</em>
+</div>
+
+<div style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; font-size: 12px; color: #6c757d;">
+    <strong>Reference Number:</strong> YITP-SPONSOR-{{ sponsorship_request.id }}<br>
+    Please keep this reference number for your records.
+</div>
+{% endblock %}
