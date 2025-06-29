@@ -195,7 +195,6 @@ def register(request):
             if phone_number:
                 profile.phone_number = phone_number
                 profile.save()
-                print(f"DEBUG: Phone number saved to profile: {profile.phone_number}")  # Debug logging
 
             # Send OTP for email verification
             try:

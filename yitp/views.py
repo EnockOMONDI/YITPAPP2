@@ -8,8 +8,16 @@ def home(request):
     return render(request, 'yitp/index.html')
 
 def web_courses_list(request):
-    
+
     return render(request, 'yitp/web_courses_list.html')
+
+def documentation(request):
+    """
+    YITP User Flow Documentation page
+    Provides comprehensive technical documentation and visual guides
+    for understanding YITP user workflows and system processes.
+    """
+    return render(request, 'yitp/documentation.html')
 
 def about(request):
     

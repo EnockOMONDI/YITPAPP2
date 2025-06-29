@@ -7,6 +7,7 @@ app_name = 'yitp'  # This helps with URL namespacing
 urlpatterns = [
     path('', views.home, name='home'),
     path('web_courses_list/', views.web_courses_list, name='web_courses_list'),
+    path('documentation/', views.documentation, name='documentation'),
     path('about/', views.about, name='about'),
     path('team/', views.team, name='team'),
     path('registration/', views.registration, name='registration'),
