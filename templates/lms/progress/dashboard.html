@@ -1,0 +1,281 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Progress Dashboard - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-chart-line me-2"></i>
+                    Progress Dashboard
+                </h1>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'progress:my_progress' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-user me-1"></i>My Progress
+                    </a>
+                    <a href="{% url 'progress:achievements' %}" class="btn btn-outline-success">
+                        <i class="fas fa-trophy me-1"></i>Achievements
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-primary mb-2">
+                        <i class="fas fa-book-open fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ total_enrollments }}</h5>
+                    <p class="card-text text-muted">Enrolled Courses</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-success mb-2">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ completed_courses }}</h5>
+                    <p class="card-text text-muted">Completed Courses</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ total_study_time }}</h5>
+                    <p class="card-text text-muted">Study Hours</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="text-info mb-2">
+                        <i class="fas fa-trophy fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ total_achievements }}</h5>
+                    <p class="card-text text-muted">Achievements</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overall Progress -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-pie me-2"></i>Overall Progress
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small>Course Completion</small>
+                                    <small>{{ overall_progress }}%</small>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" style="width: {{ overall_progress }}%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small>Lesson Progress</small>
+                                    <small>{{ lesson_progress }}%</small>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: {{ lesson_progress }}%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small>Assessment Score</small>
+                                    <small>{{ average_score }}%</small>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: {{ average_score }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <div class="position-relative d-inline-block">
+                                    <canvas id="progressChart" width="200" height="200"></canvas>
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <h4 class="text-primary mb-0">{{ overall_progress }}%</h4>
+                                        <small class="text-muted">Complete</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Courses and Recent Activity -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-book me-2"></i>Current Courses
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if current_enrollments %}
+                        {% for enrollment in current_enrollments %}
+                        <div class="d-flex align-items-center mb-3 pb-3 {% if not forloop.last %}border-bottom{% endif %}">
+                            <div class="flex-shrink-0 me-3">
+                                {% if enrollment.course.thumbnail %}
+                                    <img src="{{ enrollment.course.thumbnail.url }}" alt="{{ enrollment.course.title }}" 
+                                         class="rounded" width="60" height="60">
+                                {% else %}
+                                    <div class="bg-primary rounded d-flex align-items-center justify-content-center" 
+                                         style="width: 60px; height: 60px;">
+                                        <i class="fas fa-book text-white"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">
+                                    <a href="{% url 'courses:course_detail' enrollment.course.slug %}" 
+                                       class="text-decoration-none">{{ enrollment.course.title }}</a>
+                                </h6>
+                                <p class="text-muted mb-2 small">{{ enrollment.course.description|truncatewords:15 }}</p>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar" style="width: {{ enrollment.progress_percentage }}%"></div>
+                                </div>
+                                <small class="text-muted">{{ enrollment.progress_percentage }}% complete</small>
+                            </div>
+                            <div class="flex-shrink-0 ms-3">
+                                <a href="{% url 'progress:course_progress' enrollment.course.id %}" 
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-chart-line me-1"></i>View Progress
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">No active courses yet</p>
+                            <a href="{% url 'courses:course_list' %}" class="btn btn-primary">
+                                Browse Courses
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Recent Achievements -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-trophy me-2"></i>Recent Achievements
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if recent_achievements %}
+                        {% for achievement in recent_achievements %}
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" 
+                                     style="width: 40px; height: 40px;">
+                                    <i class="fas fa-trophy text-white"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">{{ achievement.title }}</h6>
+                                <small class="text-muted">{{ achievement.earned_at|timesince }} ago</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="text-center">
+                            <a href="{% url 'progress:achievements' %}" class="btn btn-sm btn-outline-warning">
+                                View All Achievements
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-3">
+                            <i class="fas fa-trophy fa-2x text-muted mb-2"></i>
+                            <p class="text-muted small">No achievements yet</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Study Streak -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-fire me-2"></i>Study Streak
+                    </h6>
+                </div>
+                <div class="card-body text-center">
+                    <h3 class="text-danger mb-1">{{ study_streak }}</h3>
+                    <p class="text-muted mb-3">Days in a row</p>
+                    <div class="d-flex justify-content-center">
+                        {% for day in streak_calendar %}
+                        <div class="mx-1">
+                            <div class="bg-{% if day.studied %}danger{% else %}light{% endif %} rounded-circle d-flex align-items-center justify-content-center" 
+                                 style="width: 30px; height: 30px;">
+                                <small class="text-{% if day.studied %}white{% else %}muted{% endif %}">{{ day.day }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+$(document).ready(function() {
+    // Progress Chart
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [{{ overall_progress }}, {{ 100|add:overall_progress|add:"-100" }}],
+                backgroundColor: ['#ff5d15', '#e9ecef'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,1039 @@
+{% extends 'lms/base.html' %}{% load static %}
+
+{% block title %}How It Works - YITP Learning Management System{% endblock %}
+
+{% block extra_css %}
+<style>
+    .section-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+    }
+
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        margin: 0 auto 1rem;
+    }
+
+    .process-step {
+        position: relative;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .process-step:hover {
+        transform: translateY(-5px);
+    }
+
+    .step-number {
+        position: absolute;
+        top: -15px;
+        left: 2rem;
+        width: 40px;
+        height: 40px;
+        background: var(--secondary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stats-number {
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .role-card {
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+
+    .role-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .role-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--light-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .nav-pills .nav-link {
+        border-radius: 25px;
+        padding: 0.75rem 1.5rem;
+        margin-right: 0.5rem;
+        color: var(--dark-color);
+        background: var(--light-color);
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .nav-pills .nav-link.active {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .tab-content {
+        background: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-top: 2rem;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .feature-list li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+    }
+
+    .feature-list li:last-child {
+        border-bottom: none;
+    }
+
+    .feature-list li i {
+        color: var(--success-color);
+        margin-right: 1rem;
+        width: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="section-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-cogs me-3"></i>
+                    LMS System Components
+                </h1>
+                <p class="lead mb-4">
+                    Understanding the Django Entrepreneurship LMS Application Architecture
+                </p>
+                <p class="fs-5">
+                    A technical guide for program administrators explaining how each Django app
+                    works, their core functionalities, and how they integrate to create a
+                    comprehensive learning management system.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Overview -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="stats-card">
+                    <div class="stats-number">6</div>
+                    <h5>Core Applications</h5>
+                    <p class="text-muted">Specialized Django apps for different functions</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ total_courses|default:"50+" }}</div>
+                    <h5>Courses Available</h5>
+                    <p class="text-muted">Managed through the courses app</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ total_students|default:"1000+" }}</div>
+                    <h5>User Accounts</h5>
+                    <p class="text-muted">Managed through the accounts app</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Django Apps Overview -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">Django Application Architecture</h2>
+                <p class="lead text-muted">
+                    The LMS is built using Django's modular app structure, where each app handles
+                    specific functionality. This separation makes the system maintainable, scalable,
+                    and easy to understand.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>User Management</h4>
+                    <p class="text-muted">
+                        The <strong>accounts</strong> app handles user authentication, profiles,
+                        and role-based access control for students, instructors, and administrators.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Course Structure</h4>
+                    <p class="text-muted">
+                        The <strong>courses</strong> app manages the hierarchical organization
+                        of courses, modules, and lessons with enrollment and categorization.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h4>Content Delivery</h4>
+                    <p class="text-muted">
+                        The <strong>content</strong> app handles learning materials, resources,
+                        and multimedia content with flexible delivery formats.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h4>Assessment Tools</h4>
+                    <p class="text-muted">
+                        The <strong>assessments</strong> app provides quizzes, assignments,
+                        and grading functionality with automated and manual evaluation.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Progress Tracking</h4>
+                    <p class="text-muted">
+                        The <strong>progress</strong> app monitors student advancement,
+                        achievements, and provides detailed analytics and reporting.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4>Communication Hub</h4>
+                    <p class="text-muted">
+                        The <strong>communication</strong> app facilitates forums, messaging,
+                        notifications, and collaborative learning features.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Accounts App Details -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">
+                    <i class="fas fa-users text-primary me-3"></i>
+                    Accounts App - User Management
+                </h2>
+                <p class="lead text-muted">
+                    Handles all user-related functionality including authentication, profiles, and role-based access control.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Custom User Model</h4>
+                    <p class="mb-3">
+                        Extends Django's built-in user system with additional fields for entrepreneurship education.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Email-based authentication (instead of username)</li>
+                        <li><i class="fas fa-check"></i>Profile pictures and biographical information</li>
+                        <li><i class="fas fa-check"></i>Phone numbers and location data</li>
+                        <li><i class="fas fa-check"></i>Timezone support for global users</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>User Profiles & Preferences</h4>
+                    <p class="mb-3">
+                        Detailed user profiles with role management and personalized learning preferences.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Role-based access (student, instructor, admin)</li>
+                        <li><i class="fas fa-check"></i>Organization and job title tracking</li>
+                        <li><i class="fas fa-check"></i>Experience level assessment</li>
+                        <li><i class="fas fa-check"></i>Learning preferences and notification settings</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Administrator Workflow</h4>
+                    <p class="mb-3">
+                        How administrators manage users, roles, and access permissions through the system.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Create and manage user accounts</li>
+                        <li><i class="fas fa-check"></i>Assign roles and permissions</li>
+                        <li><i class="fas fa-check"></i>Monitor user activity and engagement</li>
+                        <li><i class="fas fa-check"></i>Bulk user operations and imports</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Integration Points</h4>
+                    <p class="mb-3">
+                        How the accounts app connects with other system components.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Course enrollment tracking (with progress app)</li>
+                        <li><i class="fas fa-check"></i>Content creation permissions (with content app)</li>
+                        <li><i class="fas fa-check"></i>Assessment submissions (with assessments app)</li>
+                        <li><i class="fas fa-check"></i>Communication permissions (with communication app)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Courses App Details -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">
+                    <i class="fas fa-book text-primary me-3"></i>
+                    Courses App - Content Structure
+                </h2>
+                <p class="lead text-muted">
+                    Manages the hierarchical organization of educational content with courses, modules, and lessons.
+                </p>
+            </div>
+        </div>
+
+        <!-- Course App Tabs -->
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-pills justify-content-center mb-4" id="courseTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="course-structure-tab" data-bs-toggle="pill"
+                                data-bs-target="#course-structure" type="button" role="tab">
+                            <i class="fas fa-sitemap me-2"></i>Course Hierarchy
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="course-management-tab" data-bs-toggle="pill"
+                                data-bs-target="#course-management" type="button" role="tab">
+                            <i class="fas fa-cogs me-2"></i>Management Features
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="course-workflow-tab" data-bs-toggle="pill"
+                                data-bs-target="#course-workflow" type="button" role="tab">
+                            <i class="fas fa-tasks me-2"></i>Admin Workflow
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="courseTabsContent">
+                    <!-- Course Structure Tab -->
+                    <div class="tab-pane fade show active" id="course-structure" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="mb-4">Three-Level Hierarchy</h4>
+                                <div class="mb-4">
+                                    <h5><i class="fas fa-book text-primary me-2"></i>Courses</h5>
+                                    <p class="text-muted">
+                                        Top-level containers with metadata like title, description, difficulty level,
+                                        estimated duration, instructor assignment, and category classification.
+                                    </p>
+                                    <small class="text-info">Database: Course model with slug, thumbnail, pricing, enrollment limits</small>
+                                </div>
+                                <div class="mb-4">
+                                    <h5><i class="fas fa-folder text-primary me-2"></i>Modules</h5>
+                                    <p class="text-muted">
+                                        Organizational units within courses that group related lessons with sort ordering,
+                                        unlock criteria, and estimated duration tracking.
+                                    </p>
+                                    <small class="text-info">Database: Module model with course foreign key, sort_order, unlock_criteria JSON</small>
+                                </div>
+                                <div class="mb-4">
+                                    <h5><i class="fas fa-file-alt text-primary me-2"></i>Lessons</h5>
+                                    <p class="text-muted">
+                                        Individual learning units with content, objectives, estimated duration,
+                                        and connections to assessments and content items.
+                                    </p>
+                                    <small class="text-info">Database: Lesson model with module foreign key, content relationships</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="mb-4">Course Categories</h4>
+                                {% if sample_categories %}
+                                <div class="row">
+                                    {% for category in sample_categories %}
+                                    <div class="col-sm-6 mb-3">
+                                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                                            <i class="fas fa-tag text-primary me-3"></i>
+                                            <div>
+                                                <h6 class="mb-1">{{ category.name }}</h6>
+                                                <small class="text-muted">{{ category.description|truncatewords:6 }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
+                                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                                            <i class="fas fa-tag text-primary me-3"></i>
+                                            <div>
+                                                <h6 class="mb-1">Business Fundamentals</h6>
+                                                <small class="text-muted">Core concepts</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 mb-3">
+                                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                                            <i class="fas fa-tag text-primary me-3"></i>
+                                            <div>
+                                                <h6 class="mb-1">Marketing & Sales</h6>
+                                                <small class="text-muted">Customer strategies</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Management Features Tab -->
+                    <div class="tab-pane fade" id="course-management" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <h4 class="mb-4">Course Features</h4>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i><strong>Publication Control:</strong> Draft/published status with preview capabilities</li>
+                                    <li><i class="fas fa-check"></i><strong>Enrollment Management:</strong> Limits, prerequisites, and automatic enrollment</li>
+                                    <li><i class="fas fa-check"></i><strong>Instructor Assignment:</strong> Multiple instructors per course with role management</li>
+                                    <li><i class="fas fa-check"></i><strong>Pricing & Access:</strong> Free and paid courses with access control</li>
+                                    <li><i class="fas fa-check"></i><strong>Featured Courses:</strong> Highlighting and promotion capabilities</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <h4 class="mb-4">Module & Lesson Features</h4>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i><strong>Sequential Learning:</strong> Ordered progression through content</li>
+                                    <li><i class="fas fa-check"></i><strong>Unlock Criteria:</strong> Conditional access based on completion or scores</li>
+                                    <li><i class="fas fa-check"></i><strong>Duration Tracking:</strong> Estimated time for planning and scheduling</li>
+                                    <li><i class="fas fa-check"></i><strong>Content Integration:</strong> Links to assessments, resources, and multimedia</li>
+                                    <li><i class="fas fa-check"></i><strong>Progress Tracking:</strong> Individual lesson completion monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Workflow Tab -->
+                    <div class="tab-pane fade" id="course-workflow" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center p-4 bg-light rounded">
+                                    <i class="fas fa-plus-circle text-success mb-3" style="font-size: 3rem;"></i>
+                                    <h5>Course Creation</h5>
+                                    <p class="text-muted">
+                                        Create new courses with metadata, assign instructors,
+                                        set categories, and configure enrollment settings.
+                                    </p>
+                                    <small class="text-primary">Admin → Courses → Add Course</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center p-4 bg-light rounded">
+                                    <i class="fas fa-edit text-warning mb-3" style="font-size: 3rem;"></i>
+                                    <h5>Content Organization</h5>
+                                    <p class="text-muted">
+                                        Structure courses with modules and lessons,
+                                        set learning objectives, and configure progression rules.
+                                    </p>
+                                    <small class="text-primary">Course Detail → Modules → Lessons</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="text-center p-4 bg-light rounded">
+                                    <i class="fas fa-users text-primary mb-3" style="font-size: 3rem;"></i>
+                                    <h5>Enrollment Management</h5>
+                                    <p class="text-muted">
+                                        Monitor enrollments, manage student access,
+                                        and track course popularity and completion rates.
+                                    </p>
+                                    <small class="text-primary">Course → Enrollments → Analytics</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content App Details -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">
+                    <i class="fas fa-file-alt text-primary me-3"></i>
+                    Content App - Learning Materials
+                </h2>
+                <p class="lead text-muted">
+                    Manages all learning content including multimedia files, resources, and reusable content items.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h4>Content Item Types</h4>
+                    <p class="mb-3">Flexible content system supporting multiple media formats:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Text content with rich formatting</li>
+                        <li><i class="fas fa-check"></i>Video lectures and demonstrations</li>
+                        <li><i class="fas fa-check"></i>Audio podcasts and recordings</li>
+                        <li><i class="fas fa-check"></i>Interactive presentations</li>
+                        <li><i class="fas fa-check"></i>PDF documents and worksheets</li>
+                        <li><i class="fas fa-check"></i>Images and infographics</li>
+                        <li><i class="fas fa-check"></i>Interactive simulations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>Content Management</h4>
+                    <p class="mb-3">Advanced organization and delivery capabilities:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Tagging system for content discovery</li>
+                        <li><i class="fas fa-check"></i>Reusable content across lessons</li>
+                        <li><i class="fas fa-check"></i>External resource linking</li>
+                        <li><i class="fas fa-check"></i>Role-based access control</li>
+                        <li><i class="fas fa-check"></i>Usage analytics and tracking</li>
+                        <li><i class="fas fa-check"></i>Version control and updates</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h4>Resource Library</h4>
+                    <p class="mb-3">Organized collection of downloadable resources:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Business templates and forms</li>
+                        <li><i class="fas fa-check"></i>Case studies and examples</li>
+                        <li><i class="fas fa-check"></i>Business tools and calculators</li>
+                        <li><i class="fas fa-check"></i>Download tracking and analytics</li>
+                        <li><i class="fas fa-check"></i>Search and filter capabilities</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4>Admin Workflow</h4>
+                    <p class="mb-3">How administrators manage content:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Bulk content upload and management</li>
+                        <li><i class="fas fa-check"></i>Built-in content editor</li>
+                        <li><i class="fas fa-check"></i>Content duplication and cloning</li>
+                        <li><i class="fas fa-check"></i>Themed content libraries</li>
+                        <li><i class="fas fa-check"></i>Cross-course content sharing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Assessments App Details -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">
+                    <i class="fas fa-clipboard-check text-primary me-3"></i>
+                    Assessments App - Evaluation Tools
+                </h2>
+                <p class="lead text-muted">
+                    Comprehensive assessment system with quizzes, assignments, and automated grading capabilities.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>Quiz System</h4>
+                    <p class="text-muted">
+                        Multiple question types including multiple choice, true/false,
+                        short answer, and essay questions with automated grading
+                        and immediate feedback capabilities.
+                    </p>
+                    <small class="text-info">Database: Quiz, Question, QuizAttempt models</small>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h4>Assignment Submissions</h4>
+                    <p class="text-muted">
+                        File upload system for assignments with support for multiple
+                        formats, due date tracking, late submission handling,
+                        and instructor grading workflows.
+                    </p>
+                    <small class="text-info">Database: Assignment, AssignmentSubmission models</small>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h4>Self-Assessments</h4>
+                    <p class="text-muted">
+                        Self-evaluation tools for students to assess their own
+                        understanding and skills with guided reflection questions
+                        and scoring frameworks.
+                    </p>
+                    <small class="text-info">Database: SelfAssessment model with JSON questions</small>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4>Grading & Feedback</h4>
+                    <p class="text-muted">
+                        Comprehensive grading system with rubrics, detailed feedback,
+                        grade tracking, and automated score calculations with
+                        instructor override capabilities.
+                    </p>
+                    <small class="text-info">Integration with progress app for tracking</small>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <h4>Assessment Templates</h4>
+                    <p class="text-muted">
+                        Reusable assessment templates for quizzes, assignments,
+                        and rubrics that can be shared across courses and
+                        customized for specific needs.
+                    </p>
+                    <small class="text-info">Database: AssessmentTemplate model</small>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4>Admin Workflow</h4>
+                    <p class="text-muted">
+                        Create assessments, configure grading settings, monitor
+                        submission rates, review student performance, and
+                        generate assessment analytics reports.
+                    </p>
+                    <small class="text-info">Admin interface for all assessment management</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Progress App Details -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">
+                    <i class="fas fa-chart-line text-primary me-3"></i>
+                    Progress App - Learning Analytics
+                </h2>
+                <p class="lead text-muted">
+                    Comprehensive tracking system that monitors student progress, achievements, and learning analytics.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h4>Enrollment Tracking</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Student course enrollment management</li>
+                        <li><i class="fas fa-check"></i>Enrollment status tracking (active, completed, dropped)</li>
+                        <li><i class="fas fa-check"></i>Progress percentage calculations</li>
+                        <li><i class="fas fa-check"></i>Last accessed timestamps</li>
+                        <li><i class="fas fa-check"></i>Certificate issuance tracking</li>
+                    </ul>
+                    <small class="text-info">Database: Enrollment model with progress calculations</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h4>Lesson Progress</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Individual lesson completion tracking</li>
+                        <li><i class="fas fa-check"></i>Time spent on each lesson</li>
+                        <li><i class="fas fa-check"></i>Attempt counts and scoring</li>
+                        <li><i class="fas fa-check"></i>Start and completion timestamps</li>
+                        <li><i class="fas fa-check"></i>Automatic progress updates</li>
+                    </ul>
+                    <small class="text-info">Database: LessonProgress model with status tracking</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4>Achievements & Badges</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Achievement system with multiple types</li>
+                        <li><i class="fas fa-check"></i>Badge icons and point systems</li>
+                        <li><i class="fas fa-check"></i>Course completion recognition</li>
+                        <li><i class="fas fa-check"></i>Learning streak tracking</li>
+                        <li><i class="fas fa-check"></i>Leadership and collaboration badges</li>
+                    </ul>
+                    <small class="text-info">Database: Achievement model with badge management</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h4>Learning Paths</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Personalized learning path creation</li>
+                        <li><i class="fas fa-check"></i>Course sequencing and prerequisites</li>
+                        <li><i class="fas fa-check"></i>Unlock criteria and progression rules</li>
+                        <li><i class="fas fa-check"></i>Path completion tracking</li>
+                        <li><i class="fas fa-check"></i>Adaptive learning recommendations</li>
+                    </ul>
+                    <small class="text-info">Database: LearningPath and LearningPathCourse models</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Study Sessions</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Individual study session tracking</li>
+                        <li><i class="fas fa-check"></i>Duration and activity monitoring</li>
+                        <li><i class="fas fa-check"></i>Learning pattern analysis</li>
+                        <li><i class="fas fa-check"></i>Engagement metrics collection</li>
+                        <li><i class="fas fa-check"></i>Time-on-task reporting</li>
+                    </ul>
+                    <small class="text-info">Database: StudySession model with activity tracking</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4>Analytics & Reporting</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Quiz attempt analysis and scoring</li>
+                        <li><i class="fas fa-check"></i>Assignment submission tracking</li>
+                        <li><i class="fas fa-check"></i>Progress dashboard generation</li>
+                        <li><i class="fas fa-check"></i>Performance trend analysis</li>
+                        <li><i class="fas fa-check"></i>Completion rate calculations</li>
+                    </ul>
+                    <small class="text-info">Integration with QuizAttempt and AssignmentSubmission</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Communication App Details -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">
+                    <i class="fas fa-comments text-primary me-3"></i>
+                    Communication App - Collaboration Hub
+                </h2>
+                <p class="lead text-muted">
+                    Facilitates interaction and collaboration through forums, messaging, notifications, and study groups.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4>Discussion Forums</h4>
+                    <p class="mb-3">Course-based discussion boards with moderation:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Course-specific forum creation</li>
+                        <li><i class="fas fa-check"></i>Topic and reply management</li>
+                        <li><i class="fas fa-check"></i>Pinned topics and locked discussions</li>
+                        <li><i class="fas fa-check"></i>View count and engagement tracking</li>
+                        <li><i class="fas fa-check"></i>Solution marking for Q&A</li>
+                        <li><i class="fas fa-check"></i>Moderation and content control</li>
+                    </ul>
+                    <small class="text-info">Database: Forum, Topic, Reply models</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4>Private Messaging</h4>
+                    <p class="mb-3">Direct communication between users:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>One-on-one messaging system</li>
+                        <li><i class="fas fa-check"></i>Message threading and replies</li>
+                        <li><i class="fas fa-check"></i>Read status and timestamps</li>
+                        <li><i class="fas fa-check"></i>Message archiving capabilities</li>
+                        <li><i class="fas fa-check"></i>Attachment support</li>
+                        <li><i class="fas fa-check"></i>Instructor-student communication</li>
+                    </ul>
+                    <small class="text-info">Database: Message model with threading</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Study Groups</h4>
+                    <p class="mb-3">Collaborative learning communities:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Course-based study group creation</li>
+                        <li><i class="fas fa-check"></i>Member management and roles</li>
+                        <li><i class="fas fa-check"></i>Public and private group options</li>
+                        <li><i class="fas fa-check"></i>Group size limits and controls</li>
+                        <li><i class="fas fa-check"></i>Leadership and moderation roles</li>
+                        <li><i class="fas fa-check"></i>Group activity tracking</li>
+                    </ul>
+                    <small class="text-info">Database: StudyGroup, StudyGroupMembership models</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h4>Notifications</h4>
+                    <p class="mb-3">Smart notification and alert system:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Course enrollment notifications</li>
+                        <li><i class="fas fa-check"></i>Assignment due date reminders</li>
+                        <li><i class="fas fa-check"></i>Forum reply notifications</li>
+                        <li><i class="fas fa-check"></i>Grade posting alerts</li>
+                        <li><i class="fas fa-check"></i>Achievement notifications</li>
+                        <li><i class="fas fa-check"></i>Custom notification preferences</li>
+                    </ul>
+                    <small class="text-info">Database: Notification model with type management</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h4>Announcements</h4>
+                    <p class="mb-3">Course and system-wide announcements:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Course-specific announcements</li>
+                        <li><i class="fas fa-check"></i>Priority level management</li>
+                        <li><i class="fas fa-check"></i>Scheduled publication dates</li>
+                        <li><i class="fas fa-check"></i>Expiration date controls</li>
+                        <li><i class="fas fa-check"></i>Rich text content support</li>
+                        <li><i class="fas fa-check"></i>Instructor and admin posting</li>
+                    </ul>
+                    <small class="text-info">Database: Announcement model with scheduling</small>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Feedback System</h4>
+                    <p class="mb-3">Multi-type feedback and rating system:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Instructor feedback on assignments</li>
+                        <li><i class="fas fa-check"></i>Peer feedback and reviews</li>
+                        <li><i class="fas fa-check"></i>Course evaluation feedback</li>
+                        <li><i class="fas fa-check"></i>Rating system (1-5 stars)</li>
+                        <li><i class="fas fa-check"></i>Anonymous feedback options</li>
+                        <li><i class="fas fa-check"></i>Feedback analytics and reporting</li>
+                    </ul>
+                    <small class="text-info">Database: Feedback model with content type linking</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">Ready to Manage Your LMS System?</h2>
+                <p class="lead mb-4">
+                    Now that you understand how each Django app works together, you can effectively
+                    manage the Entrepreneurship LMS and leverage its full potential for your program.
+                </p>
+                <div class="d-flex gap-3 justify-content-center">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'courses:dashboard' %}" class="btn btn-light btn-lg">
+                            <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                        </a>
+                        <a href="{% url 'courses:course_list' %}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-book me-2"></i>Browse Courses
+                        </a>
+                    {% else %}
+                        <a href="{% url 'yitp:registration' %}" class="btn btn-light btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>Get Started
+                        </a>
+                        <a href="{% url 'account_login' %}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize Bootstrap tabs
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize course app tabs
+        var courseTabList = [].slice.call(document.querySelectorAll('#courseTabs button'))
+        courseTabList.forEach(function (triggerEl) {
+            var tabTrigger = new bootstrap.Tab(triggerEl)
+
+            triggerEl.addEventListener('click', function (event) {
+                event.preventDefault()
+                tabTrigger.show()
+            })
+        })
+    });
+</script>
+{% endblock %}

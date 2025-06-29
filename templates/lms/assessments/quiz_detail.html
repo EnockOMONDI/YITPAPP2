@@ -1,0 +1,239 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}{{ quiz.title }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-question-circle me-2"></i>
+                    {{ quiz.title }}
+                </h1>
+                <a href="{% url 'assessments:quiz_list' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Back to Quizzes
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Quiz Information -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Quiz Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ quiz.description }}</p>
+                    
+                    <div class="row text-center mb-4">
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-primary">{{ quiz.total_questions }}</h4>
+                                <small class="text-muted">Questions</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-secondary">{{ quiz.time_limit }}</h4>
+                                <small class="text-muted">Minutes</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-success">{{ quiz.max_attempts }}</h4>
+                                <small class="text-muted">Max Attempts</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-warning">{{ quiz.passing_score }}%</h4>
+                            <small class="text-muted">Passing Score</small>
+                        </div>
+                    </div>
+
+                    {% if quiz.instructions %}
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-lightbulb me-2"></i>Instructions:</h6>
+                        {{ quiz.instructions|linebreaks }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Previous Attempts -->
+            {% if user_attempts %}
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-history me-2"></i>Your Previous Attempts
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Attempt</th>
+                                    <th>Score</th>
+                                    <th>Percentage</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for attempt in user_attempts %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ attempt.score }}/{{ attempt.total_questions }}</td>
+                                    <td>
+                                        <span class="badge bg-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %}">
+                                            {{ attempt.percentage }}%
+                                        </span>
+                                    </td>
+                                    <td>{{ attempt.completed_at|date:"M d, Y H:i" }}</td>
+                                    <td>
+                                        {% if attempt.percentage >= quiz.passing_score %}
+                                            <span class="badge bg-success">Passed</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Failed</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'assessments:quiz_results' attempt.id %}" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye me-1"></i>View
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Quiz Actions -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-play me-2"></i>Quiz Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if quiz.is_available %}
+                        {% if quiz.can_attempt %}
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'assessments:take_quiz' quiz.id %}" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-play me-2"></i>
+                                    {% if user_attempts %}Start New Attempt{% else %}Start Quiz{% endif %}
+                                </a>
+                            </div>
+                            
+                            {% if user_attempts %}
+                            <div class="alert alert-warning mt-3">
+                                <small>
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    You have used {{ user_attempts|length }}/{{ quiz.max_attempts }} attempts.
+                                </small>
+                            </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="alert alert-danger">
+                                <i class="fas fa-ban me-2"></i>
+                                You have reached the maximum number of attempts for this quiz.
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-secondary">
+                            <i class="fas fa-lock me-2"></i>
+                            This quiz is not currently available.
+                        </div>
+                    {% endif %}
+
+                    <!-- Quiz Statistics -->
+                    <div class="mt-4">
+                        <h6 class="text-muted mb-3">Quiz Statistics</h6>
+                        
+                        {% if best_score is not None %}
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <small>Your Best Score</small>
+                                <small>{{ best_score }}%</small>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-{% if best_score >= quiz.passing_score %}success{% else %}warning{% endif %}" 
+                                     style="width: {{ best_score }}%"></div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-users me-1"></i>
+                                {{ quiz.total_attempts }} total attempts by all students
+                            </small>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-chart-line me-1"></i>
+                                Average score: {{ quiz.average_score }}%
+                            </small>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-percentage me-1"></i>
+                                Pass rate: {{ quiz.pass_rate }}%
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Content -->
+            {% if quiz.lesson %}
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-book me-2"></i>Related Content
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">{{ quiz.lesson.title }}</h6>
+                            <small class="text-muted">{{ quiz.lesson.course.title }}</small>
+                        </div>
+                        <a href="{% url 'courses:lesson_detail' quiz.lesson.id %}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Confirmation before starting quiz
+    $('.btn-primary[href*="take_quiz"]').click(function(e) {
+        if (!confirm('Are you ready to start this quiz? Make sure you have enough time to complete it.')) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -533,7 +533,7 @@ class OTPVerificationAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone_number', 'website', 'bio_preview']
+    list_display = ['user', 'phone_number', 'bio_preview']
     search_fields = ['user__username', 'user__email', 'phone_number']
     list_filter = ['user__date_joined']
     ordering = ['user__username']

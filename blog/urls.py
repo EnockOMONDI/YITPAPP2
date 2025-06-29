@@ -54,6 +54,12 @@ urlpatterns = [
     path('users', include('users.urls')),
     path('blogs/', include('blogapp.urls')),
     path('events/', include('events.urls')),
+     # LMS apps
+    path('lms/courses/', include('courses.urls')),
+    path('lms/progress/', include('progress.urls')),
+    path('lms/assessments/', include('assessments.urls')),
+    path('lms/communication/', include('communication.urls')),
+    path('lms/content/', include('content.urls')),
 
 ]
 

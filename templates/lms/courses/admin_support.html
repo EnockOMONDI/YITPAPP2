@@ -1,0 +1,939 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Admin Support - Entrepreneurship LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Header Section */
+    .section-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 4rem 0;
+        margin-bottom: 0;
+    }
+    
+    /* Statistics Cards */
+    .stats-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        border: none;
+        height: 100%;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Feature Icons */
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        color: white;
+        font-size: 2rem;
+    }
+    
+    /* Process Steps */
+    .process-step {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        height: 100%;
+        position: relative;
+    }
+    
+    .process-step:hover {
+        transform: translateY(-5px);
+    }
+    
+    .step-number {
+        position: absolute;
+        top: -15px;
+        left: 30px;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+    
+    /* Feature Lists */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .feature-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .feature-list li:last-child {
+        border-bottom: none;
+    }
+    
+    .feature-list i {
+        color: var(--success-color);
+        margin-right: 0.5rem;
+        width: 20px;
+    }
+    
+    /* Role Cards */
+    .role-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    
+    .role-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .role-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: white;
+        font-size: 1.5rem;
+    }
+    
+    /* Flow Diagram */
+    .flow-diagram {
+        background: #f8fafc;
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .flow-step {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        position: relative;
+    }
+    
+    .flow-arrow {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+    }
+    
+    /* Call to Action */
+    .section-cta {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 4rem 0;
+        margin-top: 4rem;
+    }
+    
+    /* Workflow Cards */
+    .workflow-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .workflow-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    
+    .workflow-number {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    
+    /* Admin Panel Links */
+    .admin-link {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0.25rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    
+    .admin-link:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .section-header {
+            padding: 2rem 0;
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="section-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-tools me-3"></i>
+                    Admin Support Guide
+                </h1>
+                <p class="lead mb-4">
+                    Complete Administrator Guide to the Entrepreneurship LMS System
+                </p>
+                <p class="fs-5">
+                    Comprehensive documentation for system administrators, program managers, 
+                    and support staff to effectively manage the Django Entrepreneurship LMS platform.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Overview -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ total_courses|default:"0" }}</div>
+                    <h5>Active Courses</h5>
+                    <p class="text-muted">Published and available courses</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ total_students|default:"0" }}</div>
+                    <h5>Total Users</h5>
+                    <p class="text-muted">Registered system users</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ active_enrollments|default:"0" }}</div>
+                    <h5>Active Enrollments</h5>
+                    <p class="text-muted">Students currently enrolled</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stats-card">
+                    <div class="stats-number">{{ total_categories|default:"0" }}</div>
+                    <h5>Course Categories</h5>
+                    <p class="text-muted">Organized learning areas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Overview -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">System Overview</h2>
+                <p class="lead text-muted">
+                    Understanding the Django Entrepreneurship LMS platform architecture and core components
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>User Management</h4>
+                    <p class="text-muted">
+                        Comprehensive user account system with role-based access control, 
+                        profile management, and authentication workflows for students, 
+                        instructors, and administrators.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Course Management</h4>
+                    <p class="text-muted">
+                        Complete course lifecycle management including creation, organization, 
+                        enrollment tracking, and progress monitoring with flexible content delivery.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Analytics & Reporting</h4>
+                    <p class="text-muted">
+                        Real-time analytics, progress tracking, and comprehensive reporting 
+                        tools for monitoring system performance and student outcomes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- User Journey Flows -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">Complete User Journey Flows</h2>
+                <p class="lead text-muted">
+                    Understanding how different user types interact with the LMS system from registration to completion
+                </p>
+            </div>
+        </div>
+
+        <!-- Student Journey -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">
+                    <i class="fas fa-user-graduate text-primary me-2"></i>
+                    Student Learning Journey
+                </h3>
+                <div class="flow-diagram">
+                    <div class="row text-center">
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-user-plus text-primary mb-2"></i>
+                                <h6>Registration</h6>
+                                <small>Account creation and email verification</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-search text-primary mb-2"></i>
+                                <h6>Course Discovery</h6>
+                                <small>Browse and search available courses</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-hand-pointer text-primary mb-2"></i>
+                                <h6>Enrollment</h6>
+                                <small>Enroll in selected courses</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-play text-primary mb-2"></i>
+                                <h6>Learning</h6>
+                                <small>Access lessons and complete activities</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-3">
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-clipboard-check text-success mb-2"></i>
+                                <h6>Assessments</h6>
+                                <small>Complete quizzes and assignments</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-chart-line text-success mb-2"></i>
+                                <h6>Progress Tracking</h6>
+                                <small>Monitor learning progress</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-comments text-success mb-2"></i>
+                                <h6>Collaboration</h6>
+                                <small>Participate in forums and discussions</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-certificate text-success mb-2"></i>
+                                <h6>Completion</h6>
+                                <small>Earn certificates and achievements</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructor Journey -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">
+                    <i class="fas fa-chalkboard-teacher text-secondary me-2"></i>
+                    Instructor Workflow
+                </h3>
+                <div class="flow-diagram">
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-plus-circle text-secondary mb-2"></i>
+                                <h6>Course Creation</h6>
+                                <small>Design and structure new courses</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-file-upload text-secondary mb-2"></i>
+                                <h6>Content Upload</h6>
+                                <small>Add lessons, resources, and materials</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-tasks text-secondary mb-2"></i>
+                                <h6>Assessment Setup</h6>
+                                <small>Create quizzes and assignments</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-3">
+                        <div class="col-md-3 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-eye text-warning mb-2"></i>
+                                <h6>Student Monitoring</h6>
+                                <small>Track student progress and engagement</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-comment-dots text-warning mb-2"></i>
+                                <h6>Student Support</h6>
+                                <small>Provide feedback and assistance</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-arrow-right flow-arrow"></i>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="flow-step">
+                                <i class="fas fa-chart-bar text-warning mb-2"></i>
+                                <h6>Performance Analysis</h6>
+                                <small>Review course analytics and outcomes</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Administrative Workflows -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">Administrative Workflows</h2>
+                <p class="lead text-muted">
+                    Step-by-step processes for common administrative tasks and system management
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>User Account Management</h4>
+                    <p class="mb-3">
+                        Complete workflow for managing user accounts, roles, and permissions across the system.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Create and activate user accounts</li>
+                        <li><i class="fas fa-check"></i>Assign roles (Student, Instructor, Admin)</li>
+                        <li><i class="fas fa-check"></i>Manage user permissions and access levels</li>
+                        <li><i class="fas fa-check"></i>Handle password resets and account recovery</li>
+                        <li><i class="fas fa-check"></i>Monitor user activity and engagement</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="/admin/accounts/customuser/" class="admin-link">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            Manage Users
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Course Administration</h4>
+                    <p class="mb-3">
+                        Comprehensive course management from creation to completion monitoring.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Approve and publish new courses</li>
+                        <li><i class="fas fa-check"></i>Manage course categories and organization</li>
+                        <li><i class="fas fa-check"></i>Monitor enrollment numbers and trends</li>
+                        <li><i class="fas fa-check"></i>Review course content and quality</li>
+                        <li><i class="fas fa-check"></i>Handle course-related support requests</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="/admin/courses/course/" class="admin-link">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            Manage Courses
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Content Quality Control</h4>
+                    <p class="mb-3">
+                        Ensuring high-quality educational content and maintaining platform standards.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Review and approve new content submissions</li>
+                        <li><i class="fas fa-check"></i>Monitor content quality and accuracy</li>
+                        <li><i class="fas fa-check"></i>Manage content libraries and resources</li>
+                        <li><i class="fas fa-check"></i>Handle content-related issues and reports</li>
+                        <li><i class="fas fa-check"></i>Maintain content standards and guidelines</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="/admin/content/contentitem/" class="admin-link">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            Manage Content
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>System Monitoring & Analytics</h4>
+                    <p class="mb-3">
+                        Comprehensive system performance monitoring and data analysis.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Monitor system performance and uptime</li>
+                        <li><i class="fas fa-check"></i>Analyze user engagement and learning outcomes</li>
+                        <li><i class="fas fa-check"></i>Generate reports for stakeholders</li>
+                        <li><i class="fas fa-check"></i>Track enrollment and completion trends</li>
+                        <li><i class="fas fa-check"></i>Identify and resolve system issues</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="/admin/progress/enrollment/" class="admin-link">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            View Analytics
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Architecture -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">System Architecture & Components</h2>
+                <p class="lead text-muted">
+                    Understanding the technical foundation and key components of the LMS platform
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4>Backend Framework</h4>
+                    <p class="text-muted mb-3">
+                        <strong>Django 5.2</strong> - Robust Python web framework providing secure,
+                        scalable foundation for the LMS platform.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Model-View-Template architecture</li>
+                        <li><i class="fas fa-check"></i>Built-in admin interface</li>
+                        <li><i class="fas fa-check"></i>User authentication system</li>
+                        <li><i class="fas fa-check"></i>Database ORM and migrations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>Database System</h4>
+                    <p class="text-muted mb-3">
+                        <strong>PostgreSQL</strong> - Enterprise-grade relational database
+                        ensuring data integrity and performance.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>ACID compliance</li>
+                        <li><i class="fas fa-check"></i>Advanced indexing</li>
+                        <li><i class="fas fa-check"></i>JSON field support</li>
+                        <li><i class="fas fa-check"></i>Full-text search capabilities</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h4>Frontend Framework</h4>
+                    <p class="text-muted mb-3">
+                        <strong>Bootstrap 5</strong> - Modern responsive framework
+                        ensuring consistent, mobile-first user experience.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Responsive grid system</li>
+                        <li><i class="fas fa-check"></i>Component library</li>
+                        <li><i class="fas fa-check"></i>Utility classes</li>
+                        <li><i class="fas fa-check"></i>JavaScript interactions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Django Apps Structure -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Django Applications Structure</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="workflow-card">
+                            <div class="d-flex align-items-center">
+                                <div class="workflow-number">1</div>
+                                <div>
+                                    <h5 class="mb-1">Accounts App</h5>
+                                    <p class="mb-0 text-muted">User management, profiles, authentication</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="workflow-card">
+                            <div class="d-flex align-items-center">
+                                <div class="workflow-number">2</div>
+                                <div>
+                                    <h5 class="mb-1">Courses App</h5>
+                                    <p class="mb-0 text-muted">Course structure, categories, enrollment</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="workflow-card">
+                            <div class="d-flex align-items-center">
+                                <div class="workflow-number">3</div>
+                                <div>
+                                    <h5 class="mb-1">Content App</h5>
+                                    <p class="mb-0 text-muted">Lessons, resources, multimedia content</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="workflow-card">
+                            <div class="d-flex align-items-center">
+                                <div class="workflow-number">4</div>
+                                <div>
+                                    <h5 class="mb-1">Assessments App</h5>
+                                    <p class="mb-0 text-muted">Quizzes, assignments, grading system</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="workflow-card">
+                            <div class="d-flex align-items-center">
+                                <div class="workflow-number">5</div>
+                                <div>
+                                    <h5 class="mb-1">Progress App</h5>
+                                    <p class="mb-0 text-muted">Learning analytics, achievements, tracking</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="workflow-card">
+                            <div class="d-flex align-items-center">
+                                <div class="workflow-number">6</div>
+                                <div>
+                                    <h5 class="mb-1">Communication App</h5>
+                                    <p class="mb-0 text-muted">Forums, messaging, notifications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Troubleshooting & Support -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">Troubleshooting & Support</h2>
+                <p class="lead text-muted">
+                    Common issues, solutions, and support procedures for system administrators
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-user-times"></i>
+                    </div>
+                    <h4>User Account Issues</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Password reset procedures</li>
+                        <li><i class="fas fa-check"></i>Account activation problems</li>
+                        <li><i class="fas fa-check"></i>Email verification issues</li>
+                        <li><i class="fas fa-check"></i>Permission and role conflicts</li>
+                        <li><i class="fas fa-check"></i>Profile data inconsistencies</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="/admin/accounts/customuser/" class="admin-link">
+                            <i class="fas fa-tools me-1"></i>
+                            User Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>Course & Content Issues</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Course publishing problems</li>
+                        <li><i class="fas fa-check"></i>Content upload failures</li>
+                        <li><i class="fas fa-check"></i>Enrollment processing errors</li>
+                        <li><i class="fas fa-check"></i>Progress tracking issues</li>
+                        <li><i class="fas fa-check"></i>Assessment submission problems</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="/admin/courses/course/" class="admin-link">
+                            <i class="fas fa-tools me-1"></i>
+                            Course Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="role-card">
+                    <div class="role-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4>System Performance</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Database performance optimization</li>
+                        <li><i class="fas fa-check"></i>Memory usage monitoring</li>
+                        <li><i class="fas fa-check"></i>Response time analysis</li>
+                        <li><i class="fas fa-check"></i>Error log investigation</li>
+                        <li><i class="fas fa-check"></i>Cache management</li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="/admin/" class="admin-link">
+                            <i class="fas fa-tools me-1"></i>
+                            System Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Admin Actions -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Quick Admin Actions</h3>
+                <div class="text-center">
+                    <a href="/admin/" class="admin-link me-2 mb-2">
+                        <i class="fas fa-tachometer-alt me-1"></i>
+                        Admin Dashboard
+                    </a>
+                    <a href="/admin/accounts/customuser/" class="admin-link me-2 mb-2">
+                        <i class="fas fa-users me-1"></i>
+                        Manage Users
+                    </a>
+                    <a href="/admin/courses/course/" class="admin-link me-2 mb-2">
+                        <i class="fas fa-graduation-cap me-1"></i>
+                        Manage Courses
+                    </a>
+                    <a href="/admin/progress/enrollment/" class="admin-link me-2 mb-2">
+                        <i class="fas fa-chart-bar me-1"></i>
+                        View Enrollments
+                    </a>
+                    <a href="/admin/content/contentitem/" class="admin-link me-2 mb-2">
+                        <i class="fas fa-file-alt me-1"></i>
+                        Manage Content
+                    </a>
+                    <a href="/admin/assessments/quiz/" class="admin-link me-2 mb-2">
+                        <i class="fas fa-clipboard-check me-1"></i>
+                        Manage Assessments
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section-cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">Ready to Manage Your LMS?</h2>
+                <p class="lead mb-4">
+                    Access the Django admin interface to start managing users, courses, and content.
+                    Use this guide as your reference for effective system administration.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="/admin/" class="btn btn-light btn-lg">
+                        <i class="fas fa-cog me-2"></i>
+                        Access Admin Panel
+                    </a>
+                    <a href="{% url 'courses:how_it_works' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-info-circle me-2"></i>
+                        How It Works
+                    </a>
+                    <a href="{% url 'courses:home' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-home me-2"></i>
+                        Back to Home
+                    </a>
+                </div>
+
+                <div class="mt-5">
+                    <h4 class="mb-3">System Status Overview</h4>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="text-center">
+                                <div class="h3 mb-1">{{ total_courses|default:"0" }}</div>
+                                <small>Active Courses</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="text-center">
+                                <div class="h3 mb-1">{{ active_enrollments|default:"0" }}</div>
+                                <small>Active Enrollments</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="text-center">
+                                <div class="h3 mb-1">{{ total_students|default:"0" }}</div>
+                                <small>Total Users</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="text-center">
+                                <div class="h3 mb-1">{{ completed_courses|default:"0" }}</div>
+                                <small>Completed Courses</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

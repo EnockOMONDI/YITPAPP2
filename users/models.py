@@ -18,7 +18,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio = models.TextField(default='Edit your Bio!')
-    website = models.CharField(max_length=40)
     phone_number = models.CharField(max_length=20, blank=True, null=True, help_text="Contact phone number")
 
     def __str__(self):

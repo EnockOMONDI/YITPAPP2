@@ -1,0 +1,300 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Quiz Results: {{ quiz.title }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-chart-line me-2"></i>
+                    Quiz Results
+                </h1>
+                <div class="btn-group">
+                    <a href="{% url 'assessments:quiz_detail' quiz.id %}" class="btn btn-outline-primary">
+                        <i class="fas fa-info-circle me-1"></i>Quiz Details
+                    </a>
+                    <a href="{% url 'assessments:quiz_list' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-list me-1"></i>All Quizzes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Summary -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %} text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-{% if attempt.percentage >= quiz.passing_score %}check-circle{% else %}times-circle{% endif %} me-2"></i>
+                            {{ quiz.title }}
+                        </h5>
+                        <span class="badge bg-white text-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %}">
+                            {% if attempt.percentage >= quiz.passing_score %}PASSED{% else %}FAILED{% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h3 class="text-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %}">
+                                    {{ attempt.percentage }}%
+                                </h3>
+                                <small class="text-muted">Your Score</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h3 class="text-primary">{{ attempt.score }}/{{ attempt.total_questions }}</h3>
+                                <small class="text-muted">Correct Answers</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h3 class="text-secondary">{{ quiz.passing_score }}%</h3>
+                                <small class="text-muted">Passing Score</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="text-info">{{ attempt.time_taken }}</h3>
+                            <small class="text-muted">Time Taken</small>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="progress mb-2" style="height: 20px;">
+                                <div class="progress-bar bg-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %}" 
+                                     style="width: {{ attempt.percentage }}%">
+                                    {{ attempt.percentage }}%
+                                </div>
+                            </div>
+                            <small class="text-muted">Your Performance</small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-end">
+                                <p class="mb-1">
+                                    <strong>Completed:</strong> {{ attempt.completed_at|date:"M d, Y H:i" }}
+                                </p>
+                                <p class="mb-0">
+                                    <strong>Attempt:</strong> {{ attempt.attempt_number }} of {{ quiz.max_attempts }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Results -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list-alt me-2"></i>Question-by-Question Review
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% for result in question_results %}
+                    <div class="question-result mb-4 pb-4 {% if not forloop.last %}border-bottom{% endif %}">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="text-primary">Question {{ forloop.counter }}</h6>
+                            <span class="badge bg-{% if result.is_correct %}success{% else %}danger{% endif %}">
+                                {% if result.is_correct %}
+                                    <i class="fas fa-check me-1"></i>Correct
+                                {% else %}
+                                    <i class="fas fa-times me-1"></i>Incorrect
+                                {% endif %}
+                                {% if result.points %}({{ result.points }} pts){% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="question-text mb-3">
+                            {{ result.question.question_text|linebreaks }}
+                        </div>
+
+                        {% if result.question.question_type == 'multiple_choice' %}
+                            <div class="choices">
+                                {% for choice in result.question.choices.all %}
+                                <div class="form-check mb-1">
+                                    <input class="form-check-input" type="radio" disabled
+                                           {% if choice.id == result.user_answer_id %}checked{% endif %}>
+                                    <label class="form-check-label
+                                           {% if choice.is_correct %}text-success fw-bold{% endif %}
+                                           {% if choice.id == result.user_answer_id and not choice.is_correct %}text-danger{% endif %}">
+                                        {{ choice.choice_text }}
+                                        {% if choice.is_correct %}
+                                            <i class="fas fa-check text-success ms-1"></i>
+                                        {% elif choice.id == result.user_answer_id %}
+                                            <i class="fas fa-times text-danger ms-1"></i>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% elif result.question.question_type == 'true_false' %}
+                            <div class="choices">
+                                <div class="form-check mb-1">
+                                    <input class="form-check-input" type="radio" disabled
+                                           {% if result.user_answer == 'true' %}checked{% endif %}>
+                                    <label class="form-check-label
+                                           {% if result.question.correct_answer == 'true' %}text-success fw-bold{% endif %}
+                                           {% if result.user_answer == 'true' and result.question.correct_answer != 'true' %}text-danger{% endif %}">
+                                        True
+                                        {% if result.question.correct_answer == 'true' %}
+                                            <i class="fas fa-check text-success ms-1"></i>
+                                        {% elif result.user_answer == 'true' %}
+                                            <i class="fas fa-times text-danger ms-1"></i>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-check mb-1">
+                                    <input class="form-check-input" type="radio" disabled
+                                           {% if result.user_answer == 'false' %}checked{% endif %}>
+                                    <label class="form-check-label
+                                           {% if result.question.correct_answer == 'false' %}text-success fw-bold{% endif %}
+                                           {% if result.user_answer == 'false' and result.question.correct_answer != 'false' %}text-danger{% endif %}">
+                                        False
+                                        {% if result.question.correct_answer == 'false' %}
+                                            <i class="fas fa-check text-success ms-1"></i>
+                                        {% elif result.user_answer == 'false' %}
+                                            <i class="fas fa-times text-danger ms-1"></i>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="user-answer mb-2">
+                                <strong>Your Answer:</strong>
+                                <div class="border rounded p-2 bg-light">
+                                    {{ result.user_answer|default:"No answer provided"|linebreaks }}
+                                </div>
+                            </div>
+                            {% if result.question.sample_answer %}
+                            <div class="sample-answer">
+                                <strong>Sample Answer:</strong>
+                                <div class="border rounded p-2 bg-success bg-opacity-10">
+                                    {{ result.question.sample_answer|linebreaks }}
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if result.question.explanation %}
+                        <div class="explanation mt-2">
+                            <small class="text-muted">
+                                <strong>Explanation:</strong> {{ result.question.explanation }}
+                            </small>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Performance Summary -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-chart-pie me-2"></i>Performance Summary
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small>Correct Answers</small>
+                            <small>{{ attempt.score }}/{{ attempt.total_questions }}</small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" 
+                                 style="width: {{ attempt.percentage }}%"></div>
+                        </div>
+                    </div>
+
+                    {% if category_breakdown %}
+                    <h6 class="text-muted mb-2">By Category:</h6>
+                    {% for category in category_breakdown %}
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small>{{ category.name }}</small>
+                            <small>{{ category.score }}/{{ category.total }}</small>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" 
+                                 style="width: {{ category.percentage }}%"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-forward me-2"></i>Next Steps
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if attempt.percentage >= quiz.passing_score %}
+                        <div class="alert alert-success">
+                            <i class="fas fa-trophy me-2"></i>
+                            Congratulations! You passed this quiz.
+                        </div>
+                        
+                        {% if next_quiz %}
+                        <a href="{% url 'assessments:quiz_detail' next_quiz.id %}" class="btn btn-primary btn-sm w-100 mb-2">
+                            <i class="fas fa-arrow-right me-1"></i>Next Quiz
+                        </a>
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            You need {{ quiz.passing_score }}% to pass.
+                        </div>
+                        
+                        {% if can_retake %}
+                        <a href="{% url 'assessments:take_quiz' quiz.id %}" class="btn btn-warning btn-sm w-100 mb-2">
+                            <i class="fas fa-redo me-1"></i>Retake Quiz
+                        </a>
+                        {% endif %}
+                        
+                        {% if study_materials %}
+                        <a href="{{ study_materials.url }}" class="btn btn-info btn-sm w-100 mb-2">
+                            <i class="fas fa-book me-1"></i>Study Materials
+                        </a>
+                        {% endif %}
+                    {% endif %}
+
+                    <a href="{% url 'assessments:quiz_list' %}" class="btn btn-outline-secondary btn-sm w-100">
+                        <i class="fas fa-list me-1"></i>All Quizzes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Print results functionality
+    $('#print-results').click(function() {
+        window.print();
+    });
+});
+</script>
+{% endblock %}

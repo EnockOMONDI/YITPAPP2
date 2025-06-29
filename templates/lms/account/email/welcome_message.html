@@ -1,0 +1,198 @@
+{% extends "account/email/base.html" %}
+{% load account %}
+
+{% block title %}Welcome to Youth Impact Training Programme{% endblock %}
+
+{% block preheader %}🎉 Welcome to YITP! Your entrepreneurship education begins now. Access courses, connect with mentors, and start building your business empire.{% endblock %}
+
+{% block header_title %}🎉 Welcome to Your Future!{% endblock %}
+{% block header_subtitle %}Your entrepreneurial transformation begins now{% endblock %}
+
+{% block content %}
+<h2 style="color: #1f2937; font-size: 32px; margin-bottom: 24px; font-weight: 700; line-height: 1.2; text-align: center;">
+    🚀 Welcome to the Youth Impact Training Programme!
+</h2>
+
+<p style="margin-bottom: 18px; font-size: 20px; line-height: 1.6; color: #374151; font-weight: 600; text-align: center;">
+    Hello {{ user.first_name|default:"Future Entrepreneur" }}! 👋
+</p>
+
+<div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #bbf7d0; border-radius: 12px; padding: 28px; margin: 32px 0; text-align: center;">
+    <p style="margin: 0 0 12px 0; font-size: 18px; color: #166534; font-weight: 700;">
+        🎊 CONGRATULATIONS! 🎊
+    </p>
+    <p style="margin: 0; font-size: 16px; color: #15803d; line-height: 1.6;">
+        Your email is confirmed and your account is now <strong>ACTIVE</strong>!<br>
+        You're officially part of the global YITP entrepreneur community.
+    </p>
+</div>
+
+<div style="text-align: center; margin: 36px 0;">
+    <a href="http://127.0.0.1:8000/dashboard/" style="display: inline-block; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white !important; text-decoration: none; padding: 20px 40px; border-radius: 12px; font-weight: 700; font-size: 20px; box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); transition: all 0.3s ease;">
+        🏆 Launch My Entrepreneur Dashboard
+    </a>
+</div>
+
+<div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #bfdbfe; border-radius: 12px; padding: 28px; margin: 32px 0;">
+    <h3 style="color: #1e40af; font-size: 22px; margin: 0 0 20px 0; font-weight: 700; text-align: center;">
+        🎯 Your Entrepreneurship Toolkit Awaits:
+    </h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+        <div style="text-align: center; padding: 16px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">📚</div>
+            <h4 style="color: #1e40af; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">World-Class Courses</h4>
+            <p style="color: #3730a3; font-size: 14px; margin: 0; line-height: 1.4;">Comprehensive business curriculum designed by industry experts</p>
+        </div>
+        <div style="text-align: center; padding: 16px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">👥</div>
+            <h4 style="color: #1e40af; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">Global Community</h4>
+            <p style="color: #3730a3; font-size: 14px; margin: 0; line-height: 1.4;">Connect with 10,000+ ambitious young entrepreneurs</p>
+        </div>
+        <div style="text-align: center; padding: 16px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">🧠</div>
+            <h4 style="color: #1e40af; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">Expert Mentorship</h4>
+            <p style="color: #3730a3; font-size: 14px; margin: 0; line-height: 1.4;">Learn from successful entrepreneurs and industry leaders</p>
+        </div>
+        <div style="text-align: center; padding: 16px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">🚀</div>
+            <h4 style="color: #1e40af; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">Real-World Projects</h4>
+            <p style="color: #3730a3; font-size: 14px; margin: 0; line-height: 1.4;">Build actual businesses while you learn</p>
+        </div>
+    </div>
+</div>
+
+<div style="background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%); border: 2px solid #fde68a; border-radius: 12px; padding: 28px; margin: 32px 0;">
+    <h3 style="color: #92400e; font-size: 20px; margin: 0 0 16px 0; font-weight: 700;">
+        🏃‍♂️ Your 7-Day Quick Start Challenge:
+    </h3>
+    <ol style="list-style: none; padding: 0; margin: 0; counter-reset: step-counter;">
+        <li style="padding: 12px 0; position: relative; padding-left: 40px; color: #92400e; font-weight: 500; counter-increment: step-counter;">
+            <span style="position: absolute; left: 0; top: 12px; background: #f59e0b; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">1</span>
+            <strong>Day 1:</strong> Complete your entrepreneur profile and set your business goals
+        </li>
+        <li style="padding: 12px 0; position: relative; padding-left: 40px; color: #92400e; font-weight: 500; counter-increment: step-counter;">
+            <span style="position: absolute; left: 0; top: 12px; background: #f59e0b; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">2</span>
+            <strong>Day 2-3:</strong> Explore our course catalog and enroll in your first course
+        </li>
+        <li style="padding: 12px 0; position: relative; padding-left: 40px; color: #92400e; font-weight: 500; counter-increment: step-counter;">
+            <span style="position: absolute; left: 0; top: 12px; background: #f59e0b; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">3</span>
+            <strong>Day 4-5:</strong> Complete your first lesson and join the community discussions
+        </li>
+        <li style="padding: 12px 0; position: relative; padding-left: 40px; color: #92400e; font-weight: 500; counter-increment: step-counter;">
+            <span style="position: absolute; left: 0; top: 12px; background: #f59e0b; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">4</span>
+            <strong>Day 6-7:</strong> Start working on your first business idea using our frameworks
+        </li>
+    </ol>
+</div>
+
+<div style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border: 2px solid #c4b5fd; border-radius: 12px; padding: 28px; margin: 32px 0;">
+    <h3 style="color: #6b21a8; font-size: 22px; margin: 0 0 20px 0; font-weight: 700; text-align: center;">
+        🎓 Featured Learning Paths for Future CEOs:
+    </h3>
+    <div style="display: grid; gap: 16px;">
+        <div style="background: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h4 style="color: #6b21a8; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">🚀 Startup Fundamentals</h4>
+            <p style="color: #7c3aed; font-size: 14px; margin: 0; line-height: 1.4;">Master the essentials of launching and scaling a successful startup from idea to IPO</p>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h4 style="color: #6b21a8; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">💡 Innovation & Design Thinking</h4>
+            <p style="color: #7c3aed; font-size: 14px; margin: 0; line-height: 1.4;">Develop breakthrough products and services using proven innovation methodologies</p>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h4 style="color: #6b21a8; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">📊 Strategic Business Planning</h4>
+            <p style="color: #7c3aed; font-size: 14px; margin: 0; line-height: 1.4;">Create winning business strategies and comprehensive plans that attract investors</p>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h4 style="color: #6b21a8; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">💰 Funding & Financial Mastery</h4>
+            <p style="color: #7c3aed; font-size: 14px; margin: 0; line-height: 1.4;">Navigate funding rounds, manage finances, and build sustainable revenue models</p>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h4 style="color: #6b21a8; font-size: 16px; margin: 0 0 8px 0; font-weight: 600;">📈 Growth Marketing & Sales</h4>
+            <p style="color: #7c3aed; font-size: 14px; margin: 0; line-height: 1.4;">Build powerful marketing funnels and sales systems that scale your business</p>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center; margin: 36px 0;">
+    <h3 style="color: #1f2937; font-size: 20px; margin: 0 0 20px 0; font-weight: 600;">
+        Ready to Start Building Your Empire? 🏰
+    </h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; max-width: 500px; margin: 0 auto;">
+        <a href="http://127.0.0.1:8000/courses/" style="display: block; background: #2563eb; color: white !important; text-decoration: none; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center;">
+            📚 Browse Courses
+        </a>
+        <a href="http://127.0.0.1:8000/how-it-works/" style="display: block; background: #059669; color: white !important; text-decoration: none; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center;">
+            🎯 How It Works
+        </a>
+        <a href="http://127.0.0.1:8000/admin-support/" style="display: block; background: #dc2626; color: white !important; text-decoration: none; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-align: center;">
+            🆘 Get Support
+        </a>
+    </div>
+</div>
+
+<div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 2px solid #fca5a5; border-radius: 12px; padding: 24px; margin: 32px 0;">
+    <h3 style="color: #991b1b; font-size: 18px; margin: 0 0 16px 0; font-weight: 600;">
+        🔐 Keep Your Entrepreneur Account Secure:
+    </h3>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+        <li style="padding: 6px 0; position: relative; padding-left: 24px; color: #991b1b;">
+            <span style="position: absolute; left: 0; top: 6px; color: #dc2626;">•</span>
+            Never share your login credentials with anyone
+        </li>
+        <li style="padding: 6px 0; position: relative; padding-left: 24px; color: #991b1b;">
+            <span style="position: absolute; left: 0; top: 6px; color: #dc2626;">•</span>
+            Use a strong, unique password for your YITP account
+        </li>
+        <li style="padding: 6px 0; position: relative; padding-left: 24px; color: #991b1b;">
+            <span style="position: absolute; left: 0; top: 6px; color: #dc2626;">•</span>
+            Always log out when using shared or public computers
+        </li>
+        <li style="padding: 6px 0; position: relative; padding-left: 24px; color: #991b1b;">
+            <span style="position: absolute; left: 0; top: 6px; color: #dc2626;">•</span>
+            Contact support immediately if you notice any suspicious activity
+        </li>
+    </ul>
+</div>
+
+<div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #bbf7d0; border-radius: 12px; padding: 28px; margin: 32px 0; text-align: center;">
+    <p style="margin: 0 0 16px 0; font-size: 18px; color: #166534; font-weight: 700;">
+        🌟 You're Now Part of Something Amazing! 🌟
+    </p>
+    <p style="margin: 0 0 16px 0; font-size: 16px; color: #15803d; line-height: 1.6;">
+        Join <strong>10,000+ young entrepreneurs</strong> who are already building the future.<br>
+        Our community has launched <strong>500+ successful startups</strong> and raised <strong>$50M+ in funding</strong>.
+    </p>
+    <p style="margin: 0; font-size: 16px; color: #15803d; font-weight: 600;">
+        Your success story starts TODAY! 🚀
+    </p>
+</div>
+
+<p style="margin-bottom: 18px; font-size: 18px; line-height: 1.7; color: #1f2937; font-weight: 600; text-align: center;">
+    We're beyond excited to be part of your entrepreneurial journey and can't wait to see the incredible businesses you'll build!
+</p>
+
+<p style="margin-bottom: 18px; font-size: 16px; line-height: 1.7; color: #4b5563; text-align: center;">
+    Remember: Every successful entrepreneur started exactly where you are now. The difference? They took action.
+</p>
+
+<div style="text-align: center; margin: 36px 0;">
+    <a href="http://127.0.0.1:8000/courses/" style="display: inline-block; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white !important; text-decoration: none; padding: 20px 40px; border-radius: 12px; font-weight: 700; font-size: 20px; box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4); transition: all 0.3s ease;">
+        🎯 Start Your First Course Now
+    </a>
+</div>
+
+<p style="margin-bottom: 8px; font-size: 16px; line-height: 1.7; color: #4b5563; text-align: center;">
+    To your entrepreneurial success,
+</p>
+<p style="margin: 0; font-size: 18px; line-height: 1.7; color: #1f2937; font-weight: 700; text-align: center;">
+    <strong>The Youth Impact Training Programme Team</strong><br>
+    <span style="color: #6b7280; font-weight: 400; font-size: 16px;">Building Tomorrow's Business Leaders Today</span>
+</p>
+
+<div style="text-align: center; margin: 32px 0; padding: 20px; background: #f9fafb; border-radius: 8px;">
+    <p style="margin: 0; font-size: 14px; color: #6b7280; font-style: italic;">
+        "The best time to plant a tree was 20 years ago. The second best time is now."<br>
+        <strong>- Your entrepreneurial journey starts today! 🌱</strong>
+    </p>
+</div>
+{% endblock %}

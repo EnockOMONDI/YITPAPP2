@@ -50,6 +50,13 @@ INSTALLED_APPS = [
     'yitp',
     'blogapp',  # Fixed to match actual directory name (blogapp)
     'events',
+       # New LMS apps
+    'courses',
+    'progress',
+    'assessments',
+    'communication',
+    'content',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +67,12 @@ INSTALLED_APPS = [
     'taggit',
     'import_export',
     'ckeditor_uploader',
+
+    # Third-party apps
+   'rest_framework',
+   'crispy_forms',
+   'crispy_bootstrap5',
+   'corsheaders',
 ]
 
 

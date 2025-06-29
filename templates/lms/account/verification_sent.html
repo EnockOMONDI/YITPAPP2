@@ -1,0 +1,144 @@
+{% extends 'lms/base.html' %}
+{% load i18n %}
+
+{% block title %}Verification Sent - Entrepreneurship LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-container {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+    
+    .auth-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 450px;
+        width: 100%;
+    }
+    
+    .auth-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .auth-header h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+    
+    .auth-header p {
+        margin: 0.5rem 0 0 0;
+        opacity: 0.9;
+    }
+    
+    .auth-body {
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .btn-auth {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .btn-auth:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    }
+    
+    .success-message {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        color: #166534;
+    }
+    
+    .success-message i {
+        color: #16a34a;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .auth-links {
+        text-align: center;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e2e8f0;
+    }
+    
+    .auth-links a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    
+    .auth-links a:hover {
+        color: var(--secondary-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <i class="fas fa-paper-plane fa-2x mb-3"></i>
+                        <h1>Verification Sent</h1>
+                        <p>Check your email to verify your account</p>
+                    </div>
+                    
+                    <div class="auth-body">
+                        <div class="success-message">
+                            <i class="fas fa-envelope-open-text d-block"></i>
+                            <strong>Account created successfully!</strong><br>
+                            We've sent a verification email to your address. Please check your inbox 
+                            and click the verification link to activate your account.
+                        </div>
+                        
+                        <p class="text-muted mb-3">
+                            <strong>Important:</strong> You'll need to verify your email address 
+                            before you can sign in to your account.
+                        </p>
+                        
+                        <a href="{% url 'account_login' %}" class="btn btn-primary btn-auth">
+                            <i class="fas fa-sign-in-alt me-2"></i>
+                            Go to Sign In
+                        </a>
+                        
+                        <div class="auth-links">
+                            <p class="mb-0">
+                                Didn't receive the email? 
+                                <a href="{% url 'account_email' %}">
+                                    <strong>Resend verification</strong>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

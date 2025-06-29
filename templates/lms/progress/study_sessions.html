@@ -1,0 +1,513 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Study Sessions - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-clock me-2"></i>
+                    Study Sessions
+                </h1>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'progress:dashboard' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Dashboard
+                    </a>
+                    <a href="{% url 'progress:analytics' %}" class="btn btn-outline-info">
+                        <i class="fas fa-chart-bar me-1"></i>Analytics
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-primary mb-2">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ total_study_time }}</h5>
+                    <p class="card-text text-muted">Total Study Time</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-success mb-2">
+                        <i class="fas fa-calendar-day fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ sessions_this_week }}</h5>
+                    <p class="card-text text-muted">Sessions This Week</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-stopwatch fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ average_session_time }}</h5>
+                    <p class="card-text text-muted">Average Session</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-danger mb-2">
+                        <i class="fas fa-fire fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ current_streak }}</h5>
+                    <p class="card-text text-muted">Day Streak</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Time Chart -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-line me-2"></i>Study Time Trends
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <input type="radio" class="btn-check" name="timeRange" id="week" value="week" checked>
+                            <label class="btn btn-outline-primary" for="week">This Week</label>
+
+                            <input type="radio" class="btn-check" name="timeRange" id="month" value="month">
+                            <label class="btn btn-outline-primary" for="month">This Month</label>
+
+                            <input type="radio" class="btn-check" name="timeRange" id="year" value="year">
+                            <label class="btn btn-outline-primary" for="year">This Year</label>
+                        </div>
+                    </div>
+                    <canvas id="studyTimeChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Study Goals -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-target me-2"></i>Study Goals
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Daily Goal</small>
+                            <small class="text-muted">{{ daily_progress }}/{{ daily_goal }} min</small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: {{ daily_progress_percentage }}%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Weekly Goal</small>
+                            <small class="text-muted">{{ weekly_progress }}/{{ weekly_goal }} hours</small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: {{ weekly_progress_percentage }}%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-muted">Monthly Goal</small>
+                            <small class="text-muted">{{ monthly_progress }}/{{ monthly_goal }} hours</small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" style="width: {{ monthly_progress_percentage }}%"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#goalsModal">
+                        <i class="fas fa-edit me-1"></i>Edit Goals
+                    </button>
+                </div>
+            </div>
+
+            <!-- Study Streak Calendar -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-calendar-alt me-2"></i>Study Streak
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <h4 class="text-danger">{{ current_streak }}</h4>
+                        <small class="text-muted">Day Streak</small>
+                    </div>
+                    <div id="streakCalendar" class="study-calendar">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Study Sessions -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-history me-2"></i>Recent Study Sessions
+                    </h5>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#sessionModal">
+                            <i class="fas fa-plus me-1"></i>Log Session
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if study_sessions %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Course</th>
+                                        <th>Duration</th>
+                                        <th>Activity</th>
+                                        <th>Progress</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for session in study_sessions %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <span>{{ session.date|date:"M d, Y" }}</span>
+                                                <small class="text-muted">{{ session.start_time|time:"H:i" }} - {{ session.end_time|time:"H:i" }}</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                {% if session.course.thumbnail %}
+                                                    <img src="{{ session.course.thumbnail.url }}" alt="{{ session.course.title }}" 
+                                                         class="rounded me-2" width="30" height="30">
+                                                {% else %}
+                                                    <div class="bg-primary rounded me-2 d-flex align-items-center justify-content-center" 
+                                                         style="width: 30px; height: 30px;">
+                                                        <i class="fas fa-book text-white small"></i>
+                                                    </div>
+                                                {% endif %}
+                                                <div>
+                                                    <span class="fw-medium">{{ session.course.title|truncatechars:30 }}</span>
+                                                    {% if session.lesson %}
+                                                        <br><small class="text-muted">{{ session.lesson.title|truncatechars:25 }}</small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-primary">{{ session.duration }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{% if session.activity_type == 'video' %}info{% elif session.activity_type == 'quiz' %}warning{% elif session.activity_type == 'reading' %}success{% else %}secondary{% endif %}">
+                                                {{ session.get_activity_type_display }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if session.progress_made %}
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-arrow-up text-success me-1"></i>
+                                                    <small>{{ session.progress_made }}%</small>
+                                                </div>
+                                            {% else %}
+                                                <small class="text-muted">No progress</small>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-primary btn-sm" 
+                                                        data-bs-toggle="tooltip" title="View Details"
+                                                        onclick="viewSessionDetails({{ session.id }})">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-outline-secondary btn-sm" 
+                                                        data-bs-toggle="tooltip" title="Edit Session"
+                                                        onclick="editSession({{ session.id }})">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        {% if is_paginated %}
+                        <nav aria-label="Study sessions pagination">
+                            <ul class="pagination justify-content-center">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                    </li>
+                                {% endif %}
+                                
+                                {% for num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <li class="page-item active">
+                                            <span class="page-link">{{ num }}</span>
+                                        </li>
+                                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        {% endif %}
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-clock fa-4x text-muted mb-3"></i>
+                            <h5 class="text-muted">No Study Sessions Yet</h5>
+                            <p class="text-muted">Start tracking your study time to see your progress!</p>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sessionModal">
+                                <i class="fas fa-plus me-1"></i>Log Your First Session
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Study Goals Modal -->
+<div class="modal fade" id="goalsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Study Goals</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'progress:update_study_goals' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="dailyGoal" class="form-label">Daily Goal (minutes)</label>
+                        <input type="number" class="form-control" name="daily_goal" id="dailyGoal" 
+                               value="{{ daily_goal }}" min="15" max="480">
+                    </div>
+                    <div class="mb-3">
+                        <label for="weeklyGoal" class="form-label">Weekly Goal (hours)</label>
+                        <input type="number" class="form-control" name="weekly_goal" id="weeklyGoal" 
+                               value="{{ weekly_goal }}" min="1" max="40" step="0.5">
+                    </div>
+                    <div class="mb-3">
+                        <label for="monthlyGoal" class="form-label">Monthly Goal (hours)</label>
+                        <input type="number" class="form-control" name="monthly_goal" id="monthlyGoal" 
+                               value="{{ monthly_goal }}" min="5" max="200" step="0.5">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Goals</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Log Session Modal -->
+<div class="modal fade" id="sessionModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Log Study Session</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'progress:log_study_session' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="course" class="form-label">Course</label>
+                        <select class="form-select" name="course" id="course" required>
+                            <option value="">Select a course...</option>
+                            {% for enrollment in user_enrollments %}
+                            <option value="{{ enrollment.course.id }}">{{ enrollment.course.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration (minutes)</label>
+                        <input type="number" class="form-control" name="duration" id="duration" 
+                               min="5" max="480" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="activityType" class="form-label">Activity Type</label>
+                        <select class="form-select" name="activity_type" id="activityType" required>
+                            <option value="video">Watching Videos</option>
+                            <option value="reading">Reading Materials</option>
+                            <option value="quiz">Taking Quizzes</option>
+                            <option value="assignment">Working on Assignments</option>
+                            <option value="practice">Practice Exercises</option>
+                            <option value="review">Review & Notes</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes (optional)</label>
+                        <textarea class="form-control" name="notes" id="notes" rows="3" 
+                                  placeholder="What did you learn or work on?"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Log Session</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+$(document).ready(function() {
+    // Initialize study time chart
+    const ctx = document.getElementById('studyTimeChart').getContext('2d');
+    let studyChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ chart_labels|safe }},
+            datasets: [{
+                label: 'Study Time (minutes)',
+                data: {{ chart_data|safe }},
+                borderColor: '#ff5d15',
+                backgroundColor: 'rgba(255, 93, 21, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Minutes'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Time range filter
+    $('input[name="timeRange"]').change(function() {
+        const range = $(this).val();
+        // Update chart data via AJAX
+        updateChartData(range);
+    });
+
+    // Generate study streak calendar
+    generateStreakCalendar();
+
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+
+function updateChartData(range) {
+    // AJAX call to get updated chart data
+    fetch(`/lms/progress/study-sessions/chart-data/?range=${range}`)
+        .then(response => response.json())
+        .then(data => {
+            studyChart.data.labels = data.labels;
+            studyChart.data.datasets[0].data = data.data;
+            studyChart.update();
+        });
+}
+
+function generateStreakCalendar() {
+    const calendar = document.getElementById('streakCalendar');
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    
+    // Generate calendar grid for current month
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    
+    let calendarHTML = '<div class="row text-center small text-muted mb-1">';
+    ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(day => {
+        calendarHTML += `<div class="col">${day}</div>`;
+    });
+    calendarHTML += '</div>';
+    
+    let dayCount = 1;
+    for (let week = 0; week < 6; week++) {
+        calendarHTML += '<div class="row mb-1">';
+        for (let day = 0; day < 7; day++) {
+            if (week === 0 && day < firstDay) {
+                calendarHTML += '<div class="col"></div>';
+            } else if (dayCount <= daysInMonth) {
+                const hasStudied = Math.random() > 0.3; // Placeholder logic
+                const isToday = dayCount === today.getDate();
+                calendarHTML += `<div class="col">
+                    <div class="study-day ${hasStudied ? 'studied' : ''} ${isToday ? 'today' : ''}" 
+                         style="width: 20px; height: 20px; margin: 0 auto; border-radius: 3px; 
+                                background: ${hasStudied ? '#28a745' : '#e9ecef'}; 
+                                border: ${isToday ? '2px solid #ff5d15' : 'none'};">
+                    </div>
+                </div>`;
+                dayCount++;
+            } else {
+                calendarHTML += '<div class="col"></div>';
+            }
+        }
+        calendarHTML += '</div>';
+        if (dayCount > daysInMonth) break;
+    }
+    
+    calendar.innerHTML = calendarHTML;
+}
+
+function viewSessionDetails(sessionId) {
+    // Implementation for viewing session details
+    console.log('View session:', sessionId);
+}
+
+function editSession(sessionId) {
+    // Implementation for editing session
+    console.log('Edit session:', sessionId);
+}
+</script>
+{% endblock %}

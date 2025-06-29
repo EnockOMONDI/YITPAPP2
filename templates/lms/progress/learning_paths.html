@@ -1,0 +1,354 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Learning Paths - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-route me-2"></i>
+                    My Learning Paths
+                </h1>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'progress:dashboard' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Dashboard
+                    </a>
+                    <a href="{% url 'progress:achievements' %}" class="btn btn-outline-warning">
+                        <i class="fas fa-trophy me-1"></i>Achievements
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Path Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-primary mb-2">
+                        <i class="fas fa-route fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ total_paths }}</h5>
+                    <p class="card-text text-muted">Total Paths</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-play-circle fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ active_paths }}</h5>
+                    <p class="card-text text-muted">Active Paths</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-success mb-2">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ completed_paths }}</h5>
+                    <p class="card-text text-muted">Completed Paths</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <div class="text-info mb-2">
+                        <i class="fas fa-percentage fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">{{ average_progress }}%</h5>
+                    <p class="card-text text-muted">Average Progress</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Learning Paths -->
+    {% if active_learning_paths %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-play-circle me-2"></i>Active Learning Paths
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% for path in active_learning_paths %}
+                    <div class="learning-path-item mb-4 pb-4 {% if not forloop.last %}border-bottom{% endif %}">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0 me-3">
+                                        <div class="bg-primary rounded d-flex align-items-center justify-content-center" 
+                                             style="width: 80px; height: 80px;">
+                                            <i class="fas fa-route text-white fa-2x"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">{{ path.title }}</h6>
+                                        <p class="text-muted mb-2 small">{{ path.description|truncatewords:25 }}</p>
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <span class="badge bg-primary me-2 mb-1">{{ path.difficulty_level }}</span>
+                                            <small class="text-muted me-3 mb-1">
+                                                <i class="fas fa-book me-1"></i>{{ path.total_courses }} courses
+                                            </small>
+                                            <small class="text-muted me-3 mb-1">
+                                                <i class="fas fa-clock me-1"></i>{{ path.estimated_duration }} hours
+                                            </small>
+                                            <small class="text-muted mb-1">
+                                                <i class="fas fa-calendar me-1"></i>Started: {{ path.started_at|date:"M d, Y" }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-end">
+                                    <div class="mb-2">
+                                        <span class="h5 text-primary">{{ path.progress_percentage }}%</span>
+                                        <small class="text-muted">complete</small>
+                                    </div>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" style="width: {{ path.progress_percentage }}%"></div>
+                                    </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{% url 'progress:learning_path_detail' path.id %}" 
+                                           class="btn btn-primary">
+                                            <i class="fas fa-eye me-1"></i>View Details
+                                        </a>
+                                        <a href="{% url 'courses:course_detail' path.next_course.slug %}" 
+                                           class="btn btn-outline-primary">
+                                            <i class="fas fa-play me-1"></i>Continue
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Path Progress Visualization -->
+                        <div class="mt-3">
+                            <h6 class="text-muted mb-2">Path Progress:</h6>
+                            <div class="d-flex align-items-center">
+                                {% for course in path.courses %}
+                                <div class="flex-shrink-0 me-2 text-center">
+                                    <div class="position-relative">
+                                        {% if course.is_completed %}
+                                            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" 
+                                                 style="width: 40px; height: 40px;">
+                                                <i class="fas fa-check text-white"></i>
+                                            </div>
+                                        {% elif course.is_current %}
+                                            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" 
+                                                 style="width: 40px; height: 40px;">
+                                                <i class="fas fa-play text-white"></i>
+                                            </div>
+                                        {% else %}
+                                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" 
+                                                 style="width: 40px; height: 40px;">
+                                                <i class="fas fa-lock text-muted"></i>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">
+                                        {{ course.title|truncatechars:10 }}
+                                    </small>
+                                </div>
+                                {% if not forloop.last %}
+                                <div class="flex-shrink-0 me-2">
+                                    <i class="fas fa-arrow-right text-muted"></i>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Available Learning Paths -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-compass me-2"></i>Available Learning Paths
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if available_paths %}
+                        <div class="row">
+                            {% for path in available_paths %}
+                            <div class="col-lg-6 mb-4">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="bg-{{ path.color|default:'primary' }} rounded d-flex align-items-center justify-content-center" 
+                                                     style="width: 60px; height: 60px;">
+                                                    <i class="fas {{ path.icon|default:'fa-route' }} text-white fa-lg"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="card-title">{{ path.title }}</h6>
+                                                <p class="card-text text-muted small">{{ path.description|truncatewords:20 }}</p>
+                                                
+                                                <div class="d-flex align-items-center flex-wrap mb-3">
+                                                    <span class="badge bg-{{ path.difficulty_color|default:'secondary' }} me-2 mb-1">
+                                                        {{ path.difficulty_level }}
+                                                    </span>
+                                                    <small class="text-muted me-3 mb-1">
+                                                        <i class="fas fa-book me-1"></i>{{ path.course_count }} courses
+                                                    </small>
+                                                    <small class="text-muted mb-1">
+                                                        <i class="fas fa-clock me-1"></i>{{ path.estimated_duration }} hours
+                                                    </small>
+                                                </div>
+
+                                                <!-- Skills You'll Learn -->
+                                                {% if path.skills %}
+                                                <div class="mb-3">
+                                                    <small class="text-muted d-block mb-1">Skills you'll learn:</small>
+                                                    <div class="d-flex flex-wrap">
+                                                        {% for skill in path.skills|slice:":3" %}
+                                                        <span class="badge bg-light text-dark me-1 mb-1">{{ skill }}</span>
+                                                        {% endfor %}
+                                                        {% if path.skills|length > 3 %}
+                                                        <span class="badge bg-light text-muted">+{{ path.skills|length|add:"-3" }} more</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    {% if path.is_enrolled %}
+                                                        <a href="{% url 'progress:learning_path_detail' path.id %}" 
+                                                           class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-eye me-1"></i>View Progress
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="{% url 'progress:enroll_learning_path' path.id %}" 
+                                                           class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-plus me-1"></i>Start Path
+                                                        </a>
+                                                    {% endif %}
+                                                    
+                                                    <div class="text-end">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="text-warning me-1">
+                                                                {% for i in "12345"|make_list %}
+                                                                    {% if forloop.counter <= path.rating %}
+                                                                        <i class="fas fa-star"></i>
+                                                                    {% else %}
+                                                                        <i class="far fa-star"></i>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </div>
+                                                            <small class="text-muted">({{ path.rating_count }})</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-route fa-4x text-muted mb-3"></i>
+                            <h5 class="text-muted">No Learning Paths Available</h5>
+                            <p class="text-muted">Learning paths are being prepared. Check back soon!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completed Learning Paths -->
+    {% if completed_learning_paths %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-check-circle me-2"></i>Completed Learning Paths
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for path in completed_learning_paths %}
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3 bg-light rounded">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" 
+                                         style="width: 50px; height: 50px;">
+                                        <i class="fas fa-trophy text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">{{ path.title }}</h6>
+                                    <small class="text-muted">Completed {{ path.completed_at|date:"M d, Y" }}</small>
+                                    <div class="text-success small">
+                                        <i class="fas fa-certificate me-1"></i>Certificate Earned
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <a href="{% url 'progress:download_path_certificate' path.id %}" 
+                                       class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Path card hover effects
+    $('.card').hover(
+        function() {
+            $(this).addClass('shadow-lg').removeClass('shadow-sm');
+        },
+        function() {
+            $(this).addClass('shadow-sm').removeClass('shadow-lg');
+        }
+    );
+
+    // Smooth scroll to sections
+    $('a[href^="#"]').on('click', function(event) {
+        var target = $(this.getAttribute('href'));
+        if( target.length ) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top - 100
+            }, 1000);
+        }
+    });
+});
+</script>
+{% endblock %}
