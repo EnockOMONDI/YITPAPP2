@@ -190,10 +190,12 @@ def register(request):
             user.save()
 
             # Create user profile with phone number
+            # Use get_or_create to handle potential race conditions with signals
             profile, created = Profile.objects.get_or_create(user=user)
             if phone_number:
                 profile.phone_number = phone_number
                 profile.save()
+                print(f"DEBUG: Phone number saved to profile: {profile.phone_number}")  # Debug logging
 
             # Send OTP for email verification
             try:

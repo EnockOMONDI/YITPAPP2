@@ -6,11 +6,11 @@ from django.core.exceptions import ObjectDoesNotExist
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
-    try:
-        instance.profile.save()
-    except ObjectDoesNotExist:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    """Create a profile for newly created users only"""
+    if created:  # Only create profile for new users
+        try:
+            # Check if profile already exists
+            if not hasattr(instance, 'profile'):
+                Profile.objects.create(user=instance)
+        except ObjectDoesNotExist:
+            Profile.objects.create(user=instance)
