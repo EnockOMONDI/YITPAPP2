@@ -108,6 +108,41 @@ class CourseDetailView(DetailView):
         modules = course.modules.filter(is_published=True).prefetch_related(
             'lessons__student_progress'
         ).order_by('sort_order')
+
+        # Add lesson accessibility information if user is enrolled
+        if self.request.user.is_authenticated:
+            try:
+                enrollment = Enrollment.objects.get(
+                    student=self.request.user,
+                    course=course,
+                    status='active'
+                )
+
+                # Process each module and lesson for accessibility
+                for module in modules:
+                    lessons = module.lessons.filter(is_published=True).order_by('sort_order')
+                    lesson_data = []
+                    for lesson in lessons:
+                        try:
+                            progress = LessonProgress.objects.get(
+                                enrollment=enrollment,
+                                lesson=lesson
+                            )
+                        except LessonProgress.DoesNotExist:
+                            progress = None
+
+                        is_accessible, _ = lesson.is_accessible_for_user(self.request.user)
+                        lesson_data.append({
+                            'lesson': lesson,
+                            'progress': progress,
+                            'is_accessible': is_accessible
+                        })
+
+                    module.lesson_data = lesson_data
+
+            except Enrollment.DoesNotExist:
+                pass
+
         context['modules'] = modules
 
         # Check if user is enrolled and get progress
@@ -272,21 +307,29 @@ class ModuleDetailView(LoginRequiredMixin, DetailView):
         except Enrollment.DoesNotExist:
             return redirect('courses:course_detail', slug=module.course.slug)
         
-        # Get lessons with progress
-        lessons = module.lessons.filter(is_published=True)
-        lesson_progress = {}
+        # Get lessons with progress and accessibility
+        lessons = module.lessons.filter(is_published=True).order_by('sort_order')
+        lesson_data = []
         for lesson in lessons:
             try:
                 progress = LessonProgress.objects.get(
                     enrollment=enrollment,
                     lesson=lesson
                 )
-                lesson_progress[lesson.id] = progress
             except LessonProgress.DoesNotExist:
-                lesson_progress[lesson.id] = None
-        
-        context['lessons'] = lessons
-        context['lesson_progress'] = lesson_progress
+                progress = None
+
+            # Check lesson accessibility
+            is_accessible, access_message = lesson.is_accessible_for_user(self.request.user)
+
+            lesson_data.append({
+                'lesson': lesson,
+                'progress': progress,
+                'is_accessible': is_accessible,
+                'access_message': access_message
+            })
+
+        context['lesson_data'] = lesson_data
         
         return context
 
@@ -313,7 +356,7 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         lesson = self.object
-        
+
         # Check enrollment
         try:
             enrollment = Enrollment.objects.get(
@@ -324,39 +367,46 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
             context['enrollment'] = enrollment
         except Enrollment.DoesNotExist:
             return redirect('courses:course_detail', slug=lesson.module.course.slug)
-        
+
+        # Check if lesson is accessible (prerequisite validation)
+        is_accessible, access_message = lesson.is_accessible_for_user(self.request.user)
+        context['is_accessible'] = is_accessible
+        context['access_message'] = access_message
+
+        if not is_accessible:
+            # If lesson is not accessible, don't mark as started or update access time
+            context['progress'] = None
+            context['next_lesson'] = lesson.get_next_lesson()
+            context['prev_lesson'] = lesson.get_previous_lesson()
+            return context
+
         # Get or create lesson progress
         progress, created = LessonProgress.objects.get_or_create(
             enrollment=enrollment,
             lesson=lesson
         )
-        
+
         # Mark as started if not already
         if progress.status == 'not_started':
             progress.mark_started()
-        
+
         # Update last accessed
         enrollment.mark_as_accessed()
-        
+
         context['progress'] = progress
-        
-        # Get next and previous lessons
-        current_order = lesson.sort_order
-        module = lesson.module
-        
-        next_lesson = module.lessons.filter(
-            sort_order__gt=current_order,
-            is_published=True
-        ).first()
-        
-        prev_lesson = module.lessons.filter(
-            sort_order__lt=current_order,
-            is_published=True
-        ).last()
-        
-        context['next_lesson'] = next_lesson
-        context['prev_lesson'] = prev_lesson
-        
+
+        # Get next and previous lessons using the new methods
+        context['next_lesson'] = lesson.get_next_lesson()
+        context['prev_lesson'] = lesson.get_previous_lesson()
+
+        # Check accessibility of next lesson for UI purposes
+        next_lesson = context['next_lesson']
+        if next_lesson:
+            next_accessible, _ = next_lesson.is_accessible_for_user(self.request.user)
+            context['next_lesson_accessible'] = next_accessible
+        else:
+            context['next_lesson_accessible'] = False
+
         return context
     
     def post(self, request, course_slug, lesson_id):

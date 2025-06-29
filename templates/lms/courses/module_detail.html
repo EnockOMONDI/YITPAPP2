@@ -260,24 +260,37 @@
                 <div class="mb-4">
                     <h3 class="mb-4">Module Lessons</h3>
                     
-                    {% if module.lessons.all %}
-                        {% for lesson in module.lessons.all %}
-                        <div class="lesson-card {% if forloop.first %}in-progress{% else %}not-started{% endif %}">
+                    {% if lesson_data %}
+                        {% for data in lesson_data %}
+                        {% with lesson=data.lesson progress=data.progress is_accessible=data.is_accessible %}
+                        <div class="lesson-card
+                            {% if progress.status == 'completed' %}completed
+                            {% elif progress.status == 'in_progress' %}in-progress
+                            {% elif not is_accessible %}locked
+                            {% else %}not-started{% endif %}">
                             <div class="d-flex align-items-start">
-                                <div class="lesson-status {% if forloop.first %}status-in-progress{% else %}status-not-started{% endif %}">
-                                    {% if forloop.first %}
+                                <div class="lesson-status
+                                    {% if progress.status == 'completed' %}status-completed
+                                    {% elif progress.status == 'in_progress' %}status-in-progress
+                                    {% elif not is_accessible %}status-locked
+                                    {% else %}status-not-started{% endif %}">
+                                    {% if progress.status == 'completed' %}
+                                        <i class="fas fa-check"></i>
+                                    {% elif progress.status == 'in_progress' %}
                                         <i class="fas fa-play"></i>
+                                    {% elif not is_accessible %}
+                                        <i class="fas fa-lock"></i>
                                     {% else %}
                                         <i class="fas fa-circle"></i>
                                     {% endif %}
                                 </div>
-                                
+
                                 <div class="flex-grow-1">
                                     <div class="d-flex justify-content-between align-items-start">
                                         <div>
                                             <h5 class="mb-2">{{ lesson.title }}</h5>
                                             <p class="text-muted mb-2">{{ lesson.description|truncatewords:20 }}</p>
-                                            
+
                                             <div class="lesson-meta">
                                                 <span>
                                                     <i class="fas fa-clock"></i>
@@ -293,16 +306,28 @@
                                                     {{ lesson.get_lesson_type_display }}
                                                 </span>
                                                 {% endif %}
+                                                {% if progress.status == 'completed' %}
+                                                <span class="text-success">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    Completed
+                                                </span>
+                                                {% endif %}
                                             </div>
                                         </div>
-                                        
+
                                         <div class="text-end">
-                                            {% if forloop.first %}
+                                            {% if is_accessible %}
                                                 <a href="{% url 'courses:lesson_detail' course_slug=module.course.slug lesson_id=lesson.id %}" class="btn btn-lesson">
-                                                    <i class="fas fa-play me-2"></i>Start Lesson
+                                                    {% if progress.status == 'completed' %}
+                                                        <i class="fas fa-eye me-2"></i>Review
+                                                    {% elif progress.status == 'in_progress' %}
+                                                        <i class="fas fa-play me-2"></i>Continue
+                                                    {% else %}
+                                                        <i class="fas fa-play me-2"></i>Start Lesson
+                                                    {% endif %}
                                                 </a>
                                             {% else %}
-                                                <button class="btn btn-lesson" disabled>
+                                                <button class="btn btn-lesson" disabled title="{{ data.access_message }}">
                                                     <i class="fas fa-lock me-2"></i>Locked
                                                 </button>
                                             {% endif %}
@@ -311,6 +336,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endwith %}
                         {% endfor %}
                     {% else %}
                         <div class="text-center py-5">

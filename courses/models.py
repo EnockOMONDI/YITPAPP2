@@ -145,6 +145,93 @@ class Lesson(models.Model):
     def __str__(self):
         return f"{self.module.title} - {self.title}"
     
+    def is_accessible_for_user(self, user):
+        """
+        Check if lesson is accessible for the given user based on prerequisites
+        """
+        from progress.models import Enrollment, LessonProgress
+
+        try:
+            # Check if user is enrolled in the course
+            enrollment = Enrollment.objects.get(
+                student=user,
+                course=self.module.course,
+                status='active'
+            )
+        except Enrollment.DoesNotExist:
+            return False, "You must be enrolled in this course to access lessons."
+
+        # First lesson in first module is always accessible
+        if self.is_first_lesson_in_course():
+            return True, "First lesson is always accessible."
+
+        # Check if previous lesson is completed
+        previous_lesson = self.get_previous_lesson()
+        if previous_lesson:
+            try:
+                prev_progress = LessonProgress.objects.get(
+                    enrollment=enrollment,
+                    lesson=previous_lesson
+                )
+                if prev_progress.status != 'completed':
+                    return False, f"You must complete '{previous_lesson.title}' before accessing this lesson."
+            except LessonProgress.DoesNotExist:
+                return False, f"You must complete '{previous_lesson.title}' before accessing this lesson."
+
+        return True, "Lesson is accessible."
+
+    def is_first_lesson_in_course(self):
+        """Check if this is the first lesson in the entire course"""
+        first_module = self.module.course.modules.filter(is_published=True).order_by('sort_order').first()
+        if first_module and first_module == self.module:
+            first_lesson = first_module.lessons.filter(is_published=True).order_by('sort_order').first()
+            return first_lesson == self
+        return False
+
+    def get_previous_lesson(self):
+        """Get the previous lesson in the course sequence"""
+        # First, try to get previous lesson in same module
+        prev_in_module = self.module.lessons.filter(
+            sort_order__lt=self.sort_order,
+            is_published=True
+        ).order_by('-sort_order').first()
+
+        if prev_in_module:
+            return prev_in_module
+
+        # If no previous lesson in current module, get last lesson from previous module
+        prev_module = self.module.course.modules.filter(
+            sort_order__lt=self.module.sort_order,
+            is_published=True
+        ).order_by('-sort_order').first()
+
+        if prev_module:
+            return prev_module.lessons.filter(is_published=True).order_by('-sort_order').first()
+
+        return None
+
+    def get_next_lesson(self):
+        """Get the next lesson in the course sequence"""
+        # First, try to get next lesson in same module
+        next_in_module = self.module.lessons.filter(
+            sort_order__gt=self.sort_order,
+            is_published=True
+        ).order_by('sort_order').first()
+
+        if next_in_module:
+            return next_in_module
+
+        # If no next lesson in current module, get first lesson from next module
+        next_module = self.module.course.modules.filter(
+            sort_order__gt=self.module.sort_order,
+            is_published=True
+        ).order_by('sort_order').first()
+
+        if next_module:
+            return next_module.lessons.filter(is_published=True).order_by('sort_order').first()
+
+        return None
+
     class Meta:
         verbose_name = "Lesson"
         verbose_name_plural = "Lessons"

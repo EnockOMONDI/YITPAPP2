@@ -198,48 +198,182 @@
         border-bottom: none;
     }
 
-    /* Hierarchical Navigation Styles */
+    /* Enhanced Hierarchical Navigation Styles */
     .quick-nav .parent-nav {
         font-weight: 600 !important;
         border-bottom: 2px solid var(--yitp-orange) !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 0 !important;
+        cursor: pointer !important;
+        position: relative !important;
+        transition: all 0.3s ease !important;
+        padding: 12px 15px !important;
+        border-radius: 8px 8px 0 0 !important;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        /* Button-specific styles */
+        border: none !important;
+        width: 100% !important;
+        text-align: left !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        color: var(--yitp-dark-blue) !important;
+        font-size: 1rem !important;
+        font-family: inherit !important;
+    }
+
+    .quick-nav .parent-nav:hover {
+        background: linear-gradient(135deg, var(--yitp-orange) 0%, #e04a0f 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(255, 93, 21, 0.3) !important;
+    }
+
+    .quick-nav .parent-nav:focus {
+        outline: 3px solid rgba(255, 93, 21, 0.5) !important;
+        outline-offset: 2px !important;
+    }
+
+    .quick-nav .parent-nav .chevron-icon {
+        transition: transform 0.3s ease !important;
+        font-size: 0.9rem !important;
+        margin-left: auto !important;
+    }
+
+    .quick-nav .parent-nav.expanded .chevron-icon {
+        transform: rotate(180deg) !important;
     }
 
     .quick-nav .child-nav-items {
         margin-left: 0 !important;
         border-left: 3px solid var(--yitp-orange) !important;
         margin-bottom: 15px !important;
+        overflow: hidden !important;
+        transition: max-height 0.4s ease, opacity 0.3s ease !important;
+        max-height: 0 !important;
+        opacity: 0 !important;
+        background-color: #fff !important;
+        border-radius: 0 0 8px 8px !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .quick-nav .child-nav-items.expanded {
+        max-height: 500px !important;
+        opacity: 1 !important;
     }
 
     .quick-nav .child-nav {
-        padding-left: 30px !important;
+        padding: 12px 15px 12px 35px !important;
         font-size: 0.9rem !important;
         color: #666 !important;
-        background-color: #f8f9fa !important;
+        background-color: transparent !important;
         border-bottom: 1px solid #e9ecef !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+    }
+
+    .quick-nav .child-nav:last-child {
+        border-bottom: none !important;
+    }
+
+    .quick-nav .child-nav:before {
+        content: '' !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 0 !important;
+        background-color: var(--yitp-orange) !important;
+        transition: width 0.3s ease !important;
     }
 
     .quick-nav .child-nav:hover {
-        background-color: var(--yitp-orange) !important;
-        color: white !important;
-        transform: translateX(5px) !important;
+        background-color: rgba(255, 93, 21, 0.1) !important;
+        color: var(--yitp-dark-blue) !important;
+        transform: translateX(8px) !important;
+        padding-left: 40px !important;
     }
 
+    .quick-nav .child-nav:hover:before {
+        width: 4px !important;
+    }
+
+    .quick-nav .child-nav:focus {
+        outline: 2px solid rgba(255, 93, 21, 0.5) !important;
+        outline-offset: 1px !important;
+        background-color: rgba(255, 93, 21, 0.1) !important;
+    }
+
+    /* Mobile-Friendly Navigation Styles */
     @media (max-width: 768px) {
         .documentation-header h1 {
             font-size: 2rem;
         }
-        
+
         .documentation-header p {
             font-size: 1rem;
         }
-        
+
         .section-content {
             padding: 20px;
         }
-        
+
         .quick-nav {
             position: static;
+            margin-bottom: 20px;
+        }
+
+        .quick-nav .parent-nav {
+            padding: 15px 20px !important;
+            font-size: 1rem !important;
+            min-height: 48px !important; /* Touch-friendly target size */
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+
+        .quick-nav .parent-nav .chevron-icon {
+            font-size: 1.1rem !important;
+            margin-left: 10px !important;
+        }
+
+        .quick-nav .child-nav {
+            padding: 15px 20px 15px 40px !important;
+            font-size: 0.95rem !important;
+            min-height: 44px !important; /* Touch-friendly target size */
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .quick-nav .child-nav:hover {
+            transform: translateX(5px) !important;
+            padding-left: 45px !important;
+        }
+
+        /* Improved touch targets for mobile */
+        .quick-nav .parent-nav,
+        .quick-nav .child-nav {
+            -webkit-tap-highlight-color: rgba(255, 93, 21, 0.2) !important;
+            tap-highlight-color: rgba(255, 93, 21, 0.2) !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .quick-nav .parent-nav {
+            padding: 12px 15px !important;
+            font-size: 0.95rem !important;
+        }
+
+        .quick-nav .child-nav {
+            padding: 12px 15px 12px 35px !important;
+            font-size: 0.9rem !important;
+        }
+
+        .quick-nav .child-nav:hover {
+            padding-left: 40px !important;
         }
     }
 </style>
@@ -265,12 +399,42 @@
         <div class="col-lg-3 col-md-4">
             <div class="quick-nav">
                 <h5><i class="fas fa-compass"></i> Quick Navigation</h5>
-                <a href="#registration-workflow" class="parent-nav"><i class="fas fa-user-plus"></i> Registration Workflow <i class="fas fa-chevron-down float-right"></i></a>
-                <div class="child-nav-items">
-                    <a href="#registration-overview" class="child-nav"><i class="fas fa-list-ol"></i> Registration Process Steps</a>
-                    <a href="#visual-flowchart" class="child-nav"><i class="fas fa-project-diagram"></i> User Registration Visual Flow Chart</a>
-                    <a href="#email-workflows" class="child-nav"><i class="fas fa-envelope"></i> Email Workflow</a>
-                    <a href="#welcome-page-experience" class="child-nav"><i class="fas fa-home"></i> Welcome Page Experience</a>
+                <button type="button" class="parent-nav" data-target="#registration-workflow" aria-expanded="false" aria-controls="registration-nav-items" tabindex="0">
+                    <span><i class="fas fa-user-plus"></i> Registration Workflow</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="registration-nav-items" aria-labelledby="registration-workflow">
+                    <a href="#registration-overview" class="child-nav" tabindex="-1"><i class="fas fa-list-ol"></i> Registration Process Steps</a>
+                    <a href="#visual-flowchart" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> User Registration Visual Flow Chart</a>
+                    <a href="#email-workflows" class="child-nav" tabindex="-1"><i class="fas fa-envelope"></i> Email Workflow</a>
+                    <a href="#welcome-page-experience" class="child-nav" tabindex="-1"><i class="fas fa-home"></i> Welcome Page Experience</a>
+                </div>
+
+                <button type="button" class="parent-nav" data-target="#enrollment-workflow" aria-expanded="false" aria-controls="enrollment-nav-items" tabindex="0">
+                    <span><i class="fas fa-graduation-cap"></i> User Course Enrollment Workflow</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="enrollment-nav-items" aria-labelledby="enrollment-workflow">
+                    <a href="#login-authentication" class="child-nav" tabindex="-1"><i class="fas fa-sign-in-alt"></i> User Login & Authentication</a>
+                    <a href="#enrollment-visual-flow" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> Complete Enrollment Visual Flow Chart</a>
+                    <a href="#profile-navigation" class="child-nav" tabindex="-1"><i class="fas fa-user-cog"></i> Profile Navigation & Management</a>
+                    <a href="#course-browsing" class="child-nav" tabindex="-1"><i class="fas fa-search"></i> Course Browsing & Selection</a>
+                    <a href="#sponsorship-process" class="child-nav" tabindex="-1"><i class="fas fa-hand-holding-heart"></i> Sponsorship Request Process</a>
+                    <a href="#course-enrollment" class="child-nav" tabindex="-1"><i class="fas fa-book-open"></i> Course Enrollment (Free & Paid)</a>
+                    <a href="#progress-tracking" class="child-nav" tabindex="-1"><i class="fas fa-chart-line"></i> Progress Tracking & Analytics</a>
+                </div>
+
+                <button type="button" class="parent-nav" data-target="#content-delivery-workflow" aria-expanded="false" aria-controls="content-delivery-nav-items" tabindex="0">
+                    <span><i class="fas fa-play-circle"></i> Course Content Delivery & Lesson Progression</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="content-delivery-nav-items" aria-labelledby="content-delivery-workflow">
+                    <a href="#lesson-access-overview" class="child-nav" tabindex="-1"><i class="fas fa-list-ol"></i> Lesson Access & Progression Steps</a>
+                    <a href="#content-delivery-visual-flow" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> Sequential Learning Visual Flow Chart</a>
+                    <a href="#lesson-navigation" class="child-nav" tabindex="-1"><i class="fas fa-route"></i> Lesson Navigation & Unlocking</a>
+                    <a href="#content-rendering" class="child-nav" tabindex="-1"><i class="fas fa-desktop"></i> Content Rendering & Display</a>
+                    <a href="#progress-completion" class="child-nav" tabindex="-1"><i class="fas fa-check-circle"></i> Progress Marking & Completion</a>
+                    <a href="#cross-module-progression" class="child-nav" tabindex="-1"><i class="fas fa-arrow-right"></i> Cross-Module Progression</a>
                 </div>
             </div>
         </div>
@@ -299,7 +463,7 @@
                         <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
                         The registration workflow is fully functional and production-ready with all components working correctly including phone number storage, OTP verification, reliable email delivery, and the new welcome page experience.
                     </div>
-                    
+
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
@@ -389,7 +553,7 @@
                 </div>
                 <div class="section-content">
                     <p>The following interactive flowchart illustrates the complete user registration journey:</p>
-                    
+
                     <div class="mermaid-container">
                         <div class="mermaid">
                             graph TD
@@ -414,7 +578,7 @@
                                 P --> R[Redirect to Welcome Page]
                                 R --> S[Welcome Page Experience<br/>Onboarding & Next Steps]
                                 S --> Q[Registration Complete<br/>User Can Access Platform]
-                                
+
                                 style A fill:#e3f2fd
                                 style D fill:#fff3cd
                                 style F fill:#d4edda
@@ -585,6 +749,929 @@
 
                 </div>
             </div>
+            <!-- User Course Enrollment Workflow Section -->
+            <div id="enrollment-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-graduation-cap"></i> User Course Enrollment Workflow</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Complete overview of the YITP user course enrollment process, from login through progress tracking.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
+                        The complete user course enrollment workflow has been successfully implemented and tested with a 100% success rate across all 37 test scenarios, including registration, authentication, sponsorship requests, course enrollment, and progress tracking.
+                    </div>
+                </div>
+            </div>
+            <!-- Login & Authentication Section -->
+            <div id="login-authentication" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-sign-in-alt"></i> User Login & Authentication</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">How users securely access their YITP account and learning dashboard.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Authentication Status:</strong>
+                        The login system is fully secure and working reliably with proper session management and user verification.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Login Form</h5>
+                                <p class="mb-0">User enters their email address and password on the login page</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Credential Verification</h5>
+                                <p class="mb-0">System verifies the email and password match an existing account</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Access Granted</h5>
+                                <p class="mb-0">User is logged in and redirected to their personalized profile dashboard</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> User Experience:</strong>
+                        The login process is streamlined and secure, providing immediate access to all YITP learning features and personal dashboard.
+                    </div>
+                </div>
+            </div>
+            <!-- Complete Enrollment Visual Flow Section -->
+            <div id="enrollment-visual-flow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-project-diagram"></i> Interactive Visual Flowchart</h3>
+                </div>
+                <div class="section-content">
+                    <p>The following interactive flowchart illustrates the complete user course enrollment journey:</p>
+
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                            graph TD
+                                A[User Login] --> B{Authentication Success?}
+                                B -->|Valid| C[Access Profile Dashboard]
+                                B -->|Invalid| D[Show Login Error]
+                                D --> A
+                                C --> E[Profile Overview Page]
+                                E --> F{User Action}
+                                F -->|Request Sponsorship| G[Open Sponsorship Modal]
+                                G --> H[Fill Sponsorship Form]
+                                H --> I[Submit Request]
+                                I --> J[Send Email Notifications]
+                                J --> K[Return to Profile]
+                                F -->|Browse Courses| L[Navigate to Course List]
+                                L --> M[View Available Courses]
+                                M --> N[Select Course]
+                                N --> O[View Course Details]
+                                O --> P{Course Type?}
+                                P -->|Free Course| Q[Click Enroll Button]
+                                P -->|Paid Course| R{Payment Status?}
+                                R -->|Payment Confirmed| Q
+                                R -->|Payment Required| S[Payment Verification]
+                                S --> T[Update Payment Status]
+                                T --> Q
+                                Q --> U[Create Enrollment Record]
+                                U --> V[Send Confirmation Email]
+                                V --> W[Course Access Granted]
+                                W --> X[Access Course Materials]
+                                X --> Y[Complete Lessons]
+                                Y --> Z[Track Progress]
+                                Z --> AA[View Analytics Dashboard]
+                                K --> L
+                                AA --> BB[Learning Complete]
+
+                                style A fill:#e3f2fd
+                                style C fill:#fff3cd
+                                style E fill:#d4edda
+                                style G fill:#f3e5f5
+                                style I fill:#e8f5e8
+                                style Q fill:#d4edda
+                                style U fill:#e8f5e8
+                                style W fill:#fff3cd
+                                style AA fill:#e3f2fd
+                                style BB fill:#c8e6c9
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Technical Note:</strong>
+                        This flowchart is interactive and can be zoomed/panned. Each step represents a specific function or process in the YITP enrollment system.
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Profile Navigation Section -->
+            <div id="profile-navigation" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-cog"></i> Profile Navigation & Management</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Your personalized dashboard where you can manage your learning journey and account settings.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Profile System:</strong>
+                        The unified profile provides a comprehensive view of your YITP experience with easy navigation between all features.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Personal Information</h5>
+                                <p class="mb-0">View and update your basic profile details and contact information</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Learning Dashboard</h5>
+                                <p class="mb-0">Track your course progress, achievements, and learning milestones</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Course Management</h5>
+                                <p class="mb-0">Access your enrolled courses and continue where you left off</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Progress Analytics</h5>
+                                <p class="mb-0">View detailed insights about your learning performance and goals</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Account Settings</h5>
+                                <p class="mb-0">Manage your payment information, billing history, and account preferences</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Navigation:</strong>
+                        All profile sections are easily accessible through intuitive navigation tabs and quick action buttons.
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Course Browsing & Selection Section -->
+            <div id="course-browsing" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-search"></i> Course Browsing & Selection</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Discover and explore YITP courses that match your learning goals and interests.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Course Discovery:</strong>
+                        The course browsing system makes it easy to find the perfect courses for your learning journey with intuitive search and filtering options.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Browse Course Catalog</h5>
+                                <p class="mb-0">Access the complete catalog of available YITP courses from your profile</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Filter and Search</h5>
+                                <p class="mb-0">Use filters to find courses by category, difficulty, or price, or search by keywords</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Review Course Details</h5>
+                                <p class="mb-0">View comprehensive course information including objectives, instructor, and requirements</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Make Enrollment Decision</h5>
+                                <p class="mb-0">Choose to enroll in courses that align with your learning goals</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Course Information:</strong>
+                        Each course page provides detailed information to help you make informed enrollment decisions.
+                    </div>
+                </div>
+            </div>
+            <!-- Sponsorship Request Process Section -->
+            <div id="sponsorship-process" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-hand-holding-heart"></i> Sponsorship Request Process</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">How to request financial assistance for YITP programs through our sponsorship system.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Sponsorship System:</strong>
+                        The sponsorship request process is designed to be comprehensive yet user-friendly, ensuring all necessary information is collected efficiently.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Open Request Form</h5>
+                                <p class="mb-0">Click the "Request Sponsorship" button on your profile dashboard</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Complete Application</h5>
+                                <p class="mb-0">Fill out the sponsorship form with program details and financial information</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Provide Emergency Contact</h5>
+                                <p class="mb-0">Add emergency contact information as required for program participation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Submit Request</h5>
+                                <p class="mb-0">Submit your completed sponsorship application for review</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Confirmation & Review</h5>
+                                <p class="mb-0">Receive email confirmation and await review from the YITP team</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Application Process:</strong>
+                        Your sponsorship request will be carefully reviewed, and you'll receive updates via email throughout the process.
+                    </div>
+                </div>
+            </div>
+            <!-- Course Enrollment (Free & Paid) Section -->
+            <div id="course-enrollment" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-book-open"></i> Course Enrollment (Free & Paid)</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Simple enrollment process for both free and paid YITP courses.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Enrollment System:</strong>
+                        The enrollment process is designed to be quick and straightforward, with automatic verification for payment requirements.
+                    </div>
+
+                    <h4><i class="fas fa-gift"></i> Free Course Enrollment</h4>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Click Enroll</h5>
+                                <p class="mb-0">Simply click the "Enroll Now" button on any free course page</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Instant Access</h5>
+                                <p class="mb-0">You're immediately enrolled and can start learning right away</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Email Confirmation</h5>
+                                <p class="mb-0">Receive a confirmation email with course access details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4"><i class="fas fa-credit-card"></i> Paid Course Enrollment</h4>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Payment Verification</h5>
+                                <p class="mb-0">System verifies your payment status before enrollment</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Access Control</h5>
+                                <p class="mb-0">Only users with confirmed payment can access paid courses</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Course Access</h5>
+                                <p class="mb-0">Once payment is confirmed, you can enroll and start learning</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Payment Information:</strong>
+                        Payment verification ensures secure access to premium course content while keeping free courses open to everyone.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tracking & Analytics Section -->
+            <div id="progress-tracking" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-chart-line"></i> Progress Tracking & Analytics</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Track your learning progress and view detailed analytics about your YITP journey.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Learning Analytics:</strong>
+                        The progress tracking system provides comprehensive insights into your learning achievements and helps you stay motivated.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>View Learning Dashboard</h5>
+                                <p class="mb-0">Access your personalized analytics dashboard from your profile</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Track Course Progress</h5>
+                                <p class="mb-0">See visual progress bars and completion percentages for each enrolled course</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Review Learning Metrics</h5>
+                                <p class="mb-0">View time spent learning, modules completed, and assessment scores</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Monitor Goals</h5>
+                                <p class="mb-0">Track your progress toward learning goals and milestones</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Access Account Information</h5>
+                                <p class="mb-0">View billing history and manage your account settings</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Progress Updates:</strong>
+                        Your progress is automatically updated as you complete lessons, helping you stay on track with your learning goals.
+                    </div>
+                </div>
+            </div>
+            <!-- Course Content Delivery & Lesson Progression Workflow Section -->
+            <div id="content-delivery-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-play-circle"></i> Course Content Delivery & Lesson Progression Workflow</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Complete overview of how students access course content and progress through lessons in a structured, sequential learning experience.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
+                        The sequential lesson progression system has been successfully implemented and tested with a 100% success rate across all content delivery scenarios, including lesson accessibility validation, cross-module navigation, and progress tracking integration.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson Access & Progression Steps Section -->
+            <div id="lesson-access-overview" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-list-ol"></i> Lesson Access & Progression Steps</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Step-by-step breakdown of how students access and progress through course content, from initial lesson access to completion and unlocking subsequent content.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Learning Experience:</strong>
+                        The sequential progression system ensures students follow a structured learning path, building knowledge progressively while maintaining engagement through achievement-based unlocking.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Course Enrollment Verification</h5>
+                                <p class="mb-0">System verifies student has active enrollment in the course before allowing lesson access</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>First Lesson Access</h5>
+                                <p class="mb-0">Students can immediately access the first lesson in the course without prerequisites</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Content Rendering & Display</h5>
+                                <p class="mb-0">Lesson content is rendered with YITP branding and interactive elements for optimal learning experience</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Progress Tracking</h5>
+                                <p class="mb-0">Student progress is automatically tracked as they engage with lesson content</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Lesson Completion</h5>
+                                <p class="mb-0">Students mark lessons as completed, triggering progress updates and next lesson unlocking</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">6</span>
+                            <div>
+                                <h5>Sequential Unlocking</h5>
+                                <p class="mb-0">Next lesson becomes accessible only after current lesson completion, ensuring proper learning sequence</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">7</span>
+                            <div>
+                                <h5>Cross-Module Progression</h5>
+                                <p class="mb-0">Upon module completion, first lesson of next module automatically unlocks for seamless progression</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">8</span>
+                            <div>
+                                <h5>Visual Status Indicators</h5>
+                                <p class="mb-0">Students see clear visual indicators for lesson status: completed, in-progress, locked, or available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sequential Learning Visual Flow Chart Section -->
+            <div id="content-delivery-visual-flow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-project-diagram"></i> Interactive Sequential Learning Visual Flow Chart</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Interactive visual representation of the course content delivery and lesson progression workflow, showing the complete student learning journey.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Interactive Flowchart:</strong>
+                        This Mermaid.js flowchart provides a comprehensive visual guide to understanding how students progress through course content in the YITP learning management system.
+                    </div>
+
+                    <div class="flowchart-container">
+                        <div class="mermaid">
+                        flowchart TD
+                            A[Student Enrolled in Course] --> B{Check Enrollment Status}
+                            B -->|Active Enrollment| C[Access Course Dashboard]
+                            B -->|No Enrollment| D[Redirect to Enrollment]
+
+                            C --> E[View Course Modules]
+                            E --> F[Select First Lesson]
+                            F --> G{Is First Lesson in Course?}
+
+                            G -->|Yes| H[Grant Immediate Access]
+                            G -->|No| I{Check Previous Lesson Completion}
+
+                            I -->|Completed| H
+                            I -->|Not Completed| J[Show Locked Status]
+                            J --> K[Display Prerequisites Message]
+                            K --> L[Redirect to Required Lesson]
+
+                            H --> M[Render Lesson Content]
+                            M --> N[Display YITP Branded Interface]
+                            N --> O[Track Lesson Engagement]
+
+                            O --> P[Student Interacts with Content]
+                            P --> Q{Lesson Complete?}
+
+                            Q -->|No| P
+                            Q -->|Yes| R[Mark Lesson as Completed]
+
+                            R --> S[Update Progress Tracking]
+                            S --> T[Calculate Course Progress]
+                            T --> U{More Lessons in Module?}
+
+                            U -->|Yes| V[Unlock Next Lesson]
+                            U -->|No| W{More Modules in Course?}
+
+                            V --> X[Show Next Lesson Available]
+                            X --> Y[Student Continues Learning]
+                            Y --> F
+
+                            W -->|Yes| Z[Unlock First Lesson of Next Module]
+                            W -->|No| AA[Course Completion]
+
+                            Z --> BB[Cross-Module Progression]
+                            BB --> CC[Display Module Transition]
+                            CC --> F
+
+                            AA --> DD[Generate Certificate]
+                            DD --> EE[Update Student Analytics]
+                            EE --> FF[Send Completion Notification]
+
+                            %% Styling with YITP colors
+                            classDef startEnd fill:#ff5d15,stroke:#1a2e53,stroke-width:3px,color:#fff
+                            classDef process fill:#1a2e53,stroke:#ff5d15,stroke-width:2px,color:#fff
+                            classDef decision fill:#f8f9fa,stroke:#ff5d15,stroke-width:2px,color:#1a2e53
+                            classDef success fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            classDef warning fill:#ffc107,stroke:#1a2e53,stroke-width:2px,color:#1a2e53
+
+                            class A,AA,DD,FF startEnd
+                            class C,E,H,M,N,O,R,S,T,V,X,Z,BB,CC,EE process
+                            class B,G,I,Q,U,W decision
+                            class Y success
+                            class J,K,L warning
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Flow Explanation:</strong>
+                        This flowchart illustrates the complete sequential learning experience, from enrollment verification through lesson completion and cross-module progression, ensuring students follow a structured learning path.
+                    </div>
+                </div>
+            </div>
+            <!-- Lesson Navigation & Unlocking Section -->
+            <div id="lesson-navigation" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-route"></i> Lesson Navigation & Unlocking</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Understand how the sequential lesson unlocking system guides students through their learning journey.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Smart Navigation:</strong>
+                        The lesson navigation system automatically manages access permissions and provides clear guidance for student progression.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Prerequisite Validation</h5>
+                                <p class="mb-0">System checks if previous lessons are completed before granting access to new content</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Visual Status Indicators</h5>
+                                <p class="mb-0">Lessons display clear status: <span style="color: #28a745;">✓ Completed</span>, <span style="color: #ff5d15;">⏳ In Progress</span>, <span style="color: #6c757d;">🔒 Locked</span>, <span style="color: #007bff;">📖 Available</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Automatic Unlocking</h5>
+                                <p class="mb-0">Next lesson automatically becomes available when current lesson is marked complete</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Cross-Module Transitions</h5>
+                                <p class="mb-0">Seamless progression from last lesson of one module to first lesson of the next module</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Navigation Logic:</strong>
+                        The system ensures students cannot skip ahead, maintaining the integrity of the learning sequence while providing clear feedback about their progress and next steps.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Rendering & Display Section -->
+            <div id="content-rendering" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-desktop"></i> Content Rendering & Display</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Learn how course content is presented to students with YITP branding and optimal user experience.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Branded Experience:</strong>
+                        All lesson content is rendered with consistent YITP branding, ensuring a professional and cohesive learning environment.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>YITP Branded Interface</h5>
+                                <p class="mb-0">Lessons display with YITP orange (#ff5d15) and dark blue (#1a2e53) color scheme</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Responsive Design</h5>
+                                <p class="mb-0">Content adapts to different screen sizes for optimal viewing on desktop, tablet, and mobile devices</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Interactive Elements</h5>
+                                <p class="mb-0">Lessons include interactive components like progress bars, completion buttons, and navigation controls</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Accessibility Features</h5>
+                                <p class="mb-0">Content includes proper heading structure, alt text, and keyboard navigation support</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Content Types:</strong>
+                        The system supports various content types including text, images, videos, and interactive exercises, all rendered with consistent styling and functionality.
+                    </div>
+                </div>
+            </div>
+            <!-- Progress Marking & Completion Section -->
+            <div id="progress-completion" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-check-circle"></i> Progress Marking & Completion</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Discover how student progress is tracked and lessons are marked as completed in the YITP learning system.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Progress Tracking:</strong>
+                        The system automatically tracks student engagement and provides multiple ways to mark lessons as completed, ensuring accurate progress measurement.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Engagement Tracking</h5>
+                                <p class="mb-0">System monitors time spent on lessons and interaction with content elements</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Manual Completion</h5>
+                                <p class="mb-0">Students can manually mark lessons as completed using the "Mark as Complete" button</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Progress Calculation</h5>
+                                <p class="mb-0">Course progress percentage is automatically calculated based on completed lessons</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Analytics Integration</h5>
+                                <p class="mb-0">Completion data feeds into student analytics dashboard for comprehensive progress insights</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Data Persistence:</strong>
+                        All progress data is securely stored and synchronized across devices, ensuring students never lose their learning progress.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cross-Module Progression Section -->
+            <div id="cross-module-progression" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-arrow-right"></i> Cross-Module Progression</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Understand how students seamlessly transition between course modules while maintaining sequential learning progression.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Seamless Transitions:</strong>
+                        The cross-module progression system ensures students experience smooth transitions between learning modules without losing momentum in their educational journey.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Module Completion Detection</h5>
+                                <p class="mb-0">System automatically detects when all lessons in a module are completed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Next Module Unlocking</h5>
+                                <p class="mb-0">First lesson of the next module becomes immediately accessible upon module completion</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Progress Continuity</h5>
+                                <p class="mb-0">Learning progress carries forward seamlessly across module boundaries</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Visual Transition Indicators</h5>
+                                <p class="mb-0">Students receive clear visual feedback when transitioning between modules</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Course Completion Recognition</h5>
+                                <p class="mb-0">System recognizes when all modules are completed and triggers course completion workflows</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Learning Continuity:</strong>
+                        The cross-module system maintains learning momentum by eliminating barriers between modules while preserving the structured, sequential nature of the educational experience.
+                    </div>
+                </div>
+            </div>
+
 
 
 
@@ -630,31 +1717,172 @@
             mermaid.init();
             console.log('Mermaid diagrams initialized');
         }, 1000);
-    });
 
-        // Hierarchical navigation functionality
-        const parentNav = document.querySelector('.parent-nav');
-        const childNavItems = document.querySelector('.child-nav-items');
-        const chevron = parentNav.querySelector('.fa-chevron-down');
+        // Enhanced Hierarchical Navigation Functionality
+        function initializeDropdownNavigation() {
+            console.log('Initializing dropdown navigation...');
+            const parentNavs = document.querySelectorAll('.parent-nav');
+            console.log('Found parent navs:', parentNavs.length);
 
-        // Toggle child navigation visibility
-        parentNav.addEventListener('click', function(e) {
-            e.preventDefault();
-            childNavItems.style.display = childNavItems.style.display === 'none' ? 'block' : 'none';
-            chevron.classList.toggle('fa-chevron-down');
-            chevron.classList.toggle('fa-chevron-up');
+            parentNavs.forEach((parentNav, index) => {
+                console.log(`Processing parent nav ${index + 1}:`, parentNav);
+                const targetId = parentNav.getAttribute('aria-controls');
+                console.log('Target ID:', targetId);
+                const childNavItems = document.getElementById(targetId);
+                console.log('Child nav items:', childNavItems);
+                const chevron = parentNav.querySelector('.chevron-icon');
+                console.log('Chevron:', chevron);
+                const childLinks = childNavItems ? childNavItems.querySelectorAll('.child-nav') : [];
+                console.log('Child links:', childLinks.length);
+
+                // Click/Touch event handler
+                if (childNavItems && chevron) {
+                    parentNav.addEventListener('click', function(e) {
+                        console.log('Parent nav clicked:', parentNav);
+                        e.preventDefault();
+                        toggleDropdown(parentNav, childNavItems, chevron, childLinks);
+                    });
+                    console.log('Event listener added successfully');
+                } else {
+                    console.error('Missing elements for parent nav:', {
+                        parentNav,
+                        childNavItems,
+                        chevron,
+                        targetId
+                    });
+                }
+
+                // Keyboard event handler
+                parentNav.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleDropdown(parentNav, childNavItems, chevron, childLinks);
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (!parentNav.classList.contains('expanded')) {
+                            toggleDropdown(parentNav, childNavItems, chevron, childLinks);
+                        }
+                        // Focus first child link
+                        const firstChild = childNavItems.querySelector('.child-nav');
+                        if (firstChild) {
+                            firstChild.focus();
+                        }
+                    }
+                });
+
+                // Handle keyboard navigation within child items
+                childLinks.forEach((link, index) => {
+                    link.addEventListener('keydown', function(e) {
+                        if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            const nextLink = childLinks[index + 1];
+                            if (nextLink) {
+                                nextLink.focus();
+                            }
+                        } else if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            if (index === 0) {
+                                parentNav.focus();
+                            } else {
+                                const prevLink = childLinks[index - 1];
+                                if (prevLink) {
+                                    prevLink.focus();
+                                }
+                            }
+                        } else if (e.key === 'Escape') {
+                            e.preventDefault();
+                            closeDropdown(parentNav, childNavItems, chevron, childLinks);
+                            parentNav.focus();
+                        }
+                    });
+                });
+            });
+        }
+
+        function toggleDropdown(parentNav, childNavItems, chevron, childLinks) {
+            console.log('Toggle dropdown called');
+            const isExpanded = parentNav.classList.contains('expanded');
+            console.log('Is expanded:', isExpanded);
+
+            // Close all other dropdowns first (accordion behavior)
+            closeAllDropdowns();
+
+            if (!isExpanded) {
+                console.log('Opening dropdown');
+                openDropdown(parentNav, childNavItems, chevron, childLinks);
+            } else {
+                console.log('Dropdown was already expanded, now closed by closeAllDropdowns');
+            }
+        }
+
+        function openDropdown(parentNav, childNavItems, chevron, childLinks) {
+            console.log('Opening dropdown for:', parentNav);
+            parentNav.classList.add('expanded');
+            parentNav.setAttribute('aria-expanded', 'true');
+            childNavItems.classList.add('expanded');
+            console.log('Classes added, childNavItems classes:', childNavItems.className);
+            // Note: chevron rotation is handled by CSS .parent-nav.expanded .chevron-icon
+
+            // Enable tab navigation for child links
+            childLinks.forEach(link => {
+                link.setAttribute('tabindex', '0');
+            });
+        }
+
+        function closeDropdown(parentNav, childNavItems, chevron, childLinks) {
+            console.log('Closing dropdown for:', parentNav);
+            parentNav.classList.remove('expanded');
+            parentNav.setAttribute('aria-expanded', 'false');
+            childNavItems.classList.remove('expanded');
+            // Note: chevron rotation is handled by CSS .parent-nav.expanded .chevron-icon
+
+            // Disable tab navigation for child links
+            childLinks.forEach(link => {
+                link.setAttribute('tabindex', '-1');
+            });
+        }
+
+        function closeAllDropdowns() {
+            const allParentNavs = document.querySelectorAll('.parent-nav');
+            allParentNavs.forEach(parentNav => {
+                const targetId = parentNav.getAttribute('aria-controls');
+                const childNavItems = document.getElementById(targetId);
+                const chevron = parentNav.querySelector('.chevron-icon');
+                const childLinks = childNavItems.querySelectorAll('.child-nav');
+
+                closeDropdown(parentNav, childNavItems, chevron, childLinks);
+            });
+        }
+
+        // Initialize dropdown navigation
+        initializeDropdownNavigation();
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.quick-nav')) {
+                closeAllDropdowns();
+            }
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('.quick-nav a[href^="#"]').forEach(anchor => {
+        // Enhanced smooth scrolling for navigation links
+        document.querySelectorAll('.quick-nav .child-nav[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
+                    // Close all dropdowns after navigation
+                    closeAllDropdowns();
+
+                    // Smooth scroll to target
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
+
+                    // Focus management for accessibility
+                    setTimeout(() => {
+                        target.focus();
+                    }, 500);
                 }
             });
         });

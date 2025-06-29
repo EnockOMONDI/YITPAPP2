@@ -22,8 +22,9 @@ from django.core import mail
 from django.urls import reverse
 from django.conf import settings
 from users.models import Profile, OTPVerification, SponsorshipRequest
-from courses.models import Course, Category
-from progress.models import Enrollment
+from courses.models import Course, Category, Module, Lesson
+from progress.models import Enrollment, LessonProgress
+from content.models import ContentItem, LessonContent
 from users.email_utils import send_otp_email, send_welcome_email
 
 class YITPWorkflowTester:
@@ -38,7 +39,9 @@ class YITPWorkflowTester:
             'sponsorship': {'passed': 0, 'failed': 0, 'details': []},
             'enrollment': {'passed': 0, 'failed': 0, 'details': []},
             'email': {'passed': 0, 'failed': 0, 'details': []},
-            'analytics': {'passed': 0, 'failed': 0, 'details': []}
+            'analytics': {'passed': 0, 'failed': 0, 'details': []},
+            'content_delivery': {'passed': 0, 'failed': 0, 'details': []},
+            'lesson_progression': {'passed': 0, 'failed': 0, 'details': []}
         }
         
     def log_result(self, category, test_name, passed, details=""):
@@ -375,6 +378,10 @@ class YITPWorkflowTester:
                     'is_published': True
                 }
             )
+
+            # Create test modules and lessons for content delivery testing
+            self._create_test_course_structure(self.test_course)
+
             self.log_result('enrollment', 'Test course creation', True,
                           f"Course: {self.test_course.title}, Slug: {self.test_course.slug}")
         except Exception as e:
@@ -664,9 +671,304 @@ class YITPWorkflowTester:
         self.test_4_course_enrollment_flow()
         self.test_5_email_system_validation()
         self.test_6_analytics_progress_tracking()
+        self.test_7_content_delivery_workflow()
+        self.test_8_lesson_progression_workflow()
 
         # Print summary
         self.print_summary()
+
+    def _create_test_course_structure(self, course):
+        """Create test modules and lessons for the course"""
+        try:
+            # Create Module 1
+            module1, created = Module.objects.get_or_create(
+                course=course,
+                title="Introduction Module",
+                defaults={
+                    'description': 'Introduction to the course',
+                    'sort_order': 1,
+                    'estimated_duration': 30,
+                    'is_published': True
+                }
+            )
+
+            # Create Module 2
+            module2, created = Module.objects.get_or_create(
+                course=course,
+                title="Advanced Module",
+                defaults={
+                    'description': 'Advanced course content',
+                    'sort_order': 2,
+                    'estimated_duration': 45,
+                    'is_published': True
+                }
+            )
+
+            # Create lessons for Module 1
+            lesson1, created = Lesson.objects.get_or_create(
+                module=module1,
+                title="Lesson 1: Getting Started",
+                defaults={
+                    'content_type': 'text',
+                    'content': 'This is the first lesson content.',
+                    'learning_objectives': 'Introduction lesson objectives',
+                    'sort_order': 1,
+                    'estimated_duration': 10,
+                    'is_published': True
+                }
+            )
+
+            lesson2, created = Lesson.objects.get_or_create(
+                module=module1,
+                title="Lesson 2: Basic Concepts",
+                defaults={
+                    'content_type': 'text',
+                    'content': 'This is the second lesson content.',
+                    'learning_objectives': 'Basic concepts lesson objectives',
+                    'sort_order': 2,
+                    'estimated_duration': 15,
+                    'is_published': True
+                }
+            )
+
+            # Create lessons for Module 2
+            lesson3, created = Lesson.objects.get_or_create(
+                module=module2,
+                title="Lesson 3: Advanced Topics",
+                defaults={
+                    'content_type': 'text',
+                    'content': 'This is the third lesson content.',
+                    'learning_objectives': 'Advanced topics lesson objectives',
+                    'sort_order': 1,
+                    'estimated_duration': 20,
+                    'is_published': True
+                }
+            )
+
+            lesson4, created = Lesson.objects.get_or_create(
+                module=module2,
+                title="Lesson 4: Final Project",
+                defaults={
+                    'content_type': 'text',
+                    'content': 'This is the final lesson content.',
+                    'learning_objectives': 'Final project lesson objectives',
+                    'sort_order': 2,
+                    'estimated_duration': 25,
+                    'is_published': True
+                }
+            )
+
+            return True
+        except Exception as e:
+            print(f"Error creating test course structure: {e}")
+            return False
+
+    def test_7_content_delivery_workflow(self):
+        """Test content delivery and lesson access workflow"""
+        print("\n🎯 PHASE 7: Content Delivery & Lesson Access Workflow")
+        print("-" * 60)
+
+        if not self.test_user or not self.test_course:
+            self.log_result('content_delivery', 'Prerequisites check', False,
+                          "Test user or course not available")
+            return False
+
+        # Test 7.1: Course content structure validation
+        try:
+            modules = Module.objects.filter(course=self.test_course, is_published=True)
+            if modules.exists():
+                self.log_result('content_delivery', 'Course modules exist', True,
+                              f"Found {modules.count()} modules")
+
+                # Check lessons in modules
+                total_lessons = 0
+                for module in modules:
+                    lessons = Lesson.objects.filter(module=module, is_published=True)
+                    total_lessons += lessons.count()
+
+                if total_lessons > 0:
+                    self.log_result('content_delivery', 'Course lessons exist', True,
+                                  f"Found {total_lessons} lessons across modules")
+                else:
+                    self.log_result('content_delivery', 'Course lessons exist', False,
+                                  "No lessons found in course")
+            else:
+                self.log_result('content_delivery', 'Course modules exist', False,
+                              "No modules found in course")
+        except Exception as e:
+            self.log_result('content_delivery', 'Course structure validation', False, str(e))
+
+        # Test 7.2: Lesson detail page access
+        try:
+            # Get first lesson
+            first_lesson = Lesson.objects.filter(
+                module__course=self.test_course,
+                is_published=True
+            ).order_by('module__sort_order', 'sort_order').first()
+
+            if first_lesson:
+                lesson_url = reverse('courses:lesson_detail', kwargs={
+                    'course_slug': self.test_course.slug,
+                    'lesson_id': first_lesson.id
+                })
+
+                response = self.client.get(lesson_url)
+                if response.status_code == 200:
+                    self.log_result('content_delivery', 'Lesson page access', True,
+                                  f"Lesson detail page accessible: {first_lesson.title}")
+
+                    # Check for lesson content
+                    content = response.content.decode()
+                    if 'lesson-content' in content or first_lesson.title in content:
+                        self.log_result('content_delivery', 'Lesson content rendering', True,
+                                      "Lesson content properly rendered")
+                    else:
+                        self.log_result('content_delivery', 'Lesson content rendering', False,
+                                      "Lesson content not found in response")
+                else:
+                    self.log_result('content_delivery', 'Lesson page access', False,
+                                  f"Status: {response.status_code}")
+            else:
+                self.log_result('content_delivery', 'First lesson availability', False,
+                              "No lessons found in course")
+        except Exception as e:
+            self.log_result('content_delivery', 'Lesson page access', False, str(e))
+
+        return True
+
+    def test_8_lesson_progression_workflow(self):
+        """Test sequential lesson progression and unlocking logic"""
+        print("\n🔄 PHASE 8: Sequential Lesson Progression Workflow")
+        print("-" * 60)
+
+        if not self.test_user or not self.test_course:
+            self.log_result('lesson_progression', 'Prerequisites check', False,
+                          "Test user or course not available")
+            return False
+
+        # Test 8.1: Lesson accessibility logic
+        try:
+            # Get course lessons in order
+            lessons = Lesson.objects.filter(
+                module__course=self.test_course,
+                is_published=True
+            ).order_by('module__sort_order', 'sort_order')
+
+            if lessons.count() >= 2:
+                first_lesson = lessons[0]
+                second_lesson = lessons[1]
+
+                # Test first lesson accessibility (should be accessible)
+                is_accessible, message = first_lesson.is_accessible_for_user(self.test_user)
+                if is_accessible:
+                    self.log_result('lesson_progression', 'First lesson accessibility', True,
+                                  "First lesson is accessible to enrolled user")
+                else:
+                    self.log_result('lesson_progression', 'First lesson accessibility', False,
+                                  f"First lesson not accessible: {message}")
+
+                # Test second lesson accessibility (should be locked initially)
+                is_accessible, message = second_lesson.is_accessible_for_user(self.test_user)
+                if not is_accessible:
+                    self.log_result('lesson_progression', 'Sequential locking logic', True,
+                                  "Second lesson properly locked until first is completed")
+                else:
+                    self.log_result('lesson_progression', 'Sequential locking logic', False,
+                                  "Second lesson should be locked but is accessible")
+            else:
+                self.log_result('lesson_progression', 'Sufficient lessons for testing', False,
+                              f"Need at least 2 lessons, found {lessons.count()}")
+        except Exception as e:
+            self.log_result('lesson_progression', 'Lesson accessibility logic', False, str(e))
+
+        # Test 8.2: Lesson completion and unlocking
+        try:
+            # Get enrollment
+            enrollment = Enrollment.objects.get(
+                student=self.test_user,
+                course=self.test_course,
+                status='active'
+            )
+
+            # Get first lesson
+            first_lesson = Lesson.objects.filter(
+                module__course=self.test_course,
+                is_published=True
+            ).order_by('module__sort_order', 'sort_order').first()
+
+            if first_lesson:
+                # Create or get lesson progress
+                progress, created = LessonProgress.objects.get_or_create(
+                    enrollment=enrollment,
+                    lesson=first_lesson
+                )
+
+                # Mark first lesson as completed
+                progress.mark_completed()
+
+                self.log_result('lesson_progression', 'Lesson completion marking', True,
+                              f"Successfully marked lesson as completed: {first_lesson.title}")
+
+                # Check if next lesson is now accessible
+                lessons = Lesson.objects.filter(
+                    module__course=self.test_course,
+                    is_published=True
+                ).order_by('module__sort_order', 'sort_order')
+
+                if lessons.count() >= 2:
+                    second_lesson = lessons[1]
+                    is_accessible, message = second_lesson.is_accessible_for_user(self.test_user)
+
+                    if is_accessible:
+                        self.log_result('lesson_progression', 'Next lesson unlocking', True,
+                                      "Next lesson unlocked after completion")
+                    else:
+                        self.log_result('lesson_progression', 'Next lesson unlocking', False,
+                                      f"Next lesson still locked: {message}")
+            else:
+                self.log_result('lesson_progression', 'First lesson availability', False,
+                              "No first lesson found for completion test")
+        except Exception as e:
+            self.log_result('lesson_progression', 'Lesson completion workflow', False, str(e))
+
+        # Test 8.3: Cross-module progression
+        try:
+            modules = Module.objects.filter(course=self.test_course, is_published=True).order_by('sort_order')
+            if modules.count() >= 2:
+                first_module = modules[0]
+                second_module = modules[1]
+
+                # Get last lesson of first module
+                last_lesson_module1 = Lesson.objects.filter(
+                    module=first_module,
+                    is_published=True
+                ).order_by('sort_order').last()
+
+                # Get first lesson of second module
+                first_lesson_module2 = Lesson.objects.filter(
+                    module=second_module,
+                    is_published=True
+                ).order_by('sort_order').first()
+
+                if last_lesson_module1 and first_lesson_module2:
+                    # Test cross-module navigation
+                    next_lesson = last_lesson_module1.get_next_lesson()
+                    if next_lesson and next_lesson.id == first_lesson_module2.id:
+                        self.log_result('lesson_progression', 'Cross-module navigation', True,
+                                      "Cross-module lesson navigation works correctly")
+                    else:
+                        self.log_result('lesson_progression', 'Cross-module navigation', False,
+                                      "Cross-module navigation not working properly")
+                else:
+                    self.log_result('lesson_progression', 'Cross-module test setup', False,
+                                  "Insufficient lessons for cross-module testing")
+            else:
+                self.log_result('lesson_progression', 'Multiple modules available', False,
+                              f"Need at least 2 modules, found {modules.count()}")
+        except Exception as e:
+            self.log_result('lesson_progression', 'Cross-module progression', False, str(e))
+
+        return True
 
     def print_summary(self):
         """Print test results summary"""
