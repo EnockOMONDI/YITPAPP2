@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-# import dj_database_url  # Only needed for PostgreSQL DATABASE_URL parsing in production
+# import dj_database_url  # Not needed for manual PostgreSQL configuration
 from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -113,38 +113,65 @@ WHITENOISE_MANIFEST_STRICT = False
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # =============================================================================
-# LOCAL DEVELOPMENT DATABASE CONFIGURATION (SQLite)
+# DATABASE CONFIGURATION
 # =============================================================================
-# Using SQLite for local development - lightweight and no external dependencies required
+
+# Active PostgreSQL configuration using manual settings (recommended for Neon pooled connections)
+# This approach avoids issues with DATABASE_URL parsing and unsupported startup parameters
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'yitplms',
+        'USER': 'yitplms_owner',
+        'PASSWORD': 'npg_LwHI4a8TufWb',
+        'HOST': 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require'
+        },
     }
 }
 
 # =============================================================================
-# PRODUCTION DATABASE CONFIGURATION (PostgreSQL - Neon)
+# COMMENTED OUT: DATABASE_URL parsing approach (caused Neon pooled connection issues)
 # =============================================================================
-# UNCOMMENT THE SECTION BELOW FOR PRODUCTION DEPLOYMENT ON RENDER
-# Comment out the SQLite configuration above and uncomment this section
+# DEFAULT_DATABASE_URL = 'postgresql://yitplms_owner:npg_LwHI4a8TufWb@ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech/yitplms?sslmode=require&channel_binding=require'
+# DATABASE_URL = os.getenv('DATABASE_URL', DEFAULT_DATABASE_URL)
+# DATABASES = {
+#     'default': dj_database_url.parse(DATABASE_URL)
+# }
+# DATABASES['default']['OPTIONS'] = {
+#     'sslmode': 'require',
+#     'options': '-c default_transaction_isolation=read_committed'  # This parameter caused issues with Neon pooled connections
+# }
 
-# # Database configuration using environment variables
+# =============================================================================
+# FALLBACK DATABASE CONFIGURATIONS (for reference)
+# =============================================================================
+
+# SQLite configuration for local development (commented out)
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DB_NAME', 'YITPDB'),
-#         'USER': os.getenv('DB_USER', 'YITPDB_owner'),
-#         'PASSWORD': os.getenv('DB_PASSWORD', 'npg_n0zFeVa6SCxm'),
-#         'HOST': os.getenv('DB_HOST', 'ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech'),
-#         'PORT': os.getenv('DB_PORT', '5432'),
-#         'OPTIONS': {'sslmode': 'require'},
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
-# # Alternative: Use DATABASE_URL if available (for compatibility with various deployment platforms)
-# if os.getenv('DATABASE_URL'):
-#     DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+# Alternative manual PostgreSQL configuration (commented out - active configuration is above)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'yitplms',
+#         'USER': 'yitplms_owner',
+#         'PASSWORD': 'npg_LwHI4a8TufWb',
+#         'HOST': 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#             'options': '-c default_transaction_isolation=read_committed'
+#         },
+#     }
+# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
