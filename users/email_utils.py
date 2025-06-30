@@ -11,6 +11,7 @@ from django.utils.html import strip_tags
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.db import models
 import logging
 
 logger = logging.getLogger(__name__)
@@ -395,5 +396,107 @@ def send_enrollment_admin_notification(user, course, enrollment):
         logger.info(f"✅ Enrollment admin notification sent successfully")
     else:
         logger.error(f"❌ Failed to send enrollment admin notification")
+
+    return result
+
+
+def send_course_completion_email(user, course, enrollment):
+    """Send course completion congratulations email to user"""
+    logger.info(f"Preparing to send course completion email to {user.email} for course {course.title}")
+
+    # Calculate additional context data
+    total_lessons = course.total_lessons
+    completed_lessons = enrollment.lesson_progress.filter(status='completed').count()
+    learning_streak = enrollment.get_learning_streak()
+
+    # Calculate total study time from lesson progress
+    total_study_time = enrollment.lesson_progress.aggregate(
+        total_time=models.Sum('time_spent')
+    )['total_time'] or 0
+
+    context = {
+        'user': user,
+        'course': course,
+        'enrollment': enrollment,
+        'total_lessons': total_lessons,
+        'completed_lessons': completed_lessons,
+        'learning_streak': learning_streak,
+        'total_study_time': total_study_time,
+        'course_url': f"{settings.SITE_URL}/lms/courses/{course.slug}/" if hasattr(settings, 'SITE_URL') else f"/lms/courses/{course.slug}/",
+        'certificate_url': f"{settings.SITE_URL}/lms/progress/certificates/" if hasattr(settings, 'SITE_URL') else "/lms/progress/certificates/",
+        'support_email': settings.ADMIN_EMAIL,
+        'site_name': 'Youth Impact Training Programme'
+    }
+
+    html_content = render_to_string('emails/course_completion.html', context)
+    plain_content = render_to_string('emails/course_completion.txt', context)
+
+    subject = f"🎉 Course Completed: {course.title} - Congratulations from YITP!"
+
+    logger.info(f"Sending course completion email with subject: {subject}")
+
+    result = send_html_email(
+        subject=subject,
+        html_content=html_content,
+        recipient_list=[user.email],
+        plain_text_content=plain_content
+    )
+
+    if result:
+        logger.info(f"✅ Course completion email sent successfully to {user.email}")
+    else:
+        logger.error(f"❌ Failed to send course completion email to {user.email}")
+
+    return result
+
+
+def send_certificate_issuance_email(user, course, certificate):
+    """Send certificate issuance notification email to user"""
+    logger.info(f"Preparing to send certificate issuance email to {user.email} for course {course.title}")
+
+    # Get enrollment for additional context
+    enrollment = certificate.enrollment
+
+    # Calculate additional context data
+    completed_lessons = enrollment.lesson_progress.filter(status='completed').count()
+    learning_streak = enrollment.get_learning_streak()
+
+    # Calculate total study time from lesson progress
+    total_study_time = enrollment.lesson_progress.aggregate(
+        total_time=models.Sum('time_spent')
+    )['total_time'] or 0
+
+    context = {
+        'user': user,
+        'course': course,
+        'certificate': certificate,
+        'enrollment': enrollment,
+        'completed_lessons': completed_lessons,
+        'learning_streak': learning_streak,
+        'total_study_time': total_study_time,
+        'certificate_download_url': f"{settings.SITE_URL}/lms/progress/certificates/{certificate.certificate_id}/download/" if hasattr(settings, 'SITE_URL') else f"/lms/progress/certificates/{certificate.certificate_id}/download/",
+        'verification_url': f"{settings.SITE_URL}/certificates/verify/{certificate.verification_code}/" if hasattr(settings, 'SITE_URL') else f"/certificates/verify/{certificate.verification_code}/",
+        'support_email': settings.ADMIN_EMAIL,
+        'site_name': 'Youth Impact Training Programme'
+    }
+
+    html_content = render_to_string('emails/certificate_issuance.html', context)
+    plain_content = render_to_string('emails/certificate_issuance.txt', context)
+
+    subject = f"🎓 Your YITP Certificate is Ready: {course.title}"
+
+    logger.info(f"Sending certificate issuance email with subject: {subject}")
+
+    result = send_html_email(
+        subject=subject,
+        html_content=html_content,
+        recipient_list=[user.email],
+        plain_text_content=plain_content
+    )
+
+    if result:
+        logger.info(f"✅ Certificate issuance email sent successfully to {user.email}")
+    else:
+        logger.error(f"❌ Failed to send certificate issuance email to {user.email}")
 
     return result

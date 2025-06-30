@@ -21,6 +21,7 @@ from django.contrib.auth.models import User
 from django.core import mail
 from django.urls import reverse
 from django.conf import settings
+from django.utils import timezone
 from users.models import Profile, OTPVerification, SponsorshipRequest
 from courses.models import Course, Category, Module, Lesson
 from progress.models import Enrollment, LessonProgress
@@ -33,6 +34,7 @@ class YITPWorkflowTester:
         self.test_user_data = None
         self.test_user = None
         self.test_course = None
+        self.test_lesson = None
         self.results = {
             'registration': {'passed': 0, 'failed': 0, 'details': []},
             'authentication': {'passed': 0, 'failed': 0, 'details': []},
@@ -41,7 +43,10 @@ class YITPWorkflowTester:
             'email': {'passed': 0, 'failed': 0, 'details': []},
             'analytics': {'passed': 0, 'failed': 0, 'details': []},
             'content_delivery': {'passed': 0, 'failed': 0, 'details': []},
-            'lesson_progression': {'passed': 0, 'failed': 0, 'details': []}
+            'lesson_progression': {'passed': 0, 'failed': 0, 'details': []},
+            'assessment_quiz': {'passed': 0, 'failed': 0, 'details': []},
+            'communication': {'passed': 0, 'failed': 0, 'details': []},
+            'progress_tracking': {'passed': 0, 'failed': 0, 'details': []}
         }
         
     def log_result(self, category, test_name, passed, details=""):
@@ -97,7 +102,11 @@ class YITPWorkflowTester:
                 # Check if user was created
                 try:
                     self.test_user = User.objects.get(username=user_data['username'])
-                    self.log_result('registration', 'User account creation', True, 
+                    # Make test user admin for comprehensive testing
+                    self.test_user.is_staff = True
+                    self.test_user.is_superuser = True
+                    self.test_user.save()
+                    self.log_result('registration', 'User account creation', True,
                                   f"User ID: {self.test_user.id}")
                 except User.DoesNotExist:
                     self.log_result('registration', 'User account creation', False, 
@@ -673,6 +682,10 @@ class YITPWorkflowTester:
         self.test_6_analytics_progress_tracking()
         self.test_7_content_delivery_workflow()
         self.test_8_lesson_progression_workflow()
+        self.test_9_assessment_quiz_workflow()
+        self.test_10_communication_workflow()
+        self.test_11_progress_tracking_workflow()
+        self.test_12_email_notification_workflow()
 
         # Print summary
         self.print_summary()
@@ -807,6 +820,9 @@ class YITPWorkflowTester:
             ).order_by('module__sort_order', 'sort_order').first()
 
             if first_lesson:
+                # Set test_lesson for use in other tests
+                self.test_lesson = first_lesson
+
                 lesson_url = reverse('courses:lesson_detail', kwargs={
                     'course_slug': self.test_course.slug,
                     'lesson_id': first_lesson.id
@@ -970,6 +986,500 @@ class YITPWorkflowTester:
 
         return True
 
+    def test_9_assessment_quiz_workflow(self):
+        """Test Assessment & Quiz Taking Workflow"""
+        print("\n🧪 Testing Assessment & Quiz Taking Workflow...")
+
+        # Test 9.1: Quiz discovery and access
+        try:
+            # Check if assessments app is available
+            from assessments.models import Quiz, Question
+            from progress.models import QuizAttempt
+
+            # Create a test quiz
+            quiz, created = Quiz.objects.get_or_create(
+                title="Test Quiz",
+                defaults={
+                    'description': 'Test quiz for workflow testing',
+                    'lesson': self.test_lesson,
+                    'time_limit': 30,  # 30 minutes
+                    'max_attempts': 3,
+                    'is_published': True,
+                    'passing_score': 70.0
+                }
+            )
+
+            self.log_result('assessment_quiz', 'Quiz creation', True,
+                          f"Successfully created/found test quiz: {quiz.title}")
+
+            # Test quiz discovery through course
+            if hasattr(self.test_course, 'quiz_set'):
+                course_quizzes = self.test_course.quiz_set.filter(is_published=True)
+                if course_quizzes.exists():
+                    self.log_result('assessment_quiz', 'Quiz discovery', True,
+                                  f"Found {course_quizzes.count()} published quizzes")
+                else:
+                    self.log_result('assessment_quiz', 'Quiz discovery', False,
+                                  "No published quizzes found for course")
+            else:
+                self.log_result('assessment_quiz', 'Quiz-Course relationship', False,
+                              "Quiz-Course relationship not properly configured")
+
+        except ImportError:
+            self.log_result('assessment_quiz', 'Assessment app availability', False,
+                          "Assessment app not available or not properly configured")
+        except Exception as e:
+            self.log_result('assessment_quiz', 'Quiz discovery setup', False, str(e))
+
+        # Test 9.2: Quiz taking process
+        try:
+            from assessments.models import Quiz
+            from progress.models import QuizAttempt
+
+            # Get or create a quiz for testing
+            quiz = Quiz.objects.filter(lesson=self.test_lesson, is_published=True).first()
+            if quiz:
+                # Test quiz attempt creation
+                attempt = QuizAttempt.objects.create(
+                    quiz=quiz,
+                    student=self.test_user,
+                    attempt_number=1
+                )
+
+                self.log_result('assessment_quiz', 'Quiz attempt creation', True,
+                              f"Successfully created quiz attempt: {attempt.id}")
+
+                # Test attempt validation
+                if attempt.student == self.test_user and attempt.quiz == quiz:
+                    self.log_result('assessment_quiz', 'Quiz attempt validation', True,
+                                  "Quiz attempt properly linked to user and quiz")
+                else:
+                    self.log_result('assessment_quiz', 'Quiz attempt validation', False,
+                                  "Quiz attempt not properly linked")
+
+                # Test time limit enforcement
+                if quiz.time_limit and quiz.time_limit > 0:
+                    self.log_result('assessment_quiz', 'Time limit configuration', True,
+                                  f"Time limit properly set: {quiz.time_limit} minutes")
+                else:
+                    self.log_result('assessment_quiz', 'Time limit configuration', False,
+                                  "Time limit not properly configured")
+            else:
+                self.log_result('assessment_quiz', 'Quiz availability for testing', False,
+                              "No published quiz available for testing")
+
+        except Exception as e:
+            self.log_result('assessment_quiz', 'Quiz taking process', False, str(e))
+
+        # Test 9.3: Grading and feedback system
+        try:
+            from progress.models import QuizAttempt
+
+            # Find a quiz attempt to test grading
+            attempt = QuizAttempt.objects.filter(student=self.test_user).first()
+            if attempt:
+                # Test score calculation
+                if hasattr(attempt, 'calculate_score'):
+                    score = attempt.calculate_score()
+                    self.log_result('assessment_quiz', 'Score calculation', True,
+                                  f"Score calculation method available, score: {score}")
+                else:
+                    self.log_result('assessment_quiz', 'Score calculation method', False,
+                                  "Score calculation method not available")
+
+                # Test feedback generation
+                if hasattr(attempt, 'get_feedback'):
+                    feedback = attempt.get_feedback()
+                    self.log_result('assessment_quiz', 'Feedback generation', True,
+                                  "Feedback generation method available")
+                else:
+                    self.log_result('assessment_quiz', 'Feedback generation method', False,
+                                  "Feedback generation method not available")
+
+                # Test completion status
+                if hasattr(attempt, 'is_completed'):
+                    completion_status = attempt.is_completed()
+                    self.log_result('assessment_quiz', 'Completion tracking', True,
+                                  f"Completion tracking available: {completion_status}")
+                else:
+                    self.log_result('assessment_quiz', 'Completion tracking method', False,
+                                  "Completion tracking method not available")
+            else:
+                self.log_result('assessment_quiz', 'Quiz attempt for grading test', False,
+                              "No quiz attempt available for grading test")
+
+        except Exception as e:
+            self.log_result('assessment_quiz', 'Grading and feedback', False, str(e))
+
+        # Test 9.4: Results review and analytics
+        try:
+            from progress.models import QuizAttempt
+
+            # Test attempt history
+            user_attempts = QuizAttempt.objects.filter(student=self.test_user)
+            if user_attempts.exists():
+                self.log_result('assessment_quiz', 'Attempt history tracking', True,
+                              f"Found {user_attempts.count()} quiz attempts for user")
+
+                # Test performance analytics
+                if user_attempts.count() > 0:
+                    latest_attempt = user_attempts.latest('started_at')
+                    if hasattr(latest_attempt, 'get_performance_data'):
+                        performance_data = latest_attempt.get_performance_data()
+                        self.log_result('assessment_quiz', 'Performance analytics', True,
+                                      "Performance analytics method available")
+                    else:
+                        self.log_result('assessment_quiz', 'Performance analytics method', False,
+                                      "Performance analytics method not available")
+            else:
+                self.log_result('assessment_quiz', 'Attempt history', False,
+                              "No quiz attempts found for analytics testing")
+
+        except Exception as e:
+            self.log_result('assessment_quiz', 'Results review and analytics', False, str(e))
+
+        return True
+
+    def test_10_communication_workflow(self):
+        """Test Communication & Collaboration Workflow"""
+        print("\n💬 Testing Communication & Collaboration Workflow...")
+
+        # Test 10.1: Student-Instructor messaging system
+        try:
+            # Check if communication app is available
+            from communication.models import Message
+
+            # Test direct message creation
+            message = Message.objects.create(
+                sender=self.test_user,
+                recipient=self.test_user,  # Self-message for testing
+                subject="Test Communication Message",
+                content="Test message for workflow testing"
+            )
+
+            self.log_result('communication', 'Message creation', True,
+                          f"Successfully created message: {message.id}")
+
+            # Test message read tracking
+            if hasattr(message, 'mark_as_read'):
+                message.mark_as_read()
+                self.log_result('communication', 'Message read tracking', True,
+                              f"Message read tracking available: {message.is_read}")
+            else:
+                self.log_result('communication', 'Message read tracking method', False,
+                              "Message read tracking method not available")
+
+            # Test message reply functionality
+            if hasattr(message, 'parent_message'):
+                self.log_result('communication', 'Message reply functionality', True,
+                              "Message reply functionality available")
+            else:
+                self.log_result('communication', 'Message reply functionality', False,
+                              "Message reply functionality not available")
+
+        except ImportError:
+            self.log_result('communication', 'Communication app availability', False,
+                          "Communication app not available or not properly configured")
+        except Exception as e:
+            self.log_result('communication', 'Messaging system setup', False, str(e))
+
+        # Test 10.2: Discussion forums and peer interaction
+        try:
+            from communication.models import Forum, Topic, Reply
+
+            # Create a test forum
+            forum, created = Forum.objects.get_or_create(
+                title="Test Forum",
+                defaults={
+                    'description': 'Test forum for workflow testing',
+                    'course': self.test_course,
+                    'is_active': True,
+                    'created_by': self.test_user
+                }
+            )
+
+            self.log_result('communication', 'Forum creation', True,
+                          f"Successfully created/found forum: {forum.title}")
+
+            # Create a test topic
+            topic = Topic.objects.create(
+                forum=forum,
+                title="Test Discussion Topic",
+                created_by=self.test_user,
+                content="Test topic content for workflow testing"
+            )
+
+            self.log_result('communication', 'Forum topic creation', True,
+                          f"Successfully created forum topic: {topic.title}")
+
+            # Create a test reply
+            reply = Reply.objects.create(
+                topic=topic,
+                created_by=self.test_user,
+                content="Test forum reply for workflow testing"
+            )
+
+            self.log_result('communication', 'Forum reply creation', True,
+                          f"Successfully created forum reply: {reply.id}")
+
+            # Test forum moderation features
+            if hasattr(forum, 'is_moderated'):
+                moderation_status = forum.is_moderated
+                self.log_result('communication', 'Forum moderation features', True,
+                              f"Forum moderation available: {moderation_status}")
+            else:
+                self.log_result('communication', 'Forum moderation field', False,
+                              "Forum moderation field not available")
+
+        except Exception as e:
+            self.log_result('communication', 'Discussion forums setup', False, str(e))
+
+        # Test 10.3: Announcements and notifications
+        try:
+            from communication.models import Announcement, Notification
+
+            # Create a test announcement
+            announcement = Announcement.objects.create(
+                title="Test Announcement",
+                content="Test announcement content for workflow testing",
+                course=self.test_course,
+                created_by=self.test_user,
+                priority='normal',
+                is_published=True
+            )
+
+            self.log_result('communication', 'Announcement creation', True,
+                          f"Successfully created announcement: {announcement.title}")
+
+            # Test notification generation
+            notification = Notification.objects.create(
+                user=self.test_user,
+                title="Test Notification",
+                message="Test notification message",
+                notification_type='announcement',
+                is_read=False
+            )
+
+            self.log_result('communication', 'Notification creation', True,
+                          f"Successfully created notification: {notification.title}")
+
+            # Test notification delivery
+            if hasattr(notification, 'mark_as_read'):
+                notification.mark_as_read()
+                self.log_result('communication', 'Notification read tracking', True,
+                              "Notification read tracking method available")
+            else:
+                self.log_result('communication', 'Notification read tracking method', False,
+                              "Notification read tracking method not available")
+
+        except Exception as e:
+            self.log_result('communication', 'Announcements and notifications', False, str(e))
+
+        # Test 10.4: Feedback and collaboration system
+        try:
+            from communication.models import Feedback, StudyGroup
+
+            # Create a test feedback
+            feedback = Feedback.objects.create(
+                content_type='lesson',
+                object_id=self.test_lesson.id,
+                feedback_type='peer',
+                rating=5,
+                comment="Test feedback for workflow testing",
+                given_by=self.test_user,
+                received_by=self.test_user
+            )
+
+            self.log_result('communication', 'Feedback creation', True,
+                          f"Successfully created feedback: {feedback.id}")
+
+            # Create a test study group
+            study_group = StudyGroup.objects.create(
+                name="Test Study Group",
+                description="Test study group for workflow testing",
+                course=self.test_course,
+                created_by=self.test_user,
+                max_members=5
+            )
+
+            self.log_result('communication', 'Study group creation', True,
+                          f"Successfully created study group: {study_group.name}")
+
+            # Test study group membership
+            if hasattr(study_group, 'members'):
+                member_count = study_group.members.count()
+                self.log_result('communication', 'Study group membership tracking', True,
+                              f"Study group membership tracking available: {member_count}")
+            else:
+                self.log_result('communication', 'Study group membership method', False,
+                              "Study group membership method not available")
+
+        except Exception as e:
+            self.log_result('communication', 'Feedback and collaboration system', False, str(e))
+
+        return True
+
+    def test_11_progress_tracking_workflow(self):
+        """Test Progress Tracking & Analytics Workflow"""
+        print("\n📊 Testing Progress Tracking & Analytics Workflow...")
+
+        # Test 11.1: Student dashboard and progress visualization
+        try:
+            # Test enrollment progress tracking
+            enrollment = Enrollment.objects.filter(student=self.test_user, course=self.test_course).first()
+            if enrollment:
+                # Test progress calculation
+                if hasattr(enrollment, 'get_progress_percentage'):
+                    progress_percentage = enrollment.get_progress_percentage()
+                    self.log_result('progress_tracking', 'Progress percentage calculation', True,
+                                  f"Progress percentage: {progress_percentage}%")
+                else:
+                    self.log_result('progress_tracking', 'Progress percentage method', False,
+                                  "Progress percentage calculation method not available")
+
+                # Test completion status
+                if hasattr(enrollment, 'is_completed'):
+                    completion_status = enrollment.is_completed()
+                    self.log_result('progress_tracking', 'Completion status tracking', True,
+                                  f"Completion status: {completion_status}")
+                else:
+                    self.log_result('progress_tracking', 'Completion status method', False,
+                                  "Completion status method not available")
+
+                # Test learning streak tracking
+                if hasattr(enrollment, 'get_learning_streak'):
+                    learning_streak = enrollment.get_learning_streak()
+                    self.log_result('progress_tracking', 'Learning streak tracking', True,
+                                  f"Learning streak: {learning_streak} days")
+                else:
+                    self.log_result('progress_tracking', 'Learning streak method', False,
+                                  "Learning streak tracking method not available")
+            else:
+                self.log_result('progress_tracking', 'Enrollment for progress tracking', False,
+                              "No enrollment found for progress tracking test")
+
+        except Exception as e:
+            self.log_result('progress_tracking', 'Student dashboard progress', False, str(e))
+
+        # Test 11.2: Learning analytics and metrics
+        try:
+            # Test lesson progress analytics
+            lesson_progresses = LessonProgress.objects.filter(enrollment__student=self.test_user)
+            if lesson_progresses.exists():
+                self.log_result('progress_tracking', 'Lesson progress data collection', True,
+                              f"Found {lesson_progresses.count()} lesson progress records")
+
+                # Test engagement metrics
+                completed_lessons = lesson_progresses.filter(status='completed')
+                if completed_lessons.exists():
+                    self.log_result('progress_tracking', 'Completion metrics tracking', True,
+                                  f"Completed lessons: {completed_lessons.count()}")
+                else:
+                    self.log_result('progress_tracking', 'Completion metrics', False,
+                                  "No completed lessons found for metrics")
+
+                # Test time tracking
+                latest_progress = lesson_progresses.latest('started_at')
+                if hasattr(latest_progress, 'time_spent'):
+                    time_spent = latest_progress.time_spent
+                    self.log_result('progress_tracking', 'Time tracking', True,
+                                  f"Time tracking available: {time_spent}")
+                else:
+                    self.log_result('progress_tracking', 'Time tracking field', False,
+                                  "Time tracking field not available")
+            else:
+                self.log_result('progress_tracking', 'Lesson progress data', False,
+                              "No lesson progress data found for analytics")
+
+        except Exception as e:
+            self.log_result('progress_tracking', 'Learning analytics', False, str(e))
+
+        # Test 11.3: Certificates and achievements
+        try:
+            # Check if certificates app is available
+            try:
+                from progress.models import Certificate, Achievement
+
+                # Test certificate generation
+                enrollment = Enrollment.objects.filter(student=self.test_user, course=self.test_course).first()
+                if enrollment:
+                    # Test certificate eligibility
+                    if hasattr(enrollment, 'is_eligible_for_certificate'):
+                        eligibility = enrollment.is_eligible_for_certificate()
+                        self.log_result('progress_tracking', 'Certificate eligibility check', True,
+                                      f"Certificate eligibility: {eligibility}")
+                    else:
+                        self.log_result('progress_tracking', 'Certificate eligibility method', False,
+                                      "Certificate eligibility method not available")
+
+                    # Test certificate creation
+                    if hasattr(enrollment, 'generate_certificate'):
+                        try:
+                            certificate = enrollment.generate_certificate()
+                            if certificate:
+                                self.log_result('progress_tracking', 'Certificate generation', True,
+                                              f"Certificate generated: {certificate.id}")
+                            else:
+                                self.log_result('progress_tracking', 'Certificate generation result', False,
+                                              "Certificate generation returned None")
+                        except Exception as cert_e:
+                            self.log_result('progress_tracking', 'Certificate generation execution', False,
+                                          f"Certificate generation failed: {str(cert_e)}")
+                    else:
+                        self.log_result('progress_tracking', 'Certificate generation method', False,
+                                      "Certificate generation method not available")
+                else:
+                    self.log_result('progress_tracking', 'Enrollment for certificate test', False,
+                                  "No enrollment found for certificate test")
+
+            except ImportError:
+                self.log_result('progress_tracking', 'Certificate models availability', False,
+                              "Certificate models not available in progress app")
+
+        except Exception as e:
+            self.log_result('progress_tracking', 'Certificates and achievements', False, str(e))
+
+        # Test 11.4: Admin and parent monitoring
+        try:
+            # Test admin analytics access
+            if self.test_user.is_staff or self.test_user.is_superuser:
+                # Test course-wide analytics
+                course_enrollments = Enrollment.objects.filter(course=self.test_course)
+                if course_enrollments.exists():
+                    self.log_result('progress_tracking', 'Course-wide enrollment data', True,
+                                  f"Found {course_enrollments.count()} enrollments for analytics")
+
+                    # Test completion rate calculation
+                    completed_enrollments = course_enrollments.filter(status='completed')
+                    completion_rate = (completed_enrollments.count() / course_enrollments.count()) * 100
+                    self.log_result('progress_tracking', 'Admin and parent monitoring', True,
+                                  f"Course completion rate: {completion_rate:.1f}%")
+                else:
+                    self.log_result('progress_tracking', 'Course enrollment data', False,
+                                  "No enrollment data found for course analytics")
+            else:
+                self.log_result('progress_tracking', 'Admin access simulation', False,
+                              "Test user does not have admin privileges for monitoring test")
+
+            # Test privacy controls
+            enrollment = Enrollment.objects.filter(student=self.test_user, course=self.test_course).first()
+            if enrollment:
+                if hasattr(enrollment, 'privacy_settings'):
+                    privacy_settings = enrollment.privacy_settings
+                    self.log_result('progress_tracking', 'Privacy controls', True,
+                                  f"Privacy settings available: {privacy_settings}")
+                else:
+                    self.log_result('progress_tracking', 'Privacy settings field', False,
+                                  "Privacy settings field not available")
+            else:
+                self.log_result('progress_tracking', 'Enrollment for privacy test', False,
+                              "No enrollment found for privacy controls test")
+
+        except Exception as e:
+            self.log_result('progress_tracking', 'Admin and parent monitoring', False, str(e))
+
+        return True
+
     def print_summary(self):
         """Print test results summary"""
         print("\n" + "="*80)
@@ -998,6 +1508,177 @@ class YITPWorkflowTester:
         print(f"  ❌ Total Failed: {total_failed}")
         print(f"  📈 Success Rate: {(total_passed/(total_passed+total_failed)*100):.1f}%")
         print(f"{'='*80}")
+
+    def test_12_email_notification_workflow(self):
+        """Test Course Completion and Certificate Email Notification Workflow"""
+        print("\n📧 PHASE 12: Email Notification Workflow Testing")
+        print("-" * 60)
+
+        if not self.test_user or not self.test_course:
+            self.log_result('email', 'Prerequisites check', False,
+                          "Test user or course not available")
+            return False
+
+        # Test 12.1: Course completion email notification
+        try:
+            # Get or create enrollment
+            enrollment, created = Enrollment.objects.get_or_create(
+                student=self.test_user,
+                course=self.test_course,
+                defaults={'status': 'active'}
+            )
+
+            # Simulate course completion by marking all lessons as completed
+            lessons = Lesson.objects.filter(
+                module__course=self.test_course,
+                is_published=True
+            )
+
+            for lesson in lessons:
+                progress, created = LessonProgress.objects.get_or_create(
+                    enrollment=enrollment,
+                    lesson=lesson
+                )
+                progress.mark_completed()
+
+            # Test course completion status detection
+            completion_status = enrollment.get_completion_status()
+            if completion_status['is_completed']:
+                self.log_result('email', 'Course completion detection', True,
+                              "Course completion properly detected")
+
+                # Test course completion email function
+                from users.email_utils import send_course_completion_email
+                result = send_course_completion_email(self.test_user, self.test_course, enrollment)
+
+                if result:
+                    self.log_result('email', 'Course completion email sending', True,
+                                  "Course completion email sent successfully")
+                else:
+                    self.log_result('email', 'Course completion email sending', False,
+                                  "Failed to send course completion email")
+            else:
+                self.log_result('email', 'Course completion detection', False,
+                              "Course completion not detected properly")
+
+        except Exception as e:
+            self.log_result('email', 'Course completion email workflow', False, str(e))
+
+        # Test 12.2: Certificate issuance email notification
+        try:
+            # Get enrollment
+            enrollment = Enrollment.objects.get(
+                student=self.test_user,
+                course=self.test_course
+            )
+
+            # Generate certificate
+            certificate = enrollment.generate_certificate()
+            if certificate:
+                self.log_result('email', 'Certificate generation', True,
+                              f"Certificate generated with ID: {certificate.certificate_id}")
+
+                # Test certificate issuance email function
+                from users.email_utils import send_certificate_issuance_email
+                result = send_certificate_issuance_email(self.test_user, self.test_course, certificate)
+
+                if result:
+                    self.log_result('email', 'Certificate issuance email sending', True,
+                                  "Certificate issuance email sent successfully")
+                else:
+                    self.log_result('email', 'Certificate issuance email sending', False,
+                                  "Failed to send certificate issuance email")
+
+                # Test certificate verification code
+                if certificate.verification_code:
+                    self.log_result('email', 'Certificate verification code', True,
+                                  f"Verification code generated: {certificate.verification_code[:8]}...")
+                else:
+                    self.log_result('email', 'Certificate verification code', False,
+                                  "No verification code generated")
+            else:
+                self.log_result('email', 'Certificate generation', False,
+                              "Failed to generate certificate")
+
+        except Exception as e:
+            self.log_result('email', 'Certificate issuance email workflow', False, str(e))
+
+        # Test 12.3: Email template rendering validation
+        try:
+            from django.template.loader import render_to_string
+
+            # Test course completion email template
+            context = {
+                'user': self.test_user,
+                'course': self.test_course,
+                'enrollment': enrollment,
+                'total_lessons': 4,
+                'completed_lessons': 4,
+                'learning_streak': 7,
+                'total_study_time': 120,
+                'course_url': f"/lms/courses/{self.test_course.slug}/",
+                'certificate_url': "/lms/progress/certificates/",
+                'support_email': 'support@yitp.com',
+                'site_name': 'Youth Impact Training Programme'
+            }
+
+            html_content = render_to_string('emails/course_completion.html', context)
+            if 'Congratulations' in html_content and self.test_user.first_name in html_content:
+                self.log_result('email', 'Course completion email template', True,
+                              "Email template renders correctly with user data")
+            else:
+                self.log_result('email', 'Course completion email template', False,
+                              "Email template not rendering properly")
+
+            plain_content = render_to_string('emails/course_completion.txt', context)
+            if 'Congratulations' in plain_content and self.test_user.first_name in plain_content:
+                self.log_result('email', 'Course completion plain text template', True,
+                              "Plain text template renders correctly")
+            else:
+                self.log_result('email', 'Course completion plain text template', False,
+                              "Plain text template not rendering properly")
+
+        except Exception as e:
+            self.log_result('email', 'Email template rendering validation', False, str(e))
+
+        # Test 12.4: Certificate email template validation
+        try:
+            if 'certificate' in locals():
+                cert_context = {
+                    'user': self.test_user,
+                    'course': self.test_course,
+                    'certificate': certificate,
+                    'enrollment': enrollment,
+                    'completed_lessons': 4,
+                    'learning_streak': 7,
+                    'total_study_time': 120,
+                    'certificate_download_url': f"/lms/progress/certificates/{certificate.certificate_id}/download/",
+                    'verification_url': f"/certificates/verify/{certificate.verification_code}/",
+                    'support_email': 'support@yitp.com',
+                    'site_name': 'Youth Impact Training Programme'
+                }
+
+                cert_html = render_to_string('emails/certificate_issuance.html', cert_context)
+                if 'Certificate is Ready' in cert_html and certificate.certificate_id in cert_html:
+                    self.log_result('email', 'Certificate issuance email template', True,
+                                  "Certificate email template renders correctly")
+                else:
+                    self.log_result('email', 'Certificate issuance email template', False,
+                                  "Certificate email template not rendering properly")
+
+                cert_plain = render_to_string('emails/certificate_issuance.txt', cert_context)
+                if 'Certificate is Ready' in cert_plain and certificate.certificate_id in cert_plain:
+                    self.log_result('email', 'Certificate issuance plain text template', True,
+                                  "Certificate plain text template renders correctly")
+                else:
+                    self.log_result('email', 'Certificate issuance plain text template', False,
+                                  "Certificate plain text template not rendering properly")
+
+        except Exception as e:
+            self.log_result('email', 'Certificate email template validation', False, str(e))
+
+        return True
+
 
 if __name__ == "__main__":
     tester = YITPWorkflowTester()

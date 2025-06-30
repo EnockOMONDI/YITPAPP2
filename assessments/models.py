@@ -21,6 +21,11 @@ class Quiz(models.Model):
     show_results = models.BooleanField(default=True, help_text="Show results immediately after completion")
     is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
+
+    @property
+    def course(self):
+        """Get the course this quiz belongs to through its lesson"""
+        return self.lesson.module.course
     
     def __str__(self):
         return f"{self.lesson.title} - {self.title}"
@@ -205,6 +210,7 @@ class GradingScale(models.Model):
         verbose_name_plural = "Grading Scales"
 
 
+
 class AssessmentTemplate(models.Model):
     """
     Reusable assessment templates
@@ -215,7 +221,7 @@ class AssessmentTemplate(models.Model):
         ('rubric', 'Rubric Template'),
         ('self_assessment', 'Self-Assessment Template'),
     ]
-    
+
     name = models.CharField(max_length=200)
     description = models.TextField()
     template_type = models.CharField(max_length=30, choices=TEMPLATE_TYPES)
@@ -223,10 +229,10 @@ class AssessmentTemplate(models.Model):
     is_public = models.BooleanField(default=False)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_templates')
     created_at = models.DateTimeField(default=timezone.now)
-    
+
     def __str__(self):
         return self.name
-    
+
     class Meta:
         verbose_name = "Assessment Template"
         verbose_name_plural = "Assessment Templates"

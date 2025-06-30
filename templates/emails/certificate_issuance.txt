@@ -1,0 +1,57 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Your YITP Certificate is Ready
+
+Your Certificate is Ready, {{ user.first_name|default:user.username }}!
+
+Your official completion certificate for "{{ course.title }}" has been generated and is now available for download. This certificate represents your dedication to learning and the skills you've acquired through the Youth Impact Training Programme.
+
+CERTIFICATE DETAILS:
+Certificate ID: {{ certificate.certificate_id }}
+Course: {{ course.title }}
+Issued Date: {{ certificate.issued_date|date:"F d, Y" }} at {{ certificate.issued_date|time:"g:i A" }}
+Final Score: {{ certificate.final_score|floatformat:1 }}%
+Certificate Type: {{ certificate.get_certificate_type_display }}
+Verification Code: {{ certificate.verification_code|truncatechars:16 }}...
+
+CERTIFICATE VERIFICATION:
+Your certificate includes a unique verification code that allows employers, educational institutions, and other organizations to verify the authenticity of your credential through our online verification portal.
+
+DOWNLOAD & VERIFICATION:
+Download Certificate: {{ certificate_download_url }}
+Verify Certificate Online: {{ verification_url }}
+
+ACHIEVEMENT SUMMARY:
+During your learning journey, you completed {{ completed_lessons }} lessons, maintained a learning streak of {{ learning_streak }} consecutive days, and spent {{ total_study_time }} minutes actively engaged with the course material.
+
+PROFESSIONAL USE:
+- Add this certificate to your LinkedIn profile and resume
+- Share with current or prospective employers
+- Include in job applications and portfolio submissions
+- Use for continuing education credit where applicable
+- Present to educational institutions for academic recognition
+- Display in your professional workspace or office
+
+IMPORTANT CERTIFICATE INFORMATION:
+Please save multiple copies of your certificate in secure locations. While you can always re-download it from your YITP dashboard, having backup copies ensures you'll always have access to this important credential.
+
+ONLINE VERIFICATION:
+Anyone can verify the authenticity of your certificate by visiting our verification portal at {{ verification_url }} and entering your certificate verification code: {{ certificate.verification_code|truncatechars:16 }}...
+
+DIGITAL SHARING:
+Your certificate is provided in high-quality PDF format, optimized for both digital sharing and professional printing. The design includes security features and QR codes for easy verification.
+
+NEXT STEPS:
+Consider exploring our advanced courses and specialized programs to continue building your skills. As a certified YITP graduate, you may be eligible for exclusive opportunities and advanced learning paths.
+
+SUPPORT:
+If you experience any issues downloading your certificate or have questions about verification, please contact us at {{ support_email }}. We're here to help ensure you can access and use your credential effectively.
+
+Congratulations once again on this significant achievement. Your certificate represents not just completion of a course, but your commitment to continuous learning and professional development.
+
+Best regards,
+The YITP Certification Team
+Youth Impact Training Programme
+
+---
+This is an automated message from the Youth Impact Training Programme.
+Your certificate is ready for download and verification.

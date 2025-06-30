@@ -80,6 +80,16 @@ class Course(models.Model):
     def enrolled_students_count(self):
         from progress.models import Enrollment
         return Enrollment.objects.filter(course=self, status='active').count()
+
+    @property
+    def quiz_set(self):
+        """Get all quizzes for this course through its lessons"""
+        try:
+            from assessments.models import Quiz
+            lesson_ids = self.modules.values_list('lessons__id', flat=True)
+            return Quiz.objects.filter(lesson_id__in=lesson_ids)
+        except ImportError:
+            return Quiz.objects.none()
     
     class Meta:
         verbose_name = "Course"

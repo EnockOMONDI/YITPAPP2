@@ -1,0 +1,53 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Course Completion Congratulations
+
+Congratulations {{ user.first_name|default:user.username }}!
+
+You have successfully completed "{{ course.title }}" through the Youth Impact Training Programme! This is a significant achievement that demonstrates your commitment to learning and personal growth.
+
+COURSE COMPLETION DETAILS:
+Course: {{ course.title }}
+Completion Date: {{ enrollment.completion_date|date:"F d, Y" }} at {{ enrollment.completion_date|time:"g:i A" }}
+Final Score: {{ enrollment.progress_percentage|floatformat:1 }}%
+Learning Streak: {{ learning_streak }} consecutive day{{ learning_streak|pluralize }}
+Total Study Time: {{ total_study_time }} minutes
+Lessons Completed: {{ completed_lessons }}/{{ total_lessons }}
+
+YOUR LEARNING JOURNEY:
+You started this course on {{ enrollment.enrollment_date|date:"F d, Y" }} and have shown remarkable dedication throughout your learning journey. Your progress demonstrates the skills and knowledge you've gained in this program.
+
+{% if enrollment.certificate_issued %}CERTIFICATE AVAILABLE:
+Your course completion certificate has been generated and is ready for download. This certificate serves as official recognition of your achievement and can be shared with employers, educational institutions, and professional networks.
+
+Certificate Download: {{ certificate_url }}
+{% endif %}
+
+COURSE ACCESS:
+View your course dashboard: {{ course_url }}
+
+WHAT'S NEXT:
+- Download and share your completion certificate
+- Explore advanced courses in your area of interest
+- Join our alumni network for continued learning opportunities
+- Apply your new skills in real-world projects
+- Consider mentoring other students in the program
+- Provide feedback to help us improve the course experience
+
+ALUMNI BENEFITS:
+As a course graduate, you now have access to exclusive alumni resources, networking events, and advanced learning opportunities. Stay connected with the YITP community to continue your professional development journey.
+
+SHARE YOUR SUCCESS:
+We encourage you to share your achievement on social media and professional networks. Your success story can inspire others to pursue their learning goals through YITP.
+
+STAY CONNECTED:
+If you have any questions about your certificate, need additional documentation, or want to explore further learning opportunities, please contact us at {{ support_email }}.
+
+Thank you for choosing the Youth Impact Training Programme. We're proud of your achievement and excited to see how you'll apply your new knowledge and skills to make a positive impact in your community and beyond!
+
+Warmest congratulations,
+The YITP Team
+Youth Impact Training Programme
+
+---
+This is an automated message from the Youth Impact Training Programme.
+Congratulations on your successful course completion!

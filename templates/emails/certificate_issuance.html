@@ -1,0 +1,95 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}Your YITP Certificate is Ready - {{ course.title }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    🎓 Your Certificate is Ready, {{ user.first_name|default:user.username }}! 🎓
+</div>
+
+<div class="content-text">
+    Your official completion certificate for <strong>{{ course.title }}</strong> has been generated and is now available for download. This certificate represents your dedication to learning and the skills you've acquired through the Youth Impact Training Programme.
+</div>
+
+<div class="success-box">
+    <strong>📜 Certificate Details:</strong><br>
+    <strong>Certificate ID:</strong> {{ certificate.certificate_id }}<br>
+    <strong>Course:</strong> {{ course.title }}<br>
+    <strong>Issued Date:</strong> {{ certificate.issued_date|date:"F d, Y" }} at {{ certificate.issued_date|time:"g:i A" }}<br>
+    <strong>Final Score:</strong> {{ certificate.final_score|floatformat:1 }}%<br>
+    <strong>Certificate Type:</strong> {{ certificate.get_certificate_type_display }}<br>
+    <strong>Verification Code:</strong> <code>{{ certificate.verification_code|truncatechars:16 }}...</code>
+</div>
+
+<div class="info-box">
+    <strong>🔐 Certificate Verification:</strong><br>
+    Your certificate includes a unique verification code that allows employers, educational institutions, and other organizations to verify the authenticity of your credential through our online verification portal.
+</div>
+
+<div class="cta-container">
+    <a href="{{ certificate_download_url }}" class="cta-button">
+        📥 Download Certificate
+    </a>
+</div>
+
+<div class="cta-container">
+    <a href="{{ verification_url }}" class="cta-button btn-secondary">
+        🔍 Verify Certificate Online
+    </a>
+</div>
+
+<div class="content-text">
+    <strong>📊 Achievement Summary:</strong><br>
+    During your learning journey, you completed {{ completed_lessons }} lessons, maintained a learning streak of {{ learning_streak }} consecutive days, and spent {{ total_study_time }} minutes actively engaged with the course material.
+</div>
+
+<div class="content-text">
+    <strong>💼 Professional Use:</strong>
+</div>
+
+<div class="content-text">
+    <ul style="text-align: left; margin: 0; padding-left: 20px;">
+        <li>Add this certificate to your LinkedIn profile and resume</li>
+        <li>Share with current or prospective employers</li>
+        <li>Include in job applications and portfolio submissions</li>
+        <li>Use for continuing education credit where applicable</li>
+        <li>Present to educational institutions for academic recognition</li>
+        <li>Display in your professional workspace or office</li>
+    </ul>
+</div>
+
+<div class="warning-box">
+    <strong>⚠️ Important Certificate Information:</strong><br>
+    Please save multiple copies of your certificate in secure locations. While you can always re-download it from your YITP dashboard, having backup copies ensures you'll always have access to this important credential.
+</div>
+
+<div class="content-text">
+    <strong>🌐 Online Verification:</strong><br>
+    Anyone can verify the authenticity of your certificate by visiting our verification portal at {{ verification_url }} and entering your certificate verification code: <strong>{{ certificate.verification_code|truncatechars:16 }}...</strong>
+</div>
+
+<div class="content-text">
+    <strong>📱 Digital Sharing:</strong><br>
+    Your certificate is provided in high-quality PDF format, optimized for both digital sharing and professional printing. The design includes security features and QR codes for easy verification.
+</div>
+
+<div class="content-text">
+    <strong>🎯 Next Steps:</strong><br>
+    Consider exploring our advanced courses and specialized programs to continue building your skills. As a certified YITP graduate, you may be eligible for exclusive opportunities and advanced learning paths.
+</div>
+
+<div class="content-text">
+    <strong>📞 Support:</strong><br>
+    If you experience any issues downloading your certificate or have questions about verification, please contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a>. We're here to help ensure you can access and use your credential effectively.
+</div>
+
+<div class="content-text">
+    Congratulations once again on this significant achievement. Your certificate represents not just completion of a course, but your commitment to continuous learning and professional development.
+</div>
+
+<div class="signature">
+    Best regards,<br>
+    <strong>The YITP Certification Team</strong><br>
+    Youth Impact Training Programme
+</div>
+{% endblock %}

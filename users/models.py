@@ -107,6 +107,18 @@ class Profile(models.Model):
             'payment_method', 'payment_reference', 'payment_notes'
         ])
 
+    def has_admin_privileges(self):
+        """Check if user has admin privileges for monitoring"""
+        return self.user.is_staff or self.user.is_superuser
+
+    def can_access_analytics(self):
+        """Check if user can access detailed analytics"""
+        return self.has_admin_privileges() or self.user.groups.filter(name='Analytics_Viewers').exists()
+
+    def can_monitor_progress(self):
+        """Check if user can monitor other users' progress"""
+        return self.has_admin_privileges() or self.user.groups.filter(name='Progress_Monitors').exists()
+
 class OTPVerification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     otp_code = models.CharField(max_length=10)

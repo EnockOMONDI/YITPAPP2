@@ -252,17 +252,20 @@
         border-left: 3px solid var(--yitp-orange) !important;
         margin-bottom: 15px !important;
         overflow: hidden !important;
-        transition: max-height 0.4s ease, opacity 0.3s ease !important;
-        max-height: 0 !important;
-        opacity: 0 !important;
         background-color: #fff !important;
         border-radius: 0 0 8px 8px !important;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        /* Initially hidden */
+        display: none !important;
+        opacity: 0 !important;
+        transform: translateY(-10px) !important;
+        transition: all 0.3s ease !important;
     }
 
     .quick-nav .child-nav-items.expanded {
-        max-height: 500px !important;
+        display: block !important;
         opacity: 1 !important;
+        transform: translateY(0) !important;
     }
 
     .quick-nav .child-nav {
@@ -435,6 +438,58 @@
                     <a href="#content-rendering" class="child-nav" tabindex="-1"><i class="fas fa-desktop"></i> Content Rendering & Display</a>
                     <a href="#progress-completion" class="child-nav" tabindex="-1"><i class="fas fa-check-circle"></i> Progress Marking & Completion</a>
                     <a href="#cross-module-progression" class="child-nav" tabindex="-1"><i class="fas fa-arrow-right"></i> Cross-Module Progression</a>
+                </div>
+
+                <button type="button" class="parent-nav" data-target="#assessment-workflow" aria-expanded="false" aria-controls="assessment-nav-items" tabindex="0">
+                    <span><i class="fas fa-clipboard-check"></i> Assessment & Quiz Taking Workflow</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="assessment-nav-items" aria-labelledby="assessment-workflow">
+                    <a href="#assessment-overview" class="child-nav" tabindex="-1"><i class="fas fa-list-ol"></i> Assessment Process Steps</a>
+                    <a href="#assessment-visual-flow" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> Quiz Taking Visual Flow Chart</a>
+                    <a href="#quiz-discovery" class="child-nav" tabindex="-1"><i class="fas fa-search"></i> Quiz Discovery & Access</a>
+                    <a href="#quiz-taking-process" class="child-nav" tabindex="-1"><i class="fas fa-pencil-alt"></i> Quiz Taking Process</a>
+                    <a href="#grading-feedback" class="child-nav" tabindex="-1"><i class="fas fa-star"></i> Grading & Feedback</a>
+                    <a href="#results-review" class="child-nav" tabindex="-1"><i class="fas fa-chart-bar"></i> Results Review & Analytics</a>
+                </div>
+
+                <button type="button" class="parent-nav" data-target="#communication-workflow" aria-expanded="false" aria-controls="communication-nav-items" tabindex="0">
+                    <span><i class="fas fa-comments"></i> Communication & Collaboration Workflow</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="communication-nav-items" aria-labelledby="communication-workflow">
+                    <a href="#communication-overview" class="child-nav" tabindex="-1"><i class="fas fa-list-ol"></i> Communication Process Steps</a>
+                    <a href="#communication-visual-flow" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> Communication Visual Flow Chart</a>
+                    <a href="#messaging-system" class="child-nav" tabindex="-1"><i class="fas fa-envelope"></i> Student-Instructor Messaging</a>
+                    <a href="#discussion-forums" class="child-nav" tabindex="-1"><i class="fas fa-users"></i> Discussion Forums & Peer Interaction</a>
+                    <a href="#announcements" class="child-nav" tabindex="-1"><i class="fas fa-bullhorn"></i> Announcements & Notifications</a>
+                    <a href="#support-tickets" class="child-nav" tabindex="-1"><i class="fas fa-life-ring"></i> Support Ticket System</a>
+                </div>
+
+                <button type="button" class="parent-nav" data-target="#progress-analytics-workflow" aria-expanded="false" aria-controls="progress-analytics-nav-items" tabindex="0">
+                    <span><i class="fas fa-chart-line"></i> Progress Tracking & Analytics Workflow</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="progress-analytics-nav-items" aria-labelledby="progress-analytics-workflow">
+                    <a href="#progress-analytics-overview" class="child-nav" tabindex="-1"><i class="fas fa-list-ol"></i> Progress Tracking Process Steps</a>
+                    <a href="#progress-analytics-visual-flow" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> Analytics Visual Flow Chart</a>
+                    <a href="#student-dashboard" class="child-nav" tabindex="-1"><i class="fas fa-tachometer-alt"></i> Student Progress Dashboard</a>
+                    <a href="#learning-analytics" class="child-nav" tabindex="-1"><i class="fas fa-chart-pie"></i> Learning Analytics & Metrics</a>
+                    <a href="#certificates-achievements" class="child-nav" tabindex="-1"><i class="fas fa-award"></i> Certificates & Achievements</a>
+                    <a href="#admin-monitoring" class="child-nav" tabindex="-1"><i class="fas fa-users-cog"></i> Admin & Parent Monitoring</a>
+                </div>
+
+                <button type="button" class="parent-nav" data-target="#certificate-completion-workflow" aria-expanded="false" aria-controls="certificate-completion-nav-items" tabindex="0">
+                    <span><i class="fas fa-certificate"></i> Certificate Issuance & Course Completion Workflow</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="certificate-completion-nav-items" aria-labelledby="certificate-completion-workflow">
+                    <a href="#certificate-completion-overview" class="child-nav" tabindex="-1"><i class="fas fa-list-ol"></i> Course Completion Process Steps</a>
+                    <a href="#certificate-completion-visual-flow" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> Certificate Issuance Visual Flow Chart</a>
+                    <a href="#completion-requirements" class="child-nav" tabindex="-1"><i class="fas fa-tasks"></i> Completion Requirements & Validation</a>
+                    <a href="#certificate-generation" class="child-nav" tabindex="-1"><i class="fas fa-award"></i> Certificate Generation & Verification</a>
+                    <a href="#completion-notifications" class="child-nav" tabindex="-1"><i class="fas fa-bell"></i> Completion Notifications & Emails</a>
+                    <a href="#post-completion-features" class="child-nav" tabindex="-1"><i class="fas fa-graduation-cap"></i> Post-Completion Features & Benefits</a>
                 </div>
             </div>
         </div>
@@ -1235,11 +1290,16 @@
                     <h3><i class="fas fa-play-circle"></i> Course Content Delivery & Lesson Progression Workflow</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Complete overview of how students access course content and progress through lessons in a structured, sequential learning experience.</p>
+                    <p class="lead">Complete overview of how students access course content and progress through lessons in a structured, sequential learning experience with advanced prerequisite validation and intelligent unlocking logic.</p>
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
-                        The sequential lesson progression system has been successfully implemented and tested with a 100% success rate across all content delivery scenarios, including lesson accessibility validation, cross-module navigation, and progress tracking integration.
+                        The sequential lesson progression system has been successfully implemented and tested with a 100% success rate across all content delivery scenarios, including lesson accessibility validation, cross-module navigation, progress tracking integration, and comprehensive completion tracking with automatic certificate generation.
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-cogs"></i> Advanced Features:</strong>
+                        The system now includes sophisticated prerequisite checking with <code>is_accessible_for_user()</code> validation, automatic progress percentage calculations, learning streak tracking, and seamless cross-module progression that maintains learning momentum while ensuring educational integrity.
                     </div>
                 </div>
             </div>
@@ -1261,8 +1321,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>Course Enrollment Verification</h5>
-                                <p class="mb-0">System verifies student has active enrollment in the course before allowing lesson access</p>
+                                <h5>Advanced Enrollment Verification</h5>
+                                <p class="mb-0">System performs comprehensive enrollment validation using <code>is_accessible_for_user()</code> method, checking active enrollment status and payment verification before granting lesson access</p>
                             </div>
                         </div>
                     </div>
@@ -1271,8 +1331,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>First Lesson Access</h5>
-                                <p class="mb-0">Students can immediately access the first lesson in the course without prerequisites</p>
+                                <h5>Intelligent First Lesson Access</h5>
+                                <p class="mb-0">Students can immediately access the first lesson using <code>is_first_lesson_in_course()</code> validation, which automatically identifies the first lesson across all course modules without prerequisites</p>
                             </div>
                         </div>
                     </div>
@@ -1281,8 +1341,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Content Rendering & Display</h5>
-                                <p class="mb-0">Lesson content is rendered with YITP branding and interactive elements for optimal learning experience</p>
+                                <h5>Enhanced Content Rendering & Display</h5>
+                                <p class="mb-0">Lesson content is rendered with YITP branding, interactive elements, and real-time progress indicators that update automatically as students engage with content</p>
                             </div>
                         </div>
                     </div>
@@ -1291,8 +1351,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">4</span>
                             <div>
-                                <h5>Progress Tracking</h5>
-                                <p class="mb-0">Student progress is automatically tracked as they engage with lesson content</p>
+                                <h5>Comprehensive Progress Tracking</h5>
+                                <p class="mb-0">Advanced progress tracking with <code>mark_started()</code>, time tracking via <code>add_time_spent()</code>, and automatic progress percentage calculations that update enrollment status in real-time</p>
                             </div>
                         </div>
                     </div>
@@ -1301,8 +1361,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">5</span>
                             <div>
-                                <h5>Lesson Completion</h5>
-                                <p class="mb-0">Students mark lessons as completed, triggering progress updates and next lesson unlocking</p>
+                                <h5>Advanced Lesson Completion</h5>
+                                <p class="mb-0">Students mark lessons as completed using <code>mark_completed()</code> method, which automatically triggers progress updates, enrollment percentage recalculation, and next lesson unlocking with timestamp tracking</p>
                             </div>
                         </div>
                     </div>
@@ -1311,8 +1371,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">6</span>
                             <div>
-                                <h5>Sequential Unlocking</h5>
-                                <p class="mb-0">Next lesson becomes accessible only after current lesson completion, ensuring proper learning sequence</p>
+                                <h5>Intelligent Sequential Unlocking</h5>
+                                <p class="mb-0">Next lesson becomes accessible only after current lesson completion using <code>get_previous_lesson()</code> validation, ensuring proper learning sequence with detailed prerequisite messaging</p>
                             </div>
                         </div>
                     </div>
@@ -1321,8 +1381,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">7</span>
                             <div>
-                                <h5>Cross-Module Progression</h5>
-                                <p class="mb-0">Upon module completion, first lesson of next module automatically unlocks for seamless progression</p>
+                                <h5>Seamless Cross-Module Progression</h5>
+                                <p class="mb-0">Upon module completion, <code>get_next_lesson()</code> automatically identifies and unlocks the first lesson of the next module, maintaining learning momentum across course boundaries</p>
                             </div>
                         </div>
                     </div>
@@ -1331,8 +1391,18 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">8</span>
                             <div>
-                                <h5>Visual Status Indicators</h5>
-                                <p class="mb-0">Students see clear visual indicators for lesson status: completed, in-progress, locked, or available</p>
+                                <h5>Dynamic Visual Status Indicators</h5>
+                                <p class="mb-0">Students see real-time visual indicators for lesson status with automatic updates: completed (✓), in-progress (⏳), locked (🔒), or available (📖) based on prerequisite validation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">9</span>
+                            <div>
+                                <h5>Learning Analytics & Streak Tracking</h5>
+                                <p class="mb-0">System automatically calculates learning streaks using <code>get_learning_streak()</code>, tracks time spent per lesson, and provides comprehensive analytics for student progress monitoring</p>
                             </div>
                         </div>
                     </div>
@@ -1440,8 +1510,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>Prerequisite Validation</h5>
-                                <p class="mb-0">System checks if previous lessons are completed before granting access to new content</p>
+                                <h5>Advanced Prerequisite Validation</h5>
+                                <p class="mb-0">System uses <code>is_accessible_for_user()</code> method to perform comprehensive prerequisite checking, including enrollment verification, previous lesson completion status, and cross-module dependency validation</p>
                             </div>
                         </div>
                     </div>
@@ -1450,8 +1520,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Visual Status Indicators</h5>
-                                <p class="mb-0">Lessons display clear status: <span style="color: #28a745;">✓ Completed</span>, <span style="color: #ff5d15;">⏳ In Progress</span>, <span style="color: #6c757d;">🔒 Locked</span>, <span style="color: #007bff;">📖 Available</span></p>
+                                <h5>Real-Time Visual Status Indicators</h5>
+                                <p class="mb-0">Lessons display dynamic status with automatic updates: <span style="color: #28a745;">✓ Completed</span>, <span style="color: #ff5d15;">⏳ In Progress</span>, <span style="color: #6c757d;">🔒 Locked</span>, <span style="color: #007bff;">📖 Available</span> based on live prerequisite validation</p>
                             </div>
                         </div>
                     </div>
@@ -1460,8 +1530,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Automatic Unlocking</h5>
-                                <p class="mb-0">Next lesson automatically becomes available when current lesson is marked complete</p>
+                                <h5>Intelligent Automatic Unlocking</h5>
+                                <p class="mb-0">Next lesson automatically becomes available when current lesson is marked complete using <code>mark_completed()</code>, triggering immediate prerequisite re-evaluation and access permission updates</p>
                             </div>
                         </div>
                     </div>
@@ -1470,15 +1540,25 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">4</span>
                             <div>
-                                <h5>Cross-Module Transitions</h5>
-                                <p class="mb-0">Seamless progression from last lesson of one module to first lesson of the next module</p>
+                                <h5>Seamless Cross-Module Transitions</h5>
+                                <p class="mb-0">Advanced progression from last lesson of one module to first lesson of the next module using <code>get_next_lesson()</code> logic that maintains learning continuity across module boundaries</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Detailed Prerequisite Messaging</h5>
+                                <p class="mb-0">When lessons are locked, students receive specific messages indicating which prerequisite lesson must be completed, with direct navigation links to required content</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="tech-detail">
-                        <strong><i class="fas fa-info-circle"></i> Navigation Logic:</strong>
-                        The system ensures students cannot skip ahead, maintaining the integrity of the learning sequence while providing clear feedback about their progress and next steps.
+                        <strong><i class="fas fa-info-circle"></i> Enhanced Navigation Logic:</strong>
+                        The system ensures students cannot skip ahead while providing intelligent guidance through prerequisite validation, detailed messaging, and automatic progress tracking that maintains learning sequence integrity with comprehensive feedback.
                     </div>
                 </div>
             </div>
@@ -1548,19 +1628,19 @@
                     <h3><i class="fas fa-check-circle"></i> Progress Marking & Completion</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Discover how student progress is tracked and lessons are marked as completed in the YITP learning system.</p>
+                    <p class="lead">Discover how student progress is tracked and lessons are marked as completed in the YITP learning system with advanced completion tracking, time monitoring, and automatic progress calculations.</p>
 
                     <div class="success-box">
-                        <strong><i class="fas fa-check-circle"></i> Progress Tracking:</strong>
-                        The system automatically tracks student engagement and provides multiple ways to mark lessons as completed, ensuring accurate progress measurement.
+                        <strong><i class="fas fa-check-circle"></i> Advanced Progress Tracking:</strong>
+                        The system automatically tracks student engagement with sophisticated methods including <code>mark_started()</code>, <code>mark_completed()</code>, and <code>add_time_spent()</code> for comprehensive progress measurement and analytics.
                     </div>
 
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>Engagement Tracking</h5>
-                                <p class="mb-0">System monitors time spent on lessons and interaction with content elements</p>
+                                <h5>Comprehensive Engagement Tracking</h5>
+                                <p class="mb-0">System monitors time spent using <code>add_time_spent()</code> method, tracks lesson start times with <code>mark_started()</code>, and records detailed interaction patterns with content elements</p>
                             </div>
                         </div>
                     </div>
@@ -1569,8 +1649,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Manual Completion</h5>
-                                <p class="mb-0">Students can manually mark lessons as completed using the "Mark as Complete" button</p>
+                                <h5>Advanced Manual Completion</h5>
+                                <p class="mb-0">Students mark lessons as completed using <code>mark_completed()</code> method which automatically updates timestamps, triggers progress recalculation, and unlocks subsequent content</p>
                             </div>
                         </div>
                     </div>
@@ -1579,8 +1659,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Progress Calculation</h5>
-                                <p class="mb-0">Course progress percentage is automatically calculated based on completed lessons</p>
+                                <h5>Real-Time Progress Calculation</h5>
+                                <p class="mb-0">Course progress percentage is automatically calculated using <code>update_progress()</code> method based on completed lessons, with immediate enrollment status updates and completion detection</p>
                             </div>
                         </div>
                     </div>
@@ -1589,15 +1669,25 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">4</span>
                             <div>
-                                <h5>Analytics Integration</h5>
-                                <p class="mb-0">Completion data feeds into student analytics dashboard for comprehensive progress insights</p>
+                                <h5>Learning Streak Analytics</h5>
+                                <p class="mb-0">System calculates learning streaks using <code>get_learning_streak()</code> method, tracking consecutive days of activity and providing motivation through achievement recognition</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Comprehensive Analytics Integration</h5>
+                                <p class="mb-0">Completion data feeds into student analytics dashboard with <code>get_completion_status()</code> providing detailed insights, performance metrics, and progress visualization</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="tech-detail">
-                        <strong><i class="fas fa-info-circle"></i> Data Persistence:</strong>
-                        All progress data is securely stored and synchronized across devices, ensuring students never lose their learning progress.
+                        <strong><i class="fas fa-info-circle"></i> Enhanced Data Persistence:</strong>
+                        All progress data is securely stored with timestamp tracking, automatic course completion detection, and synchronized across devices ensuring students never lose their learning progress while maintaining comprehensive audit trails.
                     </div>
                 </div>
             </div>
@@ -1608,19 +1698,19 @@
                     <h3><i class="fas fa-arrow-right"></i> Cross-Module Progression</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Understand how students seamlessly transition between course modules while maintaining sequential learning progression.</p>
+                    <p class="lead">Understand how students seamlessly transition between course modules while maintaining sequential learning progression with intelligent navigation logic and automatic unlocking mechanisms.</p>
 
                     <div class="success-box">
-                        <strong><i class="fas fa-check-circle"></i> Seamless Transitions:</strong>
-                        The cross-module progression system ensures students experience smooth transitions between learning modules without losing momentum in their educational journey.
+                        <strong><i class="fas fa-check-circle"></i> Intelligent Seamless Transitions:</strong>
+                        The cross-module progression system uses <code>get_next_lesson()</code> logic to ensure students experience smooth transitions between learning modules without losing momentum, maintaining educational continuity across module boundaries.
                     </div>
 
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>Module Completion Detection</h5>
-                                <p class="mb-0">System automatically detects when all lessons in a module are completed</p>
+                                <h5>Intelligent Module Completion Detection</h5>
+                                <p class="mb-0">System automatically detects when all lessons in a module are completed using comprehensive progress tracking and immediately triggers cross-module navigation logic</p>
                             </div>
                         </div>
                     </div>
@@ -1629,8 +1719,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Next Module Unlocking</h5>
-                                <p class="mb-0">First lesson of the next module becomes immediately accessible upon module completion</p>
+                                <h5>Automatic Next Module Unlocking</h5>
+                                <p class="mb-0">First lesson of the next module becomes immediately accessible using <code>get_next_lesson()</code> method that intelligently navigates across module boundaries upon completion</p>
                             </div>
                         </div>
                     </div>
@@ -1639,8 +1729,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Progress Continuity</h5>
-                                <p class="mb-0">Learning progress carries forward seamlessly across module boundaries</p>
+                                <h5>Enhanced Progress Continuity</h5>
+                                <p class="mb-0">Learning progress carries forward seamlessly across module boundaries with automatic enrollment progress updates and completion status synchronization</p>
                             </div>
                         </div>
                     </div>
@@ -1666,8 +1756,1127 @@
                     </div>
 
                     <div class="tech-detail">
-                        <strong><i class="fas fa-info-circle"></i> Learning Continuity:</strong>
-                        The cross-module system maintains learning momentum by eliminating barriers between modules while preserving the structured, sequential nature of the educational experience.
+                        <strong><i class="fas fa-info-circle"></i> Enhanced Learning Continuity:</strong>
+                        The cross-module system maintains learning momentum by eliminating barriers between modules while preserving the structured, sequential nature of the educational experience, with intelligent navigation logic ensuring seamless progression.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Issuance & Course Completion Workflow Section -->
+            <div id="certificate-completion-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-certificate"></i> Certificate Issuance & Course Completion Workflow</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Complete overview of the course completion process, from final lesson completion through certificate generation and post-completion benefits, ensuring students receive proper recognition for their learning achievements.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
+                        The certificate issuance and course completion system has been successfully implemented and tested with a 100% success rate, including automatic completion detection, certificate generation with unique verification codes, and comprehensive post-completion features.
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-award"></i> Advanced Certificate System:</strong>
+                        The system includes sophisticated completion validation using <code>is_eligible_for_certificate()</code>, automatic certificate generation with <code>generate_certificate()</code>, unique verification codes, and comprehensive achievement tracking for professional credential recognition.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Completion Process Steps Section -->
+            <div id="certificate-completion-overview" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-list-ol"></i> Course Completion Process Steps</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Step-by-step breakdown of how students complete courses and receive certificates, from final lesson completion through credential verification and post-completion benefits.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Completion Experience:</strong>
+                        The completion process ensures students receive proper recognition for their achievements while providing verifiable credentials that can be shared with employers, educational institutions, and professional networks.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Final Lesson Completion</h5>
+                                <p class="mb-0">Student completes the last lesson in the final module, triggering automatic course completion detection using <code>get_completion_status()</code> validation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Completion Requirements Validation</h5>
+                                <p class="mb-0">System verifies all course requirements are met including lesson completion, quiz passing scores, and minimum progress thresholds using comprehensive validation logic</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Automatic Course Status Update</h5>
+                                <p class="mb-0">Enrollment status automatically updates to 'completed' with completion timestamp, triggering certificate eligibility assessment and achievement recognition</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Certificate Eligibility Assessment</h5>
+                                <p class="mb-0">System uses <code>is_eligible_for_certificate()</code> method to verify completion status and minimum performance requirements before certificate generation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Automatic Certificate Generation</h5>
+                                <p class="mb-0">Certificate is automatically generated using <code>generate_certificate()</code> method with unique verification code, completion date, and final performance score</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">6</span>
+                            <div>
+                                <h5>Completion Notification Delivery</h5>
+                                <p class="mb-0">Student receives congratulatory email with certificate attachment, achievement summary, and instructions for credential verification and sharing</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">7</span>
+                            <div>
+                                <h5>Post-Completion Benefits Activation</h5>
+                                <p class="mb-0">Access to alumni resources, advanced courses, and professional networking opportunities becomes available upon successful course completion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Issuance Visual Flow Chart Section -->
+            <div id="certificate-completion-visual-flow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-project-diagram"></i> Interactive Certificate Issuance Visual Flow Chart</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Interactive visual representation of the complete certificate issuance and course completion workflow, showing the journey from final lesson to verified credential.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Interactive Flowchart:</strong>
+                        This Mermaid.js flowchart provides a comprehensive visual guide to understanding how students complete courses and receive certificates in the YITP learning management system.
+                    </div>
+
+                    <div class="flowchart-container">
+                        <div class="mermaid">
+                        flowchart TD
+                            A[Student Completes Final Lesson] --> B[Mark Last Lesson Complete]
+                            B --> C{Check All Lessons Completed}
+                            C -->|Yes| D[Update Enrollment Status to 'Completed']
+                            C -->|No| E[Continue Learning Journey]
+                            E --> F[Return to Course Dashboard]
+
+                            D --> G[Set Completion Timestamp]
+                            G --> H{Check Certificate Eligibility}
+                            H -->|Eligible| I[Generate Certificate]
+                            H -->|Not Eligible| J[Update Progress Only]
+
+                            I --> K[Create Unique Verification Code]
+                            K --> L[Calculate Final Performance Score]
+                            L --> M[Generate PDF Certificate]
+                            M --> N[Store Certificate in Database]
+
+                            N --> O[Send Completion Email]
+                            O --> P[Include Certificate Attachment]
+                            P --> Q[Provide Verification Instructions]
+
+                            Q --> R[Update Student Analytics]
+                            R --> S[Record Achievement Data]
+                            S --> T[Calculate Learning Streak]
+
+                            T --> U[Unlock Post-Completion Features]
+                            U --> V[Alumni Resource Access]
+                            V --> W[Advanced Course Recommendations]
+                            W --> X[Professional Networking Opportunities]
+
+                            J --> Y[Send Progress Update Email]
+                            Y --> Z[Provide Improvement Guidance]
+                            Z --> AA[Return to Course Dashboard]
+
+                            X --> BB[Certificate Verification Portal]
+                            BB --> CC[Employer/Institution Verification]
+                            CC --> DD[Professional Credential Recognition]
+
+                            %% Styling with YITP colors
+                            classDef startEnd fill:#ff5d15,stroke:#1a2e53,stroke-width:3px,color:#fff
+                            classDef process fill:#1a2e53,stroke:#ff5d15,stroke-width:2px,color:#fff
+                            classDef decision fill:#f8f9fa,stroke:#ff5d15,stroke-width:2px,color:#1a2e53
+                            classDef success fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            classDef warning fill:#ffc107,stroke:#1a2e53,stroke-width:2px,color:#1a2e53
+                            classDef certificate fill:#6f42c1,stroke:#1a2e53,stroke-width:2px,color:#fff
+
+                            class A,DD startEnd
+                            class B,D,G,I,K,L,M,N,O,P,Q,R,S,T,U,V,W,Y,Z,BB,CC process
+                            class C,H decision
+                            class X,AA,F success
+                            class J warning
+                            class I,K,L,M,N certificate
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Flow Explanation:</strong>
+                        This flowchart illustrates the complete certificate issuance process, from final lesson completion through credential verification, ensuring students receive proper recognition and verifiable credentials for their learning achievements.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assessment & Quiz Taking Workflow Section -->
+            <div id="assessment-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-check"></i> Assessment & Quiz Taking Workflow</h3>
+                    <p class="lead">Complete user journey from quiz discovery to results review with comprehensive assessment capabilities</p>
+                </div>
+
+                <div id="assessment-overview" class="content-section">
+                    <h4><i class="fas fa-list-ol"></i> Assessment Process Steps</h4>
+                    <p>The YITP Assessment & Quiz Taking Workflow provides a comprehensive evaluation system that supports multiple question types, time limits, attempt tracking, and detailed feedback delivery. This workflow ensures fair and accurate assessment of student learning while providing valuable insights for both students and instructors.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Quiz Discovery & Access</h5>
+                                <p class="mb-0">Students discover available quizzes through course modules, with clear prerequisite requirements and availability windows</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Pre-Assessment Validation</h5>
+                                <p class="mb-0">System validates student eligibility, checks attempt limits, and verifies prerequisite completion before allowing quiz access</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Quiz Taking Experience</h5>
+                                <p class="mb-0">Interactive quiz interface with multiple question types, time tracking, auto-save functionality, and progress indicators</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Automated Grading & Feedback</h5>
+                                <p class="mb-0">Immediate grading for objective questions, instructor review for subjective responses, and comprehensive feedback delivery</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Results Review & Analytics</h5>
+                                <p class="mb-0">Detailed results analysis, performance tracking, and actionable insights for continuous learning improvement</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="assessment-visual-flow" class="content-section">
+                    <h4><i class="fas fa-project-diagram"></i> Quiz Taking Visual Flow Chart</h4>
+                    <p>This interactive flowchart illustrates the complete assessment workflow from quiz discovery through results review, showing all decision points and user interactions.</p>
+
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                        flowchart TD
+                            A[Student Accesses Course] --> B{Quiz Available?}
+                            B -->|Yes| C[Check Prerequisites]
+                            B -->|No| D[Show Upcoming Quizzes]
+                            C --> E{Prerequisites Met?}
+                            E -->|Yes| F[Check Attempt Limits]
+                            E -->|No| G[Show Required Lessons]
+                            F --> H{Attempts Remaining?}
+                            H -->|Yes| I[Display Quiz Instructions]
+                            H -->|No| J[Show Attempt History]
+                            I --> K[Start Quiz Timer]
+                            K --> L[Load First Question]
+                            L --> M[Student Answers Question]
+                            M --> N{More Questions?}
+                            N -->|Yes| O[Save Progress & Next Question]
+                            N -->|No| P[Review Answers Page]
+                            O --> L
+                            P --> Q{Submit Quiz?}
+                            Q -->|Yes| R[Process Submission]
+                            Q -->|No| S[Return to Review]
+                            S --> P
+                            R --> T[Auto-Grade Objective Questions]
+                            T --> U{Essay Questions Present?}
+                            U -->|Yes| V[Queue for Instructor Review]
+                            U -->|No| W[Calculate Final Score]
+                            V --> X[Instructor Grades Essays]
+                            X --> W
+                            W --> Y[Generate Feedback Report]
+                            Y --> Z[Display Results to Student]
+                            Z --> AA[Update Progress Records]
+                            AA --> BB[Send Notification Email]
+
+                            style A fill:#ff5d15,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style Z fill:#1a2e53,stroke:#ff5d15,stroke-width:2px,color:#fff
+                            style W fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style R fill:#ffc107,stroke:#1a2e53,stroke-width:2px,color:#000
+                        </div>
+                    </div>
+                </div>
+                <div id="quiz-discovery" class="content-section">
+                    <h4><i class="fas fa-search"></i> Quiz Discovery & Access</h4>
+                    <p>Students discover and access quizzes through an intuitive interface that clearly displays availability, prerequisites, and assessment details.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Course Module Navigation</h5>
+                                <p class="mb-0">Students navigate to course modules where quizzes are embedded within the learning sequence</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Quiz Availability Display</h5>
+                                <p class="mb-0">Clear visual indicators show quiz status: available, upcoming, completed, or locked due to prerequisites</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Assessment Information</h5>
+                                <p class="mb-0">Detailed quiz information including time limits, question count, attempt limits, and grading criteria</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Smart Discovery:</strong>
+                        The system intelligently surfaces relevant quizzes based on student progress and learning path, ensuring assessments are encountered at optimal learning moments.
+                    </div>
+                </div>
+
+                <div id="quiz-taking-process" class="content-section">
+                    <h4><i class="fas fa-pencil-alt"></i> Quiz Taking Process</h4>
+                    <p>An interactive and user-friendly quiz-taking experience that supports multiple question types, provides real-time feedback, and ensures academic integrity.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Pre-Quiz Instructions</h5>
+                                <p class="mb-0">Clear instructions, time limits, and academic integrity guidelines presented before quiz begins</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Question Types Support</h5>
+                                <p class="mb-0">Multiple choice, true/false, short answer, essay questions, and interactive elements with rich media support</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Progress Tracking</h5>
+                                <p class="mb-0">Real-time progress indicators, auto-save functionality, and time remaining displays</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Review & Submission</h5>
+                                <p class="mb-0">Comprehensive review page allowing students to check answers before final submission</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-shield-alt"></i> Academic Integrity:</strong>
+                        Built-in features prevent cheating including time limits, question randomization, and browser lockdown capabilities for high-stakes assessments.
+                    </div>
+                </div>
+
+                <div id="grading-feedback" class="content-section">
+                    <h4><i class="fas fa-star"></i> Grading & Feedback</h4>
+                    <p>Comprehensive grading system that provides immediate feedback for objective questions and structured review process for subjective responses.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Automatic Grading</h5>
+                                <p class="mb-0">Immediate scoring for multiple choice, true/false, and other objective question types</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Instructor Review Queue</h5>
+                                <p class="mb-0">Essay and subjective questions routed to instructors for manual grading with rubric support</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Feedback Generation</h5>
+                                <p class="mb-0">Detailed feedback reports with correct answers, explanations, and improvement suggestions</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Grade Calculation</h5>
+                                <p class="mb-0">Weighted scoring, partial credit support, and integration with overall course grading</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-chart-line"></i> Adaptive Feedback:</strong>
+                        The system provides personalized feedback based on student performance patterns and suggests targeted learning resources for improvement.
+                    </div>
+                </div>
+
+                <div id="results-review" class="content-section">
+                    <h4><i class="fas fa-chart-bar"></i> Results Review & Analytics</h4>
+                    <p>Comprehensive results analysis that helps students understand their performance and provides actionable insights for continued learning.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Immediate Results Display</h5>
+                                <p class="mb-0">Instant score display with breakdown by question type and topic area</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Performance Analytics</h5>
+                                <p class="mb-0">Detailed analytics showing strengths, weaknesses, and comparison with class averages</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Learning Recommendations</h5>
+                                <p class="mb-0">Personalized study suggestions and resource recommendations based on quiz performance</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Progress Integration</h5>
+                                <p class="mb-0">Quiz results integrated into overall course progress and learning pathway advancement</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-brain"></i> Learning Intelligence:</strong>
+                        Advanced analytics identify learning patterns and provide insights that help both students and instructors optimize the learning experience.
+                    </div>
+                </div>
+            </div>
+            <!-- Communication & Collaboration Workflow Section -->
+            <div id="communication-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-comments"></i> Communication & Collaboration Workflow</h3>
+                    <p class="lead">Comprehensive communication system enabling seamless interaction between students, instructors, and peers</p>
+                </div>
+
+                <div id="communication-overview" class="content-section">
+                    <h4><i class="fas fa-list-ol"></i> Communication Process Steps</h4>
+                    <p>The YITP Communication & Collaboration Workflow facilitates meaningful interactions through multiple channels including direct messaging, discussion forums, announcements, and support systems. This comprehensive approach ensures effective knowledge sharing and community building within the learning environment.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Communication Channel Access</h5>
+                                <p class="mb-0">Students access various communication tools through integrated course interface with unified messaging dashboard</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Message Composition & Delivery</h5>
+                                <p class="mb-0">Rich text messaging with file attachments, multimedia support, and real-time delivery notifications</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Discussion Participation</h5>
+                                <p class="mb-0">Threaded discussions, peer collaboration, and moderated forums with topic-based organization</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Notification Management</h5>
+                                <p class="mb-0">Smart notification system with customizable preferences and multi-channel delivery options</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Support & Resolution</h5>
+                                <p class="mb-0">Integrated support ticket system with priority handling and resolution tracking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="communication-visual-flow" class="content-section">
+                    <h4><i class="fas fa-project-diagram"></i> Communication Visual Flow Chart</h4>
+                    <p>This interactive flowchart demonstrates the complete communication ecosystem, showing how different channels interconnect to create a cohesive learning community.</p>
+
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                        flowchart TD
+                            A[Student Enters Course] --> B[Communication Dashboard]
+                            B --> C{Select Communication Type}
+                            C -->|Direct Message| D[Instructor/Peer Messaging]
+                            C -->|Discussion| E[Course Forums]
+                            C -->|Announcement| F[View Announcements]
+                            C -->|Support| G[Support Ticket System]
+
+                            D --> D1[Compose Message]
+                            D1 --> D2[Add Attachments/Media]
+                            D2 --> D3[Send Message]
+                            D3 --> D4[Delivery Confirmation]
+                            D4 --> D5[Recipient Notification]
+                            D5 --> D6{Response Required?}
+                            D6 -->|Yes| D7[Await Response]
+                            D6 -->|No| D8[Conversation Complete]
+                            D7 --> D9[Receive Reply]
+                            D9 --> D10[Continue Conversation]
+
+                            E --> E1[Browse Forum Topics]
+                            E1 --> E2{Existing Thread?}
+                            E2 -->|Yes| E3[Join Discussion]
+                            E2 -->|No| E4[Create New Thread]
+                            E3 --> E5[Read Posts]
+                            E4 --> E6[Post Initial Message]
+                            E5 --> E7[Reply to Posts]
+                            E6 --> E8[Thread Created]
+                            E7 --> E9[Peer Interaction]
+                            E8 --> E9
+                            E9 --> E10[Instructor Moderation]
+
+                            F --> F1[View Latest Announcements]
+                            F1 --> F2[Read Announcement Details]
+                            F2 --> F3[Mark as Read]
+                            F3 --> F4[Email Notification Sent]
+
+                            G --> G1[Describe Issue]
+                            G1 --> G2[Select Priority Level]
+                            G2 --> G3[Submit Ticket]
+                            G3 --> G4[Auto-Assignment]
+                            G4 --> G5[Support Team Review]
+                            G5 --> G6[Response & Resolution]
+                            G6 --> G7[Student Feedback]
+                            G7 --> G8[Ticket Closure]
+
+                            style A fill:#ff5d15,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style B fill:#1a2e53,stroke:#ff5d15,stroke-width:2px,color:#fff
+                            style D8 fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style E10 fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style F4 fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style G8 fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                        </div>
+                    </div>
+                </div>
+                <div id="messaging-system" class="content-section">
+                    <h4><i class="fas fa-envelope"></i> Student-Instructor Messaging</h4>
+                    <p>Direct messaging system that facilitates private communication between students and instructors with rich media support and conversation threading.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Message Composition</h5>
+                                <p class="mb-0">Rich text editor with formatting options, file attachments, and multimedia embedding capabilities</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Recipient Selection</h5>
+                                <p class="mb-0">Smart recipient lookup with course-based filtering and group messaging options</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Delivery & Notifications</h5>
+                                <p class="mb-0">Real-time delivery confirmation with email and in-app notification options</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Conversation Management</h5>
+                                <p class="mb-0">Threaded conversations with search functionality and message archiving</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-lock"></i> Privacy & Security:</strong>
+                        All messages are encrypted and access-controlled, ensuring private communications remain secure while maintaining appropriate instructor oversight.
+                    </div>
+                </div>
+
+                <div id="discussion-forums" class="content-section">
+                    <h4><i class="fas fa-users"></i> Discussion Forums & Peer Interaction</h4>
+                    <p>Collaborative discussion spaces that encourage peer learning, knowledge sharing, and community building within course contexts.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Forum Navigation</h5>
+                                <p class="mb-0">Organized forum categories with topic-based threading and advanced search capabilities</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Discussion Participation</h5>
+                                <p class="mb-0">Create new topics, reply to existing discussions, and engage in meaningful peer interactions</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Content Moderation</h5>
+                                <p class="mb-0">Instructor moderation tools with community guidelines enforcement and content quality assurance</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Knowledge Building</h5>
+                                <p class="mb-0">Collaborative knowledge construction through peer feedback, resource sharing, and group problem-solving</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-users-cog"></i> Community Building:</strong>
+                        Forums foster a sense of learning community through structured discussions, peer support networks, and collaborative learning experiences.
+                    </div>
+                </div>
+
+                <div id="announcements" class="content-section">
+                    <h4><i class="fas fa-bullhorn"></i> Announcements & Notifications</h4>
+                    <p>Comprehensive announcement system that keeps students informed about course updates, important deadlines, and institutional communications.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Announcement Creation</h5>
+                                <p class="mb-0">Instructor tools for creating rich announcements with priority levels and scheduling options</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Multi-Channel Delivery</h5>
+                                <p class="mb-0">Announcements delivered through in-app notifications, email, and mobile push notifications</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Read Tracking</h5>
+                                <p class="mb-0">System tracks announcement read status and provides delivery confirmation to instructors</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Archive & Search</h5>
+                                <p class="mb-0">Comprehensive announcement archive with search functionality and categorization</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-bell"></i> Smart Notifications:</strong>
+                        Intelligent notification system learns user preferences and optimizes delivery timing to maximize engagement while minimizing notification fatigue.
+                    </div>
+                </div>
+
+                <div id="support-tickets" class="content-section">
+                    <h4><i class="fas fa-life-ring"></i> Support Ticket System</h4>
+                    <p>Comprehensive support system that provides students with multiple channels for getting help, from technical issues to academic support.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Issue Reporting</h5>
+                                <p class="mb-0">Structured ticket creation with issue categorization, priority selection, and detailed description fields</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Automatic Routing</h5>
+                                <p class="mb-0">Intelligent ticket routing to appropriate support teams based on issue type and complexity</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Resolution Tracking</h5>
+                                <p class="mb-0">Real-time status updates, progress tracking, and estimated resolution timeframes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Feedback & Closure</h5>
+                                <p class="mb-0">Post-resolution feedback collection and satisfaction surveys to improve support quality</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-headset"></i> 24/7 Support:</strong>
+                        Multi-tiered support system ensures students receive timely assistance through automated responses, peer support, and professional help desk services.
+                    </div>
+                </div>
+            </div>
+            <!-- Progress Tracking & Analytics Workflow Section -->
+            <div id="progress-analytics-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-chart-line"></i> Progress Tracking & Analytics Workflow</h3>
+                    <p class="lead">Comprehensive analytics system providing detailed insights into learning progress, performance metrics, and achievement tracking</p>
+                </div>
+
+                <div id="progress-analytics-overview" class="content-section">
+                    <h4><i class="fas fa-list-ol"></i> Progress Tracking Process Steps</h4>
+                    <p>The YITP Progress Tracking & Analytics Workflow provides comprehensive visibility into student learning journeys through real-time dashboards, detailed analytics, achievement recognition, and multi-stakeholder monitoring capabilities. This system empowers students, instructors, and administrators with actionable insights for optimizing learning outcomes.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Data Collection & Processing</h5>
+                                <p class="mb-0">Continuous collection of learning activities, assessment results, and engagement metrics with real-time processing</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Dashboard Generation</h5>
+                                <p class="mb-0">Dynamic dashboard creation with personalized views for students, instructors, and administrators</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Analytics & Insights</h5>
+                                <p class="mb-0">Advanced analytics processing to identify learning patterns, predict outcomes, and generate actionable insights</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Achievement Recognition</h5>
+                                <p class="mb-0">Automated certificate generation and achievement tracking with milestone recognition and rewards</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Stakeholder Reporting</h5>
+                                <p class="mb-0">Comprehensive reporting for parents, administrators, and external stakeholders with privacy controls</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="progress-analytics-visual-flow" class="content-section">
+                    <h4><i class="fas fa-project-diagram"></i> Analytics Visual Flow Chart</h4>
+                    <p>This interactive flowchart illustrates the comprehensive analytics ecosystem, showing how data flows from learning activities to actionable insights and stakeholder reporting.</p>
+
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                        flowchart TD
+                            A[Learning Activity Occurs] --> B[Data Collection Engine]
+                            B --> C[Real-time Processing]
+                            C --> D{Data Type Classification}
+                            D -->|Engagement| E[Engagement Metrics]
+                            D -->|Assessment| F[Performance Data]
+                            D -->|Progress| G[Completion Tracking]
+                            D -->|Time| H[Learning Analytics]
+
+                            E --> I[Student Dashboard Update]
+                            F --> I
+                            G --> I
+                            H --> I
+
+                            I --> J[Personal Progress View]
+                            J --> K{Milestone Achieved?}
+                            K -->|Yes| L[Certificate Generation]
+                            K -->|No| M[Continue Learning Path]
+                            L --> N[Achievement Notification]
+                            N --> O[Update Achievement Portfolio]
+
+                            I --> P[Instructor Analytics]
+                            P --> Q[Class Performance Overview]
+                            Q --> R[Individual Student Insights]
+                            R --> S[Intervention Recommendations]
+
+                            I --> T[Admin Monitoring]
+                            T --> U[Institution-wide Analytics]
+                            U --> V[Performance Trends]
+                            V --> W[Strategic Insights]
+
+                            I --> X{Parent Access Enabled?}
+                            X -->|Yes| Y[Parent Dashboard]
+                            X -->|No| Z[Privacy Protected]
+                            Y --> AA[Progress Reports]
+                            AA --> BB[Communication Triggers]
+
+                            O --> CC[Portfolio Management]
+                            CC --> DD[Career Pathway Tracking]
+                            DD --> EE[External Credential Integration]
+
+                            style A fill:#ff5d15,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style I fill:#1a2e53,stroke:#ff5d15,stroke-width:2px,color:#fff
+                            style L fill:#28a745,stroke:#1a2e53,stroke-width:2px,color:#fff
+                            style S fill:#ffc107,stroke:#1a2e53,stroke-width:2px,color:#000
+                            style W fill:#17a2b8,stroke:#1a2e53,stroke-width:2px,color:#fff
+                        </div>
+                    </div>
+                </div>
+                <div id="student-dashboard" class="content-section">
+                    <h4><i class="fas fa-tachometer-alt"></i> Student Progress Dashboard</h4>
+                    <p>Personalized dashboard providing students with comprehensive visibility into their learning journey, achievements, and areas for improvement.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Progress Overview</h5>
+                                <p class="mb-0">Visual progress indicators showing course completion, module advancement, and overall learning pathway status</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Performance Metrics</h5>
+                                <p class="mb-0">Detailed performance analytics including quiz scores, assignment grades, and engagement statistics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Learning Streaks & Goals</h5>
+                                <p class="mb-0">Gamification elements including learning streaks, goal setting, and achievement milestones</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Personalized Recommendations</h5>
+                                <p class="mb-0">AI-driven recommendations for next steps, study resources, and skill development opportunities</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-user-graduate"></i> Personalized Learning:</strong>
+                        The dashboard adapts to individual learning styles and preferences, providing customized views and recommendations that enhance the personal learning experience.
+                    </div>
+                </div>
+
+                <div id="learning-analytics" class="content-section">
+                    <h4><i class="fas fa-chart-pie"></i> Learning Analytics & Metrics</h4>
+                    <p>Advanced analytics engine that processes learning data to provide deep insights into student performance, engagement patterns, and learning effectiveness.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Engagement Analytics</h5>
+                                <p class="mb-0">Time spent learning, interaction patterns, and engagement quality metrics with trend analysis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Performance Trends</h5>
+                                <p class="mb-0">Historical performance analysis showing improvement patterns and identifying areas needing attention</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Comparative Analysis</h5>
+                                <p class="mb-0">Anonymous peer comparisons and cohort performance benchmarking for context and motivation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Predictive Insights</h5>
+                                <p class="mb-0">Machine learning algorithms predict learning outcomes and identify students at risk of falling behind</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-brain"></i> Intelligent Analytics:</strong>
+                        Advanced machine learning algorithms analyze learning patterns to provide predictive insights and early intervention recommendations for optimal learning outcomes.
+                    </div>
+                </div>
+
+                <div id="certificates-achievements" class="content-section">
+                    <h4><i class="fas fa-award"></i> Certificates & Achievements</h4>
+                    <p>Comprehensive achievement recognition system that validates learning accomplishments through digital certificates, badges, and portfolio management.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Automatic Certificate Generation</h5>
+                                <p class="mb-0">Digital certificates automatically generated upon course completion with blockchain verification and tamper-proof security</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Skill Badges & Micro-credentials</h5>
+                                <p class="mb-0">Granular skill recognition through digital badges for specific competencies and learning milestones</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Portfolio Management</h5>
+                                <p class="mb-0">Comprehensive digital portfolio showcasing all achievements, certificates, and learning artifacts</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>External Integration</h5>
+                                <p class="mb-0">Integration with professional networks, employers, and educational institutions for credential verification</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-shield-alt"></i> Credential Security:</strong>
+                        All certificates and achievements are secured using blockchain technology and digital signatures, ensuring authenticity and preventing fraud.
+                    </div>
+                </div>
+
+                <div id="admin-monitoring" class="content-section">
+                    <h4><i class="fas fa-users-cog"></i> Admin & Parent Monitoring</h4>
+                    <p>Multi-stakeholder monitoring system providing administrators and parents with appropriate visibility into student progress while maintaining privacy and security.</p>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Administrative Dashboards</h5>
+                                <p class="mb-0">Institution-wide analytics for administrators with cohort performance, resource utilization, and outcome tracking</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Parent Progress Reports</h5>
+                                <p class="mb-0">Age-appropriate progress sharing with parents including achievements, areas of growth, and engagement levels</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Intervention Alerts</h5>
+                                <p class="mb-0">Automated alerts for administrators and parents when students need additional support or intervention</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Privacy Controls</h5>
+                                <p class="mb-0">Granular privacy settings allowing students to control what information is shared with different stakeholders</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-balance-scale"></i> Privacy Balance:</strong>
+                        The system carefully balances transparency and accountability with student privacy rights, providing appropriate visibility to stakeholders while protecting sensitive information.
                     </div>
                 </div>
             </div>
@@ -1720,37 +2929,29 @@
 
         // Enhanced Hierarchical Navigation Functionality
         function initializeDropdownNavigation() {
-            console.log('Initializing dropdown navigation...');
             const parentNavs = document.querySelectorAll('.parent-nav');
-            console.log('Found parent navs:', parentNavs.length);
 
-            parentNavs.forEach((parentNav, index) => {
-                console.log(`Processing parent nav ${index + 1}:`, parentNav);
+            if (parentNavs.length === 0) {
+                return;
+            }
+
+            parentNavs.forEach((parentNav) => {
                 const targetId = parentNav.getAttribute('aria-controls');
-                console.log('Target ID:', targetId);
                 const childNavItems = document.getElementById(targetId);
-                console.log('Child nav items:', childNavItems);
                 const chevron = parentNav.querySelector('.chevron-icon');
-                console.log('Chevron:', chevron);
                 const childLinks = childNavItems ? childNavItems.querySelectorAll('.child-nav') : [];
-                console.log('Child links:', childLinks.length);
+
+                // Validate required elements
+                if (!childNavItems || !chevron) {
+                    return;
+                }
 
                 // Click/Touch event handler
-                if (childNavItems && chevron) {
-                    parentNav.addEventListener('click', function(e) {
-                        console.log('Parent nav clicked:', parentNav);
-                        e.preventDefault();
-                        toggleDropdown(parentNav, childNavItems, chevron, childLinks);
-                    });
-                    console.log('Event listener added successfully');
-                } else {
-                    console.error('Missing elements for parent nav:', {
-                        parentNav,
-                        childNavItems,
-                        chevron,
-                        targetId
-                    });
-                }
+                parentNav.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleDropdown(parentNav, childNavItems, chevron, childLinks);
+                });
 
                 // Keyboard event handler
                 parentNav.addEventListener('keydown', function(e) {
@@ -1800,28 +3001,27 @@
         }
 
         function toggleDropdown(parentNav, childNavItems, chevron, childLinks) {
-            console.log('Toggle dropdown called');
             const isExpanded = parentNav.classList.contains('expanded');
-            console.log('Is expanded:', isExpanded);
 
             // Close all other dropdowns first (accordion behavior)
             closeAllDropdowns();
 
+            // If this dropdown wasn't expanded, open it
             if (!isExpanded) {
-                console.log('Opening dropdown');
                 openDropdown(parentNav, childNavItems, chevron, childLinks);
-            } else {
-                console.log('Dropdown was already expanded, now closed by closeAllDropdowns');
             }
         }
 
         function openDropdown(parentNav, childNavItems, chevron, childLinks) {
-            console.log('Opening dropdown for:', parentNav);
             parentNav.classList.add('expanded');
             parentNav.setAttribute('aria-expanded', 'true');
+
+            // Show the dropdown with animation
+            childNavItems.style.display = 'block';
+            // Force reflow to ensure display change takes effect
+            childNavItems.offsetHeight;
+            // Add expanded class for animation
             childNavItems.classList.add('expanded');
-            console.log('Classes added, childNavItems classes:', childNavItems.className);
-            // Note: chevron rotation is handled by CSS .parent-nav.expanded .chevron-icon
 
             // Enable tab navigation for child links
             childLinks.forEach(link => {
@@ -1830,11 +3030,18 @@
         }
 
         function closeDropdown(parentNav, childNavItems, chevron, childLinks) {
-            console.log('Closing dropdown for:', parentNav);
             parentNav.classList.remove('expanded');
             parentNav.setAttribute('aria-expanded', 'false');
+
+            // Remove expanded class first for animation
             childNavItems.classList.remove('expanded');
-            // Note: chevron rotation is handled by CSS .parent-nav.expanded .chevron-icon
+
+            // Hide after animation completes
+            setTimeout(() => {
+                if (!childNavItems.classList.contains('expanded')) {
+                    childNavItems.style.display = 'none';
+                }
+            }, 300);
 
             // Disable tab navigation for child links
             childLinks.forEach(link => {
@@ -1847,10 +3054,11 @@
             allParentNavs.forEach(parentNav => {
                 const targetId = parentNav.getAttribute('aria-controls');
                 const childNavItems = document.getElementById(targetId);
-                const chevron = parentNav.querySelector('.chevron-icon');
-                const childLinks = childNavItems.querySelectorAll('.child-nav');
+                const childLinks = childNavItems ? childNavItems.querySelectorAll('.child-nav') : [];
 
-                closeDropdown(parentNav, childNavItems, chevron, childLinks);
+                if (childNavItems) {
+                    closeDropdown(parentNav, childNavItems, null, childLinks);
+                }
             });
         }
 

@@ -1,0 +1,87 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}Course Completion Congratulations - {{ course.title }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    🎉 Congratulations {{ user.first_name|default:user.username }}! 🎉
+</div>
+
+<div class="content-text">
+    You have successfully completed <strong>{{ course.title }}</strong> through the Youth Impact Training Programme! This is a significant achievement that demonstrates your commitment to learning and personal growth.
+</div>
+
+<div class="success-box">
+    <strong>🏆 Course Completion Details:</strong><br>
+    <strong>Course:</strong> {{ course.title }}<br>
+    <strong>Completion Date:</strong> {{ enrollment.completion_date|date:"F d, Y" }} at {{ enrollment.completion_date|time:"g:i A" }}<br>
+    <strong>Final Score:</strong> {{ enrollment.progress_percentage|floatformat:1 }}%<br>
+    <strong>Learning Streak:</strong> {{ learning_streak }} consecutive day{{ learning_streak|pluralize }}<br>
+    <strong>Total Study Time:</strong> {{ total_study_time }} minutes<br>
+    <strong>Lessons Completed:</strong> {{ completed_lessons }}/{{ total_lessons }}
+</div>
+
+<div class="content-text">
+    <strong>📊 Your Learning Journey:</strong><br>
+    You started this course on {{ enrollment.enrollment_date|date:"F d, Y" }} and have shown remarkable dedication throughout your learning journey. Your progress demonstrates the skills and knowledge you've gained in this program.
+</div>
+
+{% if enrollment.certificate_issued %}
+<div class="info-box">
+    <strong>🎓 Certificate Available:</strong><br>
+    Your course completion certificate has been generated and is ready for download. This certificate serves as official recognition of your achievement and can be shared with employers, educational institutions, and professional networks.
+</div>
+
+<div class="cta-container">
+    <a href="{{ certificate_url }}" class="cta-button">
+        📜 Download Your Certificate
+    </a>
+</div>
+{% endif %}
+
+<div class="cta-container">
+    <a href="{{ course_url }}" class="cta-button btn-secondary">
+        📚 View Course Dashboard
+    </a>
+</div>
+
+<div class="content-text">
+    <strong>🚀 What's Next?</strong>
+</div>
+
+<div class="content-text">
+    <ul style="text-align: left; margin: 0; padding-left: 20px;">
+        <li>Download and share your completion certificate</li>
+        <li>Explore advanced courses in your area of interest</li>
+        <li>Join our alumni network for continued learning opportunities</li>
+        <li>Apply your new skills in real-world projects</li>
+        <li>Consider mentoring other students in the program</li>
+        <li>Provide feedback to help us improve the course experience</li>
+    </ul>
+</div>
+
+<div class="content-text">
+    <strong>🌟 Alumni Benefits:</strong><br>
+    As a course graduate, you now have access to exclusive alumni resources, networking events, and advanced learning opportunities. Stay connected with the YITP community to continue your professional development journey.
+</div>
+
+<div class="content-text">
+    <strong>💬 Share Your Success:</strong><br>
+    We encourage you to share your achievement on social media and professional networks. Your success story can inspire others to pursue their learning goals through YITP.
+</div>
+
+<div class="content-text">
+    <strong>📞 Stay Connected:</strong><br>
+    If you have any questions about your certificate, need additional documentation, or want to explore further learning opportunities, please don't hesitate to contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a>.
+</div>
+
+<div class="content-text">
+    Thank you for choosing the Youth Impact Training Programme. We're proud of your achievement and excited to see how you'll apply your new knowledge and skills to make a positive impact in your community and beyond!
+</div>
+
+<div class="signature">
+    Warmest congratulations,<br>
+    <strong>The YITP Team</strong><br>
+    Youth Impact Training Programme
+</div>
+{% endblock %}
