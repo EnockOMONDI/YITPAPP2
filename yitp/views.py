@@ -5,11 +5,41 @@ from django.contrib.auth.decorators import login_required
 
 
 def home(request):
-    
-    return render(request, 'yitp/index.html')
+    """
+    Smart home view with intelligent routing based on user authentication status.
+    Authenticated users see personalized content, unauthenticated users see marketing content.
+    """
+    context = {}
+
+    if request.user.is_authenticated:
+        # Add personalized context for authenticated users
+        context.update({
+            'user_authenticated': True,
+            'show_dashboard_link': True,
+            'show_course_progress': True,
+        })
+    else:
+        # Add marketing context for unauthenticated users
+        context.update({
+            'user_authenticated': False,
+            'show_registration_cta': True,
+            'show_course_overview': True,
+        })
+
+    return render(request, 'yitp/index.html', context)
 
 def web_courses_list(request):
+    """
+    Unified course discovery view that adapts based on user authentication status.
+    For authenticated users: redirects to LMS course listing
+    For unauthenticated users: shows static course overview
+    """
+    if request.user.is_authenticated:
+        # Redirect authenticated users to the LMS course listing
+        from django.shortcuts import redirect
+        return redirect('courses:course_list')
 
+    # Show static course overview for unauthenticated users
     return render(request, 'yitp/web_courses_list.html')
 
 def documentation(request):
@@ -28,11 +58,29 @@ def team(request):
     
     return render(request, 'yitp/ourteam.html')
 
+def registration_redirect(request):
+    """
+    Smart redirect for legacy registration URL.
+    Redirects to the unified registration experience.
+    """
+    from django.shortcuts import redirect
+    return redirect('yitp:registration2')
+
 def registration(request):
-    
-    return render(request, 'yitp/registration.html')
+    """
+    Legacy registration view - redirects to unified registration
+    """
+    from django.shortcuts import redirect
+    return redirect('yitp:registration2')
 
 def registration2(request):
+    """
+    Unified registration view - the primary registration experience
+    """
+    if request.user.is_authenticated:
+        # Redirect authenticated users to their dashboard
+        from django.shortcuts import redirect
+        return redirect('courses:dashboard')
 
     return render(request, 'yitp/registration2.html')
 
@@ -40,17 +88,28 @@ def registration2(request):
 def welcome(request):
     """
     Welcome page for newly registered and verified users
-    Shows next steps and course enrollment options
+    Shows next steps and course enrollment options with smart navigation
     """
+    # Check if user has already enrolled in courses
+    from courses.models import Enrollment
+    user_enrollments = Enrollment.objects.filter(student=request.user)
+
     context = {
         'user': request.user,
         'show_course_enrollment': True,
+        'has_enrollments': user_enrollments.exists(),
+        'enrollment_count': user_enrollments.count(),
         'next_steps': [
             'Complete your profile information',
             'Browse available courses',
             'Enroll in your first course',
             'Start your learning journey'
-        ]
+        ],
+        'smart_navigation': {
+            'dashboard_url': '/lms/dashboard/',
+            'courses_url': '/lms/courses/',
+            'profile_url': '/profile/',
+        }
     }
     return render(request, 'yitp/welcome.html', context)
 

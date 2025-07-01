@@ -86,6 +86,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # YITP Unified System Middleware
+    'yitp.middleware.SmartRedirectMiddleware',
+    'yitp.middleware.CourseDiscoveryRedirectMiddleware',
+    'yitp.middleware.WelcomePageRedirectMiddleware',
+    'yitp.middleware.UnifiedNavigationMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'

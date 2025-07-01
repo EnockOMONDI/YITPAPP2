@@ -1,0 +1,272 @@
+{% load static %}
+
+<!-- Unified YITP Footer -->
+<footer class="footer__area footer__bg" style="background-color: #1a2e53;">
+    <div class="footer__top pt-100 pb-50">
+        <div class="container">
+            <div class="row">
+                <!-- Company Info -->
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__widget mb-50">
+                        <div class="footer__widget-head mb-22">
+                            <div class="footer__logo">
+                                <a href="{% url 'yitp:home' %}">
+                                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="max-width: 200px;" alt="YITP Logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="footer__widget-body">
+                            <p style="color: #ffffff; opacity: 0.8;">
+                                Empowering youth with entrepreneurship skills and leadership training to create positive impact in their communities.
+                            </p>
+                            <div class="footer__social">
+                                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-6">
+                    <div class="footer__widget mb-50">
+                        <div class="footer__widget-head mb-22">
+                            <h3 class="footer__widget-title" style="color: #ff5d15;">Quick Links</h3>
+                        </div>
+                        <div class="footer__widget-body">
+                            <div class="footer__link">
+                                <ul>
+                                    <li><a href="{% url 'yitp:home' %}" style="color: #ffffff; opacity: 0.8;">Home</a></li>
+                                    <li><a href="{% url 'yitp:about' %}" style="color: #ffffff; opacity: 0.8;">About Us</a></li>
+                                    <li><a href="{% url 'yitp:team' %}" style="color: #ffffff; opacity: 0.8;">Our Team</a></li>
+                                    {% if user.is_authenticated %}
+                                        <li><a href="{% url 'courses:course_list' %}" style="color: #ffffff; opacity: 0.8;">Courses</a></li>
+                                        <li><a href="{% url 'courses:dashboard' %}" style="color: #ffffff; opacity: 0.8;">Dashboard</a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'yitp:web_courses_list' %}" style="color: #ffffff; opacity: 0.8;">Courses</a></li>
+                                        <li><a href="{% url 'yitp:registration2' %}" style="color: #ffffff; opacity: 0.8;">Join Now</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Resources -->
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-6">
+                    <div class="footer__widget mb-50">
+                        <div class="footer__widget-head mb-22">
+                            <h3 class="footer__widget-title" style="color: #ff5d15;">Learning</h3>
+                        </div>
+                        <div class="footer__widget-body">
+                            <div class="footer__link">
+                                <ul>
+                                    {% if user.is_authenticated %}
+                                        <li><a href="{% url 'courses:my_courses' %}" style="color: #ffffff; opacity: 0.8;">My Courses</a></li>
+                                        <li><a href="{% url 'progress:my_progress' %}" style="color: #ffffff; opacity: 0.8;">My Progress</a></li>
+                                        <li><a href="{% url 'profile' %}" style="color: #ffffff; opacity: 0.8;">My Profile</a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'yitp:web_courses_list' %}" style="color: #ffffff; opacity: 0.8;">Course Overview</a></li>
+                                        <li><a href="{% url 'login' %}" style="color: #ffffff; opacity: 0.8;">Student Login</a></li>
+                                    {% endif %}
+                                    <li><a href="{% url 'yitp:documentation' %}" style="color: #ffffff; opacity: 0.8;">How It Works</a></li>
+                                    <li><a href="{% url 'yitp:faqs' %}" style="color: #ffffff; opacity: 0.8;">FAQs</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support -->
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-6">
+                    <div class="footer__widget mb-50">
+                        <div class="footer__widget-head mb-22">
+                            <h3 class="footer__widget-title" style="color: #ff5d15;">Support</h3>
+                        </div>
+                        <div class="footer__widget-body">
+                            <div class="footer__link">
+                                <ul>
+                                    <li><a href="{% url 'yitp:contact' %}" style="color: #ffffff; opacity: 0.8;">Contact Us</a></li>
+                                    <li><a href="{% url 'yitp:events' %}" style="color: #ffffff; opacity: 0.8;">Events</a></li>
+                                    <li><a href="{% url 'yitp:documentation' %}" style="color: #ffffff; opacity: 0.8;">Documentation</a></li>
+                                    <li><a href="#" style="color: #ffffff; opacity: 0.8;">Privacy Policy</a></li>
+                                    <li><a href="#" style="color: #ffffff; opacity: 0.8;">Terms of Service</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__widget mb-50">
+                        <div class="footer__widget-head mb-22">
+                            <h3 class="footer__widget-title" style="color: #ff5d15;">Get In Touch</h3>
+                        </div>
+                        <div class="footer__widget-body">
+                            <div class="footer__info">
+                                <div class="footer__info-item d-flex align-items-start mb-15">
+                                    <div class="footer__info-icon">
+                                        <i class="fas fa-map-marker-alt" style="color: #ff5d15; margin-right: 10px; margin-top: 5px;"></i>
+                                    </div>
+                                    <div class="footer__info-text">
+                                        <p style="color: #ffffff; opacity: 0.8; margin: 0;">
+                                            Youth Impact Training Programme<br>
+                                            Building Future Leaders
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="footer__info-item d-flex align-items-center mb-15">
+                                    <div class="footer__info-icon">
+                                        <i class="fas fa-envelope" style="color: #ff5d15; margin-right: 10px;"></i>
+                                    </div>
+                                    <div class="footer__info-text">
+                                        <a href="mailto:info@yitp.org" style="color: #ffffff; opacity: 0.8; text-decoration: none;">
+                                            info@yitp.org
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="footer__info-item d-flex align-items-center mb-15">
+                                    <div class="footer__info-icon">
+                                        <i class="fas fa-phone" style="color: #ff5d15; margin-right: 10px;"></i>
+                                    </div>
+                                    <div class="footer__info-text">
+                                        <a href="tel:+1234567890" style="color: #ffffff; opacity: 0.8; text-decoration: none;">
+                                            +1 (234) 567-8900
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer__bottom">
+        <div class="container">
+            <div class="footer__bottom-inner" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px;">
+                <div class="row align-items-center">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                        <div class="footer__copyright">
+                            <p style="color: #ffffff; opacity: 0.6; margin: 0;">
+                                © {{ current_year|default:"2024" }} Youth Impact Training Programme. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                        <div class="footer__bottom-right text-md-end">
+                            <div class="footer__bottom-link">
+                                <a href="#" style="color: #ffffff; opacity: 0.6; margin-left: 20px; text-decoration: none;">Privacy Policy</a>
+                                <a href="#" style="color: #ffffff; opacity: 0.6; margin-left: 20px; text-decoration: none;">Terms of Service</a>
+                                <a href="{% url 'yitp:contact' %}" style="color: #ffffff; opacity: 0.6; margin-left: 20px; text-decoration: none;">Support</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top Button -->
+<div class="back-to-top-wrapper">
+    <button id="back_to_top" type="button" class="back-to-top-btn">
+        <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 6L6 1L1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+</div>
+
+<style>
+    .footer__area {
+        position: relative;
+    }
+    
+    .social-link {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background-color: rgba(255, 93, 21, 0.1);
+        color: #ff5d15;
+        border-radius: 50%;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+    
+    .social-link:hover {
+        background-color: #ff5d15;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+    
+    .footer__link ul li {
+        margin-bottom: 8px;
+    }
+    
+    .footer__link ul li a:hover {
+        color: #ff5d15 !important;
+        opacity: 1 !important;
+    }
+    
+    .footer__info-item:hover .footer__info-text a {
+        color: #ff5d15 !important;
+        opacity: 1 !important;
+    }
+    
+    .back-to-top-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #ff5d15;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        transition: all 0.3s ease;
+    }
+    
+    .back-to-top-btn:hover {
+        background-color: #1a2e53;
+        transform: translateY(-2px);
+    }
+    
+    .back-to-top-btn.show {
+        display: flex;
+    }
+</style>
+
+<script>
+    // Back to top functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopBtn = document.getElementById('back_to_top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>

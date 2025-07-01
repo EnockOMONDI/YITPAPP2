@@ -1,0 +1,284 @@
+{% load static %}
+
+<header>
+    <div id="header-sticky" class="header__area header__transparent header__padding" style="padding-top: 20px; padding-bottom: 20px;">
+        <div class="container-fluid">
+            <!-- Desktop Layout Improvements -->
+            <style>
+                /* Navbar vertical padding for better visual spacing */
+                .header__area.header__padding {
+                    padding-top: 20px !important;
+                    padding-bottom: 20px !important;
+                }
+
+                /* Ensure mobile devices have appropriate padding */
+                @media (max-width: 991px) {
+                    .header__area.header__padding {
+                        padding-top: 15px !important;
+                        padding-bottom: 15px !important;
+                    }
+                }
+
+                /* Logo sizing improvements */
+                .logo img {
+                    transition: all 0.3s ease;
+                }
+
+                /* Navigation link improvements */
+                .main-menu ul li a {
+                    transition: all 0.3s ease;
+                    position: relative;
+                }
+
+                /* Authentication button improvements */
+                .header__auth .e-btn {
+                    transition: all 0.3s ease;
+                    border-radius: 6px;
+                }
+
+                /* Mobile menu improvements */
+                .sidebar__area {
+                    z-index: 9999;
+                }
+
+                /* Category menu improvements */
+                .cat-menu {
+                    transition: all 0.3s ease;
+                }
+
+                /* Dropdown improvements */
+                .user__dropdown {
+                    animation: fadeInDown 0.3s ease;
+                }
+
+                @keyframes fadeInDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                /* Responsive improvements */
+                @media (max-width: 1199px) {
+                    .header__auth .user__details {
+                        display: none;
+                    }
+                }
+
+                /* Mobile sidebar improvements */
+                .sidebar__wrapper {
+                    background: white;
+                    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+                }
+
+                /* Authentication state improvements */
+                .header__transparent .main-menu ul li a {
+                    color: white;
+                }
+
+                .header__area.sticky .main-menu ul li a {
+                    color: #0e1133;
+                }
+
+                .header__transparent .cat-menu {
+                    color: white;
+                }
+
+                .header__area.sticky .cat-menu {
+                    color: #0e1133;
+                }
+
+                /* Button state improvements */
+                .header__transparent .e-btn-border {
+                    border-color: white;
+                    color: white;
+                }
+
+                .header__transparent .e-btn-border:hover {
+                    background: white;
+                    color: #0e1133;
+                }
+
+                .header__area.sticky .e-btn-border {
+                    border-color: #ff5d15;
+                    color: #ff5d15;
+                }
+
+                .header__area.sticky .e-btn-border:hover {
+                    background: #ff5d15;
+                    color: white;
+                }
+
+                /* Mobile toggle improvements */
+                .header__transparent .sidebar-toggle-btn .line {
+                    background-color: white;
+                }
+
+                .header__area.sticky .sidebar-toggle-btn .line {
+                    background-color: #0e1133;
+                }
+            </style>
+            <div class="row align-items-center">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6">
+                    <div class="header__left d-flex align-items-center">
+                        <div class="logo" style="flex-shrink: 0; margin-right: 15px;">
+                            <a href="{% url 'yitp:home' %}">
+                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 200%; max-width: 280px;" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Category Section -->
+                <div class="col-xxl-2 col-xl-2 col-lg-3 d-none d-lg-block">
+                    <div class="header__category" style="padding-left: 10px;">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'yitp:web_courses_list' %}" class="cat-menu d-flex align-items-center" style="padding: 8px 12px; white-space: nowrap;">
+                                        <div class="cat-dot-icon d-inline-block" style="margin-right: 8px;">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle class="cat-dot" cx="2" cy="2" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="8" cy="2" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="14" cy="2" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="2" cy="8" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="8" cy="8" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="14" cy="8" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="2" cy="14" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="8" cy="14" r="2" fill="#ff5d15"/>
+                                                <circle class="cat-dot" cx="14" cy="14" r="2" fill="#ff5d15"/>
+                                            </svg>
+                                        </div>
+                                        <span>View Course</span>
+                                    </a>
+                                    <ul class="cat-submenu">
+                                        <li style="padding-left: 30px; color: #1a2e53;">
+                                            <a href="{% url 'yitp:web_courses_list' %}">YITP Course & Units</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="col-xxl-8 col-xl-8 col-lg-7 col-md-10 col-sm-8 col-6">
+                    <div class="header__right d-flex justify-content-end align-items-center">
+                        <div class="main-menu d-none d-xl-block" style="margin-right: 20px;">
+                            <nav id="mobile-menu">
+                                <ul>
+                                    <li><a href="{% url 'yitp:about' %}">Our Story</a></li>
+                                    <li><a href="{% url 'yitp:team' %}">Our Team</a></li>
+                                    <li><a href="{% url 'yitp:events' %}">Events</a></li>
+                                    <li><a href="{% url 'yitp:faqs' %}">FAQs</a></li>
+                                    <li><a href="{% url 'yitp:contact' %}">Contact</a></li>
+                                    <li><a href="{% url 'yitp:documentation' %}">Documentation</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="header__btn d-flex align-items-center">
+                            {% if user.is_authenticated %}
+                                <div class="header__auth d-flex align-items-center">
+                                    <div class="user__avatar">
+                                        <div class="user__details d-flex align-items-center">
+                                            <span class="user__name me-2">{{ user.get_full_name|default:user.username }}</span>
+                                            <div class="user__dropdown">
+                                                <button class="user__dropdown-btn" type="button">
+                                                    <i class="fas fa-chevron-down"></i>
+                                                </button>
+                                                <ul class="user__dropdown-menu">
+                                                    <li><a href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                                                    <li><a href="{% url 'courses:my_courses' %}"><i class="fas fa-book me-2"></i>My Courses</a></li>
+                                                    <li><a href="{% url 'progress:my_progress' %}"><i class="fas fa-chart-line me-2"></i>My Progress</a></li>
+                                                    <li><a href="{% url 'yitp:contact' %}"><i class="fas fa-envelope me-2"></i>Support</a></li>
+                                                    <li><a href="{% url 'logout' %}" class="text-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="e-btn e-btn-border me-2">Login</a>
+                                <a href="{% url 'yitp:registration2' %}" class="e-btn">Join Now</a>
+                            {% endif %}
+                        </div>
+
+                        <div class="sidebar__menu d-lg-none">
+                            <div class="sidebar-toggle-btn" id="sidebar-toggle">
+                                <span class="line"></span>
+                                <span class="line"></span>
+                                <span class="line"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- sidebar area start -->
+<div class="sidebar__area">
+    <div class="sidebar__wrapper">
+        <div class="sidebar__close">
+            <button class="sidebar__close-btn" id="sidebar__close-btn">
+                <span><i class="fal fa-times"></i></span>
+                <span>close</span>
+            </button>
+        </div>
+        <div class="sidebar__content">
+            <div class="logo mb-40">
+                <a href="{% url 'yitp:home' %}">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 75%;" alt="logo">
+                </a>
+            </div>
+            <div class="mobile__menu">
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'yitp:about' %}">Our Story</a></li>
+                        <li><a href="{% url 'yitp:team' %}">Our Team</a></li>
+                        <li><a href="{% url 'yitp:events' %}">Events</a></li>
+                        <li><a href="{% url 'yitp:faqs' %}">FAQs</a></li>
+                        <li><a href="{% url 'yitp:contact' %}">Contact</a></li>
+                        <li><a href="{% url 'yitp:documentation' %}">Documentation</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="sidebar__contact mt-30">
+                <div class="sidebar__contact-content">
+                    <div class="sidebar__contact-title">
+                        <h5>Contact Info</h5>
+                    </div>
+                    <div class="sidebar__contact-list">
+                        <div class="sidebar__contact-item">
+                            <div class="sidebar__contact-icon">
+                                <i class="fal fa-envelope"></i>
+                            </div>
+                            <div class="sidebar__contact-text">
+                                <a href="mailto:info@youthimpacttraining.org">info@youthimpacttraining.org</a>
+                            </div>
+                        </div>
+                        <div class="sidebar__contact-item">
+                            <div class="sidebar__contact-icon">
+                                <i class="fal fa-phone"></i>
+                            </div>
+                            <div class="sidebar__contact-text">
+                                <a href="tel:+1234567890">+1 (234) 567-890</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Sidebar Overlay -->
+<div class="body-overlay"></div>
