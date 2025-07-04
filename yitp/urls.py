@@ -10,9 +10,10 @@ urlpatterns = [
     path('documentation/', views.documentation, name='documentation'),
     path('about/', views.about, name='about'),
     path('team/', views.team, name='team'),
+    # Legacy registration URLs - redirected by middleware to canonical 'register' URL
     path('registration/', views.registration_redirect, name='registration'),
-    path('registration2/', views.registration2, name='registration2'),
-    path('join/', views.registration2, name='join'),  # Unified registration endpoint
+    path('registration2/', views.registration_redirect, name='registration2'),
+    path('join/', views.registration_redirect, name='join'),
     path('welcome/', views.welcome, name='welcome'),
     path('events/', event_list, name='events'),
     path('faqs/', views.faqs, name='faqs'),

@@ -44,7 +44,7 @@ class SmartRedirectMiddleware(MiddlewareMixin):
         
         # Redirect authenticated users away from registration/login pages
         if user.is_authenticated:
-            if path in ['/registration/', '/registration2/', '/login/', '/signup/']:
+            if path in ['/registration/', '/registration2/', '/login/', '/signup/', '/register/']:
                 # Check if user has course enrollments
                 try:
                     from courses.models import Enrollment
@@ -95,8 +95,8 @@ class CourseDiscoveryRedirectMiddleware(MiddlewareMixin):
                 return redirect('courses:course_list')
         
         # Handle legacy registration redirects
-        if path == '/registration/':
-            return redirect('yitp:registration2')
+        if path in ['/registration/', '/registration2/', '/join/']:
+            return redirect('register')
         
         return None
 

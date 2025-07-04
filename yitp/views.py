@@ -61,28 +61,19 @@ def team(request):
 def registration_redirect(request):
     """
     Smart redirect for legacy registration URL.
-    Redirects to the unified registration experience.
+    Redirects to the canonical registration experience.
     """
     from django.shortcuts import redirect
-    return redirect('yitp:registration2')
+    return redirect('register')
 
 def registration(request):
     """
-    Legacy registration view - redirects to unified registration
+    Legacy registration view - redirects to canonical registration
     """
     from django.shortcuts import redirect
-    return redirect('yitp:registration2')
+    return redirect('register')
 
-def registration2(request):
-    """
-    Unified registration view - the primary registration experience
-    """
-    if request.user.is_authenticated:
-        # Redirect authenticated users to their dashboard
-        from django.shortcuts import redirect
-        return redirect('courses:dashboard')
-
-    return render(request, 'yitp/registration2.html')
+# registration2 view removed - all registration now handled by canonical 'register' URL
 
 @login_required
 def welcome(request):
