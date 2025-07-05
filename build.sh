@@ -29,6 +29,13 @@ print('✅ pyuploadcare imported successfully')
 
 import psycopg2
 print('✅ psycopg2 imported successfully')
+
+# Verify crispy forms imports
+import crispy_forms
+print('✅ crispy_forms imported successfully')
+
+import crispy_bootstrap5
+print('✅ crispy_bootstrap5 imported successfully')
 "
 
 # Detailed repository and environment diagnostics
@@ -165,6 +172,38 @@ except ImportError as e:
 # Check Django configuration
 echo "🔧 Checking Django configuration..."
 python manage.py check
+
+# Verify crispy forms configuration
+echo "🔧 Verifying crispy forms configuration..."
+python -c "
+import os
+import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog.settings')
+django.setup()
+from django.conf import settings
+
+# Check crispy forms settings
+if hasattr(settings, 'CRISPY_TEMPLATE_PACK'):
+    print(f'✅ CRISPY_TEMPLATE_PACK: {settings.CRISPY_TEMPLATE_PACK}')
+else:
+    print('❌ CRISPY_TEMPLATE_PACK not configured')
+
+if hasattr(settings, 'CRISPY_ALLOWED_TEMPLATE_PACKS'):
+    print(f'✅ CRISPY_ALLOWED_TEMPLATE_PACKS: {settings.CRISPY_ALLOWED_TEMPLATE_PACKS}')
+else:
+    print('❌ CRISPY_ALLOWED_TEMPLATE_PACKS not configured')
+
+# Check if crispy forms apps are in INSTALLED_APPS
+if 'crispy_forms' in settings.INSTALLED_APPS:
+    print('✅ crispy_forms in INSTALLED_APPS')
+else:
+    print('❌ crispy_forms not in INSTALLED_APPS')
+
+if 'crispy_bootstrap5' in settings.INSTALLED_APPS:
+    print('✅ crispy_bootstrap5 in INSTALLED_APPS')
+else:
+    print('❌ crispy_bootstrap5 not in INSTALLED_APPS')
+"
 
 # Collect static files for production
 echo "📁 Collecting static files..."

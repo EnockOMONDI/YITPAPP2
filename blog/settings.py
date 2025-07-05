@@ -521,6 +521,13 @@ if not os.path.exists(LOGS_DIR):
     os.makedirs(LOGS_DIR)
 
 # =============================================================================
+# DJANGO CRISPY FORMS CONFIGURATION
+# =============================================================================
+# Configure django-crispy-forms to use Bootstrap 5
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap5',)
+
+# =============================================================================
 # PRODUCTION SECURITY NOTES
 # =============================================================================
 """
