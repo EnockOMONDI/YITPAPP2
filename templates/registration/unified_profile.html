@@ -316,6 +316,214 @@
         margin-bottom: 1rem;
     }
 }
+
+/* Enhanced Sponsorship Form Styles */
+.yitp-modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(26, 46, 83, 0.15);
+    overflow: hidden;
+}
+
+.yitp-modal-header {
+    background: var(--yitp-dark);
+    color: var(--yitp-white);
+    border-bottom: none;
+    padding: 1.5rem 2rem;
+}
+
+.yitp-modal-header .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.yitp-modal-body {
+    padding: 2rem;
+    background: var(--yitp-light);
+}
+
+.yitp-modal-footer {
+    background: var(--yitp-white);
+    border-top: 1px solid #e9ecef;
+    padding: 1.5rem 2rem;
+}
+
+.yitp-sponsorship-form {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.form-section {
+    background: var(--yitp-white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-section:hover {
+    box-shadow: 0 4px 15px rgba(26, 46, 83, 0.08);
+    transform: translateY(-2px);
+}
+
+.section-title {
+    color: var(--yitp-dark);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--yitp-accent);
+    display: flex;
+    align-items: center;
+}
+
+.section-title i {
+    color: var(--yitp-accent);
+}
+
+.yitp-form-field {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.yitp-form-field:focus {
+    border-color: var(--yitp-accent);
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.15);
+    outline: none;
+}
+
+.yitp-form-field:hover {
+    border-color: var(--yitp-primary);
+}
+
+.form-select.yitp-form-field {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ff5d15' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+}
+
+/* Character Counter Styles */
+.reason-field-container {
+    position: relative;
+}
+
+.character-counter-container {
+    margin-top: 0.5rem;
+}
+
+.character-counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--yitp-white);
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.char-status {
+    font-weight: 600;
+    margin-left: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.char-status.insufficient {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--yitp-danger);
+}
+
+.char-status.sufficient {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--yitp-success);
+}
+
+.char-status.approaching-limit {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--yitp-warning);
+}
+
+/* Enhanced Button Styles */
+.btn-yitp-accent {
+    background: var(--yitp-accent);
+    border: 2px solid var(--yitp-accent);
+    color: var(--yitp-white);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-yitp-accent:hover {
+    background: #e54a0f;
+    border-color: #e54a0f;
+    color: var(--yitp-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 93, 21, 0.3);
+}
+
+.btn-outline-secondary {
+    border: 2px solid var(--yitp-gray);
+    color: var(--yitp-gray);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--yitp-gray);
+    border-color: var(--yitp-gray);
+    color: var(--yitp-white);
+}
+
+/* Form Animation */
+.form-section {
+    animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .yitp-modal-body {
+        padding: 1rem;
+    }
+
+    .form-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .yitp-modal-footer {
+        padding: 1rem;
+    }
+
+    .yitp-modal-footer .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .character-counter {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
 </style>
 {% endblock %}
 
@@ -832,54 +1040,113 @@
     </div>
 </div>
 
-<!-- Sponsorship Request Modal - Only show when sponsorship form is available -->
+<!-- Enhanced Sponsorship Request Modal -->
 {% if sponsorship_form %}
 <div class="modal fade" id="sponsorshipModal" tabindex="-1" aria-labelledby="sponsorshipModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header" style="background: var(--yitp-primary); color: var(--yitp-white);">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content yitp-modal-content">
+            <div class="modal-header yitp-modal-header">
                 <h5 class="modal-title" id="sponsorshipModalLabel">
                     <i class="fas fa-hand-holding-heart me-2"></i>Request Sponsorship
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form method="post" enctype="multipart/form-data">
+            <div class="modal-body yitp-modal-body">
+                <form method="post" enctype="multipart/form-data" class="yitp-sponsorship-form">
                     {% csrf_token %}
                     <input type="hidden" name="sponsorship_form" value="1">
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ sponsorship_form.program|as_crispy_field }}
+                    <!-- Program Information Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">
+                            <i class="fas fa-graduation-cap me-2"></i>Program Information
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ sponsorship_form.program|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ sponsorship_form.amount_needed|as_crispy_field }}
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            {{ sponsorship_form.amount_needed|as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ sponsorship_form.financial_situation|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6" id="program_other_field" style="display: none;">
-                            {{ sponsorship_form.program_other|as_crispy_field }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6" id="financial_other_field" style="display: none;">
-                            {{ sponsorship_form.financial_situation_other|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ sponsorship_form.supporting_document|as_crispy_field }}
+                        <div class="row">
+                            <div class="col-md-6" id="program_other_field" style="display: none;">
+                                {{ sponsorship_form.program_other|as_crispy_field }}
+                            </div>
                         </div>
                     </div>
 
-                    {{ sponsorship_form.reason|as_crispy_field }}
+                    <!-- Financial Information Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">
+                            <i class="fas fa-chart-line me-2"></i>Financial Information
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ sponsorship_form.financial_situation|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6" id="financial_other_field" style="display: none;">
+                                {{ sponsorship_form.financial_situation_other|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-yitp-primary">
+                    <!-- Detailed Explanation Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">
+                            <i class="fas fa-edit me-2"></i>Detailed Explanation
+                        </h6>
+                        <div class="reason-field-container">
+                            {{ sponsorship_form.reason|as_crispy_field }}
+                            <div class="character-counter-container">
+                                <div id="characterCounter" class="character-counter">
+                                    <span id="charCount">0</span> / <span id="charMin">100</span> characters
+                                    <span id="charStatus" class="char-status"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Supporting Documents Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">
+                            <i class="fas fa-paperclip me-2"></i>Supporting Documents
+                        </h6>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ sponsorship_form.supporting_document|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">
+                            <i class="fas fa-phone me-2"></i>Emergency Contact Information
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ sponsorship_form.emergency_contact_name|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ sponsorship_form.emergency_contact_phone|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ sponsorship_form.emergency_contact_email|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ sponsorship_form.emergency_contact_relationship|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer yitp-modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </button>
+                        <button type="submit" class="btn btn-yitp-accent" id="submitSponsorshipBtn">
                             <i class="fas fa-paper-plane me-2"></i>Submit Request
                         </button>
                     </div>
@@ -940,36 +1207,138 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle program selection in sponsorship form
-    const programSelect = document.getElementById('id_program');
-    const programOtherField = document.getElementById('program_other_field');
+    // Enhanced Sponsorship Form Functionality
+    initializeSponsorshipForm();
 
-    if (programSelect && programOtherField) {
-        programSelect.addEventListener('change', function() {
-            if (this.value === 'other') {
-                programOtherField.style.display = 'block';
-                document.getElementById('id_program_other').required = true;
+    function initializeSponsorshipForm() {
+        // Handle program selection
+        const programSelect = document.getElementById('id_program');
+        const programOtherField = document.getElementById('program_other_field');
+
+        if (programSelect && programOtherField) {
+            programSelect.addEventListener('change', function() {
+                toggleConditionalField(this, 'other', programOtherField, 'id_program_other');
+            });
+        }
+
+        // Handle financial situation selection
+        const financialSelect = document.getElementById('id_financial_situation');
+        const financialOtherField = document.getElementById('financial_other_field');
+
+        if (financialSelect && financialOtherField) {
+            financialSelect.addEventListener('change', function() {
+                toggleConditionalField(this, 'other', financialOtherField, 'id_financial_situation_other');
+            });
+        }
+
+        // Initialize character counter for reason field
+        initializeCharacterCounter();
+
+        // Add form validation enhancements
+        enhanceFormValidation();
+    }
+
+    function toggleConditionalField(selectElement, triggerValue, fieldContainer, inputId) {
+        if (selectElement.value === triggerValue) {
+            fieldContainer.style.display = 'block';
+            fieldContainer.style.animation = 'slideInUp 0.3s ease-out';
+            const input = document.getElementById(inputId);
+            if (input) {
+                input.required = true;
+                setTimeout(() => input.focus(), 300);
+            }
+        } else {
+            fieldContainer.style.display = 'none';
+            const input = document.getElementById(inputId);
+            if (input) {
+                input.required = false;
+                input.value = '';
+            }
+        }
+    }
+
+    function initializeCharacterCounter() {
+        const reasonField = document.getElementById('id_reason');
+        const charCount = document.getElementById('charCount');
+        const charMin = document.getElementById('charMin');
+        const charStatus = document.getElementById('charStatus');
+        const submitBtn = document.getElementById('submitSponsorshipBtn');
+
+        if (!reasonField || !charCount || !charStatus) return;
+
+        const minChars = parseInt(reasonField.getAttribute('data-min-chars')) || 100;
+        const maxChars = parseInt(reasonField.getAttribute('data-max-chars')) || 2000;
+
+        charMin.textContent = minChars;
+
+        function updateCharacterCounter() {
+            const currentLength = reasonField.value.length;
+            charCount.textContent = currentLength;
+
+            // Remove all status classes
+            charStatus.classList.remove('insufficient', 'sufficient', 'approaching-limit');
+
+            if (currentLength < minChars) {
+                const remaining = minChars - currentLength;
+                charStatus.textContent = `${remaining} more needed`;
+                charStatus.classList.add('insufficient');
+                if (submitBtn) submitBtn.disabled = true;
+            } else if (currentLength >= minChars && currentLength <= maxChars - 200) {
+                charStatus.textContent = 'Requirement met ✓';
+                charStatus.classList.add('sufficient');
+                if (submitBtn) submitBtn.disabled = false;
+            } else if (currentLength > maxChars - 200) {
+                const remaining = maxChars - currentLength;
+                charStatus.textContent = `${remaining} characters left`;
+                charStatus.classList.add('approaching-limit');
+                if (submitBtn) submitBtn.disabled = false;
+            }
+
+            // Add visual feedback to the textarea
+            if (currentLength < minChars) {
+                reasonField.style.borderColor = '#dc3545';
             } else {
-                programOtherField.style.display = 'none';
-                document.getElementById('id_program_other').required = false;
+                reasonField.style.borderColor = '#28a745';
+            }
+        }
+
+        // Initialize counter
+        updateCharacterCounter();
+
+        // Update counter on input
+        reasonField.addEventListener('input', updateCharacterCounter);
+        reasonField.addEventListener('paste', () => setTimeout(updateCharacterCounter, 10));
+    }
+
+    function enhanceFormValidation() {
+        const form = document.querySelector('.yitp-sponsorship-form');
+        if (!form) return;
+
+        form.addEventListener('submit', function(e) {
+            const reasonField = document.getElementById('id_reason');
+            if (reasonField && reasonField.value.length < 100) {
+                e.preventDefault();
+                reasonField.focus();
+                showValidationMessage('Please provide at least 100 characters in your explanation.');
+                return false;
             }
         });
     }
 
-    // Handle financial situation selection
-    const financialSelect = document.getElementById('id_financial_situation');
-    const financialOtherField = document.getElementById('financial_other_field');
-
-    if (financialSelect && financialOtherField) {
-        financialSelect.addEventListener('change', function() {
-            if (this.value === 'other') {
-                financialOtherField.style.display = 'block';
-                document.getElementById('id_financial_situation_other').required = true;
-            } else {
-                financialOtherField.style.display = 'none';
-                document.getElementById('id_financial_situation_other').required = false;
-            }
-        });
+    function showValidationMessage(message) {
+        // Create or update validation message
+        let messageDiv = document.getElementById('validation-message');
+        if (!messageDiv) {
+            messageDiv = document.createElement('div');
+            messageDiv.id = 'validation-message';
+            messageDiv.className = 'alert alert-danger mt-3';
+            messageDiv.style.animation = 'slideInUp 0.3s ease-out';
+            document.querySelector('.yitp-modal-body').prepend(messageDiv);
+        }
+        messageDiv.textContent = message;
+        setTimeout(() => {
+            if (messageDiv) messageDiv.remove();
+        }, 5000);
     }
 
     // Section-based URL handling

@@ -20,53 +20,56 @@ class SponsorshipRequestForm(forms.ModelForm):
         
         widgets = {
             'program': forms.Select(attrs={
-                'class': 'form-control sponsorship-select',
+                'class': 'form-select sponsorship-select yitp-form-field',
                 'id': 'id_program'
             }),
             'program_other': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'placeholder': 'Please specify the program',
                 'style': 'display: none;'
             }),
             'amount_needed': forms.NumberInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'placeholder': '0.00',
                 'min': '1',
                 'step': '0.01'
             }),
             'financial_situation': forms.Select(attrs={
-                'class': 'form-control sponsorship-select',
+                'class': 'form-select sponsorship-select yitp-form-field',
                 'id': 'id_financial_situation'
             }),
             'financial_situation_other': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'placeholder': 'Please specify your situation',
                 'style': 'display: none;'
             }),
             'reason': forms.Textarea(attrs={
-                'class': 'form-control',
+                'class': 'form-control sponsorship-reason-field',
                 'rows': 6,
                 'placeholder': 'Please provide a detailed explanation of why you need sponsorship (minimum 100 characters)',
-                'maxlength': '2000'
+                'maxlength': '2000',
+                'id': 'id_reason',
+                'data-min-chars': '100',
+                'data-max-chars': '2000'
             }),
             'supporting_document': forms.FileInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'accept': '.pdf,.doc,.docx,.jpg,.jpeg,.png'
             }),
             'emergency_contact_name': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'placeholder': 'Full name of emergency contact'
             }),
             'emergency_contact_phone': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'placeholder': '+1234567890'
             }),
             'emergency_contact_email': forms.EmailInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'placeholder': 'emergency@example.com'
             }),
             'emergency_contact_relationship': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control yitp-form-field',
                 'placeholder': 'e.g., Parent, Sibling, Friend'
             }),
         }
