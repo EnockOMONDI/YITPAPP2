@@ -1142,6 +1142,7 @@
                         </div>
                     </div>
 
+                    <!-- Form Footer -->
                     <div class="modal-footer yitp-modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             <i class="fas fa-times me-2"></i>Cancel
@@ -1209,6 +1210,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Enhanced Sponsorship Form Functionality
     initializeSponsorshipForm();
+
+    // Re-initialize when modal is shown
+    const sponsorshipModal = document.getElementById('sponsorshipModal');
+    if (sponsorshipModal) {
+        sponsorshipModal.addEventListener('shown.bs.modal', function() {
+            initializeSponsorshipForm();
+        });
+    }
 
     function initializeSponsorshipForm() {
         // Handle program selection
@@ -1282,24 +1291,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 const remaining = minChars - currentLength;
                 charStatus.textContent = `${remaining} more needed`;
                 charStatus.classList.add('insufficient');
-                if (submitBtn) submitBtn.disabled = true;
+                // Don't disable submit button - let Django validation handle it
+                reasonField.style.borderColor = '#dc3545';
             } else if (currentLength >= minChars && currentLength <= maxChars - 200) {
                 charStatus.textContent = 'Requirement met ✓';
                 charStatus.classList.add('sufficient');
-                if (submitBtn) submitBtn.disabled = false;
+                reasonField.style.borderColor = '#28a745';
             } else if (currentLength > maxChars - 200) {
                 const remaining = maxChars - currentLength;
                 charStatus.textContent = `${remaining} characters left`;
                 charStatus.classList.add('approaching-limit');
-                if (submitBtn) submitBtn.disabled = false;
+                reasonField.style.borderColor = '#ffc107';
             }
 
-            // Add visual feedback to the textarea
-            if (currentLength < minChars) {
-                reasonField.style.borderColor = '#dc3545';
-            } else {
-                reasonField.style.borderColor = '#28a745';
+            // Always enable submit button - let server-side validation handle requirements
+            if (submitBtn) {
+                submitBtn.disabled = false;
             }
+        }
+
+        // Ensure submit button is enabled initially
+        if (submitBtn) {
+            submitBtn.disabled = false;
         }
 
         // Initialize counter
@@ -1316,11 +1329,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         form.addEventListener('submit', function(e) {
             const reasonField = document.getElementById('id_reason');
+
+            // Show warning but don't prevent submission - let Django handle validation
             if (reasonField && reasonField.value.length < 100) {
-                e.preventDefault();
-                reasonField.focus();
-                showValidationMessage('Please provide at least 100 characters in your explanation.');
-                return false;
+                showValidationMessage('Note: Your explanation is shorter than recommended (100 characters). Consider adding more details for a stronger application.');
+                // Don't prevent submission - let server-side validation handle it
+            }
+
+            // Add loading state to submit button
+            const submitBtn = document.getElementById('submitSponsorshipBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+
+                // Re-enable button after 5 seconds in case of issues
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Submit Request';
+                }, 5000);
             }
         });
     }
