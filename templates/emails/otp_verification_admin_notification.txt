@@ -1,0 +1,50 @@
+YOUTH IMPACT TRAINING PROGRAMME
+New User Verification - Admin Notification
+
+YITP Admin Notification
+
+A new user has successfully completed OTP verification and joined the Youth Impact Training Programme platform.
+
+✅ USER VERIFICATION COMPLETE!
+{{ user.get_full_name|default:user.username }} has verified their email address and is now an active YITP member.
+
+USER INFORMATION:
+Name: {{ user.get_full_name|default:user.username }}
+Email: {{ user.email }}
+Username: {{ user.username }}
+Date Joined: {{ user.date_joined|date:"F d, Y" }}
+Verification Time: {{ verification_timestamp|date:"F d, Y" }} at {{ verification_timestamp|time:"g:i A" }}
+Account Status: {% if user.is_active %}Active{% else %}Inactive{% endif %}
+
+{% if user_profile %}PROFILE INFORMATION:
+{% if user_profile.bio %}Bio: {{ user_profile.bio|truncatechars:100 }}{% endif %}
+{% if user_profile.phone_number %}Phone: {{ user_profile.phone_number }}{% endif %}
+Payment Status: {{ user_profile.get_payment_status_display }}
+Profile Created: {{ user_profile.created_at|date:"F d, Y" }}
+
+{% endif %}ACCOUNT STATISTICS:
+User ID: {{ user.id }}
+Is Staff: {% if user.is_staff %}Yes{% else %}No{% endif %}
+Is Superuser: {% if user.is_superuser %}Yes{% else %}No{% endif %}
+Last Login: {% if user.last_login %}{{ user.last_login|date:"F d, Y" }} at {{ user.last_login|time:"g:i A" }}{% else %}Never{% endif %}
+
+🎯 RECOMMENDED ADMIN ACTIONS:
+✅ Monitor User Activity: Track course enrollments and engagement
+✅ Welcome Message: Consider sending a personalized welcome message
+✅ Course Recommendations: Suggest relevant courses based on user profile
+✅ Payment Verification: Monitor payment status for paid courses
+✅ Support Readiness: Be prepared to assist with onboarding questions
+
+QUICK LINKS:
+📊 User Dashboard: {{ user_dashboard_url }}
+⚙️ Admin Panel: {{ admin_url }}
+
+💡 NEXT STEPS:
+The user has received a welcome email and has been redirected to the welcome page. They now have full access to the YITP platform and can enroll in courses.
+
+This is an automated notification from the YITP Learning Management System. The user is now ready to begin their learning journey with the Youth Impact Training Programme.
+
+---
+Automated notification from YITP Learning Management System
+Youth Impact Training Programme
+{{ site_name }}

@@ -1,0 +1,78 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}New User Verified - {{ user.get_full_name|default:user.username }}{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    YITP Admin Notification 🎉
+</div>
+
+<div class="content-text">
+    A new user has successfully completed OTP verification and joined the Youth Impact Training Programme platform.
+</div>
+
+<div class="success-box">
+    <strong>✅ User Verification Complete!</strong><br>
+    {{ user.get_full_name|default:user.username }} has verified their email address and is now an active YITP member.
+</div>
+
+<div class="info-box">
+    <strong>👤 User Information:</strong><br>
+    <strong>Name:</strong> {{ user.get_full_name|default:user.username }}<br>
+    <strong>Email:</strong> {{ user.email }}<br>
+    <strong>Username:</strong> {{ user.username }}<br>
+    <strong>Date Joined:</strong> {{ user.date_joined|date:"F d, Y" }}<br>
+    <strong>Verification Time:</strong> {{ verification_timestamp|date:"F d, Y" }} at {{ verification_timestamp|time:"g:i A" }}<br>
+    <strong>Account Status:</strong> {% if user.is_active %}Active{% else %}Inactive{% endif %}
+</div>
+
+{% if user_profile %}
+<div class="info-box">
+    <strong>📋 Profile Information:</strong><br>
+    {% if user_profile.bio %}<strong>Bio:</strong> {{ user_profile.bio|truncatechars:100 }}<br>{% endif %}
+    {% if user_profile.phone_number %}<strong>Phone:</strong> {{ user_profile.phone_number }}<br>{% endif %}
+    <strong>Payment Status:</strong> {{ user_profile.get_payment_status_display }}<br>
+    <strong>Profile Created:</strong> {{ user_profile.created_at|date:"F d, Y" }}
+</div>
+{% endif %}
+
+<div class="info-box">
+    <strong>📊 Account Statistics:</strong><br>
+    <strong>User ID:</strong> {{ user.id }}<br>
+    <strong>Is Staff:</strong> {% if user.is_staff %}Yes{% else %}No{% endif %}<br>
+    <strong>Is Superuser:</strong> {% if user.is_superuser %}Yes{% else %}No{% endif %}<br>
+    <strong>Last Login:</strong> {% if user.last_login %}{{ user.last_login|date:"F d, Y" }} at {{ user.last_login|time:"g:i A" }}{% else %}Never{% endif %}
+</div>
+
+<div class="content-text">
+    <strong>🎯 Recommended Admin Actions:</strong>
+</div>
+
+<div class="content-text">
+    ✅ <strong>Monitor User Activity:</strong> Track course enrollments and engagement<br>
+    ✅ <strong>Welcome Message:</strong> Consider sending a personalized welcome message<br>
+    ✅ <strong>Course Recommendations:</strong> Suggest relevant courses based on user profile<br>
+    ✅ <strong>Payment Verification:</strong> Monitor payment status for paid courses<br>
+    ✅ <strong>Support Readiness:</strong> Be prepared to assist with onboarding questions
+</div>
+
+<a href="{{ admin_url }}" class="btn">View User in Admin Panel</a>
+
+<div class="content-text">
+    <strong>🔗 Quick Links:</strong>
+</div>
+
+<div class="content-text">
+    📊 <strong>User Dashboard:</strong> <a href="{{ user_dashboard_url }}">{{ user_dashboard_url }}</a><br>
+    ⚙️ <strong>Admin Panel:</strong> <a href="{{ admin_url }}">{{ admin_url }}</a>
+</div>
+
+<div class="warning-box">
+    <strong>💡 Next Steps:</strong><br>
+    The user has received a welcome email and has been redirected to the welcome page. They now have full access to the YITP platform and can enroll in courses.
+</div>
+
+<div class="content-text">
+    This is an automated notification from the YITP Learning Management System. The user is now ready to begin their learning journey with the Youth Impact Training Programme.
+</div>
+{% endblock %}

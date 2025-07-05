@@ -1,0 +1,484 @@
+2025-07-05 00:55:31,944 - INFO - 🚀 Starting YITP Registration & OTP Flow Test Suite
+2025-07-05 00:55:31,944 - INFO - ============================================================
+2025-07-05 00:55:31,944 - INFO - 🧪 Testing Admin Notification System...
+2025-07-05 00:55:38,549 - INFO - Sending OTP verification admin notification for user: admin_test@example.com
+2025-07-05 00:55:38,551 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 00:55:38,551 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 00:55:38,551 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 00:55:41,545 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 00:55:41,545 - INFO - ✅ OTP verification admin notification sent successfully for user: admin_test@example.com
+2025-07-05 00:55:41,545 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 00:55:41,545 - INFO - 🧪 Testing Automatic Login After OTP Verification...
+2025-07-05 00:55:43,518 - INFO - Preparing to send OTP email to login_test@example.com
+2025-07-05 00:55:43,522 - INFO - Sending OTP email with subject: Your YITP Verification Code: 377883
+2025-07-05 00:55:43,522 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 00:55:43,522 - INFO - Subject: Your YITP Verification Code: 377883
+2025-07-05 00:55:43,522 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 00:55:48,657 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 00:55:48,658 - INFO - ✅ OTP email sent successfully to login_test@example.com
+2025-07-05 00:55:48,659 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 377883
+2025-07-05 00:55:50,977 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 00:55:50,977 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 00:55:50,977 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 00:55:55,669 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 00:55:55,673 - INFO - Sending OTP verification admin notification for user: login_test@example.com
+2025-07-05 00:55:55,673 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 00:55:55,673 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 00:55:55,673 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 00:55:58,862 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 00:55:58,863 - INFO - ✅ OTP verification admin notification sent successfully for user: login_test@example.com
+2025-07-05 00:56:01,381 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 00:56:01,647 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 00:56:01,647 - INFO - 🧪 Testing Profile Completion Tracking...
+2025-07-05 00:56:03,216 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 00:56:03,486 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 00:56:03,486 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 00:56:03,487 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 00:56:03,487 - INFO - 🧪 Testing Welcome Page Redirect Flow...
+2025-07-05 00:56:08,769 - ERROR - Internal Server Error: /welcome/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 85, in welcome
+    from courses.models import Enrollment
+ImportError: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:08,771 - INFO - ❌ FAIL - Welcome Redirect - System Error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:08,771 - INFO - 🧪 Testing Email Verification Status Integration...
+2025-07-05 00:56:10,447 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 00:56:11,000 - INFO - Preparing to send OTP email to email_verify_test@example.com
+2025-07-05 00:56:11,001 - INFO - Sending OTP email with subject: Your YITP Verification Code: 637879
+2025-07-05 00:56:11,001 - INFO - Attempting to send email directly to ['email_verify_test@example.com']
+2025-07-05 00:56:11,001 - INFO - Subject: Your YITP Verification Code: 637879
+2025-07-05 00:56:11,001 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 00:56:16,226 - INFO - ✅ Email sent successfully to ['email_verify_test@example.com']
+2025-07-05 00:56:16,227 - INFO - ✅ OTP email sent successfully to email_verify_test@example.com
+2025-07-05 00:56:18,276 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 00:56:18,277 - INFO - 🔧 Testing Post-OTP Verification Enhancement Fixes...
+2025-07-05 00:56:18,277 - INFO - 🧪 Testing WelcomePageRedirectMiddleware Session Flag Fix...
+2025-07-05 00:56:27,601 - ERROR - Internal Server Error: /welcome/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 85, in welcome
+    from courses.models import Enrollment
+ImportError: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:27,603 - INFO - ❌ FAIL - Middleware Fix - System Error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:27,603 - INFO - 🧪 Testing Profile Creation During OTP Verification...
+2025-07-05 00:56:31,611 - INFO - Preparing to send OTP email to profile_otp_test@example.com
+2025-07-05 00:56:31,613 - INFO - Sending OTP email with subject: Your YITP Verification Code: 710623
+2025-07-05 00:56:31,614 - INFO - Attempting to send email directly to ['profile_otp_test@example.com']
+2025-07-05 00:56:31,614 - INFO - Subject: Your YITP Verification Code: 710623
+2025-07-05 00:56:31,614 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 00:56:36,137 - INFO - ✅ Email sent successfully to ['profile_otp_test@example.com']
+2025-07-05 00:56:36,143 - INFO - ✅ OTP email sent successfully to profile_otp_test@example.com
+2025-07-05 00:56:40,708 - ERROR - Internal Server Error: /verify-otp/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/otp_views.py", line 81, in verify_otp_view
+    profile = user.profile
+              ^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/db/models/fields/related_descriptors.py", line 492, in __get__
+    raise self.RelatedObjectDoesNotExist(
+django.contrib.auth.models.User.profile.RelatedObjectDoesNotExist: User has no profile.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/otp_views.py", line 85, in verify_otp_view
+    except Profile.DoesNotExist:
+           ^^^^^^^
+UnboundLocalError: cannot access local variable 'Profile' where it is not associated with a value
+2025-07-05 00:56:40,712 - INFO - ❌ FAIL - Profile OTP - System Error: cannot access local variable 'Profile' where it is not associated with a value
+2025-07-05 00:56:40,712 - INFO - 🧪 Testing Enhanced Onboarding Modal Logic...
+2025-07-05 00:56:49,383 - ERROR - Internal Server Error: /welcome/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 85, in welcome
+    from courses.models import Enrollment
+ImportError: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:49,386 - INFO - ❌ FAIL - Onboarding Enhancement - System Error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:49,386 - INFO - ============================================================
+2025-07-05 00:56:49,386 - INFO - 📊 FINAL TEST REPORT
+2025-07-05 00:56:49,386 - INFO - ============================================================
+2025-07-05 00:56:49,386 - INFO - Total Tests: 14
+2025-07-05 00:56:49,386 - INFO - Passed: 9
+2025-07-05 00:56:49,386 - INFO - Failed: 5
+2025-07-05 00:56:49,386 - INFO - Success Rate: 64.3%
+2025-07-05 00:56:49,386 - INFO - 
+2025-07-05 00:56:49,386 - INFO - 📋 DETAILED RESULTS:
+2025-07-05 00:56:49,386 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 00:56:49,386 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 377883
+2025-07-05 00:56:49,386 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 00:56:49,387 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 00:56:49,387 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 00:56:49,387 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 00:56:49,387 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 00:56:49,387 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 00:56:49,387 - INFO - ❌ FAIL - Welcome Redirect - System Error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:49,387 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 00:56:49,387 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 00:56:49,387 - INFO - ❌ FAIL - Middleware Fix - System Error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:49,387 - INFO - ❌ FAIL - Profile OTP - System Error: cannot access local variable 'Profile' where it is not associated with a value
+2025-07-05 00:56:49,387 - INFO - ❌ FAIL - Onboarding Enhancement - System Error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+2025-07-05 00:56:49,387 - INFO - ============================================================
+2025-07-05 00:56:49,387 - INFO - ⚠️ MODERATE: Several issues need attention
+2025-07-05 01:01:07,786 - INFO - 🚀 Starting YITP Registration & OTP Flow Test Suite
+2025-07-05 01:01:07,787 - INFO - ============================================================
+2025-07-05 01:01:07,787 - INFO - 🧪 Testing Admin Notification System...
+2025-07-05 01:01:23,359 - INFO - Sending OTP verification admin notification for user: admin_test@example.com
+2025-07-05 01:01:23,361 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:01:23,361 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:01:23,361 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:01:26,155 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:01:26,160 - INFO - ✅ OTP verification admin notification sent successfully for user: admin_test@example.com
+2025-07-05 01:01:26,166 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 01:01:26,171 - INFO - 🧪 Testing Automatic Login After OTP Verification...
+2025-07-05 01:01:39,306 - INFO - Preparing to send OTP email to login_test@example.com
+2025-07-05 01:01:39,312 - INFO - Sending OTP email with subject: Your YITP Verification Code: 829064
+2025-07-05 01:01:39,312 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 01:01:39,312 - INFO - Subject: Your YITP Verification Code: 829064
+2025-07-05 01:01:39,312 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:01:42,410 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 01:01:42,411 - INFO - ✅ OTP email sent successfully to login_test@example.com
+2025-07-05 01:01:42,411 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 829064
+2025-07-05 01:01:44,946 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 01:01:44,947 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 01:01:44,947 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:01:51,237 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 01:01:51,257 - INFO - Sending OTP verification admin notification for user: login_test@example.com
+2025-07-05 01:01:51,258 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:01:51,258 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:01:51,258 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:01:55,792 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:01:55,794 - INFO - ✅ OTP verification admin notification sent successfully for user: login_test@example.com
+2025-07-05 01:01:58,251 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 01:01:58,559 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 01:01:58,559 - INFO - 🧪 Testing Profile Completion Tracking...
+2025-07-05 01:02:11,868 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 01:02:12,183 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 01:02:12,183 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 01:02:12,183 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 01:02:12,183 - INFO - 🧪 Testing Welcome Page Redirect Flow...
+2025-07-05 01:02:30,299 - INFO - ✅ PASS - Welcome Redirect - Page Access: Welcome page accessible
+2025-07-05 01:02:30,299 - INFO - ✅ PASS - Welcome Redirect - Content Validation: Welcome content found
+2025-07-05 01:02:30,299 - INFO - 🧪 Testing Email Verification Status Integration...
+2025-07-05 01:02:43,587 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 01:02:44,133 - INFO - Preparing to send OTP email to email_verify_test@example.com
+2025-07-05 01:02:44,135 - INFO - Sending OTP email with subject: Your YITP Verification Code: 383755
+2025-07-05 01:02:44,135 - INFO - Attempting to send email directly to ['email_verify_test@example.com']
+2025-07-05 01:02:44,135 - INFO - Subject: Your YITP Verification Code: 383755
+2025-07-05 01:02:44,136 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:02:47,032 - INFO - ✅ Email sent successfully to ['email_verify_test@example.com']
+2025-07-05 01:02:47,033 - INFO - ✅ OTP email sent successfully to email_verify_test@example.com
+2025-07-05 01:02:47,926 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 01:02:47,927 - INFO - 🔧 Testing Post-OTP Verification Enhancement Fixes...
+2025-07-05 01:02:47,927 - INFO - 🧪 Testing WelcomePageRedirectMiddleware Session Flag Fix...
+2025-07-05 01:03:06,056 - INFO - ✅ PASS - Middleware Fix - Normal Welcome Access: Welcome page accessible without session flag
+2025-07-05 01:03:10,326 - INFO - ✅ PASS - Middleware Fix - OTP Session Flag: Welcome page accessible with OTP session flag
+2025-07-05 01:03:10,649 - INFO - ✅ PASS - Middleware Fix - Session Flag Cleanup: Session flag properly cleared
+2025-07-05 01:03:10,649 - INFO - 🧪 Testing Profile Creation During OTP Verification...
+2025-07-05 01:03:27,249 - INFO - Preparing to send OTP email to profile_otp_test@example.com
+2025-07-05 01:03:27,253 - INFO - Sending OTP email with subject: Your YITP Verification Code: 258518
+2025-07-05 01:03:27,253 - INFO - Attempting to send email directly to ['profile_otp_test@example.com']
+2025-07-05 01:03:27,253 - INFO - Subject: Your YITP Verification Code: 258518
+2025-07-05 01:03:27,253 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:03:30,681 - INFO - ✅ Email sent successfully to ['profile_otp_test@example.com']
+2025-07-05 01:03:30,682 - INFO - ✅ OTP email sent successfully to profile_otp_test@example.com
+2025-07-05 01:03:33,290 - INFO - Attempting to send email directly to ['profile_otp_test@example.com']
+2025-07-05 01:03:33,290 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 01:03:33,290 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:03:35,958 - INFO - ✅ Email sent successfully to ['profile_otp_test@example.com']
+2025-07-05 01:03:35,963 - INFO - Sending OTP verification admin notification for user: profile_otp_test@example.com
+2025-07-05 01:03:35,963 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:03:35,963 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:03:35,963 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:03:38,865 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:03:38,867 - INFO - ✅ OTP verification admin notification sent successfully for user: profile_otp_test@example.com
+2025-07-05 01:03:40,991 - INFO - ✅ PASS - Profile OTP - Profile Creation: Profile created during OTP verification
+2025-07-05 01:03:40,991 - INFO - ❌ FAIL - Profile OTP - Email Verification Set: Email verification not set
+2025-07-05 01:03:40,991 - INFO - ✅ PASS - Profile OTP - Completion Calculated: Completion: 50.0%
+2025-07-05 01:03:40,991 - INFO - 🧪 Testing Enhanced Onboarding Modal Logic...
+2025-07-05 01:04:01,253 - INFO - ✅ PASS - Onboarding Enhancement - Welcome Page Access: Welcome page accessible
+2025-07-05 01:04:01,254 - INFO - ❌ FAIL - Onboarding Enhancement - OTP Context Variable: OTP completion context missing
+2025-07-05 01:04:01,254 - INFO - ❌ FAIL - Onboarding Enhancement - JavaScript Logic: Enhanced onboarding JavaScript missing
+2025-07-05 01:04:01,255 - INFO - ============================================================
+2025-07-05 01:04:01,255 - INFO - 📊 FINAL TEST REPORT
+2025-07-05 01:04:01,255 - INFO - ============================================================
+2025-07-05 01:04:01,255 - INFO - Total Tests: 21
+2025-07-05 01:04:01,255 - INFO - Passed: 17
+2025-07-05 01:04:01,255 - INFO - Failed: 4
+2025-07-05 01:04:01,255 - INFO - Success Rate: 81.0%
+2025-07-05 01:04:01,255 - INFO - 
+2025-07-05 01:04:01,255 - INFO - 📋 DETAILED RESULTS:
+2025-07-05 01:04:01,255 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 01:04:01,255 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 829064
+2025-07-05 01:04:01,255 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 01:04:01,255 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 01:04:01,255 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Welcome Redirect - Page Access: Welcome page accessible
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Welcome Redirect - Content Validation: Welcome content found
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Middleware Fix - Normal Welcome Access: Welcome page accessible without session flag
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Middleware Fix - OTP Session Flag: Welcome page accessible with OTP session flag
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Middleware Fix - Session Flag Cleanup: Session flag properly cleared
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Profile OTP - Profile Creation: Profile created during OTP verification
+2025-07-05 01:04:01,256 - INFO - ❌ FAIL - Profile OTP - Email Verification Set: Email verification not set
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Profile OTP - Completion Calculated: Completion: 50.0%
+2025-07-05 01:04:01,256 - INFO - ✅ PASS - Onboarding Enhancement - Welcome Page Access: Welcome page accessible
+2025-07-05 01:04:01,256 - INFO - ❌ FAIL - Onboarding Enhancement - OTP Context Variable: OTP completion context missing
+2025-07-05 01:04:01,256 - INFO - ❌ FAIL - Onboarding Enhancement - JavaScript Logic: Enhanced onboarding JavaScript missing
+2025-07-05 01:04:01,256 - INFO - ============================================================
+2025-07-05 01:04:01,256 - INFO - ✅ GOOD: Most features working, minor issues to address
+2025-07-05 01:08:58,342 - INFO - 🚀 Starting YITP Registration & OTP Flow Test Suite
+2025-07-05 01:08:58,345 - INFO - ============================================================
+2025-07-05 01:08:58,345 - INFO - 🧪 Testing Admin Notification System...
+2025-07-05 01:09:15,332 - INFO - Sending OTP verification admin notification for user: admin_test@example.com
+2025-07-05 01:09:15,333 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:09:15,333 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:09:15,333 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:09:18,948 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:09:18,949 - INFO - ✅ OTP verification admin notification sent successfully for user: admin_test@example.com
+2025-07-05 01:09:18,950 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 01:09:18,950 - INFO - 🧪 Testing Automatic Login After OTP Verification...
+2025-07-05 01:09:33,250 - INFO - Preparing to send OTP email to login_test@example.com
+2025-07-05 01:09:33,255 - INFO - Sending OTP email with subject: Your YITP Verification Code: 051047
+2025-07-05 01:09:33,256 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 01:09:33,256 - INFO - Subject: Your YITP Verification Code: 051047
+2025-07-05 01:09:33,256 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:09:37,215 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 01:09:37,216 - INFO - ✅ OTP email sent successfully to login_test@example.com
+2025-07-05 01:09:37,216 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 051047
+2025-07-05 01:09:39,989 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 01:09:39,990 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 01:09:39,990 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:09:42,831 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 01:09:42,861 - INFO - Sending OTP verification admin notification for user: login_test@example.com
+2025-07-05 01:09:42,863 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:09:42,863 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:09:42,864 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:09:45,836 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:09:45,837 - INFO - ✅ OTP verification admin notification sent successfully for user: login_test@example.com
+2025-07-05 01:09:48,536 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 01:09:48,944 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 01:09:48,945 - INFO - 🧪 Testing Profile Completion Tracking...
+2025-07-05 01:10:02,773 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 01:10:03,070 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 01:10:03,070 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 01:10:03,070 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 01:10:03,070 - INFO - 🧪 Testing Welcome Page Redirect Flow...
+2025-07-05 01:10:20,978 - INFO - ✅ PASS - Welcome Redirect - Page Access: Welcome page accessible
+2025-07-05 01:10:20,979 - INFO - ✅ PASS - Welcome Redirect - Content Validation: Welcome content found
+2025-07-05 01:10:20,979 - INFO - 🧪 Testing Email Verification Status Integration...
+2025-07-05 01:10:34,636 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 01:10:35,227 - INFO - Preparing to send OTP email to email_verify_test@example.com
+2025-07-05 01:10:35,305 - INFO - Sending OTP email with subject: Your YITP Verification Code: 654307
+2025-07-05 01:10:35,305 - INFO - Attempting to send email directly to ['email_verify_test@example.com']
+2025-07-05 01:10:35,306 - INFO - Subject: Your YITP Verification Code: 654307
+2025-07-05 01:10:35,306 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:10:38,057 - INFO - ✅ Email sent successfully to ['email_verify_test@example.com']
+2025-07-05 01:10:38,058 - INFO - ✅ OTP email sent successfully to email_verify_test@example.com
+2025-07-05 01:10:38,946 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 01:10:38,946 - INFO - 🔧 Testing Post-OTP Verification Enhancement Fixes...
+2025-07-05 01:10:38,947 - INFO - 🧪 Testing WelcomePageRedirectMiddleware Session Flag Fix...
+2025-07-05 01:10:57,202 - INFO - ✅ PASS - Middleware Fix - Normal Welcome Access: Welcome page accessible without session flag
+2025-07-05 01:11:01,037 - INFO - ✅ PASS - Middleware Fix - OTP Session Flag: Welcome page accessible with OTP session flag
+2025-07-05 01:11:01,326 - INFO - ✅ PASS - Middleware Fix - Session Flag Cleanup: Session flag properly cleared
+2025-07-05 01:11:01,327 - INFO - 🧪 Testing Profile Creation During OTP Verification...
+2025-07-05 01:11:15,655 - INFO - Preparing to send OTP email to profile_otp_test@example.com
+2025-07-05 01:11:15,658 - INFO - Sending OTP email with subject: Your YITP Verification Code: 740963
+2025-07-05 01:11:15,658 - INFO - Attempting to send email directly to ['profile_otp_test@example.com']
+2025-07-05 01:11:15,658 - INFO - Subject: Your YITP Verification Code: 740963
+2025-07-05 01:11:15,658 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:11:18,798 - INFO - ✅ Email sent successfully to ['profile_otp_test@example.com']
+2025-07-05 01:11:18,798 - INFO - ✅ OTP email sent successfully to profile_otp_test@example.com
+2025-07-05 01:11:21,705 - INFO - Attempting to send email directly to ['profile_otp_test@example.com']
+2025-07-05 01:11:21,706 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 01:11:21,706 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:11:26,865 - INFO - ✅ Email sent successfully to ['profile_otp_test@example.com']
+2025-07-05 01:11:26,876 - INFO - Sending OTP verification admin notification for user: profile_otp_test@example.com
+2025-07-05 01:11:26,876 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:11:26,876 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:11:26,876 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:11:34,365 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:11:34,366 - INFO - ✅ OTP verification admin notification sent successfully for user: profile_otp_test@example.com
+2025-07-05 01:11:43,144 - INFO - ✅ PASS - Profile OTP - Profile Creation: Profile created during OTP verification
+2025-07-05 01:11:43,145 - INFO - ✅ PASS - Profile OTP - Email Verification Set: Email verification status set during OTP
+2025-07-05 01:11:43,146 - INFO - ✅ PASS - Profile OTP - Completion Calculated: Completion: 50.00%
+2025-07-05 01:11:43,146 - INFO - 🧪 Testing Enhanced Onboarding Modal Logic...
+2025-07-05 01:12:13,196 - INFO - ✅ PASS - Onboarding Enhancement - Welcome Page Access: Welcome page accessible
+2025-07-05 01:12:13,197 - INFO - ❌ FAIL - Onboarding Enhancement - OTP Context Variable: OTP completion context missing
+2025-07-05 01:12:13,197 - INFO - ❌ FAIL - Onboarding Enhancement - JavaScript Logic: Enhanced onboarding JavaScript missing
+2025-07-05 01:12:13,197 - INFO - ============================================================
+2025-07-05 01:12:13,197 - INFO - 📊 FINAL TEST REPORT
+2025-07-05 01:12:13,198 - INFO - ============================================================
+2025-07-05 01:12:13,198 - INFO - Total Tests: 21
+2025-07-05 01:12:13,198 - INFO - Passed: 18
+2025-07-05 01:12:13,198 - INFO - Failed: 3
+2025-07-05 01:12:13,198 - INFO - Success Rate: 85.7%
+2025-07-05 01:12:13,198 - INFO - 
+2025-07-05 01:12:13,198 - INFO - 📋 DETAILED RESULTS:
+2025-07-05 01:12:13,198 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 01:12:13,198 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 051047
+2025-07-05 01:12:13,198 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Welcome Redirect - Page Access: Welcome page accessible
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Welcome Redirect - Content Validation: Welcome content found
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 01:12:13,199 - INFO - ✅ PASS - Middleware Fix - Normal Welcome Access: Welcome page accessible without session flag
+2025-07-05 01:12:13,200 - INFO - ✅ PASS - Middleware Fix - OTP Session Flag: Welcome page accessible with OTP session flag
+2025-07-05 01:12:13,201 - INFO - ✅ PASS - Middleware Fix - Session Flag Cleanup: Session flag properly cleared
+2025-07-05 01:12:13,201 - INFO - ✅ PASS - Profile OTP - Profile Creation: Profile created during OTP verification
+2025-07-05 01:12:13,201 - INFO - ✅ PASS - Profile OTP - Email Verification Set: Email verification status set during OTP
+2025-07-05 01:12:13,201 - INFO - ✅ PASS - Profile OTP - Completion Calculated: Completion: 50.00%
+2025-07-05 01:12:13,202 - INFO - ✅ PASS - Onboarding Enhancement - Welcome Page Access: Welcome page accessible
+2025-07-05 01:12:13,202 - INFO - ❌ FAIL - Onboarding Enhancement - OTP Context Variable: OTP completion context missing
+2025-07-05 01:12:13,202 - INFO - ❌ FAIL - Onboarding Enhancement - JavaScript Logic: Enhanced onboarding JavaScript missing
+2025-07-05 01:12:13,202 - INFO - ============================================================
+2025-07-05 01:12:13,202 - INFO - ✅ GOOD: Most features working, minor issues to address
+2025-07-05 01:44:53,500 - INFO - 🚀 Starting YITP Registration & OTP Flow Test Suite
+2025-07-05 01:44:53,501 - INFO - ============================================================
+2025-07-05 01:44:53,501 - INFO - 🧪 Testing Admin Notification System...
+2025-07-05 01:45:15,151 - INFO - Sending OTP verification admin notification for user: admin_test@example.com
+2025-07-05 01:45:15,155 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:45:15,155 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:45:15,155 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:45:18,251 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:45:18,252 - INFO - ✅ OTP verification admin notification sent successfully for user: admin_test@example.com
+2025-07-05 01:45:18,252 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 01:45:18,252 - INFO - 🧪 Testing Automatic Login After OTP Verification...
+2025-07-05 01:45:36,612 - INFO - Preparing to send OTP email to login_test@example.com
+2025-07-05 01:45:36,618 - INFO - Sending OTP email with subject: Your YITP Verification Code: 842849
+2025-07-05 01:45:36,619 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 01:45:36,619 - INFO - Subject: Your YITP Verification Code: 842849
+2025-07-05 01:45:36,619 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:45:40,582 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 01:45:40,583 - INFO - ✅ OTP email sent successfully to login_test@example.com
+2025-07-05 01:45:40,583 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 842849
+2025-07-05 01:45:43,269 - INFO - Attempting to send email directly to ['login_test@example.com']
+2025-07-05 01:45:43,269 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 01:45:43,269 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:45:47,608 - INFO - ✅ Email sent successfully to ['login_test@example.com']
+2025-07-05 01:45:47,609 - INFO - Sending OTP verification admin notification for user: login_test@example.com
+2025-07-05 01:45:47,609 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:45:47,609 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:45:47,609 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:45:51,273 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:45:51,273 - INFO - ✅ OTP verification admin notification sent successfully for user: login_test@example.com
+2025-07-05 01:45:54,119 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 01:45:54,408 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 01:45:54,408 - INFO - 🧪 Testing Profile Completion Tracking...
+2025-07-05 01:46:11,223 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 01:46:11,663 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 01:46:11,663 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 01:46:11,663 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 01:46:11,664 - INFO - 🧪 Testing Welcome Page Redirect Flow...
+2025-07-05 01:46:32,751 - INFO - ✅ PASS - Welcome Redirect - Page Access: Welcome page accessible
+2025-07-05 01:46:32,752 - INFO - ✅ PASS - Welcome Redirect - Content Validation: Welcome content found
+2025-07-05 01:46:32,752 - INFO - 🧪 Testing Email Verification Status Integration...
+2025-07-05 01:46:47,166 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 01:46:47,779 - INFO - Preparing to send OTP email to email_verify_test@example.com
+2025-07-05 01:46:47,782 - INFO - Sending OTP email with subject: Your YITP Verification Code: 987360
+2025-07-05 01:46:47,782 - INFO - Attempting to send email directly to ['email_verify_test@example.com']
+2025-07-05 01:46:47,782 - INFO - Subject: Your YITP Verification Code: 987360
+2025-07-05 01:46:47,782 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:46:50,474 - INFO - ✅ Email sent successfully to ['email_verify_test@example.com']
+2025-07-05 01:46:50,476 - INFO - ✅ OTP email sent successfully to email_verify_test@example.com
+2025-07-05 01:46:51,447 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 01:46:51,448 - INFO - 🔧 Testing Post-OTP Verification Enhancement Fixes...
+2025-07-05 01:46:51,448 - INFO - 🧪 Testing WelcomePageRedirectMiddleware Session Flag Fix...
+2025-07-05 01:47:11,648 - INFO - ✅ PASS - Middleware Fix - Normal Welcome Access: Welcome page accessible without session flag
+2025-07-05 01:47:16,058 - INFO - ✅ PASS - Middleware Fix - OTP Session Flag: Welcome page accessible with OTP session flag
+2025-07-05 01:47:16,363 - INFO - ✅ PASS - Middleware Fix - Session Flag Cleanup: Session flag properly cleared
+2025-07-05 01:47:16,363 - INFO - 🧪 Testing Profile Creation During OTP Verification...
+2025-07-05 01:47:32,944 - INFO - Preparing to send OTP email to profile_otp_test@example.com
+2025-07-05 01:47:32,963 - INFO - Sending OTP email with subject: Your YITP Verification Code: 920500
+2025-07-05 01:47:32,964 - INFO - Attempting to send email directly to ['profile_otp_test@example.com']
+2025-07-05 01:47:32,965 - INFO - Subject: Your YITP Verification Code: 920500
+2025-07-05 01:47:32,965 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:47:35,948 - INFO - ✅ Email sent successfully to ['profile_otp_test@example.com']
+2025-07-05 01:47:35,949 - INFO - ✅ OTP email sent successfully to profile_otp_test@example.com
+2025-07-05 01:47:39,186 - INFO - Attempting to send email directly to ['profile_otp_test@example.com']
+2025-07-05 01:47:39,187 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 01:47:39,188 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:47:43,054 - INFO - ✅ Email sent successfully to ['profile_otp_test@example.com']
+2025-07-05 01:47:43,059 - INFO - Sending OTP verification admin notification for user: profile_otp_test@example.com
+2025-07-05 01:47:43,060 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:47:43,060 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 01:47:43,060 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 01:47:47,413 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 01:47:47,414 - INFO - ✅ OTP verification admin notification sent successfully for user: profile_otp_test@example.com
+2025-07-05 01:47:50,655 - INFO - ✅ PASS - Profile OTP - Profile Creation: Profile created during OTP verification
+2025-07-05 01:47:50,655 - INFO - ✅ PASS - Profile OTP - Email Verification Set: Email verification status set during OTP
+2025-07-05 01:47:50,655 - INFO - ✅ PASS - Profile OTP - Completion Calculated: Completion: 50.00%
+2025-07-05 01:47:50,656 - INFO - 🧪 Testing Enhanced Onboarding Modal Logic...
+2025-07-05 01:48:12,671 - INFO - ✅ PASS - Onboarding Enhancement - Welcome Page Access: Welcome page accessible
+2025-07-05 01:48:12,672 - INFO - ❌ FAIL - Onboarding Enhancement - OTP Context Variable: OTP completion context missing
+2025-07-05 01:48:12,673 - INFO - ❌ FAIL - Onboarding Enhancement - JavaScript Logic: Enhanced onboarding JavaScript missing
+2025-07-05 01:48:12,673 - INFO - ============================================================
+2025-07-05 01:48:12,673 - INFO - 📊 FINAL TEST REPORT
+2025-07-05 01:48:12,673 - INFO - ============================================================
+2025-07-05 01:48:12,673 - INFO - Total Tests: 21
+2025-07-05 01:48:12,673 - INFO - Passed: 18
+2025-07-05 01:48:12,673 - INFO - Failed: 3
+2025-07-05 01:48:12,673 - INFO - Success Rate: 85.7%
+2025-07-05 01:48:12,673 - INFO - 
+2025-07-05 01:48:12,673 - INFO - 📋 DETAILED RESULTS:
+2025-07-05 01:48:12,673 - INFO - ❌ FAIL - Admin Notification - Email Sent: No admin notification email found
+2025-07-05 01:48:12,673 - INFO - ✅ PASS - Auto Login - OTP Generation: OTP generated: 842849
+2025-07-05 01:48:12,673 - INFO - ✅ PASS - Auto Login - Redirect Response: Successful redirect after verification
+2025-07-05 01:48:12,673 - INFO - ✅ PASS - Auto Login - User Activation: User activated successfully
+2025-07-05 01:48:12,673 - INFO - ✅ PASS - Profile Tracking - Initial Completion: Initial completion: 50.00%
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Profile Tracking - Completion Calculation: Calculated: 50.00%
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Profile Tracking - Status Method: Status: 📝 Your profile needs some work
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Profile Tracking - Email Verified Field: Email verified: False
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Welcome Redirect - Page Access: Welcome page accessible
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Welcome Redirect - Content Validation: Welcome content found
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Email Verification - Initial Status: Initial status: False
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Email Verification - Status Update: Email verification status updated
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Middleware Fix - Normal Welcome Access: Welcome page accessible without session flag
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Middleware Fix - OTP Session Flag: Welcome page accessible with OTP session flag
+2025-07-05 01:48:12,674 - INFO - ✅ PASS - Middleware Fix - Session Flag Cleanup: Session flag properly cleared
+2025-07-05 01:48:12,675 - INFO - ✅ PASS - Profile OTP - Profile Creation: Profile created during OTP verification
+2025-07-05 01:48:12,675 - INFO - ✅ PASS - Profile OTP - Email Verification Set: Email verification status set during OTP
+2025-07-05 01:48:12,675 - INFO - ✅ PASS - Profile OTP - Completion Calculated: Completion: 50.00%
+2025-07-05 01:48:12,675 - INFO - ✅ PASS - Onboarding Enhancement - Welcome Page Access: Welcome page accessible
+2025-07-05 01:48:12,675 - INFO - ❌ FAIL - Onboarding Enhancement - OTP Context Variable: OTP completion context missing
+2025-07-05 01:48:12,675 - INFO - ❌ FAIL - Onboarding Enhancement - JavaScript Logic: Enhanced onboarding JavaScript missing
+2025-07-05 01:48:12,675 - INFO - ============================================================
+2025-07-05 01:48:12,675 - INFO - ✅ GOOD: Most features working, minor issues to address

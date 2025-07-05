@@ -1,0 +1,744 @@
+2025-07-05 02:02:20,928 - INFO - ============================================================
+2025-07-05 02:02:20,929 - INFO - 🧪 Starting test: test_duplicate_email_validation
+2025-07-05 02:02:20,929 - INFO - ============================================================
+2025-07-05 02:02:23,007 - INFO - ✅ PASS - Duplicate Email Validation: Duplicate email properly rejected
+2025-07-05 02:02:23,871 - INFO - ✅ Completed test: test_duplicate_email_validation
+2025-07-05 02:02:23,871 - INFO - ------------------------------------------------------------
+2025-07-05 02:02:57,944 - INFO - ============================================================
+2025-07-05 02:02:57,946 - INFO - 🧪 Starting test: test_duplicate_username_validation
+2025-07-05 02:02:57,946 - INFO - ============================================================
+2025-07-05 02:03:00,026 - INFO - ❌ FAIL - Duplicate Username Validation: Duplicate username properly rejected
+2025-07-05 02:03:14,721 - INFO - ✅ Completed test: test_duplicate_username_validation
+2025-07-05 02:03:14,722 - INFO - ------------------------------------------------------------
+2025-07-05 02:03:47,098 - INFO - ============================================================
+2025-07-05 02:03:47,100 - INFO - 🧪 Starting test: test_password_mismatch_validation
+2025-07-05 02:03:47,100 - INFO - ============================================================
+2025-07-05 02:03:47,983 - INFO - ✅ PASS - Password Mismatch Validation: Password mismatch properly rejected
+2025-07-05 02:03:49,120 - INFO - ✅ Completed test: test_password_mismatch_validation
+2025-07-05 02:03:49,120 - INFO - ------------------------------------------------------------
+2025-07-05 02:04:23,047 - INFO - ============================================================
+2025-07-05 02:04:23,048 - INFO - 🧪 Starting test: test_registration_form_access
+2025-07-05 02:04:23,048 - INFO - ============================================================
+2025-07-05 02:04:23,055 - INFO - ✅ PASS - Registration Form Access: Registration form accessible (Status: 200)
+2025-07-05 02:04:24,716 - INFO - ✅ Completed test: test_registration_form_access
+2025-07-05 02:04:24,717 - INFO - ------------------------------------------------------------
+2025-07-05 02:05:01,485 - INFO - ============================================================
+2025-07-05 02:05:01,487 - INFO - 🧪 Starting test: test_required_fields_validation
+2025-07-05 02:05:01,487 - INFO - ============================================================
+2025-07-05 02:05:02,291 - INFO - ✅ PASS - Required Fields Validation: Missing required fields properly rejected
+2025-07-05 02:05:03,290 - INFO - ✅ Completed test: test_required_fields_validation
+2025-07-05 02:05:03,290 - INFO - ------------------------------------------------------------
+2025-07-05 02:05:31,751 - INFO - ============================================================
+2025-07-05 02:05:31,757 - INFO - 🧪 Starting test: test_valid_registration_submission
+2025-07-05 02:05:31,758 - INFO - ============================================================
+2025-07-05 02:05:35,807 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:05:35,842 - INFO - Sending OTP email with subject: Your YITP Verification Code: 961224
+2025-07-05 02:05:35,848 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:05:35,848 - INFO - Subject: Your YITP Verification Code: 961224
+2025-07-05 02:05:35,848 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:05:39,682 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:05:39,683 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:05:42,711 - INFO - ✅ PASS - Valid Registration Submission: User created: True, Redirected to OTP: True
+2025-07-05 02:05:55,765 - INFO - ✅ Completed test: test_valid_registration_submission
+2025-07-05 02:05:55,767 - INFO - ------------------------------------------------------------
+2025-07-05 02:06:30,329 - INFO - ============================================================
+2025-07-05 02:06:30,331 - INFO - 🧪 Starting test: test_profile_creation_during_registration
+2025-07-05 02:06:30,331 - INFO - ============================================================
+2025-07-05 02:06:35,349 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:06:35,351 - INFO - Sending OTP email with subject: Your YITP Verification Code: 107228
+2025-07-05 02:06:35,351 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:06:35,351 - INFO - Subject: Your YITP Verification Code: 107228
+2025-07-05 02:06:35,351 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:06:39,635 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:06:39,636 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:06:43,851 - INFO - ✅ PASS - Profile Creation During Registration: Profile created with phone: +1234567890
+2025-07-05 02:06:58,590 - INFO - ✅ Completed test: test_profile_creation_during_registration
+2025-07-05 02:06:58,592 - INFO - ------------------------------------------------------------
+2025-07-05 02:07:28,089 - INFO - ============================================================
+2025-07-05 02:07:28,091 - INFO - 🧪 Starting test: test_user_creation_with_correct_data
+2025-07-05 02:07:28,091 - INFO - ============================================================
+2025-07-05 02:07:33,390 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:07:33,391 - INFO - Sending OTP email with subject: Your YITP Verification Code: 519208
+2025-07-05 02:07:33,391 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:07:33,391 - INFO - Subject: Your YITP Verification Code: 519208
+2025-07-05 02:07:33,391 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:07:38,251 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:07:38,252 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:07:42,742 - INFO - ✅ PASS - User Creation with Correct Data: User created with correct data, inactive status: True
+2025-07-05 02:07:59,627 - INFO - ✅ Completed test: test_user_creation_with_correct_data
+2025-07-05 02:07:59,629 - INFO - ------------------------------------------------------------
+2025-07-05 02:08:38,936 - INFO - ============================================================
+2025-07-05 02:08:38,938 - INFO - 🧪 Starting test: test_multiple_otp_invalidation
+2025-07-05 02:08:38,939 - INFO - ============================================================
+2025-07-05 02:08:41,139 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2025-07-05 02:08:41,143 - INFO - Sending OTP email with subject: Your YITP Verification Code: 480050
+2025-07-05 02:08:41,144 - INFO - Attempting to send email directly to ['multipleotpuser@example.com']
+2025-07-05 02:08:41,144 - INFO - Subject: Your YITP Verification Code: 480050
+2025-07-05 02:08:41,144 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:08:44,965 - INFO - ✅ Email sent successfully to ['multipleotpuser@example.com']
+2025-07-05 02:08:44,966 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2025-07-05 02:08:45,788 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2025-07-05 02:08:45,789 - INFO - Sending OTP email with subject: Your YITP Verification Code: 654822
+2025-07-05 02:08:45,790 - INFO - Attempting to send email directly to ['multipleotpuser@example.com']
+2025-07-05 02:08:45,790 - INFO - Subject: Your YITP Verification Code: 654822
+2025-07-05 02:08:45,790 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:08:51,108 - INFO - ✅ Email sent successfully to ['multipleotpuser@example.com']
+2025-07-05 02:08:51,109 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2025-07-05 02:08:51,469 - INFO - ✅ PASS - Multiple OTP Invalidation: First OTP invalidated: True, Second OTP valid: True
+2025-07-05 02:08:52,470 - INFO - ✅ Completed test: test_multiple_otp_invalidation
+2025-07-05 02:08:52,470 - INFO - ------------------------------------------------------------
+2025-07-05 02:09:21,845 - INFO - ============================================================
+2025-07-05 02:09:21,847 - INFO - 🧪 Starting test: test_otp_email_delivery
+2025-07-05 02:09:21,847 - INFO - ============================================================
+2025-07-05 02:09:26,898 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:09:26,900 - INFO - Sending OTP email with subject: Your YITP Verification Code: 608478
+2025-07-05 02:09:26,901 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:09:26,901 - INFO - Subject: Your YITP Verification Code: 608478
+2025-07-05 02:09:26,901 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:09:30,954 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:09:30,956 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:09:33,760 - INFO - ❌ FAIL - OTP Email Delivery: No email was sent
+2025-07-05 02:09:46,909 - INFO - ✅ Completed test: test_otp_email_delivery
+2025-07-05 02:09:46,911 - INFO - ------------------------------------------------------------
+2025-07-05 02:10:15,137 - INFO - ============================================================
+2025-07-05 02:10:15,139 - INFO - 🧪 Starting test: test_otp_generation_and_storage
+2025-07-05 02:10:15,140 - INFO - ============================================================
+2025-07-05 02:10:18,755 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:10:18,760 - INFO - Sending OTP email with subject: Your YITP Verification Code: 006952
+2025-07-05 02:10:18,760 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:10:18,760 - INFO - Subject: Your YITP Verification Code: 006952
+2025-07-05 02:10:18,760 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:10:21,665 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:10:21,666 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:10:24,902 - INFO - ✅ PASS - OTP Generation and Storage: OTP generated: 006952, expires: 2025-07-05 02:30:18.449665+00:00
+2025-07-05 02:10:39,309 - INFO - ✅ Completed test: test_otp_generation_and_storage
+2025-07-05 02:10:39,311 - INFO - ------------------------------------------------------------
+2025-07-05 02:11:21,783 - INFO - ============================================================
+2025-07-05 02:11:21,784 - INFO - 🧪 Starting test: test_expired_otp_verification
+2025-07-05 02:11:21,784 - INFO - ============================================================
+2025-07-05 02:11:24,844 - INFO - ✅ PASS - Expired OTP Verification: User remains inactive: True, Expired OTP rejected
+2025-07-05 02:11:25,975 - INFO - ✅ Completed test: test_expired_otp_verification
+2025-07-05 02:11:25,975 - INFO - ------------------------------------------------------------
+2025-07-05 02:12:00,641 - INFO - ============================================================
+2025-07-05 02:12:00,644 - INFO - 🧪 Starting test: test_invalid_otp_verification
+2025-07-05 02:12:00,644 - INFO - ============================================================
+2025-07-05 02:12:06,179 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:12:06,182 - INFO - Sending OTP email with subject: Your YITP Verification Code: 786614
+2025-07-05 02:12:06,182 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:12:06,182 - INFO - Subject: Your YITP Verification Code: 786614
+2025-07-05 02:12:06,182 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:12:10,294 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:12:10,296 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:12:16,516 - INFO - ✅ PASS - Invalid OTP Verification: User remains inactive: True, Error message shown
+2025-07-05 02:12:30,230 - INFO - ✅ Completed test: test_invalid_otp_verification
+2025-07-05 02:12:30,232 - INFO - ------------------------------------------------------------
+2025-07-05 02:12:56,074 - INFO - ============================================================
+2025-07-05 02:12:56,074 - INFO - 🧪 Starting test: test_valid_otp_verification
+2025-07-05 02:12:56,074 - INFO - ============================================================
+2025-07-05 02:13:00,494 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:13:00,495 - INFO - Sending OTP email with subject: Your YITP Verification Code: 346444
+2025-07-05 02:13:00,495 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:13:00,495 - INFO - Subject: Your YITP Verification Code: 346444
+2025-07-05 02:13:00,496 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:13:06,975 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:13:06,976 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:13:13,985 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:13:13,986 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:13:13,986 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:13:17,533 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:13:17,547 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:13:17,548 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:13:17,548 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:13:17,549 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:13:21,187 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:13:21,189 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:13:29,089 - INFO - ✅ PASS - Valid OTP Verification: User activated: True, OTP used: True, Redirected to welcome: True
+2025-07-05 02:13:42,569 - INFO - ✅ Completed test: test_valid_otp_verification
+2025-07-05 02:13:42,571 - INFO - ------------------------------------------------------------
+2025-07-05 02:14:13,440 - INFO - ============================================================
+2025-07-05 02:14:13,441 - INFO - 🧪 Starting test: test_automatic_login_after_verification
+2025-07-05 02:14:13,442 - INFO - ============================================================
+2025-07-05 02:14:17,494 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:14:17,496 - INFO - Sending OTP email with subject: Your YITP Verification Code: 432755
+2025-07-05 02:14:17,496 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:14:17,496 - INFO - Subject: Your YITP Verification Code: 432755
+2025-07-05 02:14:17,496 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:14:21,628 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:14:21,629 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:14:28,551 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:14:28,551 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:14:28,551 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:14:31,944 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:14:31,948 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:14:31,949 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:14:31,949 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:14:31,949 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:14:36,601 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:14:36,602 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:14:42,105 - INFO - ✅ PASS - Automatic Login After Verification: User logged in: True, Correct user: True
+2025-07-05 02:14:54,006 - INFO - ✅ Completed test: test_automatic_login_after_verification
+2025-07-05 02:14:54,007 - INFO - ------------------------------------------------------------
+2025-07-05 02:15:22,064 - INFO - ============================================================
+2025-07-05 02:15:22,066 - INFO - 🧪 Starting test: test_profile_email_verification_status
+2025-07-05 02:15:22,066 - INFO - ============================================================
+2025-07-05 02:15:26,315 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:15:26,316 - INFO - Sending OTP email with subject: Your YITP Verification Code: 408070
+2025-07-05 02:15:26,317 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:15:26,317 - INFO - Subject: Your YITP Verification Code: 408070
+2025-07-05 02:15:26,317 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:15:28,994 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:15:28,996 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:15:34,301 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:15:34,302 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:15:34,302 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:15:37,231 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:15:37,235 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:15:37,236 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:15:37,236 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:15:37,236 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:15:41,595 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:15:41,597 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:15:45,216 - INFO - ✅ PASS - Profile Email Verification Status: Email verification status: True
+2025-07-05 02:15:56,715 - INFO - ✅ Completed test: test_profile_email_verification_status
+2025-07-05 02:15:56,715 - INFO - ------------------------------------------------------------
+2025-07-05 02:16:22,390 - INFO - ============================================================
+2025-07-05 02:16:22,392 - INFO - 🧪 Starting test: test_session_flag_management
+2025-07-05 02:16:22,392 - INFO - ============================================================
+2025-07-05 02:16:26,320 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:16:26,325 - INFO - Sending OTP email with subject: Your YITP Verification Code: 600801
+2025-07-05 02:16:26,326 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:16:26,326 - INFO - Subject: Your YITP Verification Code: 600801
+2025-07-05 02:16:26,326 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:16:30,826 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:16:30,827 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:16:36,098 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:16:36,098 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:16:36,099 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:16:39,570 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:16:39,574 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:16:39,575 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:16:39,575 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:16:39,575 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:16:43,487 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:16:43,487 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:16:46,760 - INFO - ✅ PASS - Session Flag Management: OTP flag set: True, Timestamp set: True
+2025-07-05 02:16:58,554 - INFO - ✅ Completed test: test_session_flag_management
+2025-07-05 02:16:58,556 - INFO - ------------------------------------------------------------
+2025-07-05 02:17:25,672 - INFO - ============================================================
+2025-07-05 02:17:25,675 - INFO - 🧪 Starting test: test_admin_notification_email
+2025-07-05 02:17:25,675 - INFO - ============================================================
+2025-07-05 02:17:29,699 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:17:29,701 - INFO - Sending OTP email with subject: Your YITP Verification Code: 034256
+2025-07-05 02:17:29,701 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:17:29,701 - INFO - Subject: Your YITP Verification Code: 034256
+2025-07-05 02:17:29,701 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:17:32,583 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:17:32,583 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:17:37,648 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:17:37,649 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:17:37,650 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:17:41,701 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:17:41,706 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:17:41,706 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:17:41,706 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:17:41,706 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:17:44,405 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:17:44,406 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:17:47,056 - INFO - ❌ FAIL - Admin Notification Email: Admin notification sent: False
+2025-07-05 02:17:58,069 - INFO - ✅ Completed test: test_admin_notification_email
+2025-07-05 02:17:58,070 - INFO - ------------------------------------------------------------
+2025-07-05 02:18:21,268 - INFO - ============================================================
+2025-07-05 02:18:21,269 - INFO - 🧪 Starting test: test_welcome_email_after_verification
+2025-07-05 02:18:21,270 - INFO - ============================================================
+2025-07-05 02:18:24,815 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:18:24,817 - INFO - Sending OTP email with subject: Your YITP Verification Code: 408853
+2025-07-05 02:18:24,817 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:18:24,817 - INFO - Subject: Your YITP Verification Code: 408853
+2025-07-05 02:18:24,818 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:18:29,229 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:18:29,232 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:18:34,388 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:18:34,390 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:18:34,390 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:18:37,998 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:18:38,004 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:18:38,004 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:18:38,004 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:18:38,004 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:18:40,725 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:18:40,726 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:18:43,518 - INFO - ❌ FAIL - Welcome Email After Verification: Welcome email sent: False
+2025-07-05 02:18:54,720 - INFO - ✅ Completed test: test_welcome_email_after_verification
+2025-07-05 02:18:54,722 - INFO - ------------------------------------------------------------
+2025-07-05 02:19:21,968 - INFO - ============================================================
+2025-07-05 02:19:21,971 - INFO - 🧪 Starting test: test_authenticated_user_redirect_from_registration
+2025-07-05 02:19:21,971 - INFO - ============================================================
+2025-07-05 02:19:28,419 - INFO - ✅ PASS - Authenticated User Redirect from Registration: Authenticated user redirected from registration (Status: 302)
+2025-07-05 02:19:29,215 - INFO - ✅ Completed test: test_authenticated_user_redirect_from_registration
+2025-07-05 02:19:29,216 - INFO - ------------------------------------------------------------
+2025-07-05 02:19:53,622 - INFO - ============================================================
+2025-07-05 02:19:53,623 - INFO - 🧪 Starting test: test_welcome_page_redirect_with_session_flag
+2025-07-05 02:19:53,623 - INFO - ============================================================
+2025-07-05 02:19:58,327 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:19:58,330 - INFO - Sending OTP email with subject: Your YITP Verification Code: 308335
+2025-07-05 02:19:58,330 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:19:58,330 - INFO - Subject: Your YITP Verification Code: 308335
+2025-07-05 02:19:58,330 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:20:02,497 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:20:02,500 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:20:08,297 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:20:08,298 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:20:08,299 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:20:12,408 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:20:12,413 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:20:12,428 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:20:12,429 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:20:12,429 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:20:15,169 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:20:15,202 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:20:21,160 - INFO - ✅ PASS - Welcome Page Redirect with Session Flag: Redirected to welcome page: True
+2025-07-05 02:20:31,960 - INFO - ✅ Completed test: test_welcome_page_redirect_with_session_flag
+2025-07-05 02:20:32,055 - INFO - ------------------------------------------------------------
+2025-07-05 02:21:04,445 - INFO - ============================================================
+2025-07-05 02:21:04,446 - INFO - 🧪 Starting test: test_otp_verification_with_invalid_user_id
+2025-07-05 02:21:04,447 - INFO - ============================================================
+2025-07-05 02:21:04,775 - INFO - ✅ PASS - OTP Verification with Invalid User ID: Invalid user ID properly handled
+2025-07-05 02:21:05,735 - INFO - ✅ Completed test: test_otp_verification_with_invalid_user_id
+2025-07-05 02:21:05,736 - INFO - ------------------------------------------------------------
+2025-07-05 02:21:34,027 - INFO - ============================================================
+2025-07-05 02:21:34,029 - INFO - 🧪 Starting test: test_otp_verification_with_missing_user_id
+2025-07-05 02:21:34,029 - INFO - ============================================================
+2025-07-05 02:21:34,038 - INFO - ✅ PASS - OTP Verification with Missing User ID: Missing user ID properly handled
+2025-07-05 02:21:35,005 - INFO - ✅ Completed test: test_otp_verification_with_missing_user_id
+2025-07-05 02:21:35,006 - INFO - ------------------------------------------------------------
+2025-07-05 02:22:02,690 - INFO - ============================================================
+2025-07-05 02:22:02,692 - INFO - 🧪 Starting test: test_registration_with_email_failure
+2025-07-05 02:22:02,693 - INFO - ============================================================
+2025-07-05 02:22:07,116 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:22:07,119 - INFO - Sending OTP email with subject: Your YITP Verification Code: 187044
+2025-07-05 02:22:07,120 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:22:07,120 - INFO - Subject: Your YITP Verification Code: 187044
+2025-07-05 02:22:07,120 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:22:11,523 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:22:11,524 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:22:14,655 - INFO - ❌ FAIL - Registration with Email Failure: User created and activated despite email failure: False
+2025-07-05 02:22:28,077 - INFO - ✅ Completed test: test_registration_with_email_failure
+2025-07-05 02:22:28,079 - INFO - ------------------------------------------------------------
+2025-07-05 02:22:57,393 - INFO - ============================================================
+2025-07-05 02:22:57,394 - INFO - 🧪 Starting test: test_profile_completion_calculation
+2025-07-05 02:22:57,395 - INFO - ============================================================
+2025-07-05 02:23:01,425 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:23:01,443 - INFO - Sending OTP email with subject: Your YITP Verification Code: 335291
+2025-07-05 02:23:01,443 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:23:01,443 - INFO - Subject: Your YITP Verification Code: 335291
+2025-07-05 02:23:01,443 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:23:04,058 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:23:04,059 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:23:09,763 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:23:09,763 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:23:09,764 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:23:12,490 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:23:12,494 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:23:12,495 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:23:12,495 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:23:12,495 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:23:16,678 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:23:16,679 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:23:20,445 - INFO - ✅ PASS - Profile Completion Calculation: Profile completion calculated: 66.67%
+2025-07-05 02:23:33,337 - INFO - ✅ Completed test: test_profile_completion_calculation
+2025-07-05 02:23:33,339 - INFO - ------------------------------------------------------------
+2025-07-05 02:24:02,930 - INFO - ============================================================
+2025-07-05 02:24:02,931 - INFO - 🧪 Starting test: test_complete_registration_journey
+2025-07-05 02:24:02,931 - INFO - ============================================================
+2025-07-05 02:24:06,987 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:24:06,991 - INFO - Sending OTP email with subject: Your YITP Verification Code: 049487
+2025-07-05 02:24:06,991 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:24:06,991 - INFO - Subject: Your YITP Verification Code: 049487
+2025-07-05 02:24:06,991 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:24:09,780 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:24:09,781 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:24:15,811 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:24:15,812 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:24:15,812 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:24:19,716 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:24:19,719 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:24:19,720 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:24:19,720 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:24:19,720 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:24:22,883 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:24:22,884 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:24:29,871 - INFO - ❌ FAIL - Complete Registration Journey: Steps: Registration(False), User/OTP(True), Email(False), Verification(True), Activation(True), Redirect(True)
+2025-07-05 02:24:42,049 - INFO - ✅ Completed test: test_complete_registration_journey
+2025-07-05 02:24:42,051 - INFO - ------------------------------------------------------------
+2025-07-05 02:41:52,166 - INFO - ============================================================
+2025-07-05 02:41:52,169 - INFO - 🧪 Starting test: test_duplicate_email_validation
+2025-07-05 02:41:52,169 - INFO - ============================================================
+2025-07-05 02:41:54,220 - INFO - ✅ PASS - Duplicate Email Validation: Duplicate email properly rejected
+2025-07-05 02:41:54,996 - INFO - ✅ Completed test: test_duplicate_email_validation
+2025-07-05 02:41:54,996 - INFO - ------------------------------------------------------------
+2025-07-05 02:42:20,855 - INFO - ============================================================
+2025-07-05 02:42:20,856 - INFO - 🧪 Starting test: test_duplicate_username_validation
+2025-07-05 02:42:20,857 - INFO - ============================================================
+2025-07-05 02:42:22,750 - INFO - ✅ PASS - Duplicate Username Validation: Duplicate username properly rejected
+2025-07-05 02:42:34,151 - INFO - ✅ Completed test: test_duplicate_username_validation
+2025-07-05 02:42:34,153 - INFO - ------------------------------------------------------------
+2025-07-05 02:42:57,421 - INFO - ============================================================
+2025-07-05 02:42:57,423 - INFO - 🧪 Starting test: test_password_mismatch_validation
+2025-07-05 02:42:57,423 - INFO - ============================================================
+2025-07-05 02:42:57,993 - INFO - ✅ PASS - Password Mismatch Validation: Password mismatch properly rejected
+2025-07-05 02:42:58,787 - INFO - ✅ Completed test: test_password_mismatch_validation
+2025-07-05 02:42:58,787 - INFO - ------------------------------------------------------------
+2025-07-05 02:43:24,797 - INFO - ============================================================
+2025-07-05 02:43:24,798 - INFO - 🧪 Starting test: test_registration_form_access
+2025-07-05 02:43:24,798 - INFO - ============================================================
+2025-07-05 02:43:24,805 - INFO - ✅ PASS - Registration Form Access: Registration form accessible (Status: 200)
+2025-07-05 02:43:25,714 - INFO - ✅ Completed test: test_registration_form_access
+2025-07-05 02:43:25,715 - INFO - ------------------------------------------------------------
+2025-07-05 02:43:58,528 - INFO - ============================================================
+2025-07-05 02:43:58,529 - INFO - 🧪 Starting test: test_required_fields_validation
+2025-07-05 02:43:58,529 - INFO - ============================================================
+2025-07-05 02:43:59,230 - INFO - ✅ PASS - Required Fields Validation: Missing required fields properly rejected
+2025-07-05 02:44:00,324 - INFO - ✅ Completed test: test_required_fields_validation
+2025-07-05 02:44:00,325 - INFO - ------------------------------------------------------------
+2025-07-05 02:44:30,899 - INFO - ============================================================
+2025-07-05 02:44:30,900 - INFO - 🧪 Starting test: test_valid_registration_submission
+2025-07-05 02:44:30,900 - INFO - ============================================================
+2025-07-05 02:44:38,347 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:44:38,462 - INFO - Sending OTP email with subject: Your YITP Verification Code: 999766
+2025-07-05 02:44:38,475 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:44:38,476 - INFO - Subject: Your YITP Verification Code: 999766
+2025-07-05 02:44:38,476 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:44:43,731 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:44:43,732 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:44:49,100 - INFO - ✅ PASS - Valid Registration Submission: User created: True, Redirected to OTP: True
+2025-07-05 02:45:03,535 - INFO - ✅ Completed test: test_valid_registration_submission
+2025-07-05 02:45:03,537 - INFO - ------------------------------------------------------------
+2025-07-05 02:45:38,156 - INFO - ============================================================
+2025-07-05 02:45:38,157 - INFO - 🧪 Starting test: test_profile_creation_during_registration
+2025-07-05 02:45:38,157 - INFO - ============================================================
+2025-07-05 02:45:43,804 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:45:43,834 - INFO - Sending OTP email with subject: Your YITP Verification Code: 020739
+2025-07-05 02:45:43,843 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:45:43,843 - INFO - Subject: Your YITP Verification Code: 020739
+2025-07-05 02:45:43,843 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:45:51,388 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:45:51,390 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:45:55,242 - INFO - ✅ PASS - Profile Creation During Registration: Profile created with phone: +1234567890
+2025-07-05 02:46:07,298 - INFO - ✅ Completed test: test_profile_creation_during_registration
+2025-07-05 02:46:07,299 - INFO - ------------------------------------------------------------
+2025-07-05 02:46:36,694 - INFO - ============================================================
+2025-07-05 02:46:36,695 - INFO - 🧪 Starting test: test_user_creation_with_correct_data
+2025-07-05 02:46:36,695 - INFO - ============================================================
+2025-07-05 02:46:41,249 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:46:41,252 - INFO - Sending OTP email with subject: Your YITP Verification Code: 599895
+2025-07-05 02:46:41,253 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:46:41,253 - INFO - Subject: Your YITP Verification Code: 599895
+2025-07-05 02:46:41,253 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:46:45,742 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:46:45,743 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:46:48,546 - INFO - ✅ PASS - User Creation with Correct Data: User created with correct data, inactive status: True
+2025-07-05 02:47:00,114 - INFO - ✅ Completed test: test_user_creation_with_correct_data
+2025-07-05 02:47:00,118 - INFO - ------------------------------------------------------------
+2025-07-05 02:47:34,771 - INFO - ============================================================
+2025-07-05 02:47:34,772 - INFO - 🧪 Starting test: test_multiple_otp_invalidation
+2025-07-05 02:47:34,772 - INFO - ============================================================
+2025-07-05 02:47:36,601 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2025-07-05 02:47:36,605 - INFO - Sending OTP email with subject: Your YITP Verification Code: 009148
+2025-07-05 02:47:36,605 - INFO - Attempting to send email directly to ['multipleotpuser@example.com']
+2025-07-05 02:47:36,606 - INFO - Subject: Your YITP Verification Code: 009148
+2025-07-05 02:47:36,606 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:47:40,454 - INFO - ✅ Email sent successfully to ['multipleotpuser@example.com']
+2025-07-05 02:47:40,677 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2025-07-05 02:47:41,962 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2025-07-05 02:47:42,026 - INFO - Sending OTP email with subject: Your YITP Verification Code: 872312
+2025-07-05 02:47:42,029 - INFO - Attempting to send email directly to ['multipleotpuser@example.com']
+2025-07-05 02:47:42,030 - INFO - Subject: Your YITP Verification Code: 872312
+2025-07-05 02:47:42,030 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:47:46,374 - INFO - ✅ Email sent successfully to ['multipleotpuser@example.com']
+2025-07-05 02:47:46,382 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2025-07-05 02:47:46,985 - INFO - ✅ PASS - Multiple OTP Invalidation: First OTP invalidated: True, Second OTP valid: True
+2025-07-05 02:47:47,928 - INFO - ✅ Completed test: test_multiple_otp_invalidation
+2025-07-05 02:47:47,929 - INFO - ------------------------------------------------------------
+2025-07-05 02:48:14,752 - INFO - ============================================================
+2025-07-05 02:48:14,754 - INFO - 🧪 Starting test: test_otp_email_delivery
+2025-07-05 02:48:14,754 - INFO - ============================================================
+2025-07-05 02:48:18,691 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:48:18,693 - INFO - Sending OTP email with subject: Your YITP Verification Code: 861460
+2025-07-05 02:48:18,693 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:48:18,693 - INFO - Subject: Your YITP Verification Code: 861460
+2025-07-05 02:48:18,693 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:48:21,440 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:48:21,443 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:48:24,005 - INFO - ❌ FAIL - OTP Email Delivery: No email was sent
+2025-07-05 02:48:38,414 - INFO - ✅ Completed test: test_otp_email_delivery
+2025-07-05 02:48:38,416 - INFO - ------------------------------------------------------------
+2025-07-05 02:49:06,916 - INFO - ============================================================
+2025-07-05 02:49:06,917 - INFO - 🧪 Starting test: test_otp_generation_and_storage
+2025-07-05 02:49:06,918 - INFO - ============================================================
+2025-07-05 02:49:11,064 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:49:11,065 - INFO - Sending OTP email with subject: Your YITP Verification Code: 405937
+2025-07-05 02:49:11,066 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:49:11,066 - INFO - Subject: Your YITP Verification Code: 405937
+2025-07-05 02:49:11,066 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:49:13,853 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:49:13,855 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:49:17,092 - INFO - ✅ PASS - OTP Generation and Storage: OTP generated: 405937, expires: 2025-07-05 03:09:10.545687+00:00
+2025-07-05 02:49:30,245 - INFO - ✅ Completed test: test_otp_generation_and_storage
+2025-07-05 02:49:30,247 - INFO - ------------------------------------------------------------
+2025-07-05 02:49:57,555 - INFO - ============================================================
+2025-07-05 02:49:57,566 - INFO - 🧪 Starting test: test_expired_otp_verification
+2025-07-05 02:49:57,566 - INFO - ============================================================
+2025-07-05 02:50:00,039 - INFO - ✅ PASS - Expired OTP Verification: User remains inactive: True, Expired OTP rejected
+2025-07-05 02:50:01,025 - INFO - ✅ Completed test: test_expired_otp_verification
+2025-07-05 02:50:01,028 - INFO - ------------------------------------------------------------
+2025-07-05 02:50:26,022 - INFO - ============================================================
+2025-07-05 02:50:26,025 - INFO - 🧪 Starting test: test_invalid_otp_verification
+2025-07-05 02:50:26,029 - INFO - ============================================================
+2025-07-05 02:50:30,004 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:50:30,008 - INFO - Sending OTP email with subject: Your YITP Verification Code: 261552
+2025-07-05 02:50:30,008 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:50:30,008 - INFO - Subject: Your YITP Verification Code: 261552
+2025-07-05 02:50:30,008 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:50:34,096 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:50:34,102 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:50:38,018 - INFO - ✅ PASS - Invalid OTP Verification: User remains inactive: True, Error message shown
+2025-07-05 02:50:50,117 - INFO - ✅ Completed test: test_invalid_otp_verification
+2025-07-05 02:50:50,119 - INFO - ------------------------------------------------------------
+2025-07-05 02:51:15,032 - INFO - ============================================================
+2025-07-05 02:51:15,035 - INFO - 🧪 Starting test: test_valid_otp_verification
+2025-07-05 02:51:15,035 - INFO - ============================================================
+2025-07-05 02:51:18,813 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:51:18,817 - INFO - Sending OTP email with subject: Your YITP Verification Code: 358506
+2025-07-05 02:51:18,818 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:51:18,818 - INFO - Subject: Your YITP Verification Code: 358506
+2025-07-05 02:51:18,818 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:51:21,562 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:51:21,563 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:51:27,013 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:51:27,013 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:51:27,013 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:51:31,261 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:51:31,274 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:51:31,274 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:51:31,274 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:51:31,274 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:51:35,492 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:51:35,494 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:51:41,420 - INFO - ✅ PASS - Valid OTP Verification: User activated: True, OTP used: True, Redirected to welcome: True
+2025-07-05 02:51:52,858 - INFO - ✅ Completed test: test_valid_otp_verification
+2025-07-05 02:51:52,860 - INFO - ------------------------------------------------------------
+2025-07-05 02:52:20,155 - INFO - ============================================================
+2025-07-05 02:52:20,157 - INFO - 🧪 Starting test: test_automatic_login_after_verification
+2025-07-05 02:52:20,158 - INFO - ============================================================
+2025-07-05 02:52:24,156 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:52:24,158 - INFO - Sending OTP email with subject: Your YITP Verification Code: 383868
+2025-07-05 02:52:24,158 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:52:24,158 - INFO - Subject: Your YITP Verification Code: 383868
+2025-07-05 02:52:24,158 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:52:28,567 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:52:28,568 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:52:34,963 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:52:34,963 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:52:34,963 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:52:39,590 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:52:39,599 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:52:39,599 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:52:39,599 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:52:39,599 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:52:44,385 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:52:44,386 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:52:51,384 - INFO - ✅ PASS - Automatic Login After Verification: User logged in: True, Correct user: True
+2025-07-05 02:53:04,643 - INFO - ✅ Completed test: test_automatic_login_after_verification
+2025-07-05 02:53:04,645 - INFO - ------------------------------------------------------------
+2025-07-05 02:53:32,907 - INFO - ============================================================
+2025-07-05 02:53:32,909 - INFO - 🧪 Starting test: test_profile_email_verification_status
+2025-07-05 02:53:32,910 - INFO - ============================================================
+2025-07-05 02:53:37,028 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:53:37,031 - INFO - Sending OTP email with subject: Your YITP Verification Code: 405777
+2025-07-05 02:53:37,031 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:53:37,032 - INFO - Subject: Your YITP Verification Code: 405777
+2025-07-05 02:53:37,032 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:53:41,346 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:53:41,347 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:53:46,972 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:53:46,972 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:53:46,972 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:53:49,855 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:53:49,859 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:53:49,859 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:53:49,859 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:53:49,859 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:53:54,342 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:53:54,343 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:53:57,994 - INFO - ✅ PASS - Profile Email Verification Status: Email verification status: True
+2025-07-05 02:54:09,894 - INFO - ✅ Completed test: test_profile_email_verification_status
+2025-07-05 02:54:09,896 - INFO - ------------------------------------------------------------
+2025-07-05 02:54:34,927 - INFO - ============================================================
+2025-07-05 02:54:34,930 - INFO - 🧪 Starting test: test_session_flag_management
+2025-07-05 02:54:34,930 - INFO - ============================================================
+2025-07-05 02:54:38,665 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:54:38,772 - INFO - Sending OTP email with subject: Your YITP Verification Code: 534455
+2025-07-05 02:54:38,775 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:54:38,775 - INFO - Subject: Your YITP Verification Code: 534455
+2025-07-05 02:54:38,775 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:54:43,315 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:54:43,318 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:54:49,608 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:54:49,609 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:54:49,609 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:54:54,654 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:54:54,660 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:54:54,661 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:54:54,661 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:54:54,661 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:55:00,813 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:55:00,814 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:55:04,175 - INFO - ✅ PASS - Session Flag Management: OTP flag set: True, Timestamp set: True
+2025-07-05 02:55:15,256 - INFO - ✅ Completed test: test_session_flag_management
+2025-07-05 02:55:15,258 - INFO - ------------------------------------------------------------
+2025-07-05 02:55:50,652 - INFO - ============================================================
+2025-07-05 02:55:50,654 - INFO - 🧪 Starting test: test_admin_notification_email
+2025-07-05 02:55:50,655 - INFO - ============================================================
+2025-07-05 02:55:55,347 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:55:55,350 - INFO - Sending OTP email with subject: Your YITP Verification Code: 750170
+2025-07-05 02:55:55,351 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:55:55,351 - INFO - Subject: Your YITP Verification Code: 750170
+2025-07-05 02:55:55,351 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:55:59,650 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:55:59,652 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:56:05,824 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:56:05,825 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:56:05,826 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:56:09,721 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:56:09,726 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:56:09,727 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:56:09,727 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:56:09,730 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:56:13,627 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:56:13,629 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:56:17,262 - INFO - ❌ FAIL - Admin Notification Email: Admin notification sent: False
+2025-07-05 02:56:32,122 - INFO - ✅ Completed test: test_admin_notification_email
+2025-07-05 02:56:32,124 - INFO - ------------------------------------------------------------
+2025-07-05 02:57:08,601 - INFO - ============================================================
+2025-07-05 02:57:08,603 - INFO - 🧪 Starting test: test_welcome_email_after_verification
+2025-07-05 02:57:08,603 - INFO - ============================================================
+2025-07-05 02:57:13,212 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:57:13,214 - INFO - Sending OTP email with subject: Your YITP Verification Code: 435271
+2025-07-05 02:57:13,214 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:57:13,214 - INFO - Subject: Your YITP Verification Code: 435271
+2025-07-05 02:57:13,214 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:57:17,648 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:57:17,649 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:57:24,478 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:57:24,479 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:57:24,479 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:57:28,423 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:57:28,428 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:57:28,428 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:57:28,428 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:57:28,428 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:57:31,118 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:57:31,119 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:57:34,469 - INFO - ❌ FAIL - Welcome Email After Verification: Welcome email sent: False
+2025-07-05 02:57:48,950 - INFO - ✅ Completed test: test_welcome_email_after_verification
+2025-07-05 02:57:48,951 - INFO - ------------------------------------------------------------
+2025-07-05 02:58:16,907 - INFO - ============================================================
+2025-07-05 02:58:16,909 - INFO - 🧪 Starting test: test_authenticated_user_redirect_from_registration
+2025-07-05 02:58:16,909 - INFO - ============================================================
+2025-07-05 02:58:23,872 - INFO - ✅ PASS - Authenticated User Redirect from Registration: Authenticated user redirected from registration (Status: 302)
+2025-07-05 02:58:24,697 - INFO - ✅ Completed test: test_authenticated_user_redirect_from_registration
+2025-07-05 02:58:24,698 - INFO - ------------------------------------------------------------
+2025-07-05 02:58:52,812 - INFO - ============================================================
+2025-07-05 02:58:52,813 - INFO - 🧪 Starting test: test_welcome_page_redirect_with_session_flag
+2025-07-05 02:58:52,813 - INFO - ============================================================
+2025-07-05 02:58:57,044 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 02:58:57,047 - INFO - Sending OTP email with subject: Your YITP Verification Code: 853142
+2025-07-05 02:58:57,047 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:58:57,048 - INFO - Subject: Your YITP Verification Code: 853142
+2025-07-05 02:58:57,048 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:59:00,948 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:59:00,951 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 02:59:06,389 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 02:59:06,390 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 02:59:06,390 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:59:10,852 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 02:59:10,858 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 02:59:10,858 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:59:10,858 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 02:59:10,859 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 02:59:13,783 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 02:59:13,783 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 02:59:20,190 - INFO - ✅ PASS - Welcome Page Redirect with Session Flag: Redirected to welcome page: True
+2025-07-05 02:59:32,068 - INFO - ✅ Completed test: test_welcome_page_redirect_with_session_flag
+2025-07-05 02:59:32,069 - INFO - ------------------------------------------------------------
+2025-07-05 03:00:00,763 - INFO - ============================================================
+2025-07-05 03:00:00,766 - INFO - 🧪 Starting test: test_otp_verification_with_invalid_user_id
+2025-07-05 03:00:00,766 - INFO - ============================================================
+2025-07-05 03:00:01,058 - INFO - ✅ PASS - OTP Verification with Invalid User ID: Invalid user ID properly handled
+2025-07-05 03:00:02,036 - INFO - ✅ Completed test: test_otp_verification_with_invalid_user_id
+2025-07-05 03:00:02,037 - INFO - ------------------------------------------------------------
+2025-07-05 03:00:29,413 - INFO - ============================================================
+2025-07-05 03:00:29,415 - INFO - 🧪 Starting test: test_otp_verification_with_missing_user_id
+2025-07-05 03:00:29,415 - INFO - ============================================================
+2025-07-05 03:00:29,429 - INFO - ✅ PASS - OTP Verification with Missing User ID: Missing user ID properly handled
+2025-07-05 03:00:30,436 - INFO - ✅ Completed test: test_otp_verification_with_missing_user_id
+2025-07-05 03:00:30,436 - INFO - ------------------------------------------------------------
+2025-07-05 03:00:55,523 - INFO - ============================================================
+2025-07-05 03:00:55,525 - INFO - 🧪 Starting test: test_registration_with_email_failure
+2025-07-05 03:00:55,525 - INFO - ============================================================
+2025-07-05 03:00:59,520 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 03:00:59,523 - INFO - Sending OTP email with subject: Your YITP Verification Code: 987571
+2025-07-05 03:00:59,523 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 03:00:59,523 - INFO - Subject: Your YITP Verification Code: 987571
+2025-07-05 03:00:59,523 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 03:01:02,430 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 03:01:02,432 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 03:01:05,485 - INFO - ❌ FAIL - Registration with Email Failure: User created and activated despite email failure: False
+2025-07-05 03:01:16,853 - INFO - ✅ Completed test: test_registration_with_email_failure
+2025-07-05 03:01:16,855 - INFO - ------------------------------------------------------------
+2025-07-05 03:01:48,260 - INFO - ============================================================
+2025-07-05 03:01:48,262 - INFO - 🧪 Starting test: test_profile_completion_calculation
+2025-07-05 03:01:48,263 - INFO - ============================================================
+2025-07-05 03:01:52,151 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 03:01:52,154 - INFO - Sending OTP email with subject: Your YITP Verification Code: 725933
+2025-07-05 03:01:52,155 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 03:01:52,155 - INFO - Subject: Your YITP Verification Code: 725933
+2025-07-05 03:01:52,155 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 03:01:55,682 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 03:01:55,683 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 03:02:01,676 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 03:02:01,676 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 03:02:01,677 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 03:02:05,324 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 03:02:05,327 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 03:02:05,328 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 03:02:05,328 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 03:02:05,328 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 03:02:09,811 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 03:02:09,813 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 03:02:13,351 - INFO - ✅ PASS - Profile Completion Calculation: Profile completion calculated: 66.67%
+2025-07-05 03:02:25,540 - INFO - ✅ Completed test: test_profile_completion_calculation
+2025-07-05 03:02:25,542 - INFO - ------------------------------------------------------------
+2025-07-05 03:02:57,428 - INFO - ============================================================
+2025-07-05 03:02:57,430 - INFO - 🧪 Starting test: test_complete_registration_journey
+2025-07-05 03:02:57,430 - INFO - ============================================================
+2025-07-05 03:03:01,460 - INFO - Preparing to send OTP email to testuser@example.com
+2025-07-05 03:03:01,475 - INFO - Sending OTP email with subject: Your YITP Verification Code: 586903
+2025-07-05 03:03:01,477 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 03:03:01,477 - INFO - Subject: Your YITP Verification Code: 586903
+2025-07-05 03:03:01,477 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 03:03:05,709 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 03:03:05,711 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2025-07-05 03:03:11,414 - INFO - Attempting to send email directly to ['testuser@example.com']
+2025-07-05 03:03:11,414 - INFO - Subject: Welcome to YITP, Test!
+2025-07-05 03:03:11,414 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 03:03:15,850 - INFO - ✅ Email sent successfully to ['testuser@example.com']
+2025-07-05 03:03:15,854 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2025-07-05 03:03:15,855 - INFO - Attempting to send email directly to ['youthimpactglobal3@gmail.com']
+2025-07-05 03:03:15,855 - INFO - Subject: New User Verified: Test User - YITP
+2025-07-05 03:03:15,855 - INFO - From: YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>
+2025-07-05 03:03:20,478 - INFO - ✅ Email sent successfully to ['youthimpactglobal3@gmail.com']
+2025-07-05 03:03:20,479 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2025-07-05 03:03:26,692 - INFO - ❌ FAIL - Complete Registration Journey: Steps: Registration(False), User/OTP(True), Email(False), Verification(True), Activation(True), Redirect(True)
+2025-07-05 03:03:38,355 - INFO - ✅ Completed test: test_complete_registration_journey
+2025-07-05 03:03:38,357 - INFO - ------------------------------------------------------------

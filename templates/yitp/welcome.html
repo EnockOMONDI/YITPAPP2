@@ -51,6 +51,72 @@
             </div>
         </div>
 
+        <!-- Profile Completion Section -->
+        {% if user.profile %}
+        <div class="row mt-4">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="profile-completion-card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3">
+                            <i class="fas fa-user-edit text-primary me-2"></i>
+                            Complete Your Profile
+                        </h4>
+
+                        {% with completion_status=user.profile.get_completion_status %}
+                        <div class="completion-progress mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="completion-label">Profile Completion</span>
+                                <span class="completion-percentage text-{{ completion_status.color }}">
+                                    {{ user.profile.profile_completion_percentage|floatformat:0 }}%
+                                </span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-{{ completion_status.color }}"
+                                     role="progressbar"
+                                     style="width: {{ user.profile.profile_completion_percentage }}%"
+                                     aria-valuenow="{{ user.profile.profile_completion_percentage }}"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="completion-status mb-3">
+                            <div class="alert alert-{{ completion_status.color }} alert-sm">
+                                {{ completion_status.message }}
+                            </div>
+                        </div>
+
+                        {% if completion_status.recommendations %}
+                        <div class="completion-recommendations">
+                            <h6 class="mb-2">
+                                <i class="fas fa-lightbulb text-warning me-1"></i>
+                                Recommended Actions:
+                            </h6>
+                            <ul class="list-unstyled mb-3">
+                                {% for recommendation in completion_status.recommendations %}
+                                <li class="mb-1">
+                                    <i class="fas fa-arrow-right text-muted me-2"></i>
+                                    {{ recommendation }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        <div class="completion-actions text-center">
+                            <a href="{% url 'profile' %}" class="btn btn-primary">
+                                <i class="fas fa-edit me-2"></i>
+                                Complete Profile
+                            </a>
+                        </div>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         <!-- Next Steps Section -->
         <div class="row mt-5">
             <div class="col-lg-12">
@@ -128,6 +194,171 @@
         </div>
     </div>
 </section>
+
+<!-- Onboarding Modal -->
+<div class="modal fade" id="onboardingModal" tabindex="-1" aria-labelledby="onboardingModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 text-center">
+                <div class="w-100">
+                    <h4 class="modal-title" id="onboardingModalLabel">
+                        <i class="fas fa-rocket text-primary me-2"></i>
+                        Welcome to Your YITP Journey!
+                    </h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Progress Indicator -->
+                <div class="onboarding-progress mb-4">
+                    <div class="progress" style="height: 6px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 33%" id="onboardingProgress"></div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <small class="text-muted">Step <span id="currentStep">1</span> of 3</small>
+                        <small class="text-muted"><span id="progressPercent">33</span>% Complete</small>
+                    </div>
+                </div>
+
+                <!-- Step 1: Profile Completion -->
+                <div class="onboarding-step" id="step1">
+                    <div class="text-center mb-4">
+                        <div class="step-icon mb-3">
+                            <i class="fas fa-user-edit" style="font-size: 3rem; color: var(--primary-color);"></i>
+                        </div>
+                        <h5>Complete Your Profile</h5>
+                        <p class="text-muted">Let's personalize your YITP experience by completing your profile information.</p>
+                    </div>
+
+                    {% if user.profile %}
+                    {% with completion_status=user.profile.get_completion_status %}
+                    <div class="profile-preview">
+                        <div class="completion-progress mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span>Profile Completion</span>
+                                <span class="badge bg-{{ completion_status.color }}">
+                                    {{ user.profile.profile_completion_percentage|floatformat:0 }}%
+                                </span>
+                            </div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-{{ completion_status.color }}"
+                                     style="width: {{ user.profile.profile_completion_percentage }}%"></div>
+                            </div>
+                        </div>
+
+                        {% if completion_status.recommendations %}
+                        <div class="recommendations">
+                            <h6 class="mb-2">Quick Actions:</h6>
+                            <ul class="list-unstyled">
+                                {% for recommendation in completion_status.recommendations %}
+                                <li class="mb-1">
+                                    <i class="fas fa-check-circle text-muted me-2"></i>
+                                    {{ recommendation }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endwith %}
+                    {% endif %}
+                </div>
+
+                <!-- Step 2: Course Discovery -->
+                <div class="onboarding-step d-none" id="step2">
+                    <div class="text-center mb-4">
+                        <div class="step-icon mb-3">
+                            <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color);"></i>
+                        </div>
+                        <h5>Discover Your Courses</h5>
+                        <p class="text-muted">Explore our comprehensive training programmes designed to empower youth and create positive impact.</p>
+                    </div>
+
+                    <div class="course-preview">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="course-card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-users text-primary mb-2" style="font-size: 2rem;"></i>
+                                        <h6>Leadership Training</h6>
+                                        <p class="small text-muted">Develop essential leadership skills</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="course-card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-lightbulb text-primary mb-2" style="font-size: 2rem;"></i>
+                                        <h6>Innovation & Entrepreneurship</h6>
+                                        <p class="small text-muted">Build innovative solutions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-muted">And many more specialized programmes...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Get Started -->
+                <div class="onboarding-step d-none" id="step3">
+                    <div class="text-center mb-4">
+                        <div class="step-icon mb-3">
+                            <i class="fas fa-play-circle" style="font-size: 3rem; color: var(--primary-color);"></i>
+                        </div>
+                        <h5>Ready to Begin!</h5>
+                        <p class="text-muted">You're all set to start your transformative learning journey with YITP.</p>
+                    </div>
+
+                    <div class="getting-started">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div class="action-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="action-icon me-3">
+                                            <i class="fas fa-book-open text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1">Browse Course Catalog</h6>
+                                            <p class="small text-muted mb-0">Explore all available courses and find your perfect match</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="action-card">
+                                    <div class="d-flex align-items-center">
+                                        <div class="action-icon me-3">
+                                            <i class="fas fa-tachometer-alt text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1">Visit Your Dashboard</h6>
+                                            <p class="small text-muted mb-0">Access your personalized learning dashboard</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <div class="w-100 d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary" id="prevBtn" style="display: none;">
+                        <i class="fas fa-arrow-left me-2"></i>Previous
+                    </button>
+                    <div class="ms-auto">
+                        <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Skip Tour</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn">
+                            Next<i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style>
 .welcome-hero-area {
@@ -279,5 +510,179 @@
         margin: 0 !important;
     }
 }
+
+/* Onboarding Modal Styles */
+.onboarding-step {
+    min-height: 300px;
+}
+
+.step-icon {
+    display: inline-block;
+}
+
+.course-card, .action-card {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.course-card:hover, .action-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.1);
+    transform: translateY(-2px);
+}
+
+.action-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 93, 21, 0.1);
+    border-radius: 50%;
+    font-size: 1.2rem;
+}
+
+.profile-preview {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.completion-progress .progress {
+    border-radius: 10px;
+}
+
+.recommendations ul li {
+    padding: 5px 0;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    padding: 30px 30px 0;
+}
+
+.modal-body {
+    padding: 20px 30px;
+}
+
+.modal-footer {
+    padding: 0 30px 30px;
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced onboarding logic: consider both localStorage and OTP verification status
+    const onboardingCompleted = localStorage.getItem('yitp_onboarding_completed') === 'true';
+    const justCompletedOTP = {{ just_completed_otp|yesno:"true,false" }};
+    const otpTimestamp = "{{ otp_verification_timestamp|default:'' }}";
+
+    // Show onboarding if:
+    // 1. User just completed OTP verification (new user), OR
+    // 2. Onboarding not completed in localStorage AND user has no recent OTP verification
+    let shouldShowOnboarding = false;
+
+    if (justCompletedOTP) {
+        // Always show onboarding for users who just completed OTP verification
+        shouldShowOnboarding = true;
+        console.log('Showing onboarding: User just completed OTP verification');
+    } else if (!onboardingCompleted) {
+        // Show onboarding for users who haven't completed it and didn't just verify OTP
+        shouldShowOnboarding = true;
+        console.log('Showing onboarding: Not completed in localStorage');
+    }
+
+    if (shouldShowOnboarding) {
+        // Show modal after a short delay
+        setTimeout(function() {
+            const modal = new bootstrap.Modal(document.getElementById('onboardingModal'));
+            modal.show();
+        }, 1000);
+    }
+
+    // Onboarding modal functionality
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const currentStepSpan = document.getElementById('currentStep');
+    const progressPercent = document.getElementById('progressPercent');
+    const onboardingProgress = document.getElementById('onboardingProgress');
+
+    function updateStep(step) {
+        // Hide all steps
+        document.querySelectorAll('.onboarding-step').forEach(stepEl => {
+            stepEl.classList.add('d-none');
+        });
+
+        // Show current step
+        document.getElementById('step' + step).classList.remove('d-none');
+
+        // Update progress
+        const progress = (step / totalSteps) * 100;
+        currentStepSpan.textContent = step;
+        progressPercent.textContent = Math.round(progress);
+        onboardingProgress.style.width = progress + '%';
+
+        // Update buttons
+        if (step === 1) {
+            prevBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = 'inline-block';
+        }
+
+        if (step === totalSteps) {
+            nextBtn.innerHTML = 'Get Started <i class="fas fa-rocket ms-2"></i>';
+        } else {
+            nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ms-2"></i>';
+        }
+    }
+
+    nextBtn.addEventListener('click', function() {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            updateStep(currentStep);
+        } else {
+            // Complete onboarding
+            localStorage.setItem('yitp_onboarding_completed', 'true');
+            const modal = bootstrap.Modal.getInstance(document.getElementById('onboardingModal'));
+            modal.hide();
+
+            // Optional: redirect to profile or courses
+            // window.location.href = '/profile/';
+        }
+    });
+
+    prevBtn.addEventListener('click', function() {
+        if (currentStep > 1) {
+            currentStep--;
+            updateStep(currentStep);
+        }
+    });
+
+    // Handle modal close
+    document.getElementById('onboardingModal').addEventListener('hidden.bs.modal', function() {
+        localStorage.setItem('yitp_onboarding_completed', 'true');
+    });
+
+    // Add click handlers for action buttons in step 1
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.completion-actions .btn')) {
+            localStorage.setItem('yitp_onboarding_completed', 'true');
+            const modal = bootstrap.Modal.getInstance(document.getElementById('onboardingModal'));
+            if (modal) modal.hide();
+        }
+    });
+});
+</script>
+
 {% endblock %}

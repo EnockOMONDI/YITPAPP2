@@ -82,14 +82,32 @@ def welcome(request):
     Shows next steps and course enrollment options with smart navigation
     """
     # Check if user has already enrolled in courses
-    from courses.models import Enrollment
+    from progress.models import Enrollment
+    from users.models import Profile
+
     user_enrollments = Enrollment.objects.filter(student=request.user)
+
+    # Get user profile (should exist from OTP verification)
+    try:
+        profile = request.user.profile
+        # Update completion percentage in case profile was modified
+        profile.update_profile_completion()
+    except Profile.DoesNotExist:
+        # Fallback: create profile if somehow missing (shouldn't happen after OTP verification)
+        profile = Profile.objects.create(user=request.user)
+        profile.update_profile_completion()
+
+    # Check if user just completed OTP verification (for onboarding logic)
+    just_completed_otp = request.session.get('just_completed_otp_verification', False)
+    otp_verification_timestamp = request.session.get('otp_verification_timestamp')
 
     context = {
         'user': request.user,
         'show_course_enrollment': True,
         'has_enrollments': user_enrollments.exists(),
         'enrollment_count': user_enrollments.count(),
+        'just_completed_otp': just_completed_otp,
+        'otp_verification_timestamp': otp_verification_timestamp,
         'next_steps': [
             'Complete your profile information',
             'Browse available courses',

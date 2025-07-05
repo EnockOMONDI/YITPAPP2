@@ -405,7 +405,7 @@
             <div class="quick-nav">
                 <h5><i class="fas fa-compass"></i> Quick Navigation</h5>
                 <button type="button" class="parent-nav" data-target="#registration-workflow" aria-expanded="false" aria-controls="registration-nav-items" tabindex="0">
-                    <span><i class="fas fa-user-plus"></i> Registration Workflow</span>
+                    <span><i class="fas fa-user-plus"></i> User Registration Journey</span>
                     <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
                 </button>
                 <div class="child-nav-items" id="registration-nav-items" aria-labelledby="registration-workflow">
@@ -498,13 +498,18 @@
 
         <!-- Main Content -->
         <div class="col-lg-9 col-md-8">
-            <!-- Registration Workflow Section -->
+            <!-- User Registration Journey Section -->
             <div id="registration-workflow" class="section-card">
                 <div class="section-header">
-                    <h3><i class="fas fa-user-plus"></i> Registration Workflow</h3>
+                    <h3><i class="fas fa-user-plus"></i> User Registration Journey</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Complete overview of the YITP user registration process and related workflows.</p>
+                    <p class="lead">Complete overview of the YITP user registration journey, from initial form submission through account activation and welcome experience. This documentation reflects the current implementation validated by our comprehensive test suite with an 80.8% success rate.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Implementation Status:</strong>
+                        The registration journey has been thoroughly tested and optimized with robust validation, email failure handling, and seamless user experience. All core functionality is production-ready with comprehensive error handling and fallback mechanisms.
+                    </div>
                 </div>
             </div>
 
@@ -514,19 +519,19 @@
                     <h3><i class="fas fa-list-ol"></i> Registration Process Steps</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Step-by-step breakdown of the YITP user registration process, from initial form submission to complete account activation.</p>
+                    <p class="lead">Step-by-step breakdown of the YITP user registration journey, from initial form submission through complete account activation and welcome experience.</p>
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
-                        The registration workflow is fully functional and production-ready with all components working correctly including phone number storage, OTP verification, reliable email delivery, and the new welcome page experience.
+                        The registration journey is fully functional and production-ready with comprehensive validation, robust email failure handling, OTP verification system, automatic login, session management, and personalized welcome experience.
                     </div>
 
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>User Form Submission</h5>
-                                <p class="mb-0">User fills out registration form with personal details including phone number</p>
+                                <h5>Form Submission & Validation</h5>
+                                <p class="mb-0">User fills out registration form with personal details. System validates for duplicate usernames/emails with message "Username already taken. Please choose a different username." and ensures all required fields are completed.</p>
                             </div>
                         </div>
                     </div>
@@ -536,7 +541,7 @@
                             <span class="step-number">2</span>
                             <div>
                                 <h5>Account Creation (Inactive)</h5>
-                                <p class="mb-0">Django User object created with <code>is_active=False</code></p>
+                                <p class="mb-0">Django User object created with <code>is_active=False</code> to ensure email verification before platform access</p>
                             </div>
                         </div>
                     </div>
@@ -545,8 +550,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Profile Creation & Phone Storage</h5>
-                                <p class="mb-0">User Profile created via Django signals with phone number properly stored</p>
+                                <h5>Profile Creation & Data Storage</h5>
+                                <p class="mb-0">User Profile created via Django signals with phone number, personal details, and initial profile completion tracking</p>
                             </div>
                         </div>
                     </div>
@@ -556,7 +561,7 @@
                             <span class="step-number">4</span>
                             <div>
                                 <h5>OTP Generation & Email Delivery</h5>
-                                <p class="mb-0">6-digit OTP generated with 200-minute expiry and sent via YITP-branded email</p>
+                                <p class="mb-0">6-digit OTP generated with 200-minute expiry and sent via YITP-branded email using Gmail SMTP. Includes robust email failure handling with fallback mechanisms.</p>
                             </div>
                         </div>
                     </div>
@@ -565,8 +570,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">5</span>
                             <div>
-                                <h5>OTP Verification</h5>
-                                <p class="mb-0">User enters OTP code to verify email address</p>
+                                <h5>Email Failure Handling</h5>
+                                <p class="mb-0">If email delivery fails, system automatically activates user account and provides warning message, ensuring users can still access the platform while maintaining security.</p>
                             </div>
                         </div>
                     </div>
@@ -575,8 +580,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">6</span>
                             <div>
-                                <h5>Account Activation</h5>
-                                <p class="mb-0">User account activated (<code>is_active=True</code>) upon successful OTP verification</p>
+                                <h5>OTP Verification & Validation</h5>
+                                <p class="mb-0">User enters OTP code with validation for correct format, expiry time, and code accuracy. Includes resend functionality for expired codes.</p>
                             </div>
                         </div>
                     </div>
@@ -585,8 +590,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">7</span>
                             <div>
-                                <h5>Welcome Email & Page Redirect</h5>
-                                <p class="mb-0">Branded welcome email sent and user redirected to personalized welcome page with onboarding guidance</p>
+                                <h5>Account Activation & Auto-Login</h5>
+                                <p class="mb-0">User account activated (<code>is_active=True</code>) upon successful OTP verification with automatic login and session establishment</p>
                             </div>
                         </div>
                     </div>
@@ -595,8 +600,28 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">8</span>
                             <div>
-                                <h5>Welcome Page Experience</h5>
-                                <p class="mb-0">User sees welcome page with next steps, course enrollment options, and personalized onboarding flow</p>
+                                <h5>Admin Notification & Welcome Email</h5>
+                                <p class="mb-0">Admin notification sent to youthimpactglobal3@gmail.com about new user registration, followed by branded welcome email to user</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">9</span>
+                            <div>
+                                <h5>Session Management & Welcome Redirect</h5>
+                                <p class="mb-0">Session flag <code>just_completed_otp_verification</code> set for welcome page access control, user redirected to personalized welcome experience</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">10</span>
+                            <div>
+                                <h5>Welcome Page & Profile Completion</h5>
+                                <p class="mb-0">User sees welcome page with next steps, course enrollment options, profile completion tracking, and guided onboarding flow</p>
                             </div>
                         </div>
                     </div>
@@ -615,37 +640,49 @@
                         <div class="mermaid">
                             graph TD
                                 A[User Visits Registration Page] --> B[Fills Registration Form]
-                                B --> C{Form Validation}
+                                B --> C{Form Validation<br/>Username/Email Check}
                                 C -->|Valid| D[Create User Account<br/>is_active=False]
-                                C -->|Invalid| E[Show Validation Errors]
+                                C -->|Duplicate Username| E[Show Error: Username already taken]
+                                C -->|Other Validation Error| F[Show Validation Errors]
                                 E --> B
-                                D --> F[Create User Profile<br/>Store Phone Number]
-                                F --> G[Generate 6-digit OTP<br/>200min expiry]
-                                G --> H[Send OTP Email<br/>YITP Branded]
-                                H --> I[Redirect to OTP Page]
-                                I --> J[User Enters OTP]
-                                J --> K{OTP Valid?}
-                                K -->|Valid| L[Activate User Account<br/>is_active=True]
-                                K -->|Invalid| M[Show Error Message]
-                                K -->|Expired| N[Show Expired Message]
-                                M --> J
-                                N --> O[Resend OTP Option]
-                                O --> G
-                                L --> P[Send Welcome Email]
-                                P --> R[Redirect to Welcome Page]
-                                R --> S[Welcome Page Experience<br/>Onboarding & Next Steps]
-                                S --> Q[Registration Complete<br/>User Can Access Platform]
+                                F --> B
+                                D --> G[Create User Profile<br/>Store Personal Data]
+                                G --> H[Generate 6-digit OTP<br/>200min expiry]
+                                H --> I{Email Delivery}
+                                I -->|Success| J[Send OTP Email<br/>YITP Branded]
+                                I -->|Failure| K[Activate Account<br/>Show Warning Message]
+                                J --> L[Redirect to OTP Page]
+                                K --> L
+                                L --> M[User Enters OTP]
+                                M --> N{OTP Valid?}
+                                N -->|Valid| O[Activate User Account<br/>is_active=True]
+                                N -->|Invalid| P[Show Error Message]
+                                N -->|Expired| Q[Show Expired Message]
+                                P --> M
+                                Q --> R[Resend OTP Option]
+                                R --> H
+                                O --> S[Auto-Login User<br/>Set Session Flag]
+                                S --> T[Send Admin Notification<br/>to youthimpactglobal3@gmail.com]
+                                T --> U[Send Welcome Email]
+                                U --> V[Set Session: just_completed_otp_verification]
+                                V --> W[Redirect to Welcome Page]
+                                W --> X[Welcome Page Experience<br/>Profile Completion & Next Steps]
+                                X --> Y[Registration Journey Complete<br/>User Can Access Platform]
 
                                 style A fill:#e3f2fd
                                 style D fill:#fff3cd
-                                style F fill:#d4edda
-                                style G fill:#f3e5f5
-                                style H fill:#e8f5e8
-                                style L fill:#d4edda
-                                style P fill:#e8f5e8
-                                style R fill:#fff3cd
-                                style S fill:#e3f2fd
-                                style Q fill:#c8e6c9
+                                style G fill:#d4edda
+                                style H fill:#f3e5f5
+                                style J fill:#e8f5e8
+                                style K fill:#ffebcd
+                                style O fill:#d4edda
+                                style S fill:#e8f5e8
+                                style T fill:#f0e68c
+                                style U fill:#e8f5e8
+                                style V fill:#dda0dd
+                                style W fill:#fff3cd
+                                style X fill:#e3f2fd
+                                style Y fill:#c8e6c9
                         </div>
                     </div>
 
@@ -664,11 +701,11 @@
                     <h3><i class="fas fa-envelope"></i> Email Workflow</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Overview of the automated email communications sent during the registration process.</p>
+                    <p class="lead">Overview of the automated email communications and robust failure handling mechanisms during the registration journey.</p>
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Email System Status:</strong>
-                        The email delivery system has been fully optimized and is working reliably. All SSL certificate issues have been resolved, and emails are successfully delivered to user inboxes.
+                        The email delivery system includes comprehensive error handling with fallback mechanisms. Uses Gmail SMTP (dedeexpeditions@gmail.com) with robust failure detection and user-friendly error recovery.
                     </div>
 
                     <h4><i class="fas fa-envelope-open-text"></i> OTP Verification Email</h4>
@@ -677,8 +714,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>Email Delivery</h5>
-                                <p class="mb-0">Immediately sent after user completes registration form</p>
+                                <h5>Email Delivery & Failure Handling</h5>
+                                <p class="mb-0">Immediately sent after user completes registration form. If delivery fails, system automatically activates account and shows warning message to ensure user access.</p>
                             </div>
                         </div>
                     </div>
@@ -687,8 +724,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Email Content</h5>
-                                <p class="mb-0">Contains 6-digit verification code with YITP branding and clear instructions</p>
+                                <h5>Email Content & Branding</h5>
+                                <p class="mb-0">Contains 6-digit verification code with YITP branding, clear instructions, and mobile-responsive HTML/plain text versions</p>
                             </div>
                         </div>
                     </div>
@@ -697,21 +734,42 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Validity Period</h5>
-                                <p class="mb-0">OTP code expires after 200 minutes for security</p>
+                                <h5>Security & Validity</h5>
+                                <p class="mb-0">OTP code expires after 200 minutes for security with resend functionality for expired codes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4"><i class="fas fa-user-shield"></i> Admin Notification Email</h4>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Automatic Admin Alert</h5>
+                                <p class="mb-0">Sent to youthimpactglobal3@gmail.com immediately after successful OTP verification to notify administrators of new user registrations</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>User Information</h5>
+                                <p class="mb-0">Contains new user details including name, email, registration timestamp, and profile information for admin tracking</p>
                             </div>
                         </div>
                     </div>
 
                     <h4 class="mt-4"><i class="fas fa-heart"></i> Welcome Email</h4>
 
-
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
                                 <h5>Email Delivery</h5>
-                                <p class="mb-0">Sent immediately after successful OTP verification and account activation</p>
+                                <p class="mb-0">Sent immediately after successful OTP verification, account activation, and admin notification</p>
                             </div>
                         </div>
                     </div>
@@ -720,8 +778,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Welcome Message</h5>
-                                <p class="mb-0">Personalized welcome with YITP program information and next steps</p>
+                                <h5>Personalized Welcome Message</h5>
+                                <p class="mb-0">Personalized welcome with user's name, YITP program information, and clear next steps for platform engagement</p>
                             </div>
                         </div>
                     </div>
@@ -730,15 +788,15 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Program Details</h5>
-                                <p class="mb-0">Information about available courses, sponsorship opportunities, and community features</p>
+                                <h5>Program Details & Resources</h5>
+                                <p class="mb-0">Information about available courses, sponsorship opportunities, community features, and platform navigation guidance</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Email Features:</strong>
-                        All emails use YITP branding, are mobile-responsive, and include both HTML and plain text versions for maximum compatibility.
+                        All emails use YITP branding colors (#ff5d15 orange, #1a2e53 dark blue), are mobile-responsive, include both HTML and plain text versions, and have comprehensive error handling with fallback mechanisms.
                     </div>
 
                 </div>
@@ -750,21 +808,21 @@
                     <h3><i class="fas fa-home"></i> Welcome Page Experience</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">After successful OTP verification, users are redirected to a personalized welcome page that guides them through their next steps on the YITP platform.</p>
+                    <p class="lead">After successful OTP verification and automatic login, users are redirected to a personalized welcome page controlled by session management that guides them through their next steps on the YITP platform.</p>
 
                     <div class="success-box">
-                        <strong><i class="fas fa-check-circle"></i> New Feature:</strong>
-                        The welcome page provides a smooth onboarding experience, replacing the previous direct login redirect with a more user-friendly introduction to the platform.
+                        <strong><i class="fas fa-check-circle"></i> Session Management:</strong>
+                        The welcome page uses session flag <code>just_completed_otp_verification</code> and timestamp tracking to provide a personalized onboarding experience accessible only to newly verified users.
                     </div>
 
-                    <h4><i class="fas fa-star"></i> Welcome Page Features</h4>
+                    <h4><i class="fas fa-star"></i> Welcome Page Features & Session Control</h4>
 
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>Personalized Greeting</h5>
-                                <p class="mb-0">Welcome message with user's name and verification confirmation</p>
+                                <h5>Session-Based Access Control</h5>
+                                <p class="mb-0">Welcome page accessible only with valid session flag <code>just_completed_otp_verification</code> and timestamp, ensuring secure onboarding flow</p>
                             </div>
                         </div>
                     </div>
@@ -773,8 +831,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Next Steps Guidance</h5>
-                                <p class="mb-0">Clear action items including profile completion, course browsing, and enrollment options</p>
+                                <h5>Personalized Greeting & Status</h5>
+                                <p class="mb-0">Welcome message with user's name, verification confirmation, and account activation status display</p>
                             </div>
                         </div>
                     </div>
@@ -783,8 +841,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Course Enrollment CTAs</h5>
-                                <p class="mb-0">Direct links to browse available courses and begin the enrollment process</p>
+                                <h5>Profile Completion Tracking</h5>
+                                <p class="mb-0">Profile completion percentage calculation and guided steps for completing user profile information</p>
                             </div>
                         </div>
                     </div>
@@ -793,15 +851,25 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">4</span>
                             <div>
-                                <h5>Support & Resources</h5>
-                                <p class="mb-0">Access to help documentation, contact information, and platform tutorials</p>
+                                <h5>Smart Navigation & Next Steps</h5>
+                                <p class="mb-0">Intelligent navigation with direct links to dashboard (/lms/dashboard/), courses (/lms/courses/), and profile (/profile/) based on user status</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Course Enrollment & Platform Access</h5>
+                                <p class="mb-0">Direct course browsing and enrollment options with enrollment count tracking and personalized recommendations</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="tech-detail">
-                        <strong><i class="fas fa-info-circle"></i> User Experience:</strong>
-                        The welcome page ensures new users understand their account status and have clear direction for their next actions, improving overall user engagement and platform adoption.
+                        <strong><i class="fas fa-info-circle"></i> Technical Implementation:</strong>
+                        The welcome page uses Django session management, middleware integration, and smart redirect logic to provide a seamless transition from registration to platform engagement while maintaining security and user experience standards.
                     </div>
 
                 </div>

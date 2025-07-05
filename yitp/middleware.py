@@ -119,21 +119,30 @@ class WelcomePageRedirectMiddleware(MiddlewareMixin):
         
         # Handle welcome page for returning users
         if path == '/welcome/' and user.is_authenticated:
+            # Check if user just completed OTP verification
+            just_completed_otp = request.session.get('just_completed_otp_verification', False)
+
+            if just_completed_otp:
+                # Clear the session flag and allow access to welcome page
+                request.session.pop('just_completed_otp_verification', None)
+                request.session.pop('otp_verification_timestamp', None)
+                return None  # Continue to welcome page
+
             try:
-                from courses.models import Enrollment
+                from progress.models import Enrollment
                 from django.utils import timezone
                 from datetime import timedelta
-                
+
                 # Check if user has been active recently (within last 7 days)
                 recent_enrollments = Enrollment.objects.filter(
                     student=user,
-                    enrolled_at__gte=timezone.now() - timedelta(days=7)
+                    enrollment_date__gte=timezone.now() - timedelta(days=7)
                 )
-                
+
                 # If user has recent enrollments, redirect to dashboard
                 if recent_enrollments.exists():
                     return redirect('courses:dashboard')
-                
+
             except:
                 # Fallback - continue to welcome page
                 pass

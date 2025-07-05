@@ -73,8 +73,28 @@ class Profile(models.Model):
         help_text="Additional notes about payment (admin use)"
     )
 
+    # Profile completion tracking
+    profile_completion_percentage = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        default=0.00,
+        help_text="Percentage of profile completion based on filled fields"
+    )
+    email_verified = models.BooleanField(
+        default=False,
+        help_text="Whether the user's email has been verified via OTP"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.user.get_username()
+
+    def save(self, *args, **kwargs):
+        """Override save to automatically update profile completion percentage"""
+        # Calculate completion percentage before saving
+        self.profile_completion_percentage = self.calculate_profile_completion()
+        super().save(*args, **kwargs)
 
     @property
     def has_confirmed_payment(self):
@@ -118,6 +138,98 @@ class Profile(models.Model):
     def can_monitor_progress(self):
         """Check if user can monitor other users' progress"""
         return self.has_admin_privileges() or self.user.groups.filter(name='Progress_Monitors').exists()
+
+    def calculate_profile_completion(self):
+        """Calculate profile completion percentage based on filled fields"""
+        total_fields = 0
+        completed_fields = 0
+
+        # Core profile fields to check
+        profile_fields = [
+            ('bio', self.bio != 'Edit your Bio!' and self.bio.strip()),
+            ('phone_number', bool(self.phone_number and self.phone_number.strip())),
+            ('image', self.image.name != 'default.jpg'),
+        ]
+
+        # User fields to check
+        user_fields = [
+            ('first_name', bool(self.user.first_name and self.user.first_name.strip())),
+            ('last_name', bool(self.user.last_name and self.user.last_name.strip())),
+            ('email', bool(self.user.email and self.user.email.strip())),
+        ]
+
+        # Count all fields
+        all_fields = profile_fields + user_fields
+        total_fields = len(all_fields)
+
+        # Count completed fields
+        for field_name, is_completed in all_fields:
+            if is_completed:
+                completed_fields += 1
+
+        # Calculate percentage
+        if total_fields == 0:
+            percentage = 0.00
+        else:
+            percentage = (completed_fields / total_fields) * 100
+
+        return round(percentage, 2)
+
+    def update_profile_completion(self):
+        """Update the profile completion percentage"""
+        self.profile_completion_percentage = self.calculate_profile_completion()
+        self.save(update_fields=['profile_completion_percentage', 'updated_at'])
+        return self.profile_completion_percentage
+
+    def get_completion_status(self):
+        """Get profile completion status with recommendations"""
+        percentage = float(self.profile_completion_percentage)
+
+        if percentage >= 90:
+            return {
+                'status': 'excellent',
+                'message': '🎉 Your profile is excellent!',
+                'color': 'success',
+                'recommendations': []
+            }
+        elif percentage >= 70:
+            return {
+                'status': 'good',
+                'message': '👍 Your profile looks good!',
+                'color': 'info',
+                'recommendations': self._get_missing_fields()
+            }
+        elif percentage >= 50:
+            return {
+                'status': 'fair',
+                'message': '📝 Your profile needs some work',
+                'color': 'warning',
+                'recommendations': self._get_missing_fields()
+            }
+        else:
+            return {
+                'status': 'poor',
+                'message': '⚠️ Please complete your profile',
+                'color': 'danger',
+                'recommendations': self._get_missing_fields()
+            }
+
+    def _get_missing_fields(self):
+        """Get list of missing profile fields with user-friendly names"""
+        missing = []
+
+        if self.bio == 'Edit your Bio!' or not self.bio.strip():
+            missing.append('Add a personal bio')
+        if not self.phone_number or not self.phone_number.strip():
+            missing.append('Add your phone number')
+        if self.image.name == 'default.jpg':
+            missing.append('Upload a profile picture')
+        if not self.user.first_name or not self.user.first_name.strip():
+            missing.append('Add your first name')
+        if not self.user.last_name or not self.user.last_name.strip():
+            missing.append('Add your last name')
+
+        return missing
 
 class OTPVerification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -4,6 +4,7 @@ Handles OTP generation, sending, and verification
 """
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 from django.contrib import messages
 from django.utils import timezone
 from django.conf import settings
@@ -75,10 +76,40 @@ def verify_otp_view(request):
                 user.is_active = True
                 user.save()
             
+            # Create or update profile with email verification status
+            from users.models import Profile
+            try:
+                profile = user.profile
+                profile.email_verified = True
+                profile.update_profile_completion()  # Calculate completion percentage
+                profile.save()
+            except Profile.DoesNotExist:
+                # Create profile if it doesn't exist
+                profile = Profile.objects.create(user=user, email_verified=True)
+                profile.update_profile_completion()  # Calculate initial completion percentage
+
             # Send welcome email
             send_welcome_email(user)
 
-            messages.success(request, 'Email verified successfully! Welcome to YITP!')
+            # Send admin notification about new user verification
+            try:
+                from users.email_utils import send_otp_verification_admin_notification
+                send_otp_verification_admin_notification(user)
+            except Exception as e:
+                # Log error but don't fail verification
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Failed to send admin notification for user {user.email}: {str(e)}")
+
+            # Automatically log in the user after successful verification
+            login(request, user)
+
+            # Set session flag to indicate user just completed OTP verification
+            # This allows WelcomePageRedirectMiddleware to show welcome page instead of dashboard
+            request.session['just_completed_otp_verification'] = True
+            request.session['otp_verification_timestamp'] = timezone.now().isoformat()
+
+            messages.success(request, 'Email verified successfully! You are now logged in. Welcome to YITP!')
             return redirect('yitp:welcome')
         else:
             messages.error(request, 'Invalid or expired OTP code. Please try again.')

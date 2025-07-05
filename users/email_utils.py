@@ -500,3 +500,45 @@ def send_certificate_issuance_email(user, course, certificate):
         logger.error(f"❌ Failed to send certificate issuance email to {user.email}")
 
     return result
+
+
+def send_otp_verification_admin_notification(user, verification_timestamp=None):
+    """Send notification to admin when user completes OTP verification"""
+    if verification_timestamp is None:
+        verification_timestamp = timezone.now()
+
+    # Get user profile information if available
+    try:
+        user_profile = user.profile
+    except:
+        user_profile = None
+
+    context = {
+        'user': user,
+        'user_profile': user_profile,
+        'verification_timestamp': verification_timestamp,
+        'site_name': 'Youth Impact Training Programme',
+        'admin_url': f"{settings.SITE_URL}/admin/auth/user/{user.id}/change/" if hasattr(settings, 'SITE_URL') else f"/admin/auth/user/{user.id}/change/",
+        'user_dashboard_url': f"{settings.SITE_URL}/lms/dashboard/" if hasattr(settings, 'SITE_URL') else '/lms/dashboard/'
+    }
+
+    html_content = render_to_string('emails/otp_verification_admin_notification.html', context)
+    plain_content = render_to_string('emails/otp_verification_admin_notification.txt', context)
+
+    subject = f"New User Verified: {user.get_full_name() or user.username} - YITP"
+
+    logger.info(f"Sending OTP verification admin notification for user: {user.email}")
+
+    result = send_html_email(
+        subject=subject,
+        html_content=html_content,
+        recipient_list=[settings.ADMIN_EMAIL],
+        plain_text_content=plain_content
+    )
+
+    if result:
+        logger.info(f"✅ OTP verification admin notification sent successfully for user: {user.email}")
+    else:
+        logger.error(f"❌ Failed to send OTP verification admin notification for user: {user.email}")
+
+    return result
