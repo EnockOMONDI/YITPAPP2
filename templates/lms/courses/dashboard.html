@@ -1,7 +1,30 @@
 {% extends 'unified/base.html' %}
 {% block title %}Dashboard - Entrepreneurship LMS{% endblock %}
 
+{% block extra_css %}
+<style>
+/* Fix for navbar overlap - add top margin to account for fixed navbar */
+.dashboard-content-wrapper {
+    margin-top: 100px; /* Account for fixed navbar height (~60px content + 40px padding) */
+}
+
+/* Responsive navbar spacing adjustments */
+@media (max-width: 991px) {
+    .dashboard-content-wrapper {
+        margin-top: 90px; /* Slightly less margin on mobile */
+    }
+}
+
+@media (max-width: 575px) {
+    .dashboard-content-wrapper {
+        margin-top: 80px; /* Even less margin on small mobile */
+    }
+}
+</style>
+{% endblock %}
+
 {% block content %}
+<div class="dashboard-content-wrapper">
 <div class="container-fluid py-4">
     <div class="row">
         <!-- Main Content -->
@@ -238,6 +261,7 @@
         </div>
     </div>
 </div>
+</div> <!-- End dashboard-content-wrapper -->
 {% endblock %}
 
 {% block extra_js %}

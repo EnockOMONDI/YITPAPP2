@@ -2,7 +2,30 @@
 
 {% block title %}Courses - Entrepreneurship LMS{% endblock %}
 
+{% block extra_css %}
+<style>
+/* Fix for navbar overlap - add top margin to account for fixed navbar */
+.course-list-content-wrapper {
+    margin-top: 100px; /* Account for fixed navbar height (~60px content + 40px padding) */
+}
+
+/* Responsive navbar spacing adjustments */
+@media (max-width: 991px) {
+    .course-list-content-wrapper {
+        margin-top: 90px; /* Slightly less margin on mobile */
+    }
+}
+
+@media (max-width: 575px) {
+    .course-list-content-wrapper {
+        margin-top: 80px; /* Even less margin on small mobile */
+    }
+}
+</style>
+{% endblock %}
+
 {% block content %}
+<div class="course-list-content-wrapper">
 <div class="container py-4">
     <!-- Header Section -->
     <div class="row mb-4">
@@ -201,6 +224,7 @@
     </div>
     {% endif %}
 </div>
+</div> <!-- End course-list-content-wrapper -->
 {% endblock %}
 
 {% block extra_js %}

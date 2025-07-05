@@ -4,6 +4,24 @@
 
 {% block extra_css %}
 <style>
+    /* Fix for navbar overlap - add top margin to account for fixed navbar */
+    .lesson-detail-content-wrapper {
+        margin-top: 100px; /* Account for fixed navbar height (~60px content + 40px padding) */
+    }
+
+    /* Responsive navbar spacing adjustments */
+    @media (max-width: 991px) {
+        .lesson-detail-content-wrapper {
+            margin-top: 90px; /* Slightly less margin on mobile */
+        }
+    }
+
+    @media (max-width: 575px) {
+        .lesson-detail-content-wrapper {
+            margin-top: 80px; /* Even less margin on small mobile */
+        }
+    }
+
     .lesson-header {
         background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         color: white;
@@ -265,6 +283,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="lesson-detail-content-wrapper">
 <!-- Lesson Header -->
 <section class="lesson-header">
     <div class="container">
@@ -508,6 +527,7 @@
         </div>
     </div>
 </section>
+</div> <!-- End lesson-detail-content-wrapper -->
 {% endblock %}
 
 {% block extra_js %}

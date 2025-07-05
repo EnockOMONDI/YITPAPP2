@@ -7,6 +7,25 @@
 {% block extra_css %}
 <style>
 /* YITP Unified Profile Styles - Solid Colors Only */
+
+/* Fix for navbar overlap - add top margin to account for fixed navbar */
+.profile-content-wrapper {
+    margin-top: 100px; /* Account for fixed navbar height (~60px content + 40px padding) */
+}
+
+/* Responsive navbar spacing adjustments */
+@media (max-width: 991px) {
+    .profile-content-wrapper {
+        margin-top: 90px; /* Slightly less margin on mobile */
+    }
+}
+
+@media (max-width: 575px) {
+    .profile-content-wrapper {
+        margin-top: 80px; /* Even less margin on small mobile */
+    }
+}
+
 :root {
     --yitp-primary: #6610f2;
     --yitp-accent: #ff5d15;
@@ -528,6 +547,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="profile-content-wrapper">
 <!-- Profile Header -->
 <section class="profile-header">
     <div class="container">
@@ -1157,6 +1177,7 @@
     </div>
 </div>
 {% endif %}
+</div> <!-- End profile-content-wrapper -->
 {% endblock %}
 
 {% block extra_js %}

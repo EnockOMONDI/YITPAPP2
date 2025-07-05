@@ -3,6 +3,24 @@
 
 {% block extra_css %}
 <style>
+    /* Fix for navbar overlap - add top margin to account for fixed navbar */
+    .course-detail-content-wrapper {
+        margin-top: 100px; /* Account for fixed navbar height (~60px content + 40px padding) */
+    }
+
+    /* Responsive navbar spacing adjustments */
+    @media (max-width: 991px) {
+        .course-detail-content-wrapper {
+            margin-top: 90px; /* Slightly less margin on mobile */
+        }
+    }
+
+    @media (max-width: 575px) {
+        .course-detail-content-wrapper {
+            margin-top: 80px; /* Even less margin on small mobile */
+        }
+    }
+
     .course-hero {
         background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(249, 115, 22, 0.9));
         color: white;
@@ -137,6 +155,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="course-detail-content-wrapper">
 <!-- Breadcrumb Navigation -->
 <div class="container mt-3">
     <nav aria-label="breadcrumb">
@@ -693,6 +712,7 @@
         </div>
     </div>
 </div>
+</div> <!-- End course-detail-content-wrapper -->
 {% endblock %}
 
 {% block extra_js %}

@@ -139,3 +139,348 @@ INFO 2025-07-05 17:39:33,036 basehttp 24260 6133002240 - Broken pipe from ('127.
 WARNING 2025-07-05 17:39:33,172 basehttp 24260 6149828608 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
 INFO 2025-07-05 17:39:33,344 basehttp 24260 6133002240 "GET / HTTP/1.1" 200 65845
 WARNING 2025-07-05 17:39:34,287 basehttp 24260 6133002240 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1835
+INFO 2025-07-05 17:41:12,311 autoreload 24399 8467643072 Watching for file changes with StatReloader
+INFO 2025-07-05 17:41:23,089 basehttp 24399 6125465600 "GET / HTTP/1.1" 200 65845
+WARNING 2025-07-05 17:41:23,548 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:41:25,256 basehttp 24399 6125465600 "GET /contact/ HTTP/1.1" 200 50969
+WARNING 2025-07-05 17:41:25,418 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:41:32,011 basehttp 24399 6125465600 "GET /login/ HTTP/1.1" 200 13133
+INFO 2025-07-05 17:41:36,878 basehttp 24399 6125465600 "GET /register/ HTTP/1.1" 200 15700
+INFO 2025-07-05 17:41:57,553 basehttp 24399 6125465600 "GET /blogs/ HTTP/1.1" 200 18590
+INFO 2025-07-05 17:42:01,131 basehttp 24399 6125465600 "GET /about/ HTTP/1.1" 200 56583
+WARNING 2025-07-05 17:42:01,312 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:42:04,191 basehttp 24399 6142291968 "GET /registration/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:42:04,213 basehttp 24399 6142291968 "GET /register/ HTTP/1.1" 200 15700
+INFO 2025-07-05 17:42:21,519 basehttp 24399 6125465600 "GET /registration/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:42:21,525 basehttp 24399 6125465600 "GET /register/ HTTP/1.1" 200 15700
+INFO 2025-07-05 17:42:26,134 basehttp 24399 6125465600 "GET /contact/ HTTP/1.1" 200 50969
+WARNING 2025-07-05 17:42:26,372 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:42:37,571 basehttp 24399 6125465600 "GET /web_courses_list/ HTTP/1.1" 200 89059
+WARNING 2025-07-05 17:42:37,849 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+WARNING 2025-07-05 17:42:37,853 basehttp 24399 6142291968 "GET /static/assets/img/course/course-dot.png%20 HTTP/1.1" 404 1860
+WARNING 2025-07-05 17:42:37,863 basehttp 24399 6125465600 "GET /static/assets/img/cta/cta-shape.png%20 HTTP/1.1" 404 1848
+INFO 2025-07-05 17:43:19,753 basehttp 24399 6125465600 "GET //lms/courses/courses/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:43:19,763 basehttp 24399 6125465600 "GET /login/?next=/lms/courses/courses/ HTTP/1.1" 200 13133
+INFO 2025-07-05 17:43:54,834 basehttp 24399 6125465600 "POST /login/?next=/lms/courses/courses/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:44:01,986 basehttp 24399 6125465600 "GET /lms/courses/courses/ HTTP/1.1" 200 52983
+WARNING 2025-07-05 17:44:02,294 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:44:26,513 basehttp 24399 6125465600 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:44:41,287 basehttp 24399 6125465600 "GET /lms/courses/courses/ HTTP/1.1" 200 52983
+WARNING 2025-07-05 17:44:42,258 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:45:04,955 basehttp 24399 6125465600 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:45:12,356 basehttp 24399 6125465600 "GET /lms/courses/courses/ HTTP/1.1" 200 52983
+WARNING 2025-07-05 17:45:12,794 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:45:46,126 basehttp 24399 6125465600 - Broken pipe from ('127.0.0.1', 60193)
+INFO 2025-07-05 17:45:49,483 basehttp 24399 6142291968 "GET / HTTP/1.1" 200 70468
+INFO 2025-07-05 17:45:53,561 basehttp 24399 6142291968 "GET / HTTP/1.1" 200 70468
+WARNING 2025-07-05 17:45:53,863 basehttp 24399 6142291968 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:46:04,598 basehttp 24399 6125465600 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:46:14,031 basehttp 24399 6125465600 "GET /lms/courses/courses/ HTTP/1.1" 200 52983
+WARNING 2025-07-05 17:46:14,272 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:46:30,101 basehttp 24399 6125465600 "GET / HTTP/1.1" 200 70468
+WARNING 2025-07-05 17:46:30,303 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:46:36,920 basehttp 24399 6125465600 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-07-05 17:46:48,073 basehttp 24399 6125465600 "GET /lms/courses/courses/ HTTP/1.1" 200 52983
+WARNING 2025-07-05 17:46:48,355 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+ERROR 2025-07-05 17:49:20,078 log 24399 6125465600 Internal Server Error: /lms/progress/my-progress/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 886, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(
+                                            ^^^^^^^^
+AttributeError: type object 'RequestContext' has no attribute 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1064, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 736, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 847, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [overall_progress] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'view': <progress.views.MyProgressView object at 0x120f01d60>, 'enrollments': <QuerySet []>, 'progress_data': {}}]
+ERROR 2025-07-05 17:49:20,085 basehttp 24399 6125465600 "GET /lms/progress/my-progress/ HTTP/1.1" 500 190101
+INFO 2025-07-05 17:49:35,029 basehttp 24399 6125465600 "GET /lms/courses/dashboard/ HTTP/1.1" 200 49312
+WARNING 2025-07-05 17:49:35,392 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+ERROR 2025-07-05 17:49:55,655 log 24399 6125465600 Internal Server Error: /lms/progress/my-progress/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 886, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(
+                                            ^^^^^^^^
+AttributeError: type object 'RequestContext' has no attribute 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1064, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 736, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 847, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [overall_progress] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'view': <progress.views.MyProgressView object at 0x120f32e70>, 'enrollments': <QuerySet []>, 'progress_data': {}}]
+ERROR 2025-07-05 17:49:55,658 basehttp 24399 6125465600 "GET /lms/progress/my-progress/ HTTP/1.1" 500 190101
+INFO 2025-07-05 17:49:55,658 basehttp 24399 6125465600 - Broken pipe from ('127.0.0.1', 60505)
+INFO 2025-07-05 17:49:59,190 basehttp 24399 6142291968 - Broken pipe from ('127.0.0.1', 60509)
+INFO 2025-07-05 17:50:01,344 basehttp 24399 6175944704 - Broken pipe from ('127.0.0.1', 60517)
+INFO 2025-07-05 17:50:04,312 basehttp 24399 6192771072 "GET /lms/courses/my-courses/ HTTP/1.1" 200 51407
+WARNING 2025-07-05 17:50:04,565 basehttp 24399 6192771072 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:50:06,228 basehttp 24399 6159118336 - Broken pipe from ('127.0.0.1', 60510)
+INFO 2025-07-05 17:50:47,208 basehttp 24399 6125465600 "GET /profile/ HTTP/1.1" 200 70913
+INFO 2025-07-05 17:51:52,981 basehttp 24399 6125465600 "GET /lms/courses/dashboard/ HTTP/1.1" 200 49312
+WARNING 2025-07-05 17:51:53,438 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:55:33,821 basehttp 24399 6125465600 "GET / HTTP/1.1" 200 70468
+WARNING 2025-07-05 17:55:34,152 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:55:42,834 basehttp 24399 6125465600 "GET /about/ HTTP/1.1" 200 61206
+WARNING 2025-07-05 17:55:43,053 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 17:55:49,623 basehttp 24399 6125465600 "GET /team/ HTTP/1.1" 200 56463
+WARNING 2025-07-05 17:55:50,027 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 18:02:11,386 basehttp 24399 6125465600 "GET /profile/ HTTP/1.1" 200 70913
+INFO 2025-07-05 18:09:46,380 basehttp 24399 6125465600 "GET /profile/ HTTP/1.1" 200 71500
+INFO 2025-07-05 18:10:42,707 basehttp 24399 6125465600 "GET /lms/courses/dashboard/ HTTP/1.1" 200 49925
+WARNING 2025-07-05 18:10:42,993 basehttp 24399 6125465600 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 18:11:45,026 autoreload 25191 8467643072 Watching for file changes with StatReloader
+INFO 2025-07-05 18:12:19,424 basehttp 25191 6220443648 "GET /lms/courses/dashboard/ HTTP/1.1" 200 49925
+INFO 2025-07-05 18:12:19,607 basehttp 25191 6203617280 "GET /profile/ HTTP/1.1" 200 71500
+WARNING 2025-07-05 18:12:21,229 basehttp 25191 6203617280 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 18:16:07,868 basehttp 25191 6203617280 "GET /documentation HTTP/1.1" 301 0
+INFO 2025-07-05 18:16:13,173 basehttp 25191 6203617280 "GET /documentation/ HTTP/1.1" 200 214405
+WARNING 2025-07-05 18:16:13,954 basehttp 25191 6203617280 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 18:23:02,106 basehttp 25191 6203617280 "GET /lms/courses/ HTTP/1.1" 200 17522
+INFO 2025-07-05 18:23:09,496 basehttp 25191 6220443648 "GET /lms/courses/my-courses/ HTTP/1.1" 200 52068
+WARNING 2025-07-05 18:23:10,600 basehttp 25191 6220443648 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 18:23:32,066 basehttp 25191 6203617280 "GET / HTTP/1.1" 200 70468
+WARNING 2025-07-05 18:23:32,507 basehttp 25191 6203617280 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+INFO 2025-07-05 18:23:49,305 basehttp 25191 6203617280 "GET /lms/courses/courses/ HTTP/1.1" 200 53606
+WARNING 2025-07-05 18:23:49,613 basehttp 25191 6203617280 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 404 1837
+ERROR 2025-07-05 18:24:05,115 log 25191 6203617280 Internal Server Error: /lms/progress/my-progress/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 886, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(
+                                            ^^^^^^^^
+AttributeError: type object 'RequestContext' has no attribute 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'overall_progress'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 1064, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 736, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 847, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/template/base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [overall_progress] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'view': <progress.views.MyProgressView object at 0x110511c70>, 'enrollments': <QuerySet []>, 'progress_data': {}}]
+ERROR 2025-07-05 18:24:05,123 basehttp 25191 6203617280 "GET /lms/progress/my-progress/ HTTP/1.1" 500 189874
