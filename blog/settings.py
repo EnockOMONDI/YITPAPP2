@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'assessments',
     'communication',
     'content',
+    'payments',  # Added for test suite
+    'certificates',  # Added for test suite
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -343,3 +345,211 @@ OTP_LENGTH = 6
 # Uncomment the line below for local development only
 # if DEBUG and os.getenv('USE_CONSOLE_EMAIL', 'False').lower() == 'true':
 #     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# =============================================================================
+# M-PESA PAYMENT INTEGRATION CONFIGURATION
+# =============================================================================
+
+# M-Pesa API Credentials
+# Note: These are development/sandbox credentials. For production, use environment variables
+MPESA_CONSUMER_KEY = os.environ.get('MPESA_CONSUMER_KEY', 'UMi2MLMFIdaOS8vRFiWLG40CJ4GzWAGAHbwFROxe473iZ6gQ')
+MPESA_CONSUMER_SECRET = os.environ.get('MPESA_CONSUMER_SECRET', '2K3IJkdE7uxLJm9Nis3mhO3TZHqmowc0ndI9abTGxGJ4gcAdvdAZ5C9tx9wrAWRp')
+
+# M-Pesa Business Configuration
+MPESA_SHORTCODE = os.environ.get('MPESA_SHORTCODE', '174379')  # Sandbox shortcode
+MPESA_PASSKEY = os.environ.get('MPESA_PASSKEY', 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919')  # Sandbox passkey
+
+# M-Pesa API URLs (Sandbox vs Production)
+MPESA_ENVIRONMENT = os.environ.get('MPESA_ENVIRONMENT', 'sandbox')  # 'sandbox' or 'production'
+
+if MPESA_ENVIRONMENT == 'production':
+    MPESA_BASE_URL = 'https://api.safaricom.co.ke'
+else:
+    MPESA_BASE_URL = 'https://sandbox.safaricom.co.ke'
+
+# M-Pesa API Endpoints
+MPESA_AUTH_URL = f'{MPESA_BASE_URL}/oauth/v1/generate?grant_type=client_credentials'
+MPESA_STK_PUSH_URL = f'{MPESA_BASE_URL}/mpesa/stkpush/v1/processrequest'
+MPESA_QUERY_URL = f'{MPESA_BASE_URL}/mpesa/stkpushquery/v1/query'
+
+# M-Pesa Callback URLs
+# These URLs will receive payment notifications from Safaricom
+SITE_URL = os.environ.get('SITE_URL', 'https://yitp-app.onrender.com')  # Update with your actual domain
+MPESA_CALLBACK_URL = f'{SITE_URL}/payments/mpesa/callback/'
+MPESA_RESULT_URL = f'{SITE_URL}/payments/mpesa/result/'
+MPESA_TIMEOUT_URL = f'{SITE_URL}/payments/mpesa/timeout/'
+
+# Payment Configuration
+PAYMENT_TIMEOUT_HOURS = 24  # Payment expires after 24 hours
+PAYMENT_CURRENCY = 'KES'
+PAYMENT_PROCESSING_FEE_PERCENTAGE = 0.00  # No processing fee for now
+
+# Bank Transfer Details (for manual payments)
+BANK_TRANSFER_DETAILS = {
+    'bank_name': 'Absa Bank Kenya',
+    'account_name': 'Youth Impact Training Programme',
+    'account_number': '2046381648',
+    'paybill_number': '303030',
+    'branch_code': 'ABSAKENAXXX',
+    'swift_code': 'ABSAKENAXXX',
+    'verification_phone': '+254722646958',  # WhatsApp number for payment verification
+}
+
+# Payment Method Configuration
+AVAILABLE_PAYMENT_METHODS = [
+    {
+        'code': 'mpesa',
+        'name': 'M-Pesa',
+        'description': 'Pay using M-Pesa mobile money',
+        'enabled': True,
+        'requires_phone': True,
+        'processing_fee': 0.00,
+    },
+    {
+        'code': 'bank_transfer',
+        'name': 'Bank Transfer',
+        'description': 'Direct bank transfer to YITP account',
+        'enabled': True,
+        'requires_account_number': False,
+        'processing_fee': 0.00,
+    },
+    {
+        'code': 'card',
+        'name': 'Credit/Debit Card',
+        'description': 'Pay using Visa, Mastercard, or other cards',
+        'enabled': False,  # To be implemented later with Stripe/PayPal
+        'processing_fee': 2.50,
+    }
+]
+
+# Security Settings for Payment Processing
+PAYMENT_SECURITY = {
+    'max_payment_attempts': 3,
+    'payment_verification_required': True,
+    'admin_approval_required_above': 50000,  # KES amount requiring admin approval
+    'auto_refund_timeout_hours': 72,
+}
+
+# =============================================================================
+# CERTIFICATE GENERATION CONFIGURATION
+# =============================================================================
+
+# Certificate Settings
+CERTIFICATE_SETTINGS = {
+    'template_path': 'certificates/certificate_template.html',
+    'pdf_generation_enabled': True,
+    'verification_url_base': f'{SITE_URL}/certificates/verify/',
+    'certificate_storage_path': 'certificates/',
+    'watermark_enabled': True,
+    'digital_signature_enabled': False,  # To be implemented later
+}
+
+# Certificate Branding
+CERTIFICATE_BRANDING = {
+    'organization_name': 'Youth Impact Training Programme',
+    'logo_path': 'images/yitp-logo.png',
+    'signature_path': 'images/director-signature.png',
+    'primary_color': '#1a2e53',  # YITP dark blue
+    'secondary_color': '#ff5d15',  # YITP orange
+    'font_family': 'Arial, sans-serif',
+}
+
+# =============================================================================
+# LOGGING CONFIGURATION FOR PAYMENT AND ENROLLMENT TRACKING
+# =============================================================================
+
+# Enhanced logging for payment and enrollment operations
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'yitp.log'),
+            'formatter': 'verbose',
+        },
+        'payment_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'payments.log'),
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'payments': {
+            'handlers': ['payment_file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'courses.enrollment_service': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'certificates': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+# Create logs directory if it doesn't exist
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOGS_DIR):
+    os.makedirs(LOGS_DIR)
+
+# =============================================================================
+# PRODUCTION SECURITY NOTES
+# =============================================================================
+"""
+IMPORTANT: For production deployment, ensure the following:
+
+1. Set environment variables for sensitive data:
+   - MPESA_CONSUMER_KEY
+   - MPESA_CONSUMER_SECRET
+   - MPESA_PASSKEY
+   - MPESA_SHORTCODE (your actual business shortcode)
+   - SITE_URL (your production domain)
+
+2. Update MPESA_ENVIRONMENT to 'production'
+
+3. Replace sandbox credentials with actual production credentials from Safaricom
+
+4. Ensure HTTPS is enabled for all callback URLs
+
+5. Implement proper error monitoring and alerting
+
+6. Set up database backups for payment records
+
+7. Configure proper firewall rules for M-Pesa callback IPs
+
+Example production environment variables:
+export MPESA_CONSUMER_KEY="your_production_consumer_key"
+export MPESA_CONSUMER_SECRET="your_production_consumer_secret"
+export MPESA_SHORTCODE="your_business_shortcode"
+export MPESA_PASSKEY="your_production_passkey"
+export MPESA_ENVIRONMENT="production"
+export SITE_URL="https://yourdomain.com"
+"""

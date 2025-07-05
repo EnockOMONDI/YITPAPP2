@@ -1,0 +1,470 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Payment Methods - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+    .payment-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .payment-method-card {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .payment-method-card:hover {
+        border-color: #ff5d15;
+        box-shadow: 0 4px 12px rgba(255, 93, 21, 0.1);
+    }
+    
+    .payment-method-card.selected {
+        border-color: #ff5d15;
+        background-color: #fff8f5;
+    }
+    
+    .payment-method-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+    
+    .mpesa-icon {
+        background-color: #00a651;
+        color: white;
+    }
+    
+    .bank-icon {
+        background-color: #1a2e53;
+        color: white;
+    }
+    
+    .card-icon {
+        background-color: #6c757d;
+        color: white;
+    }
+    
+    .payment-form {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-top: 2rem;
+        display: none;
+    }
+    
+    .payment-form.active {
+        display: block;
+    }
+    
+    .btn-yitp {
+        background-color: #ff5d15;
+        border-color: #ff5d15;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+    
+    .btn-yitp:hover {
+        background-color: #e54a0c;
+        border-color: #e54a0c;
+        color: white;
+    }
+    
+    .course-summary {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .amount-display {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #1a2e53;
+    }
+    
+    .phone-input {
+        font-family: monospace;
+        font-size: 1.1rem;
+    }
+    
+    .payment-instructions {
+        background: #e7f3ff;
+        border: 1px solid #b3d9ff;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .bank-details {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .bank-detail-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+    
+    .bank-detail-item:last-child {
+        border-bottom: none;
+    }
+    
+    .copy-button {
+        background: none;
+        border: none;
+        color: #ff5d15;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    
+    .copy-button:hover {
+        text-decoration: underline;
+    }
+    
+    .disabled-method {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    .disabled-method:hover {
+        border-color: #e9ecef !important;
+        box-shadow: none !important;
+    }
+    
+    .coming-soon-badge {
+        background-color: #6c757d;
+        color: white;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        margin-left: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="payment-container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4" style="color: #1a2e53;">
+                <i class="fas fa-credit-card me-2"></i>
+                Choose Payment Method
+            </h2>
+            
+            <!-- Course Summary -->
+            <div class="course-summary">
+                <h5 style="color: #1a2e53;">Course Summary</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">{{ course.title }}</h6>
+                        <small class="text-muted">{{ course.duration_weeks }} weeks • {{ course.category.name }}</small>
+                    </div>
+                    <div class="amount-display">
+                        KES {{ course.price|floatformat:0 }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                <!-- M-Pesa Payment -->
+                <div class="payment-method-card" data-method="mpesa" onclick="selectPaymentMethod('mpesa')">
+                    <div class="d-flex align-items-center">
+                        <div class="payment-method-icon mpesa-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">M-Pesa</h6>
+                            <small class="text-muted">Pay using M-Pesa mobile money</small>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-success">✓ Instant</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bank Transfer Payment -->
+                <div class="payment-method-card" data-method="bank" onclick="selectPaymentMethod('bank')">
+                    <div class="d-flex align-items-center">
+                        <div class="payment-method-icon bank-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">Bank Transfer</h6>
+                            <small class="text-muted">Direct bank transfer to YITP account</small>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-warning">⏱ 1-2 hours</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Credit/Debit Card Payment (Coming Soon) -->
+                <div class="payment-method-card disabled-method">
+                    <div class="d-flex align-items-center">
+                        <div class="payment-method-icon card-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">Credit/Debit Card</h6>
+                            <small class="text-muted">Pay using Visa, Mastercard, or other cards</small>
+                        </div>
+                        <div class="coming-soon-badge">
+                            Coming Soon
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- M-Pesa Payment Form -->
+            <div id="mpesa-form" class="payment-form">
+                <h5 style="color: #1a2e53;">
+                    <i class="fas fa-mobile-alt me-2"></i>
+                    M-Pesa Payment
+                </h5>
+                
+                <form method="post" action="{% url 'payments:process_mpesa' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <input type="hidden" name="amount" value="{{ course.price }}">
+                    
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">M-Pesa Phone Number</label>
+                        <input type="tel" 
+                               class="form-control phone-input" 
+                               id="phone_number" 
+                               name="phone_number" 
+                               placeholder="+254712345678"
+                               pattern="^\+254[0-9]{9}$"
+                               required>
+                        <div class="form-text">Enter your M-Pesa registered phone number (format: +254XXXXXXXXX)</div>
+                    </div>
+                    
+                    <div class="payment-instructions">
+                        <h6><i class="fas fa-info-circle me-2"></i>Payment Instructions</h6>
+                        <ol class="mb-0">
+                            <li>Click "Pay with M-Pesa" button below</li>
+                            <li>You will receive an STK push notification on your phone</li>
+                            <li>Enter your M-Pesa PIN to complete the payment</li>
+                            <li>You will receive a confirmation SMS from M-Pesa</li>
+                            <li>Your course access will be activated automatically</li>
+                        </ol>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-yitp btn-lg mt-3">
+                        <i class="fas fa-mobile-alt me-2"></i>
+                        Pay KES {{ course.price|floatformat:0 }} with M-Pesa
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Bank Transfer Form -->
+            <div id="bank-form" class="payment-form">
+                <h5 style="color: #1a2e53;">
+                    <i class="fas fa-university me-2"></i>
+                    Bank Transfer Payment
+                </h5>
+                
+                <div class="bank-details">
+                    <h6>YITP Bank Account Details</h6>
+                    
+                    <div class="bank-detail-item">
+                        <span><strong>Bank Name:</strong></span>
+                        <span>
+                            Absa Bank Kenya
+                            <button type="button" class="copy-button" onclick="copyToClipboard('Absa Bank Kenya')">
+                                Copy
+                            </button>
+                        </span>
+                    </div>
+                    
+                    <div class="bank-detail-item">
+                        <span><strong>Account Name:</strong></span>
+                        <span>
+                            Youth Impact Training Programme
+                            <button type="button" class="copy-button" onclick="copyToClipboard('Youth Impact Training Programme')">
+                                Copy
+                            </button>
+                        </span>
+                    </div>
+                    
+                    <div class="bank-detail-item">
+                        <span><strong>Account Number:</strong></span>
+                        <span>
+                            2046381648
+                            <button type="button" class="copy-button" onclick="copyToClipboard('2046381648')">
+                                Copy
+                            </button>
+                        </span>
+                    </div>
+                    
+                    <div class="bank-detail-item">
+                        <span><strong>Paybill Number:</strong></span>
+                        <span>
+                            303030
+                            <button type="button" class="copy-button" onclick="copyToClipboard('303030')">
+                                Copy
+                            </button>
+                        </span>
+                    </div>
+                    
+                    <div class="bank-detail-item">
+                        <span><strong>Amount:</strong></span>
+                        <span class="text-primary">
+                            <strong>KES {{ course.price|floatformat:0 }}</strong>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="payment-instructions">
+                    <h6><i class="fas fa-info-circle me-2"></i>Payment Instructions</h6>
+                    <ol class="mb-0">
+                        <li>Transfer the exact amount (KES {{ course.price|floatformat:0 }}) to the account above</li>
+                        <li>Use your name and course title as the reference</li>
+                        <li>Send payment confirmation via WhatsApp to +254722646958</li>
+                        <li>Include your transaction reference and course name</li>
+                        <li>Payment verification takes 1-2 hours during business hours</li>
+                    </ol>
+                </div>
+                
+                <form method="post" action="{% url 'payments:process_bank_transfer' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <input type="hidden" name="amount" value="{{ course.price }}">
+                    
+                    <div class="mb-3 mt-3">
+                        <label for="bank_reference" class="form-label">Transaction Reference (Optional)</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="bank_reference" 
+                               name="bank_reference" 
+                               placeholder="Enter your bank transaction reference">
+                        <div class="form-text">If you have already made the payment, enter your transaction reference</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-yitp btn-lg mt-3">
+                        <i class="fas fa-university me-2"></i>
+                        Confirm Bank Transfer
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header" style="background-color: #1a2e53; color: white;">
+                    <h6 class="mb-0">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        Secure Payment
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-lock text-success me-2"></i>
+                        <small>SSL Encrypted</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <small>Instant Verification</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-headset text-success me-2"></i>
+                        <small>24/7 Support</small>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h6 style="color: #1a2e53;">Need Help?</h6>
+                    <p class="small text-muted">
+                        Contact our support team via WhatsApp at 
+                        <a href="https://wa.me/254722646958" target="_blank" class="text-decoration-none">
+                            +254722646958
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function selectPaymentMethod(method) {
+    // Remove selected class from all cards
+    document.querySelectorAll('.payment-method-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    // Hide all payment forms
+    document.querySelectorAll('.payment-form').forEach(form => {
+        form.classList.remove('active');
+    });
+    
+    // Skip disabled methods
+    if (document.querySelector(`[data-method="${method}"]`).classList.contains('disabled-method')) {
+        return;
+    }
+    
+    // Select the clicked method
+    document.querySelector(`[data-method="${method}"]`).classList.add('selected');
+    
+    // Show the corresponding form
+    document.getElementById(`${method}-form`).classList.add('active');
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Show temporary success message
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.style.color = '#28a745';
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.color = '#ff5d15';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+
+// Auto-format phone number
+document.getElementById('phone_number').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    
+    if (value.startsWith('254')) {
+        value = '+' + value;
+    } else if (value.startsWith('0')) {
+        value = '+254' + value.substring(1);
+    } else if (value.length > 0 && !value.startsWith('+254')) {
+        value = '+254' + value;
+    }
+    
+    e.target.value = value;
+});
+</script>
+{% endblock %}

@@ -1,0 +1,445 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment Status - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+    .status-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+    }
+    
+    .status-card {
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .status-success {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        border: 1px solid #c3e6cb;
+    }
+    
+    .status-pending {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        border: 1px solid #ffeaa7;
+    }
+    
+    .status-failed {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        border: 1px solid #f5c6cb;
+    }
+    
+    .status-processing {
+        background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+        border: 1px solid #bee5eb;
+    }
+    
+    .status-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .status-icon.success {
+        color: #28a745;
+    }
+    
+    .status-icon.pending {
+        color: #ffc107;
+    }
+    
+    .status-icon.failed {
+        color: #dc3545;
+    }
+    
+    .status-icon.processing {
+        color: #17a2b8;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+    
+    .payment-details {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        text-align: left;
+    }
+    
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+    
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+    
+    .btn-yitp {
+        background-color: #ff5d15;
+        border-color: #ff5d15;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 1rem;
+    }
+    
+    .btn-yitp:hover {
+        background-color: #e54a0c;
+        border-color: #e54a0c;
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary-yitp {
+        background-color: #1a2e53;
+        border-color: #1a2e53;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 1rem;
+        margin-left: 1rem;
+    }
+    
+    .btn-secondary-yitp:hover {
+        background-color: #152340;
+        border-color: #152340;
+        color: white;
+        text-decoration: none;
+    }
+    
+    .next-steps {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        text-align: left;
+    }
+    
+    .countdown-timer {
+        font-family: monospace;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #1a2e53;
+        margin-top: 1rem;
+    }
+    
+    .whatsapp-link {
+        color: #25d366;
+        text-decoration: none;
+    }
+    
+    .whatsapp-link:hover {
+        color: #128c7e;
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="status-container">
+    {% if payment.status == 'confirmed' %}
+        <!-- Payment Successful -->
+        <div class="status-card status-success">
+            <div class="status-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 style="color: #28a745;">Payment Successful!</h2>
+            <p class="lead">Your payment has been confirmed and processed successfully.</p>
+            
+            <div class="payment-details">
+                <h5 style="color: #1a2e53;">Payment Details</h5>
+                <div class="detail-row">
+                    <span><strong>Course:</strong></span>
+                    <span>{{ payment.course.title }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Amount:</strong></span>
+                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Payment Method:</strong></span>
+                    <span>{{ payment.payment_method.name }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Reference:</strong></span>
+                    <span>{{ payment.reference_number }}</span>
+                </div>
+                {% if payment.mpesa_receipt_number %}
+                <div class="detail-row">
+                    <span><strong>M-Pesa Receipt:</strong></span>
+                    <span>{{ payment.mpesa_receipt_number }}</span>
+                </div>
+                {% endif %}
+                <div class="detail-row">
+                    <span><strong>Date:</strong></span>
+                    <span>{{ payment.confirmed_at|date:"M d, Y H:i" }}</span>
+                </div>
+            </div>
+            
+            <div class="next-steps">
+                <h6><i class="fas fa-arrow-right me-2"></i>What's Next?</h6>
+                <ul class="text-start">
+                    <li>You can now enroll in the course</li>
+                    <li>Check your email for payment confirmation</li>
+                    <li>Access your course materials immediately</li>
+                    <li>Start your learning journey!</li>
+                </ul>
+            </div>
+            
+            <a href="{% url 'courses:course_detail' slug=payment.course.slug %}" class="btn btn-yitp">
+                <i class="fas fa-play me-2"></i>
+                Start Course
+            </a>
+            <a href="{% url 'progress:dashboard' %}" class="btn btn-secondary-yitp">
+                <i class="fas fa-tachometer-alt me-2"></i>
+                Go to Dashboard
+            </a>
+        </div>
+        
+    {% elif payment.status == 'processing' %}
+        <!-- Payment Processing -->
+        <div class="status-card status-processing">
+            <div class="status-icon processing">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <h2 style="color: #17a2b8;">Payment Processing</h2>
+            <p class="lead">Your payment is being processed. Please wait...</p>
+            
+            {% if payment.payment_method.code == 'mpesa' %}
+                <div class="next-steps">
+                    <h6><i class="fas fa-mobile-alt me-2"></i>M-Pesa Payment Instructions</h6>
+                    <ol class="text-start">
+                        <li>Check your phone for an STK push notification</li>
+                        <li>Enter your M-Pesa PIN to complete the payment</li>
+                        <li>Wait for the confirmation SMS from M-Pesa</li>
+                        <li>This page will update automatically once payment is confirmed</li>
+                    </ol>
+                </div>
+                
+                <div class="countdown-timer" id="countdown">
+                    Time remaining: <span id="timer">05:00</span>
+                </div>
+            {% endif %}
+            
+            <div class="payment-details">
+                <h5 style="color: #1a2e53;">Payment Details</h5>
+                <div class="detail-row">
+                    <span><strong>Course:</strong></span>
+                    <span>{{ payment.course.title }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Amount:</strong></span>
+                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Payment Method:</strong></span>
+                    <span>{{ payment.payment_method.name }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Reference:</strong></span>
+                    <span>{{ payment.reference_number }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Status:</strong></span>
+                    <span class="text-info">Processing...</span>
+                </div>
+            </div>
+            
+            <a href="#" onclick="location.reload()" class="btn btn-yitp">
+                <i class="fas fa-sync-alt me-2"></i>
+                Refresh Status
+            </a>
+        </div>
+        
+    {% elif payment.status == 'pending' %}
+        <!-- Payment Pending -->
+        <div class="status-card status-pending">
+            <div class="status-icon pending">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h2 style="color: #ffc107;">Payment Pending</h2>
+            <p class="lead">Your payment is awaiting verification.</p>
+            
+            {% if payment.payment_method.code == 'bank_transfer' %}
+                <div class="next-steps">
+                    <h6><i class="fas fa-university me-2"></i>Bank Transfer Verification</h6>
+                    <p class="text-start">
+                        To speed up verification, please send your payment confirmation via WhatsApp to 
+                        <a href="https://wa.me/254722646958?text=Payment%20Confirmation%0AReference:%20{{ payment.reference_number }}%0ACourse:%20{{ payment.course.title }}%0AAmount:%20KES%20{{ payment.amount|floatformat:0 }}" 
+                           target="_blank" class="whatsapp-link">
+                            <i class="fab fa-whatsapp me-1"></i>
+                            +254722646958
+                        </a>
+                    </p>
+                    <p class="small text-muted">
+                        Include your transaction reference and course name in the message.
+                    </p>
+                </div>
+            {% endif %}
+            
+            <div class="payment-details">
+                <h5 style="color: #1a2e53;">Payment Details</h5>
+                <div class="detail-row">
+                    <span><strong>Course:</strong></span>
+                    <span>{{ payment.course.title }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Amount:</strong></span>
+                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Payment Method:</strong></span>
+                    <span>{{ payment.payment_method.name }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Reference:</strong></span>
+                    <span>{{ payment.reference_number }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Status:</strong></span>
+                    <span class="text-warning">Pending Verification</span>
+                </div>
+            </div>
+            
+            <a href="#" onclick="location.reload()" class="btn btn-yitp">
+                <i class="fas fa-sync-alt me-2"></i>
+                Check Status
+            </a>
+            <a href="{% url 'payments:payment_methods' %}?course={{ payment.course.slug }}" class="btn btn-secondary-yitp">
+                <i class="fas fa-arrow-left me-2"></i>
+                Try Another Method
+            </a>
+        </div>
+        
+    {% else %}
+        <!-- Payment Failed -->
+        <div class="status-card status-failed">
+            <div class="status-icon failed">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h2 style="color: #dc3545;">Payment Failed</h2>
+            <p class="lead">Unfortunately, your payment could not be processed.</p>
+            
+            <div class="next-steps">
+                <h6><i class="fas fa-exclamation-triangle me-2"></i>What went wrong?</h6>
+                <ul class="text-start">
+                    {% if payment.failure_reason %}
+                        <li>{{ payment.failure_reason }}</li>
+                    {% else %}
+                        <li>Payment was cancelled or timed out</li>
+                        <li>Insufficient funds in your account</li>
+                        <li>Network connectivity issues</li>
+                        <li>Invalid payment details</li>
+                    {% endif %}
+                </ul>
+            </div>
+            
+            <div class="payment-details">
+                <h5 style="color: #1a2e53;">Payment Details</h5>
+                <div class="detail-row">
+                    <span><strong>Course:</strong></span>
+                    <span>{{ payment.course.title }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Amount:</strong></span>
+                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Payment Method:</strong></span>
+                    <span>{{ payment.payment_method.name }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Reference:</strong></span>
+                    <span>{{ payment.reference_number }}</span>
+                </div>
+                <div class="detail-row">
+                    <span><strong>Status:</strong></span>
+                    <span class="text-danger">Failed</span>
+                </div>
+            </div>
+            
+            <div class="next-steps">
+                <h6><i class="fas fa-redo me-2"></i>Next Steps</h6>
+                <ul class="text-start">
+                    <li>Try the payment again with correct details</li>
+                    <li>Use a different payment method</li>
+                    <li>Contact support if the problem persists</li>
+                    <li>Check your account balance and try again</li>
+                </ul>
+            </div>
+            
+            <a href="{% url 'payments:payment_methods' %}?course={{ payment.course.slug }}" class="btn btn-yitp">
+                <i class="fas fa-redo me-2"></i>
+                Try Again
+            </a>
+            <a href="https://wa.me/254722646958?text=Payment%20Issue%0AReference:%20{{ payment.reference_number }}%0ACourse:%20{{ payment.course.title }}" 
+               target="_blank" class="btn btn-secondary-yitp">
+                <i class="fab fa-whatsapp me-2"></i>
+                Get Help
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if payment.status == 'processing' and payment.payment_method.code == 'mpesa' %}
+<script>
+// Countdown timer for M-Pesa payment
+let timeLeft = 300; // 5 minutes in seconds
+
+function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    
+    document.getElementById('timer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (timeLeft <= 0) {
+        document.getElementById('countdown').innerHTML = 
+            '<span class="text-danger">Payment timeout. Please try again.</span>';
+        return;
+    }
+    
+    timeLeft--;
+    setTimeout(updateTimer, 1000);
+}
+
+// Start the timer
+updateTimer();
+
+// Auto-refresh page every 10 seconds to check payment status
+setInterval(() => {
+    if (timeLeft > 0) {
+        location.reload();
+    }
+}, 10000);
+</script>
+{% endif %}
+
+{% if payment.status == 'pending' %}
+<script>
+// Auto-refresh page every 30 seconds for pending payments
+setInterval(() => {
+    location.reload();
+}, 30000);
+</script>
+{% endif %}
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.contrib import messages
@@ -203,72 +203,51 @@ class CourseDetailView(DetailView):
         return context
 
 
-class EnrollView(LoginRequiredMixin, TemplateView):
+class EnrollView(LoginRequiredMixin, View):
     """
-    Course enrollment view
+    Unified course enrollment view using EnrollmentService
     """
     def post(self, request, course_slug):
-        course = get_object_or_404(Course, slug=course_slug, is_published=True)
+        from .enrollment_service import EnrollmentService
 
-        # Check payment verification for paid courses
-        if course.price > 0:
-            # Get or create user profile
-            profile, created = request.user.profile, False
-            try:
-                profile = request.user.profile
-            except:
-                from users.models import Profile
-                profile = Profile.objects.create(user=request.user)
+        # Get course using the service
+        try:
+            course = EnrollmentService.get_course_by_slug_or_id(course_slug)
+        except:
+            messages.error(request, 'Course not found or not available for enrollment.')
+            return redirect('courses:course_list')
 
-            # Check if payment is confirmed for paid courses
-            if not profile.has_confirmed_payment:
-                messages.error(
-                    request,
-                    f'Payment verification required for {course.title}. '
-                    f'This course costs KES {course.price}. Please complete your payment '
-                    f'and wait for confirmation before enrolling. Contact support for payment instructions.'
-                )
-                return redirect('courses:course_detail', slug=course_slug)
+        # Process enrollment using the unified service
+        result = EnrollmentService.enroll_user_in_course(request.user, course)
 
-        # Check if already enrolled
-        enrollment, created = Enrollment.objects.get_or_create(
-            student=request.user,
-            course=course,
-            defaults={'status': 'active'}
-        )
-
-        if created:
-            # Send enrollment confirmation email to user
-            try:
-                send_enrollment_confirmation_email(request.user, course, enrollment)
-            except Exception as e:
-                # Log error but don't fail enrollment
-                import logging
-                logger = logging.getLogger(__name__)
-                logger.error(f"Failed to send enrollment confirmation email: {str(e)}")
-
-            # Send enrollment notification to admin
-            try:
-                send_enrollment_admin_notification(request.user, course, enrollment)
-            except Exception as e:
-                # Log error but don't fail enrollment
-                import logging
-                logger = logging.getLogger(__name__)
-                logger.error(f"Failed to send enrollment admin notification: {str(e)}")
-
+        # Handle the result and provide appropriate user feedback
+        if result['success']:
+            # Successful enrollment
             if course.price > 0:
                 messages.success(
                     request,
-                    f'Successfully enrolled in {course.title}! Your payment has been verified. '
+                    f'Successfully enrolled in "{course.title}"! Your payment has been verified. '
                     f'Check your email for confirmation details.'
                 )
             else:
                 messages.success(
                     request,
-                    f'Successfully enrolled in {course.title}! Check your email for confirmation details.'
+                    f'Successfully enrolled in "{course.title}"! Check your email for confirmation details.'
+                )
+
+            # Check for email notification issues
+            if result['email_results'] and result['email_results']['errors']:
+                messages.warning(
+                    request,
+                    'Enrollment successful, but there were issues sending confirmation emails. '
+                    'Please contact support if you need assistance.'
                 )
         else:
-            messages.info(request, f'You are already enrolled in {course.title}.')
+            # Failed enrollment - show specific error message
+            if 'already enrolled' in result['message'].lower():
+                messages.info(request, result['message'])
+            else:
+                messages.error(request, result['message'])
 
         return redirect('courses:course_detail', slug=course_slug)
 
