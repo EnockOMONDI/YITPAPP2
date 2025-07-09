@@ -1,0 +1,65 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Notifications - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-bell me-2"></i>Notifications
+                </h1>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary" id="markAllRead">
+                        <i class="fas fa-check me-1"></i>Mark All Read
+                    </button>
+                    <a href="{% url 'communication:dashboard' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list me-2"></i>Recent Notifications
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <!-- Sample notifications - replace with dynamic content -->
+                        <div class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">New course available</div>
+                                <p class="mb-1">Advanced Business Strategy & Leadership is now available for enrollment.</p>
+                                <small class="text-muted">2 hours ago</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">New</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Assignment due reminder</div>
+                                <p class="mb-1">Your assignment for "Business Planning" is due in 2 days.</p>
+                                <small class="text-muted">1 day ago</small>
+                            </div>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Forum reply</div>
+                                <p class="mb-1">Someone replied to your topic in the General Discussion forum.</p>
+                                <small class="text-muted">3 days ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Search Content - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-search me-2"></i>Search Content
+                </h1>
+                <a href="{% url 'content:library' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Back to Library
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="q" value="{{ query }}" placeholder="Search for resources, content, exercises...">
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select" name="type">
+                                <option value="">All Types</option>
+                                <option value="resource">Resources</option>
+                                <option value="content">Content Items</option>
+                                <option value="exercise">Exercises</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search me-1"></i>Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Results -->
+    {% if query %}
+    <div class="row">
+        <div class="col-12">
+            <h4 class="mb-3">Search Results for "{{ query }}"</h4>
+            
+            <!-- Resources -->
+            {% if resources %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Resources ({{ resources|length }})</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for resource in resources %}
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-file-alt fa-2x text-primary"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6><a href="{% url 'content:resource_detail' resource.id %}">{{ resource.title }}</a></h6>
+                                    <p class="mb-1">{{ resource.description|truncatewords:15 }}</p>
+                                    <small class="text-muted">{{ resource.get_resource_type_display }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Content Items -->
+            {% if content_items %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Content Items ({{ content_items|length }})</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for item in content_items %}
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-layer-group fa-2x text-success"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6><a href="{% url 'content:content_item_detail' item.id %}">{{ item.title }}</a></h6>
+                                    <p class="mb-1">{{ item.content|truncatewords:15 }}</p>
+                                    <small class="text-muted">{{ item.get_content_type_display }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Exercises -->
+            {% if exercises %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Interactive Exercises ({{ exercises|length }})</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for exercise in exercises %}
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-puzzle-piece fa-2x text-warning"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6><a href="{% url 'content:exercise_detail' exercise.id %}">{{ exercise.title }}</a></h6>
+                                    <p class="mb-1">{{ exercise.description|truncatewords:15 }}</p>
+                                    <small class="text-muted">{{ exercise.get_exercise_type_display }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if not resources and not content_items and not exercises %}
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">No results found</h4>
+                <p class="text-muted">Try different keywords or browse the content library.</p>
+                <a href="{% url 'content:library' %}" class="btn btn-primary">Browse Library</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

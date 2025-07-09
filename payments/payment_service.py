@@ -31,16 +31,18 @@ class PaymentService:
     REFUNDED = 'refunded'
     
     @staticmethod
-    def create_payment_record(user, course, amount, payment_method='mpesa'):
+    def create_payment_record(user, course, amount, payment_method='mpesa', is_installment=False, installment_sequence=None):
         """
         Create a payment record for course enrollment
-        
+
         Args:
             user: User object
             course: Course object
             amount: Payment amount (Decimal)
-            payment_method: Payment method ('mpesa', 'bank_transfer', 'card')
-            
+            payment_method: Payment method ('mpesa', 'bank_transfer', 'paypal', 'card')
+            is_installment: Boolean indicating if this is an installment payment
+            installment_sequence: Integer (1 or 2) for installment sequence
+
         Returns:
             Payment object
         """
@@ -52,10 +54,12 @@ class PaymentService:
                 payment_method=payment_method,
                 reference_number=PaymentService._generate_reference(),
                 status=PaymentService.PENDING,
+                is_installment=is_installment,
+                installment_sequence=installment_sequence,
                 created_at=timezone.now()
             )
-            
-            logger.info(f"Payment record created: {payment.reference_number} for {user.email}")
+
+            logger.info(f"Payment record created: {payment.reference_number} for {user.email} - Method: {payment_method}")
             return payment
             
         except Exception as e:
@@ -131,6 +135,313 @@ class PaymentService:
                 'success': False,
                 'message': f'Payment processing failed: {str(e)}',
                 'transaction_id': None
+            }
+
+    @staticmethod
+    def process_paypal_payment(payment, paypal_payment_id=None, paypal_payer_id=None):
+        """
+        Process PayPal payment using existing PayPal infrastructure
+
+        Args:
+            payment: Payment object
+            paypal_payment_id: PayPal transaction ID (optional for manual verification)
+            paypal_payer_id: PayPal payer ID (optional for manual verification)
+
+        Returns:
+            dict: {'success': bool, 'message': str, 'paypal_url': str or None}
+        """
+        try:
+            # Generate PayPal payment URL based on existing infrastructure
+            paypal_url = PaymentService._generate_paypal_url(payment)
+
+            # Update payment with PayPal details
+            if paypal_payment_id:
+                payment.paypal_payment_id = paypal_payment_id
+            if paypal_payer_id:
+                payment.paypal_payer_id = paypal_payer_id
+
+            payment.status = PaymentService.PENDING
+            payment.save()
+
+            logger.info(f"PayPal payment initiated: {payment.reference_number}")
+
+            return {
+                'success': True,
+                'message': 'PayPal payment initiated. Please complete payment on PayPal.',
+                'paypal_url': paypal_url,
+                'payment_id': payment.reference_number
+            }
+
+        except Exception as e:
+            logger.error(f"PayPal payment processing failed: {str(e)}")
+            return {
+                'success': False,
+                'message': f'PayPal payment processing failed: {str(e)}',
+                'paypal_url': None
+            }
+
+    @staticmethod
+    def _generate_paypal_url(payment):
+        """
+        Generate PayPal payment URL with enhanced error handling
+        Uses the existing PayPal link structure with proper validation
+        """
+        try:
+            # Validate payment object
+            if not payment or not payment.reference_number:
+                raise ValueError("Invalid payment object or missing reference number")
+
+            # Validate amount
+            if not payment.amount or payment.amount <= 0:
+                raise ValueError("Invalid payment amount")
+
+            # Use existing PayPal payment link structure
+            base_url = "https://www.paypal.com/ncp/payment/FUAJVJ66L978C"
+
+            # Validate base URL format
+            if not base_url.startswith('https://'):
+                raise ValueError("Invalid PayPal base URL - must use HTTPS")
+
+            # Add payment reference and amount as parameters for tracking
+            # URL encode parameters to handle special characters
+            from urllib.parse import urlencode
+            params = {
+                'reference': payment.reference_number,
+                'amount': str(payment.amount),
+                'currency': payment.currency or 'KES'
+            }
+
+            paypal_url = f"{base_url}?{urlencode(params)}"
+
+            # Validate final URL length (PayPal has URL length limits)
+            if len(paypal_url) > 2048:
+                logger.warning(f"PayPal URL length exceeds recommended limit: {len(paypal_url)} characters")
+
+            logger.info(f"Generated PayPal URL for payment {payment.reference_number}")
+            return paypal_url
+
+        except Exception as e:
+            logger.error(f"Failed to generate PayPal URL for payment {payment.reference_number if payment else 'unknown'}: {str(e)}")
+            # Return fallback URL without parameters
+            return "https://www.paypal.com/ncp/payment/FUAJVJ66L978C"
+
+    @staticmethod
+    def process_bank_transfer_payment(payment, transaction_id=None):
+        """
+        Process bank transfer payment with manual verification
+
+        Args:
+            payment: Payment object
+            transaction_id: Bank transaction ID for verification
+
+        Returns:
+            dict: {'success': bool, 'message': str}
+        """
+        try:
+            # Update payment with transaction details
+            if transaction_id:
+                payment.reference_number = transaction_id
+
+            payment.status = PaymentService.PENDING
+            payment.save()
+
+            logger.info(f"Bank transfer payment initiated: {payment.reference_number}")
+
+            return {
+                'success': True,
+                'message': 'Bank transfer payment recorded. Please wait for manual verification.',
+                'payment_id': payment.reference_number
+            }
+
+        except Exception as e:
+            logger.error(f"Bank transfer payment processing failed: {str(e)}")
+            return {
+                'success': False,
+                'message': f'Bank transfer payment processing failed: {str(e)}'
+            }
+
+    @staticmethod
+    def verify_manual_payment(payment, transaction_id, verified_by=None, notes=""):
+        """
+        Manually verify PayPal or bank transfer payment
+
+        Args:
+            payment: Payment object
+            transaction_id: Transaction ID from PayPal or bank
+            verified_by: User who verified the payment (admin)
+            notes: Additional verification notes
+
+        Returns:
+            dict: {'success': bool, 'message': str}
+        """
+        try:
+            # Update payment with verification details
+            if payment.payment_method == 'paypal':
+                payment.paypal_payment_id = transaction_id
+            else:
+                payment.reference_number = transaction_id
+
+            # Confirm the payment using enhanced method from Phase 1
+            payment.confirm_payment(verified_by=verified_by, notes=notes)
+
+            logger.info(f"Manual payment verification completed: {payment.reference_number}")
+
+            return {
+                'success': True,
+                'message': 'Payment verified and confirmed successfully.',
+                'payment_status': payment.status
+            }
+
+        except Exception as e:
+            logger.error(f"Manual payment verification failed: {str(e)}")
+            return {
+                'success': False,
+                'message': f'Payment verification failed: {str(e)}'
+            }
+
+    @staticmethod
+    def confirm_payment_and_enroll(payment, verified_by=None):
+        """
+        Confirm payment and automatically enroll user in course
+
+        Args:
+            payment: Payment object to confirm
+            verified_by: User who verified the payment (for manual payments)
+
+        Returns:
+            dict: {'success': bool, 'message': str, 'enrollment': Enrollment or None}
+        """
+        try:
+            # Confirm the payment using enhanced method from Phase 1
+            confirmation_result = payment.confirm_payment(verified_by=verified_by)
+
+            if not confirmation_result.get('success', True):  # confirm_payment may not return dict
+                return {
+                    'success': False,
+                    'message': 'Payment confirmation failed.',
+                    'enrollment': None
+                }
+
+            # Create course enrollment
+            from courses.models import Enrollment
+            enrollment, created = Enrollment.objects.get_or_create(
+                student=payment.user,
+                course=payment.course,
+                defaults={
+                    'enrollment_date': timezone.now(),
+                    'payment_status': 'confirmed' if not payment.is_installment else 'partially_paid'
+                }
+            )
+
+            if created:
+                logger.info(f"User {payment.user.username} enrolled in course {payment.course.title}")
+
+                # Update user profile payment status
+                profile = payment.user.profile
+                if payment.is_installment and payment.installment_sequence == 1:
+                    profile.payment_status = 'partially_paid'
+                    profile.payment_expiry_date = timezone.now() + timezone.timedelta(days=30)
+                else:
+                    profile.payment_status = 'confirmed'
+                    profile.payment_expiry_date = None
+                profile.save()
+
+                return {
+                    'success': True,
+                    'message': 'Payment confirmed and course enrollment completed.',
+                    'enrollment': enrollment
+                }
+            else:
+                return {
+                    'success': True,
+                    'message': 'Payment confirmed. User was already enrolled in course.',
+                    'enrollment': enrollment
+                }
+
+        except Exception as e:
+            logger.error(f"Payment confirmation and enrollment failed: {str(e)}")
+            return {
+                'success': False,
+                'message': f'Payment confirmation failed: {str(e)}',
+                'enrollment': None
+            }
+
+    @staticmethod
+    def create_installment_payment(user, course, installment_sequence=1, payment_method='mpesa'):
+        """
+        Create an installment payment (50% of course price)
+
+        Args:
+            user: User object
+            course: Course object
+            installment_sequence: 1 for first installment, 2 for second
+            payment_method: Payment method ('mpesa', 'paypal', 'bank_transfer')
+
+        Returns:
+            Payment object
+        """
+        from decimal import Decimal
+
+        # Calculate installment amount (50% of course price)
+        installment_amount = course.price * Decimal('0.5')
+
+        # Create installment payment record
+        payment = PaymentService.create_payment_record(
+            user=user,
+            course=course,
+            amount=installment_amount,
+            payment_method=payment_method,
+            is_installment=True,
+            installment_sequence=installment_sequence
+        )
+
+        logger.info(f"Installment payment created: {payment.reference_number} - Sequence: {installment_sequence}")
+        return payment
+
+    @staticmethod
+    def process_installment_payment(payment, **kwargs):
+        """
+        Process installment payment based on payment method
+
+        Args:
+            payment: Payment object (must be installment payment)
+            **kwargs: Additional arguments based on payment method
+
+        Returns:
+            dict: Payment processing result
+        """
+        if not payment.is_installment:
+            return {
+                'success': False,
+                'message': 'Payment is not an installment payment'
+            }
+
+        if payment.payment_method == 'mpesa':
+            phone_number = kwargs.get('phone_number')
+            if not phone_number:
+                return {
+                    'success': False,
+                    'message': 'Phone number required for M-Pesa payment'
+                }
+            return PaymentService.process_mpesa_payment(payment, phone_number)
+
+        elif payment.payment_method == 'paypal':
+            return PaymentService.process_paypal_payment(
+                payment,
+                kwargs.get('paypal_payment_id'),
+                kwargs.get('paypal_payer_id')
+            )
+
+        elif payment.payment_method == 'bank_transfer':
+            return PaymentService.process_bank_transfer_payment(
+                payment,
+                kwargs.get('transaction_id')
+            )
+
+        else:
+            return {
+                'success': False,
+                'message': f'Unsupported payment method: {payment.payment_method}'
             }
 
     @staticmethod
@@ -300,21 +611,32 @@ class PaymentService:
                 'name': 'M-Pesa',
                 'description': 'Pay using M-Pesa mobile money',
                 'icon': 'mpesa-icon.png',
-                'enabled': True
+                'enabled': True,
+                'supports_installments': True
             },
             {
                 'code': 'bank_transfer',
                 'name': 'Bank Transfer',
                 'description': 'Direct bank transfer to YITP account',
                 'icon': 'bank-icon.png',
-                'enabled': True
+                'enabled': True,
+                'supports_installments': True
+            },
+            {
+                'code': 'paypal',
+                'name': 'PayPal',
+                'description': 'Pay securely with PayPal',
+                'icon': 'paypal-icon.png',
+                'enabled': True,
+                'supports_installments': True
             },
             {
                 'code': 'card',
                 'name': 'Credit/Debit Card',
                 'description': 'Pay using Visa, Mastercard, or other cards',
                 'icon': 'card-icon.png',
-                'enabled': False  # To be implemented later
+                'enabled': False,  # To be implemented later
+                'supports_installments': False
             }
         ]
 

@@ -7,7 +7,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.files.base import ContentFile
 from django.utils import timezone
-from django.urls import reverse
+
 import logging
 import uuid
 import os
@@ -85,8 +85,9 @@ class CertificateService:
                     enrollment=enrollment,
                     certificate_id=CertificateService._generate_certificate_id(),
                     verification_code=CertificateService._generate_verification_code(),
-                    issued_at=timezone.now(),
-                    certificate_file=pdf_result['file']
+                    issued_date=timezone.now(),
+                    final_score=enrollment.progress_percentage,
+                    certificate_data={'file_path': pdf_result.get('file_path', '')}
                 )
                 
                 logger.info(f"Certificate generated: {certificate.certificate_id} for {enrollment.student.email}")
@@ -95,7 +96,7 @@ class CertificateService:
                     'success': True,
                     'certificate': certificate,
                     'message': 'Certificate generated successfully',
-                    'file_path': certificate.certificate_file.path
+                    'file_path': pdf_result.get('file_path', '')
                 }
             else:
                 return pdf_result
@@ -212,7 +213,7 @@ class CertificateService:
             # Completion details
             completion_date = enrollment.completion_date or timezone.now()
             story.append(Paragraph(f"Completed on: {completion_date.strftime('%B %d, %Y')}", body_style))
-            story.append(Paragraph(f"Course Duration: {enrollment.course.duration_weeks} weeks", body_style))
+            story.append(Paragraph(f"Course Duration: {enrollment.course.estimated_duration} hours", body_style))
             story.append(Paragraph(f"Final Score: {enrollment.progress_percentage:.1f}%", body_style))
             story.append(Spacer(1, 40))
             
@@ -244,7 +245,7 @@ class CertificateService:
             story.append(Paragraph(f"Verification Code: {verification_code}", details_style))
             
             # Verification URL
-            verification_url = f"{settings.SITE_URL}{reverse('certificates:verify', args=[verification_code])}"
+            verification_url = f"{settings.SITE_URL}/certificates/verify/{verification_code}/"
             story.append(Paragraph(f"Verify at: {verification_url}", details_style))
             
             # Build PDF
@@ -278,12 +279,12 @@ class CertificateService:
                 'student_name': f"{enrollment.student.first_name} {enrollment.student.last_name}".strip() or enrollment.student.username,
                 'course_title': enrollment.course.title,
                 'completion_date': enrollment.completion_date or timezone.now(),
-                'duration': enrollment.course.duration_weeks,
+                'duration': enrollment.course.estimated_duration,
                 'score': enrollment.progress_percentage,
                 'certificate_id': CertificateService._generate_certificate_id(),
                 'verification_code': CertificateService._generate_verification_code(),
                 'issue_date': timezone.now(),
-                'verification_url': f"{settings.SITE_URL}{reverse('certificates:verify', args=['VERIFICATION_CODE'])}"
+                'verification_url': f"{settings.SITE_URL}/certificates/verify/VERIFICATION_CODE/"
             }
             
             # Render HTML template
@@ -350,4 +351,4 @@ class CertificateService:
         """Get all certificates for a user"""
         return Certificate.objects.filter(
             enrollment__student=user
-        ).select_related('enrollment__course').order_by('-issued_at')
+        ).select_related('enrollment__course').order_by('-issued_date')

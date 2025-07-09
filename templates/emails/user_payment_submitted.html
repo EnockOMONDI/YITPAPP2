@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Submitted Successfully - YITP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff5d15 0%, #ff8f00 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            border-left: 4px solid #28a745;
+        }
+        
+        .success-icon {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        
+        .payment-summary {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #1a2e53;
+            min-width: 140px;
+        }
+        
+        .detail-value {
+            color: #333;
+            text-align: right;
+            flex: 1;
+        }
+        
+        .verification-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #ff5d15;
+        }
+        
+        .timeline {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .timeline-step {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .step-completed {
+            background: #28a745;
+        }
+        
+        .step-current {
+            background: #ff5d15;
+        }
+        
+        .step-pending {
+            background: #6c757d;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff5d15, #ff8f00);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #1a2e53;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .footer {
+            background: #1a2e53;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #ff5d15;
+            text-decoration: none;
+        }
+        
+        .installment-notice {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                text-align: left;
+            }
+            
+            .detail-value {
+                text-align: left;
+                margin-top: 5px;
+                font-weight: 500;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Payment Submitted Successfully!</h1>
+            <p>Thank you for your payment, {{ user.get_full_name|default:user.username }}</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Success Message -->
+            <div class="success-message">
+                <div class="success-icon">✅</div>
+                <h3 style="color: #28a745; margin: 0 0 10px 0;">Payment Received</h3>
+                <p style="margin: 0;">Your {{ payment.get_payment_method_display }} payment has been successfully submitted and is now being processed.</p>
+            </div>
+            
+            <!-- Payment Summary -->
+            <div class="payment-summary">
+                <h3 style="color: #1a2e53; margin-top: 0;">📋 Payment Summary</h3>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Reference Number:</span>
+                    <span class="detail-value"><strong>{{ payment.reference_number }}</strong></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Course:</span>
+                    <span class="detail-value">{{ payment.course.title }}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Amount:</span>
+                    <span class="detail-value"><strong>KES {{ payment.amount|floatformat:0 }}</strong></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method:</span>
+                    <span class="detail-value">
+                        {% if payment.payment_method == 'paypal' %}
+                            💳 PayPal
+                        {% elif payment.payment_method == 'bank_transfer' %}
+                            🏦 Bank Transfer
+                        {% else %}
+                            {{ payment.get_payment_method_display }}
+                        {% endif %}
+                    </span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Payment Type:</span>
+                    <span class="detail-value">
+                        {% if payment.is_installment %}
+                            Installment {{ payment.installment_sequence }} of 2
+                        {% else %}
+                            Full Payment
+                        {% endif %}
+                    </span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Submitted:</span>
+                    <span class="detail-value">{{ payment.created_at|date:"F d, Y H:i" }}</span>
+                </div>
+
+                {% if payment.paypal_payment_id %}
+                <div class="detail-row">
+                    <span class="detail-label">PayPal Transaction ID:</span>
+                    <span class="detail-value">{{ payment.paypal_payment_id }}</span>
+                </div>
+                {% endif %}
+
+                {% if payment.transaction_id and payment.payment_method == 'bank_transfer' %}
+                <div class="detail-row">
+                    <span class="detail-label">Bank Transaction ID:</span>
+                    <span class="detail-value">{{ payment.transaction_id }}</span>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Verification Information -->
+            <div class="verification-info">
+                <h4 style="color: #1a2e53; margin-top: 0;">⏱️ Verification Process</h4>
+                <p><strong>Your transaction ID has been sent to our team and will be verified within 24 hours.</strong></p>
+                
+                {% if payment.payment_method == 'paypal' %}
+                    <p>Our team will verify your PayPal payment and confirm your course enrollment. You'll receive an email notification once verification is complete.</p>
+                {% elif payment.payment_method == 'bank_transfer' %}
+                    <p>Our team will verify your bank transfer and confirm your course enrollment. You'll receive an email notification once verification is complete.</p>
+                {% endif %}
+                
+                <p class="small" style="margin-bottom: 0;">
+                    <strong>Business Hours:</strong> Monday - Friday, 8:00 AM - 6:00 PM EAT<br>
+                    <strong>Verification Time:</strong> Usually within 2 hours during business hours
+                </p>
+            </div>
+            
+            <!-- Process Timeline -->
+            <div class="timeline">
+                <h4 style="color: #1a2e53; margin-top: 0;">📈 What Happens Next</h4>
+                
+                <div class="timeline-step">
+                    <div class="step-icon step-completed">1</div>
+                    <div>
+                        <strong>Payment Submitted</strong><br>
+                        <small>Your payment details have been received ✅</small>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <div class="step-icon step-current">2</div>
+                    <div>
+                        <strong>Verification in Progress</strong><br>
+                        <small>Our team is verifying your transaction (Current Step)</small>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <div class="step-icon step-pending">3</div>
+                    <div>
+                        <strong>Course Access Granted</strong><br>
+                        <small>You'll receive confirmation and can start learning</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Installment Notice -->
+            {% if payment.is_installment %}
+            <div class="installment-notice">
+                <h4 style="color: #1a2e53; margin-top: 0;">📅 Installment Payment Information</h4>
+                {% if payment.installment_sequence == 1 %}
+                    <p><strong>First Installment:</strong> Once verified, you'll have 30 days of course access.</p>
+                    <p><strong>Second Payment:</strong> Complete your second installment within 30 days for full course access.</p>
+                {% else %}
+                    <p><strong>Final Installment:</strong> Once verified, you'll have complete access to the course.</p>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+            <!-- Action Buttons -->
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ payment_status_url }}" class="btn btn-primary">
+                    📊 Check Payment Status
+                </a>
+                <a href="{{ profile_url }}" class="btn btn-secondary">
+                    👤 View My Profile
+                </a>
+            </div>
+            
+            <!-- Support Information -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h4 style="color: #1a2e53; margin-top: 0;">💬 Need Help?</h4>
+                <p style="margin-bottom: 10px;">If you have any questions about your payment or need assistance:</p>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Email us at: <a href="mailto:support@yitp.org">support@yitp.org</a></li>
+                    <li>WhatsApp: <a href="https://wa.me/254722646958">+254 722 646 958</a></li>
+                    <li>Check your payment status anytime using the link above</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                <strong>Youth Impact Training Program (YITP)</strong><br>
+                Empowering youth through quality education and training<br>
+                <a href="mailto:support@yitp.org">support@yitp.org</a> | <a href="https://yitp.org">www.yitp.org</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Verification Required - YITP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff5d15 0%, #ff8f00 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff5d15;
+        }
+        
+        .payment-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #1a2e53;
+            min-width: 140px;
+        }
+        
+        .detail-value {
+            color: #333;
+            text-align: right;
+            flex: 1;
+        }
+        
+        .transaction-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .action-buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff5d15, #ff8f00);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #1a2e53;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .footer {
+            background: #1a2e53;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #ff5d15;
+            text-decoration: none;
+        }
+        
+        .priority-high {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            border-left-color: #dc3545;
+        }
+        
+        .method-icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                text-align: left;
+            }
+            
+            .detail-value {
+                text-align: left;
+                margin-top: 5px;
+                font-weight: 500;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔔 Payment Verification Required</h1>
+            <p>YITP Admin Notification</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="alert {% if payment.payment_method == 'paypal' %}priority-high{% endif %}">
+                <strong>⚠️ Action Required:</strong> A new {{ payment.get_payment_method_display }} payment requires manual verification.
+            </div>
+            
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <h3 style="color: #1a2e53; margin-top: 0;">
+                    {% if payment.payment_method == 'paypal' %}
+                        <span class="method-icon">💳</span>PayPal Payment Details
+                    {% elif payment.payment_method == 'bank_transfer' %}
+                        <span class="method-icon">🏦</span>Bank Transfer Details
+                    {% else %}
+                        <span class="method-icon">💰</span>Payment Details
+                    {% endif %}
+                </h3>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Reference Number:</span>
+                    <span class="detail-value"><strong>{{ payment.reference_number }}</strong></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Student:</span>
+                    <span class="detail-value">{{ payment.user.get_full_name|default:payment.user.username }}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">{{ payment.user.email }}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Course:</span>
+                    <span class="detail-value">{{ payment.course.title }}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Amount:</span>
+                    <span class="detail-value"><strong>KES {{ payment.amount|floatformat:0 }}</strong></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Payment Type:</span>
+                    <span class="detail-value">
+                        {% if payment.is_installment %}
+                            Installment {{ payment.installment_sequence }} of 2
+                        {% else %}
+                            Full Payment
+                        {% endif %}
+                    </span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Submitted:</span>
+                    <span class="detail-value">{{ payment.created_at|date:"F d, Y H:i" }}</span>
+                </div>
+            </div>
+            
+            <!-- Transaction Information -->
+            {% if payment.paypal_payment_id or payment.transaction_id %}
+            <div class="transaction-info">
+                <h4 style="color: #1a2e53; margin-top: 0;">📋 Transaction Information</h4>
+                
+                {% if payment.paypal_payment_id %}
+                <div class="detail-row">
+                    <span class="detail-label">PayPal Transaction ID:</span>
+                    <span class="detail-value"><code>{{ payment.paypal_payment_id }}</code></span>
+                </div>
+                {% endif %}
+                
+                {% if payment.paypal_payer_id %}
+                <div class="detail-row">
+                    <span class="detail-label">PayPal Payer ID:</span>
+                    <span class="detail-value"><code>{{ payment.paypal_payer_id }}</code></span>
+                </div>
+                {% endif %}
+                
+                {% if payment.transaction_id and payment.payment_method == 'bank_transfer' %}
+                <div class="detail-row">
+                    <span class="detail-label">Bank Reference:</span>
+                    <span class="detail-value"><code>{{ payment.transaction_id }}</code></span>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="{{ admin_url }}" class="btn btn-primary">
+                    ✅ Verify Payment in Admin
+                </a>
+                <a href="{{ user_profile_url }}" class="btn btn-secondary">
+                    👤 View User Profile
+                </a>
+            </div>
+            
+            <!-- Instructions -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h4 style="color: #1a2e53; margin-top: 0;">📝 Verification Instructions</h4>
+                <ol style="margin: 0; padding-left: 20px;">
+                    <li>Click "Verify Payment in Admin" to access the Django admin interface</li>
+                    <li>Verify the transaction details against your payment processor records</li>
+                    <li>Use the admin actions to approve or reject the payment</li>
+                    <li>The student will be automatically notified of the verification result</li>
+                    {% if payment.is_installment %}
+                    <li><strong>Note:</strong> This is an installment payment - partial course access will be granted</li>
+                    {% endif %}
+                </ol>
+            </div>
+            
+            <!-- Priority Notice -->
+            {% if payment.payment_method == 'paypal' %}
+            <div class="alert priority-high" style="margin-top: 20px;">
+                <strong>🚨 High Priority:</strong> PayPal payments should be verified within 2 hours during business hours to ensure optimal user experience.
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                <strong>YITP Payment Management System</strong><br>
+                This is an automated notification. Please do not reply to this email.<br>
+                For support, contact: <a href="mailto:support@yitp.org">support@yitp.org</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

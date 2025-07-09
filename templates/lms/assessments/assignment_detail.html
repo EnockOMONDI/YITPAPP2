@@ -112,8 +112,9 @@
                             </div>
                             <div class="col-md-6 text-end">
                                 {% if user_submission.grade is not None %}
-                                    <span class="badge bg-{% if user_submission.grade >= assignment.max_points * 0.8 %}success{% elif user_submission.grade >= assignment.max_points * 0.6 %}warning{% else %}danger{% endif %} fs-6">
-                                        Grade: {{ user_submission.grade }}/{{ assignment.max_points }}
+                                    {% widthratio user_submission.grade assignment.max_points 100 as grade_percentage %}
+                                    <span class="badge bg-{% if grade_percentage >= 80 %}success{% elif grade_percentage >= 60 %}warning{% else %}danger{% endif %} fs-6">
+                                        Grade: {{ user_submission.grade }}/{{ assignment.max_points }} ({{ grade_percentage }}%)
                                     </span>
                                 {% else %}
                                     <span class="badge bg-secondary fs-6">Pending Review</span>
@@ -327,37 +328,150 @@
 
 {% block extra_js %}
 <script>
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     // File upload validation
-    $('#submission_files').change(function() {
-        const files = this.files;
-        const maxSize = {{ assignment.max_file_size|default:10485760 }}; // 10MB default
-        
-        for (let i = 0; i < files.length; i++) {
-            if (files[i].size > maxSize) {
-                alert(`File "${files[i].name}" is too large. Maximum size is {{ assignment.max_file_size|filesizeformat|default:"10MB" }}.`);
-                this.value = '';
-                return;
+    const fileInput = document.getElementById('submission_files');
+    if (fileInput) {
+        fileInput.addEventListener('change', function() {
+            const files = this.files;
+            const maxSize = {{ assignment.max_file_size|default:10485760 }}; // 10MB default
+
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > maxSize) {
+                    alert(`File "${files[i].name}" is too large. Maximum size is 10MB.`);
+                    this.value = '';
+                    return;
+                }
             }
-        }
-    });
+
+            // Show selected files
+            const fileList = document.getElementById('selected-files');
+            if (fileList) {
+                fileList.innerHTML = '';
+                for (let i = 0; i < files.length; i++) {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'alert alert-info py-2 mb-2';
+                    fileItem.innerHTML = `
+                        <i class="fas fa-file me-2"></i>
+                        ${files[i].name} (${(files[i].size / 1024 / 1024).toFixed(2)} MB)
+                    `;
+                    fileList.appendChild(fileItem);
+                }
+            }
+        });
+    }
 
     // Submission confirmation
-    $('#submission-form').submit(function(e) {
-        if (!confirm('Are you sure you want to submit this assignment? You may not be able to change it later.')) {
-            e.preventDefault();
-        }
-    });
+    const submissionForm = document.getElementById('submission-form');
+    if (submissionForm) {
+        submissionForm.addEventListener('submit', function(e) {
+            if (!confirm('Are you sure you want to submit this assignment? You may not be able to change it later.')) {
+                e.preventDefault();
+            }
+        });
+    }
 
-    // Auto-save draft functionality (optional)
-    let autoSaveTimer;
-    $('#submission_text').on('input', function() {
-        clearTimeout(autoSaveTimer);
-        autoSaveTimer = setTimeout(function() {
-            // Auto-save draft functionality could be implemented here
-            console.log('Auto-saving draft...');
-        }, 2000);
-    });
+    // Auto-save draft functionality
+    const submissionText = document.getElementById('submission_text');
+    if (submissionText) {
+        let autoSaveTimer;
+        submissionText.addEventListener('input', function() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(function() {
+                // Auto-save draft functionality could be implemented here
+                console.log('Auto-saving draft...');
+
+                // Show auto-save indicator
+                const indicator = document.getElementById('autosave-indicator');
+                if (indicator) {
+                    indicator.style.display = 'block';
+                    setTimeout(() => {
+                        indicator.style.display = 'none';
+                    }, 2000);
+                }
+            }, 2000);
+        });
+    }
+
+    // Character counter for text submissions
+    const textArea = document.getElementById('submission_text');
+    if (textArea) {
+        const counter = document.getElementById('char-counter');
+        if (counter) {
+            textArea.addEventListener('input', function() {
+                const length = this.value.length;
+                counter.textContent = `${length} characters`;
+
+                // Color coding based on length
+                if (length > 5000) {
+                    counter.className = 'text-danger';
+                } else if (length > 3000) {
+                    counter.className = 'text-warning';
+                } else {
+                    counter.className = 'text-muted';
+                }
+            });
+        }
+    }
 });
 </script>
+
+<style>
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+    transform: translateY(-1px);
+}
+
+.text-primary {
+    color: #ff5d15 !important;
+}
+
+.assignment-description {
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.submission-area {
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.submission-area:hover {
+    border-color: #ff5d15;
+    background-color: rgba(255, 93, 21, 0.05);
+}
+
+.form-control:focus {
+    border-color: #ff5d15;
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
+}
+
+#autosave-indicator {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+</style>
 {% endblock %}

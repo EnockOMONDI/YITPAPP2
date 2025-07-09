@@ -51,7 +51,12 @@
         background-color: #1a2e53;
         color: white;
     }
-    
+
+    .paypal-icon {
+        background-color: #0070ba;
+        color: white;
+    }
+
     .card-icon {
         background-color: #6c757d;
         color: white;
@@ -151,6 +156,46 @@
         border-color: #e9ecef !important;
         box-shadow: none !important;
     }
+
+    .payment-option-toggle {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .payment-option-toggle .form-check-input:checked {
+        background-color: #ff5d15;
+        border-color: #ff5d15;
+    }
+
+    .installment-info {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .installment-breakdown {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .installment-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+    .installment-item:last-child {
+        border-bottom: none;
+    }
     
     .coming-soon-badge {
         background-color: #6c757d;
@@ -185,7 +230,61 @@
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Payment Option Toggle -->
+            <div class="payment-option-toggle">
+                <h6 class="mb-3" style="color: #1a2e53;">Payment Options</h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_option" id="full_payment" value="full" checked onchange="togglePaymentOption()">
+                            <label class="form-check-label" for="full_payment">
+                                <strong>Full Payment</strong><br>
+                                <small class="text-muted">Pay the complete course fee now</small><br>
+                                <span class="text-success"><strong>KES {{ course.price|floatformat:0 }}</strong></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_option" id="installment_payment" value="installment" onchange="togglePaymentOption()">
+                            <label class="form-check-label" for="installment_payment">
+                                <strong>2-Installment Plan</strong><br>
+                                <small class="text-muted">Pay 50% now, 50% within 30 days</small><br>
+                                <span class="text-warning"><strong>KES {% widthratio course.price 2 1 %} × 2</strong></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Installment Information -->
+                <div id="installment-info" class="installment-info" style="display: none;">
+                    <h6><i class="fas fa-info-circle me-2"></i>Installment Payment Details</h6>
+                    <div class="installment-breakdown">
+                        <div class="installment-item">
+                            <span><strong>First Payment (Now):</strong></span>
+                            <span><strong>KES {% widthratio course.price 2 1 %}</strong></span>
+                        </div>
+                        <div class="installment-item">
+                            <span><strong>Second Payment (Within 30 days):</strong></span>
+                            <span><strong>KES {% widthratio course.price 2 1 %}</strong></span>
+                        </div>
+                        <div class="installment-item">
+                            <span><strong>Course Access:</strong></span>
+                            <span>30 days after first payment</span>
+                        </div>
+                        <div class="installment-item">
+                            <span><strong>Full Access:</strong></span>
+                            <span>After second payment completion</span>
+                        </div>
+                    </div>
+                    <p class="small text-muted mt-2 mb-0">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        Course access expires after 30 days if second payment is not completed.
+                    </p>
+                </div>
+            </div>
+
             <!-- Payment Methods -->
             <div class="payment-methods">
                 <!-- M-Pesa Payment -->
@@ -219,6 +318,22 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- PayPal Payment -->
+                <div class="payment-method-card" data-method="paypal" onclick="selectPaymentMethod('paypal')">
+                    <div class="d-flex align-items-center">
+                        <div class="payment-method-icon paypal-icon">
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">PayPal</h6>
+                            <small class="text-muted">Pay securely with PayPal</small>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-info">🔒 Secure</small>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Credit/Debit Card Payment (Coming Soon) -->
                 <div class="payment-method-card disabled-method">
@@ -248,6 +363,8 @@
                     {% csrf_token %}
                     <input type="hidden" name="course_id" value="{{ course.id }}">
                     <input type="hidden" name="amount" value="{{ course.price }}">
+                    <input type="hidden" name="is_installment" value="false">
+                    <input type="hidden" name="installment_sequence" value="1">
                     
                     <div class="mb-3">
                         <label for="phone_number" class="form-label">M-Pesa Phone Number</label>
@@ -352,20 +469,88 @@
                     {% csrf_token %}
                     <input type="hidden" name="course_id" value="{{ course.id }}">
                     <input type="hidden" name="amount" value="{{ course.price }}">
+                    <input type="hidden" name="is_installment" value="false">
+                    <input type="hidden" name="installment_sequence" value="1">
                     
                     <div class="mb-3 mt-3">
-                        <label for="bank_reference" class="form-label">Transaction Reference (Optional)</label>
-                        <input type="text" 
-                               class="form-control" 
-                               id="bank_reference" 
-                               name="bank_reference" 
-                               placeholder="Enter your bank transaction reference">
-                        <div class="form-text">If you have already made the payment, enter your transaction reference</div>
+                        <label for="bank_reference" class="form-label">Transaction Reference</label>
+                        <input type="text"
+                               class="form-control"
+                               id="bank_reference"
+                               name="transaction_id"
+                               placeholder="Enter your bank transaction reference"
+                               required>
+                        <div class="form-text">Enter your bank transaction reference for verification</div>
                     </div>
                     
                     <button type="submit" class="btn btn-yitp btn-lg mt-3">
                         <i class="fas fa-university me-2"></i>
                         Confirm Bank Transfer
+                    </button>
+                </form>
+            </div>
+
+            <!-- PayPal Payment Form -->
+            <div id="paypal-form" class="payment-form">
+                <h5 style="color: #1a2e53;">
+                    <i class="fab fa-paypal me-2"></i>
+                    PayPal Payment
+                </h5>
+
+                <div class="payment-instructions">
+                    <h6><i class="fas fa-info-circle me-2"></i>PayPal Payment Instructions</h6>
+                    <ol class="mb-0">
+                        <li>Click "Pay with PayPal" button below to open PayPal in a new window</li>
+                        <li>Complete your payment on PayPal's secure platform</li>
+                        <li>Return to this page and enter your PayPal transaction ID</li>
+                        <li>Submit the verification form for manual confirmation</li>
+                        <li>Your course access will be activated within 1-2 hours</li>
+                    </ol>
+                </div>
+
+                <!-- PayPal Payment Button -->
+                <div class="text-center my-4">
+                    <a href="https://www.paypal.com/ncp/payment/FUAJVJ66L978C?reference={{ course.id }}&amount={{ course.price }}"
+                       target="_blank"
+                       class="btn btn-primary btn-lg"
+                       style="background-color: #0070ba; border-color: #0070ba;">
+                        <i class="fab fa-paypal me-2"></i>
+                        Pay KES {{ course.price|floatformat:0 }} with PayPal
+                    </a>
+                </div>
+
+                <!-- PayPal Verification Form -->
+                <form method="post" action="{% url 'payments:process_paypal' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <input type="hidden" name="amount" value="{{ course.price }}">
+                    <input type="hidden" name="is_installment" value="false">
+                    <input type="hidden" name="installment_sequence" value="1">
+
+                    <div class="mb-3">
+                        <label for="paypal_transaction_id" class="form-label">PayPal Transaction ID</label>
+                        <input type="text"
+                               class="form-control"
+                               id="paypal_transaction_id"
+                               name="paypal_payment_id"
+                               placeholder="Enter your PayPal transaction ID"
+                               required>
+                        <div class="form-text">Enter the transaction ID from your PayPal payment confirmation</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="paypal_payer_id" class="form-label">PayPal Payer ID (Optional)</label>
+                        <input type="text"
+                               class="form-control"
+                               id="paypal_payer_id"
+                               name="paypal_payer_id"
+                               placeholder="Enter your PayPal Payer ID">
+                        <div class="form-text">Optional: Your PayPal Payer ID for additional verification</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-yitp btn-lg mt-3">
+                        <i class="fas fa-check me-2"></i>
+                        Verify PayPal Payment
                     </button>
                 </form>
             </div>
@@ -417,22 +602,93 @@ function selectPaymentMethod(method) {
     document.querySelectorAll('.payment-method-card').forEach(card => {
         card.classList.remove('selected');
     });
-    
+
     // Hide all payment forms
     document.querySelectorAll('.payment-form').forEach(form => {
         form.classList.remove('active');
     });
-    
+
     // Skip disabled methods
     if (document.querySelector(`[data-method="${method}"]`).classList.contains('disabled-method')) {
         return;
     }
-    
+
     // Select the clicked method
     document.querySelector(`[data-method="${method}"]`).classList.add('selected');
-    
+
     // Show the corresponding form
     document.getElementById(`${method}-form`).classList.add('active');
+
+    // Update payment amounts based on installment option
+    updatePaymentAmounts();
+}
+
+function togglePaymentOption() {
+    const isInstallment = document.getElementById('installment_payment').checked;
+    const installmentInfo = document.getElementById('installment-info');
+
+    if (isInstallment) {
+        installmentInfo.style.display = 'block';
+    } else {
+        installmentInfo.style.display = 'none';
+    }
+
+    // Update payment amounts in forms
+    updatePaymentAmounts();
+}
+
+function updatePaymentAmounts() {
+    const isInstallment = document.getElementById('installment_payment').checked;
+    const coursePrice = {{ course.price }};
+    const amount = isInstallment ? (coursePrice / 2) : coursePrice;
+    const amountFormatted = Math.round(amount);
+
+    // Update M-Pesa form
+    const mpesaButton = document.querySelector('#mpesa-form button[type="submit"]');
+    const mpesaAmount = document.querySelector('#mpesa-form input[name="amount"]');
+    const mpesaInstallment = document.querySelector('#mpesa-form input[name="is_installment"]');
+
+    if (mpesaButton) {
+        mpesaButton.innerHTML = `<i class="fas fa-mobile-alt me-2"></i>Pay KES ${amountFormatted} with M-Pesa${isInstallment ? ' (First Installment)' : ''}`;
+    }
+    if (mpesaAmount) {
+        mpesaAmount.value = amount;
+    }
+    if (mpesaInstallment) {
+        mpesaInstallment.value = isInstallment;
+    }
+
+    // Update Bank Transfer form
+    const bankButton = document.querySelector('#bank-form button[type="submit"]');
+    const bankAmount = document.querySelector('#bank-form input[name="amount"]');
+    const bankInstallment = document.querySelector('#bank-form input[name="is_installment"]');
+
+    if (bankButton) {
+        bankButton.innerHTML = `<i class="fas fa-university me-2"></i>Confirm Bank Transfer${isInstallment ? ' (First Installment)' : ''}`;
+    }
+    if (bankAmount) {
+        bankAmount.value = amount;
+    }
+    if (bankInstallment) {
+        bankInstallment.value = isInstallment;
+    }
+
+    // Update PayPal form
+    const paypalButton = document.querySelector('#paypal-form .btn-primary');
+    const paypalAmount = document.querySelector('#paypal-form input[name="amount"]');
+    const paypalInstallment = document.querySelector('#paypal-form input[name="is_installment"]');
+
+    if (paypalButton) {
+        const href = paypalButton.getAttribute('href').split('&amount=')[0];
+        paypalButton.setAttribute('href', `${href}&amount=${amount}`);
+        paypalButton.innerHTML = `<i class="fab fa-paypal me-2"></i>Pay KES ${amountFormatted} with PayPal${isInstallment ? ' (First Installment)' : ''}`;
+    }
+    if (paypalAmount) {
+        paypalAmount.value = amount;
+    }
+    if (paypalInstallment) {
+        paypalInstallment.value = isInstallment;
+    }
 }
 
 function copyToClipboard(text) {

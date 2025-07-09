@@ -290,8 +290,8 @@
         <!-- Breadcrumb -->
         <nav class="breadcrumb-custom">
             <a href="{% url 'courses:home' %}">Home</a> /
-            <a href="{% url 'courses:course_detail' slug=lesson.module.course.slug %}">{{ lesson.module.course.title }}</a> /
-            <a href="{% url 'courses:module_detail' course_slug=lesson.module.course.slug module_id=lesson.module.id %}">{{ lesson.module.title }}</a> /
+            <a href="{% if lesson.module.course %}{% url 'courses:course_detail' slug=lesson.module.course.slug %}{% else %}#{% endif %}">{{ lesson.module.course.title|default:"Course" }}</a> /
+            <a href="{% if lesson.module %}{% url 'courses:module_detail' course_slug=lesson.module.course.slug module_id=lesson.module.id %}{% else %}#{% endif %}">{{ lesson.module.title|default:"Module" }}</a> /
             <span>{{ lesson.title }}</span>
         </nav>
         
@@ -409,7 +409,7 @@
                 <div class="lesson-navigation">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <a href="{% url 'courses:module_detail' course_slug=lesson.module.course.slug module_id=lesson.module.id %}" class="nav-button secondary">
+                            <a href="{% if lesson.module %}{% url 'courses:module_detail' course_slug=lesson.module.course.slug module_id=lesson.module.id %}{% else %}{% url 'courses:course_list' %}{% endif %}" class="nav-button secondary">
                                 <i class="fas fa-arrow-left me-2"></i>Back to Module
                             </a>
                         </div>
@@ -512,7 +512,7 @@
                     <h4 class="mb-3">Quick Actions</h4>
                     
                     <div class="d-grid gap-2">
-                        <a href="{% url 'courses:course_detail' slug=lesson.module.course.slug %}" class="btn btn-outline-primary">
+                        <a href="{% if lesson.module.course %}{% url 'courses:course_detail' slug=lesson.module.course.slug %}{% else %}#{% endif %}" class="btn btn-outline-primary">
                             <i class="fas fa-book me-2"></i>Course Overview
                         </a>
                         <a href="{% url 'courses:my_courses' %}" class="btn btn-outline-secondary">
@@ -535,18 +535,124 @@
 function markAsComplete() {
     const button = document.querySelector('.completion-button');
     const progressFill = document.querySelector('.progress-fill');
-    const progressText = document.querySelector('.lesson-progress .text-muted:last-of-type');
-    
-    // Simulate completion
-    button.innerHTML = '<i class="fas fa-check me-2"></i>Completed!';
+    const progressText = document.querySelector('.lesson-progress small');
+    const nextButton = document.querySelector('.nav-button:last-child');
+
+    // Disable button and show loading state
     button.disabled = true;
-    button.style.background = '#10b981';
-    
-    progressFill.style.width = '100%';
-    progressText.textContent = '100%';
-    
-    // Show success message
-    alert('Lesson marked as complete! Great job!');
+    button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Completing...';
+
+    // Get CSRF token
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    // Send AJAX request to complete lesson
+    fetch('{% url "courses:lesson_complete" course_slug=lesson.module.course.slug lesson_id=lesson.id %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update UI to show completion
+            button.innerHTML = '<i class="fas fa-check-circle me-2"></i>Completed';
+            button.style.background = '#10b981';
+            button.disabled = true;
+
+            // Update progress bar
+            progressFill.style.width = '100%';
+
+            // Update progress text
+            if (progressText) {
+                progressText.textContent = 'Lesson completed!';
+            }
+
+            // Update progress percentage display
+            const progressPercentage = document.querySelector('.lesson-progress .text-muted:nth-of-type(2)');
+            if (progressPercentage) {
+                progressPercentage.textContent = '100%';
+            }
+
+            // Update course progress if available
+            if (data.progress_percentage !== undefined) {
+                // Update any course progress displays on the page
+                const courseProgressElements = document.querySelectorAll('.course-progress-percentage');
+                courseProgressElements.forEach(element => {
+                    element.textContent = `${Math.round(data.progress_percentage)}%`;
+                });
+            }
+
+            // Show success message with course progress
+            let message = data.message;
+            if (data.course_progress) {
+                message += `\n\nCourse Progress: ${data.course_progress.completed_lessons}/${data.course_progress.total_lessons} lessons (${Math.round(data.course_progress.percentage)}%)`;
+            }
+
+            // Check if next lesson is now accessible
+            if (data.next_lesson_accessible && data.next_lesson_url) {
+                message += `\n\nNext lesson "${data.next_lesson_title}" is now unlocked!`;
+
+                // Update next button if it exists
+                if (nextButton && nextButton.classList.contains('locked')) {
+                    nextButton.classList.remove('locked');
+                    nextButton.disabled = false;
+                    nextButton.innerHTML = 'Next<i class="fas fa-chevron-right ms-2"></i>';
+                    nextButton.onclick = () => window.location.href = data.next_lesson_url;
+                    nextButton.style.cursor = 'pointer';
+                }
+
+                // Show option to continue to next lesson
+                setTimeout(() => {
+                    if (confirm(`Great job! Would you like to continue to the next lesson: "${data.next_lesson_title}"?`)) {
+                        window.location.href = data.next_lesson_url;
+                    }
+                }, 1000);
+            }
+
+            // Show success notification
+            showNotification(message, 'success');
+
+        } else {
+            // Handle error
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-check me-2"></i>Mark as Complete';
+            showNotification(data.error || 'Failed to complete lesson. Please try again.', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error completing lesson:', error);
+        button.disabled = false;
+        button.innerHTML = '<i class="fas fa-check me-2"></i>Mark as Complete';
+        showNotification('Network error. Please check your connection and try again.', 'error');
+    });
+}
+
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 1050; max-width: 400px;';
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+
+    // Add to page
+    document.body.appendChild(notification);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
 }
 </script>
+
+<!-- Add CSRF token for AJAX requests -->
+{% csrf_token %}
 {% endblock %}

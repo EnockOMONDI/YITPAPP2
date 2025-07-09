@@ -417,6 +417,105 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
         return JsonResponse({'status': 'already_completed'})
 
 
+class LessonCompleteView(LoginRequiredMixin, View):
+    """
+    Dedicated view for handling lesson completion via AJAX
+    """
+
+    def post(self, request, course_slug, lesson_id):
+        """
+        Mark lesson as complete and return updated status
+        """
+        try:
+            # Get the lesson
+            lesson = get_object_or_404(
+                Lesson,
+                id=lesson_id,
+                module__course__slug=course_slug,
+                is_published=True
+            )
+
+            # Check enrollment
+            try:
+                enrollment = Enrollment.objects.get(
+                    student=request.user,
+                    course=lesson.module.course,
+                    status='active'
+                )
+            except Enrollment.DoesNotExist:
+                return JsonResponse({
+                    'success': False,
+                    'error': 'You are not enrolled in this course.'
+                }, status=403)
+
+            # Check if lesson is accessible
+            is_accessible, access_message = lesson.is_accessible_for_user(request.user)
+            if not is_accessible:
+                return JsonResponse({
+                    'success': False,
+                    'error': access_message
+                }, status=403)
+
+            # Get or create lesson progress
+            progress, created = LessonProgress.objects.get_or_create(
+                enrollment=enrollment,
+                lesson=lesson
+            )
+
+            # Mark as completed if not already
+            if progress.status != 'completed':
+                progress.mark_completed()
+
+                # Get updated enrollment progress
+                enrollment.refresh_from_db()
+
+                # Check if next lesson is now accessible
+                next_lesson = lesson.get_next_lesson()
+                next_lesson_accessible = False
+                next_lesson_url = None
+
+                if next_lesson:
+                    next_accessible, _ = next_lesson.is_accessible_for_user(request.user)
+                    next_lesson_accessible = next_accessible
+                    if next_accessible:
+                        from django.urls import reverse
+                        next_lesson_url = reverse('courses:lesson_detail', kwargs={
+                            'course_slug': course_slug,
+                            'lesson_id': next_lesson.id
+                        })
+
+                return JsonResponse({
+                    'success': True,
+                    'status': 'completed',
+                    'message': 'Lesson completed successfully!',
+                    'progress_percentage': float(enrollment.progress_percentage),
+                    'next_lesson_accessible': next_lesson_accessible,
+                    'next_lesson_url': next_lesson_url,
+                    'next_lesson_title': next_lesson.title if next_lesson else None,
+                    'course_progress': {
+                        'completed_lessons': enrollment.lesson_progress.filter(status='completed').count(),
+                        'total_lessons': enrollment.course.total_lessons,
+                        'percentage': float(enrollment.progress_percentage)
+                    }
+                })
+            else:
+                return JsonResponse({
+                    'success': True,
+                    'status': 'already_completed',
+                    'message': 'Lesson was already completed.'
+                })
+
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error completing lesson {lesson_id} for user {request.user.id}: {str(e)}")
+
+            return JsonResponse({
+                'success': False,
+                'error': 'An error occurred while completing the lesson. Please try again.'
+            }, status=500)
+
+
 class MyCoursesView(LoginRequiredMixin, ListView):
     """
     User's enrolled courses view

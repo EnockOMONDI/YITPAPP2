@@ -62,7 +62,8 @@ class EnrollmentService:
                 from users.models import Profile
                 profile = Profile.objects.create(user=user)
 
-            if not profile.has_confirmed_payment:
+            # Check if user has any valid payment access (confirmed, partially_paid, or sponsorship)
+            if not profile.has_any_payment_access:
                 return {
                     'is_valid': False,
                     'error_message': (
@@ -70,6 +71,17 @@ class EnrollmentService:
                         f'This course costs KES {course.price:,.2f}. Please complete your payment '
                         f'and wait for confirmation before enrolling. '
                         f'Contact support at +254722646958 for payment verification.'
+                    )
+                }
+
+            # Check if partial payment has expired
+            if profile.has_partial_payment and profile.is_partial_payment_expired:
+                return {
+                    'is_valid': False,
+                    'error_message': (
+                        f'Your partial payment access for "{course.title}" has expired. '
+                        f'Please complete your second installment payment or contact support '
+                        f'at +254722646958 for assistance.'
                     )
                 }
 

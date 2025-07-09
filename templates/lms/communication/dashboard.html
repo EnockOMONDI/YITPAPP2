@@ -1,0 +1,258 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Communication Dashboard - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-comments me-2"></i>
+                    Communication Dashboard
+                </h1>
+                <div class="btn-group" role="group">
+                    <a href="{% url 'communication:compose' %}" class="btn btn-primary">
+                        <i class="fas fa-plus me-1"></i>New Message
+                    </a>
+                    <a href="{% url 'communication:forum_list' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-users me-1"></i>Forums
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">{{ unread_messages }}</h4>
+                            <p class="card-text">Unread Messages</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-envelope fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">{{ total_messages }}</h4>
+                            <p class="card-text">Total Messages</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-comments fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">{{ unread_notifications }}</h4>
+                            <p class="card-text">Notifications</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-bell fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 class="card-title">{{ recent_announcements|length }}</h4>
+                            <p class="card-text">Announcements</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-bullhorn fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Recent Messages -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-inbox me-2"></i>Recent Messages
+                    </h5>
+                    <a href="{% url 'communication:inbox' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body">
+                    {% if recent_messages %}
+                        <div class="list-group list-group-flush">
+                            {% for message in recent_messages %}
+                            <div class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{ message.subject }}</div>
+                                    <small class="text-muted">From: {{ message.sender.get_full_name|default:message.sender.username }}</small>
+                                    <br>
+                                    <small class="text-muted">{{ message.sent_at|timesince }} ago</small>
+                                </div>
+                                {% if not message.is_read %}
+                                <span class="badge bg-primary rounded-pill">New</span>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted py-4">
+                            <i class="fas fa-inbox fa-3x mb-3"></i>
+                            <p>No messages yet</p>
+                            <a href="{% url 'communication:compose' %}" class="btn btn-primary">Send Your First Message</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Announcements -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bullhorn me-2"></i>Recent Announcements
+                    </h5>
+                    <a href="{% url 'communication:announcements' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body">
+                    {% if recent_announcements %}
+                        <div class="list-group list-group-flush">
+                            {% for announcement in recent_announcements %}
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">{{ announcement.title }}</h6>
+                                    <small class="text-muted">{{ announcement.publish_date|timesince }} ago</small>
+                                </div>
+                                <p class="mb-1">{{ announcement.content|truncatewords:20 }}</p>
+                                <small class="text-muted">{{ announcement.course.title }}</small>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted py-4">
+                            <i class="fas fa-bullhorn fa-3x mb-3"></i>
+                            <p>No announcements yet</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt me-2"></i>Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="{% url 'communication:compose' %}" class="btn btn-outline-primary w-100 mb-2">
+                                <i class="fas fa-edit me-2"></i>Compose Message
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'communication:inbox' %}" class="btn btn-outline-success w-100 mb-2">
+                                <i class="fas fa-inbox me-2"></i>View Inbox
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'communication:forum_list' %}" class="btn btn-outline-info w-100 mb-2">
+                                <i class="fas fa-users me-2"></i>Join Discussion
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'communication:notifications' %}" class="btn btn-outline-warning w-100 mb-2">
+                                <i class="fas fa-bell me-2"></i>Notifications
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> <!-- End content-wrapper -->
+
+<style>
+/* Content wrapper to handle navbar overlap */
+.content-wrapper {
+    margin-top: 100px; /* Desktop */
+    min-height: calc(100vh - 100px);
+}
+
+/* Responsive navbar spacing adjustments */
+@media (max-width: 991.98px) {
+    .content-wrapper {
+        margin-top: 90px; /* Tablet */
+    }
+}
+
+@media (max-width: 767.98px) {
+    .content-wrapper {
+        margin-top: 80px; /* Mobile */
+    }
+}
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+    transform: translateY(-1px);
+}
+
+.text-primary {
+    color: #ff5d15 !important;
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%) !important;
+}
+</style>
+{% endblock %}

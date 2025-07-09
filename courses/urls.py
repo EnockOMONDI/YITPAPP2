@@ -14,6 +14,7 @@ urlpatterns = [
     path('courses/<slug:course_slug>/enroll/', views.EnrollView.as_view(), name='enroll'),
     path('courses/<slug:course_slug>/modules/<int:module_id>/', views.ModuleDetailView.as_view(), name='module_detail'),
     path('courses/<slug:course_slug>/lessons/<int:lesson_id>/', views.LessonDetailView.as_view(), name='lesson_detail'),
+    path('courses/<slug:course_slug>/lessons/<int:lesson_id>/complete/', views.LessonCompleteView.as_view(), name='lesson_complete'),
     path('my-courses/', views.MyCoursesView.as_view(), name='my_courses'),
 
     # Redirect old LMS profile to unified profile with LMS section

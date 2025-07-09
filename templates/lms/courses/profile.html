@@ -5,8 +5,27 @@
 
 {% block extra_css %}
 <style>
+    /* Content wrapper to handle navbar overlap */
+    .content-wrapper {
+        margin-top: 100px; /* Desktop */
+        min-height: calc(100vh - 100px);
+    }
+
+    /* Responsive navbar spacing adjustments */
+    @media (max-width: 991.98px) {
+        .content-wrapper {
+            margin-top: 90px; /* Tablet */
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .content-wrapper {
+            margin-top: 80px; /* Mobile */
+        }
+    }
+
     .profile-header {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
         color: white;
         padding: 3rem 0;
         margin-bottom: 2rem;
@@ -333,10 +352,170 @@
         margin-top: 15px;
         color: #6c757d;
     }
+
+    /* LMS Navigation Cards */
+    .nav-card {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        height: 100%;
+        min-height: 80px;
+    }
+
+    .nav-card:hover {
+        border-color: #ff5d15;
+        background: linear-gradient(135deg, rgba(255, 93, 21, 0.05) 0%, rgba(255, 123, 61, 0.05) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1rem rgba(255, 93, 21, 0.15);
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .nav-card-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    .nav-card-icon i {
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .nav-card-content {
+        flex: 1;
+    }
+
+    .nav-card-content h6 {
+        margin: 0 0 0.25rem 0;
+        font-weight: 600;
+        color: #1a2e53;
+        font-size: 0.95rem;
+    }
+
+    .nav-card-content small {
+        color: #6c757d;
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+
+    /* Section titles in LMS Navigation */
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #1a2e53;
+    }
+
+    .section-title i {
+        font-size: 1rem;
+    }
+
+    /* Quick Actions Buttons */
+    .btn-primary {
+        background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 0.25rem 0.5rem rgba(255, 93, 21, 0.3);
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #34ce57 100%);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-success:hover {
+        background: linear-gradient(135deg, #218838 0%, #2bb84a 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 0.25rem 0.5rem rgba(40, 167, 69, 0.3);
+    }
+
+    .btn-info {
+        background: linear-gradient(135deg, #17a2b8 0%, #20c997 100%);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-info:hover {
+        background: linear-gradient(135deg, #138496 0%, #1aa085 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 0.25rem 0.5rem rgba(23, 162, 184, 0.3);
+    }
+
+    .btn-warning {
+        background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        color: #1a2e53;
+        transition: all 0.3s ease;
+    }
+
+    .btn-warning:hover {
+        background: linear-gradient(135deg, #e0a800 0%, #e6b800 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 0.25rem 0.5rem rgba(255, 193, 7, 0.3);
+        color: #1a2e53;
+    }
+
+    /* Responsive adjustments for navigation cards */
+    @media (max-width: 768px) {
+        .nav-card {
+            min-height: 70px;
+            padding: 0.75rem;
+        }
+
+        .nav-card-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 0.75rem;
+        }
+
+        .nav-card-icon i {
+            font-size: 1rem;
+        }
+
+        .nav-card-content h6 {
+            font-size: 0.9rem;
+        }
+
+        .nav-card-content small {
+            font-size: 0.75rem;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
+<div class="content-wrapper">
 <!-- Profile Header -->
 <section class="profile-header">
     <div class="container">
@@ -401,6 +580,11 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="billing-tab" data-bs-toggle="pill" data-bs-target="#billing" type="button" role="tab">
                     <i class="fas fa-credit-card me-2"></i>Billing
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lms-navigation-tab" data-bs-toggle="pill" data-bs-target="#lms-navigation" type="button" role="tab">
+                    <i class="fas fa-compass me-2"></i>LMS Navigation
                 </button>
             </li>
         </ul>
@@ -941,9 +1125,279 @@
                     </div>
                 </div>
             </div>
+
+            <!-- LMS Navigation Tab -->
+            <div class="tab-pane fade" id="lms-navigation" role="tabpanel">
+                <div class="row">
+                    <!-- Communication Features -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">
+                                <i class="fas fa-comments me-2 text-primary"></i>
+                                Communication & Collaboration
+                            </h4>
+                            <p class="text-muted mb-4">Connect with instructors and fellow students through our comprehensive communication tools.</p>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <a href="{% url 'communication:dashboard' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-tachometer-alt"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Communication Hub</h6>
+                                            <small>Overview of all communication activities</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'communication:inbox' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-inbox"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Messages</h6>
+                                            <small>Send and receive private messages</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'communication:forum_list' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Discussion Forums</h6>
+                                            <small>Join course discussions and Q&A</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'communication:notifications' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-bell"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Notifications</h6>
+                                            <small>Stay updated with important alerts</small>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Library -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">
+                                <i class="fas fa-book-open me-2 text-success"></i>
+                                Content Library & Resources
+                            </h4>
+                            <p class="text-muted mb-4">Access comprehensive learning materials, resources, and interactive content.</p>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <a href="{% url 'content:dashboard' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Content Dashboard</h6>
+                                            <small>Overview of all learning materials</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'content:library' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-book-open"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Resource Library</h6>
+                                            <small>Browse all available resources</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'content:search' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Search Content</h6>
+                                            <small>Find specific learning materials</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'content:exercise_list' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-puzzle-piece"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Interactive Exercises</h6>
+                                            <small>Practice with hands-on activities</small>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assessment Tools -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">
+                                <i class="fas fa-clipboard-check me-2 text-info"></i>
+                                Assessments & Evaluation
+                            </h4>
+                            <p class="text-muted mb-4">Test your knowledge and track your learning progress with comprehensive assessments.</p>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <a href="{% url 'assessments:dashboard' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-chart-pie"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Assessment Hub</h6>
+                                            <small>Overview of all assessments</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'assessments:quiz_list' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-question-circle"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Quizzes</h6>
+                                            <small>Take interactive quizzes</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'assessments:assignment_list' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-tasks"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Assignments</h6>
+                                            <small>Submit and track assignments</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'assessments:quiz_results' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Results & Grades</h6>
+                                            <small>View your performance</small>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Tracking -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <h4 class="section-title">
+                                <i class="fas fa-chart-line me-2 text-warning"></i>
+                                Progress & Analytics
+                            </h4>
+                            <p class="text-muted mb-4">Monitor your learning journey and celebrate your achievements.</p>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <a href="{% url 'progress:dashboard' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-tachometer-alt"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Progress Dashboard</h6>
+                                            <small>Comprehensive learning analytics</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'progress:my_progress' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>My Progress</h6>
+                                            <small>Track your course completion</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'progress:achievements' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Achievements</h6>
+                                            <small>View badges and certificates</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'progress:learning_paths' %}" class="nav-card">
+                                        <div class="nav-card-icon">
+                                            <i class="fas fa-route"></i>
+                                        </div>
+                                        <div class="nav-card-content">
+                                            <h6>Learning Paths</h6>
+                                            <small>Structured learning journeys</small>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Section -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="profile-card">
+                            <h4 class="section-title">
+                                <i class="fas fa-bolt me-2 text-primary"></i>
+                                Quick Actions
+                            </h4>
+                            <div class="d-flex flex-wrap gap-3 mt-3">
+                                <a href="{% url 'communication:compose' %}" class="btn btn-primary">
+                                    <i class="fas fa-edit me-2"></i>Send Message
+                                </a>
+                                <a href="{% url 'content:search' %}" class="btn btn-success">
+                                    <i class="fas fa-search me-2"></i>Search Content
+                                </a>
+                                <a href="{% url 'assessments:quiz_list' %}" class="btn btn-info">
+                                    <i class="fas fa-question-circle me-2"></i>Take Quiz
+                                </a>
+                                <a href="{% url 'progress:dashboard' %}" class="btn btn-warning">
+                                    <i class="fas fa-chart-line me-2"></i>View Progress
+                                </a>
+                                <a href="{% url 'communication:announcements' %}" class="btn btn-outline-primary">
+                                    <i class="fas fa-bullhorn me-2"></i>Announcements
+                                </a>
+                                <a href="{% url 'content:resource_list' %}" class="btn btn-outline-success">
+                                    <i class="fas fa-file-alt me-2"></i>Resources
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+</div> <!-- End content-wrapper -->
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

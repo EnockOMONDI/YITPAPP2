@@ -39,18 +39,60 @@
                             <label for="otp_code" class="form-label">
                                 <i class="fas fa-key"></i> Verification Code
                             </label>
-                            <input type="text" 
-                                   class="form-control form-control-lg text-center" 
-                                   id="otp_code" 
-                                   name="otp_code" 
-                                   placeholder="Enter 6-digit code"
-                                   maxlength="6"
-                                   pattern="[0-9]{6}"
-                                   required
-                                   autocomplete="off"
+                            <div class="otp-input-container">
+                                <input type="text"
+                                       class="form-control form-control-lg text-center otp-input"
+                                       id="otp_code"
+                                       name="otp_code"
+                                       placeholder="123456"
+                                       maxlength="6"
+                                       pattern="[0-9]{6}"
+                                       inputmode="numeric"
+                                       required
+                                       autocomplete="off"
+                                       data-auto-submit="true"
                                    style="letter-spacing: 0.5em; font-size: 1.5rem;">
-                            <div class="form-text">
-                                <i class="fas fa-clock"></i> Code expires in 200 minutes
+
+                                <!-- Character Counter and Validation Feedback -->
+                                <div class="otp-feedback mt-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="form-text text-muted">
+                                            <i class="fas fa-clock"></i> Code expires in 200 minutes
+                                        </div>
+                                        <div class="character-counter">
+                                            <span id="char-count" class="badge bg-secondary">0/6</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Real-time validation feedback -->
+                                    <div id="validation-feedback" class="mt-2" style="display: none;">
+                                        <div class="validation-status">
+                                            <i id="validation-icon" class="fas fa-circle"></i>
+                                            <span id="validation-message">Enter 6 digits</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Enhanced error display -->
+                                    {% if error_type %}
+                                    <div class="alert alert-danger mt-3" role="alert">
+                                        <div class="d-flex align-items-start">
+                                            <i class="fas fa-exclamation-triangle me-2 mt-1"></i>
+                                            <div>
+                                                <strong>Verification Failed:</strong>
+                                                <div class="mt-1">{{ error_help }}</div>
+                                                {% if show_resend %}
+                                                <div class="mt-2">
+                                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                                            onclick="requestNewCode()">
+                                                        <i class="fas fa-redo"></i> Request New Code
+                                                    </button>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 
@@ -139,6 +181,104 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+/* Enhanced OTP Input Styling */
+.otp-input-container {
+    position: relative;
+}
+
+.otp-input {
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+}
+
+.otp-input:focus {
+    border-color: #ff5d15 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25) !important;
+    transform: scale(1.02);
+}
+
+.otp-input.valid {
+    border-color: #28a745;
+    background-color: #f8fff9;
+}
+
+.otp-input.invalid {
+    border-color: #dc3545;
+    background-color: #fff8f8;
+}
+
+/* Character Counter Styling */
+.character-counter .badge {
+    transition: all 0.3s ease;
+}
+
+.character-counter .badge.complete {
+    background-color: #28a745 !important;
+    transform: scale(1.1);
+}
+
+.character-counter .badge.incomplete {
+    background-color: #6c757d !important;
+}
+
+/* Validation Feedback Styling */
+.validation-status {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.validation-status i {
+    margin-right: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.validation-status.valid {
+    color: #28a745;
+}
+
+.validation-status.invalid {
+    color: #dc3545;
+}
+
+.validation-status.incomplete {
+    color: #6c757d;
+}
+
+/* Enhanced Error Display */
+.alert-danger {
+    border-left: 4px solid #dc3545;
+    background-color: #fff5f5;
+}
+
+/* Loading Animation */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 
 <script>
@@ -151,14 +291,137 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-focus on OTP input
     otpInput.focus();
 
-    // Only allow numbers in OTP input
+    // Enhanced OTP input handling
+    const charCountElement = document.getElementById('char-count');
+    const validationFeedback = document.getElementById('validation-feedback');
+    const validationIcon = document.getElementById('validation-icon');
+    const validationMessage = document.getElementById('validation-message');
+    const submitBtn = document.querySelector('button[type="submit"]');
+
+    // Auto-format and validate OTP input
     otpInput.addEventListener('input', function(e) {
-        this.value = this.value.replace(/[^0-9]/g, '');
-        if (this.value.length === 6) {
-            // Auto-submit when 6 digits are entered
-            document.getElementById('otpForm').submit();
+        // Remove any non-digit characters
+        let value = this.value.replace(/[^0-9]/g, '');
+
+        // Limit to 6 digits
+        if (value.length > 6) {
+            value = value.substring(0, 6);
+        }
+
+        this.value = value;
+
+        // Update character counter
+        updateCharacterCounter(value.length);
+
+        // Update validation feedback
+        updateValidationFeedback(value);
+
+        // Auto-submit when 6 digits are entered
+        if (value.length === 6) {
+            setTimeout(() => {
+                submitOTPForm();
+            }, 500);
         }
     });
+
+    // Character counter update function
+    function updateCharacterCounter(length) {
+        charCountElement.textContent = `${length}/6`;
+
+        if (length === 6) {
+            charCountElement.classList.remove('incomplete');
+            charCountElement.classList.add('complete');
+        } else {
+            charCountElement.classList.remove('complete');
+            charCountElement.classList.add('incomplete');
+        }
+    }
+
+    // Validation feedback update function
+    function updateValidationFeedback(value) {
+        const length = value.length;
+
+        // Show feedback after user starts typing
+        if (length > 0) {
+            validationFeedback.style.display = 'block';
+        } else {
+            validationFeedback.style.display = 'none';
+            return;
+        }
+
+        // Update input styling and feedback
+        if (length === 6) {
+            // Valid length
+            otpInput.classList.remove('invalid', 'incomplete');
+            otpInput.classList.add('valid');
+
+            validationIcon.className = 'fas fa-check-circle';
+            validationMessage.textContent = 'Ready to verify';
+            validationFeedback.querySelector('.validation-status').className = 'validation-status valid';
+
+        } else if (length > 0 && length < 6) {
+            // Incomplete
+            otpInput.classList.remove('valid', 'invalid');
+            otpInput.classList.add('incomplete');
+
+            validationIcon.className = 'fas fa-clock';
+            validationMessage.textContent = `Enter ${6 - length} more digit${6 - length > 1 ? 's' : ''}`;
+            validationFeedback.querySelector('.validation-status').className = 'validation-status incomplete';
+
+        } else {
+            // Reset
+            otpInput.classList.remove('valid', 'invalid', 'incomplete');
+            validationFeedback.style.display = 'none';
+        }
+    }
+
+    // Enhanced form submission with loading state
+    function submitOTPForm() {
+        const form = document.getElementById('otpForm');
+
+        // Add loading state to submit button
+        submitBtn.classList.add('btn-loading');
+        submitBtn.disabled = true;
+
+        // Submit form
+        form.submit();
+    }
+
+    // Prevent multiple form submissions
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+        if (submitBtn.disabled) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Add loading state
+        submitBtn.classList.add('btn-loading');
+        submitBtn.disabled = true;
+    });
+
+    // Function to request new code
+    function requestNewCode() {
+        const userId = document.querySelector('input[name="user_id"]').value;
+
+        // Show loading state
+        const btn = event.target.closest('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Requesting...';
+        btn.disabled = true;
+
+        // Simulate request (you can implement actual AJAX call here)
+        setTimeout(() => {
+            alert('New verification code has been sent to your email!');
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+
+            // Clear current input
+            otpInput.value = '';
+            otpInput.focus();
+            updateCharacterCounter(0);
+            updateValidationFeedback('');
+        }, 2000);
+    }
 
     // Handle resend OTP
     resendBtn.addEventListener('click', function() {

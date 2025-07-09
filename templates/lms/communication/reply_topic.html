@@ -1,0 +1,210 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Reply to {{ topic.title|default:"Topic" }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Original Topic -->
+            {% if topic %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-quote-left me-2"></i>Original Topic
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="mb-0">{{ topic.title }}</h5>
+                        <small class="text-muted">{{ topic.created_at|date:"M d, Y" }}</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar-sm me-3">
+                            <div class="avatar-title bg-primary rounded-circle">
+                                {{ topic.created_by.first_name|first|default:topic.created_by.username|first|upper }}
+                            </div>
+                        </div>
+                        <div>
+                            <strong>{{ topic.created_by.get_full_name|default:topic.created_by.username }}</strong>
+                            <br>
+                            <small class="text-muted">{{ topic.created_at|timesince }} ago</small>
+                        </div>
+                    </div>
+                    <div class="border-start border-3 border-secondary ps-3">
+                        {{ topic.content|linebreaks|truncatewords:50 }}
+                        {% if topic.content|wordcount > 50 %}
+                        <p class="mb-0">
+                            <a href="{% if topic %}{% url 'communication:topic_detail' topic.id %}{% else %}#{% endif %}" class="text-decoration-none">
+                                <small>Read full topic...</small>
+                            </a>
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                    <h5>Reply to Topic</h5>
+                    <p class="text-muted">Share your thoughts and join the discussion.</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Reply Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-reply me-2"></i>Post Your Reply
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if topic and topic.is_locked %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-lock me-2"></i>
+                        This topic is locked and no longer accepting replies.
+                    </div>
+                    <div class="text-center">
+                        <a href="{% if topic %}{% url 'communication:topic_detail' topic.id %}{% else %}{% url 'communication:forum_list' %}{% endif %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>Back to Topic
+                        </a>
+                    </div>
+                    {% else %}
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="id_content" class="form-label">
+                                <i class="fas fa-edit me-1"></i>Your Reply
+                            </label>
+                            <textarea class="form-control" 
+                                      id="id_content" 
+                                      name="content" 
+                                      rows="8" 
+                                      placeholder="Write your thoughtful reply here..."
+                                      required></textarea>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Be respectful and constructive in your response. You can use line breaks for formatting.
+                            </div>
+                        </div>
+
+                        <!-- Reply Guidelines -->
+                        <div class="alert alert-info">
+                            <h6 class="alert-heading">
+                                <i class="fas fa-lightbulb me-2"></i>Reply Guidelines
+                            </h6>
+                            <ul class="mb-0">
+                                <li>Stay on topic and be respectful to other participants</li>
+                                <li>Provide constructive feedback and helpful insights</li>
+                                <li>Use clear and professional language</li>
+                                <li>Avoid spam or off-topic discussions</li>
+                            </ul>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% if topic %}{% url 'communication:topic_detail' topic.id %}{% else %}{% url 'communication:forum_list' %}{% endif %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-reply me-1"></i>Post Reply
+                            </button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Recent Replies Preview -->
+            {% if recent_replies %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-comments me-2"></i>Recent Replies
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% for reply in recent_replies %}
+                    <div class="d-flex mb-3 {% if not forloop.last %}border-bottom pb-3{% endif %}">
+                        <div class="avatar-sm me-3">
+                            <div class="avatar-title bg-secondary rounded-circle">
+                                {{ reply.created_by.first_name|first|default:reply.created_by.username|first|upper }}
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between">
+                                <strong>{{ reply.created_by.get_full_name|default:reply.created_by.username }}</strong>
+                                <small class="text-muted">{{ reply.created_at|timesince }} ago</small>
+                            </div>
+                            <p class="mb-0 text-muted">{{ reply.content|truncatewords:20 }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="text-center">
+                        <a href="{% if topic %}{% url 'communication:topic_detail' topic.id %}{% else %}{% url 'communication:forum_list' %}{% endif %}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-eye me-1"></i>View All Replies
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.avatar-sm {
+    width: 40px;
+    height: 40px;
+}
+
+.avatar-title {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+}
+
+.text-primary {
+    color: #ff5d15 !important;
+}
+
+.form-control:focus {
+    border-color: #ff5d15;
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
+}
+
+.alert-info {
+    background-color: rgba(255, 93, 21, 0.1);
+    border-color: rgba(255, 93, 21, 0.2);
+    color: #1a2e53;
+}
+</style>
+{% endblock %}

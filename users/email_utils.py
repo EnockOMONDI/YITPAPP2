@@ -2,6 +2,8 @@
 Email utilities for YITP application
 Handles OTP generation, email sending, and template management
 """
+import os
+import sys
 import random
 import string
 from datetime import datetime, timedelta
@@ -83,12 +85,18 @@ def send_html_email(subject, html_content, recipient_list, from_email=None, plai
     Send HTML email with fallback to plain text
     Uses direct SMTP method as primary, Django backend as fallback
     """
-    # Try direct method first (more reliable)
-    if send_html_email_direct(subject, html_content, recipient_list, from_email, plain_text_content):
-        return True
+    # Check if we're in test environment - use Django backend directly for tests
+    if hasattr(settings, 'EMAIL_BACKEND') and 'locmem' in settings.EMAIL_BACKEND:
+        logger.info("Test environment detected, using Django email backend directly")
+    elif 'test' in sys.argv or os.environ.get('DJANGO_TESTING'):
+        logger.info("Test environment detected via command line or environment")
+    else:
+        # Try direct method first (more reliable) in production
+        if send_html_email_direct(subject, html_content, recipient_list, from_email, plain_text_content):
+            return True
 
-    # Fallback to Django's email backend
-    logger.warning("Direct email failed, trying Django backend...")
+        # Fallback to Django's email backend
+        logger.warning("Direct email failed, trying Django backend...")
 
     try:
         if from_email is None:

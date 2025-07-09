@@ -1,0 +1,351 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}{{ exercise.title }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 text-primary">{{ exercise.title }}</h1>
+                    <p class="text-muted mb-0">{{ exercise.get_exercise_type_display }} Exercise</p>
+                </div>
+                <div class="btn-group" role="group">
+                    {% if not exercise.is_started_by_user %}
+                    <button type="button" class="btn btn-primary" id="startExercise">
+                        <i class="fas fa-play me-1"></i>Start Exercise
+                    </button>
+                    {% elif exercise.is_completed_by_user %}
+                    <button type="button" class="btn btn-success" id="reviewExercise">
+                        <i class="fas fa-eye me-1"></i>Review Exercise
+                    </button>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" id="continueExercise">
+                        <i class="fas fa-play me-1"></i>Continue Exercise
+                    </button>
+                    {% endif %}
+                    <a href="{% url 'content:exercise_list' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Exercises
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Exercise Description -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Exercise Description
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="lead">{{ exercise.description }}</p>
+                    
+                    {% if exercise.instructions %}
+                    <div class="mt-4">
+                        <h6>Instructions</h6>
+                        <div class="instructions">
+                            {{ exercise.instructions|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if exercise.learning_objectives %}
+                    <div class="mt-4">
+                        <h6>Learning Objectives</h6>
+                        <div class="learning-objectives">
+                            {{ exercise.learning_objectives|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Exercise Content -->
+            <div class="card" id="exerciseContent">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-puzzle-piece me-2"></i>Interactive Exercise
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if exercise.exercise_type == 'quiz' %}
+                        <!-- Quiz Exercise -->
+                        <div id="quizExercise" class="exercise-container">
+                            <div class="text-center py-5">
+                                <i class="fas fa-question-circle fa-4x text-primary mb-3"></i>
+                                <h4>Quiz Exercise</h4>
+                                <p class="text-muted">Test your knowledge with this interactive quiz.</p>
+                                <button type="button" class="btn btn-primary" onclick="startQuiz()">
+                                    <i class="fas fa-play me-1"></i>Start Quiz
+                                </button>
+                            </div>
+                        </div>
+                    {% elif exercise.exercise_type == 'simulation' %}
+                        <!-- Simulation Exercise -->
+                        <div id="simulationExercise" class="exercise-container">
+                            <div class="text-center py-5">
+                                <i class="fas fa-desktop fa-4x text-success mb-3"></i>
+                                <h4>Business Simulation</h4>
+                                <p class="text-muted">Practice real-world scenarios in a safe environment.</p>
+                                <button type="button" class="btn btn-success" onclick="startSimulation()">
+                                    <i class="fas fa-play me-1"></i>Start Simulation
+                                </button>
+                            </div>
+                        </div>
+                    {% elif exercise.exercise_type == 'case_study' %}
+                        <!-- Case Study Exercise -->
+                        <div id="caseStudyExercise" class="exercise-container">
+                            <div class="text-center py-5">
+                                <i class="fas fa-file-alt fa-4x text-info mb-3"></i>
+                                <h4>Case Study Analysis</h4>
+                                <p class="text-muted">Analyze real business cases and provide solutions.</p>
+                                <button type="button" class="btn btn-info" onclick="startCaseStudy()">
+                                    <i class="fas fa-play me-1"></i>Start Case Study
+                                </button>
+                            </div>
+                        </div>
+                    {% elif exercise.exercise_type == 'interactive' %}
+                        <!-- Interactive Exercise -->
+                        <div id="interactiveExercise" class="exercise-container">
+                            <div class="text-center py-5">
+                                <i class="fas fa-mouse-pointer fa-4x text-warning mb-3"></i>
+                                <h4>Interactive Exercise</h4>
+                                <p class="text-muted">Engage with interactive content and activities.</p>
+                                <button type="button" class="btn btn-warning" onclick="startInteractive()">
+                                    <i class="fas fa-play me-1"></i>Start Exercise
+                                </button>
+                            </div>
+                        </div>
+                    {% else %}
+                        <!-- Default Exercise -->
+                        <div id="defaultExercise" class="exercise-container">
+                            <div class="text-center py-5">
+                                <i class="fas fa-puzzle-piece fa-4x text-secondary mb-3"></i>
+                                <h4>Exercise Activity</h4>
+                                <p class="text-muted">Complete this learning exercise.</p>
+                                <button type="button" class="btn btn-secondary" onclick="startExercise()">
+                                    <i class="fas fa-play me-1"></i>Start Exercise
+                                </button>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- Exercise Content Area (Hidden initially) -->
+                    <div id="exerciseArea" class="exercise-area" style="display: none;">
+                        <div class="exercise-content">
+                            {{ exercise.content|safe }}
+                        </div>
+                        
+                        <!-- Exercise Controls -->
+                        <div class="exercise-controls mt-4">
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-outline-secondary" onclick="pauseExercise()">
+                                    <i class="fas fa-pause me-1"></i>Pause
+                                </button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-warning" onclick="resetExercise()">
+                                        <i class="fas fa-redo me-1"></i>Reset
+                                    </button>
+                                    <button type="button" class="btn btn-success" onclick="completeExercise()">
+                                        <i class="fas fa-check me-1"></i>Complete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Exercise Details -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Exercise Details</h6>
+                </div>
+                <div class="card-body">
+                    <p><strong>Type:</strong> {{ exercise.get_exercise_type_display }}</p>
+                    <p><strong>Difficulty:</strong> {{ exercise.difficulty_level|title|default:"Not specified" }}</p>
+                    <p><strong>Estimated Time:</strong> {{ exercise.estimated_duration|default:"Not specified" }} minutes</p>
+                    <p><strong>Points:</strong> {{ exercise.points|default:"Not specified" }}</p>
+                    <p><strong>Created:</strong> {{ exercise.created_at|date:"M d, Y" }}</p>
+                    {% if exercise.created_by %}
+                    <p><strong>Created by:</strong> {{ exercise.created_by.get_full_name|default:exercise.created_by.username }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Progress Tracking -->
+            {% if user.is_authenticated %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Your Progress</h6>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-primary" 
+                             role="progressbar" 
+                             style="width: {{ exercise.user_progress_percentage }}%"
+                             aria-valuenow="{{ exercise.user_progress_percentage }}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            {{ exercise.user_progress_percentage }}%
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span>Status</span>
+                        {% if exercise.is_completed_by_user %}
+                        <span class="badge bg-success">Completed</span>
+                        {% elif exercise.is_started_by_user %}
+                        <span class="badge bg-warning">In Progress</span>
+                        {% else %}
+                        <span class="badge bg-secondary">Not Started</span>
+                        {% endif %}
+                    </div>
+
+                    {% if exercise.user_score %}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Score</span>
+                        <span class="badge bg-info">{{ exercise.user_score }}/{{ exercise.max_score }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Related Exercises -->
+            {% if related_exercises %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Related Exercises</h6>
+                </div>
+                <div class="card-body">
+                    {% for related in related_exercises %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div>
+                            <a href="{% url 'content:exercise_detail' related.id %}" class="text-decoration-none">
+                                {{ related.title|truncatechars:30 }}
+                            </a>
+                            <br>
+                            <small class="text-muted">{{ related.get_exercise_type_display }}</small>
+                        </div>
+                        <span class="badge bg-{{ related.difficulty_level|default:'secondary' }}">
+                            {{ related.difficulty_level|title|default:'Basic' }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+}
+
+.text-primary {
+    color: #ff5d15 !important;
+}
+
+.exercise-container {
+    min-height: 300px;
+}
+
+.exercise-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: #f8f9fa;
+}
+
+.instructions,
+.learning-objectives {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #ff5d15;
+}
+
+.progress-bar {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+}
+</style>
+
+<script>
+function startQuiz() {
+    showExerciseArea();
+    // Add quiz-specific functionality here
+}
+
+function startSimulation() {
+    showExerciseArea();
+    // Add simulation-specific functionality here
+}
+
+function startCaseStudy() {
+    showExerciseArea();
+    // Add case study-specific functionality here
+}
+
+function startInteractive() {
+    showExerciseArea();
+    // Add interactive exercise functionality here
+}
+
+function startExercise() {
+    showExerciseArea();
+    // Add general exercise functionality here
+}
+
+function showExerciseArea() {
+    document.querySelector('.exercise-container').style.display = 'none';
+    document.getElementById('exerciseArea').style.display = 'block';
+}
+
+function pauseExercise() {
+    // Add pause functionality
+    console.log('Exercise paused');
+}
+
+function resetExercise() {
+    if (confirm('Are you sure you want to reset your progress?')) {
+        // Add reset functionality
+        console.log('Exercise reset');
+    }
+}
+
+function completeExercise() {
+    if (confirm('Are you sure you want to mark this exercise as complete?')) {
+        // Add completion functionality
+        console.log('Exercise completed');
+    }
+}
+</script>
+{% endblock %}

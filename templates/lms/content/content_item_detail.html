@@ -1,0 +1,272 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}{{ content_item.title }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 text-primary">{{ content_item.title }}</h1>
+                    <p class="text-muted mb-0">{{ content_item.get_content_type_display }}</p>
+                </div>
+                <div class="btn-group" role="group">
+                    {% if content_item.external_url %}
+                    <a href="{{ content_item.external_url }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt me-1"></i>Open External Link
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'content:content_item_list' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Content Items
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-layer-group me-2"></i>Content
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="content-display">
+                        {% if content_item.content_type == 'text' %}
+                            <div class="text-content">
+                                {{ content_item.content|linebreaks }}
+                            </div>
+                        {% elif content_item.content_type == 'html' %}
+                            <div class="html-content">
+                                {{ content_item.content|safe }}
+                            </div>
+                        {% elif content_item.content_type == 'video' %}
+                            <div class="video-content">
+                                {% if content_item.video_url %}
+                                    <div class="ratio ratio-16x9">
+                                        <iframe src="{{ content_item.video_url }}" 
+                                                title="{{ content_item.title }}"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                {% else %}
+                                    <div class="text-center py-4">
+                                        <i class="fas fa-video fa-3x text-muted mb-3"></i>
+                                        <p class="text-muted">Video content not available</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% elif content_item.content_type == 'audio' %}
+                            <div class="audio-content">
+                                {% if content_item.audio_file %}
+                                    <audio controls class="w-100">
+                                        <source src="{{ content_item.audio_file.url }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                {% else %}
+                                    <div class="text-center py-4">
+                                        <i class="fas fa-volume-up fa-3x text-muted mb-3"></i>
+                                        <p class="text-muted">Audio content not available</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% elif content_item.content_type == 'image' %}
+                            <div class="image-content text-center">
+                                {% if content_item.image_file %}
+                                    <img src="{{ content_item.image_file.url }}" 
+                                         alt="{{ content_item.title }}" 
+                                         class="img-fluid rounded">
+                                {% else %}
+                                    <div class="text-center py-4">
+                                        <i class="fas fa-image fa-3x text-muted mb-3"></i>
+                                        <p class="text-muted">Image content not available</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="default-content">
+                                {{ content_item.content|linebreaks }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {% if content_item.learning_objectives %}
+                    <div class="mt-4">
+                        <h6>Learning Objectives</h6>
+                        <div class="learning-objectives">
+                            {{ content_item.learning_objectives|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if content_item.additional_notes %}
+                    <div class="mt-4">
+                        <h6>Additional Notes</h6>
+                        <div class="additional-notes">
+                            {{ content_item.additional_notes|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Related Content -->
+            {% if related_content %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-link me-2"></i>Related Content
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for item in related_content %}
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-layer-group fa-2x text-primary"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6>
+                                        <a href="{% url 'content:content_item_detail' item.id %}" class="text-decoration-none">
+                                            {{ item.title }}
+                                        </a>
+                                    </h6>
+                                    <p class="mb-1 text-muted">{{ item.content|truncatewords:15|striptags }}</p>
+                                    <small class="text-muted">{{ item.get_content_type_display }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-4">
+            <!-- Content Details -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Content Details</h6>
+                </div>
+                <div class="card-body">
+                    <p><strong>Type:</strong> {{ content_item.get_content_type_display }}</p>
+                    <p><strong>Difficulty:</strong> {{ content_item.difficulty_level|title|default:"Not specified" }}</p>
+                    <p><strong>Estimated Time:</strong> {{ content_item.estimated_duration|default:"Not specified" }} minutes</p>
+                    <p><strong>Created:</strong> {{ content_item.created_at|date:"M d, Y" }}</p>
+                    {% if content_item.updated_at != content_item.created_at %}
+                    <p><strong>Last Updated:</strong> {{ content_item.updated_at|date:"M d, Y" }}</p>
+                    {% endif %}
+                    {% if content_item.created_by %}
+                    <p><strong>Created by:</strong> {{ content_item.created_by.get_full_name|default:content_item.created_by.username }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Progress Tracking -->
+            {% if user.is_authenticated %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Your Progress</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span>Completion Status</span>
+                        {% if content_item.is_completed_by_user %}
+                        <span class="badge bg-success">Completed</span>
+                        {% else %}
+                        <span class="badge bg-warning">In Progress</span>
+                        {% endif %}
+                    </div>
+                    
+                    {% if not content_item.is_completed_by_user %}
+                    <form method="post" action="{% url 'content:mark_content_complete' content_item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-check me-1"></i>Mark as Complete
+                        </button>
+                    </form>
+                    {% else %}
+                    <div class="text-center text-success">
+                        <i class="fas fa-check-circle fa-2x mb-2"></i>
+                        <p class="mb-0">Well done! You've completed this content.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Quick Actions -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Quick Actions</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        {% if content_item.external_url %}
+                        <a href="{{ content_item.external_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-external-link-alt me-1"></i>Open External Link
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'content:content_item_list' %}" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-list me-1"></i>Browse More Content
+                        </a>
+                        <a href="{% url 'content:library' %}" class="btn btn-outline-info btn-sm">
+                            <i class="fas fa-book-open me-1"></i>Content Library
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+}
+
+.text-primary {
+    color: #ff5d15 !important;
+}
+
+.content-display {
+    line-height: 1.6;
+}
+
+.text-content,
+.html-content,
+.default-content {
+    font-size: 1.1rem;
+}
+
+.learning-objectives,
+.additional-notes {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #ff5d15;
+}
+</style>
+{% endblock %}

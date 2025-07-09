@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'content',
     'payments',  # Added for test suite
     'certificates',  # Added for test suite
+    'analytics',  # Payment analytics dashboard
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'ckeditor',
     'taggit',
     'import_export',
@@ -97,6 +99,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'blog.urls'
 
+# Sites framework
+SITE_ID = 1
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -123,21 +128,34 @@ WHITENOISE_MANIFEST_STRICT = False
 # DATABASE CONFIGURATION
 # =============================================================================
 
-# Active PostgreSQL configuration using manual settings (recommended for Neon pooled connections)
-# This approach avoids issues with DATABASE_URL parsing and unsupported startup parameters
+# TEMPORARY: SQLite configuration for local development and testing
+# This is a temporary change for development convenience
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'yitplms',
-        'USER': 'yitplms_owner',
-        'PASSWORD': 'npg_LwHI4a8TufWb',
-        'HOST': 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require'
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# =============================================================================
+# PRODUCTION: PostgreSQL configuration (COMMENTED OUT - RESTORE FOR PRODUCTION)
+# =============================================================================
+# Active PostgreSQL configuration using manual settings (recommended for Neon pooled connections)
+# This approach avoids issues with DATABASE_URL parsing and unsupported startup parameters
+# Connection string: postgresql://yitplms_owner:npg_LwHI4a8TufWb@ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech/yitplms?sslmode=require&channel_binding=require
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'yitplms',
+#         'USER': 'yitplms_owner',
+#         'PASSWORD': 'npg_LwHI4a8TufWb',
+#         'HOST': 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#             'sslmode': 'require'
+#         },
+#     }
+# }
 
 # =============================================================================
 # COMMENTED OUT: DATABASE_URL parsing approach (caused Neon pooled connection issues)
@@ -153,16 +171,10 @@ DATABASES = {
 # }
 
 # =============================================================================
-# FALLBACK DATABASE CONFIGURATIONS (for reference)
+# ALTERNATIVE DATABASE CONFIGURATIONS (for reference)
 # =============================================================================
 
-# SQLite configuration for local development (commented out)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+# NOTE: SQLite configuration is now ACTIVE above for local development
 
 # Alternative manual PostgreSQL configuration (commented out - active configuration is above)
 # DATABASES = {
@@ -404,6 +416,7 @@ AVAILABLE_PAYMENT_METHODS = [
         'enabled': True,
         'requires_phone': True,
         'processing_fee': 0.00,
+        'supports_installments': True,
     },
     {
         'code': 'bank_transfer',
@@ -412,13 +425,24 @@ AVAILABLE_PAYMENT_METHODS = [
         'enabled': True,
         'requires_account_number': False,
         'processing_fee': 0.00,
+        'supports_installments': True,
+    },
+    {
+        'code': 'paypal',
+        'name': 'PayPal',
+        'description': 'Pay securely with PayPal',
+        'enabled': True,
+        'requires_verification': True,
+        'processing_fee': 0.00,
+        'supports_installments': True,
     },
     {
         'code': 'card',
         'name': 'Credit/Debit Card',
         'description': 'Pay using Visa, Mastercard, or other cards',
-        'enabled': False,  # To be implemented later with Stripe/PayPal
+        'enabled': False,  # To be implemented later with Stripe
         'processing_fee': 2.50,
+        'supports_installments': False,
     }
 ]
 

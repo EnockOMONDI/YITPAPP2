@@ -416,7 +416,7 @@
                 </div>
 
                 <button type="button" class="parent-nav" data-target="#enrollment-workflow" aria-expanded="false" aria-controls="enrollment-nav-items" tabindex="0">
-                    <span><i class="fas fa-graduation-cap"></i> User Course Enrollment Workflow</span>
+                    <span><i class="fas fa-graduation-cap"></i> User Course Enrollment Journey</span>
                     <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
                 </button>
                 <div class="child-nav-items" id="enrollment-nav-items" aria-labelledby="enrollment-workflow">
@@ -425,8 +425,9 @@
                     <a href="#profile-navigation" class="child-nav" tabindex="-1"><i class="fas fa-user-cog"></i> Profile Navigation & Management</a>
                     <a href="#course-browsing" class="child-nav" tabindex="-1"><i class="fas fa-search"></i> Course Browsing & Selection</a>
                     <a href="#sponsorship-process" class="child-nav" tabindex="-1"><i class="fas fa-hand-holding-heart"></i> Sponsorship Request Process</a>
-                    <a href="#course-enrollment" class="child-nav" tabindex="-1"><i class="fas fa-book-open"></i> Course Enrollment (Free & Paid)</a>
+                    <a href="#course-enrollment" class="child-nav" tabindex="-1"><i class="fas fa-book-open"></i> Course Enrollment with M-Pesa Integration</a>
                     <a href="#progress-tracking" class="child-nav" tabindex="-1"><i class="fas fa-chart-line"></i> Progress Tracking & Analytics</a>
+                    <a href="#email-notifications" class="child-nav" tabindex="-1"><i class="fas fa-envelope"></i> Email Notification System</a>
                 </div>
 
                 <button type="button" class="parent-nav" data-target="#content-delivery-workflow" aria-expanded="false" aria-controls="content-delivery-nav-items" tabindex="0">
@@ -874,17 +875,17 @@
 
                 </div>
             </div>
-            <!-- User Course Enrollment Workflow Section -->
+            <!-- User Course Enrollment Journey Section -->
             <div id="enrollment-workflow" class="section-card">
                 <div class="section-header">
-                    <h3><i class="fas fa-graduation-cap"></i> User Course Enrollment Workflow</h3>
+                    <h3><i class="fas fa-graduation-cap"></i> User Course Enrollment Journey</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Complete overview of the YITP user course enrollment process, from login through progress tracking.</p>
+                    <p class="lead">Complete overview of the YITP user course enrollment journey, from login through course completion and certification.</p>
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
-                        The complete user course enrollment workflow has been successfully implemented and tested with a 100% success rate across all 37 test scenarios, including registration, authentication, sponsorship requests, course enrollment, and progress tracking.
+                        The complete user course enrollment journey has been successfully implemented with unified enrollment services, automated payment processing via M-Pesa integration, real-time progress tracking, and automated certificate generation upon course completion.
                     </div>
                 </div>
             </div>
@@ -949,53 +950,59 @@
                         <div class="mermaid">
                             graph TD
                                 A[User Login] --> B{Authentication Success?}
-                                B -->|Valid| C[Access Profile Dashboard]
+                                B -->|Valid| C[Access LMS Dashboard]
                                 B -->|Invalid| D[Show Login Error]
                                 D --> A
-                                C --> E[Profile Overview Page]
-                                E --> F{User Action}
-                                F -->|Request Sponsorship| G[Open Sponsorship Modal]
-                                G --> H[Fill Sponsorship Form]
-                                H --> I[Submit Request]
-                                I --> J[Send Email Notifications]
-                                J --> K[Return to Profile]
-                                F -->|Browse Courses| L[Navigate to Course List]
-                                L --> M[View Available Courses]
-                                M --> N[Select Course]
-                                N --> O[View Course Details]
-                                O --> P{Course Type?}
-                                P -->|Free Course| Q[Click Enroll Button]
-                                P -->|Paid Course| R{Payment Status?}
-                                R -->|Payment Confirmed| Q
-                                R -->|Payment Required| S[Payment Verification]
-                                S --> T[Update Payment Status]
-                                T --> Q
-                                Q --> U[Create Enrollment Record]
-                                U --> V[Send Confirmation Email]
-                                V --> W[Course Access Granted]
-                                W --> X[Access Course Materials]
-                                X --> Y[Complete Lessons]
-                                Y --> Z[Track Progress]
-                                Z --> AA[View Analytics Dashboard]
-                                K --> L
-                                AA --> BB[Learning Complete]
+                                C --> E[Browse Available Courses]
+                                E --> F[Select Course of Interest]
+                                F --> G[View Course Details]
+                                G --> H{Course Type?}
+                                H -->|Free Course| I[Click Enroll Now]
+                                H -->|Paid Course| J{Payment Status Check}
+                                J -->|Payment Confirmed| I
+                                J -->|Payment Required| K[Payment Processing Required]
+                                K --> L[Choose Payment Method]
+                                L --> M{Payment Method?}
+                                M -->|M-Pesa| N[STK Push Initiated]
+                                M -->|Bank Transfer| O[Bank Details Provided]
+                                N --> P[Complete Phone Payment]
+                                O --> Q[Manual Payment Verification]
+                                P --> R{Payment Successful?}
+                                Q --> R
+                                R -->|Yes| S[Update Profile Payment Status]
+                                R -->|No| T[Payment Failed - Retry]
+                                T --> L
+                                S --> U[Payment Confirmation Email]
+                                U --> I
+                                I --> V[EnrollmentService Validation]
+                                V --> W[Create Enrollment Record]
+                                W --> X[Send Enrollment Confirmation]
+                                X --> Y[Course Access Granted]
+                                Y --> Z[Sequential Lesson Access]
+                                Z --> AA[Progress Tracking & Analytics]
+                                AA --> BB{Course Complete?}
+                                BB -->|No| Z
+                                BB -->|Yes| CC[Generate Certificate]
+                                CC --> DD[Send Completion Email]
+                                DD --> EE[Learning Journey Complete]
 
                                 style A fill:#e3f2fd
                                 style C fill:#fff3cd
                                 style E fill:#d4edda
-                                style G fill:#f3e5f5
-                                style I fill:#e8f5e8
-                                style Q fill:#d4edda
-                                style U fill:#e8f5e8
-                                style W fill:#fff3cd
+                                style H fill:#f3e5f5
+                                style J fill:#e8f5e8
+                                style V fill:#d4edda
+                                style W fill:#e8f5e8
+                                style Y fill:#fff3cd
                                 style AA fill:#e3f2fd
-                                style BB fill:#c8e6c9
+                                style CC fill:#c8e6c9
+                                style EE fill:#c8e6c9
                         </div>
                     </div>
 
                     <div class="tech-detail">
                         <strong><i class="fas fa-info-circle"></i> Technical Note:</strong>
-                        This flowchart is interactive and can be zoomed/panned. Each step represents a specific function or process in the YITP enrollment system.
+                        This flowchart represents the complete user enrollment journey powered by Django's EnrollmentService, featuring automated M-Pesa payment processing, real-time progress tracking, and certificate generation upon course completion.
                     </div>
                 </div>
             </div>
@@ -1246,14 +1253,14 @@
                         </div>
                     </div>
 
-                    <h4 class="mt-4"><i class="fas fa-credit-card"></i> Paid Course Enrollment</h4>
+                    <h4 class="mt-4"><i class="fas fa-credit-card"></i> Paid Course Enrollment with M-Pesa Integration</h4>
 
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>Payment Verification</h5>
-                                <p class="mb-0">System verifies your payment status before enrollment</p>
+                                <h5>Payment Method Selection</h5>
+                                <p class="mb-0">Choose between M-Pesa mobile payment or bank transfer for course payment</p>
                             </div>
                         </div>
                     </div>
@@ -1262,8 +1269,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Access Control</h5>
-                                <p class="mb-0">Only users with confirmed payment can access paid courses</p>
+                                <h5>M-Pesa STK Push</h5>
+                                <p class="mb-0">For M-Pesa payments, receive an instant payment prompt on your phone to complete the transaction</p>
                             </div>
                         </div>
                     </div>
@@ -1272,15 +1279,35 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Course Access</h5>
-                                <p class="mb-0">Once payment is confirmed, you can enroll and start learning</p>
+                                <h5>Payment Confirmation</h5>
+                                <p class="mb-0">System automatically verifies M-Pesa payments or processes manual bank transfer verification</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Profile Status Update</h5>
+                                <p class="mb-0">Your payment status is updated in your profile, enabling access to paid courses</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Course Enrollment Access</h5>
+                                <p class="mb-0">With confirmed payment, you can now enroll in any paid course and start learning immediately</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="tech-detail">
-                        <strong><i class="fas fa-info-circle"></i> Payment Information:</strong>
-                        Payment verification ensures secure access to premium course content while keeping free courses open to everyone.
+                        <strong><i class="fas fa-info-circle"></i> Payment Integration:</strong>
+                        The M-Pesa integration provides seamless mobile payments while bank transfer options ensure accessibility for all users. Payment verification is automated for M-Pesa and manual for bank transfers.
                     </div>
                 </div>
             </div>
@@ -1291,19 +1318,19 @@
                     <h3><i class="fas fa-chart-line"></i> Progress Tracking & Analytics</h3>
                 </div>
                 <div class="section-content">
-                    <p class="lead">Track your learning progress and view detailed analytics about your YITP journey.</p>
+                    <p class="lead">Track your learning progress with sequential lesson access, real-time analytics, and automated certificate generation upon course completion.</p>
 
                     <div class="success-box">
-                        <strong><i class="fas fa-check-circle"></i> Learning Analytics:</strong>
-                        The progress tracking system provides comprehensive insights into your learning achievements and helps you stay motivated.
+                        <strong><i class="fas fa-check-circle"></i> Advanced Progress Tracking:</strong>
+                        The system features sequential lesson progression, cross-module navigation, completion tracking, and automatic certificate generation when courses are completed.
                     </div>
 
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">1</span>
                             <div>
-                                <h5>View Learning Dashboard</h5>
-                                <p class="mb-0">Access your personalized analytics dashboard from your profile</p>
+                                <h5>Sequential Lesson Access</h5>
+                                <p class="mb-0">Complete lessons in order - each lesson unlocks the next one, ensuring structured learning progression</p>
                             </div>
                         </div>
                     </div>
@@ -1312,8 +1339,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">2</span>
                             <div>
-                                <h5>Track Course Progress</h5>
-                                <p class="mb-0">See visual progress bars and completion percentages for each enrolled course</p>
+                                <h5>Real-Time Progress Tracking</h5>
+                                <p class="mb-0">View your completion percentage and track progress across all enrolled courses</p>
                             </div>
                         </div>
                     </div>
@@ -1322,8 +1349,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">3</span>
                             <div>
-                                <h5>Review Learning Metrics</h5>
-                                <p class="mb-0">View time spent learning, modules completed, and assessment scores</p>
+                                <h5>Cross-Module Navigation</h5>
+                                <p class="mb-0">Navigate seamlessly between modules while maintaining lesson completion requirements</p>
                             </div>
                         </div>
                     </div>
@@ -1332,8 +1359,8 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">4</span>
                             <div>
-                                <h5>Monitor Goals</h5>
-                                <p class="mb-0">Track your progress toward learning goals and milestones</p>
+                                <h5>Learning Analytics Dashboard</h5>
+                                <p class="mb-0">View comprehensive learning metrics including time spent, completion rates, and performance data</p>
                             </div>
                         </div>
                     </div>
@@ -1342,18 +1369,99 @@
                         <div class="d-flex align-items-center">
                             <span class="step-number">5</span>
                             <div>
-                                <h5>Access Account Information</h5>
-                                <p class="mb-0">View billing history and manage your account settings</p>
+                                <h5>Automatic Course Completion</h5>
+                                <p class="mb-0">When all lessons are completed, the system automatically marks the course as complete</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">6</span>
+                            <div>
+                                <h5>Certificate Generation</h5>
+                                <p class="mb-0">Upon course completion, receive an automatically generated certificate via email</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="tech-detail">
-                        <strong><i class="fas fa-info-circle"></i> Progress Updates:</strong>
-                        Your progress is automatically updated as you complete lessons, helping you stay on track with your learning goals.
+                        <strong><i class="fas fa-info-circle"></i> Smart Progress System:</strong>
+                        The system automatically tracks lesson completion, calculates progress percentages, and triggers certificate generation when courses are completed, with email notifications sent for all major milestones.
                     </div>
                 </div>
             </div>
+
+            <!-- Email Notification System Section -->
+            <div id="email-notifications" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Email Notification System</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Comprehensive email notification system that keeps users and administrators informed throughout the entire enrollment and learning journey.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Automated Communications:</strong>
+                        The system automatically sends targeted email notifications for enrollment confirmations, payment updates, course completion, and certificate issuance.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Enrollment Confirmation Emails</h5>
+                                <p class="mb-0">Students receive detailed enrollment confirmation emails with course information and access instructions</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Admin Enrollment Notifications</h5>
+                                <p class="mb-0">Administrators receive comprehensive notifications about new enrollments including student details and course statistics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Payment Confirmation Emails</h5>
+                                <p class="mb-0">Automated payment confirmation emails are sent when M-Pesa or bank transfer payments are successfully processed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Course Completion Notifications</h5>
+                                <p class="mb-0">Students receive congratulatory emails when they complete courses, including achievement summaries</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Certificate Issuance Emails</h5>
+                                <p class="mb-0">Automated certificate delivery emails with downloadable certificates are sent upon course completion</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Email Integration:</strong>
+                        All emails are sent using Django's email framework with HTML and plain text versions, ensuring compatibility across all email clients and providing professional communication throughout the learning journey.
+                    </div>
+                </div>
+            </div>
+
             <!-- Course Content Delivery & Lesson Progression Workflow Section -->
             <div id="content-delivery-workflow" class="section-card">
                 <div class="section-header">

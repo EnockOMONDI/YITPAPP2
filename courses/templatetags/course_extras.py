@@ -22,3 +22,11 @@ def default_if_none(value, default):
     if value is None:
         return default
     return value
+
+@register.filter
+def mul(value, arg):
+    """Multiply value by arg"""
+    try:
+        return float(value) * float(arg)
+    except (ValueError, TypeError):
+        return 0

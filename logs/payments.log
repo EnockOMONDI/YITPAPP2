@@ -1,0 +1,85 @@
+INFO 2025-07-06 21:22:58,140 payment_service 37493 8467643072 Payment record created: YITP-20250706-C6B129F7 for test@example.com - Method: paypal
+INFO 2025-07-06 21:22:58,144 payment_service 37493 8467643072 Generated PayPal URL for payment YITP-20250706-C6B129F7
+ERROR 2025-07-06 21:22:58,144 payment_service 37493 8467643072 Failed to generate PayPal URL for payment unknown: Invalid payment object or missing reference number
+INFO 2025-07-06 21:27:57,338 payment_service 37619 8467643072 Payment record created: YITP-20250706-1C079CF8 for test@example.com - Method: paypal
+INFO 2025-07-06 21:27:57,940 email_service 37619 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-1C079CF8
+INFO 2025-07-06 21:27:57,945 email_service 37619 8467643072 Admin verification notification sent for payment YITP-20250706-1C079CF8
+ERROR 2025-07-06 21:36:56,689 views 37763 8467643072 Bank transfer payment processing error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+INFO 2025-07-06 21:38:50,094 payment_service 37763 8467643072 Payment record created: YITP-20250706-610CDB35 for test@example.com - Method: paypal
+INFO 2025-07-06 21:39:33,177 payment_service 37763 8467643072 Payment record created: YITP-20250706-128BB845 for test@example.com - Method: paypal
+INFO 2025-07-06 21:39:34,564 email_service 37763 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-128BB845
+INFO 2025-07-06 21:39:34,567 email_service 37763 8467643072 Admin verification notification sent for payment YITP-20250706-128BB845
+ERROR 2025-07-06 21:40:00,886 views 37763 8467643072 PayPal payment processing error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+ERROR 2025-07-06 21:41:50,836 views 37763 8467643072 PayPal payment processing error: cannot import name 'Enrollment' from 'courses.models' (/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py)
+INFO 2025-07-06 22:44:20,371 payment_service 39119 8467643072 Payment record created: YITP-20250706-CFA11F58 for test@example.com - Method: paypal
+INFO 2025-07-06 22:44:20,897 email_service 39119 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-CFA11F58
+INFO 2025-07-06 22:44:20,900 email_service 39119 8467643072 Admin verification notification sent for payment YITP-20250706-CFA11F58
+INFO 2025-07-06 23:30:56,644 payment_service 39977 8467643072 Payment record created: YITP-20250706-07E7F23C for test@example.com - Method: paypal
+INFO 2025-07-06 23:30:56,645 payment_service 39977 8467643072 Generated PayPal URL for payment YITP-20250706-07E7F23C
+ERROR 2025-07-06 23:30:56,645 payment_service 39977 8467643072 Failed to generate PayPal URL for payment unknown: Invalid payment object or missing reference number
+INFO 2025-07-06 23:52:34,262 payment_service 40405 8467643072 Payment record created: YITP-20250706-91A34C65 for test@example.com - Method: bank_transfer
+INFO 2025-07-06 23:52:35,122 email_service 40405 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-91A34C65
+INFO 2025-07-06 23:52:35,125 email_service 40405 8467643072 Admin verification notification sent for payment YITP-20250706-91A34C65
+INFO 2025-07-06 23:53:42,405 payment_service 40405 8467643072 Payment record created: YITP-20250706-22D650E8 for test@example.com - Method: paypal
+INFO 2025-07-06 23:54:13,928 payment_service 40405 8467643072 Payment record created: YITP-20250706-E9F53E82 for test@example.com - Method: paypal
+INFO 2025-07-06 23:54:13,938 email_service 40405 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-E9F53E82
+INFO 2025-07-06 23:54:13,941 email_service 40405 8467643072 Admin verification notification sent for payment YITP-20250706-E9F53E82
+INFO 2025-07-06 23:54:32,456 payment_service 40405 8467643072 Payment record created: YITP-20250706-F2A1F549 for test@example.com - Method: paypal
+INFO 2025-07-06 23:54:32,873 email_service 40405 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-F2A1F549
+INFO 2025-07-06 23:54:32,876 email_service 40405 8467643072 Admin verification notification sent for payment YITP-20250706-F2A1F549
+INFO 2025-07-06 23:55:35,762 payment_service 40405 8467643072 Payment record created: YITP-20250706-23FD6429 for test@example.com - Method: paypal
+INFO 2025-07-06 23:55:36,180 email_service 40405 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-23FD6429
+INFO 2025-07-06 23:55:36,183 email_service 40405 8467643072 Admin verification notification sent for payment YITP-20250706-23FD6429
+INFO 2025-07-06 23:56:13,640 payment_service 40405 8467643072 Payment record created: YITP-20250706-58905F06 for test@example.com - Method: paypal
+INFO 2025-07-06 23:56:13,646 payment_service 40405 8467643072 Generated PayPal URL for payment YITP-20250706-58905F06
+ERROR 2025-07-06 23:56:13,647 payment_service 40405 8467643072 Failed to generate PayPal URL for payment unknown: Invalid payment object or missing reference number
+INFO 2025-07-07 00:41:38,591 payment_service 41358 8467643072 Payment record created: YITP-20250706-31B5398B for test@example.com - Method: bank_transfer
+INFO 2025-07-07 00:41:39,423 email_service 41358 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-31B5398B
+INFO 2025-07-07 00:41:39,427 email_service 41358 8467643072 Admin verification notification sent for payment YITP-20250706-31B5398B
+INFO 2025-07-07 00:42:38,307 payment_service 41358 8467643072 Payment record created: YITP-20250706-D60EB6F1 for test@example.com - Method: paypal
+INFO 2025-07-07 00:42:58,729 payment_service 41358 8467643072 Payment record created: YITP-20250706-48B46DE4 for test@example.com - Method: paypal
+INFO 2025-07-07 00:42:58,738 email_service 41358 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-48B46DE4
+INFO 2025-07-07 00:42:58,742 email_service 41358 8467643072 Admin verification notification sent for payment YITP-20250706-48B46DE4
+INFO 2025-07-07 00:43:17,753 payment_service 41358 8467643072 Payment record created: YITP-20250706-0C341B08 for test@example.com - Method: paypal
+INFO 2025-07-07 00:43:18,164 email_service 41358 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-0C341B08
+INFO 2025-07-07 00:43:18,168 email_service 41358 8467643072 Admin verification notification sent for payment YITP-20250706-0C341B08
+INFO 2025-07-07 00:44:16,305 payment_service 41358 8467643072 Payment record created: YITP-20250706-232FD800 for test@example.com - Method: paypal
+INFO 2025-07-07 00:44:16,725 email_service 41358 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-232FD800
+INFO 2025-07-07 00:44:16,729 email_service 41358 8467643072 Admin verification notification sent for payment YITP-20250706-232FD800
+INFO 2025-07-07 00:44:37,595 payment_service 41358 8467643072 Payment record created: YITP-20250706-69F66845 for test@example.com - Method: paypal
+INFO 2025-07-07 00:44:37,599 payment_service 41358 8467643072 Generated PayPal URL for payment YITP-20250706-69F66845
+ERROR 2025-07-07 00:44:37,599 payment_service 41358 8467643072 Failed to generate PayPal URL for payment unknown: Invalid payment object or missing reference number
+INFO 2025-07-07 00:52:06,708 payment_service 41635 8467643072 Payment record created: YITP-20250706-5E7A667D for test@example.com - Method: paypal
+INFO 2025-07-07 00:52:07,594 email_service 41635 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-5E7A667D
+INFO 2025-07-07 00:52:07,596 email_service 41635 8467643072 Admin verification notification sent for payment YITP-20250706-5E7A667D
+INFO 2025-07-07 00:55:13,957 payment_service 41891 8467643072 Payment record created: YITP-20250706-F30EBE76 for test@example.com - Method: bank_transfer
+INFO 2025-07-07 00:55:14,838 email_service 41891 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-F30EBE76
+INFO 2025-07-07 00:55:14,842 email_service 41891 8467643072 Admin verification notification sent for payment YITP-20250706-F30EBE76
+INFO 2025-07-07 00:56:06,938 payment_service 41891 8467643072 Payment record created: YITP-20250706-18AA5B7D for test@example.com - Method: paypal
+INFO 2025-07-07 00:56:28,065 payment_service 41891 8467643072 Payment record created: YITP-20250706-D0D07F95 for test@example.com - Method: paypal
+INFO 2025-07-07 00:56:28,075 email_service 41891 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-D0D07F95
+INFO 2025-07-07 00:56:28,079 email_service 41891 8467643072 Admin verification notification sent for payment YITP-20250706-D0D07F95
+INFO 2025-07-07 00:56:44,720 payment_service 41891 8467643072 Payment record created: YITP-20250706-12EE447E for test@example.com - Method: paypal
+INFO 2025-07-07 00:56:45,134 email_service 41891 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-12EE447E
+INFO 2025-07-07 00:56:45,137 email_service 41891 8467643072 Admin verification notification sent for payment YITP-20250706-12EE447E
+INFO 2025-07-07 00:57:46,681 payment_service 41891 8467643072 Payment record created: YITP-20250706-729A578F for test@example.com - Method: paypal
+INFO 2025-07-07 00:57:47,137 email_service 41891 8467643072 User payment confirmation sent to test@example.com for payment YITP-20250706-729A578F
+INFO 2025-07-07 00:57:47,141 email_service 41891 8467643072 Admin verification notification sent for payment YITP-20250706-729A578F
+INFO 2025-07-07 00:58:07,189 payment_service 41891 8467643072 Payment record created: YITP-20250706-E84DDC6B for test@example.com - Method: paypal
+INFO 2025-07-07 00:58:07,193 payment_service 41891 8467643072 Generated PayPal URL for payment YITP-20250706-E84DDC6B
+ERROR 2025-07-07 00:58:07,193 payment_service 41891 8467643072 Failed to generate PayPal URL for payment unknown: Invalid payment object or missing reference number
+ERROR 2025-07-09 00:41:52,594 payment_service 86698 8467643072 Payment not found: TEST-PAY-003 - testuser@example.com - Advanced Web Development
+INFO 2025-07-09 00:41:53,237 payment_service 86698 8467643072 Payment record created: YITP-20250708-090F9C5C for testuser@example.com - Method: bank_transfer
+INFO 2025-07-09 00:41:53,876 payment_service 86698 8467643072 Payment record created: YITP-20250708-062B0BC4 for testuser@example.com - Method: mpesa
+ERROR 2025-07-09 00:43:57,482 payment_service 86750 8467643072 Payment not found: TEST-PAY-004 - testuser@example.com - Advanced Web Development
+ERROR 2025-07-09 00:43:58,116 payment_service 86750 8467643072 Payment not found: TEST-PAY-003 - testuser@example.com - Advanced Web Development
+INFO 2025-07-09 00:43:58,780 payment_service 86750 8467643072 Payment record created: YITP-20250708-475869C2 for testuser@example.com - Method: bank_transfer
+INFO 2025-07-09 00:43:59,468 payment_service 86750 8467643072 Payment record created: YITP-20250708-3DD08884 for testuser@example.com - Method: mpesa
+ERROR 2025-07-09 00:46:41,442 payment_service 86895 8467643072 Payment not found: INVALID-REF-123
+INFO 2025-07-09 00:46:42,082 payment_service 86895 8467643072 Payment confirmed: TEST-PAY-003 for testuser@example.com
+INFO 2025-07-09 00:46:42,872 payment_service 86895 8467643072 Payment record created: YITP-20250708-8593E7C8 for testuser@example.com - Method: bank_transfer
+INFO 2025-07-09 00:46:43,556 payment_service 86895 8467643072 Payment record created: YITP-20250708-1F3E50D0 for testuser@example.com - Method: mpesa
+ERROR 2025-07-09 01:34:36,912 payment_service 88185 8467643072 Payment not found: INVALID-REF-123
+INFO 2025-07-09 01:34:38,566 payment_service 88185 8467643072 Payment confirmed: TEST-PAY-003 for testuser@example.com
+INFO 2025-07-09 01:34:43,422 payment_service 88185 8467643072 Payment record created: YITP-20250708-2100384B for testuser@example.com - Method: bank_transfer
+INFO 2025-07-09 01:34:44,689 payment_service 88185 8467643072 Payment record created: YITP-20250708-6DEF00B0 for testuser@example.com - Method: mpesa

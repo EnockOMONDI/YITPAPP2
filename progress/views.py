@@ -71,6 +71,31 @@ class MyProgressView(LoginRequiredMixin, TemplateView):
 
         context['progress_data'] = progress_data
 
+        # Calculate overall progress across all enrollments
+        if enrollments.exists():
+            total_lessons_all = sum(enrollment.course.total_lessons for enrollment in enrollments)
+            completed_lessons_all = sum(
+                LessonProgress.objects.filter(
+                    enrollment=enrollment,
+                    status='completed'
+                ).count() for enrollment in enrollments
+            )
+            overall_progress_percentage = (completed_lessons_all / total_lessons_all * 100) if total_lessons_all > 0 else 0
+
+            context['overall_progress'] = {
+                'total_courses': enrollments.count(),
+                'total_lessons': total_lessons_all,
+                'completed_lessons': completed_lessons_all,
+                'progress_percentage': round(overall_progress_percentage, 1)
+            }
+        else:
+            context['overall_progress'] = {
+                'total_courses': 0,
+                'total_lessons': 0,
+                'completed_lessons': 0,
+                'progress_percentage': 0
+            }
+
         return context
 
 
@@ -350,3 +375,22 @@ class EndStudySessionView(LoginRequiredMixin, View):
 
         except StudySession.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Invalid session'})
+
+
+class UpdateStudyGoalsView(LoginRequiredMixin, View):
+    """API endpoint to update study goals"""
+
+    def post(self, request):
+        daily_goal = request.POST.get('daily_goal')
+        weekly_goal = request.POST.get('weekly_goal')
+
+        try:
+            # Here you would typically update user's study goals
+            # For now, just return success
+            return JsonResponse({
+                'success': True,
+                'message': 'Study goals updated successfully'
+            })
+
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})

@@ -12,7 +12,7 @@
                     <i class="fas fa-tasks me-2"></i>
                     Assignments
                 </h1>
-                <a href="{% url 'assessments:assessment_dashboard' %}" class="btn btn-outline-secondary">
+                <a href="{% url 'assessments:dashboard' %}" class="btn btn-outline-secondary">
                     <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
                 </a>
             </div>
@@ -117,7 +117,8 @@
                                     Submitted: {{ assignment.user_submission.submitted_at|date:"M d, Y H:i" }}
                                 </small>
                                 {% if assignment.user_submission.grade %}
-                                    <span class="badge bg-{% if assignment.user_submission.grade >= assignment.max_points * 0.8 %}success{% elif assignment.user_submission.grade >= assignment.max_points * 0.6 %}warning{% else %}danger{% endif %}">
+                                    {% widthratio assignment.user_submission.grade assignment.max_points 100 as grade_percentage %}
+                                    <span class="badge bg-{% if grade_percentage >= 80 %}success{% elif grade_percentage >= 60 %}warning{% else %}danger{% endif %}">
                                         {{ assignment.user_submission.grade }}/{{ assignment.max_points }}
                                     </span>
                                 {% else %}
@@ -156,7 +157,7 @@
                 <i class="fas fa-tasks fa-4x text-muted mb-3"></i>
                 <h4 class="text-muted">No Assignments Available</h4>
                 <p class="text-muted">Check back later for new assignments or contact your instructor.</p>
-                <a href="{% url 'assessments:assessment_dashboard' %}" class="btn btn-primary">
+                <a href="{% url 'assessments:dashboard' %}" class="btn btn-primary">
                     <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
                 </a>
             </div>
@@ -211,36 +212,83 @@
 
 {% block extra_js %}
 <script>
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Filter functionality
-    $('input[name="status_filter"]').change(function() {
-        const filter = $(this).attr('id');
-        const cards = $('.assignment-card');
-        
-        cards.show();
-        
-        if (filter !== 'all') {
-            cards.each(function() {
-                if ($(this).data('status') !== filter) {
-                    $(this).parent().hide();
+    const statusFilters = document.querySelectorAll('input[name="status_filter"]');
+    statusFilters.forEach(function(filter) {
+        filter.addEventListener('change', function() {
+            const filterValue = this.id;
+            const cards = document.querySelectorAll('.assignment-card');
+
+            cards.forEach(function(card) {
+                const cardContainer = card.closest('.col-lg-6, .col-xl-4');
+                cardContainer.style.display = 'block';
+
+                if (filterValue !== 'all') {
+                    const cardStatus = card.getAttribute('data-status');
+                    if (cardStatus !== filterValue) {
+                        cardContainer.style.display = 'none';
+                    }
                 }
             });
-        }
+        });
     });
 
-    // Sort by due date
-    $('#sort-due-date').click(function() {
-        const container = $('.row').has('.assignment-card');
-        const cards = container.children().detach();
-        
-        cards.sort(function(a, b) {
-            const dateA = new Date($(a).find('[data-due-date]').data('due-date'));
-            const dateB = new Date($(b).find('[data-due-date]').data('due-date'));
-            return dateA - dateB;
+    // Enhanced card interactions
+    const assignmentCards = document.querySelectorAll('.assignment-card');
+    assignmentCards.forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)';
         });
-        
-        container.append(cards);
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)';
+        });
     });
 });
 </script>
+
+<style>
+.assignment-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.assignment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
+    transform: translateY(-1px);
+}
+
+.text-primary {
+    color: #ff5d15 !important;
+}
+
+.btn-outline-primary {
+    color: #ff5d15;
+    border-color: #ff5d15;
+}
+
+.btn-outline-primary:hover {
+    background-color: #ff5d15;
+    border-color: #ff5d15;
+}
+</style>
 {% endblock %}

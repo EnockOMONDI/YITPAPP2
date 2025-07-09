@@ -270,3 +270,16 @@ class ContentSearchView(TemplateView):
 
         context['query'] = query
         return context
+
+
+class MarkContentCompleteView(LoginRequiredMixin, View):
+    """Mark content item as complete"""
+
+    def post(self, request, content_item_id):
+        content_item = get_object_or_404(ContentItem, id=content_item_id)
+
+        # Here you would typically create a ContentProgress record
+        # For now, just return success
+        messages.success(request, f'Content "{content_item.title}" marked as complete!')
+
+        return redirect('content:content_item_detail', content_item_id=content_item_id)

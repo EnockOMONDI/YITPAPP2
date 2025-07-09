@@ -1,0 +1,66 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}{{ resource.title }} - YITP LMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 text-primary">{{ resource.title }}</h1>
+                    <p class="text-muted mb-0">{{ resource.get_resource_type_display }}</p>
+                </div>
+                <div class="btn-group" role="group">
+                    {% if resource.file_path %}
+                    <a href="{{ resource.file_path.url }}" class="btn btn-primary" download>
+                        <i class="fas fa-download me-1"></i>Download
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'content:resource_list' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Resources
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Description</h5>
+                    <p class="card-text">{{ resource.description|linebreaks }}</p>
+
+                    {% if resource.external_url %}
+                    <div class="mt-4">
+                        <h6>External Link</h6>
+                        <a href="{{ resource.external_url }}" target="_blank" class="btn btn-outline-primary">
+                            <i class="fas fa-external-link-alt me-1"></i>Open Resource
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Resource Details</h6>
+                </div>
+                <div class="card-body">
+                    <p><strong>Type:</strong> {{ resource.get_resource_type_display }}</p>
+                    <p><strong>Category:</strong> {{ resource.category|title|default:"General" }}</p>
+                    <p><strong>Access Level:</strong> {{ resource.access_level|title }}</p>
+                    <p><strong>Downloads:</strong> {{ resource.download_count }}</p>
+                    <p><strong>Created:</strong> {{ resource.created_at|date:"M d, Y" }}</p>
+                    {% if resource.created_by %}
+                    <p><strong>Created by:</strong> {{ resource.created_by.get_full_name|default:resource.created_by.username }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

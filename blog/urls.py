@@ -67,6 +67,12 @@ urlpatterns = [
     path('lms/communication/', include('communication.urls')),
     path('lms/content/', include('content.urls')),
 
+    # Payment processing
+    path('payments/', include('payments.urls')),
+
+    # Analytics dashboard
+    path('analytics/', include('analytics.urls')),
+
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -20,11 +20,14 @@ class Profile(models.Model):
         ('pending', 'Pending Verification'),
         ('confirmed', 'Payment Confirmed'),
         ('expired', 'Payment Expired'),
+        ('partially_paid', 'Partially Paid (Installment)'),
+        ('sponsorship', 'Sponsored Access'),
     ]
 
     PAYMENT_METHOD_CHOICES = [
         ('mpesa', 'M-Pesa'),
         ('bank_transfer', 'Bank Transfer'),
+        ('paypal', 'PayPal'),
         ('cash', 'Cash Payment'),
         ('installment', 'Installment Plan'),
         ('scholarship', 'Scholarship'),
@@ -73,6 +76,42 @@ class Profile(models.Model):
         help_text="Additional notes about payment (admin use)"
     )
 
+    # Installment payment tracking
+    partial_payment_date = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Date when partial payment (50%) was made"
+    )
+    payment_expiration_date = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Date when partial payment access expires (30 days from partial payment)"
+    )
+    installment_amount_paid = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text="Amount paid in first installment (50% of course price)"
+    )
+    total_course_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text="Total course price for installment tracking"
+    )
+
+    # Sponsorship tracking
+    sponsorship_request = models.ForeignKey(
+        'SponsorshipRequest',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='sponsored_profile',
+        help_text="Linked sponsorship request if payment status is 'sponsorship'"
+    )
+
     # Profile completion tracking
     profile_completion_percentage = models.DecimalField(
         max_digits=5,
@@ -102,6 +141,43 @@ class Profile(models.Model):
         return self.payment_status == 'confirmed'
 
     @property
+    def has_partial_payment(self):
+        """Check if user has partial payment status"""
+        return self.payment_status == 'partially_paid'
+
+    @property
+    def has_sponsorship_access(self):
+        """Check if user has sponsorship access"""
+        return self.payment_status == 'sponsorship'
+
+    @property
+    def has_any_payment_access(self):
+        """Check if user has any form of payment access (confirmed, partial, or sponsorship)"""
+        return self.payment_status in ['confirmed', 'partially_paid', 'sponsorship']
+
+    @property
+    def is_partial_payment_expired(self):
+        """Check if partial payment has expired"""
+        if self.payment_status == 'partially_paid' and self.payment_expiration_date:
+            return timezone.now() > self.payment_expiration_date
+        return False
+
+    @property
+    def days_until_expiration(self):
+        """Get days remaining until partial payment expires"""
+        if self.payment_status == 'partially_paid' and self.payment_expiration_date:
+            remaining = self.payment_expiration_date - timezone.now()
+            return max(0, remaining.days)
+        return 0
+
+    @property
+    def remaining_installment_amount(self):
+        """Get remaining amount for second installment"""
+        if self.payment_status == 'partially_paid' and self.total_course_price and self.installment_amount_paid:
+            return self.total_course_price - self.installment_amount_paid
+        return 0
+
+    @property
     def payment_status_display(self):
         """Get human-readable payment status with emoji"""
         status_icons = {
@@ -125,6 +201,77 @@ class Profile(models.Model):
         self.save(update_fields=[
             'payment_status', 'payment_confirmed_at', 'payment_amount',
             'payment_method', 'payment_reference', 'payment_notes'
+        ])
+
+    def confirm_partial_payment(self, amount, course_price, method, reference=None, notes=None):
+        """Confirm partial payment (50% installment) for the user"""
+        from datetime import timedelta
+
+        self.payment_status = 'partially_paid'
+        self.partial_payment_date = timezone.now()
+        self.payment_expiration_date = timezone.now() + timedelta(days=30)
+        self.installment_amount_paid = amount
+        self.total_course_price = course_price
+        self.payment_amount = amount
+        self.payment_method = method
+        self.payment_confirmed_at = timezone.now()
+
+        if reference:
+            self.payment_reference = reference
+        if notes:
+            self.payment_notes = notes
+
+        self.save(update_fields=[
+            'payment_status', 'partial_payment_date', 'payment_expiration_date',
+            'installment_amount_paid', 'total_course_price', 'payment_amount',
+            'payment_method', 'payment_confirmed_at', 'payment_reference', 'payment_notes'
+        ])
+
+    def complete_installment_payment(self, remaining_amount, reference=None, notes=None):
+        """Complete the second installment payment"""
+        total_paid = self.installment_amount_paid + remaining_amount
+
+        self.payment_status = 'confirmed'
+        self.payment_amount = total_paid
+        self.payment_confirmed_at = timezone.now()
+
+        # Clear installment tracking fields
+        self.partial_payment_date = None
+        self.payment_expiration_date = None
+
+        if reference:
+            self.payment_reference = reference
+        if notes:
+            self.payment_notes = notes
+
+        self.save(update_fields=[
+            'payment_status', 'payment_amount', 'payment_confirmed_at',
+            'partial_payment_date', 'payment_expiration_date',
+            'payment_reference', 'payment_notes'
+        ])
+
+    def expire_partial_payment(self):
+        """Expire partial payment and revoke access"""
+        self.payment_status = 'unpaid'
+        self.partial_payment_date = None
+        self.payment_expiration_date = None
+        self.installment_amount_paid = None
+        self.total_course_price = None
+
+        self.save(update_fields=[
+            'payment_status', 'partial_payment_date', 'payment_expiration_date',
+            'installment_amount_paid', 'total_course_price'
+        ])
+
+    def confirm_sponsorship_access(self, sponsorship_request):
+        """Grant access through approved sponsorship"""
+        self.payment_status = 'sponsorship'
+        self.sponsorship_request = sponsorship_request
+        self.payment_confirmed_at = timezone.now()
+        self.payment_method = 'scholarship'
+
+        self.save(update_fields=[
+            'payment_status', 'sponsorship_request', 'payment_confirmed_at', 'payment_method'
         ])
 
     def has_admin_privileges(self):
@@ -381,6 +528,16 @@ class SponsorshipRequest(models.Model):
     # Basic Information
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sponsorship_requests')
 
+    # Course Selection
+    course = models.ForeignKey(
+        'courses.Course',
+        on_delete=models.CASCADE,
+        related_name='sponsorship_requests',
+        null=True,
+        blank=True,
+        help_text="Course for which sponsorship is requested"
+    )
+
     # Program and Financial Details
     program = models.CharField(max_length=50, choices=PROGRAM_CHOICES)
     program_other = models.CharField(max_length=200, blank=True, help_text="Specify if 'Other' is selected")
@@ -418,6 +575,27 @@ class SponsorshipRequest(models.Model):
     # Status and Timestamps
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     admin_notes = models.TextField(blank=True, help_text="Internal notes for administrators")
+
+    # Approval workflow fields
+    approved_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='approved_sponsorships',
+        help_text="Admin user who approved this request"
+    )
+
+    approved_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Date and time when sponsorship was approved"
+    )
+
+    rejection_reason = models.TextField(
+        blank=True,
+        help_text="Reason for rejection (if applicable)"
+    )
 
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
@@ -459,3 +637,42 @@ class SponsorshipRequest(models.Model):
         if notes:
             self.admin_notes = notes
         self.save()
+
+    def approve_sponsorship(self, approved_by_user, notes=""):
+        """Approve the sponsorship request and grant course access"""
+        self.status = 'approved'
+        self.approved_by = approved_by_user
+        self.approved_at = timezone.now()
+        self.reviewed_by = approved_by_user
+        self.reviewed_at = timezone.now()
+        if notes:
+            self.admin_notes = notes
+        self.save()
+
+        # Grant course access through sponsorship
+        profile = self.user.profile
+        profile.confirm_sponsorship_access(self)
+
+        return True
+
+    def reject_sponsorship(self, rejected_by_user, reason="", notes=""):
+        """Reject the sponsorship request"""
+        self.status = 'rejected'
+        self.rejection_reason = reason
+        self.reviewed_by = rejected_by_user
+        self.reviewed_at = timezone.now()
+        if notes:
+            self.admin_notes = notes
+        self.save()
+
+        return True
+
+    @property
+    def is_approved(self):
+        """Check if sponsorship is approved"""
+        return self.status == 'approved'
+
+    @property
+    def is_pending(self):
+        """Check if sponsorship is pending"""
+        return self.status == 'pending'

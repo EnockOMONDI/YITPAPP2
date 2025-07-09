@@ -275,3 +275,26 @@ class SubmitAssignmentView(LoginRequiredMixin, View):
 
         messages.success(request, 'Assignment submitted successfully!')
         return redirect('assessments:assignment_detail', assignment_id=assignment.id)
+
+
+class QuizResultsListView(LoginRequiredMixin, ListView):
+    """List all quiz results for the user"""
+    model = QuizAttempt
+    template_name = 'lms/assessments/quiz_results.html'
+    context_object_name = 'quiz_attempts'
+
+    def get_queryset(self):
+        return QuizAttempt.objects.filter(
+            student=self.request.user
+        ).order_by('-completed_at')
+
+
+class QuizResultDetailView(LoginRequiredMixin, DetailView):
+    """Detailed view of a specific quiz result"""
+    model = QuizAttempt
+    template_name = 'lms/assessments/quiz_result_detail.html'
+    context_object_name = 'quiz_attempt'
+    pk_url_kwarg = 'attempt_id'
+
+    def get_queryset(self):
+        return QuizAttempt.objects.filter(student=self.request.user)
