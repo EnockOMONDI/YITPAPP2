@@ -1,45 +1,59 @@
 services:
   - type: web
-    name: django-blog
+    name: yitp-lms
     env: python
-    branch: version2
+    branch: payments
     buildCommand: ./build.sh
     startCommand: gunicorn blog.wsgi:application
     envVars:
+      # Django Configuration
       - key: DEBUG
         value: False
       - key: SECRET_KEY
         generateValue: true
       - key: ALLOWED_HOSTS
-        value: "*"
-      - key: DATABASE_URL
-        value: postgresql://YITPDB_owner:npg_n0zFeVa6SCxm@ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech:5432/YITPDB
+        value: "yitp-lms.onrender.com,*.onrender.com"
+
+      # Neon PostgreSQL Database Configuration
       - key: DB_NAME
-        value: YITPDB
+        value: yitplms
       - key: DB_USER
-        value: YITPDB_owner
+        value: yitplms_owner
       - key: DB_PASSWORD
-        value: npg_n0zFeVa6SCxm
+        value: npg_LwHI4a8TufWb
       - key: DB_HOST
-        value: ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech
+        value: ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech
       - key: DB_PORT
         value: 5432
-      - key: UPLOADCARE_PUBLIC_KEY
-        value: 18ad19435c41077ca842
-      - key: UPLOADCARE_SECRET_KEY
-        value: b27f8995d2e4b66cbf02
-      # Email Configuration
-      - key: EMAIL_BACKEND
-        value: "django.core.mail.backends.smtp.EmailBackend"
-      - key: EMAIL_HOST
-        value: "smtp.gmail.com"
-      - key: EMAIL_PORT
-        value: "587"
-      - key: EMAIL_USE_TLS
-        value: "True"
+
+      # Email Configuration (Gmail SMTP)
       - key: EMAIL_HOST_USER
         value: "dedeexpeditions@gmail.com"
       - key: EMAIL_HOST_PASSWORD
         value: "roqu frlt wvof rqxk"
-      - key: DEFAULT_FROM_EMAIL
-        value: "YOUTH IMPACT GLOBAL"
+
+      # M-Pesa API Configuration
+      - key: MPESA_CONSUMER_KEY
+        value: "UMi2MLMFIdaOS8vRFiWLG40CJ4GzWAGAHbwFROxe473iZ6gQ"
+      - key: MPESA_CONSUMER_SECRET
+        value: "2K3IJkdE7uxLJm9Nis3mhO3TZHqmowc0ndI9abTGxGJ4gcAdvdAZ5C9tx9wrAWRp"
+      - key: MPESA_ENVIRONMENT
+        value: "sandbox"
+      - key: MPESA_SHORTCODE
+        value: "174379"
+      - key: MPESA_PASSKEY
+        value: "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
+
+      # Site Configuration
+      - key: SITE_URL
+        value: "https://yitp-lms.onrender.com"
+
+      # Admin Configuration
+      - key: ADMIN_EMAIL
+        value: "youthimpactglobal3@gmail.com"
+
+      # Static Files Configuration
+      - key: STATIC_URL
+        value: "/static/"
+      - key: STATIC_ROOT
+        value: "staticfiles"

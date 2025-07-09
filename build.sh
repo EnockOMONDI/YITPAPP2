@@ -81,9 +81,9 @@ if [ -n "$BLOG_APP_DIR" ]; then
     done
 fi
 
-# Check other Django apps
-echo "� Checking other Django app directories:"
-for app in "users" "yitp" "events"; do
+# Check Django apps (including LMS apps)
+echo "🔍 Checking Django app directories:"
+for app in "users" "yitp" "events" "courses" "progress" "assessments" "communication" "content" "payments"; do
     if [ -d "$app" ]; then
         echo "  ✅ $app directory exists"
     else

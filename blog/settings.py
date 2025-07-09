@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-development-only')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'yitp-development-key-change-in-production-with-long-random-string-for-security')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'false'
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -128,69 +128,33 @@ WHITENOISE_MANIFEST_STRICT = False
 # DATABASE CONFIGURATION
 # =============================================================================
 
-# TEMPORARY: SQLite configuration for local development and testing
-# This is a temporary change for development convenience
+# PRODUCTION: PostgreSQL configuration for Neon database
+# Use environment variables for production deployment
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'yitplms'),
+        'USER': os.getenv('DB_USER', 'yitplms_owner'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'npg_LwHI4a8TufWb'),
+        'HOST': os.getenv('DB_HOST', 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
 # =============================================================================
-# PRODUCTION: PostgreSQL configuration (COMMENTED OUT - RESTORE FOR PRODUCTION)
+# LOCAL DEVELOPMENT: SQLite fallback (uncomment for local testing)
 # =============================================================================
-# Active PostgreSQL configuration using manual settings (recommended for Neon pooled connections)
-# This approach avoids issues with DATABASE_URL parsing and unsupported startup parameters
-# Connection string: postgresql://yitplms_owner:npg_LwHI4a8TufWb@ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech/yitplms?sslmode=require&channel_binding=require
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'yitplms',
-#         'USER': 'yitplms_owner',
-#         'PASSWORD': 'npg_LwHI4a8TufWb',
-#         'HOST': 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech',
-#         'PORT': '5432',
-#         'OPTIONS': {
-#             'sslmode': 'require'
-#         },
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
-# =============================================================================
-# COMMENTED OUT: DATABASE_URL parsing approach (caused Neon pooled connection issues)
-# =============================================================================
-# DEFAULT_DATABASE_URL = 'postgresql://yitplms_owner:npg_LwHI4a8TufWb@ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech/yitplms?sslmode=require&channel_binding=require'
-# DATABASE_URL = os.getenv('DATABASE_URL', DEFAULT_DATABASE_URL)
-# DATABASES = {
-#     'default': dj_database_url.parse(DATABASE_URL)
-# }
-# DATABASES['default']['OPTIONS'] = {
-#     'sslmode': 'require',
-#     'options': '-c default_transaction_isolation=read_committed'  # This parameter caused issues with Neon pooled connections
-# }
 
-# =============================================================================
-# ALTERNATIVE DATABASE CONFIGURATIONS (for reference)
-# =============================================================================
-
-# NOTE: SQLite configuration is now ACTIVE above for local development
-
-# Alternative manual PostgreSQL configuration (commented out - active configuration is above)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'yitplms',
-#         'USER': 'yitplms_owner',
-#         'PASSWORD': 'npg_LwHI4a8TufWb',
-#         'HOST': 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech',
-#         'PORT': '5432',
-#         'OPTIONS': {
-#             'sslmode': 'require',
-#             'options': '-c default_transaction_isolation=read_committed'
-#         },
-#     }
-# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -332,9 +296,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'dedeexpeditions@gmail.com'
-EMAIL_HOST_PASSWORD = 'roqu frlt wvof rqxk'  # Gmail app password
-DEFAULT_FROM_EMAIL = 'YOUTH IMPACT GLOBAL <dedeexpeditions@gmail.com>'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'dedeexpeditions@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'roqu frlt wvof rqxk')  # Gmail app password
+DEFAULT_FROM_EMAIL = f'YOUTH IMPACT GLOBAL <{EMAIL_HOST_USER}>'
 
 # Email timeout settings
 EMAIL_TIMEOUT = 30
