@@ -15,6 +15,16 @@ import os
 # import dj_database_url  # Not needed for manual PostgreSQL configuration
 from django.contrib.messages import constants as messages
 
+# Import decouple for environment variable management
+try:
+    from decouple import config
+    # Load .env file if it exists
+    ENV_FILE_LOADED = True
+except ImportError:
+    # Fallback to os.environ if decouple is not available
+    config = os.environ.get
+    ENV_FILE_LOADED = False
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,12 +33,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'yitp-development-key-change-in-production-with-long-random-string-for-security')
+SECRET_KEY = config('SECRET_KEY', default='yitp-development-key-change-in-production-with-long-random-string-for-security')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+DEBUG = config('DEBUG', default='False', cast=bool) if ENV_FILE_LOADED else os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',') if ENV_FILE_LOADED else os.environ.get('ALLOWED_HOSTS', '*').split(',')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Production Security Settings
@@ -350,7 +360,7 @@ MPESA_QUERY_URL = f'{MPESA_BASE_URL}/mpesa/stkpushquery/v1/query'
 
 # M-Pesa Callback URLs
 # These URLs will receive payment notifications from Safaricom
-SITE_URL = os.environ.get('SITE_URL', 'https://yitp-app.onrender.com')  # Update with your actual domain
+SITE_URL = os.environ.get('SITE_URL', 'https://yitp-lms.onrender.com')  # Production domain for YITP LMS
 MPESA_CALLBACK_URL = f'{SITE_URL}/payments/mpesa/callback/'
 MPESA_RESULT_URL = f'{SITE_URL}/payments/mpesa/result/'
 MPESA_TIMEOUT_URL = f'{SITE_URL}/payments/mpesa/timeout/'
