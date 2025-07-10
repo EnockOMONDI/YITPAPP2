@@ -26,10 +26,20 @@ class PaymentEmailService:
         """Get the base URL for the application"""
         try:
             current_site = Site.objects.get_current()
-            protocol = 'https' if getattr(settings, 'USE_HTTPS', False) else 'http'
-            return f"{protocol}://{current_site.domain}"
+            # Check if we're in development
+            if settings.DEBUG and 'localhost' in current_site.domain:
+                return 'http://127.0.0.1:8001'
+            elif settings.DEBUG:
+                return 'http://localhost:8001'
+            else:
+                protocol = 'https' if getattr(settings, 'USE_HTTPS', True) else 'http'
+                return f"{protocol}://{current_site.domain}"
         except:
-            return 'https://yitp.org'  # Fallback URL
+            # Fallback URLs based on environment
+            if settings.DEBUG:
+                return 'http://127.0.0.1:8001'
+            else:
+                return 'https://yitp.org'
     
     @staticmethod
     def send_admin_verification_notification(payment):
@@ -44,10 +54,15 @@ class PaymentEmailService:
         """
         try:
             base_url = PaymentEmailService.get_base_url()
-            
-            # Generate admin URLs
-            admin_url = f"{base_url}/admin/payments/payment/{payment.id}/change/"
-            user_profile_url = f"{base_url}/admin/auth/user/{payment.user.id}/change/"
+
+            # Generate admin URLs using reverse
+            try:
+                admin_url = f"{base_url}{reverse('admin:payments_payment_change', args=[payment.id])}"
+                user_profile_url = f"{base_url}{reverse('admin:auth_user_change', args=[payment.user.id])}"
+            except:
+                # Fallback to manual URL construction
+                admin_url = f"{base_url}/admin/payments/payment/{payment.id}/change/"
+                user_profile_url = f"{base_url}/admin/auth/user/{payment.user.id}/change/"
             
             # Email context
             context = {
@@ -156,38 +171,45 @@ class PaymentEmailService:
         """
         try:
             base_url = PaymentEmailService.get_base_url()
-            course_url = f"{base_url}{reverse('courses:course_detail', args=[payment.course.id])}"
-            
-            # Email subject and content
+
+            # Generate URLs using reverse
+            try:
+                course_url = f"{base_url}{reverse('courses:course_detail', args=[payment.course.id])}"
+                dashboard_url = f"{base_url}{reverse('users:profile')}"
+            except:
+                # Fallback URLs
+                course_url = f"{base_url}/courses/{payment.course.id}/"
+                dashboard_url = f"{base_url}/profile/"
+
+            # Email context
+            context = {
+                'payment': payment,
+                'user': payment.user,
+                'course': payment.course,
+                'course_url': course_url,
+                'dashboard_url': dashboard_url,
+                'base_url': base_url,
+            }
+
+            # Render email templates
+            html_content = render_to_string('emails/payment_verified.html', context)
+            text_content = strip_tags(html_content)
+
+            # Email subject
             subject = f"🎉 YITP: Payment Verified - Welcome to {payment.course.title}!"
-            
-            # Simple text message for now (can be enhanced with template later)
-            message = f"""
-Dear {payment.user.get_full_name() or payment.user.username},
 
-Great news! Your {payment.get_payment_method_display()} payment has been verified and approved.
-
-Payment Details:
-- Reference: {payment.reference_number}
-- Course: {payment.course.title}
-- Amount: KES {payment.amount:,.0f}
-
-You now have access to your course. Start learning today!
-
-Access your course: {course_url}
-
-Best regards,
-YITP Team
-            """.strip()
-            
-            # Send email
-            send_mail(
+            # Create email message
+            email = EmailMultiAlternatives(
                 subject=subject,
-                message=message,
+                body=text_content,
                 from_email=PaymentEmailService.FROM_EMAIL,
-                recipient_list=[payment.user.email],
-                fail_silently=False
+                to=[payment.user.email],
+                reply_to=[PaymentEmailService.FROM_EMAIL]
             )
+            email.attach_alternative(html_content, "text/html")
+
+            # Send email
+            email.send()
             
             logger.info(f"Payment verification notification sent to {payment.user.email} for payment {payment.reference_number}")
             return True
@@ -210,40 +232,43 @@ YITP Team
         """
         try:
             base_url = PaymentEmailService.get_base_url()
-            payment_methods_url = f"{base_url}{reverse('payments:payment_methods', args=[payment.course.id])}"
-            
-            # Email subject and content
-            subject = f"❌ YITP: Payment Verification Failed - {payment.reference_number}"
-            
-            reason_text = f"\n\nReason: {reason}" if reason else ""
-            
-            message = f"""
-Dear {payment.user.get_full_name() or payment.user.username},
 
-We were unable to verify your {payment.get_payment_method_display()} payment for {payment.course.title}.
+            # Generate URLs using reverse
+            try:
+                payment_url = f"{base_url}{reverse('payments:payment_methods', args=[payment.course.id])}"
+            except:
+                # Fallback URL
+                payment_url = f"{base_url}/payments/methods/{payment.course.id}/"
 
-Payment Details:
-- Reference: {payment.reference_number}
-- Amount: KES {payment.amount:,.0f}
-{reason_text}
+            # Email context
+            context = {
+                'payment': payment,
+                'user': payment.user,
+                'course': payment.course,
+                'payment_url': payment_url,
+                'rejection_reason': reason,
+                'base_url': base_url,
+            }
 
-Please try submitting your payment again or contact our support team for assistance.
+            # Render email templates
+            html_content = render_to_string('emails/payment_rejected.html', context)
+            text_content = strip_tags(html_content)
 
-Try again: {payment_methods_url}
-Support: support@yitp.org
+            # Email subject
+            subject = f"❌ YITP: Payment Verification Issue - {payment.reference_number}"
 
-Best regards,
-YITP Team
-            """.strip()
-            
-            # Send email
-            send_mail(
+            # Create email message
+            email = EmailMultiAlternatives(
                 subject=subject,
-                message=message,
+                body=text_content,
                 from_email=PaymentEmailService.FROM_EMAIL,
-                recipient_list=[payment.user.email],
-                fail_silently=False
+                to=[payment.user.email],
+                reply_to=[PaymentEmailService.FROM_EMAIL]
             )
+            email.attach_alternative(html_content, "text/html")
+
+            # Send email
+            email.send()
             
             logger.info(f"Payment rejection notification sent to {payment.user.email} for payment {payment.reference_number}")
             return True
@@ -322,49 +347,59 @@ YITP Team
         """
         try:
             base_url = PaymentEmailService.get_base_url()
-            payment_methods_url = f"{base_url}/payments/methods/"
 
+            # Get the course from the user's enrollment
+            from progress.models import Enrollment
+            enrollment = Enrollment.objects.filter(student=profile.user, status='active').first()
+            if not enrollment:
+                logger.warning(f"No active enrollment found for user {profile.user.email}")
+                return False
+
+            course = enrollment.course
             remaining_amount = profile.remaining_installment_amount
             days_until_expiry = profile.days_until_expiration
 
-            # Email subject and content
+            # Generate URLs using reverse
+            try:
+                payment_url = f"{base_url}{reverse('payments:payment_methods', args=[course.id])}"
+                paypal_payment_url = "https://www.paypal.com/ncp/payment/FUAJVJ66L978C"
+            except:
+                # Fallback URLs
+                payment_url = f"{base_url}/payments/methods/{course.id}/"
+                paypal_payment_url = "https://www.paypal.com/ncp/payment/FUAJVJ66L978C"
+
+            # Email context
+            context = {
+                'user': profile.user,
+                'course': course,
+                'first_payment_amount': profile.installment_amount_paid,
+                'remaining_amount': remaining_amount,
+                'days_remaining': days_until_expiry,
+                'payment_due_date': profile.payment_expiration_date,
+                'payment_url': payment_url,
+                'paypal_payment_url': paypal_payment_url,
+                'base_url': base_url,
+            }
+
+            # Render email templates
+            html_content = render_to_string('emails/installment_reminder.html', context)
+            text_content = strip_tags(html_content)
+
+            # Email subject
             subject = f"⏰ YITP: Second Installment Reminder - KES {remaining_amount:,.0f} Due"
 
-            message = f"""
-Dear {profile.user.get_full_name() or profile.user.username},
-
-This is a friendly reminder about your second installment payment for the Youth Impact Training Programme.
-
-PAYMENT DETAILS:
-- First installment paid: {days_since_payment} days ago
-- Remaining amount: KES {remaining_amount:,.0f}
-- Days until access expires: {days_until_expiry}
-- Payment due date: {profile.payment_expiration_date.strftime('%B %d, %Y')}
-
-To complete your second installment payment, please visit:
-{payment_methods_url}
-
-PAYMENT METHODS AVAILABLE:
-• M-Pesa: Quick mobile payment
-• Bank Transfer: Direct bank transfer
-• PayPal: Secure online payment
-
-Don't lose access to your course! Complete your payment before {profile.payment_expiration_date.strftime('%B %d, %Y')}.
-
-Need help? Contact our support team at support@yitp.org
-
-Best regards,
-YITP Team
-            """.strip()
+            # Create email message
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                to=[profile.user.email],
+                reply_to=[PaymentEmailService.FROM_EMAIL]
+            )
+            email.attach_alternative(html_content, "text/html")
 
             # Send email
-            send_mail(
-                subject=subject,
-                message=message,
-                from_email=PaymentEmailService.FROM_EMAIL,
-                recipient_list=[profile.user.email],
-                fail_silently=False
-            )
+            email.send()
 
             logger.info(f"Enhanced installment reminder sent to {profile.user.email} - {days_since_payment} days since payment")
             return True
@@ -387,50 +422,59 @@ YITP Team
         """
         try:
             base_url = PaymentEmailService.get_base_url()
-            payment_methods_url = f"{base_url}/payments/methods/"
 
+            # Get the course from the user's enrollment
+            from progress.models import Enrollment
+            enrollment = Enrollment.objects.filter(student=profile.user, status='active').first()
+            if not enrollment:
+                logger.warning(f"No active enrollment found for user {profile.user.email}")
+                return False
+
+            course = enrollment.course
             remaining_amount = profile.remaining_installment_amount
 
-            # Email subject and content
+            # Generate URLs using reverse
+            try:
+                payment_url = f"{base_url}{reverse('payments:payment_methods', args=[course.id])}"
+                paypal_payment_url = "https://www.paypal.com/ncp/payment/FUAJVJ66L978C"
+            except:
+                # Fallback URLs
+                payment_url = f"{base_url}/payments/methods/{course.id}/"
+                paypal_payment_url = "https://www.paypal.com/ncp/payment/FUAJVJ66L978C"
+
+            # Email context
+            context = {
+                'user': profile.user,
+                'course': course,
+                'first_payment_amount': profile.installment_amount_paid,
+                'remaining_amount': remaining_amount,
+                'days_remaining': days_remaining,
+                'expiration_date': profile.payment_expiration_date,
+                'payment_url': payment_url,
+                'paypal_payment_url': paypal_payment_url,
+                'base_url': base_url,
+            }
+
+            # Render email templates
+            html_content = render_to_string('emails/payment_expiration_warning.html', context)
+            text_content = strip_tags(html_content)
+
+            # Email subject
             urgency = "🚨 URGENT" if days_remaining == 1 else "⚠️ WARNING"
             subject = f"{urgency}: YITP Course Access Expires in {days_remaining} Day{'s' if days_remaining > 1 else ''}"
 
-            message = f"""
-Dear {profile.user.get_full_name() or profile.user.username},
-
-{urgency}: Your YITP course access will expire in {days_remaining} day{'s' if days_remaining > 1 else ''}!
-
-PAYMENT DETAILS:
-- Remaining amount: KES {remaining_amount:,.0f}
-- Expiry date: {profile.payment_expiration_date.strftime('%B %d, %Y at %I:%M %p')}
-- Time remaining: {days_remaining} day{'s' if days_remaining > 1 else ''}
-
-IMMEDIATE ACTION REQUIRED:
-Complete your second installment payment now to maintain course access.
-
-Pay now: {payment_methods_url}
-
-PAYMENT METHODS AVAILABLE:
-• M-Pesa: Quick mobile payment
-• Bank Transfer: Direct bank transfer
-• PayPal: Secure online payment
-
-Don't lose your progress! Complete your payment immediately.
-
-Need urgent help? Contact support@yitp.org or call +254722646958
-
-Best regards,
-YITP Team
-            """.strip()
+            # Create email message
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                to=[profile.user.email],
+                reply_to=[PaymentEmailService.FROM_EMAIL]
+            )
+            email.attach_alternative(html_content, "text/html")
 
             # Send email
-            send_mail(
-                subject=subject,
-                message=message,
-                from_email=PaymentEmailService.FROM_EMAIL,
-                recipient_list=[profile.user.email],
-                fail_silently=False
-            )
+            email.send()
 
             logger.info(f"Expiry warning sent to {profile.user.email} - {days_remaining} days remaining")
             return True

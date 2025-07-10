@@ -1,0 +1,100 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}Payment Expiration Warning - YITP{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ user.get_full_name|default:user.username }},
+</div>
+
+<div class="content-text">
+    <strong>Important:</strong> Your partial payment access for the <strong>{{ course.title }}</strong> course is about to expire.
+</div>
+
+<!-- Urgent Warning Box -->
+<div class="warning-box">
+    <h3 style="margin-top: 0; color: #dc3545;">⚠️ Action Required</h3>
+    <p><strong>Your course access will expire in {{ days_remaining }} day{{ days_remaining|pluralize }}!</strong></p>
+    <p>Complete your second installment payment immediately to maintain access to your course materials.</p>
+</div>
+
+<!-- Payment Status -->
+<div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #e9ecef;">
+    <h4 style="color: #1a2e53; margin-top: 0;">📋 Payment Summary</h4>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">Course:</span>
+        <span>{{ course.title }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">First Payment:</span>
+        <span>✅ KES {{ first_payment_amount|floatformat:0 }} (Paid)</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">Remaining Balance:</span>
+        <span style="color: #dc3545; font-weight: bold;">KES {{ remaining_amount|floatformat:0 }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">Access Expires:</span>
+        <span style="color: #dc3545; font-weight: bold;">{{ expiration_date|date:"F d, Y" }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+        <span style="font-weight: 600; color: #1a2e53;">Days Remaining:</span>
+        <span style="color: #dc3545; font-weight: bold; font-size: 18px;">{{ days_remaining }}</span>
+    </div>
+</div>
+
+<!-- What Happens Next -->
+<div class="content-text">
+    <strong>What happens if you don't pay:</strong>
+</div>
+
+<ul style="margin: 20px 0; padding-left: 20px; color: #dc3545;">
+    <li>Your course access will be suspended on {{ expiration_date|date:"F d, Y" }}</li>
+    <li>You will lose access to all course materials and progress</li>
+    <li>To regain access, you'll need to pay the full course fee</li>
+</ul>
+
+<div class="content-text">
+    <strong>Complete your payment now to:</strong>
+</div>
+
+<ul style="margin: 20px 0; padding-left: 20px; color: #28a745;">
+    <li>Maintain uninterrupted access to your course</li>
+    <li>Keep all your progress and completed assignments</li>
+    <li>Continue learning without any disruption</li>
+    <li>Receive your course completion certificate</li>
+</ul>
+
+<!-- Payment Methods -->
+<div class="info-box">
+    <h4 style="margin-top: 0; color: #1a2e53;">💳 Quick Payment Options</h4>
+    <p><strong>M-Pesa (Fastest):</strong> Pay Bill 4132847, Account: {{ user.profile.phone_number|default:user.username }}</p>
+    <p><strong>PayPal:</strong> <a href="{{ paypal_payment_url }}" style="color: #ff5d15;">Pay Online Instantly</a></p>
+    <p><strong>Bank Transfer:</strong> Contact support for immediate bank details</p>
+</div>
+
+<!-- Urgent Action Button -->
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ payment_url }}" class="btn" style="background-color: #dc3545; color: white; text-decoration: none; padding: 18px 40px; border-radius: 8px; font-weight: 700; font-size: 18px; box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);">
+        🚨 PAY NOW - {{ remaining_amount|floatformat:0 }} KES
+    </a>
+</div>
+
+<!-- Emergency Contact -->
+<div style="background: #dc3545; color: white; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;">
+    <h4 style="margin-top: 0; color: white;">🆘 Need Immediate Help?</h4>
+    <p style="margin-bottom: 10px; color: white;"><strong>Contact us immediately:</strong></p>
+    <p style="margin: 5px 0; color: white;">📧 Email: <a href="mailto:support@yitp.org" style="color: #ffeb3b;">support@yitp.org</a></p>
+    <p style="margin: 5px 0; color: white;">📱 WhatsApp: <a href="https://wa.me/254722646958" style="color: #ffeb3b;">+254 722 646 958</a></p>
+    <p style="margin: 5px 0; color: white;">📞 Call: +254 722 646 958</p>
+</div>
+
+<div class="content-text">
+    Don't let your learning journey be interrupted. Complete your payment today and continue building your future with YITP!
+</div>
+
+<div style="margin-top: 30px; color: #666; font-size: 14px;">
+    Urgent regards,<br>
+    <strong>The YITP Support Team</strong>
+</div>
+{% endblock %}

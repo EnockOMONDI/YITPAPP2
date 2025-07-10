@@ -388,52 +388,6 @@ class Certificate(models.Model):
         ordering = ['-issued_date']
 
 
-class AssignmentSubmission(models.Model):
-    """
-    Student assignment submissions
-    """
-    STATUS_CHOICES = [
-        ('submitted', 'Submitted'),
-        ('graded', 'Graded'),
-        ('returned', 'Returned for Revision'),
-    ]
-    
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assignment_submissions')
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, related_name='submissions')
-    submission_text = models.TextField(blank=True)
-    file_path = models.FileField(upload_to='submissions/', blank=True, null=True)
-    submitted_at = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted')
-    score = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    feedback = models.TextField(blank=True)
-    graded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='graded_submissions')
-    graded_at = models.DateTimeField(null=True, blank=True)
-    
-    def __str__(self):
-        return f"{self.student.get_full_name()} - {self.assignment.title}"
-    
-    @property
-    def is_late(self):
-        """Check if submission was late"""
-        if self.assignment.due_date:
-            return self.submitted_at > self.assignment.due_date
-        return False
-    
-    def grade_submission(self, score, feedback, graded_by):
-        """Grade the submission"""
-        self.score = score
-        self.feedback = feedback
-        self.graded_by = graded_by
-        self.graded_at = timezone.now()
-        self.status = 'graded'
-        self.save(update_fields=['score', 'feedback', 'graded_by', 'graded_at', 'status'])
-    
-    class Meta:
-        unique_together = ['student', 'assignment']
-        verbose_name = "Assignment Submission"
-        verbose_name_plural = "Assignment Submissions"
-        ordering = ['-submitted_at']
-
 
 class LearningPath(models.Model):
     """

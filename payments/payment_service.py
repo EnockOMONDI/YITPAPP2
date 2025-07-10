@@ -315,7 +315,8 @@ class PaymentService:
             # Confirm the payment using enhanced method from Phase 1
             confirmation_result = payment.confirm_payment(verified_by=verified_by)
 
-            if not confirmation_result.get('success', True):  # confirm_payment may not return dict
+            # confirm_payment returns True/False, not a dictionary
+            if not confirmation_result:
                 return {
                     'success': False,
                     'message': 'Payment confirmation failed.',
@@ -323,13 +324,13 @@ class PaymentService:
                 }
 
             # Create course enrollment
-            from courses.models import Enrollment
+            from progress.models import Enrollment
             enrollment, created = Enrollment.objects.get_or_create(
                 student=payment.user,
                 course=payment.course,
                 defaults={
                     'enrollment_date': timezone.now(),
-                    'payment_status': 'confirmed' if not payment.is_installment else 'partially_paid'
+                    'status': 'active'
                 }
             )
 
@@ -340,10 +341,10 @@ class PaymentService:
                 profile = payment.user.profile
                 if payment.is_installment and payment.installment_sequence == 1:
                     profile.payment_status = 'partially_paid'
-                    profile.payment_expiry_date = timezone.now() + timezone.timedelta(days=30)
+                    profile.payment_expiration_date = timezone.now() + timezone.timedelta(days=30)
                 else:
                     profile.payment_status = 'confirmed'
-                    profile.payment_expiry_date = None
+                    profile.payment_expiration_date = None
                 profile.save()
 
                 return {

@@ -211,6 +211,125 @@ class GradingScale(models.Model):
 
 
 
+class AssignmentSubmission(models.Model):
+    """
+    Student assignment submissions
+    """
+    STATUS_CHOICES = [
+        ('submitted', 'Submitted'),
+        ('graded', 'Graded'),
+        ('returned', 'Returned for Revision'),
+        ('late', 'Late Submission'),
+    ]
+
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, related_name='submissions')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assignment_submissions')
+    submission_text = models.TextField(blank=True, help_text="Text submission content")
+    submission_file = models.FileField(upload_to='assignments/', blank=True, null=True)
+    submitted_at = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted')
+    grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    feedback = models.TextField(blank=True, help_text="Instructor feedback")
+    graded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='graded_assignments')
+    graded_at = models.DateTimeField(null=True, blank=True)
+    is_late = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.student.get_full_name()} - {self.assignment.title}"
+
+    def save(self, *args, **kwargs):
+        # Check if submission is late
+        if self.assignment.due_date and self.submitted_at > self.assignment.due_date:
+            self.is_late = True
+            self.status = 'late'
+
+        # Update graded_at when grade is added
+        if self.grade is not None and not self.graded_at:
+            self.graded_at = timezone.now()
+            self.status = 'graded'
+
+        super().save(*args, **kwargs)
+
+    @property
+    def is_graded(self):
+        """Check if assignment is graded"""
+        return self.grade is not None
+
+    @property
+    def grade_percentage(self):
+        """Calculate grade as percentage"""
+        if self.grade and self.assignment.max_score:
+            return (self.grade / self.assignment.max_score) * 100
+        return 0
+
+    class Meta:
+        verbose_name = "Assignment Submission"
+        verbose_name_plural = "Assignment Submissions"
+        ordering = ['-submitted_at']
+        unique_together = ['assignment', 'student']
+
+
+class SelfAssessmentResponse(models.Model):
+    """
+    Student responses to self-assessments
+    """
+    assessment = models.ForeignKey(SelfAssessment, on_delete=models.CASCADE, related_name='responses')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='self_assessment_responses')
+    responses = models.JSONField(help_text="User responses to assessment questions")
+    score = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    completed_at = models.DateTimeField(default=timezone.now)
+    notes = models.TextField(blank=True, help_text="Additional notes from the user")
+
+    def __str__(self):
+        return f"{self.user.get_full_name()} - {self.assessment.title}"
+
+    def calculate_score(self):
+        """Calculate assessment score based on responses"""
+        if not self.responses or not self.assessment.scoring_guide:
+            return 0
+
+        total_score = 0
+        max_score = 0
+
+        scoring_guide = self.assessment.scoring_guide
+
+        for question_id, response in self.responses.items():
+            if question_id in scoring_guide:
+                question_scoring = scoring_guide[question_id]
+                max_score += question_scoring.get('max_points', 0)
+
+                # Simple scoring logic - can be enhanced based on question type
+                if isinstance(response, (int, float)):
+                    total_score += min(response, question_scoring.get('max_points', 0))
+                elif isinstance(response, str) and response.lower() in ['yes', 'true', 'agree']:
+                    total_score += question_scoring.get('max_points', 0)
+
+        if max_score > 0:
+            self.score = (total_score / max_score) * 100
+        else:
+            self.score = 0
+
+        self.save(update_fields=['score'])
+        return self.score
+
+    @property
+    def completion_percentage(self):
+        """Calculate completion percentage"""
+        if not self.assessment.questions or not self.responses:
+            return 0
+
+        total_questions = len(self.assessment.questions)
+        answered_questions = len([r for r in self.responses.values() if r])
+
+        return (answered_questions / total_questions) * 100 if total_questions > 0 else 0
+
+    class Meta:
+        verbose_name = "Self Assessment Response"
+        verbose_name_plural = "Self Assessment Responses"
+        ordering = ['-completed_at']
+        unique_together = ['assessment', 'user']
+
+
 class AssessmentTemplate(models.Model):
     """
     Reusable assessment templates

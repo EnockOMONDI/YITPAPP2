@@ -83,3 +83,10 @@ ERROR 2025-07-09 01:34:36,912 payment_service 88185 8467643072 Payment not found
 INFO 2025-07-09 01:34:38,566 payment_service 88185 8467643072 Payment confirmed: TEST-PAY-003 for testuser@example.com
 INFO 2025-07-09 01:34:43,422 payment_service 88185 8467643072 Payment record created: YITP-20250708-2100384B for testuser@example.com - Method: bank_transfer
 INFO 2025-07-09 01:34:44,689 payment_service 88185 8467643072 Payment record created: YITP-20250708-6DEF00B0 for testuser@example.com - Method: mpesa
+ERROR 2025-07-11 01:33:51,568 payment_service 48962 6199406592 Payment confirmation and enrollment failed: 'bool' object has no attribute 'get'
+INFO 2025-07-11 01:45:22,597 payment_service 50161 8422750912 Payment record created: YITP-20250710-EDAE42C7 for testuser@example.com - Method: paypal
+INFO 2025-07-11 01:49:06,673 payment_service 50205 6191198208 User testuser enrolled in course Test Entrepreneurship Course
+INFO 2025-07-11 01:49:06,800 email_service 50205 6191198208 Payment verification notification sent to testuser@example.com for payment YITP-20250710-EDAE42C7
+INFO 2025-07-11 02:22:20,521 payment_service 50840 8422750912 Payment record created: YITP-20250710-7906DE23 for testuser@example.com - Method: paypal
+INFO 2025-07-11 02:23:49,987 email_service 50930 8422750912 Enhanced installment reminder sent to testuser@example.com - 10 days since payment
+INFO 2025-07-11 02:24:42,486 email_service 50951 8422750912 Expiry warning sent to testuser@example.com - 3 days remaining

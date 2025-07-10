@@ -6,7 +6,8 @@ from django.http import JsonResponse
 from django.utils import timezone
 from .models import Quiz, Question, Assignment
 from courses.models import Course, Lesson
-from progress.models import Enrollment, QuizAttempt, AssignmentSubmission
+from progress.models import Enrollment, QuizAttempt
+from .models import AssignmentSubmission
 
 
 class AssessmentDashboardView(LoginRequiredMixin, TemplateView):

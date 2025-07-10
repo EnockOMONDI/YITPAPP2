@@ -1,0 +1,122 @@
+{% extends "emails/base_email.html" %}
+
+{% block title %}Payment Verification Issue - YITP{% endblock %}
+
+{% block content %}
+<div class="greeting">
+    Hello {{ user.get_full_name|default:user.username }},
+</div>
+
+<div class="content-text">
+    We've reviewed your payment submission for the <strong>{{ payment.course.title }}</strong> course, and unfortunately, we were unable to verify your payment at this time.
+</div>
+
+<!-- Issue Notice -->
+<div class="warning-box">
+    <h3 style="margin-top: 0; color: #dc3545;">⚠️ Payment Verification Issue</h3>
+    <p><strong>Reference Number:</strong> {{ payment.reference_number }}</p>
+    <p><strong>Reason:</strong> {{ rejection_reason|default:"Payment verification failed during admin review." }}</p>
+</div>
+
+<!-- Payment Details -->
+<div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #e9ecef;">
+    <h4 style="color: #1a2e53; margin-top: 0;">📋 Submitted Payment Details</h4>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">Reference Number:</span>
+        <span>{{ payment.reference_number }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">Course:</span>
+        <span>{{ payment.course.title }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">Amount:</span>
+        <span>KES {{ payment.amount|floatformat:0 }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
+        <span style="font-weight: 600; color: #1a2e53;">Payment Method:</span>
+        <span>{{ payment.get_payment_method_display }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+        <span style="font-weight: 600; color: #1a2e53;">Submitted:</span>
+        <span>{{ payment.created_at|date:"F d, Y H:i" }}</span>
+    </div>
+</div>
+
+<!-- Common Issues -->
+<div class="info-box">
+    <h4 style="margin-top: 0; color: #1a2e53;">🔍 Common Verification Issues</h4>
+    <ul style="margin: 10px 0; padding-left: 20px;">
+        <li><strong>Incorrect Transaction ID:</strong> Please double-check your transaction reference</li>
+        <li><strong>Payment Amount Mismatch:</strong> Ensure you paid the exact course amount</li>
+        <li><strong>Payment Method Issues:</strong> Verify payment was completed successfully</li>
+        <li><strong>Timing Issues:</strong> Some payments may take longer to reflect in our system</li>
+    </ul>
+</div>
+
+<!-- Next Steps -->
+<div class="content-text">
+    <strong>What you can do next:</strong>
+</div>
+
+<ol style="margin: 20px 0; padding-left: 20px; color: #555;">
+    <li><strong>Check Your Payment:</strong> Verify the payment was successfully completed on your end</li>
+    <li><strong>Resubmit Payment:</strong> If there was an error, you can submit a new payment</li>
+    <li><strong>Contact Support:</strong> Our team can help investigate and resolve the issue</li>
+    <li><strong>Provide Additional Information:</strong> Send us screenshots or additional payment proof</li>
+</ol>
+
+<!-- Resubmit Payment -->
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ payment_url }}" class="btn" style="background-color: #ff5d15; color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; margin: 0 10px;">
+        💳 Submit New Payment
+    </a>
+    <a href="mailto:support@yitp.org?subject=Payment Issue - {{ payment.reference_number }}" class="btn" style="background-color: #1a2e53; color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; margin: 0 10px;">
+        📧 Contact Support
+    </a>
+</div>
+
+<!-- Support Information -->
+<div style="background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2196f3;">
+    <h4 style="color: #1a2e53; margin-top: 0;">💬 Get Help Immediately</h4>
+    <p style="margin-bottom: 15px;">Our support team is ready to help resolve this issue quickly:</p>
+    
+    <div style="margin: 10px 0;">
+        <strong>📧 Email Support:</strong><br>
+        <a href="mailto:support@yitp.org?subject=Payment Issue - {{ payment.reference_number }}" style="color: #ff5d15;">support@yitp.org</a><br>
+        <small>Include your reference number: {{ payment.reference_number }}</small>
+    </div>
+    
+    <div style="margin: 10px 0;">
+        <strong>📱 WhatsApp Support:</strong><br>
+        <a href="https://wa.me/254722646958?text=Payment%20Issue%20-%20{{ payment.reference_number }}" style="color: #ff5d15;">+254 722 646 958</a><br>
+        <small>Fastest response during business hours</small>
+    </div>
+    
+    <div style="margin: 10px 0;">
+        <strong>📞 Phone Support:</strong><br>
+        +254 722 646 958<br>
+        <small>Monday - Friday, 8:00 AM - 6:00 PM EAT</small>
+    </div>
+</div>
+
+<!-- Important Information -->
+<div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
+    <h4 style="color: #856404; margin-top: 0;">📝 Important Information</h4>
+    <ul style="margin: 0; padding-left: 20px; color: #856404;">
+        <li>Your course enrollment is still available - you just need to complete payment verification</li>
+        <li>Keep all payment receipts and transaction confirmations for reference</li>
+        <li>Most payment issues can be resolved within 24 hours with proper documentation</li>
+        <li>If you made the payment correctly, we'll work to resolve this quickly</li>
+    </ul>
+</div>
+
+<div class="content-text">
+    We apologize for any inconvenience and appreciate your patience. Our team is committed to resolving this issue and getting you enrolled in your course as soon as possible.
+</div>
+
+<div style="margin-top: 30px; color: #666; font-size: 14px;">
+    We're here to help,<br>
+    <strong>The YITP Support Team</strong>
+</div>
+{% endblock %}

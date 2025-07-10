@@ -12,13 +12,17 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-# import dj_database_url  # Not needed for manual PostgreSQL configuration
+import sys
+import socket
 from django.contrib.messages import constants as messages
+
+# =============================================================================
+# SMART ENVIRONMENT DETECTION SYSTEM
+# =============================================================================
 
 # Import decouple for environment variable management
 try:
     from decouple import config
-    # Load .env file if it exists
     ENV_FILE_LOADED = True
 except ImportError:
     # Fallback to os.environ if decouple is not available
@@ -28,26 +32,95 @@ except ImportError:
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+def detect_environment():
+    """
+    Smart environment detection - Simple but effective approach
+    Returns: True if production, False if development
+    """
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+    # Method 1: Explicit environment variable (highest priority)
+    env_setting = os.environ.get('DJANGO_ENV', '').lower()
+    if env_setting == 'production':
+        return True
+    elif env_setting == 'development':
+        return False
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default='yitp-development-key-change-in-production-with-long-random-string-for-security')
+    # Method 2: Check for production platform indicators
+    production_indicators = [
+        os.environ.get('RENDER'),           # Render.com
+        os.environ.get('HEROKU_APP_NAME'),  # Heroku
+        os.environ.get('RAILWAY_ENVIRONMENT'), # Railway
+        os.environ.get('VERCEL'),           # Vercel
+        'neon.tech' in os.environ.get('DB_HOST', ''), # Neon database
+    ]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default='False', cast=bool) if ENV_FILE_LOADED else os.environ.get('DEBUG', 'False').lower() == 'true'
+    if any(production_indicators):
+        return True
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',') if ENV_FILE_LOADED else os.environ.get('ALLOWED_HOSTS', '*').split(',')
+    # Method 3: Check if running with runserver (development)
+    if 'runserver' in sys.argv:
+        return False
+
+    # Method 4: Check DEBUG setting from environment
+    debug_setting = os.environ.get('DEBUG', 'True').lower()
+    if debug_setting == 'false':
+        return True
+
+    # Default to development for safety
+    return False
+
+# Detect environment
+IS_PRODUCTION = detect_environment()
+IS_DEVELOPMENT = not IS_PRODUCTION
+
+# Environment indicator
+print(f"🔧 YITP Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
+
+# =============================================================================
+# CORE DJANGO SETTINGS
+# =============================================================================
+
+# Secret Key
+if IS_PRODUCTION:
+    SECRET_KEY = config('SECRET_KEY', default='yitp-production-key-change-this-immediately')
+else:
+    SECRET_KEY = config('SECRET_KEY', default='yitp-dev-key-not-for-production-use-only')
+
+# Debug Mode
+DEBUG = not IS_PRODUCTION
+
+# Allowed Hosts
+if IS_PRODUCTION:
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='yitp-django-app.onrender.com,*.onrender.com').split(',')
+else:
+    ALLOWED_HOSTS = ['*']  # Permissive for development
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Production Security Settings
-if not DEBUG:
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
+# =============================================================================
+# SECURITY SETTINGS - ENVIRONMENT AWARE
+# =============================================================================
+
+if IS_PRODUCTION:
+    # Production Security Settings
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+else:
+    # Development Security Settings - Relaxed for local development
+    SECURE_HSTS_SECONDS = 0
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_BROWSER_XSS_FILTER = False
+    SECURE_CONTENT_TYPE_NOSNIFF = False
+    X_FRAME_OPTIONS = 'SAMEORIGIN'
     SECURE_CONTENT_TYPE_NOSNIFF = True
 #
 
@@ -107,6 +180,12 @@ MIDDLEWARE = [
     'yitp.middleware.UnifiedNavigationMiddleware',
 ]
 
+# Environment-specific middleware adjustments
+if IS_DEVELOPMENT:
+    # Remove security middleware that might interfere with development
+    MIDDLEWARE = [m for m in MIDDLEWARE if 'SecurityMiddleware' not in m]
+    print("🔧 Removed SecurityMiddleware for development")
+
 ROOT_URLCONF = 'blog.urls'
 
 # Sites framework
@@ -135,34 +214,35 @@ WHITENOISE_MANIFEST_STRICT = False
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # =============================================================================
-# DATABASE CONFIGURATION
+# DATABASE CONFIGURATION - ENVIRONMENT AWARE
 # =============================================================================
 
-# PRODUCTION: PostgreSQL configuration for Neon database
-# Use environment variables for production deployment
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'yitplms'),
-        'USER': os.getenv('DB_USER', 'yitplms_owner'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'npg_LwHI4a8TufWb'),
-        'HOST': os.getenv('DB_HOST', 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech'),
-        'PORT': os.getenv('DB_PORT', '5432'),
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
+if IS_PRODUCTION:
+    # Production: PostgreSQL (Neon) Database
+    print("📊 Using PostgreSQL database for production")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'yitplms'),
+            'USER': os.getenv('DB_USER', 'yitplms_owner'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'npg_LwHI4a8TufWb'),
+            'HOST': os.getenv('DB_HOST', 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+            'OPTIONS': {
+                'sslmode': 'require',
+                'connect_timeout': 30,
+            },
+        }
     }
-}
-
-# =============================================================================
-# LOCAL DEVELOPMENT: SQLite fallback (uncomment for local testing)
-# =============================================================================
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+else:
+    # Development: SQLite Database
+    print("📊 Using SQLite database for development")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db_development.sqlite3',
+        }
+    }
 
 
 
@@ -202,20 +282,34 @@ USE_TZ = True
 
 
 
-# Static files (CSS, JavaScript, Images)
+# =============================================================================
+# STATIC FILES CONFIGURATION - ENVIRONMENT AWARE
+# =============================================================================
+
 STATIC_URL = '/static/'
 
-# Additional directories to look for static files during development
+# Additional directories to look for static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Directory for static files during development
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-# Directory where static files are collected for production
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+if IS_PRODUCTION:
+    # Production: Collect static files for deployment
+    print("📁 Using production static files configuration")
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
-# WhiteNoise settings for serving static files
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"  # Disabled due to missing source maps
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+    # Ensure staticfiles directory exists
+    if not os.path.exists(STATIC_ROOT):
+        os.makedirs(STATIC_ROOT, exist_ok=True)
+else:
+    # Development: Serve static files directly
+    print("📁 Using development static files configuration")
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Still needed for collectstatic
+
+    # Ensure staticfiles directory exists to prevent warnings
+    if not os.path.exists(STATIC_ROOT):
+        os.makedirs(STATIC_ROOT, exist_ok=True)
 
 # Media files (user-uploaded files)
 MEDIA_URL = '/media/'
@@ -299,26 +393,35 @@ MESSAGE_TAGS = {
 # Message storage backend
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-# Email Configuration
-# Standard SMTP backend with SSL handling
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'dedeexpeditions@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'roqu frlt wvof rqxk')  # Gmail app password
+# =============================================================================
+# EMAIL CONFIGURATION - ENVIRONMENT AWARE
+# =============================================================================
+
+if IS_PRODUCTION:
+    # Production: Gmail SMTP Backend
+    print("📧 Using Gmail SMTP for production email")
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'dedeexpeditions@gmail.com')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'roqu frlt wvof rqxk')
+    EMAIL_TIMEOUT = 30
+
+    # SSL certificate handling for production
+    import ssl
+    if os.getenv('DJANGO_DEVELOPMENT'):
+        ssl._create_default_https_context = ssl._create_unverified_context
+else:
+    # Development: Console Email Backend
+    print("📧 Using console email backend for development")
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_HOST_USER = 'development@yitp.local'
+    EMAIL_HOST_PASSWORD = 'development-password'
+    EMAIL_TIMEOUT = 10
+
 DEFAULT_FROM_EMAIL = f'YOUTH IMPACT GLOBAL <{EMAIL_HOST_USER}>'
-
-# Email timeout settings
-EMAIL_TIMEOUT = 30
-
-# SSL certificate handling for development
-import ssl
-import os
-if os.getenv('DJANGO_DEVELOPMENT') or DEBUG:
-    # Only disable SSL verification in development
-    ssl._create_default_https_context = ssl._create_unverified_context
 
 # Admin email for notifications
 ADMIN_EMAIL = 'youthimpactglobal3@gmail.com'
@@ -326,11 +429,6 @@ ADMIN_EMAIL = 'youthimpactglobal3@gmail.com'
 # OTP Configuration
 OTP_EXPIRY_MINUTES = 200
 OTP_LENGTH = 6
-
-# For development testing, you can temporarily use console backend
-# Uncomment the line below for local development only
-# if DEBUG and os.getenv('USE_CONSOLE_EMAIL', 'False').lower() == 'true':
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # =============================================================================
 # M-PESA PAYMENT INTEGRATION CONFIGURATION
@@ -558,3 +656,47 @@ export MPESA_PASSKEY="your_production_passkey"
 export MPESA_ENVIRONMENT="production"
 export SITE_URL="https://yourdomain.com"
 """
+
+# =============================================================================
+# CONFIGURATION SUMMARY & ENVIRONMENT SWITCHING
+# =============================================================================
+
+print("=" * 60)
+print(f"🚀 YITP LMS CONFIGURATION SUMMARY")
+print("=" * 60)
+print(f"🔧 Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
+print(f"🐛 Debug Mode: {DEBUG}")
+print(f"📊 Database: {'PostgreSQL (Neon)' if IS_PRODUCTION else 'SQLite (Local)'}")
+print(f"📧 Email Backend: {'Gmail SMTP' if IS_PRODUCTION else 'Console'}")
+print(f"🔒 Security: {'Production (HTTPS)' if IS_PRODUCTION else 'Development (HTTP)'}")
+print(f"📁 Static Files: {'Production (Collected)' if IS_PRODUCTION else 'Development (Direct)'}")
+print(f"🌐 Allowed Hosts: {ALLOWED_HOSTS}")
+print("=" * 60)
+
+# Environment switching instructions
+if IS_DEVELOPMENT:
+    print("💡 DEVELOPMENT MODE ACTIVE")
+    print("   • Using SQLite database for local development")
+    print("   • Using console email backend (emails printed to terminal)")
+    print("   • Security settings relaxed for HTTP development server")
+    print("   • Static files served directly by Django")
+    print("")
+    print("🚀 To switch to PRODUCTION mode:")
+    print("   • Set environment variable: export DJANGO_ENV=production")
+    print("   • Or deploy to production platform (Render, Heroku, etc.)")
+    print("   • Or ensure production environment variables are set")
+else:
+    print("🚀 PRODUCTION MODE ACTIVE")
+    print("   • Using PostgreSQL database (Neon)")
+    print("   • Using Gmail SMTP for email delivery")
+    print("   • Production security settings enabled")
+    print("   • Static files collected for deployment")
+    print("")
+    print("🛠️ To switch to DEVELOPMENT mode:")
+    print("   • Set environment variable: export DJANGO_ENV=development")
+    print("   • Or run locally with: python manage.py runserver")
+    print("   • Or unset production environment variables")
+
+print("=" * 60)
+print("✅ YITP LMS: CONFIGURATION COMPLETE")
+print("=" * 60)
