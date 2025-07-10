@@ -1,448 +1,909 @@
 {% extends 'unified/base.html' %}
 {% load static %}
 
+{% block title %}Youth Impact Training Programme - Transform Your Future in 9 Weeks{% endblock %}
+
+{% block meta_description %}Join the Youth Impact Training Programme (YITP) - a comprehensive 9-week virtual training designed to equip young people with essential life skills, career readiness, and entrepreneurial knowledge. 85% OFF limited time offer!{% endblock %}
+
+{% block extra_css %}
+<style>
+/* YITP Landing Page Styles */
+:root {
+    --yitp-orange: #ff5d15;
+    --yitp-blue: #1a2e53;
+    --yitp-light-orange: #ff7b3d;
+    --yitp-dark-blue: #0f1a35;
+    --gradient-primary: linear-gradient(135deg, var(--yitp-orange) 0%, var(--yitp-light-orange) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--yitp-blue) 0%, var(--yitp-dark-blue) 100%);
+    --shadow-soft: 0 10px 30px rgba(255, 93, 21, 0.1);
+    --shadow-medium: 0 15px 40px rgba(26, 46, 83, 0.15);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hero Section */
+.hero-section {
+    background: var(--gradient-secondary);
+    color: white;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--yitp-light-orange);
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-soft);
+    min-width: 200px;
+    justify-content: center;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(255, 93, 21, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.cta-button i {
+    transition: var(--transition-smooth);
+}
+
+.cta-button:hover i {
+    transform: translateX(5px);
+}
+
+/* Stats Section */
+.stats-section {
+    background: white;
+    padding: 60px 0;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    z-index: 3;
+    margin-top: -40px;
+    border-radius: 20px 20px 0 0;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--yitp-orange);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--yitp-blue);
+    font-weight: 600;
+}
+
+/* Section Styling */
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--yitp-blue);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Benefits Cards */
+.benefit-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    height: 100%;
+    border: 2px solid transparent;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--yitp-orange);
+}
+
+.benefit-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+    color: white;
+}
+
+.benefit-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--yitp-blue);
+    margin-bottom: 15px;
+}
+
+.benefit-description {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Course Units */
+.unit-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    margin-bottom: 30px;
+}
+
+.unit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.unit-header {
+    background: var(--gradient-secondary);
+    color: white;
+    padding: 25px 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.unit-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.unit-duration {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.unit-content {
+    padding: 25px 30px;
+    display: none;
+}
+
+.unit-content.active {
+    display: block;
+}
+
+.unit-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.unit-features {
+    list-style: none;
+    padding: 0;
+}
+
+.unit-features li {
+    padding: 8px 0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.unit-features li i {
+    color: var(--yitp-orange);
+    width: 20px;
+}
+
+/* Pricing Card */
+.pricing-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-medium);
+    position: sticky;
+    top: 100px;
+    border: 3px solid var(--yitp-orange);
+}
+
+.pricing-badge {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.price-original {
+    font-size: 1.2rem;
+    color: #999;
+    text-decoration: line-through;
+    margin-bottom: 5px;
+}
+
+.price-current {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--yitp-orange);
+    margin-bottom: 20px;
+}
+
+.price-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.price-features li {
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.price-features li:last-child {
+    border-bottom: none;
+}
+
+.price-features i {
+    color: var(--yitp-orange);
+    font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .cta-button {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+
+    .pricing-card {
+        position: static;
+        margin-top: 40px;
+    }
+
+    .unit-header {
+        padding: 20px;
+    }
+
+    .unit-content {
+        padding: 20px;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+{% endblock %}
+
 {% block content %}
-         <!-- page title area start -->
-       
-         <!-- page title area end -->
-<br><br><br><br>
-
-<section class="course__area pt-115 pb-120 ">
-   <div class="container">
-      <div class="row">
-         <div class="col-xxl-8 col-xl-8 col-lg-8">
-            <div class="course__wrapper">
-               <div class="page__title-content mb-25">
-                 
-                  <span class="page__title-pre">Registration Ongoing</span>
-                  <h5 class="page__title-3">Youth Impact Training Programme</h5>
-                  <h4><strong>Your 9-Week Transformation Journey.</strong> <br></h4>
-                  <p></p>
-
-               </div>
-               <div class="course__meta-2 d-sm-flex mb-30">
-                  
-              
-                  
-               </div>
-               <!-- <div class="course__img w-img mb-30">
-                  <img src="{% static 'assets/img/course/details/course-details-1.jpg" alt="">
-               </div> -->
-               <div class="course__tab-2 mb-45">
-                  <ul class="nav nav-tabs" id="courseTab" role="tablist">
-                     <li class="nav-item " role="presentation">
-                       <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true"> <i class="icon_ribbon_alt"></i> <span>Course Overview</span> </button>
-                     </li>
-                     <li class="nav-item" role="presentation">
-                       <button class="nav-link " id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab" aria-controls="curriculum" aria-selected="false"> <i class="icon_book_alt"></i> <span>Units</span> </button>
-                     </li>
-                     <li class="nav-item" role="presentation">
-                       <button class="nav-link " id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false"> <i class="fal fa-user"></i> <span>Instructors</span> </button>
-                     </li>
-                     <!-- <li class="nav-item" role="presentation">
-                       <button class="nav-link" id="member-tab" data-bs-toggle="tab" data-bs-target="#member" type="button" role="tab" aria-controls="member" aria-selected="false"> <i class="fal fa-user"></i> <span>Members</span> </button>
-                     </li> -->
-                   </ul>
-               </div>
-               <div class="course__tab-content mb-95">
-                  <div class="tab-content" id="courseTabContent">
-                     <div class="tab-pane active show" id="description" role="tabpanel" aria-labelledby="description-tab">
-                        <div class="course__description">
-                           <h3>Course Overview</h3>
-                           <p>The Youth Impact Training Programme (YITP) is a 9-week virtual training designed to equip young people with essential life skills, career readiness, and entrepreneurial knowledge. Our mission is to empower youth with practical skills and a success-driven mindset to help them excel in both employment and business.</p>
-
-                           
-                        
-                          <div class="course__description-list mb-45">
-                             <h4>Why Choose YITP?:</h4>
-                             <ul>
-                              <ul>
-                                 <li><i class="icon_check"></i> Learn practical, real-world skills for the 21st century</li>
-                                 <li><i class="icon_check"></i> Mentorship & networking opportunities with industry leaders</li>
-                                 <li><i class="icon_check"></i> Connect to job, scholarship, & business opportunities</li>
-                                 <li><i class="icon_check"></i> Earn a certification upon successful completion</li>
-
-                             </ul>
-                            
-                          </div>
-
-                          <div class="course__description-list mb-45">
-                             <h4>Course Structure & Units:</h4>
-                             <ul>
-                              <li>
-                                 <h4><i class="fal fa-tag"></i> Understanding Purpose in Life (UPL) (10 sessions, 2 weeks part-time)</h4>
-                                 <div class="course__tag-2 mb-35">
-                                     <i class="icon_check"></i>
-                                     <a href="#"><small>Discover your strengths, passion, and life goals.</small></a>
-                                 </div>
-                             </li>
-                             
-                             <li>
-                                 <h4><i class="fal fa-tag"></i> Personal Initiative (PI) (15 sessions, 1 week part-time)</h4>
-                                 <div class="course__tag-2 mb-35">
-                                     <i class="icon_check"></i>
-                                     <a href="#"><small>Build confidence, self-leadership, and proactive decision-making skills.</small></a>
-                                 </div>
-                             </li>
-                             
-                             <li>
-                                 <h4><i class="fal fa-tag"></i> The Power of Mindset (TPM) (10 sessions, 2 weeks part-time)</h4>
-                                 <div class="course__tag-2 mb-35">
-                                     <i class="icon_check"></i>
-                                     <a href="#"><small>Shift your perspective to a growth mindset for career and business success.</small></a>
-                                 </div>
-                             </li>
-                             
-                             <li>
-                                 <h4><i class="fal fa-tag"></i> Soft Skills for Transitioning from School to Work (TSW-SSS) (10 sessions, 2 weeks part-time)</h4>
-                                 <div class="course__tag-2 mb-35">
-                                     <i class="icon_check"></i>
-                                     <a href="#"><small>Master communication, teamwork, problem-solving, and workplace professionalism.</small></a>
-                                 </div>
-                             </li>
-                             
-                             <li>
-                                 <h4><i class="fal fa-tag"></i> Entrepreneurship & Business Alignment (ESBA) (10 sessions, 2 weeks part-time)</h4>
-                                 <div class="course__tag-2 mb-35">
-                                     <i class="icon_check"></i>
-                                     <a href="#"><small>Learn how to start, manage, and grow a successful business.</small></a>
-                                 </div>
-                             </li>
-                             
-                             <li>
-                                 <h4><i class="fal fa-tag"></i> CV Writing (CW) (1-day, 2-hour session with individual follow-up)</h4>
-                                 <div class="course__tag-2 mb-35">
-                                     <i class="icon_check"></i>
-                                     <a href="#"><small>Create a professional CV & cover letter that stands out to employers.</small></a>
-                                 </div>
-                             </li>
-                                
-                             </ul>
-                         </div>
-                         
-                         <p> <strong> 📌 Additional Benefits:
-                         </strong></p>
-                         <ul>
-                         <li>✅ Networking & Mentorship Sessions – Build connections with professionals.
-                          </li>
-                         <li>✅ Certification Upon Completion – A valuable credential for your career.</li>
-                        </ul>
-                        </div>
-                        <br>
-                     <div class="course__description-list mb-45">
-                        <h3>🎯 Who Can Join?</h3>
-                        <p>This programme is open to:</p>
-                        <ul>
-                            <li><i class="icon_check"></i> High School Students (15+ years)</li>
-                            <li><i class="icon_check"></i> College & University Students</li>
-                            <li><i class="icon_check"></i> Graduates & Young Professionals</li>
-                            <li><i class="icon_check"></i> Job Seekers & Employees</li>
-                        </ul>
-                    <br>
-                        <h4>Special Programmes Available for:</h4>
-                        <ul>
-                            <li><i class="icon_check"></i> Children (7-10 years & 11-14 years)</li>
-                            <li><i class="icon_check"></i> Youth Groups</li>
-                            <li><i class="icon_check"></i> Donor-Funded Trainings</li>
-                        </ul>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        🎯 Registration Ongoing - Limited Time Offer!
                     </div>
-                     </div>
-                    
-                     <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
-                        <div class="course__curriculum">
-                          <div class="container">
+                    <h1 class="hero-title">Youth Impact Training Programme</h1>
+                    <h2 class="hero-subtitle">Your 9-Week Transformation Journey</h2>
+                    <p class="hero-description">
+                        Equip yourself with essential life skills, career readiness, and entrepreneurial knowledge.
+                        Join 1000+ students who have transformed their futures with practical, real-world skills for the 21st century.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="{% url 'yitp:registration2' %}" class="cta-button">
+                            <i class="fas fa-rocket"></i>
+                            Start Your Journey
+                        </a>
+                        <a href="#course-overview" class="btn btn-outline-light btn-lg">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                             <div class="row">
-                                <div class="col-xxl-12">
-                                   <div class="course__tab-conent">
-                                      <div class="tab-content" id="courseTabContent">
-                                         <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
-                                            <div class="row">
-                                               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                                                  <div class="course__item white-bg mb-30 fix">
-                                                     <div class="course__thumb w-img p-relative fix">
-                                                       
-                                                        <div class="course__tag">
-                                                           <a href="#">Entrepreneurship &amp; Business Skills</a>
-                                                        </div>
-                                                     </div>
-                                                     <div class="course__content">
-                                                      <br>
-                                                      <h3 class="course__title"><a href="{% url 'yitp:registration2' %}">Entrepreneurship &amp; Business Alignment (ESBA)</a></h3>
-                                                        <div class="course__meta d-flex align-items-center justify-content-between">
-                                                           <div class="course__lesson">
-                                                              <span><i class="far fa-book-alt"></i>10 units over 2 weeks (part-time).</span>
-                                                           </div>
-                                                          
-                                                        </div>
-                                                       
-                                                     </div>
-                                                     <div class="course__more d-flex justify-content-between align-items-center">
-                                                       
-                                                        <div class="course__btn">
-                                                           <a style="color: blue;" href="{% url 'yitp:coursedetail1' %}" class="link-btn">
-                                                            View Details
-                                                              <i class="far fa-arrow-right"></i>
-                                                              <i class="far fa-arrow-right"></i>
-                                                           </a>
-                                                        </div>
-                                                     </div>
-                                                  </div>
-                                               </div>
-                                               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                                                  <div class="course__item white-bg mb-30 fix">
-                                                     <div class="course__thumb w-img p-relative fix">
-                                                       
-                                                        <div class="course__tag">
-                                                           <a href="#">Personal Development</a>
-                                                        </div>
-                                                     </div>
-                                                     <div class="course__content">
-                                                      <br>
-                                                        <h3 class="course__title"><a href="{% url 'yitp:registration2' %}">Understanding Purpose in Life (UPL)</a></h3>
-                                                        <div class="course__meta d-flex align-items-center justify-content-between">
-                                                         <div class="course__lesson">
-                                                            <span><i class="far fa-book-alt"></i>10 units 2 weeks (part-time).</span>
-                                                         </div>
-                                                        
-                                                      </div>
-                                                     </div>
-                                                     <div class="course__more d-flex justify-content-between align-items-center">
-                                                       
-                                                        <div class="course__btn">
-                                                           <a style="color: blue;" href="{% url 'yitp:coursedetail2' %}" class="link-btn">
-                                                            View Details
-                                                              <i class="far fa-arrow-right"></i>
-                                                              <i class="far fa-arrow-right"></i>
-                                                           </a>
-                                                        </div>
-                                                     </div>
-                                                  </div>
-                                               </div>
-                                               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                                                  <div class="course__item white-bg mb-30 fix">
-                                                     <div class="course__thumb w-img p-relative fix">
-                                                       
-                                                        <div class="course__tag">
-                                                           <a href="#">Personal Development</a>
-                                                        </div>
-                                                     </div>
-                                                     <div class="course__content">
-                                                      <br>
-                                                        <h3 class="course__title"><a href="{% url 'yitp:registration2' %}">Personal Initiative (PI)</a></h3>
-                                                        <div class="course__meta d-flex align-items-center justify-content-between">
-                                                         <div class="course__lesson">
-                                                            <span><i class="far fa-book-alt"></i>15 units 1 week (part-time).</span>
-                                                         </div>
-                                                        
-                                                      </div>
-                                                     </div>
-                                                     <div class="course__more d-flex justify-content-between align-items-center">
-                                                       
-                                                        <div class="course__btn">
-                                                           <a style="color: blue;" href="{% url 'yitp:coursedetail3' %}" class="link-btn">
-                                                            View Details
-                                                              <i class="far fa-arrow-right"></i>
-                                                              <i class="far fa-arrow-right"></i>
-                                                           </a>
-                                                        </div>
-                                                     </div>
-                                                  </div>
-                                               </div>
-                                               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                                                  <div class="course__item white-bg mb-30 fix">
-                                                     <div class="course__thumb w-img p-relative fix">
-                                                       
-                                                        <div class="course__tag">
-                                                           <a href="#">Personal Development</a>
-                                                        </div>
-                                                     </div>
-                                                     <div class="course__content">
-                                                      <br>
-                                                        <h3 class="course__title"><a href="{% url 'yitp:registration2' %}">The Power of Mindset (TPM)</a></h3>
-                                                        <div class="course__meta d-flex align-items-center justify-content-between">
-                                                         <div class="course__lesson">
-                                                            <span><i class="far fa-book-alt"></i>10 units  2 weeks (part-time).</span>
-                                                         </div>
-                                                        
-                                                      </div>
-                                                     </div>
-                                                     <div class="course__more d-flex justify-content-between align-items-center">
-                                                       
-                                                        <div class="course__btn">
-                                                           <a style="color: blue;" href="{% url 'yitp:coursedetail4' %}" class="link-btn">
-                                                            View Details
-                                                              <i class="far fa-arrow-right"></i>
-                                                              <i class="far fa-arrow-right"></i>
-                                                           </a>
-                                                        </div>
-                                                     </div>
-                                                  </div>
-                                               </div>
-                                               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                                                  <div class="course__item white-bg mb-30 fix">
-                                                     <div class="course__thumb w-img p-relative fix">
-                                                       
-                                                        <div class="course__tag">
-                                                           <a href="#">Personal Development</a>
-                                                        </div>
-                                                     </div>
-                                                     <div class="course__content">
-                                                       <br>
-                                                        <h3 class="course__title"><a href="{% url 'yitp:registration2' %}">Transition from School to the World - Soft Skills for the Streets</a></h3>
-                                                        <div class="course__meta d-flex align-items-center justify-content-between">
-                                                         <div class="course__lesson">
-                                                            <span><i class="far fa-book-alt"></i>10 units 2 weeks (part-time).</span>
-                                                         </div>
-                                                        
-                                                      </div>
-                                                     
-                                                     </div>
-                                                     <div class="course__more d-flex justify-content-between align-items-center">
-                                                       
-                                                        <div class="course__btn">
-                                                           <a style="color: blue;" href="{% url 'yitp:coursedetail5' %}" class="link-btn">
-                                                            View Details
-                                                              <i class="far fa-arrow-right"></i>
-                                                              <i class="far fa-arrow-right"></i>
-                                                           </a>
-                                                        </div>
-                                                     </div>
-                                                  </div>
-                                               </div>
-                                               <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                                                  <div class="course__item white-bg mb-30 fix">
-                                                     <div class="course__thumb w-img p-relative fix">
-                                                       
-                                                        <div class="course__tag">
-                                                           <a href="#">Career Development</a>
-                                                        </div>
-                                                     </div>
-                                                     <div class="course__content">
-                                                      <br>
-                                                        <h3 class="course__title"><a href="{% url 'yitp:registration2' %}">CV Writing &amp; Professional Growth</a></h3>
-                                                        <div class="course__meta d-flex align-items-center justify-content-between">
-                                                         <div class="course__lesson">
-                                                            <span><i class="far fa-book-alt"></i>1 day (2-hour session) + individual follow-up.</span>
-                                                         </div>
-                                                        
-                                                      </div>
-                                                     </div>
-                                                     <div class="course__more d-flex justify-content-between align-items-center">
-                                                       
-                                                        <div class="course__btn">
-                                                           <a style="color: blue;" href="{% url 'yitp:coursedetail6' %}" class="link-btn">
-                                                            View Details
-                                                              <i class="far fa-arrow-right"></i>
-                                                              <i class="far fa-arrow-right"></i>
-                                                           </a>
-                                                        </div>
-                                                     </div>
-                                                  </div>
-                                               </div>
-                                             
-                                              
-                                            </div>
-                                         </div>
-                                      
-                                       </div>
-                                   </div>
-                                </div>
-                             </div>
-                          
-                          </div>
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <div class="stat-item fade-in">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Students Enrolled</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item fade-in">
+                    <span class="stat-number">56</span>
+                    <span class="stat-label">Training Sessions</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item fade-in">
+                    <span class="stat-number">9</span>
+                    <span class="stat-label">Weeks Duration</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item fade-in">
+                    <span class="stat-number">85%</span>
+                    <span class="stat-label">Discount Available</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Benefits Section -->
+<section class="section-padding bg-light" id="course-overview">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title fade-in">Why Choose YITP?</h2>
+                <p class="section-subtitle fade-in">
+                    Transform your future with practical skills and a success-driven mindset to excel in both employment and business.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="benefit-title">Real-World Skills</h3>
+                    <p class="benefit-description">
+                        Learn practical, future-ready skills for the 21st century that employers and entrepreneurs actually need.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="benefit-title">Expert Mentorship</h3>
+                    <p class="benefit-description">
+                        Get mentorship and networking opportunities with industry leaders and successful professionals.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="benefit-title">Career Opportunities</h3>
+                    <p class="benefit-description">
+                        Connect to job, scholarship, and business opportunities through our extensive network.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="benefit-title">Professional Certification</h3>
+                    <p class="benefit-description">
+                        Earn a valuable certification upon successful completion to boost your career prospects.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Course Overview Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="fade-in">
+                    <h2 class="section-title text-start">Course Overview</h2>
+                    <p class="lead mb-4">
+                        The Youth Impact Training Programme (YITP) is a comprehensive 9-week virtual training designed to equip young people with essential life skills, career readiness, and entrepreneurial knowledge. Our mission is to empower youth with practical skills and a success-driven mindset to help them excel in both employment and business.
+                    </p>
+
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <h4 class="text-primary mb-3">📌 Additional Benefits</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Networking & Mentorship Sessions
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Professional Certification
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    100% Virtual & Flexible Learning
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    Industry Expert Instructors
+                                </li>
+                            </ul>
                         </div>
-                     </div>
-
-
-                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                        <div class="course__review">
-                           <h3 class="mb-45">Our Instructors</h3>
-                           
-                           <div class="row justify-content-center">
-                              <!-- Instructor 1 -->
-                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                 <div class="course__instructor-item text-center mb-40">
-                                    <div class="course__instructor-thumb mb-25">
-                                       <img src="{% static 'assets/img/hero/sylvester.jpeg' %}" alt="instructor" class="img-fluid" style="max-height: 300px; width: auto; object-fit: cover;">
-                                    </div>
-                                    <div class="course__instructor-content">
-                                       <h4 class="mb-2">Sylvester Oluoch</h4>
-                                       <p class="mb-3">Banking, Sales, Product Development</p>
-                                     
-                                    </div>
-                                 </div>
-                              </div>
-                     
-                              <!-- Instructor 2 -->
-                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                 <div class="course__instructor-item text-center mb-40">
-                                    <div class="course__instructor-thumb mb-25">
-                                       <img src="{% static 'assets/img/hero/ruth.jpeg' %}" alt="instructor" class="img-fluid" style="max-height: 300px; width: auto; object-fit: cover;">
-                                    </div>
-                                    <div class="course__instructor-content">
-                                       <h4 class="mb-2">CPA Ruth Kinyanjui</h4>
-                                       <p class="mb-3">Finance and Economics</p>
-                                     
-                                    </div>
-                                 </div>
-                              </div>
-                     
-                              <!-- Add more instructors in pairs as needed -->
-                           </div>
-                           <div class="row justify-content-center">
-                              <!-- Instructor 1 -->
-                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                 <div class="course__instructor-item text-center mb-40">
-                                    <div class="course__instructor-thumb mb-25">
-                                       <img src="{% static 'assets/img/hero/meshack.jpeg' %}" alt="instructor" class="img-fluid" style="max-height: 300px; width: auto; object-fit: cover;">
-                                    </div>
-                                    <div class="course__instructor-content">
-                                       <h4 class="mb-2">Meshack Oduke</h4>
-                                       <p class="mb-3">Teacher, Trainer Of Trainers(TOT)</p>
-                                     
-                                    </div>
-                                 </div>
-                              </div>
-                     
-                              <!-- Instructor 2 -->
-                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                 <div class="course__instructor-item text-center mb-40">
-                                    <div class="course__instructor-thumb mb-25">
-                                       <img src="{% static 'assets/img/hero/levin.jpeg' %}" alt="instructor" class="img-fluid" style="max-height: 300px; width: auto; object-fit: cover;">
-                                    </div>
-                                    <div class="course__instructor-content">
-                                       <h4 class="mb-2">Levin Ingati</h4>
-                                       <p class="mb-3">Biosystems Engineering, Sustainability Management</p>
-                                     
-                                    </div>
-                                 </div>
-                              </div>
-                     
-                              <!-- Add more instructors in pairs as needed -->
-                           </div>
-                           <div class="row justify-content-center">
-                              <!-- Instructor 1 -->
-                              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                 <div class="course__instructor-item text-center mb-40">
-                                    <div class="course__instructor-thumb mb-25">
-                                       <img src="{% static 'assets/img/hero/lilian.jpeg' %}" alt="instructor" class="img-fluid" style="max-height: 300px; width: auto; object-fit: cover;">
-                                    </div>
-                                    <div class="course__instructor-content">
-                                       <h4 class="mb-2">Lilian Njeru</h4>
-                                       <p class="mb-3">Sales Trainer, Business Development Consultant</p>
-                                     
-                                    </div>
-                                 </div>
-                              </div>
-                     
-                           
-                     
-                              <!-- Add more instructors in pairs as needed -->
-                           </div>
-                           
+                        <div class="col-md-6">
+                            <h4 class="text-primary mb-3">🎯 Who Can Join?</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-user-graduate text-warning me-2"></i>
+                                    High School Students (15+ years)
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-university text-warning me-2"></i>
+                                    College & University Students
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-briefcase text-warning me-2"></i>
+                                    Graduates & Young Professionals
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-search text-warning me-2"></i>
+                                    Job Seekers & Employees
+                                </li>
+                            </ul>
                         </div>
-                     </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">
+                            <i class="fas fa-star me-2"></i>
+                            Special Programmes Available
+                        </h5>
+                        <p class="mb-0">
+                            We also offer specialized programmes for children (7-10 years & 11-14 years), youth groups, and donor-funded trainings.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <!-- Pricing Card -->
+                <div class="pricing-card fade-in">
+                    <div class="pricing-badge">85% OFF - Limited Time!</div>
+
+                    <div class="text-center mb-4">
+                        <div class="price-original">KES 35,000 ($270)</div>
+                        <div class="price-current">KES 5,000 <small>($39)</small></div>
+                    </div>
+
+                    <ul class="price-features">
+                        <li>
+                            <i class="fas fa-book"></i>
+                            <div>
+                                <strong>56 Training Sessions</strong>
+                                <small class="d-block text-muted">Comprehensive curriculum</small>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>9 Weeks Duration</strong>
+                                <small class="d-block text-muted">Flexible part-time schedule</small>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <strong>5 days/week, 2 hours/day</strong>
+                                <small class="d-block text-muted">Manageable time commitment</small>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-laptop"></i>
+                            <div>
+                                <strong>100% Virtual Learning</strong>
+                                <small class="d-block text-muted">Learn from anywhere</small>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <strong>1000+ Students Enrolled</strong>
+                                <small class="d-block text-muted">Join our community</small>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <strong>English Language</strong>
+                                <small class="d-block text-muted">International accessibility</small>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="{% url 'yitp:registration2' %}" class="cta-button w-100 text-center">
+                        <i class="fas fa-rocket"></i>
+                        Enroll Now
+                    </a>
+
+                    <div class="text-center mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-shield-alt me-1"></i>
+                            Secure enrollment • Money-back guarantee
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Course Units Section -->
+<section class="section-padding bg-light" id="course-units">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title fade-in">Course Structure & Units</h2>
+                <p class="section-subtitle fade-in">
+                    Six comprehensive units designed to transform your mindset, skills, and career prospects.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Unit 1 -->
+                <div class="unit-card fade-in">
+                    <div class="unit-header" onclick="toggleUnit('unit1')">
+                        <div>
+                            <h3 class="unit-title">Understanding Purpose in Life (UPL)</h3>
+                            <span class="unit-duration">10 sessions • 2 weeks part-time</span>
+                        </div>
+                        <i class="fas fa-chevron-down" id="unit1-icon"></i>
+                    </div>
+                    <div class="unit-content" id="unit1-content">
+                        <p class="unit-description">
+                            Discover your strengths, passion, and life goals. This foundational unit helps you understand your unique purpose and align your career path with your values and aspirations.
+                        </p>
+                        <ul class="unit-features">
+                            <li><i class="fas fa-check"></i> Self-discovery exercises and assessments</li>
+                            <li><i class="fas fa-check"></i> Values clarification workshops</li>
+                            <li><i class="fas fa-check"></i> Goal setting and life planning</li>
+                            <li><i class="fas fa-check"></i> Personal mission statement development</li>
+                        </ul>
+                        <a href="{% url 'yitp:coursedetail2' %}" class="btn btn-outline-primary">View Detailed Curriculum</a>
+                    </div>
+                </div>
+
+                <!-- Unit 2 -->
+                <div class="unit-card fade-in">
+                    <div class="unit-header" onclick="toggleUnit('unit2')">
+                        <div>
+                            <h3 class="unit-title">Personal Initiative (PI)</h3>
+                            <span class="unit-duration">15 sessions • 1 week part-time</span>
+                        </div>
+                        <i class="fas fa-chevron-down" id="unit2-icon"></i>
+                    </div>
+                    <div class="unit-content" id="unit2-content">
+                        <p class="unit-description">
+                            Build confidence, self-leadership, and proactive decision-making skills. Learn to take charge of your life and career with confidence and determination.
+                        </p>
+                        <ul class="unit-features">
+                            <li><i class="fas fa-check"></i> Confidence building exercises</li>
+                            <li><i class="fas fa-check"></i> Leadership skills development</li>
+                            <li><i class="fas fa-check"></i> Decision-making frameworks</li>
+                            <li><i class="fas fa-check"></i> Proactive mindset cultivation</li>
+                        </ul>
+                        <a href="{% url 'yitp:coursedetail3' %}" class="btn btn-outline-primary">View Detailed Curriculum</a>
+                    </div>
+                </div>
+
+                <!-- Unit 3 -->
+                <div class="unit-card fade-in">
+                    <div class="unit-header" onclick="toggleUnit('unit3')">
+                        <div>
+                            <h3 class="unit-title">The Power of Mindset (TPM)</h3>
+                            <span class="unit-duration">10 sessions • 2 weeks part-time</span>
+                        </div>
+                        <i class="fas fa-chevron-down" id="unit3-icon"></i>
+                    </div>
+                    <div class="unit-content" id="unit3-content">
+                        <p class="unit-description">
+                            Shift your perspective to a growth mindset for career and business success. Learn to overcome limiting beliefs and develop resilience.
+                        </p>
+                        <ul class="unit-features">
+                            <li><i class="fas fa-check"></i> Growth vs. fixed mindset concepts</li>
+                            <li><i class="fas fa-check"></i> Overcoming limiting beliefs</li>
+                            <li><i class="fas fa-check"></i> Resilience and adaptability training</li>
+                            <li><i class="fas fa-check"></i> Positive psychology principles</li>
+                        </ul>
+                        <a href="{% url 'yitp:coursedetail4' %}" class="btn btn-outline-primary">View Detailed Curriculum</a>
+                    </div>
+                </div>
+                <!-- Unit 4 -->
+                <div class="unit-card fade-in">
+                    <div class="unit-header" onclick="toggleUnit('unit4')">
+                        <div>
+                            <h3 class="unit-title">Soft Skills for Transitioning from School to Work (TSW-SSS)</h3>
+                            <span class="unit-duration">10 sessions • 2 weeks part-time</span>
+                        </div>
+                        <i class="fas fa-chevron-down" id="unit4-icon"></i>
+                    </div>
+                    <div class="unit-content" id="unit4-content">
+                        <p class="unit-description">
+                            Master communication, teamwork, problem-solving, and workplace professionalism. Bridge the gap between academic learning and professional success.
+                        </p>
+                        <ul class="unit-features">
+                            <li><i class="fas fa-check"></i> Professional communication skills</li>
+                            <li><i class="fas fa-check"></i> Teamwork and collaboration</li>
+                            <li><i class="fas fa-check"></i> Problem-solving methodologies</li>
+                            <li><i class="fas fa-check"></i> Workplace etiquette and professionalism</li>
+                        </ul>
+                        <a href="{% url 'yitp:coursedetail5' %}" class="btn btn-outline-primary">View Detailed Curriculum</a>
+                    </div>
+                </div>
+
+                <!-- Unit 5 -->
+                <div class="unit-card fade-in">
+                    <div class="unit-header" onclick="toggleUnit('unit5')">
+                        <div>
+                            <h3 class="unit-title">Entrepreneurship & Business Alignment (ESBA)</h3>
+                            <span class="unit-duration">10 sessions • 2 weeks part-time</span>
+                        </div>
+                        <i class="fas fa-chevron-down" id="unit5-icon"></i>
+                    </div>
+                    <div class="unit-content" id="unit5-content">
+                        <p class="unit-description">
+                            Learn how to start, manage, and grow a successful business. Develop entrepreneurial thinking and practical business skills.
+                        </p>
+                        <ul class="unit-features">
+                            <li><i class="fas fa-check"></i> Business idea development</li>
+                            <li><i class="fas fa-check"></i> Market research and validation</li>
+                            <li><i class="fas fa-check"></i> Business planning and strategy</li>
+                            <li><i class="fas fa-check"></i> Financial management basics</li>
+                        </ul>
+                        <a href="{% url 'yitp:coursedetail1' %}" class="btn btn-outline-primary">View Detailed Curriculum</a>
+                    </div>
+                </div>
+
+                <!-- Unit 6 -->
+                <div class="unit-card fade-in">
+                    <div class="unit-header" onclick="toggleUnit('unit6')">
+                        <div>
+                            <h3 class="unit-title">CV Writing & Professional Growth</h3>
+                            <span class="unit-duration">1 day • 2-hour session + individual follow-up</span>
+                        </div>
+                        <i class="fas fa-chevron-down" id="unit6-icon"></i>
+                    </div>
+                    <div class="unit-content" id="unit6-content">
+                        <p class="unit-description">
+                            Create a professional CV and cover letter that stands out to employers. Learn interview skills and personal branding.
+                        </p>
+                        <ul class="unit-features">
+                            <li><i class="fas fa-check"></i> Professional CV writing techniques</li>
+                            <li><i class="fas fa-check"></i> Cover letter crafting</li>
+                            <li><i class="fas fa-check"></i> Interview preparation and skills</li>
+                            <li><i class="fas fa-check"></i> Personal branding strategies</li>
+                        </ul>
+                        <a href="{% url 'yitp:coursedetail6' %}" class="btn btn-outline-primary">View Detailed Curriculum</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Instructors Section -->
+<section class="section-padding" id="instructors">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title fade-in">Meet Your Expert Instructors</h2>
+                <p class="section-subtitle fade-in">
+                    Learn from industry professionals with years of experience in their respective fields.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Instructor 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="benefit-card fade-in text-center">
+                    <div class="instructor-image mb-3">
+                        <img src="{% static 'assets/img/hero/sylvester.jpeg' %}" alt="Sylvester Oluoch"
+                             class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+                    </div>
+                    <h4 class="benefit-title">Sylvester Oluoch</h4>
+                    <p class="text-muted mb-2">Banking, Sales & Product Development</p>
+                    <p class="benefit-description">
+                        Expert in financial services and business development with extensive experience in banking and sales strategies.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Instructor 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="benefit-card fade-in text-center">
+                    <div class="instructor-image mb-3">
+                        <img src="{% static 'assets/img/hero/ruth.jpeg' %}" alt="CPA Ruth Kinyanjui"
+                             class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+                    </div>
+                    <h4 class="benefit-title">CPA Ruth Kinyanjui</h4>
+                    <p class="text-muted mb-2">Finance & Economics</p>
+                    <p class="benefit-description">
+                        Certified Public Accountant with deep expertise in financial management and economic principles.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Instructor 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="benefit-card fade-in text-center">
+                    <div class="instructor-image mb-3">
+                        <img src="{% static 'assets/img/hero/meshack.jpeg' %}" alt="Meshack Oduke"
+                             class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+                    </div>
+                    <h4 class="benefit-title">Meshack Oduke</h4>
+                    <p class="text-muted mb-2">Teacher & Trainer of Trainers (TOT)</p>
+                    <p class="benefit-description">
+                        Experienced educator and training specialist focused on developing effective learning methodologies.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Instructor 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="benefit-card fade-in text-center">
+                    <div class="instructor-image mb-3">
+                        <img src="{% static 'assets/img/hero/levin.jpeg' %}" alt="Levin Ingati"
+                             class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+                    </div>
+                    <h4 class="benefit-title">Levin Ingati</h4>
+                    <p class="text-muted mb-2">Biosystems Engineering & Sustainability</p>
+                    <p class="benefit-description">
+                        Engineering professional specializing in sustainable systems and environmental management.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Instructor 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="benefit-card fade-in text-center">
+                    <div class="instructor-image mb-3">
+                        <img src="{% static 'assets/img/hero/lilian.jpeg' %}" alt="Lilian Njeru"
+                             class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+                    </div>
+                    <h4 class="benefit-title">Lilian Njeru</h4>
+                    <p class="text-muted mb-2">Sales Training & Business Development</p>
+                    <p class="benefit-description">
+                        Sales expert and business development consultant with proven track record in training and mentorship.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
                      
 
                      <!-- <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">
@@ -542,150 +1003,324 @@
                            </div>
                         </div>
                      </div> -->
-                
-                   </div>
-               </div>
-              
+<!-- FAQ Section -->
+<section class="section-padding bg-light" id="faq">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title fade-in">Frequently Asked Questions</h2>
+                <p class="section-subtitle fade-in">
+                    Get answers to common questions about the Youth Impact Training Programme.
+                </p>
             </div>
-         </div>
-         <div class="col-xxl-4 col-xl-4 col-lg-4">
-            <div class="course__sidebar pl-70 p-relative">
-               <div class="course__shape">
-                  <img class="course-dot" src="{% static 'assets/img/course/course-dot.png ' %}" alt="">
-               </div>
-               <div class="course__sidebar-widget-2 white-bg mb-20">
-                  <div class="course__video">
-                    
-                     <div class="course__video-meta mb-25 d-flex align-items-center justify-content-between">
-                        <div class="course__video-price">
-                           <h5 class="old-price"><small>KES 35,000 ($270)</small></h5>
-                           <h5><small>KES 5,000 ($39)</small> </h5>
-                        </div>
-                        <div class="course__video-discount">
-                          <small><span>85% OFF</span></small> 
-                        </div>
-                     </div>
-                     <div class="course__video-content mb-35">
-                        <ul>
-                          
-                           <li class="d-flex align-items-center">
-                              <div class="course__video-icon">
-                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
-                                    
-                                    <path class="st0" d="M4,19.5C4,18.1,5.1,17,6.5,17H20"></path>
-                                    <path class="st0" d="M6.5,2H20v20H6.5C5.1,22,4,20.9,4,19.5v-15C4,3.1,5.1,2,6.5,2z"></path>
-                                 </svg>
-                              </div>
-                              <div class="course__video-info">
-                                 <h5><span>Sessions :</span>56 </h5>
-                              </div>
-                           </li>
-                           <li class="d-flex align-items-center">
-                              <div class="course__video-icon">
-                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
-                                    <circle class="st0" cx="8" cy="8" r="6.7"></circle>
-                                    <polyline class="st0" points="8,4 8,8 10.7,9.3 "></polyline>
-                                 </svg>
-                              </div>
-                              <div class="course__video-info">
-                                 <h5><span>Duration :</span>9 weeks</h5>
-                              </div>
-                           </li>
-                           <li class="d-flex align-items-center">
-                              <div class="course__video-icon">
-                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                 x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 16 16;" xml:space="preserve">
-                                 <rect x="3" y="5" width="18" height="16" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                                 <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
-                                 <circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
-                                 <line x1="16" y1="14" x2="16" y2="16" stroke="currentColor" stroke-width="2"/>
-                                 <line x1="16" y1="16" x2="18" y2="17" stroke="currentColor" stroke-width="2"/>
-                             </svg>
-                              </div>
-                              <div class="course__video-info">
-                                 <h5><span>Schedule :</span> 5 days a week, 2 hours per day</h5>
-                              </div>
-                           </li>
-                           <li class="d-flex align-items-center">
-                              <div class="course__video-icon">
-                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                 x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
-                                 <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
-                                 <path d="M3 12h18M12 3a15 15 0 0 1 0 18M7 5a10 10 0 0 0 0 14M17 5a10 10 0 0 1 0 14" 
-                                       stroke="currentColor" stroke-width="2" fill="none"/>
-                                 <polygon points="16,16 20,20 17,22 17.5,18 16,16" fill="currentColor"/>
-                             </svg>
-                              </div>
-                              <div class="course__video-info">
-                                 <h5><span>Mode of Learning: :</span> 100% Virtual (Flexible & convenient)</h5>
-                              </div>
-                           </li>
-                           <li class="d-flex align-items-center">
-                              <div class="course__video-icon">
-                                 <svg>
-                                    <path class="st0" d="M13.3,14v-1.3c0-1.5-1.2-2.7-2.7-2.7H5.3c-1.5,0-2.7,1.2-2.7,2.7V14"></path>
-                                    <circle class="st0" cx="8" cy="4.7" r="2.7"></circle>
-                                 </svg>
-                              </div>
-                              <div class="course__video-info">
-                                 <h5><span>Enrolled :</span>1000 students</h5>
-                              </div>
-                           </li>
-                           <li class="d-flex align-items-center">
-                              <div class="course__video-icon">
-                                 <svg>
-                                    <circle class="st0" cx="8" cy="8" r="6.7"></circle>
-                                    <line class="st0" x1="1.3" y1="8" x2="14.7" y2="8"></line>
-                                    <path class="st0" d="M8,1.3c1.7,1.8,2.6,4.2,2.7,6.7c-0.1,2.5-1,4.8-2.7,6.7C6.3,12.8,5.4,10.5,5.3,8C5.4,5.5,6.3,3.2,8,1.3z"></path>
-                                 </svg>
-                              </div>
-                              <div class="course__video-info">
-                                 <h5><span>Language :</span>English</h5>
-                              </div>
-                              📍 
+        </div>
 
-                           </li>
-                        </ul>
-                     </div>
-                   
-                     <div class="course__enroll-btn">
-                        <a href="{% url 'yitp:registration2' %}" class="e-btn e-btn-7 w-100">Enrol <i class="far fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-             
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <!-- FAQ 1 -->
+                    <div class="accordion-item mb-3 fade-in">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                What is the Youth Impact Training Programme?
+                            </button>
+                        </h3>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                YITP is a comprehensive 9-week virtual training programme designed to equip young people with essential life skills, career readiness, and entrepreneurial knowledge. It covers 6 core units including personal development, soft skills, and business training.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="accordion-item mb-3 fade-in">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                How much does the programme cost?
+                            </button>
+                        </h3>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                The programme is currently offered at KES 5,000 ($39), which is an 85% discount from the regular price of KES 35,000 ($270). This special pricing is available for a limited time.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="accordion-item mb-3 fade-in">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Is the training completely online?
+                            </button>
+                        </h3>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, the programme is 100% virtual and flexible. You can learn from anywhere with an internet connection. Sessions are conducted 5 days a week for 2 hours per day, making it convenient for students and working professionals.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="accordion-item mb-3 fade-in">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Will I receive a certificate upon completion?
+                            </button>
+                        </h3>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, you will receive a professional certification upon successful completion of the programme. This certificate is a valuable credential that can enhance your career prospects and demonstrate your commitment to professional development.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="accordion-item mb-3 fade-in">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                Who can join this programme?
+                            </button>
+                        </h3>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                The programme is open to high school students (15+ years), college and university students, graduates, young professionals, job seekers, and employees. We also offer special programmes for children and youth groups.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-
+        </div>
+    </div>
 </section>
-      
 
-         <!-- cta area start -->
-         <section class="cta__area mb--120">
-            <div class="container">
-               <div class="cta__inner  fix" style="background-color: #1a2e53;">
-                  <div class="cta__shape">
-                     <img src="{% static 'assets/img/cta/cta-shape.png ' %}" alt="">
-                  </div>
-                  <div class="row align-items-center">
-                     <div class="col-xxl-7 col-xl-7 col-lg-8 col-md-8">
-                        <div class="cta__content">
-                           <h3 class="cta__title">Equipping youth with future-ready skills</h3>
+<!-- Final CTA Section -->
+<section class="section-padding" style="background: var(--gradient-secondary); color: white;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="fade-in">
+                    <h2 class="display-4 fw-bold mb-3">Ready to Transform Your Future?</h2>
+                    <p class="lead mb-4">
+                        Join 1000+ students who have already started their transformation journey.
+                        Don't miss this limited-time 85% discount offer!
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <a href="{% url 'yitp:registration2' %}" class="cta-button">
+                            <i class="fas fa-rocket"></i>
+                            Enroll Now - KES 5,000
+                        </a>
+                        <div class="text-white-50">
+                            <small>
+                                <i class="fas fa-clock me-1"></i>
+                                Limited time offer • Secure enrollment
+                            </small>
                         </div>
-                     </div>
-                     <div class="col-xxl-5 col-xl-5 col-lg-4 col-md-4">
-                        <div class="cta__more d-md-flex justify-content-end p-relative z-index-1">
-                           <a href="{% url 'yitp:registration2' %}" class="e-btn e-btn-white">Get Started</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-         </section>
-    
-         <!-- cta area end -->
+            <div class="col-lg-4 text-center">
+                <div class="fade-in">
+                    <div class="bg-white bg-opacity-10 rounded-3 p-4">
+                        <h3 class="h1 fw-bold text-warning">85% OFF</h3>
+                        <p class="mb-0">Save KES 30,000</p>
+                        <small class="text-white-50">Regular price: KES 35,000</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
          {% include 'yitp/footer.html' %}
 
          {% endblock %}
+
+{% block extra_js %}
+<script>
+// Unit Toggle Functionality
+function toggleUnit(unitId) {
+    const content = document.getElementById(unitId + '-content');
+    const icon = document.getElementById(unitId + '-icon');
+
+    if (content.classList.contains('active')) {
+        content.classList.remove('active');
+        content.style.display = 'none';
+        icon.style.transform = 'rotate(0deg)';
+    } else {
+        // Close all other units
+        document.querySelectorAll('.unit-content').forEach(unit => {
+            unit.classList.remove('active');
+            unit.style.display = 'none';
+        });
+        document.querySelectorAll('[id$="-icon"]').forEach(icon => {
+            icon.style.transform = 'rotate(0deg)';
+        });
+
+        // Open clicked unit
+        content.classList.add('active');
+        content.style.display = 'block';
+        icon.style.transform = 'rotate(180deg)';
+    }
+}
+
+// Smooth Scrolling for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Fade In Animation on Scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+// Observe all fade-in elements
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Add transition styles to icons
+    document.querySelectorAll('[id$="-icon"]').forEach(icon => {
+        icon.style.transition = 'transform 0.3s ease';
+    });
+});
+
+// Counter Animation for Stats
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+
+    counters.forEach(counter => {
+        const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+
+            // Format the number based on original content
+            const originalText = counter.textContent;
+            if (originalText.includes('+')) {
+                counter.textContent = Math.floor(current) + '+';
+            } else if (originalText.includes('%')) {
+                counter.textContent = Math.floor(current) + '%';
+            } else {
+                counter.textContent = Math.floor(current);
+            }
+        }, 16);
+    });
+}
+
+// Trigger counter animation when stats section is visible
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statsObserver.observe(statsSection);
+}
+
+// Enhanced CTA Button Interactions
+document.querySelectorAll('.cta-button').forEach(button => {
+    button.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-3px) scale(1.02)';
+    });
+
+    button.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(-3px) scale(1)';
+    });
+
+    button.addEventListener('mousedown', function() {
+        this.style.transform = 'translateY(-1px) scale(0.98)';
+    });
+
+    button.addEventListener('mouseup', function() {
+        this.style.transform = 'translateY(-3px) scale(1.02)';
+    });
+});
+
+// Mobile Menu Optimization
+function optimizeForMobile() {
+    if (window.innerWidth <= 768) {
+        // Adjust hero title size for mobile
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle) {
+            heroTitle.style.fontSize = '2.5rem';
+        }
+
+        // Ensure touch targets are large enough
+        document.querySelectorAll('.unit-header').forEach(header => {
+            header.style.minHeight = '60px';
+            header.style.padding = '20px';
+        });
+    }
+}
+
+// Call on load and resize
+window.addEventListener('load', optimizeForMobile);
+window.addEventListener('resize', optimizeForMobile);
+
+// Performance: Lazy load images
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    imageObserver.unobserve(img);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Add loading state to enrollment buttons
+document.querySelectorAll('a[href*="registration"]').forEach(link => {
+    link.addEventListener('click', function() {
+        const originalText = this.innerHTML;
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+        this.style.pointerEvents = 'none';
+
+        // Reset after 3 seconds if page hasn't changed
+        setTimeout(() => {
+            this.innerHTML = originalText;
+            this.style.pointerEvents = 'auto';
+        }, 3000);
+    });
+});
+</script>
+{% endblock %}
