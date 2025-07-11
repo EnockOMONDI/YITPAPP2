@@ -720,3 +720,285 @@ class SponsorshipRequest(models.Model):
     def is_pending(self):
         """Check if sponsorship is pending"""
         return self.status == 'pending'
+
+
+# ============================================================================
+# INSTRUCTOR ROLE SYSTEM MODELS
+# ============================================================================
+
+class Specialization(models.Model):
+    """
+    Instructor specialization areas
+    """
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+    icon = models.CharField(max_length=50, blank=True, help_text="CSS icon class")
+    color = models.CharField(max_length=7, default='#ff5d15', help_text="Hex color code")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Specialization"
+        verbose_name_plural = "Specializations"
+        ordering = ['name']
+
+
+class InstructorProfile(models.Model):
+    """
+    Enhanced instructor profile with role differentiation and professional information
+    """
+    INSTRUCTOR_ROLES = [
+        ('system_admin', 'System Administrator'),
+        ('course_instructor', 'Course Instructor'),
+        ('teaching_assistant', 'Teaching Assistant'),
+        ('content_creator', 'Content Creator'),
+        ('grader', 'Grader'),
+    ]
+
+    VERIFICATION_STATUS = [
+        ('pending', 'Pending Verification'),
+        ('verified', 'Verified'),
+        ('rejected', 'Rejected'),
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='instructor_profile')
+    instructor_role = models.CharField(
+        max_length=30,
+        choices=INSTRUCTOR_ROLES,
+        default='course_instructor',
+        help_text="Primary instructor role in the system"
+    )
+
+    # Professional Information
+    bio = models.TextField(
+        blank=True,
+        help_text="Professional biography and teaching philosophy"
+    )
+    qualifications = models.TextField(
+        blank=True,
+        help_text="Educational background and certifications"
+    )
+    specializations = models.ManyToManyField(
+        Specialization,
+        blank=True,
+        help_text="Areas of expertise and specialization"
+    )
+    years_experience = models.IntegerField(
+        default=0,
+        help_text="Years of teaching/training experience"
+    )
+
+    # Contact & Social
+    linkedin_url = models.URLField(blank=True, help_text="LinkedIn profile URL")
+    website_url = models.URLField(blank=True, help_text="Personal or professional website")
+    office_hours = models.TextField(
+        blank=True,
+        help_text="Available office hours for student consultations"
+    )
+
+    # Verification & Status
+    verification_status = models.CharField(
+        max_length=20,
+        choices=VERIFICATION_STATUS,
+        default='pending',
+        help_text="Instructor verification status"
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Whether instructor is currently active"
+    )
+    can_create_courses = models.BooleanField(
+        default=True,
+        help_text="Permission to create new courses"
+    )
+    can_manage_assessments = models.BooleanField(
+        default=True,
+        help_text="Permission to create and manage quizzes/assessments"
+    )
+    can_view_analytics = models.BooleanField(
+        default=True,
+        help_text="Permission to view student analytics and progress"
+    )
+
+    # Metadata
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
+    verified_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='verified_instructors'
+    )
+
+    def __str__(self):
+        return f"{self.user.get_full_name()} ({self.get_instructor_role_display()})"
+
+    def save(self, *args, **kwargs):
+        # Auto-verify system admins
+        if self.instructor_role == 'system_admin' and self.verification_status == 'pending':
+            self.verification_status = 'verified'
+            self.verified_at = timezone.now()
+
+        super().save(*args, **kwargs)
+
+        # Update user staff status and permissions based on role
+        if self.instructor_role in ['system_admin', 'course_instructor', 'content_creator', 'teaching_assistant']:
+            self.user.is_staff = True
+
+            # Grant necessary permissions for admin access
+            from django.contrib.auth.models import Permission
+            from django.contrib.contenttypes.models import ContentType
+
+            # Get content types for models instructors need to access
+            course_ct = ContentType.objects.get_for_model('courses.Course')
+            module_ct = ContentType.objects.get_for_model('courses.Module')
+            lesson_ct = ContentType.objects.get_for_model('courses.Lesson')
+            quiz_ct = ContentType.objects.get_for_model('assessments.Quiz')
+            question_ct = ContentType.objects.get_for_model('assessments.Question')
+            message_ct = ContentType.objects.get_for_model('communication.Message')
+
+            # Define permissions based on role
+            if self.instructor_role == 'system_admin':
+                # System admins get all permissions
+                self.user.is_superuser = True
+            else:
+                # Other instructors get specific permissions
+                permissions_to_add = []
+
+                # Course permissions
+                permissions_to_add.extend([
+                    Permission.objects.get(content_type=course_ct, codename='view_course'),
+                    Permission.objects.get(content_type=course_ct, codename='add_course'),
+                    Permission.objects.get(content_type=course_ct, codename='change_course'),
+                ])
+
+                # Module and lesson permissions
+                permissions_to_add.extend([
+                    Permission.objects.get(content_type=module_ct, codename='view_module'),
+                    Permission.objects.get(content_type=module_ct, codename='add_module'),
+                    Permission.objects.get(content_type=module_ct, codename='change_module'),
+                    Permission.objects.get(content_type=lesson_ct, codename='view_lesson'),
+                    Permission.objects.get(content_type=lesson_ct, codename='add_lesson'),
+                    Permission.objects.get(content_type=lesson_ct, codename='change_lesson'),
+                ])
+
+                # Assessment permissions
+                if self.can_manage_assessments:
+                    permissions_to_add.extend([
+                        Permission.objects.get(content_type=quiz_ct, codename='view_quiz'),
+                        Permission.objects.get(content_type=quiz_ct, codename='add_quiz'),
+                        Permission.objects.get(content_type=quiz_ct, codename='change_quiz'),
+                        Permission.objects.get(content_type=question_ct, codename='view_question'),
+                        Permission.objects.get(content_type=question_ct, codename='add_question'),
+                        Permission.objects.get(content_type=question_ct, codename='change_question'),
+                    ])
+
+                # Message permissions
+                permissions_to_add.extend([
+                    Permission.objects.get(content_type=message_ct, codename='view_message'),
+                    Permission.objects.get(content_type=message_ct, codename='change_message'),
+                ])
+
+                # Add permissions to user
+                self.user.user_permissions.add(*permissions_to_add)
+
+            self.user.save()
+
+    @property
+    def is_verified(self):
+        """Check if instructor is verified"""
+        return self.verification_status == 'verified'
+
+    @property
+    def can_access_admin(self):
+        """Check if instructor can access admin interface"""
+        return self.is_verified and self.instructor_role in [
+            'system_admin', 'course_instructor', 'content_creator'
+        ]
+
+    def get_assigned_courses(self):
+        """Get courses assigned to this instructor"""
+        from courses.models import Course
+        if self.instructor_role == 'system_admin':
+            return Course.objects.all()
+        else:
+            return Course.objects.filter(instructor=self.user)
+
+    def get_permissions_summary(self):
+        """Get summary of instructor permissions"""
+        return {
+            'create_courses': self.can_create_courses,
+            'manage_assessments': self.can_manage_assessments,
+            'view_analytics': self.can_view_analytics,
+            'access_admin': self.can_access_admin,
+            'role': self.get_instructor_role_display(),
+            'verification_status': self.get_verification_status_display(),
+        }
+
+    class Meta:
+        verbose_name = "Instructor Profile"
+        verbose_name_plural = "Instructor Profiles"
+        ordering = ['-created_at']
+
+
+class CourseInstructor(models.Model):
+    """
+    Course-specific instructor assignments with granular permissions
+    """
+    ASSIGNMENT_ROLES = [
+        ('primary_instructor', 'Primary Instructor'),
+        ('co_instructor', 'Co-Instructor'),
+        ('teaching_assistant', 'Teaching Assistant'),
+        ('grader', 'Grader'),
+        ('guest_lecturer', 'Guest Lecturer'),
+    ]
+
+    course = models.ForeignKey(
+        'courses.Course',
+        on_delete=models.CASCADE,
+        related_name='instructor_assignments'
+    )
+    instructor = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='course_assignments'
+    )
+    assignment_role = models.CharField(
+        max_length=30,
+        choices=ASSIGNMENT_ROLES,
+        default='teaching_assistant'
+    )
+
+    # Granular Permissions
+    can_edit_content = models.BooleanField(default=True)
+    can_manage_enrollments = models.BooleanField(default=True)
+    can_grade_assessments = models.BooleanField(default=True)
+    can_view_analytics = models.BooleanField(default=True)
+    can_communicate_students = models.BooleanField(default=True)
+    can_publish_course = models.BooleanField(default=False)
+
+    # Assignment Details
+    assigned_at = models.DateTimeField(auto_now_add=True)
+    assigned_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='instructor_assignments_made'
+    )
+    is_active = models.BooleanField(default=True)
+    notes = models.TextField(blank=True, help_text="Assignment notes or special instructions")
+
+    def __str__(self):
+        return f"{self.instructor.get_full_name()} - {self.course.title} ({self.get_assignment_role_display()})"
+
+    class Meta:
+        verbose_name = "Course Instructor Assignment"
+        verbose_name_plural = "Course Instructor Assignments"
+        unique_together = ['course', 'instructor']
+        ordering = ['-assigned_at']

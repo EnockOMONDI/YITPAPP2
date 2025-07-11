@@ -275,11 +275,24 @@ def login(request):
                 if not remember_me:
                     request.session.set_expiry(0)  # Session expires when browser closes
 
-                # Get next URL or redirect to home
+                # Get next URL or redirect based on user type
                 next_url = request.POST.get('next') or request.GET.get('next')
                 if next_url:
                     return redirect(next_url)
                 else:
+                    # Check if user is an instructor and redirect appropriately
+                    try:
+                        instructor_profile = user.instructor_profile
+                        if instructor_profile.is_verified and instructor_profile.is_active:
+                            messages.success(
+                                request,
+                                f'Welcome back, {user.get_full_name()}! You\'re logged in as {instructor_profile.get_instructor_role_display()}.'
+                            )
+                            return redirect('users:instructor_dashboard')
+                    except:
+                        pass
+
+                    # Default redirect for non-instructors
                     messages.success(request, f'Welcome back, {user.first_name or user.username}!')
                     return redirect('yitp:home')
             else:

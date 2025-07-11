@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 User = get_user_model()
 
@@ -140,7 +141,11 @@ class Lesson(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='lessons')
     title = models.CharField(max_length=200)
     content_type = models.CharField(max_length=20, choices=CONTENT_TYPES)
-    content = models.TextField(blank=True, help_text="Text content or description")
+    content = RichTextField(
+        config_name='lesson_content',
+        blank=True,
+        help_text="Rich text content with formatting, images, and interactive elements"
+    )
     video_url = models.URLField(blank=True, help_text="YouTube, Vimeo, or other video URL")
     presentation_file = models.FileField(upload_to='presentations/', blank=True, null=True)
     sort_order = models.IntegerField(default=0)

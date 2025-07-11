@@ -1,0 +1,415 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Analytics Dashboard - YITP LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper {
+        margin-top: 100px;
+    }
+    
+    @media (max-width: 991px) {
+        .content-wrapper {
+            margin-top: 90px;
+        }
+    }
+    
+    @media (max-width: 575px) {
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    }
+    
+    .analytics-header {
+        background: linear-gradient(135deg, #1a2e53, #ff5d15);
+        color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .metric-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        border-left: 5px solid #ff5d15;
+        margin-bottom: 1.5rem;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .metric-icon {
+        font-size: 2.5rem;
+        color: #ff5d15;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #1a2e53;
+        margin-bottom: 0.25rem;
+    }
+    
+    .metric-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-change {
+        font-size: 0.8rem;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+    
+    .metric-change.positive {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .metric-change.negative {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    
+    .chart-container {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .chart-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f8f9fa;
+    }
+    
+    .chart-icon {
+        font-size: 1.5rem;
+        color: #ff5d15;
+        margin-right: 0.75rem;
+    }
+    
+    .chart-title {
+        color: #1a2e53;
+        margin: 0;
+        font-weight: 600;
+    }
+    
+    .completion-bar {
+        background: #e9ecef;
+        border-radius: 10px;
+        height: 20px;
+        overflow: hidden;
+        margin-top: 0.5rem;
+    }
+    
+    .completion-fill {
+        height: 100%;
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        border-radius: 10px;
+        transition: width 0.8s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    
+    .course-analytics-item {
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .course-analytics-item:hover {
+        border-color: #ff5d15;
+        box-shadow: 0 4px 12px rgba(255, 93, 21, 0.1);
+    }
+    
+    .course-title {
+        color: #1a2e53;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .course-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .course-stat {
+        text-align: center;
+        padding: 0.75rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    
+    .course-stat-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1a2e53;
+    }
+    
+    .course-stat-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    
+    .analytics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .no-data {
+        text-align: center;
+        padding: 3rem;
+        color: #6c757d;
+    }
+    
+    .no-data i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid py-4">
+        <!-- Header -->
+        <div class="analytics-header">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-2">
+                        <i class="fas fa-chart-line me-3"></i>
+                        Analytics Dashboard
+                    </h1>
+                    <p class="mb-0">Comprehensive insights into your course performance and student engagement</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="d-flex flex-column align-items-md-end">
+                        <span class="badge bg-light text-dark mb-2">
+                            {{ total_courses }} Course{{ total_courses|pluralize }}
+                        </span>
+                        <small>Last updated: {{ "now"|date:"M d, Y H:i" }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="analytics-grid">
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="metric-value">{{ enrollments_30d }}</div>
+                <div class="metric-label">New Enrollments (30 days)</div>
+                <div class="metric-change positive">
+                    <i class="fas fa-arrow-up"></i> +{{ enrollments_7d }} this week
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="metric-value">{{ quiz_pass_rate }}%</div>
+                <div class="metric-label">Quiz Pass Rate</div>
+                <div class="metric-change {% if quiz_pass_rate >= 70 %}positive{% else %}negative{% endif %}">
+                    {% if quiz_pass_rate >= 70 %}
+                        <i class="fas fa-check"></i> Above target
+                    {% else %}
+                        <i class="fas fa-exclamation-triangle"></i> Below target
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="metric-value">{{ active_students }}</div>
+                <div class="metric-label">Active Students</div>
+                <div class="metric-change positive">
+                    <i class="fas fa-graduation-cap"></i> Engaged learners
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Completion Analytics -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h4 class="chart-title">Course Completion Rates</h4>
+            </div>
+            
+            {% if course_completion_data %}
+                {% for data in course_completion_data %}
+                <div class="course-analytics-item">
+                    <div class="course-title">{{ data.course.title }}</div>
+                    
+                    <div class="course-stats">
+                        <div class="course-stat">
+                            <div class="course-stat-value">{{ data.total_enrollments }}</div>
+                            <div class="course-stat-label">Total Students</div>
+                        </div>
+                        <div class="course-stat">
+                            <div class="course-stat-value">{{ data.completed_enrollments }}</div>
+                            <div class="course-stat-label">Completed</div>
+                        </div>
+                        <div class="course-stat">
+                            <div class="course-stat-value">{{ data.completion_rate }}%</div>
+                            <div class="course-stat-label">Completion Rate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="completion-bar">
+                        <div class="completion-fill" style="width: {{ data.completion_rate }}%;">
+                            {% if data.completion_rate > 15 %}{{ data.completion_rate }}%{% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-data">
+                    <i class="fas fa-chart-bar"></i>
+                    <h5>No completion data available</h5>
+                    <p>Course completion analytics will appear here once students start enrolling and completing lessons.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4 class="chart-title">Quick Actions</h4>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'users:instructor_courses' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-book me-2"></i>Manage Courses
+                        </a>
+                        <a href="{% url 'admin:assessments_quiz_changelist' %}" class="btn btn-outline-success">
+                            <i class="fas fa-question-circle me-2"></i>Review Quizzes
+                        </a>
+                        <a href="{% url 'users:instructor_messages' %}" class="btn btn-outline-info">
+                            <i class="fas fa-envelope me-2"></i>Check Messages
+                        </a>
+                        <a href="{% url 'users:instructor_dashboard' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-tachometer-alt me-2"></i>Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4 class="chart-title">Insights & Recommendations</h4>
+                    </div>
+                    
+                    <div class="list-group list-group-flush">
+                        {% if quiz_pass_rate < 70 %}
+                        <div class="list-group-item border-0 px-0">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-exclamation-triangle text-warning me-3"></i>
+                                <div>
+                                    <strong>Quiz Difficulty</strong><br>
+                                    <small class="text-muted">Consider reviewing quiz difficulty - pass rate is below 70%</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if enrollments_7d > enrollments_30d|floatformat:0|add:"-21" %}
+                        <div class="list-group-item border-0 px-0">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-trending-up text-success me-3"></i>
+                                <div>
+                                    <strong>Growing Interest</strong><br>
+                                    <small class="text-muted">Enrollment trend is positive - consider creating more content</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="list-group-item border-0 px-0">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-users text-info me-3"></i>
+                                <div>
+                                    <strong>Student Engagement</strong><br>
+                                    <small class="text-muted">{{ active_students }} students are actively learning from your courses</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add entrance animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate metric cards
+    const metricCards = document.querySelectorAll('.metric-card');
+    metricCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+    
+    // Animate completion bars
+    setTimeout(() => {
+        const completionBars = document.querySelectorAll('.completion-fill');
+        completionBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 100);
+        });
+    }, 800);
+});
+</script>
+{% endblock %}

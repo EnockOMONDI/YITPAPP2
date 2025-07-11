@@ -325,7 +325,115 @@ UPLOADCARE = {
   'secret': 'b27f8995d2e4b66cbf02',
 }
 
+# ============================================================================
+# CKEDITOR CONFIGURATION FOR RICH CONTENT CREATION
+# ============================================================================
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 400,
+        'width': '100%',
+        'extraPlugins': ','.join([
+            'uploadimage',
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+        'removePlugins': 'stylesheetparser',
+        'allowedContent': True,
+        'toolbar_full': [
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor'],
+            ['Smiley', 'SpecialChar'], ['Source'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['NumberedList', 'BulletedList'],
+            ['Indent', 'Outdent'],
+            ['Maximize'],
+        ],
+        'stylesSet': [
+            {'name': 'YITP Highlight', 'element': 'span', 'styles': {'background-color': '#fff8f5', 'color': '#ff5d15', 'padding': '2px 4px', 'border-radius': '3px'}},
+            {'name': 'YITP Alert', 'element': 'div', 'styles': {'background-color': '#fff8f5', 'border-left': '4px solid #ff5d15', 'padding': '10px', 'margin': '10px 0'}},
+            {'name': 'Code Block', 'element': 'pre', 'styles': {'background-color': '#f8f9fa', 'border': '1px solid #e9ecef', 'padding': '10px', 'border-radius': '5px'}},
+        ],
+    },
+    'lesson_content': {
+        'toolbar': 'full',
+        'height': 500,
+        'width': '100%',
+        'extraPlugins': ','.join([
+            'uploadimage',
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+            'codesnippet'
+        ]),
+        'removePlugins': 'stylesheetparser',
+        'allowedContent': True,
+        'codeSnippet_theme': 'monokai_sublime',
+        'toolbar_full': [
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike'],
+            ['TextColor', 'BGColor'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['NumberedList', 'BulletedList', 'Indent', 'Outdent'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Table', 'HorizontalRule', 'CodeSnippet'],
+            ['Undo', 'Redo'],
+            ['Source', 'Maximize'],
+        ],
+        'stylesSet': [
+            {'name': 'Learning Objective', 'element': 'div', 'styles': {'background-color': '#e8f5e8', 'border-left': '4px solid #28a745', 'padding': '15px', 'margin': '15px 0', 'border-radius': '5px'}},
+            {'name': 'Important Note', 'element': 'div', 'styles': {'background-color': '#fff3cd', 'border-left': '4px solid #ffc107', 'padding': '15px', 'margin': '15px 0', 'border-radius': '5px'}},
+            {'name': 'YITP Highlight', 'element': 'span', 'styles': {'background-color': '#fff8f5', 'color': '#ff5d15', 'padding': '2px 6px', 'border-radius': '3px', 'font-weight': 'bold'}},
+            {'name': 'Exercise Box', 'element': 'div', 'styles': {'background-color': '#f0f8ff', 'border': '2px solid #1a2e53', 'padding': '20px', 'margin': '20px 0', 'border-radius': '10px'}},
+            {'name': 'Code Inline', 'element': 'code', 'styles': {'background-color': '#f8f9fa', 'color': '#e83e8c', 'padding': '2px 4px', 'border-radius': '3px', 'font-family': 'monospace'}},
+        ],
+    },
+    'basic': {
+        'toolbar': 'basic',
+        'height': 200,
+        'width': '100%',
+        'toolbar_basic': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ],
+    }
+}
+
+
+# ============================================================================
+# AUTHENTICATION & LOGIN CONFIGURATION
+# ============================================================================
+
+# Login and logout URLs with instructor-aware redirects
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/'  # Default redirect, will be overridden by custom logic
+LOGOUT_REDIRECT_URL = '/'
 
 JET_DEFAULT_THEME = 'green'
 JET_THEMES = [

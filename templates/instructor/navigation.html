@@ -1,0 +1,209 @@
+<!-- Enhanced Instructor Navigation Component -->
+<style>
+    .instructor-nav {
+        background: linear-gradient(135deg, #1a2e53, #ff5d15);
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .nav-breadcrumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .nav-breadcrumb .breadcrumb {
+        margin: 0;
+        background: transparent;
+    }
+    
+    .nav-breadcrumb .breadcrumb-item {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .nav-breadcrumb .breadcrumb-item.active {
+        color: white;
+        font-weight: 600;
+    }
+    
+    .nav-breadcrumb .breadcrumb-item a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-breadcrumb .breadcrumb-item a:hover {
+        color: #fff8f5;
+        text-decoration: underline;
+    }
+    
+    .quick-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    
+    .quick-action-btn {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .quick-action-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+    
+    .quick-action-btn.primary {
+        background: rgba(255, 93, 21, 0.8);
+        border-color: #ff5d15;
+    }
+    
+    .quick-action-btn.primary:hover {
+        background: #ff5d15;
+    }
+    
+    .instructor-role-badge {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: auto;
+    }
+    
+    @media (max-width: 768px) {
+        .quick-actions {
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .instructor-role-badge {
+            margin-left: 0;
+            margin-top: 0.5rem;
+        }
+    }
+</style>
+
+<div class="instructor-nav">
+    <div class="container-fluid">
+        <!-- Breadcrumb Navigation -->
+        <div class="nav-breadcrumb">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'users:instructor_dashboard' %}">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    {% block breadcrumb %}
+                    {% endblock %}
+                </ol>
+            </nav>
+        </div>
+        
+        <!-- Quick Actions and Role Badge -->
+        <div class="d-flex flex-wrap align-items-center">
+            <div class="quick-actions">
+                {% block quick_actions %}
+                <!-- Default Quick Actions -->
+                <a href="{% url 'admin:courses_course_add' %}" class="quick-action-btn primary">
+                    <i class="fas fa-plus"></i>
+                    New Course
+                </a>
+                <a href="{% url 'admin:assessments_quiz_add' %}" class="quick-action-btn">
+                    <i class="fas fa-question-circle"></i>
+                    New Quiz
+                </a>
+                <a href="{% url 'users:instructor_messages' %}" class="quick-action-btn">
+                    <i class="fas fa-envelope"></i>
+                    Messages
+                    {% if unread_messages_count %}
+                        <span class="badge bg-danger rounded-pill ms-1">{{ unread_messages_count }}</span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'users:instructor_analytics' %}" class="quick-action-btn">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </a>
+                {% endblock %}
+            </div>
+            
+            {% if user.instructor_profile %}
+            <div class="instructor-role-badge">
+                <i class="fas fa-user-tie me-1"></i>
+                {{ user.instructor_profile.get_instructor_role_display }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Page Title Section -->
+{% block page_title %}
+<div class="page-title-section mb-4">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="page-title">
+                    {% block title_icon %}<i class="fas fa-tachometer-alt me-3"></i>{% endblock %}
+                    {% block page_title_text %}Instructor Dashboard{% endblock %}
+                </h1>
+                {% block page_subtitle %}
+                <p class="page-subtitle text-muted mb-0">
+                    Manage your courses, track student progress, and create engaging content
+                </p>
+                {% endblock %}
+            </div>
+            <div class="col-md-4 text-md-end">
+                {% block page_actions %}
+                <!-- Page-specific actions can be added here -->
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    .page-title-section {
+        padding: 1rem 0;
+    }
+    
+    .page-title {
+        color: #1a2e53;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+    
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 1.5rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1rem;
+        }
+    }
+</style>

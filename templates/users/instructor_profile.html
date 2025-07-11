@@ -1,0 +1,405 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}
+{% if is_instructor %}Instructor Profile{% else %}Profile{% endif %} - YITP LMS
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper {
+        margin-top: 100px;
+    }
+    
+    @media (max-width: 991px) {
+        .content-wrapper {
+            margin-top: 90px;
+        }
+    }
+    
+    @media (max-width: 575px) {
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    }
+    
+    .profile-header {
+        background: linear-gradient(135deg, #1a2e53, #ff5d15);
+        color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .profile-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .instructor-badge {
+        background: linear-gradient(135deg, #ff5d15, #e54d0f);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .verification-status {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    
+    .status-verified {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .status-pending {
+        background: #fff3cd;
+        color: #856404;
+    }
+    
+    .status-rejected {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    
+    .specialization-tag {
+        background: #fff8f5;
+        color: #ff5d15;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin: 0.25rem;
+        display: inline-block;
+        border: 1px solid #ff5d15;
+    }
+    
+    .quick-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .stat-item {
+        text-align: center;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid #ff5d15;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1a2e53;
+    }
+    
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+    
+    .action-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .action-btn {
+        background: linear-gradient(135deg, #ff5d15, #e54d0f);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 1rem;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 93, 21, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .action-btn.secondary {
+        background: linear-gradient(135deg, #1a2e53, #0f1a2e);
+    }
+    
+    .action-btn.outline {
+        background: transparent;
+        color: #ff5d15;
+        border: 2px solid #ff5d15;
+    }
+    
+    .action-btn.outline:hover {
+        background: #ff5d15;
+        color: white;
+    }
+    
+    .course-item {
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .course-item:hover {
+        border-color: #ff5d15;
+        box-shadow: 0 4px 12px rgba(255, 93, 21, 0.1);
+    }
+    
+    .course-title {
+        color: #1a2e53;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .message-item {
+        border-left: 4px solid #ff5d15;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: #fff8f5;
+        border-radius: 0 10px 10px 0;
+    }
+    
+    .non-instructor-notice {
+        background: #e2e3e5;
+        border: 1px solid #adb5bd;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        color: #495057;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid py-4">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-2">
+                        <i class="fas fa-user-circle me-3"></i>
+                        {{ user.get_full_name|default:user.username }}
+                    </h1>
+                    {% if is_instructor %}
+                        <div class="instructor-badge">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            {{ instructor_profile.get_instructor_role_display }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-4 text-md-end">
+                    {% if is_instructor %}
+                        <div class="verification-status 
+                            {% if instructor_profile.verification_status == 'verified' %}status-verified
+                            {% elif instructor_profile.verification_status == 'pending' %}status-pending
+                            {% else %}status-rejected{% endif %}">
+                            <i class="fas fa-{% if instructor_profile.verification_status == 'verified' %}check-circle{% elif instructor_profile.verification_status == 'pending' %}clock{% else %}times-circle{% endif %} me-2"></i>
+                            {{ instructor_profile.get_verification_status_display }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if is_instructor %}
+            <!-- Instructor Profile Content -->
+            <div class="row">
+                <!-- Profile Information -->
+                <div class="col-lg-8">
+                    <div class="profile-card">
+                        <h4 class="mb-3">
+                            <i class="fas fa-info-circle me-2" style="color: #ff5d15;"></i>
+                            Professional Information
+                        </h4>
+                        
+                        {% if instructor_profile.bio %}
+                            <div class="mb-3">
+                                <h6>Biography</h6>
+                                <p>{{ instructor_profile.bio }}</p>
+                            </div>
+                        {% endif %}
+                        
+                        {% if instructor_profile.qualifications %}
+                            <div class="mb-3">
+                                <h6>Qualifications</h6>
+                                <p>{{ instructor_profile.qualifications }}</p>
+                            </div>
+                        {% endif %}
+                        
+                        {% if specializations %}
+                            <div class="mb-3">
+                                <h6>Specializations</h6>
+                                {% for specialization in specializations %}
+                                    <span class="specialization-tag">{{ specialization.name }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="mb-3">
+                            <h6>Experience</h6>
+                            <p>{{ instructor_profile.years_experience }} year{{ instructor_profile.years_experience|pluralize }} of teaching experience</p>
+                        </div>
+                        
+                        {% if instructor_profile.office_hours %}
+                            <div class="mb-3">
+                                <h6>Office Hours</h6>
+                                <p>{{ instructor_profile.office_hours }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Recent Courses -->
+                    {% if instructor_courses %}
+                    <div class="profile-card">
+                        <h4 class="mb-3">
+                            <i class="fas fa-book me-2" style="color: #ff5d15;"></i>
+                            My Courses
+                        </h4>
+                        
+                        {% for course in instructor_courses %}
+                        <div class="course-item">
+                            <div class="course-title">{{ course.title }}</div>
+                            <p class="mb-2">{{ course.description|truncatechars:100 }}</p>
+                            <small class="text-muted">
+                                <i class="fas fa-users me-1"></i>{{ course.enrollments.count }} students
+                                <i class="fas fa-book-open ms-3 me-1"></i>{{ course.total_modules }} modules
+                            </small>
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="text-center mt-3">
+                            <a href="{% url 'users:instructor_courses' %}" class="btn btn-outline-primary">
+                                View All Courses
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Quick Stats -->
+                    <div class="profile-card">
+                        <h5 class="mb-3">Quick Stats</h5>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">{{ instructor_courses.count }}</div>
+                                <div class="stat-label">Courses</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">{{ recent_messages.count }}</div>
+                                <div class="stat-label">Messages</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Messages -->
+                    {% if recent_messages %}
+                    <div class="profile-card">
+                        <h5 class="mb-3">Recent Messages</h5>
+                        {% for message in recent_messages %}
+                        <div class="message-item">
+                            <div class="fw-bold">{{ message.sender.get_full_name }}</div>
+                            <div class="mb-1">{{ message.subject|truncatechars:40 }}</div>
+                            <small class="text-muted">{{ message.sent_at|timesince }} ago</small>
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="text-center mt-3">
+                            <a href="{% url 'users:instructor_messages' %}" class="btn btn-outline-primary btn-sm">
+                                View All Messages
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="{% url 'users:instructor_dashboard' %}" class="action-btn">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Instructor Dashboard
+                </a>
+                <a href="{% url 'users:instructor_courses' %}" class="action-btn secondary">
+                    <i class="fas fa-book"></i>
+                    Manage Courses
+                </a>
+                <a href="{% url 'admin:courses_course_add' %}" class="action-btn">
+                    <i class="fas fa-plus"></i>
+                    Create New Course
+                </a>
+                <a href="{% url 'users:instructor_analytics' %}" class="action-btn outline">
+                    <i class="fas fa-chart-line"></i>
+                    View Analytics
+                </a>
+            </div>
+            
+        {% else %}
+            <!-- Non-Instructor Profile -->
+            <div class="profile-card">
+                <div class="non-instructor-notice">
+                    <i class="fas fa-user fa-3x mb-3"></i>
+                    <h4>Student Profile</h4>
+                    <p>You're currently registered as a student. If you're interested in becoming an instructor, please contact our administration team.</p>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'users:home' %}" class="btn btn-primary me-3">
+                            <i class="fas fa-home me-2"></i>Go to Homepage
+                        </a>
+                        <a href="{% url 'courses:course_list' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-book me-2"></i>Browse Courses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add entrance animations
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.profile-card');
+    
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+});
+</script>
+{% endblock %}

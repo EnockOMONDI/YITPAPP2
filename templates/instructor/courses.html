@@ -1,0 +1,526 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}My Courses - YITP LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper {
+        margin-top: 100px;
+    }
+    
+    @media (max-width: 991px) {
+        .content-wrapper {
+            margin-top: 90px;
+        }
+    }
+    
+    @media (max-width: 575px) {
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    }
+    
+    .courses-header {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .filter-section {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .course-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .course-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e9ecef;
+    }
+    
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        border-color: #ff5d15;
+    }
+    
+    .course-thumbnail {
+        height: 200px;
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        position: relative;
+    }
+    
+    .course-status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    
+    .status-published {
+        background: #28a745;
+        color: white;
+    }
+    
+    .status-draft {
+        background: #ffc107;
+        color: #212529;
+    }
+    
+    .status-featured {
+        background: #ff5d15;
+        color: white;
+    }
+    
+    .course-content {
+        padding: 1.5rem;
+    }
+    
+    .course-title {
+        color: #1a2e53;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+    
+    .course-description {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+    }
+    
+    .course-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+    
+    .course-stat {
+        text-align: center;
+    }
+    
+    .course-stat-value {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #1a2e53;
+    }
+    
+    .course-stat-label {
+        font-size: 0.7rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    
+    .course-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .action-btn {
+        flex: 1;
+        min-width: 80px;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .action-btn.primary {
+        background: #ff5d15;
+        color: white;
+    }
+    
+    .action-btn.primary:hover {
+        background: #e54d0f;
+        color: white;
+        text-decoration: none;
+    }
+    
+    .action-btn.secondary {
+        background: #1a2e53;
+        color: white;
+    }
+    
+    .action-btn.secondary:hover {
+        background: #0f1a2e;
+        color: white;
+        text-decoration: none;
+    }
+    
+    .action-btn.outline {
+        background: transparent;
+        color: #6c757d;
+        border: 1px solid #dee2e6;
+    }
+    
+    .action-btn.outline:hover {
+        background: #f8f9fa;
+        color: #495057;
+        text-decoration: none;
+    }
+    
+    .search-filter-form {
+        display: flex;
+        gap: 1rem;
+        align-items: end;
+        flex-wrap: wrap;
+    }
+    
+    .form-group {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #1a2e53;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+    }
+    
+    .form-control:focus {
+        border-color: #ff5d15;
+        box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
+    }
+    
+    .btn-filter {
+        background: #ff5d15;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-filter:hover {
+        background: #e54d0f;
+        color: white;
+    }
+    
+    .btn-clear {
+        background: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-clear:hover {
+        background: #5a6268;
+        color: white;
+    }
+    
+    .no-courses {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #6c757d;
+    }
+    
+    .no-courses i {
+        font-size: 5rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.5;
+    }
+    
+    .create-course-btn {
+        background: linear-gradient(135deg, #ff5d15, #e54d0f);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 1rem 2rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .create-course-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 93, 21, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .pagination-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    
+    .pagination .page-link {
+        color: #ff5d15;
+        border-color: #dee2e6;
+    }
+    
+    .pagination .page-link:hover {
+        color: #e54d0f;
+        background-color: #fff8f5;
+        border-color: #ff5d15;
+    }
+    
+    .pagination .page-item.active .page-link {
+        background-color: #ff5d15;
+        border-color: #ff5d15;
+    }
+</style>
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active" aria-current="page">My Courses</li>
+{% endblock %}
+
+{% block title_icon %}<i class="fas fa-book me-3"></i>{% endblock %}
+
+{% block page_title_text %}My Courses{% endblock %}
+
+{% block page_subtitle %}
+<p class="page-subtitle text-muted mb-0">
+    Manage and monitor your course content and student progress
+</p>
+{% endblock %}
+
+{% block page_actions %}
+<a href="{% url 'admin:courses_course_add' %}" class="create-course-btn">
+    <i class="fas fa-plus"></i>
+    Create New Course
+</a>
+{% endblock %}
+
+{% block quick_actions %}
+<a href="{% url 'admin:courses_course_add' %}" class="quick-action-btn primary">
+    <i class="fas fa-plus"></i>
+    New Course
+</a>
+<a href="{% url 'admin:courses_module_add' %}" class="quick-action-btn">
+    <i class="fas fa-layer-group"></i>
+    New Module
+</a>
+<a href="{% url 'admin:courses_lesson_add' %}" class="quick-action-btn">
+    <i class="fas fa-file-alt"></i>
+    New Lesson
+</a>
+<a href="{% url 'users:instructor_analytics' %}" class="quick-action-btn">
+    <i class="fas fa-chart-line"></i>
+    Analytics
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    {% include 'instructor/navigation.html' %}
+
+    <div class="container-fluid py-4">
+
+        <!-- Filters -->
+        <div class="filter-section">
+            <form method="get" class="search-filter-form">
+                <div class="form-group">
+                    <label class="form-label">Search Courses</label>
+                    <input type="text" name="search" class="form-control" 
+                           placeholder="Search by title or description..." 
+                           value="{{ search_query }}">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Filter by Status</label>
+                    <select name="status" class="form-control">
+                        <option value="">All Courses</option>
+                        <option value="published" {% if status_filter == 'published' %}selected{% endif %}>Published</option>
+                        <option value="draft" {% if status_filter == 'draft' %}selected{% endif %}>Draft</option>
+                        <option value="featured" {% if status_filter == 'featured' %}selected{% endif %}>Featured</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn-filter">
+                        <i class="fas fa-search me-2"></i>Filter
+                    </button>
+                    <a href="{% url 'users:instructor_courses' %}" class="btn-clear ms-2">
+                        <i class="fas fa-times me-2"></i>Clear
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Courses Grid -->
+        {% if courses %}
+            <div class="course-grid">
+                {% for course in courses %}
+                <div class="course-card">
+                    <div class="course-thumbnail">
+                        {% if course.thumbnail %}
+                            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" 
+                                 style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                            <i class="fas fa-graduation-cap"></i>
+                        {% endif %}
+                        
+                        <div class="course-status 
+                            {% if course.is_featured %}status-featured
+                            {% elif course.is_published %}status-published
+                            {% else %}status-draft{% endif %}">
+                            {% if course.is_featured %}
+                                <i class="fas fa-star me-1"></i>Featured
+                            {% elif course.is_published %}
+                                <i class="fas fa-eye me-1"></i>Published
+                            {% else %}
+                                <i class="fas fa-edit me-1"></i>Draft
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="course-content">
+                        <h5 class="course-title">{{ course.title }}</h5>
+                        <p class="course-description">
+                            {{ course.description|truncatechars:120 }}
+                        </p>
+                        
+                        <div class="course-stats">
+                            <div class="course-stat">
+                                <div class="course-stat-value">{{ course.enrollments.count }}</div>
+                                <div class="course-stat-label">Students</div>
+                            </div>
+                            <div class="course-stat">
+                                <div class="course-stat-value">{{ course.total_modules }}</div>
+                                <div class="course-stat-label">Modules</div>
+                            </div>
+                            <div class="course-stat">
+                                <div class="course-stat-value">{{ course.total_lessons }}</div>
+                                <div class="course-stat-label">Lessons</div>
+                            </div>
+                        </div>
+                        
+                        <div class="course-actions">
+                            <a href="{% url 'admin:courses_course_change' course.pk %}" 
+                               class="action-btn primary">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="{% url 'users:instructor_course_detail' course.pk %}" 
+                               class="action-btn secondary">
+                                <i class="fas fa-chart-bar"></i> Analytics
+                            </a>
+                            <a href="{% url 'courses:course_detail' course.slug %}" 
+                               class="action-btn outline" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="pagination-wrapper">
+                <nav aria-label="Course pagination">
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">Previous</a>
+                            </li>
+                        {% endif %}
+                        
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                        </li>
+                        
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">Last</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            {% endif %}
+        {% else %}
+            <div class="no-courses">
+                <i class="fas fa-book-open"></i>
+                <h3>No courses found</h3>
+                {% if search_query or status_filter %}
+                    <p>No courses match your current filters. Try adjusting your search criteria.</p>
+                    <a href="{% url 'users:instructor_courses' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-times me-2"></i>Clear Filters
+                    </a>
+                {% else %}
+                    <p>You haven't created any courses yet. Start building your first course to engage with students!</p>
+                    <a href="{% url 'admin:courses_course_add' %}" class="create-course-btn mt-3">
+                        <i class="fas fa-plus"></i>
+                        Create Your First Course
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add entrance animations
+document.addEventListener('DOMContentLoaded', function() {
+    const courseCards = document.querySelectorAll('.course-card');
+    
+    courseCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+});
+</script>
+{% endblock %}

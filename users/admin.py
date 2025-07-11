@@ -606,7 +606,220 @@ class ProfileAdmin(admin.ModelAdmin):
 # admin.site.register(SecondSectionIcon)
 # admin.site.register(SecondSectionBox)
 
+# ============================================================================
+# INSTRUCTOR ROLE SYSTEM ADMIN CONFIGURATIONS
+# ============================================================================
+
+from .models import InstructorProfile, Specialization, CourseInstructor
+
+
+@admin.register(Specialization)
+class SpecializationAdmin(admin.ModelAdmin):
+    """Admin interface for instructor specializations"""
+    list_display = ['name', 'slug', 'color', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['name', 'description']
+    prepopulated_fields = {'slug': ('name',)}
+    readonly_fields = ['created_at']
+
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'slug', 'description')
+        }),
+        ('Display Settings', {
+            'fields': ('icon', 'color', 'is_active')
+        }),
+        ('Metadata', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+@admin.register(InstructorProfile)
+class InstructorProfileAdmin(admin.ModelAdmin):
+    """Enhanced admin interface for instructor profiles"""
+    list_display = [
+        'user_full_name', 'instructor_role', 'verification_status',
+        'years_experience', 'specializations_count', 'is_active', 'created_at'
+    ]
+    list_filter = [
+        'instructor_role', 'verification_status', 'is_active',
+        'can_create_courses', 'can_manage_assessments', 'can_view_analytics',
+        'created_at', 'specializations'
+    ]
+    search_fields = [
+        'user__username', 'user__first_name', 'user__last_name',
+        'user__email', 'bio', 'qualifications'
+    ]
+    readonly_fields = ['created_at', 'updated_at', 'verified_at']
+    filter_horizontal = ['specializations']
+
+    fieldsets = (
+        ('User Information', {
+            'fields': ('user', 'instructor_role', 'verification_status')
+        }),
+        ('Professional Information', {
+            'fields': ('bio', 'qualifications', 'specializations', 'years_experience')
+        }),
+        ('Contact & Social', {
+            'fields': ('linkedin_url', 'website_url', 'office_hours'),
+            'classes': ('collapse',)
+        }),
+        ('Permissions', {
+            'fields': (
+                'is_active', 'can_create_courses',
+                'can_manage_assessments', 'can_view_analytics'
+            )
+        }),
+        ('Verification', {
+            'fields': ('verified_at', 'verified_by'),
+            'classes': ('collapse',)
+        }),
+        ('Metadata', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    actions = ['verify_instructors', 'deactivate_instructors', 'activate_instructors']
+
+    def user_full_name(self, obj):
+        """Display user's full name with link to user admin"""
+        user_url = reverse('admin:auth_user_change', args=[obj.user.pk])
+        return format_html(
+            '<a href="{}" style="color: #ff5d15; font-weight: bold;">{}</a>',
+            user_url,
+            obj.user.get_full_name() or obj.user.username
+        )
+    user_full_name.short_description = 'Instructor Name'
+    user_full_name.admin_order_field = 'user__first_name'
+
+    def specializations_count(self, obj):
+        """Display count of specializations"""
+        count = obj.specializations.count()
+        if count > 0:
+            return format_html(
+                '<span style="background: #ff5d15; color: white; padding: 2px 6px; border-radius: 3px;">{}</span>',
+                count
+            )
+        return '-'
+    specializations_count.short_description = 'Specializations'
+
+    def verify_instructors(self, request, queryset):
+        """Bulk action to verify instructors"""
+        updated = queryset.update(
+            verification_status='verified',
+            verified_at=timezone.now(),
+            verified_by=request.user
+        )
+        self.message_user(
+            request,
+            f'{updated} instructor(s) have been verified.',
+            messages.SUCCESS
+        )
+    verify_instructors.short_description = "Verify selected instructors"
+
+    def deactivate_instructors(self, request, queryset):
+        """Bulk action to deactivate instructors"""
+        updated = queryset.update(is_active=False)
+        self.message_user(
+            request,
+            f'{updated} instructor(s) have been deactivated.',
+            messages.WARNING
+        )
+    deactivate_instructors.short_description = "Deactivate selected instructors"
+
+    def activate_instructors(self, request, queryset):
+        """Bulk action to activate instructors"""
+        updated = queryset.update(is_active=True)
+        self.message_user(
+            request,
+            f'{updated} instructor(s) have been activated.',
+            messages.SUCCESS
+        )
+    activate_instructors.short_description = "Activate selected instructors"
+
+
+@admin.register(CourseInstructor)
+class CourseInstructorAdmin(admin.ModelAdmin):
+    """Admin interface for course instructor assignments"""
+    list_display = [
+        'instructor_name', 'course_title', 'assignment_role',
+        'permissions_summary', 'is_active', 'assigned_at'
+    ]
+    list_filter = [
+        'assignment_role', 'is_active', 'assigned_at',
+        'can_edit_content', 'can_manage_enrollments', 'can_grade_assessments'
+    ]
+    search_fields = [
+        'instructor__username', 'instructor__first_name', 'instructor__last_name',
+        'course__title', 'course__slug'
+    ]
+    readonly_fields = ['assigned_at']
+
+    fieldsets = (
+        ('Assignment Details', {
+            'fields': ('course', 'instructor', 'assignment_role', 'is_active')
+        }),
+        ('Permissions', {
+            'fields': (
+                'can_edit_content', 'can_manage_enrollments',
+                'can_grade_assessments', 'can_view_analytics',
+                'can_communicate_students', 'can_publish_course'
+            )
+        }),
+        ('Assignment Info', {
+            'fields': ('assigned_by', 'assigned_at', 'notes'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    def instructor_name(self, obj):
+        """Display instructor name with link"""
+        instructor_url = reverse('admin:users_instructorprofile_change',
+                               args=[obj.instructor.instructor_profile.pk])
+        return format_html(
+            '<a href="{}" style="color: #1a2e53; font-weight: bold;">{}</a>',
+            instructor_url,
+            obj.instructor.get_full_name() or obj.instructor.username
+        )
+    instructor_name.short_description = 'Instructor'
+    instructor_name.admin_order_field = 'instructor__first_name'
+
+    def course_title(self, obj):
+        """Display course title with link"""
+        course_url = reverse('admin:courses_course_change', args=[obj.course.pk])
+        return format_html(
+            '<a href="{}" style="color: #ff5d15; font-weight: bold;">{}</a>',
+            course_url,
+            obj.course.title
+        )
+    course_title.short_description = 'Course'
+    course_title.admin_order_field = 'course__title'
+
+    def permissions_summary(self, obj):
+        """Display permissions summary"""
+        permissions = []
+        if obj.can_edit_content:
+            permissions.append('Edit')
+        if obj.can_manage_enrollments:
+            permissions.append('Enroll')
+        if obj.can_grade_assessments:
+            permissions.append('Grade')
+        if obj.can_view_analytics:
+            permissions.append('Analytics')
+
+        if permissions:
+            return format_html(
+                '<span style="font-size: 11px; color: #666;">{}</span>',
+                ' • '.join(permissions)
+            )
+        return '-'
+    permissions_summary.short_description = 'Permissions'
+
+
 # Customize admin site headers for better branding
-admin.site.site_header = "YITP Sponsorship Management"
-admin.site.site_title = "YITP Admin"
-admin.site.index_title = "Youth Impact Training Programme - Sponsorship Request Management"
+admin.site.site_header = "YITP Learning Management System"
+admin.site.site_title = "YITP LMS Admin"
+admin.site.index_title = "Youth Impact Training Programme - LMS Administration"
