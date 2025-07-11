@@ -386,6 +386,11 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
         else:
             context['next_lesson_accessible'] = False
 
+        # Add quiz status information
+        from assessments.services import QuizValidationService
+        quiz_status = QuizValidationService.get_user_quiz_status(self.request.user, lesson)
+        context['quiz_status'] = quiz_status
+
         return context
     
     def post(self, request, course_slug, lesson_id):
@@ -419,12 +424,12 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
 
 class LessonCompleteView(LoginRequiredMixin, View):
     """
-    Dedicated view for handling lesson completion via AJAX
+    Dedicated view for handling lesson completion via AJAX with quiz validation
     """
 
     def post(self, request, course_slug, lesson_id):
         """
-        Mark lesson as complete and return updated status
+        Mark lesson as complete and return updated status with quiz validation
         """
         try:
             # Get the lesson
@@ -456,6 +461,22 @@ class LessonCompleteView(LoginRequiredMixin, View):
                     'error': access_message
                 }, status=403)
 
+            # Import quiz validation service
+            from assessments.services import QuizValidationService
+
+            # Validate quiz requirements before allowing completion
+            can_complete, validation_message, quiz_data = QuizValidationService.validate_lesson_completion(
+                request.user, lesson
+            )
+
+            if not can_complete:
+                return JsonResponse({
+                    'success': False,
+                    'requires_quiz': True,
+                    'quiz_data': quiz_data,
+                    'message': validation_message
+                })
+
             # Get or create lesson progress
             progress, created = LessonProgress.objects.get_or_create(
                 enrollment=enrollment,
@@ -465,6 +486,12 @@ class LessonCompleteView(LoginRequiredMixin, View):
             # Mark as completed if not already
             if progress.status != 'completed':
                 progress.mark_completed()
+
+                # Award points and check for achievements using gamification service
+                from progress.services import GamificationService
+                gamification_result = GamificationService.award_lesson_completion_points(
+                    request.user, lesson
+                )
 
                 # Get updated enrollment progress
                 enrollment.refresh_from_db()
@@ -496,6 +523,19 @@ class LessonCompleteView(LoginRequiredMixin, View):
                         'completed_lessons': enrollment.lesson_progress.filter(status='completed').count(),
                         'total_lessons': enrollment.course.total_lessons,
                         'percentage': float(enrollment.progress_percentage)
+                    },
+                    'gamification': {
+                        'points_awarded': gamification_result['points_awarded'],
+                        'total_points': gamification_result['total_points'],
+                        'new_achievements': [
+                            {
+                                'title': achievement.title,
+                                'description': achievement.description,
+                                'badge_icon': achievement.badge_icon,
+                                'points': achievement.points
+                            } for achievement in gamification_result['new_achievements']
+                        ],
+                        'current_streak': gamification_result['current_streak']
                     }
                 })
             else:

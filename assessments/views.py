@@ -161,12 +161,37 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
 
         # Update attempt
         attempt.score = score
-        attempt.passed = passed
+        attempt.is_passed = passed
         attempt.completed_at = timezone.now()
         attempt.save()
 
-        messages.success(request, f'Quiz completed! Your score: {score:.1f}%')
-        return redirect('assessments:quiz_results', attempt_id=attempt.id)
+        if passed:
+            # Award points and achievements for passing quiz
+            from progress.services import GamificationService
+            gamification_result = GamificationService.award_lesson_completion_points(
+                user, quiz.lesson
+            )
+
+            # Store gamification data in session for success page
+            request.session['quiz_success_data'] = {
+                'points_awarded': gamification_result['points_awarded'],
+                'total_points': gamification_result['total_points'],
+                'current_streak': gamification_result['current_streak'],
+                'new_achievements': [
+                    {
+                        'title': achievement.title,
+                        'description': achievement.description,
+                        'badge_icon': achievement.badge_icon,
+                        'points': achievement.points
+                    } for achievement in gamification_result['new_achievements']
+                ]
+            }
+
+            messages.success(request, f'Congratulations! You passed with {score:.1f}%!')
+            return redirect('assessments:quiz_success', attempt_id=attempt.id)
+        else:
+            messages.error(request, f'Quiz score: {score:.1f}%. You need {quiz.passing_score}% to pass. Try again!')
+            return redirect('assessments:quiz_results', attempt_id=attempt.id)
 
 
 class QuizResultsView(LoginRequiredMixin, DetailView):
@@ -178,6 +203,79 @@ class QuizResultsView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return QuizAttempt.objects.filter(student=self.request.user)
+
+
+class QuizSuccessView(LoginRequiredMixin, DetailView):
+    """Quiz success celebration page"""
+    model = QuizAttempt
+    template_name = 'lms/assessments/quiz_success.html'
+    context_object_name = 'attempt'
+    pk_url_kwarg = 'attempt_id'
+
+    def get_queryset(self):
+        return QuizAttempt.objects.filter(
+            student=self.request.user,
+            is_passed=True
+        ).select_related('quiz__lesson__module__course')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        attempt = self.object
+        quiz = attempt.quiz
+        lesson = quiz.lesson
+        course = lesson.module.course
+
+        # Get gamification data from session
+        gamification_data = self.request.session.pop('quiz_success_data', {})
+
+        # Calculate score percentage for visual display
+        context['score_percentage'] = (float(attempt.score) / 100) * 360  # For circular progress
+
+        # Add gamification data
+        context['points_awarded'] = gamification_data.get('points_awarded', 0)
+        context['total_points'] = gamification_data.get('total_points', 0)
+        context['current_streak'] = gamification_data.get('current_streak', 0)
+        context['new_achievements'] = gamification_data.get('new_achievements', [])
+
+        # Get course progress
+        from progress.models import Enrollment, LessonProgress
+        try:
+            enrollment = Enrollment.objects.get(
+                student=self.request.user,
+                course=course,
+                status='active'
+            )
+
+            completed_lessons = enrollment.lesson_progress.filter(status='completed').count()
+            total_lessons = course.total_lessons
+            progress_percentage = (completed_lessons / total_lessons * 100) if total_lessons > 0 else 0
+
+            context['course_progress'] = {
+                'completed_lessons': completed_lessons,
+                'total_lessons': total_lessons,
+                'percentage': progress_percentage
+            }
+        except Enrollment.DoesNotExist:
+            context['course_progress'] = {
+                'completed_lessons': 0,
+                'total_lessons': 0,
+                'percentage': 0
+            }
+
+        # Check for next lesson
+        next_lesson = lesson.get_next_lesson()
+        if next_lesson:
+            # Check if next lesson is accessible
+            is_accessible, _ = next_lesson.is_accessible_for_user(self.request.user)
+            if is_accessible:
+                from django.urls import reverse
+                context['next_lesson_url'] = reverse('courses:lesson_detail', kwargs={
+                    'course_slug': course.slug,
+                    'lesson_id': next_lesson.id
+                })
+                context['next_lesson_title'] = next_lesson.title
+
+        return context
 
 
 class AssignmentListView(LoginRequiredMixin, ListView):

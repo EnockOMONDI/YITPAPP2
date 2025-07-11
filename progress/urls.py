@@ -17,6 +17,7 @@ urlpatterns = [
     
     # Achievements and Analytics
     path('achievements/', views.AchievementsView.as_view(), name='achievements'),
+    path('leaderboard/', views.LeaderboardView.as_view(), name='leaderboard'),
     path('learning-paths/', views.LearningPathsView.as_view(), name='learning_paths'),
     path('study-sessions/', views.StudySessionsView.as_view(), name='study_sessions'),
     path('analytics/', views.ProgressAnalyticsView.as_view(), name='analytics'),

@@ -329,6 +329,62 @@ class UpdateLessonProgressView(LoginRequiredMixin, View):
             return JsonResponse({'success': False, 'error': 'Invalid lesson or enrollment'})
 
 
+class LeaderboardView(LoginRequiredMixin, TemplateView):
+    """Gamification leaderboard view"""
+    template_name = 'lms/progress/leaderboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        from .services import GamificationService
+
+        # Get leaderboard data
+        context['leaderboard'] = GamificationService.get_leaderboard(limit=20)
+
+        # Get current user's stats and rank
+        user_stats = GamificationService.get_user_stats(self.request.user)
+        context['user_stats'] = user_stats
+
+        # Find user's rank
+        from users.models import Profile
+        user_rank = Profile.objects.filter(
+            total_points__gt=self.request.user.profile.total_points or 0
+        ).count() + 1
+        context['user_rank'] = user_rank
+
+        return context
+
+
+class AchievementsView(LoginRequiredMixin, ListView):
+    """User achievements view"""
+    template_name = 'lms/progress/achievements.html'
+    context_object_name = 'achievements'
+
+    def get_queryset(self):
+        return Achievement.objects.filter(
+            student=self.request.user
+        ).order_by('-earned_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        from .services import GamificationService
+
+        # Get user stats
+        context['user_stats'] = GamificationService.get_user_stats(self.request.user)
+
+        # Group achievements by type
+        achievements_by_type = {}
+        for achievement in context['achievements']:
+            if achievement.achievement_type not in achievements_by_type:
+                achievements_by_type[achievement.achievement_type] = []
+            achievements_by_type[achievement.achievement_type].append(achievement)
+
+        context['achievements_by_type'] = achievements_by_type
+
+        return context
+
+
 class StartStudySessionView(LoginRequiredMixin, View):
     """API endpoint to start a study session"""
 

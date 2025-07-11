@@ -11,8 +11,9 @@ urlpatterns = [
     path('quizzes/', views.QuizListView.as_view(), name='quiz_list'),
     path('quizzes/<int:quiz_id>/', views.QuizDetailView.as_view(), name='quiz_detail'),
     path('quizzes/<int:quiz_id>/take/', views.TakeQuizView.as_view(), name='take_quiz'),
+    path('quiz-success/<int:attempt_id>/', views.QuizSuccessView.as_view(), name='quiz_success'),
     path('quiz-results/', views.QuizResultsListView.as_view(), name='quiz_results'),
-    path('quiz-results/<int:attempt_id>/', views.QuizResultDetailView.as_view(), name='quiz_result_detail'),
+    path('quiz-results/<int:attempt_id>/', views.QuizResultsView.as_view(), name='quiz_results'),
 
     # Assignment URLs
     path('assignments/', views.AssignmentListView.as_view(), name='assignment_list'),

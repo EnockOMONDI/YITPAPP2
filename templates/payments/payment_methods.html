@@ -6,6 +6,23 @@
 
 {% block extra_css %}
 <style>
+    /* Content wrapper for navbar spacing */
+    .content-wrapper {
+        margin-top: 100px;
+    }
+
+    @media (max-width: 991px) {
+        .content-wrapper {
+            margin-top: 90px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    }
+
     .payment-container {
         max-width: 800px;
         margin: 0 auto;
@@ -19,16 +36,43 @@
         margin-bottom: 1rem;
         transition: all 0.3s ease;
         cursor: pointer;
+        position: relative;
     }
-    
+
     .payment-method-card:hover {
         border-color: #ff5d15;
         box-shadow: 0 4px 12px rgba(255, 93, 21, 0.1);
     }
-    
+
     .payment-method-card.selected {
         border-color: #ff5d15;
         background-color: #fff8f5;
+    }
+
+    /* PayPal highlighted styling */
+    .payment-method-card.paypal-featured {
+        border: 3px solid #ff5d15;
+        background: linear-gradient(135deg, #fff8f5, #ffffff);
+        box-shadow: 0 6px 20px rgba(255, 93, 21, 0.15);
+        transform: scale(1.02);
+    }
+
+    .payment-method-card.paypal-featured:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 25px rgba(255, 93, 21, 0.2);
+    }
+
+    .recommended-badge {
+        position: absolute;
+        top: -8px;
+        right: 15px;
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     
     .payment-method-icon {
@@ -148,13 +192,26 @@
     }
     
     .disabled-method {
-        opacity: 0.6;
+        opacity: 0.5;
         cursor: not-allowed;
+        background-color: #f8f9fa;
+        border-color: #dee2e6;
     }
-    
+
     .disabled-method:hover {
-        border-color: #e9ecef !important;
+        border-color: #dee2e6 !important;
         box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .unavailable-badge {
+        background-color: #6c757d;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        margin-left: auto;
     }
 
     .payment-option-toggle {
@@ -209,6 +266,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="content-wrapper">
 <div class="payment-container">
     <div class="row">
         <div class="col-md-8">
@@ -287,22 +345,25 @@
 
             <!-- Payment Methods -->
             <div class="payment-methods">
-                <!-- M-Pesa Payment -->
-                <div class="payment-method-card" data-method="mpesa" onclick="selectPaymentMethod('mpesa')">
+                <!-- PayPal Payment (Featured/Recommended) -->
+                <div class="payment-method-card paypal-featured" data-method="paypal" onclick="selectPaymentMethod('paypal')">
+                    <div class="recommended-badge">
+                        ⭐ Recommended
+                    </div>
                     <div class="d-flex align-items-center">
-                        <div class="payment-method-icon mpesa-icon">
-                            <i class="fas fa-mobile-alt"></i>
+                        <div class="payment-method-icon paypal-icon">
+                            <i class="fab fa-paypal"></i>
                         </div>
                         <div class="flex-grow-1">
-                            <h6 class="mb-1">M-Pesa</h6>
-                            <small class="text-muted">Pay using M-Pesa mobile money</small>
+                            <h6 class="mb-1" style="color: #1a2e53; font-weight: 600;">PayPal</h6>
+                            <small class="text-muted">Pay securely with PayPal - Our preferred payment method</small>
                         </div>
                         <div class="text-end">
-                            <small class="text-success">✓ Instant</small>
+                            <small class="text-success" style="font-weight: 600;">🔒 Most Secure</small>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Bank Transfer Payment -->
                 <div class="payment-method-card" data-method="bank" onclick="selectPaymentMethod('bank')">
                     <div class="d-flex align-items-center">
@@ -319,34 +380,34 @@
                     </div>
                 </div>
 
-                <!-- PayPal Payment -->
-                <div class="payment-method-card" data-method="paypal" onclick="selectPaymentMethod('paypal')">
+                <!-- M-Pesa Payment (Disabled) -->
+                <div class="payment-method-card disabled-method">
                     <div class="d-flex align-items-center">
-                        <div class="payment-method-icon paypal-icon">
-                            <i class="fab fa-paypal"></i>
+                        <div class="payment-method-icon mpesa-icon" style="opacity: 0.5;">
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
                         <div class="flex-grow-1">
-                            <h6 class="mb-1">PayPal</h6>
-                            <small class="text-muted">Pay securely with PayPal</small>
+                            <h6 class="mb-1">M-Pesa</h6>
+                            <small class="text-muted">Pay using M-Pesa mobile money</small>
                         </div>
-                        <div class="text-end">
-                            <small class="text-info">🔒 Secure</small>
+                        <div class="unavailable-badge">
+                            Currently Unavailable
                         </div>
                     </div>
                 </div>
-                
-                <!-- Credit/Debit Card Payment (Coming Soon) -->
+
+                <!-- Credit/Debit Card Payment (Disabled) -->
                 <div class="payment-method-card disabled-method">
                     <div class="d-flex align-items-center">
-                        <div class="payment-method-icon card-icon">
+                        <div class="payment-method-icon card-icon" style="opacity: 0.5;">
                             <i class="fas fa-credit-card"></i>
                         </div>
                         <div class="flex-grow-1">
                             <h6 class="mb-1">Credit/Debit Card</h6>
                             <small class="text-muted">Pay using Visa, Mastercard, or other cards</small>
                         </div>
-                        <div class="coming-soon-badge">
-                            Coming Soon
+                        <div class="unavailable-badge">
+                            Currently Unavailable
                         </div>
                     </div>
                 </div>
@@ -593,11 +654,23 @@
         </div>
     </div>
 </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
 function selectPaymentMethod(method) {
+    // Skip disabled methods
+    if (document.querySelector(`[data-method="${method}"]`).classList.contains('disabled-method')) {
+        // Show alert for disabled methods
+        if (method === 'mpesa') {
+            alert('M-Pesa payment is currently unavailable. Please use PayPal or Bank Transfer.');
+        } else if (method === 'card') {
+            alert('Card payment is currently unavailable. Please use PayPal or Bank Transfer.');
+        }
+        return;
+    }
+
     // Remove selected class from all cards
     document.querySelectorAll('.payment-method-card').forEach(card => {
         card.classList.remove('selected');
@@ -608,11 +681,6 @@ function selectPaymentMethod(method) {
         form.classList.remove('active');
     });
 
-    // Skip disabled methods
-    if (document.querySelector(`[data-method="${method}"]`).classList.contains('disabled-method')) {
-        return;
-    }
-
     // Select the clicked method
     document.querySelector(`[data-method="${method}"]`).classList.add('selected');
 
@@ -622,6 +690,11 @@ function selectPaymentMethod(method) {
     // Update payment amounts based on installment option
     updatePaymentAmounts();
 }
+
+// Auto-select PayPal on page load
+document.addEventListener('DOMContentLoaded', function() {
+    selectPaymentMethod('paypal');
+});
 
 function togglePaymentOption() {
     const isInstallment = document.getElementById('installment_payment').checked;

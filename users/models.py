@@ -126,6 +126,25 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # Gamification Fields
+    total_points = models.IntegerField(
+        default=0,
+        help_text="Total points earned by the user"
+    )
+    current_streak = models.IntegerField(
+        default=0,
+        help_text="Current consecutive days of learning activity"
+    )
+    longest_streak = models.IntegerField(
+        default=0,
+        help_text="Longest consecutive days of learning activity achieved"
+    )
+    last_activity_date = models.DateField(
+        null=True,
+        blank=True,
+        help_text="Date of last learning activity for streak calculation"
+    )
+
     def __str__(self):
         return self.user.get_username()
 
@@ -377,6 +396,31 @@ class Profile(models.Model):
             missing.append('Add your last name')
 
         return missing
+
+    def update_learning_streak(self):
+        """Update learning streak based on daily activity"""
+        from django.utils import timezone
+        today = timezone.now().date()
+
+        if self.last_activity_date:
+            if self.last_activity_date == today:
+                return  # Already updated today
+            elif self.last_activity_date == today - timezone.timedelta(days=1):
+                # Consecutive day - increment streak
+                self.current_streak += 1
+            else:
+                # Gap in activity - reset streak
+                self.current_streak = 1
+        else:
+            # First activity
+            self.current_streak = 1
+
+        # Update longest streak if current is higher
+        if self.current_streak > self.longest_streak:
+            self.longest_streak = self.current_streak
+
+        self.last_activity_date = today
+        self.save(update_fields=['current_streak', 'longest_streak', 'last_activity_date'])
 
 class OTPVerification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

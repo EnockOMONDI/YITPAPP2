@@ -1,0 +1,258 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Leaderboard - YITP LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper {
+        margin-top: 100px;
+    }
+    
+    @media (max-width: 991px) {
+        .content-wrapper {
+            margin-top: 90px;
+        }
+    }
+    
+    @media (max-width: 575px) {
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    }
+    
+    .leaderboard-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .leaderboard-header {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .rank-badge {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .rank-1 { background: linear-gradient(135deg, #ffd700, #ffed4e); color: #1a2e53; }
+    .rank-2 { background: linear-gradient(135deg, #c0c0c0, #e5e5e5); color: #1a2e53; }
+    .rank-3 { background: linear-gradient(135deg, #cd7f32, #daa520); color: white; }
+    .rank-other { background: linear-gradient(135deg, #6c757d, #adb5bd); }
+    
+    .user-stats {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+    
+    .points-display {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #ff5d15;
+    }
+    
+    .current-user-highlight {
+        background: linear-gradient(135deg, rgba(255, 93, 21, 0.1), rgba(26, 46, 83, 0.1));
+        border: 2px solid #ff5d15;
+    }
+    
+    .stats-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    
+    .stats-icon {
+        font-size: 2rem;
+        color: #ff5d15;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stats-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1a2e53;
+    }
+    
+    .stats-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid py-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="leaderboard-card">
+                    <div class="leaderboard-header">
+                        <h1 class="mb-3">
+                            <i class="fas fa-trophy me-3"></i>
+                            YITP Learning Leaderboard
+                        </h1>
+                        <p class="mb-0">Compete with fellow learners and climb the ranks!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Stats Row -->
+        <div class="row mb-4">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stats-value">{{ user_stats.total_points }}</div>
+                    <div class="stats-label">Your Points</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="stats-value">{{ user_stats.current_streak }}</div>
+                    <div class="stats-label">Current Streak</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="stats-value">#{{ user_rank }}</div>
+                    <div class="stats-label">Your Rank</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="stats-value">{{ user_stats.total_lessons_completed }}</div>
+                    <div class="stats-label">Lessons Completed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="row">
+            <div class="col-12">
+                <div class="leaderboard-card">
+                    <div class="card-header bg-white border-bottom-0 py-3">
+                        <h4 class="mb-0 text-primary">
+                            <i class="fas fa-list-ol me-2"></i>
+                            Top Learners
+                        </h4>
+                    </div>
+                    <div class="card-body p-0">
+                        {% for entry in leaderboard %}
+                        <div class="d-flex align-items-center p-3 border-bottom {% if entry.user == request.user %}current-user-highlight{% endif %}">
+                            <!-- Rank Badge -->
+                            <div class="rank-badge rank-{% if entry.rank <= 3 %}{{ entry.rank }}{% else %}other{% endif %} me-3">
+                                {% if entry.rank == 1 %}
+                                    <i class="fas fa-crown"></i>
+                                {% elif entry.rank == 2 %}
+                                    <i class="fas fa-medal"></i>
+                                {% elif entry.rank == 3 %}
+                                    <i class="fas fa-award"></i>
+                                {% else %}
+                                    {{ entry.rank }}
+                                {% endif %}
+                            </div>
+
+                            <!-- User Info -->
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center mb-1">
+                                    <h6 class="mb-0 me-2">
+                                        {{ entry.user.get_full_name|default:entry.user.username }}
+                                        {% if entry.user == request.user %}
+                                            <span class="badge bg-primary ms-2">You</span>
+                                        {% endif %}
+                                    </h6>
+                                </div>
+                                <div class="user-stats">
+                                    <span class="me-3">
+                                        <i class="fas fa-book-reader me-1"></i>
+                                        {{ entry.stats.total_lessons_completed }} lessons
+                                    </span>
+                                    <span class="me-3">
+                                        <i class="fas fa-fire me-1"></i>
+                                        {{ entry.stats.current_streak }} day streak
+                                    </span>
+                                    <span class="me-3">
+                                        <i class="fas fa-trophy me-1"></i>
+                                        {{ entry.stats.total_achievements }} achievements
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Points -->
+                            <div class="text-end">
+                                <div class="points-display">
+                                    {{ entry.stats.total_points }}
+                                </div>
+                                <small class="text-muted">points</small>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No learners yet</h5>
+                            <p class="text-muted">Be the first to start learning and earn points!</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{% url 'progress:achievements' %}" class="btn btn-primary me-3">
+                    <i class="fas fa-trophy me-2"></i>View My Achievements
+                </a>
+                <a href="{% url 'progress:dashboard' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-chart-line me-2"></i>Progress Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Auto-refresh leaderboard every 5 minutes
+setInterval(function() {
+    location.reload();
+}, 300000);
+
+// Add smooth scrolling for better UX
+document.addEventListener('DOMContentLoaded', function() {
+    // Highlight current user row with subtle animation
+    const currentUserRow = document.querySelector('.current-user-highlight');
+    if (currentUserRow) {
+        currentUserRow.style.animation = 'pulse 2s infinite';
+    }
+});
+</script>
+{% endblock %}

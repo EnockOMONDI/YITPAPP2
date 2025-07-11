@@ -30,5 +30,6 @@ urlpatterns = [
     
     # API endpoints for real-time features
     path('api/send-message/', views.SendMessageAPIView.as_view(), name='send_message_api'),
+    path('api/send-lesson-message/', views.SendLessonMessageView.as_view(), name='send_lesson_message'),
     path('api/get-unread-count/', views.GetUnreadCountAPIView.as_view(), name='get_unread_count'),
 ]

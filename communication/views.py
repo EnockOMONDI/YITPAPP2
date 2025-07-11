@@ -327,6 +327,78 @@ class SendMessageAPIView(LoginRequiredMixin, View):
             })
 
 
+class SendLessonMessageView(LoginRequiredMixin, View):
+    """API endpoint to send lesson-specific messages"""
+
+    def post(self, request):
+        import json
+
+        try:
+            data = json.loads(request.body)
+            lesson_id = data.get('lesson_id')
+            message_content = data.get('message')
+            context = data.get('context', 'lesson_help')
+
+            # Validate lesson access
+            from courses.models import Lesson
+            from progress.models import Enrollment
+
+            try:
+                lesson = Lesson.objects.get(id=lesson_id, is_published=True)
+                enrollment = Enrollment.objects.get(
+                    student=request.user,
+                    course=lesson.module.course,
+                    status='active'
+                )
+            except (Lesson.DoesNotExist, Enrollment.DoesNotExist):
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Access denied or lesson not found'
+                })
+
+            # Create lesson-specific message
+            # For now, we'll create a general message with lesson context
+            # In a full implementation, this could create a specialized LessonMessage model
+
+            # Find instructors for this course (users with staff status or specific role)
+            from django.contrib.auth.models import User
+            instructors = User.objects.filter(is_staff=True).first()
+
+            if instructors:
+                message = Message.objects.create(
+                    sender=request.user,
+                    recipient=instructors,
+                    subject=f"Question about: {lesson.title}",
+                    content=f"Lesson: {lesson.title}\nContext: {context}\n\nQuestion: {message_content}"
+                )
+
+                # Create notification for instructor
+                Notification.objects.create(
+                    user=instructors,
+                    notification_type='message',
+                    title=f"New lesson question from {request.user.get_full_name()}",
+                    message=f"Question about lesson: {lesson.title}",
+                    action_url=f"/lms/communication/messages/{message.id}/"
+                )
+
+            return JsonResponse({
+                'success': True,
+                'message_id': message.id if instructors else None,
+                'message': 'Message sent successfully'
+            })
+
+        except json.JSONDecodeError:
+            return JsonResponse({
+                'success': False,
+                'error': 'Invalid JSON data'
+            })
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'error': 'An error occurred while sending the message'
+            })
+
+
 class GetUnreadCountAPIView(LoginRequiredMixin, View):
     """API endpoint to get unread message count"""
 
