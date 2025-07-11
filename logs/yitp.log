@@ -4288,3 +4288,8 @@ INFO 2025-07-12 00:07:42,700 basehttp 76725 6240251904 "GET /static/assets/img/h
 INFO 2025-07-12 00:07:42,705 basehttp 76725 6206599168 "GET /static/assets/img/hero/3.jpg HTTP/1.1" 200 182047
 INFO 2025-07-12 00:07:42,707 basehttp 76725 6223425536 "GET /static/assets/img/hero/1.jpg HTTP/1.1" 200 213442
 INFO 2025-07-12 00:07:42,707 basehttp 76725 6257078272 "GET /static/assets/img/hero/4.jpg HTTP/1.1" 200 215809
+INFO 2025-07-12 00:13:59,276 autoreload 77796 8422750912 Watching for file changes with StatReloader
+INFO 2025-07-12 00:14:05,352 basehttp 76725 6206599168 "GET /documentation HTTP/1.1" 301 0
+INFO 2025-07-12 00:14:05,367 basehttp 76725 6223425536 "GET /documentation/ HTTP/1.1" 200 221046
+INFO 2025-07-12 00:14:06,143 basehttp 76725 6223425536 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 304 0
+INFO 2025-07-12 00:14:28,866 basehttp 76725 6206599168 "GET /documentation/ HTTP/1.1" 200 221046

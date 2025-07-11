@@ -2,7 +2,7 @@ services:
   - type: web
     name: yitp-lms
     env: python
-    branch: live
+    branch: livexp2
     buildCommand: ./build.sh
     startCommand: gunicorn blog.wsgi:application
     envVars:
