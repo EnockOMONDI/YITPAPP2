@@ -169,6 +169,17 @@
     .action-btn.secondary {
         background: linear-gradient(135deg, #1a2e53, #0f1a2e);
     }
+
+    .action-btn.outline {
+        background: transparent;
+        color: #ff5d15;
+        border: 2px solid #ff5d15;
+    }
+
+    .action-btn.outline:hover {
+        background: #ff5d15;
+        color: white;
+    }
     
     .progress-bar-custom {
         height: 8px;
@@ -330,6 +341,9 @@ Welcome back, {{ instructor_profile.user.get_full_name }}!
             </a>
             <a href="{% url 'users:instructor_messages' %}" class="action-btn secondary">
                 <i class="fas fa-envelope me-2"></i>Messages
+            </a>
+            <a href="{% url 'users:instructor_tutorial' %}" class="action-btn outline">
+                <i class="fas fa-graduation-cap me-2"></i>Tutorials
             </a>
         </div>
     </div>

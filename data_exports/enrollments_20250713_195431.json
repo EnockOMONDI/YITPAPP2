@@ -1,0 +1,32 @@
+[
+{
+  "model": "progress.enrollment",
+  "pk": 1,
+  "fields": {
+    "student": 2,
+    "course": 1,
+    "enrollment_date": "2025-07-10T22:49:06.668Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": null,
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 2,
+  "fields": {
+    "student": 4,
+    "course": 2,
+    "enrollment_date": "2025-07-11T17:05:51.143Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": null,
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+}
+]

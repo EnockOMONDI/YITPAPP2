@@ -856,12 +856,16 @@ class InstructorProfile(models.Model):
             from django.contrib.contenttypes.models import ContentType
 
             # Get content types for models instructors need to access
-            course_ct = ContentType.objects.get_for_model('courses.Course')
-            module_ct = ContentType.objects.get_for_model('courses.Module')
-            lesson_ct = ContentType.objects.get_for_model('courses.Lesson')
-            quiz_ct = ContentType.objects.get_for_model('assessments.Quiz')
-            question_ct = ContentType.objects.get_for_model('assessments.Question')
-            message_ct = ContentType.objects.get_for_model('communication.Message')
+            try:
+                course_ct = ContentType.objects.get(app_label='courses', model='course')
+                module_ct = ContentType.objects.get(app_label='courses', model='module')
+                lesson_ct = ContentType.objects.get(app_label='courses', model='lesson')
+                quiz_ct = ContentType.objects.get(app_label='assessments', model='quiz')
+                question_ct = ContentType.objects.get(app_label='assessments', model='question')
+                message_ct = ContentType.objects.get(app_label='communication', model='message')
+            except ContentType.DoesNotExist:
+                # If content types don't exist yet, skip permission setup
+                return
 
             # Define permissions based on role
             if self.instructor_role == 'system_admin':

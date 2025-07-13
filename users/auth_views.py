@@ -53,31 +53,48 @@ class InstructorProfileView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        
+
         # Check if user has instructor profile
         try:
             instructor_profile = user.instructor_profile
-            context['instructor_profile'] = instructor_profile
-            context['is_instructor'] = True
-            context['specializations'] = instructor_profile.specializations.all()
-            
-            # Get instructor's courses
-            if instructor_profile.instructor_role == 'system_admin':
-                from courses.models import Course
-                context['instructor_courses'] = Course.objects.all()[:5]
+            if instructor_profile and instructor_profile.is_active:
+                context['instructor_profile'] = instructor_profile
+                context['is_instructor'] = True
+
+                # Get specializations (handle if field doesn't exist)
+                try:
+                    context['specializations'] = instructor_profile.specializations.all()
+                except:
+                    context['specializations'] = []
+
+                # Get instructor's courses
+                try:
+                    if instructor_profile.instructor_role == 'system_admin':
+                        from courses.models import Course
+                        context['instructor_courses'] = Course.objects.all()[:5]
+                    else:
+                        context['instructor_courses'] = user.course_set.all()[:5]
+                except:
+                    context['instructor_courses'] = []
+
+                # Get recent messages
+                try:
+                    from communication.models import Message
+                    context['recent_messages'] = Message.objects.filter(
+                        recipient=user
+                    ).order_by('-sent_at')[:3]
+                except:
+                    context['recent_messages'] = []
             else:
-                context['instructor_courses'] = user.course_set.all()[:5]
-            
-            # Get recent messages
-            from communication.models import Message
-            context['recent_messages'] = Message.objects.filter(
-                recipient=user
-            ).order_by('-sent_at')[:3]
-            
-        except:
+                context['is_instructor'] = False
+                context['instructor_profile'] = None
+
+        except Exception as e:
+            # Log the specific error for debugging
+            print(f"Error accessing instructor profile for user {user.username}: {e}")
             context['is_instructor'] = False
             context['instructor_profile'] = None
-        
+
         return context
 
 

@@ -4,10 +4,13 @@
 {% block title %}{{ module.title }} - {{ module.course.title }} - Entrepreneurship LMS{% endblock %}
 
 {% block extra_css %}
+<!-- YITP Course Branding CSS -->
+<link rel="stylesheet" href="{% static 'css/yitp-course-branding.css' %}">
+
 <style>
     .module-header {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        color: white;
+        background: linear-gradient(135deg, var(--yitp-primary), var(--yitp-secondary));
+        color: var(--yitp-white);
         padding: 2rem 0;
         margin-bottom: 2rem;
     }

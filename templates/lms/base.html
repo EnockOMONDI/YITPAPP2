@@ -196,9 +196,19 @@
                             {{ user.get_full_name|default:user.username }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{% url 'profile' %}">
-                                <i class="fas fa-user me-2"></i>Profile
-                            </a></li>
+                            <li>
+                                {% with instructor_profile=user.instructor_profile|default:None %}
+                                    {% if instructor_profile %}
+                                        <a class="dropdown-item" href="{% url 'users:instructor_profile' %}">
+                                            <i class="fas fa-user me-2"></i>Profile
+                                        </a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'profile' %}">
+                                            <i class="fas fa-user me-2"></i>Profile
+                                        </a>
+                                    {% endif %}
+                                {% endwith %}
+                            </li>
                             <li><a class="dropdown-item" href="{% url 'progress:achievements' %}">
                                 <i class="fas fa-trophy me-2"></i>Achievements
                             </a></li>

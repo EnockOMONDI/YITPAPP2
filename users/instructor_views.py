@@ -325,3 +325,28 @@ def instructor_course_detail(request, course_id):
     }
     
     return render(request, 'instructor/course_detail.html', context)
+
+
+class InstructorTutorialView(InstructorRequiredMixin, TemplateView):
+    """
+    Comprehensive instructor tutorial page showing step-by-step course creation walkthrough
+    """
+    template_name = 'instructor/tutorial.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Add any additional context data for the tutorial
+        context['page_title'] = 'YITP LMS Instructor User Manual'
+        context['tutorial_sections'] = [
+            'Scenario Introduction: Meet Beryl Omondi',
+            'Initial Setup & Course Creation',
+            'Module Structure Planning',
+            'Content Development',
+            'Multimedia Integration',
+            'Assessment Creation',
+            'Course Review & Publishing',
+            'Student Management & Analytics'
+        ]
+
+        return context

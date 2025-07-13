@@ -1,0 +1,159 @@
+[
+{
+  "model": "users.instructorprofile",
+  "pk": 1,
+  "fields": {
+    "user": 5,
+    "instructor_role": "system_admin",
+    "bio": "Experienced educator and system administrator with 10+ years in digital education.",
+    "qualifications": "MBA in Business Administration, Certified Digital Marketing Professional",
+    "years_experience": 10,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-07-11T19:01:09.797Z",
+    "updated_at": "2025-07-11T19:01:09.797Z",
+    "verified_at": "2025-07-11T19:01:09.796Z",
+    "verified_by": null,
+    "specializations": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 2,
+  "fields": {
+    "user": 6,
+    "instructor_role": "course_instructor",
+    "bio": "Digital marketing expert specializing in social media and content strategy.",
+    "qualifications": "MS in Digital Marketing, Google Ads Certified, Facebook Blueprint Certified",
+    "years_experience": 7,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-07-11T19:01:10.019Z",
+    "updated_at": "2025-07-11T19:01:10.019Z",
+    "verified_at": "2025-07-11T19:01:10.018Z",
+    "verified_by": null,
+    "specializations": [
+      1,
+      5
+    ]
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 3,
+  "fields": {
+    "user": 7,
+    "instructor_role": "course_instructor",
+    "bio": "Entrepreneur and business consultant helping young people start their own ventures.",
+    "qualifications": "MBA in Entrepreneurship, CPA, Small Business Development Center Advisor",
+    "years_experience": 12,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-07-11T19:01:10.242Z",
+    "updated_at": "2025-07-11T19:01:10.242Z",
+    "verified_at": "2025-07-11T19:01:10.241Z",
+    "verified_by": null,
+    "specializations": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 4,
+  "fields": {
+    "user": 8,
+    "instructor_role": "course_instructor",
+    "bio": "Leadership coach and organizational development specialist.",
+    "qualifications": "PhD in Organizational Psychology, Certified Executive Coach",
+    "years_experience": 15,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-07-11T19:01:10.467Z",
+    "updated_at": "2025-07-11T19:01:10.467Z",
+    "verified_at": "2025-07-11T19:01:10.467Z",
+    "verified_by": null,
+    "specializations": [
+      4
+    ]
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 5,
+  "fields": {
+    "user": 9,
+    "instructor_role": "teaching_assistant",
+    "bio": "Graduate student and teaching assistant specializing in technology education.",
+    "qualifications": "MS in Education Technology (in progress), CompTIA A+ Certified",
+    "years_experience": 2,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-07-11T19:01:10.693Z",
+    "updated_at": "2025-07-11T19:01:10.693Z",
+    "verified_at": "2025-07-11T19:01:10.692Z",
+    "verified_by": null,
+    "specializations": [
+      5
+    ]
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 6,
+  "fields": {
+    "user": 16,
+    "instructor_role": "course_instructor",
+    "bio": "Experienced educator specializing in youth development and digital literacy. Passionate about creating engaging learning experiences that empower young minds.",
+    "qualifications": "M.Ed. in Educational Technology, B.A. in Youth Development, Certified Digital Learning Specialist",
+    "years_experience": 8,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-07-13T15:32:36.363Z",
+    "updated_at": "2025-07-13T15:32:36.363Z",
+    "verified_at": "2025-07-13T15:32:36.362Z",
+    "verified_by": null,
+    "specializations": []
+  }
+}
+]

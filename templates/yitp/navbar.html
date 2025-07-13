@@ -186,10 +186,19 @@
                                             </li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li>
-                                                <a class="dropdown-item" href="{% url 'profile' %}">
-                                                    <i class="fas fa-user mr-10"></i>
-                                                    My Profile
-                                                </a>
+                                                {% with instructor_profile=user.instructor_profile|default:None %}
+                                                    {% if instructor_profile %}
+                                                        <a class="dropdown-item" href="{% url 'users:instructor_profile' %}">
+                                                            <i class="fas fa-user mr-10"></i>
+                                                            My Profile
+                                                        </a>
+                                                    {% else %}
+                                                        <a class="dropdown-item" href="{% url 'profile' %}">
+                                                            <i class="fas fa-user mr-10"></i>
+                                                            My Profile
+                                                        </a>
+                                                    {% endif %}
+                                                {% endwith %}
                                             </li>
                                             <li>
                                                 <a class="dropdown-item" href="{% url 'yitp:registration' %}">
@@ -280,10 +289,19 @@
                     <div class="mobile__auth-links">
                         <ul class="mobile__auth-menu">
                             <li>
-                                <a href="{% url 'profile' %}" class="mobile__auth-link">
-                                    <i class="fas fa-user"></i>
-                                    <span>My Profile</span>
-                                </a>
+                                {% with instructor_profile=user.instructor_profile|default:None %}
+                                    {% if instructor_profile %}
+                                        <a href="{% url 'users:instructor_profile' %}" class="mobile__auth-link">
+                                            <i class="fas fa-user"></i>
+                                            <span>My Profile</span>
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'profile' %}" class="mobile__auth-link">
+                                            <i class="fas fa-user"></i>
+                                            <span>My Profile</span>
+                                        </a>
+                                    {% endif %}
+                                {% endwith %}
                             </li>
                             <li>
                                 <a href="{% url 'yitp:registration' %}" class="mobile__auth-link">

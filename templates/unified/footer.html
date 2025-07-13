@@ -66,7 +66,15 @@
                                     {% if user.is_authenticated %}
                                         <li><a href="{% url 'courses:my_courses' %}" style="color: #ffffff; opacity: 0.8;">My Courses</a></li>
                                         <li><a href="{% url 'progress:my_progress' %}" style="color: #ffffff; opacity: 0.8;">My Progress</a></li>
-                                        <li><a href="{% url 'profile' %}" style="color: #ffffff; opacity: 0.8;">My Profile</a></li>
+                                        <li>
+                                            {% with instructor_profile=user.instructor_profile|default:None %}
+                                                {% if instructor_profile %}
+                                                    <a href="{% url 'users:instructor_profile' %}" style="color: #ffffff; opacity: 0.8;">My Profile</a>
+                                                {% else %}
+                                                    <a href="{% url 'profile' %}" style="color: #ffffff; opacity: 0.8;">My Profile</a>
+                                                {% endif %}
+                                            {% endwith %}
+                                        </li>
                                     {% else %}
                                         <li><a href="{% url 'yitp:web_courses_list' %}" style="color: #ffffff; opacity: 0.8;">Course Overview</a></li>
                                         <li><a href="{% url 'login' %}" style="color: #ffffff; opacity: 0.8;">Student Login</a></li>

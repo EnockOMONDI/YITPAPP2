@@ -1,8 +1,12 @@
 {% extends 'unified/base.html' %}
+{% load static %}
 
 {% block title %}Courses - Entrepreneurship LMS{% endblock %}
 
 {% block extra_css %}
+<!-- YITP Course Branding CSS -->
+<link rel="stylesheet" href="{% static 'css/yitp-course-branding.css' %}">
+
 <style>
 /* Fix for navbar overlap - add top margin to account for fixed navbar */
 .course-list-content-wrapper {

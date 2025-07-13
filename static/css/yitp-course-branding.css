@@ -1,0 +1,549 @@
+/*
+ * YITP Course Branding CSS
+ * Consistent branding and styling for all course-related pages
+ * Author: YITP Development Team
+ * Version: 1.0
+ */
+
+/* ========================================
+   YITP Brand Colors & Variables
+   ======================================== */
+:root {
+    --yitp-primary: #ff5d15;      /* YITP Orange */
+    --yitp-secondary: #1a2e53;    /* YITP Dark Blue */
+    --yitp-success: #10B981;      /* Success Green */
+    --yitp-warning: #F59E0B;      /* Warning Yellow */
+    --yitp-danger: #EF4444;       /* Danger Red */
+    --yitp-info: #17a2b8;         /* Info Blue */
+    --yitp-light: #F3F4F6;        /* Light Gray */
+    --yitp-dark: #1F2937;         /* Dark Gray */
+    --yitp-white: #FFFFFF;        /* White */
+    
+    /* Hover States */
+    --yitp-primary-hover: #e54d0a;
+    --yitp-secondary-hover: #152340;
+    
+    /* Gradients */
+    --yitp-gradient-primary: linear-gradient(135deg, var(--yitp-primary) 0%, var(--yitp-secondary) 100%);
+    --yitp-gradient-light: linear-gradient(135deg, var(--yitp-light) 0%, var(--yitp-white) 100%);
+    
+    /* Shadows */
+    --yitp-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --yitp-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --yitp-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.2);
+    --yitp-shadow-primary: 0 4px 12px rgba(255, 93, 21, 0.3);
+    
+    /* Transitions */
+    --yitp-transition: all 0.3s ease;
+    --yitp-transition-fast: all 0.15s ease;
+}
+
+/* ========================================
+   Course Hero Section
+   ======================================== */
+.course-hero {
+    background: var(--yitp-gradient-primary);
+    color: var(--yitp-white);
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.course-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.course-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.course-hero h1, 
+.course-hero p, 
+.course-hero span,
+.course-hero i {
+    color: var(--yitp-white) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   YITP Button Styling
+   ======================================== */
+.btn-primary {
+    background-color: var(--yitp-primary);
+    border-color: var(--yitp-primary);
+    color: var(--yitp-white);
+    font-weight: 600;
+    transition: var(--yitp-transition);
+}
+
+.btn-primary:hover, 
+.btn-primary:focus {
+    background-color: var(--yitp-primary-hover);
+    border-color: var(--yitp-primary-hover);
+    color: var(--yitp-white);
+    transform: translateY(-1px);
+    box-shadow: var(--yitp-shadow-primary);
+}
+
+.btn-secondary {
+    background-color: var(--yitp-secondary);
+    border-color: var(--yitp-secondary);
+    color: var(--yitp-white);
+    font-weight: 600;
+    transition: var(--yitp-transition);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: var(--yitp-secondary-hover);
+    border-color: var(--yitp-secondary-hover);
+    color: var(--yitp-white);
+}
+
+.btn-success {
+    background-color: var(--yitp-success);
+    border-color: var(--yitp-success);
+}
+
+/* ========================================
+   Course Cards & Components
+   ======================================== */
+.course-card {
+    background: var(--yitp-white);
+    border-radius: 15px;
+    box-shadow: var(--yitp-shadow-md);
+    transition: var(--yitp-transition);
+    overflow: hidden;
+    border: none;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--yitp-shadow-lg);
+    border-left: 4px solid var(--yitp-primary);
+}
+
+.course-thumbnail {
+    border-radius: 15px;
+    box-shadow: var(--yitp-shadow-lg);
+    border: 3px solid var(--yitp-white);
+}
+
+.instructor-card {
+    background: var(--yitp-white);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--yitp-shadow-md);
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    border-top: 4px solid var(--yitp-primary);
+}
+
+.module-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--yitp-shadow-sm);
+    margin-bottom: 1rem;
+    transition: var(--yitp-transition);
+    border-left: 4px solid var(--yitp-light);
+}
+
+.module-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--yitp-shadow-md);
+    border-left-color: var(--yitp-primary);
+}
+
+/* ========================================
+   Lesson Items
+   ======================================== */
+.lesson-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    transition: var(--yitp-transition);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lesson-item:last-child {
+    border-bottom: none;
+}
+
+.lesson-item:hover {
+    background-color: rgba(255, 93, 21, 0.05);
+    border-left: 3px solid var(--yitp-primary);
+    padding-left: 0.75rem;
+}
+
+.lesson-completed {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-left: 4px solid var(--yitp-success);
+}
+
+.lesson-in-progress {
+    background-color: rgba(255, 93, 21, 0.1);
+    border-left: 4px solid var(--yitp-primary);
+}
+
+/* ========================================
+   Badge Styling
+   ======================================== */
+.badge.bg-light {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--yitp-secondary) !important;
+    font-weight: 600;
+}
+
+.badge.bg-secondary {
+    background-color: var(--yitp-secondary) !important;
+    color: var(--yitp-white) !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--yitp-primary) !important;
+    color: var(--yitp-white) !important;
+}
+
+/* ========================================
+   Card Headers & Titles
+   ======================================== */
+.card-header {
+    background-color: var(--yitp-light);
+    border-bottom: 2px solid var(--yitp-primary);
+    border-radius: 0.375rem 0.375rem 0 0 !important;
+}
+
+.card-title {
+    color: var(--yitp-secondary);
+    font-weight: 600;
+}
+
+.card-title .text-primary {
+    color: var(--yitp-primary) !important;
+}
+
+.card-title .text-warning {
+    color: var(--yitp-warning) !important;
+}
+
+/* ========================================
+   Review & Rating Components
+   ======================================== */
+.rating-stars {
+    color: var(--yitp-warning);
+}
+
+.review-card {
+    background: var(--yitp-light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--yitp-primary);
+}
+
+/* ========================================
+   Progress Components
+   ======================================== */
+.progress {
+    background-color: var(--yitp-light);
+    border-radius: 10px;
+}
+
+.progress-bar {
+    background-color: var(--yitp-primary);
+    border-radius: 10px;
+}
+
+/* ========================================
+   Breadcrumb Navigation
+   ======================================== */
+.breadcrumb {
+    background-color: var(--yitp-light);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+}
+
+.breadcrumb-item a {
+    color: var(--yitp-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--yitp-secondary);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--yitp-secondary);
+    font-weight: 600;
+}
+
+/* ========================================
+   Link Styling
+   ======================================== */
+a {
+    color: var(--yitp-primary);
+    text-decoration: none;
+    transition: var(--yitp-transition-fast);
+}
+
+a:hover {
+    color: var(--yitp-secondary);
+    text-decoration: underline;
+}
+
+/* ========================================
+   Icon Colors
+   ======================================== */
+.fas, .far {
+    color: var(--yitp-primary);
+}
+
+.course-hero .fas, 
+.course-hero .far {
+    color: var(--yitp-white) !important;
+}
+
+/* ========================================
+   Text Color Overrides for Hero Section
+   ======================================== */
+.course-hero .text-primary {
+    color: var(--yitp-white) !important;
+}
+
+.course-hero .text-secondary {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.course-hero .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* ========================================
+   Progress Circle Component
+   ======================================== */
+.progress-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(var(--yitp-success) 0deg, var(--yitp-success) calc(var(--progress) * 3.6deg), #e5e7eb calc(var(--progress) * 3.6deg));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.progress-circle::before {
+    content: '';
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--yitp-white);
+    position: absolute;
+}
+
+.progress-text {
+    position: relative;
+    z-index: 1;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: var(--yitp-secondary);
+}
+
+/* ========================================
+   Social Share Component
+   ======================================== */
+.social-share {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.social-share a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--yitp-white);
+    text-decoration: none;
+    transition: var(--yitp-transition);
+    background-color: var(--yitp-primary);
+}
+
+.social-share a:hover {
+    transform: scale(1.1);
+    background-color: var(--yitp-secondary);
+}
+
+/* ========================================
+   Course Detail Specific Overrides
+   ======================================== */
+.course-detail-content-wrapper .breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #6b7280;
+}
+
+/* ========================================
+   Payment Required Card Styling
+   ======================================== */
+/* Ultra-high specificity selector to override Bootstrap */
+.yitp-payment-card.alert.alert-warning,
+.course-detail-content-wrapper .yitp-payment-card.alert.alert-warning,
+.course-detail-content-wrapper .alert.alert-warning.yitp-payment-card,
+.alert.alert-warning.yitp-payment-card {
+    background-color: #1a2e53 !important;
+    background: #1a2e53 !important;
+    border: 2px solid #ff5d15 !important;
+    border-color: #ff5d15 !important;
+    border-radius: 15px !important;
+    color: #ffffff !important;
+    padding: 1.5rem !important;
+    box-shadow: var(--yitp-shadow-md);
+    transition: var(--yitp-transition);
+}
+
+/* Fallback with even higher specificity */
+.course-detail-content-wrapper .alert.alert-warning,
+.alert.alert-warning {
+    background-color: #1a2e53 !important;
+    background: #1a2e53 !important;
+    border: 2px solid #ff5d15 !important;
+    border-color: #ff5d15 !important;
+    border-radius: 15px !important;
+    color: #ffffff !important;
+    padding: 1.5rem !important;
+    box-shadow: var(--yitp-shadow-md);
+    transition: var(--yitp-transition);
+}
+
+.course-detail-content-wrapper .alert.alert-warning:hover,
+.alert.alert-warning:hover {
+    box-shadow: var(--yitp-shadow-lg);
+    transform: translateY(-2px);
+    background-color: #1a2e53 !important;
+}
+
+/* Ensure all text elements in payment card are white */
+.course-detail-content-wrapper .alert.alert-warning h6,
+.course-detail-content-wrapper .alert.alert-warning p,
+.course-detail-content-wrapper .alert.alert-warning strong,
+.course-detail-content-wrapper .alert.alert-warning li,
+.course-detail-content-wrapper .alert.alert-warning .alert-heading,
+.alert.alert-warning h6,
+.alert.alert-warning p,
+.alert.alert-warning strong,
+.alert.alert-warning li,
+.alert.alert-warning .alert-heading {
+    color: #ffffff !important;
+}
+
+/* Style the payment card icons */
+.course-detail-content-wrapper .alert.alert-warning .fas,
+.alert.alert-warning .fas {
+    color: #ff5d15 !important;
+}
+
+/* Style links within the payment card */
+.course-detail-content-wrapper .alert.alert-warning .alert-link,
+.alert.alert-warning .alert-link {
+    color: #ff5d15 !important;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.course-detail-content-wrapper .alert.alert-warning .alert-link:hover,
+.alert.alert-warning .alert-link:hover {
+    color: #ffffff !important;
+    background-color: #ff5d15;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* Style the horizontal rule in payment card */
+.course-detail-content-wrapper .alert.alert-warning hr,
+.alert.alert-warning hr {
+    border-color: rgba(255, 255, 255, 0.3);
+    margin: 1rem 0;
+}
+
+/* Style payment options list */
+.course-detail-content-wrapper .alert.alert-warning ul,
+.alert.alert-warning ul {
+    margin-bottom: 1rem;
+}
+
+.course-detail-content-wrapper .alert.alert-warning ul li,
+.alert.alert-warning ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+/* ========================================
+   Other Alert Components Styling
+   ======================================== */
+
+/* Success Alert (Payment Verified, Sponsored Access) */
+.alert.alert-success {
+    background-color: var(--yitp-success) !important;
+    border: 2px solid var(--yitp-primary);
+    border-radius: 12px;
+    color: var(--yitp-white) !important;
+    padding: 1.25rem;
+    box-shadow: var(--yitp-shadow-sm);
+    transition: var(--yitp-transition);
+}
+
+.alert.alert-success:hover {
+    box-shadow: var(--yitp-shadow-md);
+}
+
+.alert.alert-success strong,
+.alert.alert-success .fas {
+    color: var(--yitp-white) !important;
+}
+
+/* Info Alert (Partial Payment) */
+.alert.alert-info {
+    background-color: var(--yitp-info) !important;
+    border: 2px solid var(--yitp-primary);
+    border-radius: 12px;
+    color: var(--yitp-white) !important;
+    padding: 1.25rem;
+    box-shadow: var(--yitp-shadow-sm);
+    transition: var(--yitp-transition);
+}
+
+.alert.alert-info:hover {
+    box-shadow: var(--yitp-shadow-md);
+}
+
+.alert.alert-info strong,
+.alert.alert-info .fas {
+    color: var(--yitp-white) !important;
+}
+
+/* General alert link styling */
+.alert .alert-link {
+    font-weight: 600;
+    text-decoration: underline;
+    transition: var(--yitp-transition-fast);
+}

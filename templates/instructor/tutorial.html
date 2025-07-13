@@ -1,0 +1,1013 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}YITP LMS Instructor User Manual - Complete Walkthrough{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active" aria-current="page">Instructor Tutorial</li>
+{% endblock %}
+
+{% block title_icon %}<i class="fas fa-graduation-cap me-3"></i>{% endblock %}
+
+{% block page_title_text %}YITP LMS Instructor User Manual{% endblock %}
+
+{% block page_subtitle %}
+<p class="page-subtitle text-muted mb-0">
+    Complete step-by-step walkthrough for creating and managing courses in YITP LMS
+</p>
+{% endblock %}
+
+{% block quick_actions %}
+<a href="{% url 'admin:courses_course_add' %}" class="quick-action-btn primary">
+    <i class="fas fa-plus"></i>
+    New Course
+</a>
+<a href="{% url 'users:instructor_dashboard' %}" class="quick-action-btn">
+    <i class="fas fa-tachometer-alt"></i>
+    Dashboard
+</a>
+<a href="{% url 'users:content_management' %}" class="quick-action-btn">
+    <i class="fas fa-cloud-upload-alt"></i>
+    Content Management
+</a>
+<a href="{% url 'users:instructor_courses' %}" class="quick-action-btn">
+    <i class="fas fa-book"></i>
+    My Courses
+</a>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper {
+        margin-top: 100px;
+    }
+    
+    @media (max-width: 991px) {
+        .content-wrapper {
+            margin-top: 90px;
+        }
+    }
+    
+    @media (max-width: 575px) {
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    }
+    
+    .tutorial-section {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-left: 5px solid #ff5d15;
+    }
+    
+    .tutorial-header {
+        background: linear-gradient(135deg, #1a2e53, #ff5d15);
+        color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .step-number {
+        background: linear-gradient(135deg, #ff5d15, #e54d0f);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .step-title {
+        color: #1a2e53;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .sub-step {
+        background: #fff8f5;
+        border-left: 4px solid #ff5d15;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 10px 10px 0;
+    }
+    
+    .sub-step-number {
+        background: #ff5d15;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-right: 0.5rem;
+    }
+    
+    .highlight-box {
+        background: linear-gradient(135deg, #e8f5e8, #f0fff0);
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .warning-box {
+        background: linear-gradient(135deg, #fff3cd, #fffbf0);
+        border: 2px solid #ffc107;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .info-box {
+        background: linear-gradient(135deg, #d1ecf1, #e8f4f8);
+        border: 2px solid #17a2b8;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .screenshot-placeholder {
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 10px;
+        padding: 3rem;
+        text-align: center;
+        margin: 1.5rem 0;
+        color: #6c757d;
+    }
+    
+    .feature-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .feature-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+    
+    .feature-list li:before {
+        content: "✅";
+        margin-right: 0.75rem;
+    }
+    
+    .navigation-toc {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid #e9ecef;
+    }
+    
+    .toc-title {
+        color: #1a2e53;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .toc-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .toc-list li {
+        padding: 0.5rem 0;
+    }
+    
+    .toc-list a {
+        color: #ff5d15;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .toc-list a:hover {
+        color: #e54d0f;
+        text-decoration: underline;
+    }
+    
+    .scenario-intro {
+        background: linear-gradient(135deg, #fff8f5, #ffffff);
+        border: 2px solid #ff5d15;
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .instructor-profile {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .instructor-avatar {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+    
+    .instructor-info h5 {
+        color: #1a2e53;
+        margin-bottom: 0.25rem;
+    }
+    
+    .instructor-info p {
+        color: #6c757d;
+        margin: 0;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    {% include 'instructor/navigation.html' %}
+    
+    <div class="container-fluid py-4">
+        <!-- Tutorial Header -->
+        <div class="tutorial-header">
+            <h1 class="mb-3">
+                <i class="fas fa-graduation-cap me-3"></i>
+                YITP LMS Instructor User Manual
+            </h1>
+            <p class="lead mb-0">
+                Complete step-by-step walkthrough for creating and managing courses in the Youth Impact Training Programme Learning Management System
+            </p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="navigation-toc">
+            <h3 class="toc-title">
+                <i class="fas fa-list me-2"></i>
+                Tutorial Contents
+            </h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="toc-list">
+                        <li><a href="#scenario-intro">Scenario Introduction: Meet Beryl Omondi</a></li>
+                        <li><a href="#step1">Step 1: Initial Setup & Course Creation</a></li>
+                        <li><a href="#step2">Step 2: Module Structure Planning</a></li>
+                        <li><a href="#step3">Step 3: Content Development</a></li>
+                        <li><a href="#step4">Step 4: Multimedia Integration</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="toc-list">
+                        <li><a href="#step5">Step 5: Assessment Creation</a></li>
+                        <li><a href="#step6">Step 6: Course Review & Publishing</a></li>
+                        <li><a href="#step7">Step 7: Student Management & Analytics</a></li>
+                        <li><a href="#best-practices">Best Practices & Tips</a></li>
+                        <li><a href="#troubleshooting">Troubleshooting Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario Introduction -->
+        <div id="scenario-intro" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">👋</span>
+                Scenario Introduction: Meet Beryl Omondi
+            </h2>
+
+            <div class="scenario-intro">
+                <div class="instructor-profile">
+                    <div class="instructor-avatar">BO</div>
+                    <div class="instructor-info">
+                        <h5>Beryl Omondi</h5>
+                        <p>Course Instructor • Youth Development Specialist • 8 years experience</p>
+                    </div>
+                </div>
+
+                <p class="lead">
+                    In this comprehensive tutorial, we'll follow <strong>Beryl Omondi</strong>, an experienced Course Instructor at YITP, as she creates a new unit called <strong>"Personal Initiative"</strong> for the <strong>Youth Impact Training Course</strong>.
+                </p>
+
+                <div class="highlight-box">
+                    <h5><i class="fas fa-target me-2"></i>Learning Objectives</h5>
+                    <p>By following Beryl's journey, you'll learn how to:</p>
+                    <ul class="feature-list">
+                        <li>Navigate the YITP LMS instructor dashboard</li>
+                        <li>Create and structure course modules and lessons</li>
+                        <li>Upload and manage multimedia content</li>
+                        <li>Design engaging assessments and quizzes</li>
+                        <li>Monitor student progress and analytics</li>
+                        <li>Utilize advanced content management features</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h5><i class="fas fa-info-circle me-2"></i>Scenario Context</h5>
+                    <p><strong>Course:</strong> Youth Impact Training Course</p>
+                    <p><strong>New Unit:</strong> Personal Initiative</p>
+                    <p><strong>Target Audience:</strong> Young professionals aged 18-25</p>
+                    <p><strong>Duration:</strong> 2 weeks (4 lessons)</p>
+                    <p><strong>Content Types:</strong> PowerPoint presentations, PDF documents, video materials, interactive quizzes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Initial Setup & Course Creation -->
+        <div id="step1" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">1</span>
+                Initial Setup & Course Creation
+            </h2>
+
+            <p>Beryl begins her day by logging into the YITP LMS and accessing her instructor dashboard to start creating the "Personal Initiative" unit.</p>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">1.1</span> Accessing the Instructor Dashboard</h4>
+                <p>After logging in, Beryl is automatically redirected to her instructor dashboard thanks to the Enhanced Authentication system.</p>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> YITP LMS Instructor Dashboard</p>
+                    <small>Shows the main dashboard with course statistics, quick actions, and navigation menu</small>
+                </div>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-lightbulb me-2"></i>Key Features Visible</h6>
+                    <ul class="feature-list">
+                        <li>Welcome message with instructor role display</li>
+                        <li>Course statistics and analytics overview</li>
+                        <li>Quick action buttons for common tasks</li>
+                        <li>Enhanced navigation with breadcrumbs</li>
+                        <li>Recent activity and student progress</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">1.2</span> Navigating to Course Management</h4>
+                <p>Beryl clicks on the "My Courses" button in the quick actions menu to access her course management interface.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-route me-2"></i>Navigation Path</h6>
+                    <p><strong>Dashboard → My Courses → Youth Impact Training Course</strong></p>
+                </div>
+
+                <p>The enhanced navigation system shows her current location with breadcrumbs: <code>Dashboard > My Courses</code></p>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">1.3</span> Accessing the Youth Impact Training Course</h4>
+                <p>From her courses list, Beryl locates the "Youth Impact Training Course" and clicks on it to access the course management interface.</p>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Course Management Interface</p>
+                    <small>Shows the course overview with modules, lessons, and management options</small>
+                </div>
+
+                <div class="warning-box">
+                    <h6><i class="fas fa-exclamation-triangle me-2"></i>Important Note</h6>
+                    <p>As a Course Instructor, Beryl can only see and manage courses assigned to her. The role-based admin filtering ensures she doesn't see other instructors' courses.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Module Structure Planning -->
+        <div id="step2" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">2</span>
+                Module Structure Planning
+            </h2>
+
+            <p>Before creating content, Beryl plans the structure of her "Personal Initiative" unit, organizing it into logical modules and lessons.</p>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">2.1</span> Creating a New Module</h4>
+                <p>Beryl clicks the "Add Module" button to create a new module for the Personal Initiative unit.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-plus me-2"></i>Module Creation Form</h6>
+                    <p><strong>Module Title:</strong> Personal Initiative Fundamentals</p>
+                    <p><strong>Description:</strong> Understanding the core principles of personal initiative and self-motivation</p>
+                    <p><strong>Sort Order:</strong> 5 (after existing modules)</p>
+                    <p><strong>Status:</strong> Draft (until content is complete)</p>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Module Creation Form</p>
+                    <small>Shows the Django admin interface for creating a new module with YITP branding</small>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">2.2</span> Planning Lesson Structure</h4>
+                <p>Beryl outlines the four lessons she wants to include in this module:</p>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-list-ol me-2"></i>Planned Lesson Structure</h6>
+                    <ol>
+                        <li><strong>Introduction to Personal Initiative</strong> - Foundational concepts and importance</li>
+                        <li><strong>Self-Assessment Tools</strong> - Evaluating current initiative levels</li>
+                        <li><strong>Building Initiative Habits</strong> - Practical strategies and techniques</li>
+                        <li><strong>Initiative in Action</strong> - Real-world applications and case studies</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">2.3</span> Content Type Planning</h4>
+                <p>For each lesson, Beryl plans the multimedia content she'll need:</p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <h6><i class="fas fa-file-powerpoint me-2"></i>PowerPoint Presentations</h6>
+                            <ul>
+                                <li>Introduction slides for each lesson</li>
+                                <li>Key concept explanations</li>
+                                <li>Visual frameworks and models</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <h6><i class="fas fa-file-pdf me-2"></i>PDF Documents</h6>
+                            <ul>
+                                <li>Self-assessment worksheets</li>
+                                <li>Reading materials and research</li>
+                                <li>Action planning templates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-video me-2"></i>Video Materials</h6>
+                    <ul>
+                        <li>Welcome video introducing the module</li>
+                        <li>Expert interviews on personal initiative</li>
+                        <li>Case study video examples</li>
+                        <li>Practical demonstration videos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Content Development -->
+        <div id="step3" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">3</span>
+                Content Development
+            </h2>
+
+            <p>With her structure planned, Beryl begins creating the actual lesson content using the YITP LMS content management tools.</p>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">3.1</span> Creating the First Lesson</h4>
+                <p>Beryl starts by creating the first lesson: "Introduction to Personal Initiative"</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-edit me-2"></i>Lesson Creation Process</h6>
+                    <p><strong>Navigation:</strong> Course Management → Add Lesson</p>
+                    <p><strong>Module:</strong> Personal Initiative Fundamentals</p>
+                    <p><strong>Title:</strong> Introduction to Personal Initiative</p>
+                    <p><strong>Sort Order:</strong> 1</p>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Lesson Creation Form</p>
+                    <small>Shows the enhanced lesson creation interface with CKEditor integration</small>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">3.2</span> Using CKEditor for Rich Content</h4>
+                <p>Beryl uses the enhanced CKEditor with YITP branding to create engaging lesson content.</p>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-palette me-2"></i>CKEditor Features Used</h6>
+                    <ul class="feature-list">
+                        <li>YITP-branded content styles</li>
+                        <li>Learning objective boxes with green styling</li>
+                        <li>Important note highlights with yellow background</li>
+                        <li>Exercise boxes with blue borders</li>
+                        <li>Code snippet formatting for examples</li>
+                        <li>Image upload and management</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h6><i class="fas fa-magic me-2"></i>Content Styling Tip</h6>
+                    <p>Beryl uses the custom "Learning Objective" style to create visually appealing objective boxes that match YITP branding. She can access these through the Styles dropdown in CKEditor.</p>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">3.3</span> Content Structure Example</h4>
+                <p>Here's how Beryl structures her lesson content:</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-file-alt me-2"></i>Sample Lesson Content Structure</h6>
+                    <pre style="background: #f8f9fa; padding: 1rem; border-radius: 5px; font-size: 0.9rem;">
+<strong>Learning Objectives</strong> (using Learning Objective style)
+- Understand the definition of personal initiative
+- Identify key characteristics of initiative-driven individuals
+- Recognize opportunities for initiative in daily life
+
+<strong>Introduction</strong> (using YITP Highlight style)
+Personal initiative is the ability to take action without being prompted...
+
+<strong>Key Concepts</strong> (using Important Note style)
+1. Proactive mindset
+2. Self-motivation
+3. Problem-solving orientation
+
+<strong>Exercise</strong> (using Exercise Box style)
+Reflect on a time when you took initiative. What motivated you?
+                    </pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Multimedia Integration -->
+        <div id="step4" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">4</span>
+                Multimedia Integration
+            </h2>
+
+            <p>Beryl now uses the advanced content management system to upload and integrate multimedia materials into her lessons.</p>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">4.1</span> Accessing Content Management</h4>
+                <p>Beryl navigates to the Content Management interface using the quick action button in the navigation bar.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-route me-2"></i>Navigation Path</h6>
+                    <p><strong>Dashboard → Content Management</strong></p>
+                    <p>Breadcrumb shows: <code>Dashboard > Content Management</code></p>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Content Management Interface</p>
+                    <small>Shows the drag-and-drop upload zone and file format support</small>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">4.2</span> Uploading PowerPoint Presentations</h4>
+                <p>Beryl drags and drops her PowerPoint presentation files into the upload zone.</p>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-upload me-2"></i>Files Being Uploaded</h6>
+                    <ul class="feature-list">
+                        <li>Personal_Initiative_Introduction.pptx (2.3 MB)</li>
+                        <li>Self_Assessment_Tools.pptx (1.8 MB)</li>
+                        <li>Building_Initiative_Habits.pptx (2.1 MB)</li>
+                        <li>Initiative_in_Action.pptx (2.7 MB)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-cogs me-2"></i>Upload Process</h6>
+                    <p>The system automatically:</p>
+                    <ul>
+                        <li>Validates file types and sizes</li>
+                        <li>Shows real-time upload progress</li>
+                        <li>Provides success/error feedback</li>
+                        <li>Organizes files in instructor-specific directories</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">4.3</span> Bulk Import Feature</h4>
+                <p>For her PDF worksheets, Beryl uses the bulk import feature to automatically create lesson content.</p>
+
+                <div class="warning-box">
+                    <h6><i class="fas fa-info-circle me-2"></i>Bulk Import Process</h6>
+                    <p><strong>Step 1:</strong> Click "Bulk Import" button</p>
+                    <p><strong>Step 2:</strong> Select target course (Youth Impact Training Course)</p>
+                    <p><strong>Step 3:</strong> Upload PDF file (Self_Assessment_Worksheet.pdf)</p>
+                    <p><strong>Step 4:</strong> System creates lesson with extracted content</p>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Bulk Import Modal</p>
+                    <small>Shows the course selection and file upload interface</small>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">4.4</span> Video Content Integration</h4>
+                <p>Beryl uploads her video materials using the same drag-and-drop interface.</p>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-video me-2"></i>Video Files Uploaded</h6>
+                    <ul class="feature-list">
+                        <li>Welcome_Personal_Initiative.mp4 (45.2 MB)</li>
+                        <li>Expert_Interview_Dr_Smith.mp4 (78.5 MB)</li>
+                        <li>Case_Study_Examples.mp4 (52.1 MB)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-check-circle me-2"></i>Video Processing</h6>
+                    <p>The system handles video files by:</p>
+                    <ul>
+                        <li>Validating format compatibility</li>
+                        <li>Checking file size limits (100MB max)</li>
+                        <li>Storing in organized directory structure</li>
+                        <li>Providing embed-ready URLs for lessons</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Assessment Creation -->
+        <div id="step5" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">5</span>
+                Assessment Creation
+            </h2>
+
+            <p>Beryl creates engaging quizzes and assessments to test student understanding of personal initiative concepts.</p>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">5.1</span> Creating a Knowledge Check Quiz</h4>
+                <p>Beryl creates a quiz for the first lesson using the enhanced quiz builder.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-question-circle me-2"></i>Quiz Details</h6>
+                    <p><strong>Quiz Title:</strong> Personal Initiative Fundamentals Check</p>
+                    <p><strong>Associated Lesson:</strong> Introduction to Personal Initiative</p>
+                    <p><strong>Passing Score:</strong> 70%</p>
+                    <p><strong>Attempts Allowed:</strong> 3</p>
+                    <p><strong>Time Limit:</strong> 15 minutes</p>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Quiz Creation Interface</p>
+                    <small>Shows the enhanced admin interface for creating quizzes with YITP branding</small>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">5.2</span> Adding Quiz Questions</h4>
+                <p>Beryl adds various question types to test different aspects of learning.</p>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-list me-2"></i>Sample Questions Created</h6>
+                    <p><strong>Question 1 (Multiple Choice):</strong></p>
+                    <p>"Which of the following best defines personal initiative?"</p>
+                    <ul>
+                        <li>A) Waiting for instructions before acting</li>
+                        <li>B) Taking action without being prompted ✓</li>
+                        <li>C) Following established procedures</li>
+                        <li>D) Seeking approval for all decisions</li>
+                    </ul>
+
+                    <p><strong>Question 2 (True/False):</strong></p>
+                    <p>"Personal initiative requires natural talent and cannot be developed." (False)</p>
+
+                    <p><strong>Question 3 (Short Answer):</strong></p>
+                    <p>"Describe a situation where you demonstrated personal initiative."</p>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">5.3</span> Sequential Learning Integration</h4>
+                <p>Beryl ensures the quiz is properly integrated with the sequential learning system.</p>
+
+                <div class="warning-box">
+                    <h6><i class="fas fa-lock me-2"></i>Sequential Learning Rules</h6>
+                    <p>Students must:</p>
+                    <ul>
+                        <li>Complete the lesson content first</li>
+                        <li>Pass the quiz with 70% or higher</li>
+                        <li>Only then can access the next lesson</li>
+                        <li>Receive immediate feedback on quiz performance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6: Course Review & Publishing -->
+        <div id="step6" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">6</span>
+                Course Review & Publishing
+            </h2>
+
+            <p>Before making the module available to students, Beryl reviews all content and publishes the lessons.</p>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">6.1</span> Content Review Process</h4>
+                <p>Beryl uses the course preview feature to review her work from a student's perspective.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-eye me-2"></i>Review Checklist</h6>
+                    <ul class="feature-list">
+                        <li>All lesson content displays correctly</li>
+                        <li>Multimedia files load properly</li>
+                        <li>Quiz questions are clear and accurate</li>
+                        <li>Sequential progression works as expected</li>
+                        <li>YITP branding is consistent throughout</li>
+                    </ul>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Course Preview Mode</p>
+                    <small>Shows how the course appears to students with navigation and progress tracking</small>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">6.2</span> Publishing Lessons</h4>
+                <p>Satisfied with her content, Beryl publishes each lesson to make them available to students.</p>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-rocket me-2"></i>Publishing Process</h6>
+                    <p><strong>Step 1:</strong> Navigate to each lesson in admin interface</p>
+                    <p><strong>Step 2:</strong> Change status from "Draft" to "Published"</p>
+                    <p><strong>Step 3:</strong> Set appropriate publication date</p>
+                    <p><strong>Step 4:</strong> Save changes</p>
+                </div>
+
+                <div class="warning-box">
+                    <h6><i class="fas fa-calendar me-2"></i>Publication Strategy</h6>
+                    <p>Beryl publishes lessons gradually:</p>
+                    <ul>
+                        <li>Lesson 1: Immediate publication</li>
+                        <li>Lesson 2: Available after 3 days</li>
+                        <li>Lesson 3: Available after 1 week</li>
+                        <li>Lesson 4: Available after 10 days</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">6.3</span> Module Activation</h4>
+                <p>Finally, Beryl activates the entire "Personal Initiative Fundamentals" module.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-toggle-on me-2"></i>Module Activation</h6>
+                    <p>Beryl changes the module status from "Draft" to "Published", making it visible in the course structure for enrolled students.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7: Student Management & Analytics -->
+        <div id="step7" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">7</span>
+                Student Management & Analytics
+            </h2>
+
+            <p>With her module published, Beryl monitors student progress and engagement using the analytics dashboard.</p>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">7.1</span> Accessing Analytics Dashboard</h4>
+                <p>Beryl navigates to the Analytics section to monitor student progress on her new module.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-route me-2"></i>Navigation Path</h6>
+                    <p><strong>Dashboard → Analytics</strong></p>
+                    <p>Breadcrumb shows: <code>Dashboard > Analytics</code></p>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Analytics Dashboard</p>
+                    <small>Shows course performance metrics, student progress, and engagement statistics</small>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">7.2</span> Monitoring Student Progress</h4>
+                <p>Beryl reviews key metrics for her Personal Initiative module.</p>
+
+                <div class="highlight-box">
+                    <h6><i class="fas fa-chart-line me-2"></i>Key Metrics Monitored</h6>
+                    <ul class="feature-list">
+                        <li>Enrollment numbers: 45 students enrolled</li>
+                        <li>Completion rate: 78% for Lesson 1</li>
+                        <li>Average quiz score: 82%</li>
+                        <li>Time spent per lesson: 25 minutes average</li>
+                        <li>Student engagement: 89% active participation</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-users me-2"></i>Student Performance Insights</h6>
+                    <p>The analytics show that students are engaging well with the content, with most achieving the 70% passing threshold on their first quiz attempt.</p>
+                </div>
+            </div>
+
+            <div class="sub-step">
+                <h4><span class="sub-step-number">7.3</span> Communication with Students</h4>
+                <p>Beryl uses the enhanced communication system to interact with students who need additional support.</p>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-envelope me-2"></i>Communication Features</h6>
+                    <p><strong>Messages Interface:</strong> Dashboard → Messages</p>
+                    <p>Beryl can:</p>
+                    <ul>
+                        <li>Send individual messages to struggling students</li>
+                        <li>Create group announcements</li>
+                        <li>Respond to student questions</li>
+                        <li>Provide additional resources and guidance</li>
+                    </ul>
+                </div>
+
+                <div class="screenshot-placeholder">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p><strong>Screenshot:</strong> Messages Interface</p>
+                    <small>Shows the instructor messaging dashboard with student communications</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Practices & Tips -->
+        <div id="best-practices" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">💡</span>
+                Best Practices & Tips
+            </h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="highlight-box">
+                        <h5><i class="fas fa-star me-2"></i>Content Creation Tips</h5>
+                        <ul class="feature-list">
+                            <li>Use YITP-branded styles consistently</li>
+                            <li>Keep lessons focused and concise</li>
+                            <li>Include interactive elements in every lesson</li>
+                            <li>Test all multimedia before publishing</li>
+                            <li>Provide clear learning objectives</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <h5><i class="fas fa-users me-2"></i>Student Engagement Tips</h5>
+                        <ul class="feature-list">
+                            <li>Respond to messages within 24 hours</li>
+                            <li>Monitor analytics regularly</li>
+                            <li>Provide constructive quiz feedback</li>
+                            <li>Use varied content types</li>
+                            <li>Encourage peer interaction</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h5><i class="fas fa-shield-alt me-2"></i>Quality Assurance</h5>
+                <p>Always preview your content from a student's perspective before publishing. Check that:</p>
+                <ul>
+                    <li>All links and media work correctly</li>
+                    <li>Quiz questions have correct answers marked</li>
+                    <li>Sequential progression is properly configured</li>
+                    <li>Content follows YITP style guidelines</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Troubleshooting Guide -->
+        <div id="troubleshooting" class="tutorial-section">
+            <h2 class="step-title">
+                <span class="step-number">🔧</span>
+                Troubleshooting Guide
+            </h2>
+
+            <div class="sub-step">
+                <h4>Common Issues and Solutions</h4>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-question-circle me-2"></i>File Upload Problems</h6>
+                    <p><strong>Issue:</strong> File upload fails or times out</p>
+                    <p><strong>Solution:</strong> Check file size (max 100MB) and format compatibility</p>
+                </div>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-question-circle me-2"></i>Quiz Not Appearing</h6>
+                    <p><strong>Issue:</strong> Students can't see quiz after lesson</p>
+                    <p><strong>Solution:</strong> Verify quiz is published and associated with correct lesson</p>
+                </div>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-question-circle me-2"></i>Content Formatting Issues</h6>
+                    <p><strong>Issue:</strong> Content doesn't display with YITP styling</p>
+                    <p><strong>Solution:</strong> Use CKEditor styles dropdown to apply YITP-branded formatting</p>
+                </div>
+
+                <div class="info-box">
+                    <h6><i class="fas fa-question-circle me-2"></i>Student Progress Not Updating</h6>
+                    <p><strong>Issue:</strong> Analytics don't show recent student activity</p>
+                    <p><strong>Solution:</strong> Analytics update every 15 minutes; check again later</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="tutorial-section">
+            <div class="highlight-box">
+                <h3><i class="fas fa-trophy me-2"></i>Congratulations!</h3>
+                <p>You've successfully followed Beryl Omondi through the complete process of creating a new course unit in YITP LMS. You now know how to:</p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="feature-list">
+                            <li>Navigate the instructor dashboard</li>
+                            <li>Create and structure course content</li>
+                            <li>Upload multimedia materials</li>
+                            <li>Design engaging assessments</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="feature-list">
+                            <li>Use advanced content management</li>
+                            <li>Monitor student progress</li>
+                            <li>Communicate with students</li>
+                            <li>Apply best practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'users:instructor_dashboard' %}" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                    </a>
+                    <a href="{% url 'admin:courses_course_add' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-plus me-2"></i>Create Your Course
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Smooth scrolling for table of contents links
+document.addEventListener('DOMContentLoaded', function() {
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add entrance animations
+    const sections = document.querySelectorAll('.tutorial-section');
+
+    sections.forEach((section, index) => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+
+        setTimeout(() => {
+            section.style.transition = 'all 0.6s ease';
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+});
+</script>
+{% endblock %}
