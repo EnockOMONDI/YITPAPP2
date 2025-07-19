@@ -1,0 +1,385 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Media Library - Course Builder{% endblock %}
+
+{% block extra_css %}
+<style>
+    .media-library-container {
+        background: #f8f9fa;
+        min-height: 100vh;
+        padding-top: 100px;
+    }
+    
+    .upload-zone {
+        border: 2px dashed #dee2e6;
+        border-radius: 12px;
+        padding: 3rem;
+        text-align: center;
+        background: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .upload-zone:hover {
+        border-color: #ff5d15;
+        background: rgba(255, 93, 21, 0.05);
+    }
+    
+    .upload-zone.dragover {
+        border-color: #ff5d15;
+        background: rgba(255, 93, 21, 0.1);
+    }
+    
+    .media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .media-item {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .media-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .media-preview {
+        width: 100%;
+        height: 120px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+    }
+    
+    .media-preview img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+    
+    .media-preview i {
+        font-size: 2rem;
+        color: #6c757d;
+    }
+    
+    .media-info {
+        font-size: 0.875rem;
+    }
+    
+    .media-name {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .media-size {
+        color: #6c757d;
+        font-size: 0.75rem;
+    }
+    
+    .upload-progress {
+        display: none;
+        margin-top: 1rem;
+    }
+    
+    .filter-tabs {
+        background: white;
+        border-radius: 8px;
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .filter-tab {
+        padding: 0.5rem 1rem;
+        border: none;
+        background: transparent;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .filter-tab.active {
+        background: #ff5d15;
+        color: white;
+    }
+    
+    .search-box {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="media-library-container">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-images me-2"></i>
+                Media Library
+            </h1>
+            <button type="button" class="btn btn-outline-secondary" onclick="window.close()">
+                <i class="fas fa-times me-2"></i>
+                Close
+            </button>
+        </div>
+        
+        <!-- Upload Zone -->
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+            <h4>Drop files here or click to upload</h4>
+            <p class="text-muted">Supports images, videos, and documents (max 50MB)</p>
+            <input type="file" id="fileInput" multiple accept="image/*,video/*,.pdf,.doc,.docx" style="display: none;">
+        </div>
+        
+        <!-- Upload Progress -->
+        <div class="upload-progress" id="uploadProgress">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <small class="text-muted mt-1">Uploading files...</small>
+        </div>
+        
+        <!-- Search and Filters -->
+        <div class="search-box">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search files...">
+                </div>
+                <div class="col-md-6">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">All</button>
+                        <button class="filter-tab" data-filter="image">Images</button>
+                        <button class="filter-tab" data-filter="video">Videos</button>
+                        <button class="filter-tab" data-filter="document">Documents</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Media Grid -->
+        <div class="media-grid" id="mediaGrid">
+            <!-- Sample media items (replace with dynamic content) -->
+            <div class="media-item" data-type="image" onclick="selectMedia('sample1.jpg', 'image')">
+                <div class="media-preview">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="media-info">
+                    <div class="media-name">sample-image.jpg</div>
+                    <div class="media-size">245 KB</div>
+                </div>
+            </div>
+            
+            <div class="media-item" data-type="video" onclick="selectMedia('sample2.mp4', 'video')">
+                <div class="media-preview">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="media-info">
+                    <div class="media-name">intro-video.mp4</div>
+                    <div class="media-size">12.5 MB</div>
+                </div>
+            </div>
+            
+            <div class="media-item" data-type="document" onclick="selectMedia('sample3.pdf', 'document')">
+                <div class="media-preview">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="media-info">
+                    <div class="media-name">course-outline.pdf</div>
+                    <div class="media-size">1.2 MB</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Empty State -->
+        <div id="emptyState" class="text-center py-5" style="display: none;">
+            <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+            <h4>No files found</h4>
+            <p class="text-muted">Upload some files to get started</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// File upload handling
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const uploadProgress = document.getElementById('uploadProgress');
+
+// Drag and drop functionality
+uploadZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadZone.classList.add('dragover');
+});
+
+uploadZone.addEventListener('dragleave', () => {
+    uploadZone.classList.remove('dragover');
+});
+
+uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    handleFileUpload(files);
+});
+
+fileInput.addEventListener('change', (e) => {
+    handleFileUpload(e.target.files);
+});
+
+// File upload function
+function handleFileUpload(files) {
+    if (files.length === 0) return;
+    
+    uploadProgress.style.display = 'block';
+    const progressBar = uploadProgress.querySelector('.progress-bar');
+    
+    Array.from(files).forEach((file, index) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+        
+        fetch('{{ upload_url }}', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                addMediaItem(data);
+            } else {
+                alert('Upload failed: ' + data.error);
+            }
+            
+            // Update progress
+            const progress = ((index + 1) / files.length) * 100;
+            progressBar.style.width = progress + '%';
+            
+            if (index === files.length - 1) {
+                setTimeout(() => {
+                    uploadProgress.style.display = 'none';
+                    progressBar.style.width = '0%';
+                }, 1000);
+            }
+        })
+        .catch(error => {
+            console.error('Upload error:', error);
+            alert('Upload failed');
+        });
+    });
+}
+
+// Add media item to grid
+function addMediaItem(fileData) {
+    const mediaGrid = document.getElementById('mediaGrid');
+    const mediaItem = document.createElement('div');
+    mediaItem.className = 'media-item';
+    mediaItem.setAttribute('data-type', getFileType(fileData.file_type));
+    mediaItem.onclick = () => selectMedia(fileData.file_url, fileData.file_type);
+    
+    const icon = getFileIcon(fileData.file_type);
+    const size = formatFileSize(fileData.file_size);
+    
+    mediaItem.innerHTML = `
+        <div class="media-preview">
+            ${fileData.file_type.startsWith('image/') ? 
+                `<img src="${fileData.file_url}" alt="${fileData.file_name}">` : 
+                `<i class="${icon}"></i>`
+            }
+        </div>
+        <div class="media-info">
+            <div class="media-name">${fileData.file_name}</div>
+            <div class="media-size">${size}</div>
+        </div>
+    `;
+    
+    mediaGrid.appendChild(mediaItem);
+}
+
+// Helper functions
+function getFileType(mimeType) {
+    if (mimeType.startsWith('image/')) return 'image';
+    if (mimeType.startsWith('video/')) return 'video';
+    return 'document';
+}
+
+function getFileIcon(mimeType) {
+    if (mimeType.startsWith('image/')) return 'fas fa-image';
+    if (mimeType.startsWith('video/')) return 'fas fa-video';
+    if (mimeType.includes('pdf')) return 'fas fa-file-pdf';
+    return 'fas fa-file';
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Media selection
+function selectMedia(url, type) {
+    if (window.opener) {
+        // Send selected media back to parent window
+        window.opener.insertMediaIntoEditor(url, type);
+        window.close();
+    }
+}
+
+// Filter functionality
+document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Update active tab
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Filter media items
+        const filter = tab.getAttribute('data-filter');
+        const mediaItems = document.querySelectorAll('.media-item');
+        
+        mediaItems.forEach(item => {
+            if (filter === 'all' || item.getAttribute('data-type') === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const mediaItems = document.querySelectorAll('.media-item');
+    
+    mediaItems.forEach(item => {
+        const fileName = item.querySelector('.media-name').textContent.toLowerCase();
+        if (fileName.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
+</script>
+{% endblock %}

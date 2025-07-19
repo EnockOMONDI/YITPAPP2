@@ -170,6 +170,33 @@
         background: linear-gradient(135deg, #1a2e53, #0f1a2e);
     }
 
+    .action-btn.featured {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .action-btn.featured::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .action-btn.featured:hover::before {
+        left: 100%;
+    }
+
+    .action-btn small {
+        opacity: 0.9;
+        font-weight: 400;
+        font-size: 0.75rem;
+    }
+
     .action-btn.outline {
         background: transparent;
         color: #ff5d15;
@@ -330,8 +357,13 @@ Welcome back, {{ instructor_profile.user.get_full_name }}!
 
         <!-- Quick Actions -->
         <div class="quick-actions">
+            <a href="{% url 'course_builder:dashboard' %}" class="action-btn featured">
+                <i class="fas fa-magic me-2"></i>Course Builder
+                <small class="d-block mt-1">New! Create courses with our wizard</small>
+            </a>
             <a href="{% url 'admin:courses_course_add' %}" class="action-btn">
                 <i class="fas fa-plus me-2"></i>Create New Course
+                <small class="d-block mt-1">Traditional admin interface</small>
             </a>
             <a href="{% url 'users:instructor_courses' %}" class="action-btn secondary">
                 <i class="fas fa-book me-2"></i>Manage Courses

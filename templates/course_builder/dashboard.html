@@ -1,0 +1,238 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Course Builder - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+    .course-builder-header {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .stats-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #ff5d15;
+        transition: transform 0.3s ease;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #1a2e53;
+    }
+    
+    .course-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        border: 1px solid #e9ecef;
+    }
+    
+    .course-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-create-course {
+        background: linear-gradient(135deg, #ff5d15, #e04a0f);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-create-course:hover {
+        background: linear-gradient(135deg, #e04a0f, #cc4209);
+        transform: translateY(-2px);
+        color: white;
+    }
+    
+    .template-card {
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .template-card:hover {
+        border-color: #ff5d15;
+        background: rgba(255, 93, 21, 0.05);
+    }
+    
+    .session-item {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Header Section -->
+    <div class="course-builder-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-2">
+                        <i class="fas fa-graduation-cap me-3"></i>
+                        Course Builder
+                    </h1>
+                    <p class="mb-0 opacity-90">Create engaging courses with our intuitive course builder</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="{% url 'course_builder:wizard' %}" class="btn btn-create-course btn-lg">
+                        <i class="fas fa-plus me-2"></i>
+                        Create New Course
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Statistics Row -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ total_courses }}</div>
+                    <div class="text-muted">Total Courses</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ published_courses }}</div>
+                    <div class="text-muted">Published</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ draft_courses }}</div>
+                    <div class="text-muted">Drafts</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ active_sessions|length }}</div>
+                    <div class="text-muted">Active Sessions</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Recent Courses -->
+            <div class="col-lg-8">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3>Your Recent Courses</h3>
+                    <a href="{% url 'users:instructor_courses' %}" class="btn btn-outline-primary">View All</a>
+                </div>
+                
+                {% if instructor_courses %}
+                    <div class="row">
+                        {% for course in instructor_courses %}
+                        <div class="col-md-6 mb-3">
+                            <div class="course-card">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="mb-1">{{ course.title }}</h5>
+                                    {% if course.is_published %}
+                                        <span class="badge bg-success">Published</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Draft</span>
+                                    {% endif %}
+                                </div>
+                                <p class="text-muted small mb-2">{{ course.description|truncatewords:15 }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-users me-1"></i>
+                                        {{ course.enrollments.count }} students
+                                    </small>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-outline-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{% url 'course_builder:wizard' %}?course={{ course.id }}" class="btn btn-outline-secondary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-graduation-cap fa-3x text-muted mb-3"></i>
+                        <h4>No courses yet</h4>
+                        <p class="text-muted">Start creating your first course to share your knowledge with students.</p>
+                        <a href="{% url 'course_builder:wizard' %}" class="btn btn-create-course">
+                            <i class="fas fa-plus me-2"></i>
+                            Create Your First Course
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Course Templates -->
+                <div class="mb-4">
+                    <h4 class="mb-3">Quick Start Templates</h4>
+                    {% for template in course_templates|slice:":3" %}
+                    <div class="template-card mb-2" onclick="startFromTemplate({{ template.id }})">
+                        <h6 class="mb-1">{{ template.name }}</h6>
+                        <small class="text-muted">{{ template.description|truncatewords:10 }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Active Sessions -->
+                {% if active_sessions %}
+                <div class="mb-4">
+                    <h4 class="mb-3">Continue Working</h4>
+                    {% for session in active_sessions %}
+                    <div class="session-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ session.course.title|default:"New Course" }}</strong>
+                                <br>
+                                <small class="text-muted">Step {{ session.current_step }} of 5</small>
+                            </div>
+                            <a href="{% url 'course_builder:wizard_step' session.current_step %}?session={{ session.id }}" 
+                               class="btn btn-sm btn-warning">
+                                Continue
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function startFromTemplate(templateId) {
+    window.location.href = `{% url 'course_builder:from_template' 0 %}`.replace('0', templateId);
+}
+</script>
+{% endblock %}

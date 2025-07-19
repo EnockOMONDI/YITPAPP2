@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 from graphene_django.views import GraphQLView
 from django.contrib.auth import views as auth_views
 
@@ -84,6 +85,12 @@ urlpatterns = [
 
     # Analytics dashboard
     path('analytics/', include('analytics.urls')),
+
+    # Course Builder
+    path('course-builder/', include('course_builder.urls')),
+
+    # Favicon redirect
+    path('favicon.ico', RedirectView.as_view(url='/static/assets/img/favicon.png', permanent=True)),
 
 ]
 

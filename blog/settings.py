@@ -97,6 +97,8 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
 # =============================================================================
 # SECURITY SETTINGS - ENVIRONMENT AWARE
 # =============================================================================
@@ -142,6 +144,7 @@ INSTALLED_APPS = [
     'payments',  # Added for test suite
     'certificates',  # Added for test suite
     'analytics',  # Payment analytics dashboard
+    'course_builder',  # Course creation wizard
 
     'django.contrib.admin',
     'django.contrib.auth',

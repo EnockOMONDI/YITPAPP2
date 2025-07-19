@@ -1,0 +1,449 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<script src="https://cdn.tiny.cloud/1/qu2jb8k2dyah1y5pjdglgob206f26juotj3u82hzd7mvyz1x/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+{% endblock %}
+
+{% block title %}Content Templates - Course Builder{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper {
+        padding-top: 100px;
+    }
+    
+    .template-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e9ecef;
+        height: 100%;
+    }
+    
+    .template-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .template-type-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .template-type-text {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+    
+    .template-type-video {
+        background: #f3e5f5;
+        color: #7b1fa2;
+    }
+    
+    .template-type-image {
+        background: #e8f5e8;
+        color: #388e3c;
+    }
+    
+    .template-type-quiz {
+        background: #fff3e0;
+        color: #f57c00;
+    }
+    
+    .template-type-exercise {
+        background: #fce4ec;
+        color: #c2185b;
+    }
+    
+    .template-type-code {
+        background: #f1f8e9;
+        color: #689f38;
+    }
+    
+    .template-type-callout {
+        background: #fff8e1;
+        color: #ffa000;
+    }
+    
+    .template-type-document {
+        background: #efebe9;
+        color: #5d4037;
+    }
+    
+    .template-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+    
+    .btn-use-template {
+        background: linear-gradient(135deg, #ff5d15, #e04a0f);
+        border: none;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-use-template:hover {
+        background: linear-gradient(135deg, #e04a0f, #cc4209);
+        transform: translateY(-1px);
+        color: white;
+    }
+    
+    .create-template-card {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+    }
+    
+    .create-template-card:hover {
+        transform: translateY(-2px);
+        color: white;
+    }
+    
+    .template-preview {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-left: 4px solid #ff5d15;
+        font-size: 0.875rem;
+        max-height: 100px;
+        overflow: hidden;
+    }
+    
+    .section-header {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+        border-radius: 12px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <!-- Header -->
+        <div class="section-header">
+            <div class="text-center">
+                <h1 class="mb-2">
+                    <i class="fas fa-puzzle-piece me-3"></i>
+                    Content Templates
+                </h1>
+                <p class="mb-0 opacity-90">Reusable content blocks to speed up course creation</p>
+            </div>
+        </div>
+
+        <!-- Template Categories -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <button class="btn btn-outline-primary active" data-filter="all">All Templates</button>
+                    <button class="btn btn-outline-primary" data-filter="text">Text Content</button>
+                    <button class="btn btn-outline-primary" data-filter="video">Video</button>
+                    <button class="btn btn-outline-primary" data-filter="image">Images</button>
+                    <button class="btn btn-outline-primary" data-filter="quiz">Quizzes</button>
+                    <button class="btn btn-outline-primary" data-filter="exercise">Exercises</button>
+                    <button class="btn btn-outline-primary" data-filter="code">Code Blocks</button>
+                    <button class="btn btn-outline-primary" data-filter="callout">Callouts</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your Templates -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h3 class="mb-3">Your Templates</h3>
+                <div class="row">
+                    <!-- Create New Template Card -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="template-card create-template-card" onclick="createNewTemplate()">
+                            <i class="fas fa-plus fa-3x mb-3"></i>
+                            <h5>Create New Template</h5>
+                            <p class="mb-0">Build a reusable content block</p>
+                        </div>
+                    </div>
+                    
+                    <!-- User Templates -->
+                    {% for block in user_blocks %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="template-card" data-type="{{ block.content_type }}">
+                            <div class="template-type-badge template-type-{{ block.content_type }}">
+                                {{ block.get_content_type_display }}
+                            </div>
+                            <h5>{{ block.title }}</h5>
+                            <p class="text-muted">{{ block.description|truncatewords:15 }}</p>
+                            
+                            {% if block.content %}
+                            <div class="template-preview">
+                                {{ block.content|truncatewords:20|safe }}
+                            </div>
+                            {% endif %}
+                            
+                            <div class="template-actions">
+                                <button class="btn btn-use-template" onclick="useTemplate({{ block.id }})">
+                                    <i class="fas fa-plus me-1"></i>Use
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="editTemplate({{ block.id }})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" onclick="deleteTemplate({{ block.id }})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <div class="text-center py-4">
+                            <i class="fas fa-puzzle-piece fa-3x text-muted mb-3"></i>
+                            <h5>No templates yet</h5>
+                            <p class="text-muted">Create your first template to reuse content across courses</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Public Templates -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-3">Public Templates</h3>
+                <div class="row">
+                    {% for block in template_blocks %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="template-card" data-type="{{ block.content_type }}">
+                            <div class="template-type-badge template-type-{{ block.content_type }}">
+                                {{ block.get_content_type_display }}
+                            </div>
+                            <h5>{{ block.title }}</h5>
+                            <p class="text-muted">{{ block.description|truncatewords:15 }}</p>
+                            
+                            {% if block.content %}
+                            <div class="template-preview">
+                                {{ block.content|truncatewords:20|safe }}
+                            </div>
+                            {% endif %}
+                            
+                            <div class="template-actions">
+                                <button class="btn btn-use-template" onclick="useTemplate({{ block.id }})">
+                                    <i class="fas fa-plus me-1"></i>Use Template
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="previewTemplate({{ block.id }})">
+                                    <i class="fas fa-eye"></i>Preview
+                                </button>
+                            </div>
+                            
+                            <small class="text-muted">
+                                <i class="fas fa-user me-1"></i>
+                                by {{ block.created_by.get_full_name|default:block.created_by.username }}
+                            </small>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <div class="text-center py-4">
+                            <i class="fas fa-share-alt fa-3x text-muted mb-3"></i>
+                            <h5>No public templates available</h5>
+                            <p class="text-muted">Be the first to share a template with the community</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create Template Modal -->
+<div class="modal fade" id="createTemplateModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Content Template</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createTemplateForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="templateTitle" class="form-label">Template Title</label>
+                        <input type="text" class="form-control" id="templateTitle" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="templateDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="templateDescription" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="templateType" class="form-label">Content Type</label>
+                        <select class="form-select" id="templateType" required>
+                            <option value="text">Text Content</option>
+                            <option value="video">Video</option>
+                            <option value="image">Image</option>
+                            <option value="quiz">Quiz</option>
+                            <option value="exercise">Interactive Exercise</option>
+                            <option value="code">Code Block</option>
+                            <option value="callout">Callout/Note</option>
+                            <option value="document">Document</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="templateContent" class="form-label">Content</label>
+                        <textarea class="form-control tinymce" id="templateContent" rows="8"></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="templateTags" class="form-label">Tags (comma-separated)</label>
+                        <input type="text" class="form-control" id="templateTags" placeholder="education, introduction, welcome">
+                    </div>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="isPublicTemplate">
+                        <label class="form-check-label" for="isPublicTemplate">
+                            Make this template available to all instructors
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveTemplate()">Create Template</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Initialize TinyMCE for template content
+document.addEventListener('DOMContentLoaded', function() {
+    tinymce.init({
+        selector: 'textarea.tinymce',
+        height: 300,
+        menubar: false,
+        branding: false,
+        promotion: false,
+        plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
+            'anchor', 'searchreplace', 'visualblocks', 'code',
+            'insertdatetime', 'media', 'table', 'help', 'wordcount',
+            'template', 'codesample', 'emoticons'
+        ],
+        toolbar: 'undo redo | blocks fontsize | bold italic underline | link image | align | bullist numlist | emoticons charmap | code | removeformat',
+        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.6; color: #333; } h1, h2, h3, h4, h5, h6 { color: #1a2e53; } a { color: #ff5d15; }',
+        setup: function (editor) {
+            editor.on('init', function () {
+                console.log('TinyMCE initialized for content templates');
+            });
+        }
+    });
+});
+
+// Filter functionality
+document.querySelectorAll('[data-filter]').forEach(button => {
+    button.addEventListener('click', () => {
+        // Update active button
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Filter templates
+        const filter = button.getAttribute('data-filter');
+        const templates = document.querySelectorAll('.template-card[data-type]');
+        
+        templates.forEach(template => {
+            if (filter === 'all' || template.getAttribute('data-type') === filter) {
+                template.closest('.col-lg-4').style.display = 'block';
+            } else {
+                template.closest('.col-lg-4').style.display = 'none';
+            }
+        });
+    });
+});
+
+// Template functions
+function createNewTemplate() {
+    const modal = new bootstrap.Modal(document.getElementById('createTemplateModal'));
+    modal.show();
+}
+
+function useTemplate(templateId) {
+    if (window.opener) {
+        // Send template back to course builder
+        window.opener.insertTemplate(templateId);
+        window.close();
+    } else {
+        // Copy template content to clipboard or redirect
+        alert('Template selected! (Implementation depends on context)');
+    }
+}
+
+function editTemplate(templateId) {
+    // Implementation for editing templates
+    console.log('Edit template:', templateId);
+}
+
+function deleteTemplate(templateId) {
+    if (confirm('Are you sure you want to delete this template?')) {
+        // Implementation for deleting templates
+        console.log('Delete template:', templateId);
+    }
+}
+
+function previewTemplate(templateId) {
+    // Implementation for previewing templates
+    console.log('Preview template:', templateId);
+}
+
+function saveTemplate() {
+    const form = document.getElementById('createTemplateForm');
+    const formData = new FormData(form);
+    
+    // Add form data
+    formData.append('title', document.getElementById('templateTitle').value);
+    formData.append('description', document.getElementById('templateDescription').value);
+    formData.append('content_type', document.getElementById('templateType').value);
+    formData.append('content', document.getElementById('templateContent').value);
+    formData.append('tags', document.getElementById('templateTags').value);
+    formData.append('is_template', document.getElementById('isPublicTemplate').checked);
+    
+    // Submit via AJAX
+    fetch('/course-builder/api/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert('Error: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to create template');
+    });
+}
+</script>
+{% endblock %}
