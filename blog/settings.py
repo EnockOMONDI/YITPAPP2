@@ -97,6 +97,13 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# =============================================================================
+# COURSE BUILDER CONFIGURATION
+# =============================================================================
+
+# TinyMCE API Key for Course Builder
+TINYMCE_API_KEY = os.getenv('TINYMCE_API_KEY', 'qu2jb8k2dyah1y5pjdglgob206f26juotj3u82hzd7mvyz1x')
+
 
 
 # =============================================================================
@@ -205,6 +212,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.settings',
             ],
         },
     },

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_head %}
-<script src="https://cdn.tiny.cloud/1/qu2jb8k2dyah1y5pjdglgob206f26juotj3u82hzd7mvyz1x/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/{{ settings.TINYMCE_API_KEY }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 {% endblock %}
 
 {% block title %}Content Templates - Course Builder{% endblock %}

@@ -52,6 +52,10 @@ services:
       - key: ADMIN_EMAIL
         value: "youthimpactglobal3@gmail.com"
 
+      # TinyMCE Configuration
+      - key: TINYMCE_API_KEY
+        value: "qu2jb8k2dyah1y5pjdglgob206f26juotj3u82hzd7mvyz1x"
+
       # Static Files Configuration
       - key: STATIC_URL
         value: "/static/"
