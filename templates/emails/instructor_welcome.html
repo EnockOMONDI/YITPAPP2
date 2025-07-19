@@ -74,8 +74,9 @@
     <div class="step-item">
         <div class="step-number">1</div>
         <div class="step-content">
-            <strong>First Login</strong><br>
-            <a href="{{ login_url }}" style="color: #ff5d15;">Click here to log in</a> using your credentials above
+            <strong>First Login & Dashboard Access</strong><br>
+            <a href="{{ login_url }}" style="color: #ff5d15;">Click here to log in</a> using your credentials above<br>
+            <small>You'll be automatically redirected to your instructor dashboard</small>
             {% if temporary_password %}<br><small>You can change your password anytime in your profile settings</small>{% endif %}
         </div>
     </div>
@@ -92,9 +93,9 @@
     <div class="step-item">
         <div class="step-number">3</div>
         <div class="step-content">
-            <strong>Explore Your Dashboard</strong><br>
-            Familiarize yourself with the instructor tools and course management features<br>
-            <small>Access course creation, student management, and analytics</small>
+            <strong>Explore Your Instructor Dashboard</strong><br>
+            <a href="{{ instructor_dashboard_url }}" style="color: #ff5d15;">Visit your dashboard</a> to access instructor tools and course management features<br>
+            <small>Access course creation, student management, analytics, and tutorial resources</small>
         </div>
     </div>
     
@@ -142,8 +143,11 @@
 </div>
 
 <div class="cta-container">
-    <a href="{{ login_url }}" class="cta-button">
+    <a href="{{ instructor_dashboard_url }}" class="cta-button">
         🚀 Start Your Instructor Journey
+    </a>
+    <a href="{{ profile_url }}" class="cta-button-secondary">
+        👤 View Your Profile
     </a>
 </div>
 
@@ -188,6 +192,54 @@
         padding: 15px;
         margin: 15px 0;
         border-left: 4px solid #ffc107;
+    }
+
+    .cta-container {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        text-decoration: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        text-align: center;
+        margin: 10px 5px;
+        transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 93, 21, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .cta-button-secondary {
+        display: inline-block;
+        background: transparent;
+        color: #ff5d15;
+        border: 2px solid #ff5d15;
+        text-decoration: none;
+        padding: 13px 28px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        text-align: center;
+        margin: 10px 5px;
+        transition: all 0.3s ease;
+    }
+
+    .cta-button-secondary:hover {
+        background: #ff5d15;
+        color: white;
+        transform: translateY(-2px);
+        text-decoration: none;
     }
 </style>
 {% endblock %}

@@ -668,6 +668,17 @@ class CustomUserAdmin(BaseUserAdmin):
     """
     inlines = (InstructorProfileInline,)
 
+    # Override add_fieldsets to include email field in user creation form
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("username", "email", "first_name", "last_name", "password1", "password2"),
+            },
+        ),
+    )
+
     def get_list_display(self, request):
         """Enhanced list display with instructor role indicators"""
         base_display = list(super().get_list_display(request))
@@ -750,6 +761,15 @@ class CustomUserAdmin(BaseUserAdmin):
             if is_new_user:
                 try:
                     from .email_utils import send_instructor_welcome_email, log_instructor_account_creation
+
+                    # Validate email address before sending
+                    if not obj.email or not obj.email.strip():
+                        messages.warning(
+                            request,
+                            f'Instructor account created successfully, but no email address provided. '
+                            'Please add an email address and manually send welcome instructions.'
+                        )
+                        return
 
                     # Send welcome email
                     email_sent = send_instructor_welcome_email(

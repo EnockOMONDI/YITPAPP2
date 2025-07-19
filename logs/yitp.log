@@ -7596,3 +7596,271 @@ INFO 2025-07-19 17:12:53,095 basehttp 40963 6191050752 "GET /registration/ HTTP/
 INFO 2025-07-19 17:12:53,128 basehttp 40963 6191050752 "GET / HTTP/1.1" 200 71113
 INFO 2025-07-19 17:12:57,302 basehttp 40963 6191050752 "GET /registration/ HTTP/1.1" 302 0
 INFO 2025-07-19 17:12:57,315 basehttp 40963 6191050752 "GET / HTTP/1.1" 200 71113
+INFO 2025-07-19 17:25:27,025 autoreload 41801 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:25:39,249 autoreload 41801 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-07-19 17:25:41,090 autoreload 41813 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:25:42,332 basehttp 41813 6341865472 "GET /admin HTTP/1.1" 301 0
+INFO 2025-07-19 17:25:42,439 basehttp 41813 6358691840 "GET /admin/ HTTP/1.1" 200 48230
+INFO 2025-07-19 17:25:42,540 basehttp 41813 6358691840 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:25:42,553 basehttp 41813 6341865472 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:25:59,715 autoreload 41813 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-07-19 17:26:02,134 autoreload 41835 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:26:06,507 basehttp 41835 6158020608 "GET /admin/auth/user/ HTTP/1.1" 200 33348
+INFO 2025-07-19 17:26:06,580 basehttp 41835 6158020608 "GET /static/admin/css/changelists.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:26:06,588 basehttp 41835 6225326080 "GET /static/admin/js/core.js HTTP/1.1" 200 5682
+INFO 2025-07-19 17:26:06,589 basehttp 41835 6158020608 "GET /static/admin/js/actions.js HTTP/1.1" 200 7872
+INFO 2025-07-19 17:26:06,590 basehttp 41835 6242152448 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 0
+INFO 2025-07-19 17:26:06,594 basehttp 41835 6225326080 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-07-19 17:26:06,600 basehttp 41835 6158020608 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-07-19 17:26:06,603 basehttp 41835 6174846976 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:26:06,605 basehttp 41835 6191673344 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:26:06,607 basehttp 41835 6208499712 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 292458
+INFO 2025-07-19 17:26:06,611 basehttp 41835 6242152448 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO 2025-07-19 17:26:06,611 basehttp 41835 6174846976 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-07-19 17:26:06,611 basehttp 41835 6191673344 "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-19 17:26:07,161 basehttp 41835 6242152448 "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO 2025-07-19 17:26:07,165 basehttp 41835 6191673344 "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-19 17:26:07,210 basehttp 41835 6191673344 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:26:11,673 basehttp 41835 6174846976 "GET /static/jet/css/themes/light-gray/select2.theme.css?v=1.3.10 HTTP/1.1" 200 23382
+INFO 2025-07-19 17:26:11,674 basehttp 41835 6191673344 "GET /static/jet/css/themes/light-gray/jquery-ui.theme.css?v=1.3.10 HTTP/1.1" 200 6648
+INFO 2025-07-19 17:26:11,675 basehttp 41835 6158020608 "GET /static/jet/css/themes/light-gray/base.css?v=1.3.10 HTTP/1.1" 200 175873
+INFO 2025-07-19 17:26:15,162 basehttp 41835 6191673344 "GET /static/jet/css/themes/light-violet/jquery-ui.theme.css?v=1.3.10 HTTP/1.1" 200 6648
+INFO 2025-07-19 17:26:15,163 basehttp 41835 6174846976 "GET /static/jet/css/themes/light-violet/select2.theme.css?v=1.3.10 HTTP/1.1" 200 23386
+INFO 2025-07-19 17:26:15,164 basehttp 41835 6158020608 "GET /static/jet/css/themes/light-violet/base.css?v=1.3.10 HTTP/1.1" 200 175834
+INFO 2025-07-19 17:26:20,235 basehttp 41835 6191673344 "GET /static/jet/css/themes/default/jquery-ui.theme.css?v=1.3.10 HTTP/1.1" 200 6639
+INFO 2025-07-19 17:26:20,235 basehttp 41835 6174846976 "GET /static/jet/css/themes/default/select2.theme.css?v=1.3.10 HTTP/1.1" 200 23387
+INFO 2025-07-19 17:26:20,250 basehttp 41835 6158020608 "GET /static/jet/css/themes/default/base.css?v=1.3.10 HTTP/1.1" 200 175930
+INFO 2025-07-19 17:26:25,244 basehttp 41835 6158020608 "GET /admin/password_change/ HTTP/1.1" 200 19150
+INFO 2025-07-19 17:26:25,315 basehttp 41835 6158020608 "GET /static/admin/css/forms.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:26:25,329 basehttp 41835 6174846976 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:26:28,620 basehttp 41835 6174846976 "GET /admin/auth/user/ HTTP/1.1" 200 33354
+INFO 2025-07-19 17:26:28,754 basehttp 41835 6174846976 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:26:32,188 basehttp 41835 6191673344 "GET /static/jet/css/themes/light-blue/jquery-ui.theme.css?v=1.3.10 HTTP/1.1" 200 6648
+INFO 2025-07-19 17:26:32,190 basehttp 41835 6174846976 "GET /static/jet/css/themes/light-blue/select2.theme.css?v=1.3.10 HTTP/1.1" 200 23384
+INFO 2025-07-19 17:26:32,191 basehttp 41835 6158020608 "GET /static/jet/css/themes/light-blue/base.css?v=1.3.10 HTTP/1.1" 200 175879
+INFO 2025-07-19 17:26:51,006 autoreload 41916 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:27:16,559 autoreload 41965 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:27:36,211 basehttp 41965 6133084160 "GET /login/ HTTP/1.1" 302 0
+INFO 2025-07-19 17:27:36,238 basehttp 41965 6133084160 "GET / HTTP/1.1" 200 71113
+INFO 2025-07-19 17:27:41,538 basehttp 41965 6133084160 "GET /admin HTTP/1.1" 301 0
+INFO 2025-07-19 17:27:41,694 basehttp 41965 6133084160 "GET /admin/ HTTP/1.1" 200 48245
+INFO 2025-07-19 17:27:42,360 basehttp 41965 6183563264 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:27:42,361 basehttp 41965 6166736896 "GET /static/jet/css/themes/light-gray/jquery-ui.theme.css?v=1.3.10 HTTP/1.1" 200 6648
+INFO 2025-07-19 17:27:42,362 basehttp 41965 6149910528 "GET /static/jet/css/themes/light-gray/select2.theme.css?v=1.3.10 HTTP/1.1" 200 23382
+INFO 2025-07-19 17:27:42,365 basehttp 41965 6200389632 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:27:42,365 basehttp 41965 6133084160 "GET /static/jet/css/themes/light-gray/base.css?v=1.3.10 HTTP/1.1" 200 175873
+INFO 2025-07-19 17:27:42,401 basehttp 41965 6133084160 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:27:45,007 basehttp 41965 6133084160 "GET /admin/ HTTP/1.1" 200 48245
+INFO 2025-07-19 17:27:45,065 basehttp 41965 6133084160 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:28:14,712 basehttp 41965 6133084160 "GET /admin/auth/user/ HTTP/1.1" 200 33351
+INFO 2025-07-19 17:28:14,776 basehttp 41965 6133084160 "GET /static/admin/css/base.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:28:14,779 basehttp 41965 6149910528 "GET /static/jet/css/vendor.css?v=1.3.10 HTTP/1.1" 200 54544
+INFO 2025-07-19 17:28:14,785 basehttp 41965 6217216000 "GET /static/jet/css/themes/green/jquery-ui.theme.css?v=1.3.10 HTTP/1.1" 200 6639
+INFO 2025-07-19 17:28:14,785 basehttp 41965 6166736896 "GET /static/jet/css/icons/style.css?v=1.3.10 HTTP/1.1" 200 2248
+INFO 2025-07-19 17:28:14,786 basehttp 41965 6133084160 "GET /static/admin/css/changelists.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:28:14,786 basehttp 41965 6200389632 "GET /static/jet/css/themes/green/select2.theme.css?v=1.3.10 HTTP/1.1" 200 23387
+INFO 2025-07-19 17:28:14,792 basehttp 41965 6149910528 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:28:14,795 basehttp 41965 6133084160 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-07-19 17:28:14,797 basehttp 41965 6149910528 "GET /static/jet/js/i18n/select2/en.js?v=1.3.10 HTTP/1.1" 200 827
+INFO 2025-07-19 17:28:14,800 basehttp 41965 6183563264 "GET /static/jet/css/themes/green/base.css?v=1.3.10 HTTP/1.1" 200 175930
+INFO 2025-07-19 17:28:14,801 basehttp 41965 6166736896 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:28:14,803 basehttp 41965 6217216000 "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89795
+INFO 2025-07-19 17:28:14,804 basehttp 41965 6183563264 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 0
+INFO 2025-07-19 17:28:14,807 basehttp 41965 6149910528 "GET /static/admin/js/core.js HTTP/1.1" 200 5682
+INFO 2025-07-19 17:28:14,809 basehttp 41965 6217216000 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-07-19 17:28:14,810 basehttp 41965 6183563264 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-07-19 17:28:14,811 basehttp 41965 6166736896 "GET /static/admin/js/actions.js HTTP/1.1" 200 7872
+INFO 2025-07-19 17:28:14,812 basehttp 41965 6133084160 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 292458
+INFO 2025-07-19 17:28:14,813 basehttp 41965 6200389632 "GET /static/jet/js/build/bundle.min.js?v=1.3.10 HTTP/1.1" 200 419372
+INFO 2025-07-19 17:28:14,816 basehttp 41965 6149910528 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO 2025-07-19 17:28:14,816 basehttp 41965 6133084160 "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-19 17:28:14,817 basehttp 41965 6166736896 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-07-19 17:28:14,819 basehttp 41965 6133084160 "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO 2025-07-19 17:28:14,820 basehttp 41965 6133084160 "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-19 17:28:14,870 basehttp 41965 6133084160 "GET /static/jet/css/icons/fonts/jet-icons.ttf?415d6s HTTP/1.1" 200 6240
+WARNING 2025-07-19 17:28:14,939 log 41965 6133084160 Not Found: /favicon.ico
+WARNING 2025-07-19 17:28:14,939 basehttp 41965 6133084160 "GET /favicon.ico HTTP/1.1" 404 9029
+INFO 2025-07-19 17:28:17,179 basehttp 41965 6133084160 "GET /admin/auth/user/add/ HTTP/1.1" 200 34829
+INFO 2025-07-19 17:28:17,215 basehttp 41965 6133084160 "GET /static/admin/css/forms.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:28:17,217 basehttp 41965 6200389632 "GET /static/admin/js/collapse.js HTTP/1.1" 200 1803
+INFO 2025-07-19 17:28:17,218 basehttp 41965 6217216000 "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+INFO 2025-07-19 17:28:17,219 basehttp 41965 6183563264 "GET /static/admin/js/inlines.js HTTP/1.1" 200 15526
+INFO 2025-07-19 17:28:17,219 basehttp 41965 6133084160 "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 85
+INFO 2025-07-19 17:28:17,224 basehttp 41965 6183563264 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-07-19 17:28:17,226 basehttp 41965 6133084160 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-07-19 17:28:17,228 basehttp 41965 6149910528 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:28:17,228 basehttp 41965 6166736896 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:28:17,231 basehttp 41965 6149910528 "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-07-19 17:30:28,237 basehttp 41965 6133084160 "POST /admin/auth/user/add/ HTTP/1.1" 200 35070
+INFO 2025-07-19 17:30:28,321 basehttp 41965 6133084160 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:30:28,321 basehttp 41965 6149910528 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:30:48,978 basehttp 41965 6133084160 "POST /admin/auth/user/add/ HTTP/1.1" 302 0
+INFO 2025-07-19 17:30:49,079 basehttp 41965 6133084160 "GET /admin/auth/user/34/change/ HTTP/1.1" 200 77495
+INFO 2025-07-19 17:30:49,134 basehttp 41965 6183563264 "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 0
+INFO 2025-07-19 17:30:49,134 basehttp 41965 6166736896 "GET /static/admin/js/calendar.js HTTP/1.1" 200 8466
+INFO 2025-07-19 17:30:49,140 basehttp 41965 6149910528 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:30:49,141 basehttp 41965 6133084160 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:34:22,077 basehttp 41965 6133084160 "GET /admin/ HTTP/1.1" 200 47663
+INFO 2025-07-19 17:34:22,156 basehttp 41965 6133084160 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:34:22,173 basehttp 41965 6133084160 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:34:25,189 basehttp 41965 6133084160 "POST /admin/logout/ HTTP/1.1" 302 0
+INFO 2025-07-19 17:34:25,197 basehttp 41965 6133084160 "GET / HTTP/1.1" 200 65845
+INFO 2025-07-19 17:34:25,229 basehttp 41965 6133084160 "GET /static/assets/css/preloader.css HTTP/1.1" 200 3392
+INFO 2025-07-19 17:34:25,236 basehttp 41965 6166736896 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-07-19 17:34:25,236 basehttp 41965 6133084160 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-07-19 17:34:25,237 basehttp 41965 6217216000 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-07-19 17:34:25,239 basehttp 41965 6200389632 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-07-19 17:34:25,244 basehttp 41965 6200389632 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-07-19 17:34:25,244 basehttp 41965 6149910528 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-07-19 17:34:25,245 basehttp 41965 6166736896 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-07-19 17:34:25,246 basehttp 41965 6183563264 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-07-19 17:34:25,248 basehttp 41965 6217216000 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-07-19 17:34:25,250 basehttp 41965 6166736896 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-07-19 17:34:25,251 basehttp 41965 6149910528 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-07-19 17:34:25,252 basehttp 41965 6133084160 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-07-19 17:34:25,253 basehttp 41965 6200389632 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-07-19 17:34:28,275 basehttp 41965 6200389632 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-07-19 17:34:28,276 basehttp 41965 6133084160 "GET /static/assets/img/hero/hero-1.jpg HTTP/1.1" 200 370048
+INFO 2025-07-19 17:34:28,280 basehttp 41965 6200389632 "GET /static/assets/img/about/D.jpg HTTP/1.1" 200 197385
+INFO 2025-07-19 17:34:28,282 basehttp 41965 6133084160 "GET /static/assets/img/about/D2.jpg HTTP/1.1" 200 366629
+INFO 2025-07-19 17:34:28,284 basehttp 41965 6133084160 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-07-19 17:34:28,286 basehttp 41965 6200389632 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-07-19 17:34:28,288 basehttp 41965 6200389632 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-07-19 17:34:28,291 basehttp 41965 6200389632 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-07-19 17:34:28,296 basehttp 41965 6200389632 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-07-19 17:34:28,298 basehttp 41965 6200389632 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-07-19 17:34:28,304 basehttp 41965 6200389632 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-07-19 17:34:28,306 basehttp 41965 6200389632 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-07-19 17:34:28,308 basehttp 41965 6200389632 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-07-19 17:34:28,309 basehttp 41965 6200389632 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-07-19 17:34:28,311 basehttp 41965 6200389632 "GET /static/assets/js/main.js HTTP/1.1" 200 8167
+INFO 2025-07-19 17:34:30,219 basehttp 41965 6133084160 "GET /static/assets/img/hero/1.jpg HTTP/1.1" 200 213442
+INFO 2025-07-19 17:34:30,221 basehttp 41965 6149910528 "GET /static/assets/img/hero/3.jpg HTTP/1.1" 200 182047
+INFO 2025-07-19 17:34:30,234 basehttp 41965 6149910528 "GET /static/assets/img/hero/hero-sm-1.jpg HTTP/1.1" 200 183439
+INFO 2025-07-19 17:34:30,235 basehttp 41965 6133084160 "GET /static/assets/img/hero/4.jpg HTTP/1.1" 200 215809
+INFO 2025-07-19 17:34:30,348 basehttp 41965 6149910528 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-07-19 17:34:30,349 basehttp 41965 6133084160 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-07-19 17:34:30,349 basehttp 41965 6166736896 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-07-19 17:34:36,209 basehttp 41965 6133084160 "GET /admin/auth/user/ HTTP/1.1" 302 0
+INFO 2025-07-19 17:34:36,232 basehttp 41965 6133084160 "GET /admin/login/?next=/admin/auth/user/ HTTP/1.1" 200 9852
+INFO 2025-07-19 17:34:36,256 basehttp 41965 6133084160 "GET /static/admin/css/login.css HTTP/1.1" 200 0
+INFO 2025-07-19 17:34:36,259 basehttp 41965 6133084160 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:34:45,837 basehttp 41965 6133084160 "POST /admin/login/?next=/admin/auth/user/ HTTP/1.1" 200 10019
+INFO 2025-07-19 17:34:45,873 basehttp 41965 6133084160 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 17:35:13,252 basehttp 41965 6133084160 "POST /admin/login/?next=/admin/auth/user/ HTTP/1.1" 302 0
+WARNING 2025-07-19 17:35:13,268 log 41965 6133084160 Forbidden (Permission denied): /admin/auth/user/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/contrib/admin/options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/views/decorators/cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/utils/decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1923, in changelist_view
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+WARNING 2025-07-19 17:35:13,278 basehttp 41965 6133084160 "GET /admin/auth/user/ HTTP/1.1" 403 135
+INFO 2025-07-19 17:35:20,114 basehttp 41965 6133084160 "GET / HTTP/1.1" 200 71198
+INFO 2025-07-19 17:35:21,360 basehttp 41965 6133084160 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-07-19 17:35:23,986 basehttp 41965 6133084160 "GET /users/instructor/profile/ HTTP/1.1" 200 30741
+INFO 2025-07-19 17:35:24,016 basehttp 41965 6133084160 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-07-19 17:35:24,021 basehttp 41965 6149910528 "GET /static/img/logo/logo-icon.png HTTP/1.1" 200 200544
+INFO 2025-07-19 17:35:24,027 basehttp 41965 6217216000 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-07-19 17:35:24,027 basehttp 41965 6183563264 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-07-19 17:35:24,028 basehttp 41965 6200389632 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-07-19 17:35:24,031 basehttp 41965 6166736896 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-07-19 17:35:24,031 basehttp 41965 6200389632 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-07-19 17:35:24,033 basehttp 41965 6183563264 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-07-19 17:35:35,185 basehttp 41965 6133084160 "GET /users/instructor/ HTTP/1.1" 200 36843
+INFO 2025-07-19 17:42:26,051 autoreload 41965 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-07-19 17:42:28,404 autoreload 42605 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:42:52,899 autoreload 42605 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-07-19 17:42:54,167 autoreload 42629 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:46:11,400 autoreload 42629 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-07-19 17:46:12,933 autoreload 42757 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:46:25,652 autoreload 42811 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 17:46:57,733 autoreload 42902 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 18:00:44,896 autoreload 43704 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-19 18:00:56,301 basehttp 43704 6169997312 "GET /admin/courses/course/add/ HTTP/1.1" 200 28959
+INFO 2025-07-19 18:00:56,705 basehttp 43704 6169997312 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:00:56,712 basehttp 43704 6169997312 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:09,556 basehttp 43704 6169997312 "GET /admin/courses/course/add/ HTTP/1.1" 200 28962
+INFO 2025-07-19 18:01:09,599 basehttp 43704 6169997312 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:09,599 basehttp 43704 6186823680 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:11,382 basehttp 43704 6169997312 "GET /admin/courses/course/add/ HTTP/1.1" 200 28962
+INFO 2025-07-19 18:01:11,404 basehttp 43704 6186823680 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:11,408 basehttp 43704 6169997312 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:24,840 basehttp 43704 6169997312 "GET /admin/courses/course/add/ HTTP/1.1" 200 28962
+INFO 2025-07-19 18:01:24,899 basehttp 43704 6186823680 "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:24,899 basehttp 43704 6169997312 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:34,318 basehttp 43704 6169997312 "GET /admin/courses/course/add/ HTTP/1.1" 200 28962
+INFO 2025-07-19 18:01:37,055 basehttp 43704 6169997312 "GET / HTTP/1.1" 200 71198
+INFO 2025-07-19 18:01:37,114 basehttp 43704 6169997312 "GET /static/assets/css/preloader.css HTTP/1.1" 200 3392
+INFO 2025-07-19 18:01:37,119 basehttp 43704 6203650048 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-07-19 18:01:37,121 basehttp 43704 6254129152 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-07-19 18:01:37,123 basehttp 43704 6237302784 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-07-19 18:01:37,124 basehttp 43704 6169997312 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-07-19 18:01:37,127 basehttp 43704 6203650048 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-07-19 18:01:37,130 basehttp 43704 6220476416 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-07-19 18:01:37,130 basehttp 43704 6169997312 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-07-19 18:01:37,133 basehttp 43704 6237302784 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-07-19 18:01:37,136 basehttp 43704 6220476416 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-07-19 18:01:37,136 basehttp 43704 6186823680 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-07-19 18:01:37,136 basehttp 43704 6169997312 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-07-19 18:01:37,139 basehttp 43704 6254129152 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-07-19 18:01:37,144 basehttp 43704 6203650048 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-07-19 18:01:37,146 basehttp 43704 6186823680 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-07-19 18:01:37,148 basehttp 43704 6220476416 "GET /static/assets/img/hero/hero-1.jpg HTTP/1.1" 200 370048
+INFO 2025-07-19 18:01:37,153 basehttp 43704 6186823680 "GET /static/assets/img/about/D.jpg HTTP/1.1" 200 197385
+INFO 2025-07-19 18:01:37,155 basehttp 43704 6220476416 "GET /static/assets/img/about/D2.jpg HTTP/1.1" 200 366629
+INFO 2025-07-19 18:01:37,162 basehttp 43704 6203650048 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-07-19 18:01:37,162 basehttp 43704 6254129152 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-07-19 18:01:37,166 basehttp 43704 6254129152 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-07-19 18:01:37,170 basehttp 43704 6237302784 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-07-19 18:01:37,170 basehttp 43704 6220476416 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-07-19 18:01:37,171 basehttp 43704 6254129152 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-07-19 18:01:37,172 basehttp 43704 6186823680 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-07-19 18:01:37,177 basehttp 43704 6203650048 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-07-19 18:01:37,179 basehttp 43704 6220476416 "GET /static/assets/js/main.js HTTP/1.1" 200 8167
+INFO 2025-07-19 18:01:37,180 basehttp 43704 6169997312 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-07-19 18:01:37,181 basehttp 43704 6254129152 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-07-19 18:01:37,184 basehttp 43704 6186823680 "GET /static/assets/img/hero/3.jpg HTTP/1.1" 200 182047
+INFO 2025-07-19 18:01:37,186 basehttp 43704 6237302784 "GET /static/assets/img/hero/1.jpg HTTP/1.1" 200 213442
+INFO 2025-07-19 18:01:37,187 basehttp 43704 6203650048 "GET /static/assets/img/hero/hero-sm-1.jpg HTTP/1.1" 200 183439
+INFO 2025-07-19 18:01:37,188 basehttp 43704 6169997312 "GET /static/assets/img/hero/4.jpg HTTP/1.1" 200 215809
+INFO 2025-07-19 18:01:37,251 basehttp 43704 6203650048 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-07-19 18:01:37,252 basehttp 43704 6237302784 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-07-19 18:01:37,254 basehttp 43704 6169997312 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-07-19 18:01:37,343 basehttp 43704 6169997312 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-07-19 18:01:39,643 basehttp 43704 6169997312 "GET /users/instructor/profile/ HTTP/1.1" 200 30741
+INFO 2025-07-19 18:01:39,665 basehttp 43704 6169997312 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-07-19 18:01:39,670 basehttp 43704 6186823680 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-07-19 18:01:39,671 basehttp 43704 6254129152 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-07-19 18:01:39,672 basehttp 43704 6220476416 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-07-19 18:01:39,672 basehttp 43704 6169997312 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-07-19 18:01:39,674 basehttp 43704 6203650048 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-07-19 18:01:39,675 basehttp 43704 6237302784 "GET /static/img/logo/logo-icon.png HTTP/1.1" 200 200544
+INFO 2025-07-19 18:01:39,685 basehttp 43704 6237302784 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-07-19 18:01:42,684 basehttp 43704 6169997312 "GET /users/instructor/ HTTP/1.1" 200 36843
+INFO 2025-07-19 18:01:46,892 basehttp 43704 6169997312 "GET /users/instructor/courses/ HTTP/1.1" 200 36591
+INFO 2025-07-19 18:01:53,333 basehttp 43704 6169997312 "GET /admin/courses/course/add/ HTTP/1.1" 200 28962
+INFO 2025-07-19 18:01:53,362 basehttp 43704 6169997312 "GET /jet/jsi18n/ HTTP/1.1" 200 3343
+INFO 2025-07-19 18:01:53,362 basehttp 43704 6186823680 "GET /admin/jsi18n/ HTTP/1.1" 200 3343

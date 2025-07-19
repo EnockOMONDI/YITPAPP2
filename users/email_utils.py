@@ -738,6 +738,11 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
     Returns:
         bool: True if email sent successfully, False otherwise
     """
+    # Validate email address
+    if not user.email or not user.email.strip():
+        logger.error(f"❌ Cannot send instructor welcome email: User {user.username} has no email address")
+        return False
+
     logger.info(f"Preparing to send instructor welcome email to {user.email}")
 
     try:
@@ -795,7 +800,9 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
         base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
         login_url = f"{base_url}/login/"
         admin_url = f"{base_url}/admin/"
-        resources_url = f"{base_url}/instructor/resources/"
+        instructor_dashboard_url = f"{base_url}/users/instructor/"
+        resources_url = f"{base_url}/users/instructor/tutorial/"
+        profile_url = f"{base_url}/profile/"
 
         # Email context
         context = {
@@ -809,7 +816,9 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
             'temporary_password': temporary_password,
             'login_url': login_url,
             'admin_url': admin_url,
+            'instructor_dashboard_url': instructor_dashboard_url,
             'resources_url': resources_url,
+            'profile_url': profile_url,
             'support_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
             'created_by_admin': created_by_admin,
             'site_name': 'Youth Impact Training Programme'

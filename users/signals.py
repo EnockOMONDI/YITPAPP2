@@ -163,7 +163,6 @@ def setup_instructor_permissions(sender, instance, created, **kwargs):
                 # Check if there's a current request context to get the admin user
                 try:
                     from django.contrib.admin.models import LogEntry
-                    from django.contrib.contenttypes.models import ContentType
 
                     # Get the most recent log entry for this user creation
                     user_ct = ContentType.objects.get_for_model(User)
