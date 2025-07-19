@@ -1,0 +1,96 @@
+YOUTH IMPACT TRAINING PROGRAMME
+Welcome to the YITP Instructor Team!
+
+Hello {{ user.first_name|default:user.username }}!
+
+Congratulations! Your instructor account has been successfully created for the Youth Impact Training Programme. We're excited to have you join our team of dedicated educators and mentors.
+
+🚀 YOUR INSTRUCTOR JOURNEY BEGINS NOW!
+You've been granted access to our Learning Management System with specialized instructor privileges. Let's get you started!
+
+🔐 YOUR LOGIN CREDENTIALS:
+Username: {{ user.username }}
+Email: {{ user.email }}
+{% if temporary_password %}Temporary Password: {{ temporary_password }}{% endif %}
+Login URL: {{ login_url }}
+
+👤 YOUR INSTRUCTOR ROLE & PERMISSIONS:
+Role: {{ instructor_role_display }}
+Verification Status: {% if verification_status == 'verified' %}✅ Verified{% elif verification_status == 'pending' %}⏳ Pending Verification{% else %}❌ {{ verification_status|title }}{% endif %}
+
+Your Permissions Include:
+{% for permission in permissions_summary %}• {{ permission }}
+{% endfor %}
+
+{% if can_access_admin %}Admin Access: ✅ Granted - You can access the admin interface
+Admin URL: {{ admin_url }}
+{% else %}Admin Access: ❌ Limited - Contact administrator if you need admin access
+{% endif %}
+
+{% if temporary_password %}🔒 IMPORTANT SECURITY NOTICE:
+• Your temporary password is secure and does not expire
+• You can change your password at any time through your profile settings
+• Use a strong password with at least 8 characters, including uppercase, lowercase, numbers, and symbols
+• Never share your login credentials with anyone
+• If you forget your password, use the "Forgot Password" link on the login page
+
+{% endif %}📋 NEXT STEPS TO GET STARTED:
+
+STEP 1: First Login
+Visit: {{ login_url }}
+Use your credentials above to log in
+{% if temporary_password %}You can change your password anytime in your profile settings{% endif %}
+
+STEP 2: Complete Your Profile
+Add your bio, qualifications, specializations, and contact information
+This helps students and colleagues learn about your expertise
+
+STEP 3: Explore Your Dashboard
+Familiarize yourself with the instructor tools and course management features
+Access course creation, student management, and analytics
+
+{% if can_access_admin %}STEP 4: Access Admin Interface
+Visit: {{ admin_url }}
+Use the admin panel for advanced management features
+Manage courses, users, and system settings
+
+{% endif %}🛡️ PASSWORD SECURITY GUIDELINES:
+
+When creating your new password, ensure it includes:
+• At least 8 characters in length
+• Mix of uppercase and lowercase letters
+• At least one number
+• At least one special character (!@#$%^&*)
+• Avoid common words or personal information
+• Don't reuse passwords from other accounts
+
+🆘 NEED HELP?
+
+Technical Support: {{ support_email }}
+Instructor Resources: {{ resources_url }}
+Training Materials: Available in your instructor dashboard
+Community Forum: Connect with other YITP instructors
+
+We're here to support you every step of the way. Welcome to the YITP family, and thank you for your commitment to empowering young minds!
+
+🚀 READY TO START?
+Log in now: {{ login_url }}
+
+---
+
+Best regards,
+The YITP Team
+Youth Impact Training Programme
+"Empowering young minds for a better tomorrow"
+
+Contact Support: {{ support_email }}
+© 2025 Youth Impact Global. All rights reserved.
+
+---
+
+SECURITY REMINDER:
+This email contains sensitive login information. Please:
+• Keep this information secure and confidential
+• Change your temporary password immediately upon first login
+• Contact support if you suspect any unauthorized access
+• Delete this email after you've successfully logged in and changed your password

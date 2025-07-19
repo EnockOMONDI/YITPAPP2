@@ -847,72 +847,8 @@ class InstructorProfile(models.Model):
 
         super().save(*args, **kwargs)
 
-        # Update user staff status and permissions based on role
-        if self.instructor_role in ['system_admin', 'course_instructor', 'content_creator', 'teaching_assistant']:
-            self.user.is_staff = True
-
-            # Grant necessary permissions for admin access
-            from django.contrib.auth.models import Permission
-            from django.contrib.contenttypes.models import ContentType
-
-            # Get content types for models instructors need to access
-            try:
-                course_ct = ContentType.objects.get(app_label='courses', model='course')
-                module_ct = ContentType.objects.get(app_label='courses', model='module')
-                lesson_ct = ContentType.objects.get(app_label='courses', model='lesson')
-                quiz_ct = ContentType.objects.get(app_label='assessments', model='quiz')
-                question_ct = ContentType.objects.get(app_label='assessments', model='question')
-                message_ct = ContentType.objects.get(app_label='communication', model='message')
-            except ContentType.DoesNotExist:
-                # If content types don't exist yet, skip permission setup
-                return
-
-            # Define permissions based on role
-            if self.instructor_role == 'system_admin':
-                # System admins get all permissions
-                self.user.is_superuser = True
-            else:
-                # Other instructors get specific permissions
-                permissions_to_add = []
-
-                # Course permissions
-                permissions_to_add.extend([
-                    Permission.objects.get(content_type=course_ct, codename='view_course'),
-                    Permission.objects.get(content_type=course_ct, codename='add_course'),
-                    Permission.objects.get(content_type=course_ct, codename='change_course'),
-                ])
-
-                # Module and lesson permissions
-                permissions_to_add.extend([
-                    Permission.objects.get(content_type=module_ct, codename='view_module'),
-                    Permission.objects.get(content_type=module_ct, codename='add_module'),
-                    Permission.objects.get(content_type=module_ct, codename='change_module'),
-                    Permission.objects.get(content_type=lesson_ct, codename='view_lesson'),
-                    Permission.objects.get(content_type=lesson_ct, codename='add_lesson'),
-                    Permission.objects.get(content_type=lesson_ct, codename='change_lesson'),
-                ])
-
-                # Assessment permissions
-                if self.can_manage_assessments:
-                    permissions_to_add.extend([
-                        Permission.objects.get(content_type=quiz_ct, codename='view_quiz'),
-                        Permission.objects.get(content_type=quiz_ct, codename='add_quiz'),
-                        Permission.objects.get(content_type=quiz_ct, codename='change_quiz'),
-                        Permission.objects.get(content_type=question_ct, codename='view_question'),
-                        Permission.objects.get(content_type=question_ct, codename='add_question'),
-                        Permission.objects.get(content_type=question_ct, codename='change_question'),
-                    ])
-
-                # Message permissions
-                permissions_to_add.extend([
-                    Permission.objects.get(content_type=message_ct, codename='view_message'),
-                    Permission.objects.get(content_type=message_ct, codename='change_message'),
-                ])
-
-                # Add permissions to user
-                self.user.user_permissions.add(*permissions_to_add)
-
-            self.user.save()
+        # Note: Permission setup is now handled by the setup_instructor_permissions signal
+        # in users/signals.py to ensure consistency and avoid circular imports
 
     @property
     def is_verified(self):

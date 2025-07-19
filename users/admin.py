@@ -610,7 +610,189 @@ class ProfileAdmin(admin.ModelAdmin):
 # INSTRUCTOR ROLE SYSTEM ADMIN CONFIGURATIONS
 # ============================================================================
 
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 from .models import InstructorProfile, Specialization, CourseInstructor
+
+
+# ============================================================================
+# ENHANCED USER ADMIN WITH INSTRUCTOR PROFILE INTEGRATION
+# ============================================================================
+
+class InstructorProfileInline(admin.StackedInline):
+    """
+    Enhanced inline for instructor profiles with visual role indicators
+    """
+    model = InstructorProfile
+    fk_name = 'user'  # Specify which foreign key to use
+    can_delete = False
+    verbose_name_plural = 'Instructor Profile'
+    extra = 0
+
+    fieldsets = (
+        ('Role & Verification', {
+            'fields': ('instructor_role', 'verification_status'),
+            'classes': ('wide',)
+        }),
+        ('Professional Information', {
+            'fields': ('bio', 'qualifications', 'specializations', 'years_experience'),
+            'classes': ('collapse',)
+        }),
+        ('Contact & Social', {
+            'fields': ('linkedin_url', 'website_url', 'office_hours'),
+            'classes': ('collapse',)
+        }),
+        ('Permissions', {
+            'fields': (
+                'is_active', 'can_create_courses',
+                'can_manage_assessments', 'can_view_analytics'
+            ),
+            'classes': ('collapse',)
+        }),
+    )
+
+    filter_horizontal = ['specializations']
+    readonly_fields = ['verified_at', 'verified_by']
+
+    def get_readonly_fields(self, request, obj=None):
+        """Make verification fields readonly for non-superusers"""
+        readonly = list(self.readonly_fields)
+        if not request.user.is_superuser:
+            readonly.extend(['verification_status'])
+        return readonly
+
+
+class CustomUserAdmin(BaseUserAdmin):
+    """
+    Enhanced User admin with instructor profile integration and visual indicators
+    """
+    inlines = (InstructorProfileInline,)
+
+    def get_list_display(self, request):
+        """Enhanced list display with instructor role indicators"""
+        base_display = list(super().get_list_display(request))
+        # Insert instructor role after username
+        if 'username' in base_display:
+            username_index = base_display.index('username')
+            base_display.insert(username_index + 1, 'instructor_role_display')
+            base_display.insert(username_index + 2, 'verification_status_display')
+        return base_display
+
+    def instructor_role_display(self, obj):
+        """Display instructor role with color coding"""
+        if hasattr(obj, 'instructor_profile'):
+            profile = obj.instructor_profile
+            role_colors = {
+                'system_admin': '#dc3545',  # Red
+                'course_instructor': '#ff5d15',  # YITP Orange
+                'teaching_assistant': '#28a745',  # Green
+                'content_creator': '#17a2b8',  # Cyan
+                'grader': '#6c757d',  # Gray
+            }
+            color = role_colors.get(profile.instructor_role, '#6c757d')
+            return format_html(
+                '<span style="background: {}; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">{}</span>',
+                color,
+                profile.get_instructor_role_display()
+            )
+        return format_html('<span style="color: #6c757d; font-style: italic;">Student</span>')
+    instructor_role_display.short_description = 'Role'
+    instructor_role_display.admin_order_field = 'instructor_profile__instructor_role'
+
+    def verification_status_display(self, obj):
+        """Display verification status with color coding"""
+        if hasattr(obj, 'instructor_profile'):
+            profile = obj.instructor_profile
+            status_colors = {
+                'verified': '#28a745',  # Green
+                'pending': '#ffc107',  # Yellow
+                'rejected': '#dc3545',  # Red
+            }
+            color = status_colors.get(profile.verification_status, '#6c757d')
+            icon = {
+                'verified': '✅',
+                'pending': '⏳',
+                'rejected': '❌',
+            }.get(profile.verification_status, '❓')
+
+            return format_html(
+                '<span style="color: {}; font-weight: bold;">{} {}</span>',
+                color,
+                icon,
+                profile.get_verification_status_display()
+            )
+        return '-'
+    verification_status_display.short_description = 'Verification'
+    verification_status_display.admin_order_field = 'instructor_profile__verification_status'
+
+    def save_model(self, request, obj, form, change):
+        """Enhanced save with auto-verification and email notification for instructor profiles"""
+        is_new_user = not change
+        super().save_model(request, obj, form, change)
+
+        # Handle instructor profile creation and verification
+        if hasattr(obj, 'instructor_profile'):
+            profile = obj.instructor_profile
+
+            # Auto-verify instructor profiles created by superusers
+            if request.user.is_superuser and profile.verification_status == 'pending':
+                profile.verification_status = 'verified'
+                profile.verified_at = timezone.now()
+                profile.verified_by = request.user
+                profile.save()
+
+                messages.success(
+                    request,
+                    f'Instructor profile for {obj.get_full_name() or obj.username} has been automatically verified.'
+                )
+
+            # Send welcome email for newly created users with instructor profiles
+            if is_new_user:
+                try:
+                    from .email_utils import send_instructor_welcome_email, log_instructor_account_creation
+
+                    # Send welcome email
+                    email_sent = send_instructor_welcome_email(
+                        user=obj,
+                        instructor_profile=profile,
+                        temporary_password=None,  # Admin-created accounts use admin-set passwords
+                        created_by_admin=request.user
+                    )
+
+                    # Log the account creation
+                    log_instructor_account_creation(
+                        user=obj,
+                        instructor_profile=profile,
+                        created_by_admin=request.user,
+                        email_sent=email_sent
+                    )
+
+                    if email_sent:
+                        messages.success(
+                            request,
+                            f'Welcome email sent to {obj.email} with instructor account details and login instructions.'
+                        )
+                    else:
+                        messages.warning(
+                            request,
+                            f'User created successfully, but failed to send welcome email to {obj.email}. '
+                            'Please manually provide login credentials to the instructor.'
+                        )
+
+                except Exception as e:
+                    messages.error(
+                        request,
+                        f'User created successfully, but email notification failed: {str(e)}'
+                    )
+
+    def get_queryset(self, request):
+        """Optimize queries with select_related for instructor profiles"""
+        return super().get_queryset(request).select_related('instructor_profile')
+
+
+# Unregister the default User admin and register our custom one
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 
 @admin.register(Specialization)
@@ -638,9 +820,9 @@ class SpecializationAdmin(admin.ModelAdmin):
 
 @admin.register(InstructorProfile)
 class InstructorProfileAdmin(admin.ModelAdmin):
-    """Enhanced admin interface for instructor profiles"""
+    """Enhanced admin interface for instructor profiles with visual indicators"""
     list_display = [
-        'user_full_name', 'instructor_role', 'verification_status',
+        'user_full_name', 'instructor_role_display', 'verification_status_display',
         'years_experience', 'specializations_count', 'is_active', 'created_at'
     ]
     list_filter = [
@@ -695,6 +877,47 @@ class InstructorProfileAdmin(admin.ModelAdmin):
     user_full_name.short_description = 'Instructor Name'
     user_full_name.admin_order_field = 'user__first_name'
 
+    def instructor_role_display(self, obj):
+        """Display instructor role with color coding"""
+        role_colors = {
+            'system_admin': '#dc3545',  # Red
+            'course_instructor': '#ff5d15',  # YITP Orange
+            'teaching_assistant': '#28a745',  # Green
+            'content_creator': '#17a2b8',  # Cyan
+            'grader': '#6c757d',  # Gray
+        }
+        color = role_colors.get(obj.instructor_role, '#6c757d')
+        return format_html(
+            '<span style="background: {}; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">{}</span>',
+            color,
+            obj.get_instructor_role_display()
+        )
+    instructor_role_display.short_description = 'Role'
+    instructor_role_display.admin_order_field = 'instructor_role'
+
+    def verification_status_display(self, obj):
+        """Display verification status with color coding"""
+        status_colors = {
+            'verified': '#28a745',  # Green
+            'pending': '#ffc107',  # Yellow
+            'rejected': '#dc3545',  # Red
+        }
+        color = status_colors.get(obj.verification_status, '#6c757d')
+        icon = {
+            'verified': '✅',
+            'pending': '⏳',
+            'rejected': '❌',
+        }.get(obj.verification_status, '❓')
+
+        return format_html(
+            '<span style="color: {}; font-weight: bold;">{} {}</span>',
+            color,
+            icon,
+            obj.get_verification_status_display()
+        )
+    verification_status_display.short_description = 'Verification'
+    verification_status_display.admin_order_field = 'verification_status'
+
     def specializations_count(self, obj):
         """Display count of specializations"""
         count = obj.specializations.count()
@@ -705,6 +928,60 @@ class InstructorProfileAdmin(admin.ModelAdmin):
             )
         return '-'
     specializations_count.short_description = 'Specializations'
+
+    def save_model(self, request, obj, form, change):
+        """Enhanced save with auto-verification and email notification for instructor profiles"""
+        # Auto-verify instructor profiles created by superusers
+        if request.user.is_superuser and obj.verification_status == 'pending':
+            obj.verification_status = 'verified'
+            obj.verified_at = timezone.now()
+            obj.verified_by = request.user
+
+            messages.success(
+                request,
+                f'Instructor profile for {obj.user.get_full_name() or obj.user.username} has been automatically verified.'
+            )
+
+        super().save_model(request, obj, form, change)
+
+        # Send welcome email for newly created instructor profiles
+        if not change:  # Only for new profiles
+            try:
+                from .email_utils import send_instructor_welcome_email, log_instructor_account_creation
+
+                # Send welcome email
+                email_sent = send_instructor_welcome_email(
+                    user=obj.user,
+                    instructor_profile=obj,
+                    temporary_password=None,  # Admin-created accounts use admin-set passwords
+                    created_by_admin=request.user
+                )
+
+                # Log the account creation
+                log_instructor_account_creation(
+                    user=obj.user,
+                    instructor_profile=obj,
+                    created_by_admin=request.user,
+                    email_sent=email_sent
+                )
+
+                if email_sent:
+                    messages.success(
+                        request,
+                        f'Welcome email sent to {obj.user.email} with account details and login instructions.'
+                    )
+                else:
+                    messages.warning(
+                        request,
+                        f'Instructor profile created successfully, but failed to send welcome email to {obj.user.email}. '
+                        'Please manually provide login credentials to the instructor.'
+                    )
+
+            except Exception as e:
+                messages.error(
+                    request,
+                    f'Instructor profile created successfully, but email notification failed: {str(e)}'
+                )
 
     def verify_instructors(self, request, queryset):
         """Bulk action to verify instructors"""

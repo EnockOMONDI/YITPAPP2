@@ -27,8 +27,9 @@
 }
 
 :root {
-    --yitp-primary: #6610f2;
-    --yitp-accent: #ff5d15;
+    --yitp-primary: #ff5d15;    /* YITP Orange - Primary brand color */
+    --yitp-secondary: #1a2e53;  /* YITP Dark Blue - Secondary brand color */
+    --yitp-accent: #ff5d15;     /* YITP Orange - Accent color */
     --yitp-light: #f8f9fa;
     --yitp-dark: #1a2e53;
     --yitp-white: #ffffff;
@@ -39,10 +40,23 @@
 }
 
 .profile-header {
-    background: var(--yitp-primary);
+    background: linear-gradient(135deg, var(--yitp-primary), var(--yitp-secondary));
     color: var(--yitp-white);
     padding: 3rem 0 2rem;
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
 }
 
 .profile-avatar {
@@ -97,14 +111,14 @@
 .stats-card:hover {
     border-color: var(--yitp-primary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 16, 242, 0.1);
+    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.15);
 }
 
 .stats-icon {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: var(--yitp-primary);
+    background: linear-gradient(135deg, var(--yitp-primary), var(--yitp-secondary));
     color: var(--yitp-white);
     display: flex;
     align-items: center;
@@ -162,19 +176,22 @@
 }
 
 .btn-yitp-primary {
-    background: var(--yitp-primary);
-    border-color: var(--yitp-primary);
+    background: linear-gradient(135deg, var(--yitp-primary), var(--yitp-secondary));
+    border: none;
     color: var(--yitp-white);
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-yitp-primary:hover {
-    background: var(--yitp-dark);
-    border-color: var(--yitp-dark);
+    background: linear-gradient(135deg, var(--yitp-secondary), var(--yitp-primary));
     color: var(--yitp-white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 93, 21, 0.3);
 }
 
 .btn-yitp-accent {
@@ -469,21 +486,22 @@
 
 /* Enhanced Button Styles */
 .btn-yitp-accent {
-    background: var(--yitp-accent);
-    border: 2px solid var(--yitp-accent);
+    background: linear-gradient(135deg, var(--yitp-accent), var(--yitp-secondary));
+    border: none;
     color: var(--yitp-white);
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-yitp-accent:hover {
-    background: #e54a0f;
-    border-color: #e54a0f;
+    background: linear-gradient(135deg, var(--yitp-secondary), var(--yitp-accent));
     color: var(--yitp-white);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 93, 21, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 93, 21, 0.4);
 }
 
 .btn-outline-secondary {

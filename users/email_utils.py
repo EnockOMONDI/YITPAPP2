@@ -6,6 +6,8 @@ import os
 import sys
 import random
 import string
+import re
+import json
 from datetime import datetime, timedelta
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -21,6 +23,203 @@ logger = logging.getLogger(__name__)
 def generate_otp(length=6):
     """Generate a random OTP of specified length"""
     return ''.join(random.choices(string.digits, k=length))
+
+
+def generate_secure_temporary_password(length=12):
+    """
+    Generate a secure temporary password for instructor accounts
+
+    Args:
+        length: Password length (minimum 12 characters)
+
+    Returns:
+        str: Secure temporary password meeting complexity requirements
+    """
+    if length < 12:
+        length = 12
+
+    # Define character sets
+    uppercase = string.ascii_uppercase
+    lowercase = string.ascii_lowercase
+    digits = string.digits
+    special_chars = "!@#$%^&*"
+
+    # Ensure at least one character from each set
+    password = [
+        random.choice(uppercase),
+        random.choice(lowercase),
+        random.choice(digits),
+        random.choice(special_chars)
+    ]
+
+    # Fill remaining length with random characters from all sets
+    all_chars = uppercase + lowercase + digits + special_chars
+    for _ in range(length - 4):
+        password.append(random.choice(all_chars))
+
+    # Shuffle the password list to randomize positions
+    random.shuffle(password)
+
+    return ''.join(password)
+
+
+def validate_password_complexity(password):
+    """
+    Validate password meets YITP security requirements
+
+    Args:
+        password: Password string to validate
+
+    Returns:
+        tuple: (is_valid: bool, errors: list)
+    """
+    errors = []
+
+    if len(password) < 8:
+        errors.append("Password must be at least 8 characters long")
+
+    if not re.search(r'[A-Z]', password):
+        errors.append("Password must contain at least one uppercase letter")
+
+    if not re.search(r'[a-z]', password):
+        errors.append("Password must contain at least one lowercase letter")
+
+    if not re.search(r'\d', password):
+        errors.append("Password must contain at least one number")
+
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        errors.append("Password must contain at least one special character")
+
+    # Check for common weak patterns
+    common_patterns = ['123456', 'password', 'qwerty', 'abc123']
+    if any(pattern in password.lower() for pattern in common_patterns):
+        errors.append("Password contains common weak patterns")
+
+    return len(errors) == 0, errors
+
+
+def log_instructor_account_creation(user, instructor_profile, created_by_admin, email_sent=False):
+    """
+    Log instructor account creation for audit purposes
+
+    Args:
+        user: User instance
+        instructor_profile: InstructorProfile instance
+        created_by_admin: Admin user who created the account
+        email_sent: Whether welcome email was sent successfully
+    """
+    try:
+        audit_data = {
+            'action': 'instructor_account_created',
+            'instructor_username': user.username,
+            'instructor_email': user.email,
+            'instructor_role': instructor_profile.instructor_role,
+            'verification_status': instructor_profile.verification_status,
+            'created_by': created_by_admin.username if created_by_admin else 'system',
+            'created_by_email': created_by_admin.email if created_by_admin else 'system',
+            'email_notification_sent': email_sent,
+            'timestamp': timezone.now().isoformat(),
+            'permissions_granted': instructor_profile.get_permissions_summary()
+        }
+
+        # Log to Django logger
+        logger.info(f"INSTRUCTOR_AUDIT: {json.dumps(audit_data, indent=2)}")
+
+        # Also log to a separate audit file if configured
+        audit_logger = logging.getLogger('instructor_audit')
+        audit_logger.info(json.dumps(audit_data))
+
+    except Exception as e:
+        logger.error(f"Failed to log instructor account creation audit: {str(e)}")
+
+
+def create_instructor_with_temporary_password(username, email, first_name, last_name, instructor_role, created_by_admin):
+    """
+    Create instructor account with secure temporary password and send welcome email
+
+    Args:
+        username: Username for the new instructor
+        email: Email address for the new instructor
+        first_name: First name
+        last_name: Last name
+        instructor_role: Role from InstructorProfile.INSTRUCTOR_ROLES
+        created_by_admin: Admin user creating the account
+
+    Returns:
+        dict: {
+            'success': bool,
+            'user': User instance or None,
+            'instructor_profile': InstructorProfile instance or None,
+            'temporary_password': str or None,
+            'email_sent': bool,
+            'message': str
+        }
+    """
+    try:
+        from django.contrib.auth.models import User
+        from .models import InstructorProfile
+
+        # Generate secure temporary password
+        temporary_password = generate_secure_temporary_password()
+
+        # Validate password (should always pass, but good to check)
+        is_valid, errors = validate_password_complexity(temporary_password)
+        if not is_valid:
+            logger.error(f"Generated temporary password failed validation: {errors}")
+            # Generate a new one
+            temporary_password = generate_secure_temporary_password(16)
+
+        # Create user account
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            password=temporary_password
+        )
+
+        # Create instructor profile (this will trigger the signal)
+        instructor_profile = InstructorProfile.objects.create(
+            user=user,
+            instructor_role=instructor_role,
+            verification_status='pending'  # Will be auto-verified for system_admin
+        )
+
+        # Send welcome email
+        email_sent = send_instructor_welcome_email(
+            user=user,
+            instructor_profile=instructor_profile,
+            temporary_password=temporary_password,
+            created_by_admin=created_by_admin
+        )
+
+        # Log the account creation
+        log_instructor_account_creation(
+            user=user,
+            instructor_profile=instructor_profile,
+            created_by_admin=created_by_admin,
+            email_sent=email_sent
+        )
+
+        return {
+            'success': True,
+            'user': user,
+            'instructor_profile': instructor_profile,
+            'temporary_password': temporary_password,
+            'email_sent': email_sent,
+            'message': f'Instructor account created successfully for {email}'
+        }
+
+    except Exception as e:
+        logger.error(f"Failed to create instructor account: {str(e)}")
+        return {
+            'success': False,
+            'user': None,
+            'instructor_profile': None,
+            'temporary_password': None,
+            'email_sent': False,
+            'message': f'Failed to create instructor account: {str(e)}'
+        }
 
 def send_html_email_direct(subject, html_content, recipient_list, from_email=None, plain_text_content=None):
     """
@@ -207,17 +406,18 @@ def send_welcome_email(user):
     )
 
 def send_login_notification(user, request):
-    """Send login notification email"""
+    """Send login notification email to user and admin notification for instructors"""
     # Get client IP
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
-    
+
     # Get user agent
     user_agent = request.META.get('HTTP_USER_AGENT', 'Unknown')
-    
+
+    # Send user notification
     context = {
         'user': user,
         'login_time': timezone.now(),
@@ -226,18 +426,33 @@ def send_login_notification(user, request):
         'site_name': 'Youth Impact Training Programme',
         'support_email': settings.ADMIN_EMAIL
     }
-    
+
     html_content = render_to_string('emails/login_notification.html', context)
     plain_content = render_to_string('emails/login_notification.txt', context)
-    
+
     subject = "YITP Account Login Notification"
-    
-    return send_html_email(
+
+    user_notification_result = send_html_email(
         subject=subject,
         html_content=html_content,
         recipient_list=[user.email],
         plain_text_content=plain_content
     )
+
+    # Send admin notification for instructor logins
+    admin_notification_result = False
+    try:
+        if hasattr(user, 'instructor_profile'):
+            admin_notification_result = send_instructor_login_notification(
+                user=user,
+                login_timestamp=timezone.now(),
+                ip_address=ip,
+                user_agent=user_agent
+            )
+    except Exception as e:
+        logger.error(f"Failed to send instructor login admin notification: {str(e)}")
+
+    return user_notification_result
 
 def send_sponsorship_confirmation_email(sponsorship_request):
     """Send confirmation email when sponsorship request is submitted"""
@@ -508,6 +723,241 @@ def send_certificate_issuance_email(user, course, certificate):
         logger.error(f"❌ Failed to send certificate issuance email to {user.email}")
 
     return result
+
+
+def send_instructor_welcome_email(user, instructor_profile, temporary_password=None, created_by_admin=None):
+    """
+    Send comprehensive welcome email to newly created instructor accounts
+
+    Args:
+        user: User instance for the new instructor
+        instructor_profile: InstructorProfile instance with role and permissions
+        temporary_password: Optional temporary password if generated
+        created_by_admin: User instance of the admin who created the account
+
+    Returns:
+        bool: True if email sent successfully, False otherwise
+    """
+    logger.info(f"Preparing to send instructor welcome email to {user.email}")
+
+    try:
+        # Get role-specific information
+        role_colors = {
+            'system_admin': '#dc3545',  # Red
+            'course_instructor': '#ff5d15',  # YITP Orange
+            'teaching_assistant': '#28a745',  # Green
+            'content_creator': '#17a2b8',  # Cyan
+            'grader': '#6c757d',  # Gray
+        }
+
+        # Build permissions summary based on role
+        permissions_summary = []
+        if instructor_profile.instructor_role == 'system_admin':
+            permissions_summary = [
+                "Full system administration access",
+                "All course and user management permissions",
+                "Complete access to admin interface",
+                "System configuration and settings management"
+            ]
+        elif instructor_profile.instructor_role == 'course_instructor':
+            permissions_summary = [
+                "Create and manage courses",
+                "Create and manage course modules and lessons",
+                "Create and manage quizzes and assessments",
+                "View and manage student enrollments",
+                "Access to instructor admin interface"
+            ]
+        elif instructor_profile.instructor_role == 'teaching_assistant':
+            permissions_summary = [
+                "View course content and materials",
+                "Modify course modules and lessons",
+                "Grade quizzes and assessments",
+                "Manage student enrollments and progress",
+                "Limited admin interface access"
+            ]
+        elif instructor_profile.instructor_role == 'content_creator':
+            permissions_summary = [
+                "Create and manage course content",
+                "Create and manage course modules and lessons",
+                "Create and manage quizzes and assessments",
+                "View student enrollment information",
+                "Access to content management admin interface"
+            ]
+        elif instructor_profile.instructor_role == 'grader':
+            permissions_summary = [
+                "View course content and materials",
+                "Grade quizzes and assessments",
+                "View and update student progress",
+                "Limited admin interface access"
+            ]
+
+        # Build URLs
+        base_url = getattr(settings, 'SITE_URL', 'http://localhost:8000')
+        login_url = f"{base_url}/login/"
+        admin_url = f"{base_url}/admin/"
+        resources_url = f"{base_url}/instructor/resources/"
+
+        # Email context
+        context = {
+            'user': user,
+            'instructor_profile': instructor_profile,
+            'instructor_role_display': instructor_profile.get_instructor_role_display(),
+            'verification_status': instructor_profile.verification_status,
+            'role_color': role_colors.get(instructor_profile.instructor_role, '#6c757d'),
+            'permissions_summary': permissions_summary,
+            'can_access_admin': instructor_profile.can_access_admin,
+            'temporary_password': temporary_password,
+            'login_url': login_url,
+            'admin_url': admin_url,
+            'resources_url': resources_url,
+            'support_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
+            'created_by_admin': created_by_admin,
+            'site_name': 'Youth Impact Training Programme'
+        }
+
+        # Render email templates
+        html_content = render_to_string('emails/instructor_welcome.html', context)
+        plain_content = render_to_string('emails/instructor_welcome.txt', context)
+
+        # Email subject
+        role_display = instructor_profile.get_instructor_role_display()
+        subject = f"Welcome to YITP Instructor Team - {role_display} Account Created"
+
+        logger.info(f"Sending instructor welcome email with subject: {subject}")
+
+        # Send email
+        result = send_html_email(
+            subject=subject,
+            html_content=html_content,
+            recipient_list=[user.email],
+            plain_text_content=plain_content
+        )
+
+        if result:
+            logger.info(f"✅ Successfully sent instructor welcome email to {user.email}")
+
+            # Log the email delivery for audit purposes
+            try:
+                # Create audit log entry
+                audit_message = (
+                    f"Instructor welcome email sent to {user.email} "
+                    f"(Role: {role_display}, Created by: {created_by_admin.username if created_by_admin else 'System'})"
+                )
+                logger.info(f"AUDIT: {audit_message}")
+            except Exception as audit_error:
+                logger.warning(f"Failed to create audit log: {str(audit_error)}")
+        else:
+            logger.error(f"❌ Failed to send instructor welcome email to {user.email}")
+
+        return result
+
+    except Exception as e:
+        logger.error(f"❌ Error sending instructor welcome email to {user.email}: {str(e)}")
+        return False
+
+
+def send_instructor_login_notification(user, login_timestamp=None, ip_address=None, user_agent=None):
+    """
+    Send notification to admin when instructor logs in for security monitoring
+
+    Args:
+        user: User instance of the instructor who logged in
+        login_timestamp: Timestamp of login (defaults to now)
+        ip_address: IP address of the login attempt
+        user_agent: User agent string from the request
+
+    Returns:
+        bool: True if email sent successfully, False otherwise
+    """
+    if login_timestamp is None:
+        login_timestamp = timezone.now()
+
+    # Only send notifications for instructor accounts
+    try:
+        instructor_profile = user.instructor_profile
+    except:
+        # Not an instructor, skip notification
+        return False
+
+    logger.info(f"Preparing to send instructor login notification for {user.username}")
+
+    try:
+        # Email context
+        context = {
+            'instructor_user': user,
+            'instructor_profile': instructor_profile,
+            'login_timestamp': login_timestamp,
+            'ip_address': ip_address or 'Unknown',
+            'user_agent': user_agent or 'Unknown',
+            'instructor_role_display': instructor_profile.get_instructor_role_display(),
+            'verification_status': instructor_profile.get_verification_status_display(),
+            'admin_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
+            'site_name': 'Youth Impact Training Programme',
+            'login_location': f"{ip_address}" if ip_address else "Unknown Location"
+        }
+
+        # Email subject
+        subject = f"YITP Instructor Login Alert - {user.get_full_name() or user.username}"
+
+        # Simple text email for admin notification
+        email_content = f"""
+YITP INSTRUCTOR LOGIN NOTIFICATION
+
+An instructor has logged into the YITP Learning Management System.
+
+INSTRUCTOR DETAILS:
+• Name: {user.get_full_name() or user.username}
+• Username: {user.username}
+• Email: {user.email}
+• Role: {instructor_profile.get_instructor_role_display()}
+• Verification Status: {instructor_profile.get_verification_status_display()}
+
+LOGIN DETAILS:
+• Login Time: {login_timestamp.strftime('%Y-%m-%d %H:%M:%S UTC')}
+• IP Address: {ip_address or 'Unknown'}
+• User Agent: {user_agent or 'Unknown'}
+• Last Login: {user.last_login.strftime('%Y-%m-%d %H:%M:%S UTC') if user.last_login else 'First time login'}
+
+SECURITY INFORMATION:
+• Account Status: {'Active' if user.is_active else 'Inactive'}
+• Staff Status: {'Yes' if user.is_staff else 'No'}
+• Superuser: {'Yes' if user.is_superuser else 'No'}
+
+This is an automated security notification. If this login was not authorized, please take immediate action to secure the account.
+
+---
+YITP Security Monitoring System
+Youth Impact Training Programme
+"""
+
+        logger.info(f"Sending instructor login notification with subject: {subject}")
+
+        # Send email to admin
+        admin_email = getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com')
+        result = send_html_email(
+            subject=subject,
+            html_content=email_content,  # Using plain text as HTML for simplicity
+            recipient_list=[admin_email],
+            plain_text_content=email_content
+        )
+
+        if result:
+            logger.info(f"✅ Successfully sent instructor login notification to {admin_email}")
+
+            # Log for audit purposes
+            audit_message = (
+                f"Instructor login notification sent to admin for {user.username} "
+                f"(Role: {instructor_profile.get_instructor_role_display()}, IP: {ip_address or 'Unknown'})"
+            )
+            logger.info(f"AUDIT: {audit_message}")
+        else:
+            logger.error(f"❌ Failed to send instructor login notification to {admin_email}")
+
+        return result
+
+    except Exception as e:
+        logger.error(f"❌ Error sending instructor login notification for {user.username}: {str(e)}")
+        return False
 
 
 def send_otp_verification_admin_notification(user, verification_timestamp=None):

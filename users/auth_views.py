@@ -23,21 +23,55 @@ class InstructorAwareLoginView(auth_views.LoginView):
         Redirect instructors to their dashboard, others to default page
         """
         user = self.request.user
-        
+
         # Check if user has instructor profile
         try:
             instructor_profile = user.instructor_profile
             if instructor_profile.is_verified and instructor_profile.is_active:
                 messages.success(
-                    self.request, 
+                    self.request,
                     f"Welcome back, {user.get_full_name()}! You're logged in as {instructor_profile.get_instructor_role_display()}."
                 )
+
+                # Send admin notification for instructor login
+                self.send_instructor_login_notification(user)
+
                 return reverse('users:instructor_dashboard')
         except:
             pass
-        
+
         # Default redirect for non-instructors
         return super().get_success_url()
+
+    def send_instructor_login_notification(self, user):
+        """Send admin notification when instructor logs in"""
+        try:
+            from .email_utils import send_instructor_login_notification
+
+            # Get request details
+            ip_address = self.get_client_ip()
+            user_agent = self.request.META.get('HTTP_USER_AGENT', 'Unknown')
+
+            # Send notification asynchronously to avoid blocking login
+            send_instructor_login_notification(
+                user=user,
+                ip_address=ip_address,
+                user_agent=user_agent
+            )
+        except Exception as e:
+            # Don't break login if notification fails
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Failed to send instructor login notification: {str(e)}")
+
+    def get_client_ip(self):
+        """Get client IP address from request"""
+        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = self.request.META.get('REMOTE_ADDR')
+        return ip
 
 
 class InstructorProfileView(TemplateView):
