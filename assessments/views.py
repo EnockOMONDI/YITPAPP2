@@ -106,10 +106,13 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
     context_object_name = 'quiz'
     pk_url_kwarg = 'quiz_id'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        quiz = self.object
-        user = self.request.user
+    def get(self, request, *args, **kwargs):
+        """Handle GET request with enrollment and attempt checks"""
+        quiz = self.get_object()
+        user = request.user
+
+        print(f"DEBUG: User {user.username} trying to take quiz {quiz.id}")
+        print(f"DEBUG: Course: {quiz.lesson.module.course.title}")
 
         # Check enrollment
         try:
@@ -118,18 +121,29 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
                 course=quiz.lesson.module.course,
                 status='active'
             )
+            print(f"DEBUG: Found active enrollment: {enrollment.id}")
         except Enrollment.DoesNotExist:
-            messages.error(self.request, 'You must be enrolled in this course to take quizzes.')
+            print(f"DEBUG: No active enrollment found")
+            messages.error(request, 'You must be enrolled in this course to take quizzes.')
             return redirect('courses:course_detail', pk=quiz.lesson.module.course.id)
 
         # Check if user can take the quiz
         attempts = QuizAttempt.objects.filter(student=user, quiz=quiz)
+        print(f"DEBUG: Quiz attempts: {attempts.count()}, Max allowed: {quiz.max_attempts}")
         if quiz.max_attempts > 0 and attempts.count() >= quiz.max_attempts:
-            messages.error(self.request, 'You have reached the maximum number of attempts for this quiz.')
+            print(f"DEBUG: Max attempts reached")
+            messages.error(request, 'You have reached the maximum number of attempts for this quiz.')
             return redirect('assessments:quiz_detail', quiz_id=quiz.id)
 
+        print(f"DEBUG: All checks passed, proceeding to quiz")
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        quiz = self.object
+
         # Get quiz questions
-        questions = quiz.questions.filter(is_active=True).order_by('order')
+        questions = quiz.questions.all().order_by('sort_order')
         context['questions'] = questions
 
         return context
@@ -139,18 +153,26 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
         quiz = self.get_object()
         user = request.user
 
+        # Get user's enrollment for this course
+        try:
+            enrollment = Enrollment.objects.get(student=user, course=quiz.lesson.module.course)
+        except Enrollment.DoesNotExist:
+            messages.error(request, 'You must be enrolled in this course to take the quiz.')
+            return redirect('courses:course_detail', course_id=quiz.lesson.module.course.id)
+
         # Create quiz attempt
         attempt = QuizAttempt.objects.create(
             student=user,
             quiz=quiz,
+            enrollment=enrollment,
             started_at=timezone.now()
         )
 
         # Process answers and calculate score
-        total_questions = quiz.questions.filter(is_active=True).count()
+        total_questions = quiz.questions.count()
         correct_answers = 0
 
-        for question in quiz.questions.filter(is_active=True):
+        for question in quiz.questions.all():
             user_answer = request.POST.get(f'question_{question.id}')
             if user_answer == question.correct_answer:
                 correct_answers += 1

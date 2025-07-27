@@ -25,8 +25,8 @@ from users import views as user_views
 from users.otp_views import verify_otp_view, resend_otp_view, otp_status_view
 
 urlpatterns = [
-    path('jet/', include('jet.urls', 'jet')),  # Django Jet URLS
     path('admin/', admin.site.urls),
+    path('ckeditor5/', include('django_ckeditor_5.urls')),  # CKEditor 5 URLs
     path('graphql/', GraphQLView.as_view(graphiql=True)),
 
     # Custom authentication views

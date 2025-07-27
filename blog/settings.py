@@ -15,6 +15,8 @@ import os
 import sys
 import socket
 from django.contrib.messages import constants as messages
+from django.templatetags.static import static
+from django.urls import reverse_lazy
 
 # =============================================================================
 # SMART ENVIRONMENT DETECTION SYSTEM
@@ -136,7 +138,13 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-    'jet',
+    'unfold',  # Modern admin interface (replaces django-jet)
+    'unfold.contrib.filters',  # Enhanced admin filters
+    'unfold.contrib.forms',  # Enhanced admin forms
+    'unfold.contrib.inlines',  # Enhanced admin inlines
+    'unfold.contrib.import_export',  # Import/export integration
+    'unfold.contrib.guardian',  # Guardian integration
+    'unfold.contrib.simple_history',  # Simple history integration
     'graphene_django',
     'users',  # Simplified from 'users.apps.UsersConfig'
     'yitp',
@@ -160,10 +168,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'ckeditor',
+    'django_ckeditor_5',  # CKEditor 5 (replaces django-ckeditor)
     'taggit',
     'import_export',
-    'ckeditor_uploader',
 
     # Third-party apps
    'rest_framework',
@@ -336,103 +343,124 @@ UPLOADCARE = {
 }
 
 # ============================================================================
-# CKEDITOR CONFIGURATION FOR RICH CONTENT CREATION
+# CKEDITOR 5 CONFIGURATION FOR RICH CONTENT CREATION
 # ============================================================================
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_IMAGE_BACKEND = "pillow"
-CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
-
-CKEDITOR_CONFIGS = {
+# CKEditor 5 configuration
+CKEDITOR_5_CONFIGS = {
     'default': {
-        'toolbar': 'full',
+        'toolbar': {
+            'items': [
+                'heading', '|',
+                'bold', 'italic', 'underline', 'strikethrough', '|',
+                'fontColor', 'fontBackgroundColor', '|',
+                'alignment', '|',
+                'numberedList', 'bulletedList', '|',
+                'outdent', 'indent', '|',
+                'link', 'insertImage', 'insertTable', 'horizontalLine', '|',
+                'blockQuote', 'codeBlock', '|',
+                'undo', 'redo', '|',
+                'sourceEditing'
+            ]
+        },
         'height': 400,
         'width': '100%',
-        'extraPlugins': ','.join([
-            'uploadimage',
-            'div',
-            'autolink',
-            'autoembed',
-            'embedsemantic',
-            'autogrow',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath'
-        ]),
-        'removePlugins': 'stylesheetparser',
-        'allowedContent': True,
-        'toolbar_full': [
-            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Flash', 'Table', 'HorizontalRule'],
-            ['TextColor', 'BGColor'],
-            ['Smiley', 'SpecialChar'], ['Source'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['NumberedList', 'BulletedList'],
-            ['Indent', 'Outdent'],
-            ['Maximize'],
-        ],
-        'stylesSet': [
-            {'name': 'YITP Highlight', 'element': 'span', 'styles': {'background-color': '#fff8f5', 'color': '#ff5d15', 'padding': '2px 4px', 'border-radius': '3px'}},
-            {'name': 'YITP Alert', 'element': 'div', 'styles': {'background-color': '#fff8f5', 'border-left': '4px solid #ff5d15', 'padding': '10px', 'margin': '10px 0'}},
-            {'name': 'Code Block', 'element': 'pre', 'styles': {'background-color': '#f8f9fa', 'border': '1px solid #e9ecef', 'padding': '10px', 'border-radius': '5px'}},
-        ],
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
+                {'model': 'heading4', 'view': 'h4', 'title': 'Heading 4', 'class': 'ck-heading_heading4'},
+            ]
+        },
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', 'imageStyle:inline', 'imageStyle:block', 'imageStyle:side'
+            ]
+        },
+        'table': {
+            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells']
+        },
+        'link': {
+            'decorators': {
+                'addTargetToExternalLinks': True,
+                'defaultProtocol': 'https://',
+            }
+        },
     },
     'lesson_content': {
-        'toolbar': 'full',
+        'toolbar': {
+            'items': [
+                'heading', '|',
+                'bold', 'italic', 'underline', 'strikethrough', '|',
+                'fontColor', 'fontBackgroundColor', '|',
+                'alignment', '|',
+                'numberedList', 'bulletedList', '|',
+                'outdent', 'indent', '|',
+                'link', 'insertImage', 'insertTable', 'horizontalLine', '|',
+                'blockQuote', 'codeBlock', 'highlight', '|',
+                'specialCharacters', '|',
+                'undo', 'redo', '|',
+                'sourceEditing'
+            ]
+        },
         'height': 500,
         'width': '100%',
-        'extraPlugins': ','.join([
-            'uploadimage',
-            'div',
-            'autolink',
-            'autoembed',
-            'embedsemantic',
-            'autogrow',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath',
-            'codesnippet'
-        ]),
-        'removePlugins': 'stylesheetparser',
-        'allowedContent': True,
-        'codeSnippet_theme': 'monokai_sublime',
-        'toolbar_full': [
-            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike'],
-            ['TextColor', 'BGColor'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['NumberedList', 'BulletedList', 'Indent', 'Outdent'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Table', 'HorizontalRule', 'CodeSnippet'],
-            ['Undo', 'Redo'],
-            ['Source', 'Maximize'],
-        ],
-        'stylesSet': [
-            {'name': 'Learning Objective', 'element': 'div', 'styles': {'background-color': '#e8f5e8', 'border-left': '4px solid #28a745', 'padding': '15px', 'margin': '15px 0', 'border-radius': '5px'}},
-            {'name': 'Important Note', 'element': 'div', 'styles': {'background-color': '#fff3cd', 'border-left': '4px solid #ffc107', 'padding': '15px', 'margin': '15px 0', 'border-radius': '5px'}},
-            {'name': 'YITP Highlight', 'element': 'span', 'styles': {'background-color': '#fff8f5', 'color': '#ff5d15', 'padding': '2px 6px', 'border-radius': '3px', 'font-weight': 'bold'}},
-            {'name': 'Exercise Box', 'element': 'div', 'styles': {'background-color': '#f0f8ff', 'border': '2px solid #1a2e53', 'padding': '20px', 'margin': '20px 0', 'border-radius': '10px'}},
-            {'name': 'Code Inline', 'element': 'code', 'styles': {'background-color': '#f8f9fa', 'color': '#e83e8c', 'padding': '2px 4px', 'border-radius': '3px', 'font-family': 'monospace'}},
-        ],
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
+                {'model': 'heading4', 'view': 'h4', 'title': 'Heading 4', 'class': 'ck-heading_heading4'},
+            ]
+        },
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', 'imageStyle:inline', 'imageStyle:block', 'imageStyle:side'
+            ]
+        },
+        'table': {
+            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells']
+        },
+        'codeBlock': {
+            'languages': [
+                {'language': 'python', 'label': 'Python'},
+                {'language': 'javascript', 'label': 'JavaScript'},
+                {'language': 'html', 'label': 'HTML'},
+                {'language': 'css', 'label': 'CSS'},
+                {'language': 'sql', 'label': 'SQL'},
+                {'language': 'json', 'label': 'JSON'},
+            ]
+        },
+        'highlight': {
+            'options': [
+                {'model': 'yellowMarker', 'class': 'marker-yellow', 'title': 'Yellow marker', 'color': 'var(--ck-highlight-marker-yellow)', 'type': 'marker'},
+                {'model': 'greenMarker', 'class': 'marker-green', 'title': 'Green marker', 'color': 'var(--ck-highlight-marker-green)', 'type': 'marker'},
+                {'model': 'pinkMarker', 'class': 'marker-pink', 'title': 'Pink marker', 'color': 'var(--ck-highlight-marker-pink)', 'type': 'marker'},
+            ]
+        },
     },
     'basic': {
-        'toolbar': 'basic',
+        'toolbar': {
+            'items': [
+                'bold', 'italic', 'underline', '|',
+                'numberedList', 'bulletedList', '|',
+                'link', '|',
+                'removeFormat', 'sourceEditing'
+            ]
+        },
         'height': 200,
         'width': '100%',
-        'toolbar_basic': [
-            ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList'],
-            ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source']
-        ],
     }
 }
+
+# CKEditor 5 file upload settings
+CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.default_storage"
+CKEDITOR_5_UPLOAD_PATH = "uploads/"
+CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
 
 
 # ============================================================================
@@ -445,59 +473,147 @@ LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'  # Default redirect, will be overridden by custom logic
 LOGOUT_REDIRECT_URL = '/'
 
-JET_DEFAULT_THEME = 'green'
-JET_THEMES = [
-    {
-        'theme': 'default',
-        'color': '#47bac1',
-        'title': 'Default'
-    },
-    {
-        'theme': 'green',
-        'color': '#44b78b',
-        'title': 'Green'
-    },
-    {
-        'theme': 'light-green',
-        'color': '#2faa60',
-        'title': 'Light Green'
-    },
-    {
-        'theme': 'light-violet',
-        'color': '#a464c4',
-        'title': 'Light Violet'
-    },
-    {
-        'theme': 'light-blue',
-        'color': '#5EADDE',
-        'title': 'Light Blue'
-    },
-    {
-        'theme': 'light-gray',
-        'color': '#222',
-        'title': 'Light Gray'
-    }
-]
+# ============================================================================
+# DJANGO UNFOLD ADMIN INTERFACE CONFIGURATION
+# ============================================================================
 
-# Jet Side Menu Settings
-JET_SIDE_MENU_COMPACT = True
-
-JET_SIDE_MENU_ITEMS = [
-    {'label': 'Blog Management', 'items': [
-        {'name': 'blogapp.post', 'label': 'Posts'},
-        {'name': 'blogapp.category', 'label': 'Categories'},
-        {'name': 'blogapp.comment', 'label': 'Comments'},
-        {'name': 'blogapp.staticcontent', 'label': 'Static Content'},
-    ]},
-    {'label': 'Users', 'items': [
-        {'name': 'auth.user'},
-        {'name': 'auth.group'},
-    ]},
-]
-
-# Additional Jet settings
-JET_CHANGE_FORM_SIBLING_LINKS = True
-JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultIndexDashboard'
+UNFOLD = {
+    "SITE_TITLE": "YITP Admin",
+    "SITE_HEADER": "Youth Impact Training Platform",
+    "SITE_URL": "/",
+    "SITE_ICON": {
+        "light": lambda request: static("assets/img/logo.png"),  # YITP logo
+        "dark": lambda request: static("assets/img/logo.png"),   # YITP logo
+    },
+    "SITE_LOGO": {
+        "light": lambda request: static("assets/img/logo.png"),  # YITP logo
+        "dark": lambda request: static("assets/img/logo.png"),   # YITP logo
+    },
+    "SITE_SYMBOL": "school",  # Education-related icon
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": True,
+    "ENVIRONMENT": "YITP LMS",
+    "DASHBOARD_CALLBACK": "yitp.admin.dashboard_callback",
+    "LOGIN": {
+        "image": lambda request: static("assets/img/yitp-admin-bg.jpg"),
+        "redirect_after": lambda request: "/admin/",
+    },
+    "STYLES": [
+        lambda request: static("css/admin-custom.css"),
+    ],
+    "SCRIPTS": [
+        lambda request: static("js/admin-custom.js"),
+    ],
+    "COLORS": {
+        "primary": {
+            "50": "#fff8f5",
+            "100": "#ffedd5",
+            "200": "#fed7aa",
+            "300": "#fdba74",
+            "400": "#fb923c",
+            "500": "#ff5d15",  # YITP Orange
+            "600": "#ea580c",
+            "700": "#c2410c",
+            "800": "#9a3412",
+            "900": "#7c2d12",
+            "950": "#431407"
+        },
+    },
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇺🇸",
+                "fr": "🇫🇷",
+                "nl": "🇳🇱",
+            },
+        },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+        "navigation": [
+            {
+                "title": "Navigation",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Dashboard",
+                        "icon": "dashboard",
+                        "link": lambda request: "/admin/",
+                    },
+                ],
+            },
+            {
+                "title": "Blog Management",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Posts",
+                        "icon": "article",
+                        "link": lambda request: "/admin/blogapp/post/",
+                    },
+                    {
+                        "title": "Categories",
+                        "icon": "category",
+                        "link": lambda request: "/admin/blogapp/category/",
+                    },
+                    {
+                        "title": "Comments",
+                        "icon": "comment",
+                        "link": lambda request: "/admin/blogapp/comment/",
+                    },
+                ],
+            },
+            {
+                "title": "LMS Management",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Courses",
+                        "icon": "school",
+                        "link": lambda request: "/admin/courses/course/",
+                    },
+                    {
+                        "title": "Lessons",
+                        "icon": "menu_book",
+                        "link": lambda request: "/admin/courses/lesson/",
+                    },
+                    {
+                        "title": "Assessments",
+                        "icon": "quiz",
+                        "link": lambda request: "/admin/assessments/quiz/",
+                    },
+                    {
+                        "title": "Progress",
+                        "icon": "trending_up",
+                        "link": lambda request: "/admin/progress/lessonprogress/",
+                    },
+                ],
+            },
+            {
+                "title": "User Management",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Users",
+                        "icon": "person",
+                        "link": lambda request: "/admin/auth/user/",
+                    },
+                    {
+                        "title": "Groups",
+                        "icon": "group",
+                        "link": lambda request: "/admin/auth/group/",
+                    },
+                    {
+                        "title": "Profiles",
+                        "icon": "account_circle",
+                        "link": lambda request: "/admin/users/profile/",
+                    },
+                ],
+            },
+        ],
+    },
+}
 
 # Django Messages Framework Configuration
 MESSAGE_TAGS = {

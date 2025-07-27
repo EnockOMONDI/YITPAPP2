@@ -282,7 +282,9 @@ For test-related issues:
 
 ---
 
-**Last Updated**: January 5, 2025  
-**Test Suite Version**: 1.0  
-**Django Version**: 4.2+  
+**Last Updated**: January 26, 2025
+**Test Suite Version**: 1.1
+**Django Version**: 5.0.14+
 **Python Version**: 3.9+
+**Admin Interface**: Django Unfold
+**Content Editor**: CKEditor 5

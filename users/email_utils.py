@@ -725,6 +725,100 @@ def send_certificate_issuance_email(user, course, certificate):
     return result
 
 
+# ============================================================================
+# COURSE CREATION NOTIFICATION SYSTEM
+# ============================================================================
+
+def send_course_creation_notification(instructor, course):
+    """Send email notification to admin when instructor creates a course"""
+    logger.info(f"Preparing to send course creation notification for course: {course.title}")
+
+    context = {
+        'instructor': instructor,
+        'course': course,
+        'instructor_name': instructor.get_full_name() or instructor.username,
+        'course_title': course.title,
+        'course_description': course.description,
+        'difficulty_level': course.get_difficulty_level_display(),
+        'estimated_duration': course.estimated_duration,
+        'category': course.category.name if course.category else 'Uncategorized',
+        'admin_url': f"https://yitp-lms.onrender.com/admin/courses/course/{course.id}/change/",
+        'site_name': 'Youth Impact Training Programme',
+        'admin_email': settings.ADMIN_EMAIL
+    }
+
+    # Admin notification email content
+    subject = f"📚 New Course Created: {course.title} - Requires Review"
+
+    admin_email_content = f"""
+COURSE CREATION NOTIFICATION
+Youth Impact Training Programme
+
+A new course has been created and is awaiting your review and approval.
+
+COURSE DETAILS:
+• Title: {course.title}
+• Instructor: {instructor.get_full_name() or instructor.username} ({instructor.email})
+• Category: {course.category.name if course.category else 'Uncategorized'}
+• Difficulty: {course.get_difficulty_level_display()}
+• Duration: {course.estimated_duration} hours
+• Status: In Review
+• Created: {course.created_at.strftime('%B %d, %Y at %I:%M %p')}
+
+DESCRIPTION:
+{course.description}
+
+INSTRUCTOR INFORMATION:
+• Email: {instructor.email}
+• Username: {instructor.username}
+• Full Name: {instructor.get_full_name() or 'Not provided'}
+
+ADMIN ACTIONS REQUIRED:
+1. Review course content and structure
+2. Verify instructor qualifications
+3. Approve or reject the course
+4. Provide feedback if needed
+
+ADMIN PANEL ACCESS:
+{context['admin_url']}
+
+NEXT STEPS:
+• Login to the admin panel
+• Navigate to Courses → Course → {course.title}
+• Review the course details
+• Update status to 'Published' to approve
+• Or update status to 'Rejected' with feedback
+
+This course will remain in "In Review" status until you take action.
+
+---
+YITP Course Management System
+Youth Impact Training Programme
+"""
+
+    logger.info(f"Sending course creation notification with subject: {subject}")
+
+    # Send email to admin
+    admin_email = getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com')
+    result = send_html_email(
+        subject=subject,
+        html_content=admin_email_content,  # Using plain text as HTML for simplicity
+        recipient_list=[admin_email],
+        plain_text_content=admin_email_content
+    )
+
+    if result:
+        logger.info(f"✅ Course creation notification sent successfully for course: {course.title}")
+    else:
+        logger.error(f"❌ Failed to send course creation notification for course: {course.title}")
+
+    return result
+
+
+# ============================================================================
+# INSTRUCTOR WELCOME EMAIL SYSTEM
+# ============================================================================
+
 def send_instructor_welcome_email(user, instructor_profile, temporary_password=None, created_by_admin=None):
     """
     Send comprehensive welcome email to newly created instructor accounts

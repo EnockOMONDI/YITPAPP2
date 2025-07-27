@@ -4,9 +4,9 @@
 
 ### Step-by-Step Process
 
-1. **Login to Admin** → `/admin/`
-2. **Go to Users** → "Authentication and Authorization" → "Users"
-3. **Add User** → Click "Add User" button
+1. **Login to Admin** → `/admin/` (Modern YITP-branded interface)
+2. **Go to Users** → Sidebar: "User Management" → "Users"
+3. **Add User** → Click "Add User" button (+ icon)
 4. **Basic Info** → Username, Password, Email, Name
 5. **Instructor Profile** → Scroll to "Instructor Profile" section
 6. **Select Role** → Choose appropriate instructor role

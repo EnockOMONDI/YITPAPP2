@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 User = get_user_model()
 
@@ -43,7 +43,16 @@ class Course(models.Model):
         ('intermediate', 'Intermediate'),
         ('advanced', 'Advanced'),
     ]
-    
+
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('in_review', 'In Review'),
+        ('approved', 'Approved'),
+        ('published', 'Published'),
+        ('rejected', 'Rejected'),
+        ('archived', 'Archived'),
+    ]
+
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField()
@@ -52,19 +61,97 @@ class Course(models.Model):
     difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_LEVELS, default='beginner')
     estimated_duration = models.IntegerField(help_text="Estimated duration in hours")
     thumbnail = models.ImageField(upload_to='course_thumbnails/', blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     is_published = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     enrollment_limit = models.IntegerField(null=True, blank=True, help_text="Maximum number of students")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='courses_taught')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='courses')
+
+    # Approval workflow fields
+    submitted_for_review_at = models.DateTimeField(null=True, blank=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='courses_reviewed')
+    review_notes = models.TextField(blank=True, help_text="Admin notes about the course review")
+
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+
+        # Auto-submit for review when instructor creates course
+        if not self.pk and self.status == 'draft':
+            self.status = 'in_review'
+            self.submitted_for_review_at = timezone.now()
+
+        # Auto-publish when approved by admin
+        if self.status == 'published' and not self.is_published:
+            self.is_published = True
+        elif self.status != 'published' and self.is_published:
+            self.is_published = False
+
         super().save(*args, **kwargs)
+
+        # Send email notification for course creation
+        if not self.pk and self.status == 'in_review':
+            self._send_course_creation_notification()
+
+    def _send_course_creation_notification(self):
+        """Send email notification to admin when course is created"""
+        try:
+            from users.email_utils import send_course_creation_notification
+            send_course_creation_notification(self.instructor, self)
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Failed to send course creation notification: {str(e)}")
+
+    def submit_for_review(self, user=None):
+        """Submit course for admin review"""
+        if self.status == 'draft':
+            self.status = 'in_review'
+            self.submitted_for_review_at = timezone.now()
+            self.save()
+            self._send_course_creation_notification()
+            return True
+        return False
+
+    def approve_course(self, admin_user, notes=""):
+        """Approve course for publishing"""
+        if self.status == 'in_review':
+            self.status = 'approved'
+            self.reviewed_at = timezone.now()
+            self.reviewed_by = admin_user
+            self.review_notes = notes
+            self.save()
+            return True
+        return False
+
+    def publish_course(self, admin_user, notes=""):
+        """Publish approved course"""
+        if self.status in ['approved', 'in_review']:
+            self.status = 'published'
+            self.is_published = True
+            self.reviewed_at = timezone.now()
+            self.reviewed_by = admin_user
+            self.review_notes = notes
+            self.save()
+            return True
+        return False
+
+    def reject_course(self, admin_user, notes=""):
+        """Reject course with feedback"""
+        if self.status == 'in_review':
+            self.status = 'rejected'
+            self.reviewed_at = timezone.now()
+            self.reviewed_by = admin_user
+            self.review_notes = notes
+            self.save()
+            return True
+        return False
     
     def __str__(self):
         return self.title
@@ -141,7 +228,8 @@ class Lesson(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='lessons')
     title = models.CharField(max_length=200)
     content_type = models.CharField(max_length=20, choices=CONTENT_TYPES)
-    content = RichTextField(
+    content = CKEditor5Field(
+        'Content',
         config_name='lesson_content',
         blank=True,
         help_text="Rich text content with formatting, images, and interactive elements"

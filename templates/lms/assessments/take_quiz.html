@@ -15,22 +15,18 @@
                         <div>
                             <h4 class="text-primary mb-1">{{ quiz.title }}</h4>
                             <small class="text-muted">
-                                Question {{ current_question_number }} of {{ total_questions }}
+                                {{ questions.count }} question{{ questions.count|pluralize }}
                             </small>
                         </div>
                         <div class="text-end">
+                            {% if quiz.time_limit %}
                             <div id="timer" class="h5 text-warning mb-1">
                                 <i class="fas fa-clock me-1"></i>
-                                <span id="time-remaining">{{ time_remaining }}</span>
+                                <span id="time-remaining">{{ quiz.time_limit }} minutes</span>
                             </div>
-                            <small class="text-muted">Time Remaining</small>
+                            <small class="text-muted">Time Limit</small>
+                            {% endif %}
                         </div>
-                    </div>
-                    
-                    <!-- Progress Bar -->
-                    <div class="progress mt-3" style="height: 8px;">
-                        <div class="progress-bar bg-primary" 
-                             style="width: {{ progress_percentage }}%"></div>
                     </div>
                 </div>
             </div>
@@ -43,11 +39,12 @@
         
         <div class="row">
             <div class="col-lg-8">
-                <!-- Question Card -->
+                <!-- Questions -->
+                {% for question in questions %}
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header bg-white border-bottom">
                         <h5 class="card-title mb-0">
-                            Question {{ current_question_number }}
+                            Question {{ forloop.counter }}
                             {% if question.points %}
                                 <span class="badge bg-primary ms-2">{{ question.points }} points</span>
                             {% endif %}
@@ -61,14 +58,14 @@
                         {% if question.question_type == 'multiple_choice' %}
                             <!-- Multiple Choice -->
                             <div class="form-group">
-                                {% for choice in question.choices.all %}
+                                {% for choice in question.options %}
                                 <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" 
-                                           name="answer" value="{{ choice.id }}" 
-                                           id="choice{{ choice.id }}"
-                                           {% if choice.id|stringformat:"s" == selected_answer %}checked{% endif %}>
-                                    <label class="form-check-label" for="choice{{ choice.id }}">
-                                        {{ choice.choice_text }}
+                                    <input class="form-check-input" type="radio"
+                                           name="question_{{ question.id }}" value="{{ choice }}"
+                                           id="choice_{{ question.id }}_{{ forloop.counter }}"
+                                           required>
+                                    <label class="form-check-label" for="choice_{{ question.id }}_{{ forloop.counter }}">
+                                        {{ choice }}
                                     </label>
                                 </div>
                                 {% endfor %}
@@ -78,18 +75,18 @@
                             <!-- True/False -->
                             <div class="form-group">
                                 <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" 
-                                           name="answer" value="true" id="true"
-                                           {% if selected_answer == 'true' %}checked{% endif %}>
-                                    <label class="form-check-label" for="true">
+                                    <input class="form-check-input" type="radio"
+                                           name="question_{{ question.id }}" value="True"
+                                           id="true_{{ question.id }}" required>
+                                    <label class="form-check-label" for="true_{{ question.id }}">
                                         True
                                     </label>
                                 </div>
                                 <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" 
-                                           name="answer" value="false" id="false"
-                                           {% if selected_answer == 'false' %}checked{% endif %}>
-                                    <label class="form-check-label" for="false">
+                                    <input class="form-check-input" type="radio"
+                                           name="question_{{ question.id }}" value="False"
+                                           id="false_{{ question.id }}" required>
+                                    <label class="form-check-label" for="false_{{ question.id }}">
                                         False
                                     </label>
                                 </div>
@@ -98,50 +95,35 @@
                         {% elif question.question_type == 'short_answer' %}
                             <!-- Short Answer -->
                             <div class="form-group">
-                                <textarea class="form-control" name="answer" rows="3" 
-                                          placeholder="Enter your answer here...">{{ selected_answer }}</textarea>
+                                <textarea class="form-control" name="question_{{ question.id }}" rows="3"
+                                          placeholder="Enter your answer here..." required></textarea>
                             </div>
 
                         {% elif question.question_type == 'essay' %}
                             <!-- Essay -->
                             <div class="form-group">
-                                <textarea class="form-control" name="answer" rows="8" 
-                                          placeholder="Write your essay here...">{{ selected_answer }}</textarea>
+                                <textarea class="form-control" name="question_{{ question.id }}" rows="8"
+                                          placeholder="Write your essay here..." required></textarea>
                             </div>
                         {% endif %}
                     </div>
                 </div>
+                {% endfor %}
 
-                <!-- Navigation Buttons -->
+                <!-- Submit Button -->
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                {% if has_previous %}
-                                    <button type="submit" name="action" value="previous" 
-                                            class="btn btn-outline-secondary">
-                                        <i class="fas fa-arrow-left me-1"></i>Previous
-                                    </button>
-                                {% endif %}
+                                <a href="{% url 'assessments:quiz_detail' quiz_id=quiz.id %}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-1"></i>Back to Quiz Details
+                                </a>
                             </div>
-                            
+
                             <div>
-                                <button type="submit" name="action" value="save" 
-                                        class="btn btn-outline-primary me-2">
-                                    <i class="fas fa-save me-1"></i>Save Answer
+                                <button type="submit" class="btn btn-success btn-lg" id="submit-quiz">
+                                    <i class="fas fa-check me-1"></i>Submit Quiz
                                 </button>
-                                
-                                {% if has_next %}
-                                    <button type="submit" name="action" value="next" 
-                                            class="btn btn-primary">
-                                        Next<i class="fas fa-arrow-right ms-1"></i>
-                                    </button>
-                                {% else %}
-                                    <button type="submit" name="action" value="finish" 
-                                            class="btn btn-success" id="finish-quiz">
-                                        <i class="fas fa-check me-1"></i>Finish Quiz
-                                    </button>
-                                {% endif %}
                             </div>
                         </div>
                     </div>

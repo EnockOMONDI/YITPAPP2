@@ -28,15 +28,15 @@ class CourseAdmin(admin.ModelAdmin):
     """
     list_display = [
         'title_with_link', 'instructor_name', 'category', 'difficulty_level',
-        'enrollment_count', 'is_published', 'is_featured', 'created_at'
+        'status_display', 'enrollment_count', 'is_published', 'is_featured', 'created_at'
     ]
     list_filter = [
-        'difficulty_level', 'is_published', 'is_featured', 'category',
-        'created_at', 'instructor'
+        'status', 'difficulty_level', 'is_published', 'is_featured', 'category',
+        'created_at', 'instructor', 'reviewed_by'
     ]
     search_fields = ['title', 'description', 'instructor__email', 'instructor__first_name', 'instructor__last_name']
     prepopulated_fields = {'slug': ('title',)}
-    readonly_fields = ['created_at', 'updated_at', 'enrollment_count_display']
+    readonly_fields = ['created_at', 'updated_at', 'enrollment_count_display', 'submitted_for_review_at', 'reviewed_at']
     filter_horizontal = []
 
     fieldsets = (
@@ -49,8 +49,12 @@ class CourseAdmin(admin.ModelAdmin):
         ('Pricing & Enrollment', {
             'fields': ('price', 'enrollment_limit', 'prerequisites')
         }),
-        ('Publishing', {
-            'fields': ('is_published', 'is_featured')
+        ('Status & Publishing', {
+            'fields': ('status', 'is_published', 'is_featured')
+        }),
+        ('Review Information', {
+            'fields': ('submitted_for_review_at', 'reviewed_at', 'reviewed_by', 'review_notes'),
+            'classes': ('collapse',)
         }),
         ('Statistics', {
             'fields': ('enrollment_count_display',),
@@ -62,7 +66,7 @@ class CourseAdmin(admin.ModelAdmin):
         }),
     )
 
-    actions = ['publish_courses', 'unpublish_courses', 'feature_courses', 'unfeature_courses']
+    actions = ['approve_courses', 'publish_courses', 'reject_courses', 'unpublish_courses', 'feature_courses', 'unfeature_courses']
 
     def get_queryset(self, request):
         """Filter courses based on instructor role"""
@@ -128,6 +132,24 @@ class CourseAdmin(admin.ModelAdmin):
         return f"Active: {active_count} | Total: {total_count}"
     enrollment_count_display.short_description = 'Enrollment Statistics'
 
+    def status_display(self, obj):
+        """Display course status with color coding"""
+        status_colors = {
+            'draft': '#6c757d',
+            'in_review': '#ffc107',
+            'approved': '#28a745',
+            'published': '#007bff',
+            'rejected': '#dc3545',
+            'archived': '#6c757d'
+        }
+        color = status_colors.get(obj.status, '#6c757d')
+        return format_html(
+            '<span style="background: {}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px;">{}</span>',
+            color,
+            obj.get_status_display()
+        )
+    status_display.short_description = 'Status'
+
     def publish_courses(self, request, queryset):
         """Bulk action to publish courses"""
         updated = queryset.update(is_published=True)
@@ -167,6 +189,32 @@ class CourseAdmin(admin.ModelAdmin):
             messages.INFO
         )
     unfeature_courses.short_description = "Unfeature selected courses"
+
+    def approve_courses(self, request, queryset):
+        """Bulk action to approve courses for publishing"""
+        updated = 0
+        for course in queryset.filter(status='in_review'):
+            if course.approve_course(request.user, "Bulk approved by admin"):
+                updated += 1
+        self.message_user(
+            request,
+            f'{updated} course(s) have been approved.',
+            messages.SUCCESS
+        )
+    approve_courses.short_description = "Approve selected courses"
+
+    def reject_courses(self, request, queryset):
+        """Bulk action to reject courses"""
+        updated = 0
+        for course in queryset.filter(status='in_review'):
+            if course.reject_course(request.user, "Bulk rejected by admin"):
+                updated += 1
+        self.message_user(
+            request,
+            f'{updated} course(s) have been rejected.',
+            messages.WARNING
+        )
+    reject_courses.short_description = "Reject selected courses"
     
     fieldsets = (
         ('Basic Information', {

@@ -213,6 +213,7 @@ class QuizAttempt(models.Model):
     """
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quiz_attempts')
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='attempts')
+    enrollment = models.ForeignKey('Enrollment', on_delete=models.CASCADE, related_name='quiz_attempts', null=True, blank=True)
     attempt_number = models.IntegerField(default=1)
     started_at = models.DateTimeField(default=timezone.now)
     completed_at = models.DateTimeField(null=True, blank=True)

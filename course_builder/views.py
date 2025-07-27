@@ -209,7 +209,7 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             difficulty_level = request.POST.get('difficulty_level', 'beginner')
             estimated_duration = int(request.POST.get('estimated_duration', 10))
 
-            # Create course
+            # Create course with in_review status
             course = Course.objects.create(
                 title=title,
                 slug=slugify(title),
@@ -218,6 +218,7 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
                 category_id=category_id if category_id else None,
                 difficulty_level=difficulty_level,
                 estimated_duration=estimated_duration,
+                status='in_review',
                 is_published=False
             )
 
@@ -341,7 +342,7 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             return JsonResponse({'success': False, 'error': str(e)})
 
     def publish_course(self, request):
-        """Publish course and complete wizard"""
+        """Submit course for review (instructors) or publish course (admins)"""
         try:
             course_id = request.POST.get('course_id')
             is_featured = request.POST.get('is_featured') == 'true'
@@ -349,14 +350,25 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             enrollment_limit = request.POST.get('enrollment_limit')
 
             course = get_object_or_404(Course, id=course_id, instructor=request.user)
-            course.is_published = True
-            course.is_featured = is_featured
-            course.price = price
 
-            if enrollment_limit:
-                course.enrollment_limit = int(enrollment_limit)
-
-            course.save()
+            # Only admins can directly publish courses
+            if request.user.is_superuser:
+                course.publish_course(request.user, "Published via course builder")
+                course.is_featured = is_featured
+                course.price = price
+                if enrollment_limit:
+                    course.enrollment_limit = int(enrollment_limit)
+                course.save()
+                message = 'Course published successfully!'
+            else:
+                # Instructors can only submit for review
+                course.submit_for_review(request.user)
+                course.is_featured = is_featured
+                course.price = price
+                if enrollment_limit:
+                    course.enrollment_limit = int(enrollment_limit)
+                course.save()
+                message = 'Course submitted for admin review!'
 
             # Mark session as completed
             session_id = request.POST.get('session_id')
@@ -370,8 +382,8 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
 
             return JsonResponse({
                 'success': True,
-                'course_url': reverse('courses:course_detail', kwargs={'slug': course.slug}),
-                'message': 'Course published successfully!'
+                'course_url': reverse('courses:course_detail', kwargs={'slug': course.slug}) if course.is_published else '#',
+                'message': message
             })
 
         except Exception as e:
