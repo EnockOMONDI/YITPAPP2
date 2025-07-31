@@ -12,7 +12,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: ALLOWED_HOSTS
-        value: "yitp-lms.onrender.com,*.onrender.com"
+        value: "*.youthimpactglobal.com,youthimpactglobal.com,yitpapp2.onrender.com"
 
       # Neon PostgreSQL Database Configuration
       - key: DB_NAME

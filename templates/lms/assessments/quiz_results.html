@@ -43,26 +43,26 @@
                     <div class="row text-center">
                         <div class="col-md-3">
                             <div class="border-end">
-                                <h3 class="text-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %}">
-                                    {{ attempt.percentage }}%
+                                <h3 class="text-{% if score_percentage >= quiz.passing_score %}success{% else %}danger{% endif %}">
+                                    {{ score_percentage|floatformat:1 }}%
                                 </h3>
                                 <small class="text-muted">Your Score</small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="border-end">
-                                <h3 class="text-primary">{{ attempt.score }}/{{ attempt.total_questions }}</h3>
+                                <h3 class="text-primary">{{ correct_answers }}/{{ total_questions }}</h3>
                                 <small class="text-muted">Correct Answers</small>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="border-end">
-                                <h3 class="text-secondary">{{ quiz.passing_score }}%</h3>
+                                <h3 class="text-secondary">{{ quiz.passing_score|default:"70" }}%</h3>
                                 <small class="text-muted">Passing Score</small>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <h3 class="text-info">{{ attempt.time_taken }}</h3>
+                            <h3 class="text-info">{{ time_taken_formatted }}</h3>
                             <small class="text-muted">Time Taken</small>
                         </div>
                     </div>
@@ -70,9 +70,9 @@
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="progress mb-2" style="height: 20px;">
-                                <div class="progress-bar bg-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %}" 
-                                     style="width: {{ attempt.percentage }}%">
-                                    {{ attempt.percentage }}%
+                                <div class="progress-bar bg-{% if score_percentage >= quiz.passing_score %}success{% else %}danger{% endif %}"
+                                     style="width: {{ score_percentage }}%">
+                                    {{ score_percentage|floatformat:1 }}%
                                 </div>
                             </div>
                             <small class="text-muted">Your Performance</small>

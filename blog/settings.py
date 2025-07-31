@@ -93,7 +93,7 @@ DEBUG = not IS_PRODUCTION
 
 # Allowed Hosts
 if IS_PRODUCTION:
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='yitp-django-app.onrender.com,*.onrender.com').split(',')
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*.youthimpactglobal.com,youthimpactglobal.com,yitp-django-app.onrender.com,*.onrender.com').split(',')
 else:
     ALLOWED_HOSTS = ['*']  # Permissive for development
 

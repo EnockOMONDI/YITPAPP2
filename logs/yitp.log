@@ -9195,3 +9195,200 @@ Traceback (most recent call last):
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'course_detail' with keyword arguments '{'slug': ''}' not found. 1 pattern(s) tried: ['lms/courses/courses/(?P<slug>[-a-zA-Z0-9_]+)/\\Z']
 ERROR 2025-07-27 17:57:12,987 basehttp 53753 6167457792 "GET /lms/assessments/quiz-success/4/ HTTP/1.1" 500 212509
+INFO 2025-07-27 18:03:14,040 autoreload 53753 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py changed, reloading.
+INFO 2025-07-27 18:03:16,074 autoreload 54441 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-27 18:05:36,662 autoreload 54441 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py changed, reloading.
+INFO 2025-07-27 18:05:38,890 autoreload 54517 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-27 18:06:04,496 basehttp 54517 6165114880 "GET /lms/assessments/quiz-success/4/ HTTP/1.1" 200 25055
+INFO 2025-07-27 18:06:15,130 basehttp 54517 6165114880 "GET /lms/assessments/quiz-success/4/ HTTP/1.1" 200 23249
+ERROR 2025-07-27 18:06:27,760 log 54517 6165114880 Internal Server Error: /lms/assessments/quiz-results/4/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'quiz_detail' with arguments '('',)' not found. 1 pattern(s) tried: ['lms/assessments/quizzes/(?P<quiz_id>[0-9]+)/\\Z']
+ERROR 2025-07-27 18:06:27,770 basehttp 54517 6165114880 "GET /lms/assessments/quiz-results/4/ HTTP/1.1" 500 189213
+INFO 2025-07-27 18:06:37,648 basehttp 54517 6165114880 "GET /lms/progress/achievements/ HTTP/1.1" 200 25933
+INFO 2025-07-27 18:06:56,138 basehttp 54517 6165114880 "GET /lms/courses/courses/starting-business-2025/ HTTP/1.1" 200 68968
+INFO 2025-07-27 18:07:09,020 basehttp 54517 6165114880 "GET /lms/courses/courses/starting-business-2025/modules/3/ HTTP/1.1" 200 24250
+INFO 2025-07-27 18:07:12,591 basehttp 54517 6165114880 "GET /lms/courses/courses/starting-business-2025/lessons/6/ HTTP/1.1" 200 83097
+INFO 2025-07-27 18:07:16,073 basehttp 54517 6165114880 "POST /lms/courses/courses/starting-business-2025/lessons/6/complete/ HTTP/1.1" 200 576
+INFO 2025-07-27 18:07:25,164 basehttp 54517 6165114880 "GET /lms/courses/courses/starting-business-2025/lessons/7/ HTTP/1.1" 200 82998
+ERROR 2025-07-27 18:08:09,295 log 54517 6165114880 Internal Server Error: /lms/assessments/quiz-results/4/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'quiz_detail' with arguments '('',)' not found. 1 pattern(s) tried: ['lms/assessments/quizzes/(?P<quiz_id>[0-9]+)/\\Z']
+ERROR 2025-07-27 18:08:09,305 basehttp 54517 6165114880 "GET /lms/assessments/quiz-results/4/ HTTP/1.1" 500 189213
+INFO 2025-07-27 18:10:26,370 autoreload 54517 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py changed, reloading.
+INFO 2025-07-27 18:10:28,977 autoreload 54789 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-27 18:10:47,651 basehttp 54789 6165901312 "GET /lms/assessments/quiz-success/4/ HTTP/1.1" 200 23118
+INFO 2025-07-27 18:11:09,573 basehttp 54789 6165901312 "GET /lms/assessments/quiz-results/4/ HTTP/1.1" 200 16856
+INFO 2025-07-27 18:11:24,248 basehttp 54789 6165901312 "GET /lms/assessments/quiz-results/4/ HTTP/1.1" 200 16856
+INFO 2025-07-27 18:11:28,721 basehttp 54789 6165901312 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 17679
+ERROR 2025-07-27 18:11:36,595 log 54789 6165901312 Internal Server Error: /lms/assessments/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 226, in get
+    context = self.get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py", line 24, in get_context_data
+    context['passed_quizzes'] = quiz_attempts.filter(passed=True).count()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1495, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1307, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'passed' into field. Choices are: answers, attempt_number, completed_at, enrollment, enrollment_id, id, is_passed, quiz, quiz_id, score, started_at, student, student_id, time_taken
+ERROR 2025-07-27 18:11:36,640 basehttp 54789 6165901312 "GET /lms/assessments/ HTTP/1.1" 500 154429
+INFO 2025-07-27 18:12:15,005 autoreload 54789 8211954368 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py changed, reloading.
+INFO 2025-07-27 18:12:16,944 autoreload 54879 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-27 18:12:19,960 basehttp 54879 6192541696 "GET /lms/assessments/ HTTP/1.1" 200 15453
+INFO 2025-07-27 18:12:24,993 basehttp 54879 6192541696 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 17679
+INFO 2025-07-27 18:12:27,363 basehttp 54879 6192541696 "GET /lms/assessments/quizzes/4/ HTTP/1.1" 200 16265
+INFO 2025-07-27 18:12:32,897 basehttp 54879 6192541696 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 17679
+INFO 2025-07-27 18:12:33,067 basehttp 54879 6209368064 "GET /lms/assessments/quiz-results/4/ HTTP/1.1" 200 16856
+INFO 2025-07-27 18:20:15,009 autoreload 55541 8211954368 Watching for file changes with StatReloader
+INFO 2025-07-27 18:20:17,802 basehttp 55541 6157479936 "GET /lms/assessments/quiz-results/4/ HTTP/1.1" 200 16876
+INFO 2025-07-27 18:20:25,128 basehttp 55541 6157479936 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 17679
+INFO 2025-07-27 18:20:31,071 basehttp 55541 6157479936 "GET /lms/assessments/ HTTP/1.1" 200 15453
+INFO 2025-07-27 18:20:39,414 basehttp 55541 6157479936 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 17679
+INFO 2025-07-27 18:20:44,417 basehttp 55541 6157479936 "GET /lms/assessments/quiz-results/4/ HTTP/1.1" 200 16876

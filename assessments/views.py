@@ -21,7 +21,7 @@ class AssessmentDashboardView(LoginRequiredMixin, TemplateView):
         # Get user's quiz attempts
         quiz_attempts = QuizAttempt.objects.filter(student=user)
         context['total_quizzes_taken'] = quiz_attempts.count()
-        context['passed_quizzes'] = quiz_attempts.filter(passed=True).count()
+        context['passed_quizzes'] = quiz_attempts.filter(is_passed=True).count()
 
         # Get assignment submissions
         submissions = AssignmentSubmission.objects.filter(student=user)
@@ -111,9 +111,6 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
         quiz = self.get_object()
         user = request.user
 
-        print(f"DEBUG: User {user.username} trying to take quiz {quiz.id}")
-        print(f"DEBUG: Course: {quiz.lesson.module.course.title}")
-
         # Check enrollment
         try:
             enrollment = Enrollment.objects.get(
@@ -121,21 +118,16 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
                 course=quiz.lesson.module.course,
                 status='active'
             )
-            print(f"DEBUG: Found active enrollment: {enrollment.id}")
         except Enrollment.DoesNotExist:
-            print(f"DEBUG: No active enrollment found")
             messages.error(request, 'You must be enrolled in this course to take quizzes.')
-            return redirect('courses:course_detail', pk=quiz.lesson.module.course.id)
+            return redirect('courses:course_detail', slug=quiz.lesson.module.course.slug)
 
         # Check if user can take the quiz
         attempts = QuizAttempt.objects.filter(student=user, quiz=quiz)
-        print(f"DEBUG: Quiz attempts: {attempts.count()}, Max allowed: {quiz.max_attempts}")
         if quiz.max_attempts > 0 and attempts.count() >= quiz.max_attempts:
-            print(f"DEBUG: Max attempts reached")
             messages.error(request, 'You have reached the maximum number of attempts for this quiz.')
             return redirect('assessments:quiz_detail', quiz_id=quiz.id)
 
-        print(f"DEBUG: All checks passed, proceeding to quiz")
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -226,6 +218,49 @@ class QuizResultsView(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return QuizAttempt.objects.filter(student=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        attempt = self.object
+        quiz = attempt.quiz
+        lesson = quiz.lesson
+        course = lesson.module.course
+
+        # Add quiz, lesson, and course to context
+        context['quiz'] = quiz
+        context['lesson'] = lesson
+        context['course'] = course
+
+        # Calculate additional quiz statistics
+        questions = quiz.questions.all()
+        total_questions = questions.count()
+        total_points = sum(q.points for q in questions)
+
+        # Calculate correct answers count
+        correct_answers = 0
+        for question in questions:
+            student_answer = attempt.answers.get(str(question.id))
+            if student_answer and attempt._is_correct_answer(question, student_answer):
+                correct_answers += 1
+
+        # Add calculated values to context
+        context['total_questions'] = total_questions
+        context['total_points'] = total_points
+        context['correct_answers'] = correct_answers
+        context['score_percentage'] = float(attempt.score) if attempt.score else 0
+
+        # Format time taken
+        if attempt.time_taken:
+            minutes = attempt.time_taken // 60
+            seconds = attempt.time_taken % 60
+            if minutes > 0:
+                context['time_taken_formatted'] = f"{minutes}m {seconds}s"
+            else:
+                context['time_taken_formatted'] = f"{seconds}s"
+        else:
+            context['time_taken_formatted'] = "Not recorded"
+
+        return context
+
 
 class QuizSuccessView(LoginRequiredMixin, DetailView):
     """Quiz success celebration page"""
@@ -246,6 +281,11 @@ class QuizSuccessView(LoginRequiredMixin, DetailView):
         quiz = attempt.quiz
         lesson = quiz.lesson
         course = lesson.module.course
+
+        # Add quiz, lesson, and course to context
+        context['quiz'] = quiz
+        context['lesson'] = lesson
+        context['course'] = course
 
         # Get gamification data from session
         gamification_data = self.request.session.pop('quiz_success_data', {})
