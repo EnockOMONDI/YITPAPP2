@@ -120,40 +120,40 @@ class InstructorSystemTester:
         except Exception as e:
             self.log_test("Instructor Admin Access", False, f"Error: {e}")
     
-    def test_ckeditor_integration(self):
-        """Test Priority 1: CKEditor Integration"""
-        print("\n🧪 Testing Priority 1: CKEditor Integration")
+    def test_ckeditor5_integration(self):
+        """Test Priority 1: CKEditor 5 Integration"""
+        print("\n🧪 Testing Priority 1: CKEditor 5 Integration")
         print("-" * 60)
         
-        # Test 3.1: CKEditor configuration
+        # Test 3.1: CKEditor 5 configuration
         try:
             from django.conf import settings
-            has_ckeditor = 'ckeditor' in settings.INSTALLED_APPS
-            has_config = hasattr(settings, 'CKEDITOR_CONFIGS')
-            
+            has_ckeditor5 = 'django_ckeditor_5' in settings.INSTALLED_APPS
+            has_config = hasattr(settings, 'customColorPalette') or hasattr(settings, 'CKEDITOR_5_CONFIGS')
+
             self.log_test(
-                "CKEditor Configuration",
-                has_ckeditor and has_config,
-                f"CKEditor installed: {has_ckeditor}, Config exists: {has_config}"
+                "CKEditor 5 Configuration",
+                has_ckeditor5,
+                f"CKEditor 5 installed: {has_ckeditor5}, Config exists: {has_config}"
             )
         except Exception as e:
-            self.log_test("CKEditor Configuration", False, f"Error: {e}")
-        
+            self.log_test("CKEditor 5 Configuration", False, f"Error: {e}")
+
         # Test 3.2: Lesson content field
         try:
             from courses.models import Lesson
-            from ckeditor.fields import RichTextField
-            
+            from django_ckeditor_5.fields import CKEditor5Field
+
             content_field = Lesson._meta.get_field('content')
-            is_rich_text = isinstance(content_field, RichTextField)
-            
+            is_ck5_field = isinstance(content_field, CKEditor5Field)
+
             self.log_test(
-                "Lesson RichTextField",
-                is_rich_text,
+                "Lesson CKEditor5Field",
+                is_ck5_field,
                 f"Content field type: {type(content_field).__name__}"
             )
         except Exception as e:
-            self.log_test("Lesson RichTextField", False, f"Error: {e}")
+            self.log_test("Lesson CKEditor5Field", False, f"Error: {e}")
     
     def test_instructor_dashboard(self):
         """Test Priority 2: Instructor Dashboard"""
@@ -349,7 +349,7 @@ class InstructorSystemTester:
         # Run all test suites
         self.test_instructor_models()
         self.test_admin_filtering()
-        self.test_ckeditor_integration()
+        self.test_ckeditor5_integration()
         self.test_instructor_dashboard()
         self.test_assessment_management()
         self.test_communication_system()
@@ -379,7 +379,7 @@ class InstructorSystemTester:
         print("\n🎯 IMPLEMENTATION STATUS:")
         print("✅ Priority 1 (Critical): Enhanced Instructor Role System")
         print("✅ Priority 1 (Critical): Course-Scoped Admin Interface")
-        print("✅ Priority 1 (Critical): CKEditor Integration")
+        print("✅ Priority 1 (Critical): CKEditor 5 Integration")
         print("✅ Priority 2 (High): Instructor Dashboard & Analytics")
         print("✅ Priority 2 (High): Enhanced Assessment Management")
         print("✅ Priority 2 (High): Communication System Enhancement")

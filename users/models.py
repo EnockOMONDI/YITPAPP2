@@ -10,7 +10,7 @@ from html import unescape
 from django.utils.html import strip_tags
 from shortuuid.django_fields import ShortUUIDField
 from pyuploadcare.dj.models import ImageField
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 # Create your models here.
@@ -468,8 +468,8 @@ class Editpage(models.Model):
     ]
 
     section_name = models.CharField(max_length=100, choices=SECTION_CHOICES, unique=True, blank=True)
-    heading = RichTextField(blank=True) 
-    content = RichTextField(blank=True)  
+    heading = CKEditor5Field(blank=True)
+    content = CKEditor5Field(blank=True)
     slider_image = ImageField(blank=True, manual_crop="") 
     
 
@@ -487,21 +487,21 @@ class MainProgrames(models.Model):
     ]
 
     programe_name = models.CharField(max_length=100, choices=SECTION_CHOICES, unique=True)
-    programe_description = RichTextField()
-    programe_objective1 = RichTextField() 
-    programe_objective2 = RichTextField()
-    programe_objective3 = RichTextField()
-    programe_objective4 = RichTextField()
+    programe_description = CKEditor5Field()
+    programe_objective1 = CKEditor5Field()
+    programe_objective2 = CKEditor5Field()
+    programe_objective3 = CKEditor5Field()
+    programe_objective4 = CKEditor5Field()
     
 
     def __str__(self):
         return self.get_section_name_display()
     
-    from ckeditor.fields import RichTextField  # Make sure this import is at the top
+
 
 class SecondSection(models.Model):
-    subtitle = RichTextField()  # Changed to RichTextField
-    title = RichTextField()     # Changed to RichTextField
+    subtitle = CKEditor5Field()  # Changed to CKEditor5Field
+    title = CKEditor5Field()     # Changed to CKEditor5Field
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -521,7 +521,7 @@ class SecondSectionIcon(models.Model):
     ]
 
     icon_class = models.CharField(max_length=50, choices=ICON_CHOICES)
-    text = RichTextField()      # Changed to RichTextField
+    text = CKEditor5Field()      # Changed to CKEditor5Field
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -535,7 +535,7 @@ class SecondSectionIcon(models.Model):
         verbose_name_plural = "Second Section Icons"
 
 class SecondSectionBox(models.Model):
-    text = RichTextField()      # Changed to RichTextField
+    text = CKEditor5Field()      # Changed to CKEditor5Field
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

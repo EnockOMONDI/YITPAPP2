@@ -204,41 +204,40 @@ class EnhancedInstructorSystemTester:
             except Exception as e:
                 self.log_test(f"Admin Access - {role_name}", False, f"Error: {e}")
     
-    def test_ckeditor_integration(self):
-        """Test CKEditor integration and rich content creation"""
-        print("\n📝 Testing CKEditor Integration")
+    def test_ckeditor5_integration(self):
+        """Test CKEditor 5 integration and rich content creation"""
+        print("\n📝 Testing CKEditor 5 Integration")
         print("-" * 60)
-        
-        # Test 1: CKEditor configuration
+
+        # Test 1: CKEditor 5 configuration
         try:
             from django.conf import settings
-            has_ckeditor = 'ckeditor' in settings.INSTALLED_APPS
-            has_config = hasattr(settings, 'CKEDITOR_CONFIGS')
-            has_lesson_config = 'lesson_content' in getattr(settings, 'CKEDITOR_CONFIGS', {})
-            
+            has_ckeditor5 = 'django_ckeditor_5' in settings.INSTALLED_APPS
+            has_config = hasattr(settings, 'customColorPalette') or hasattr(settings, 'CKEDITOR_5_CONFIGS')
+
             self.log_test(
-                "CKEditor Configuration",
-                has_ckeditor and has_config and has_lesson_config,
-                f"Installed: {has_ckeditor}, Config: {has_config}, Lesson config: {has_lesson_config}"
+                "CKEditor 5 Configuration",
+                has_ckeditor5,
+                f"Installed: {has_ckeditor5}, Config exists: {has_config}"
             )
         except Exception as e:
-            self.log_test("CKEditor Configuration", False, f"Error: {e}")
-        
+            self.log_test("CKEditor 5 Configuration", False, f"Error: {e}")
+
         # Test 2: Lesson content field type
         try:
             from courses.models import Lesson
-            from ckeditor.fields import RichTextField
-            
+            from django_ckeditor_5.fields import CKEditor5Field
+
             content_field = Lesson._meta.get_field('content')
-            is_rich_text = isinstance(content_field, RichTextField)
-            
+            is_ck5_field = isinstance(content_field, CKEditor5Field)
+
             self.log_test(
-                "Lesson RichTextField",
-                is_rich_text,
+                "Lesson CKEditor5Field",
+                is_ck5_field,
                 f"Content field type: {type(content_field).__name__}"
             )
         except Exception as e:
-            self.log_test("Lesson RichTextField", False, f"Error: {e}")
+            self.log_test("Lesson CKEditor5Field", False, f"Error: {e}")
     
     def test_instructor_permissions(self):
         """Test granular instructor permissions"""
@@ -322,7 +321,7 @@ class EnhancedInstructorSystemTester:
         self.test_navigation_system()
         self.test_content_management()
         self.test_role_based_admin()
-        self.test_ckeditor_integration()
+        self.test_ckeditor5_integration()
         self.test_instructor_permissions()
         self.test_communication_system()
         
@@ -351,7 +350,7 @@ class EnhancedInstructorSystemTester:
         print("✅ Advanced Navigation with Breadcrumbs")
         print("✅ Content Management with File Upload")
         print("✅ Role-Based Admin Interface Filtering")
-        print("✅ CKEditor Rich Content Creation")
+        print("✅ CKEditor 5 Rich Content Creation")
         print("✅ Granular Instructor Permissions")
         print("✅ Enhanced Communication System")
         

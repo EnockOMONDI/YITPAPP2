@@ -9548,3 +9548,17 @@ INFO 2025-07-31 22:48:40,070 autoreload 33360 8692087488 /Users/djsean/Desktop/A
 INFO 2025-07-31 22:48:43,085 autoreload 33497 8692087488 Watching for file changes with StatReloader
 INFO 2025-07-31 22:51:43,885 autoreload 33497 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
 INFO 2025-07-31 22:51:46,351 autoreload 33606 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:13:07,844 autoreload 33606 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2025-07-31 23:13:09,263 autoreload 34538 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:13:21,738 autoreload 34538 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2025-07-31 23:13:22,503 autoreload 34551 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:13:35,891 autoreload 34551 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2025-07-31 23:13:36,744 autoreload 34571 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:13:54,367 autoreload 34571 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2025-07-31 23:13:55,375 autoreload 34589 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:14:08,793 autoreload 34589 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2025-07-31 23:14:09,646 autoreload 34610 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:14:24,063 autoreload 34610 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2025-07-31 23:14:24,856 autoreload 34621 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:14:38,292 autoreload 34621 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2025-07-31 23:14:39,570 autoreload 34634 8692087488 Watching for file changes with StatReloader
