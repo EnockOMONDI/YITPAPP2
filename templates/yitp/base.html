@@ -1,36 +1,165 @@
 {% load static %}
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Youth Impact Training Programme{% endblock %}</title>
-    <meta name="description" content="">
+
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}Youth Impact Training Programme - Empowering Youth Through Skills Development{% endblock %}</title>
+    <meta name="description" content="{% block description %}Join Youth Impact Training Programme (YITP) for comprehensive skills development, entrepreneurship training, and career advancement. Transform your future with our expert-led courses and mentorship programs.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}youth training, skills development, entrepreneurship, career advancement, online courses, mentorship, youth empowerment, professional development, YITP{% endblock %}">
+    <meta name="author" content="Youth Impact Global">
+    <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}Youth Impact Training Programme - Empowering Youth Through Skills Development{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Join Youth Impact Training Programme (YITP) for comprehensive skills development, entrepreneurship training, and career advancement. Transform your future with our expert-led courses and mentorship programs.{% endblock %}"
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'assets/img/logo/youthImpact.png' %}{% endblock %}">
+    <meta property="og:site_name" content="Youth Impact Training Programme">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Youth Impact Training Programme - Empowering Youth Through Skills Development{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Join Youth Impact Training Programme (YITP) for comprehensive skills development, entrepreneurship training, and career advancement. Transform your future with our expert-led courses and mentorship programs.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% static 'assets/img/logo/youthImpact.png' %}{% endblock %}">
+    <meta name="twitter:site" content="@YouthImpactGlobal">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#ff5d15">
+    <meta name="msapplication-TileColor" content="#ff5d15">
+    <meta name="application-name" content="YITP">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Youth Impact Training Programme",
+        "alternateName": "YITP",
+        "url": "{{ request.build_absolute_uri }}",
+        "logo": "{% static 'assets/img/logo/youthImpact.png' %}",
+        "description": "Empowering youth through comprehensive skills development, entrepreneurship training, and career advancement programs.",
+        "foundingDate": "2020",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+254-700-000-000",
+            "contactType": "customer service",
+            "email": "youthimpactglobal3@gmail.com"
+        },
+        "sameAs": [
+            "https://www.facebook.com/youthimpactglobal",
+            "https://www.twitter.com/youthimpactglobal",
+            "https://www.linkedin.com/company/youth-impact-global"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Kenya",
+            "addressRegion": "Nairobi"
+        }
+    }
+    </script>
     
-    <!-- Place favicon.ico in the root directory -->
+    <!-- Favicon and Icons -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}">
-    
-    <!-- CSS here -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/backToTop.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/jquery.fancybox.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/fontAwesome5Pro.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/elegantFont.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/navbar-auth.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/messages.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/favicon.png' %}">
+
+    <!-- Critical CSS (Above-the-fold) -->
+    <style>
+        /* Critical CSS for immediate rendering */
+        :root {
+            --yitp-orange: #ff5d15;
+            --yitp-dark-blue: #1a2e53;
+            --yitp-light-gray: #f8f9fa;
+            --yitp-white: #ffffff;
+        }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 0; }
+        .navbar { background: var(--yitp-white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .btn-primary-custom { background: var(--yitp-orange); border: none; color: white; padding: 12px 24px; border-radius: 8px; }
+        .hero-section { background: linear-gradient(135deg, var(--yitp-light-gray) 0%, #ffffff 100%); padding: 120px 0 80px; }
+    </style>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="{% static 'assets/css/bootstrap.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'assets/css/style.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'assets/fonts/inter/Inter-Regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+
+    <!-- Non-Critical CSS (Deferred Loading) -->
+    <noscript>
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    </noscript>
+
+    <!-- Progressive CSS Loading -->
+    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/backToTop.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/jquery.fancybox.min.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/fontAwesome5Pro.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/elegantFont.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/default.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/navbar-auth.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/messages.css' %}" media="print" onload="this.media='all'">
+    <!-- Google Analytics 4 -->
+    {% if not debug %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            page_title: '{{ request.resolver_match.url_name|default:"home" }}',
+            custom_map: {'custom_parameter_1': 'page_type'}
+        });
+    </script>
+    {% endif %}
+
+    <!-- Uploadcare Configuration -->
     <script>
         UPLOADCARE_PUBLIC_KEY = "f914008525312051b54c";
-      </script>
-      <script charset="utf-8" src="https://ucarecdn.com/libs/widget/3.6.0/uploadcare.full.min.js"></script>
+    </script>
+    <script charset="utf-8" src="https://ucarecdn.com/libs/widget/3.6.0/uploadcare.full.min.js" defer></script>
+
+    <!-- Performance Monitoring -->
+    <script>
+        // Core Web Vitals monitoring
+        function sendToAnalytics(metric) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', metric.name, {
+                    event_category: 'Web Vitals',
+                    event_label: metric.id,
+                    value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+                    non_interaction: true,
+                });
+            }
+        }
+
+        // Load Web Vitals library
+        if ('loading' in HTMLImageElement.prototype) {
+            import('https://unpkg.com/web-vitals@3/dist/web-vitals.js').then(({getCLS, getFID, getFCP, getLCP, getTTFB}) => {
+                getCLS(sendToAnalytics);
+                getFID(sendToAnalytics);
+                getFCP(sendToAnalytics);
+                getLCP(sendToAnalytics);
+                getTTFB(sendToAnalytics);
+            });
+        }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    {% block breadcrumb_schema %}{% endblock %}
 
     {% block extra_css %}{% endblock %}
     {% block extra_head %}{% endblock %}

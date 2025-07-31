@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils import timezone
+from django.views.decorators.cache import cache_page
+from django.views.decorators.http import require_http_methods
 
 
 def home(request):
@@ -159,5 +165,105 @@ def coursedetail5(request):
     return render(request, 'yitp/coursedetail5.html')
 
 def coursedetail6(request):
-    
+
     return render(request, 'yitp/coursedetail6.html')
+
+
+@cache_page(60 * 60 * 24)  # Cache for 24 hours
+@require_http_methods(["GET"])
+def sitemap_xml(request):
+    """
+    Generate XML sitemap for SEO optimization
+    """
+    # Define static pages with their priorities and change frequencies
+    static_pages = [
+        {
+            'url': reverse('yitp:home'),
+            'priority': '1.0',
+            'changefreq': 'daily',
+            'lastmod': timezone.now().date()
+        },
+        {
+            'url': reverse('yitp:about'),
+            'priority': '0.8',
+            'changefreq': 'monthly',
+            'lastmod': timezone.now().date()
+        },
+        {
+            'url': reverse('yitp:web_courses_list'),
+            'priority': '0.9',
+            'changefreq': 'weekly',
+            'lastmod': timezone.now().date()
+        },
+        {
+            'url': reverse('yitp:team'),
+            'priority': '0.7',
+            'changefreq': 'monthly',
+            'lastmod': timezone.now().date()
+        },
+        {
+            'url': reverse('yitp:contact'),
+            'priority': '0.6',
+            'changefreq': 'monthly',
+            'lastmod': timezone.now().date()
+        },
+        {
+            'url': reverse('yitp:faqs'),
+            'priority': '0.6',
+            'changefreq': 'monthly',
+            'lastmod': timezone.now().date()
+        },
+        {
+            'url': reverse('yitp:documentation'),
+            'priority': '0.5',
+            'changefreq': 'monthly',
+            'lastmod': timezone.now().date()
+        },
+        {
+            'url': reverse('yitp:events'),
+            'priority': '0.7',
+            'changefreq': 'weekly',
+            'lastmod': timezone.now().date()
+        },
+    ]
+
+    # Add course detail pages
+    for i in range(1, 7):
+        static_pages.append({
+            'url': reverse(f'yitp:coursedetail{i}'),
+            'priority': '0.8',
+            'changefreq': 'monthly',
+            'lastmod': timezone.now().date()
+        })
+
+    # Build absolute URLs
+    for page in static_pages:
+        page['url'] = request.build_absolute_uri(page['url'])
+
+    # Render sitemap XML
+    sitemap_xml = render_to_string('yitp/sitemap.xml', {
+        'pages': static_pages,
+        'domain': request.get_host(),
+    })
+
+    return HttpResponse(sitemap_xml, content_type='application/xml')
+
+
+@cache_page(60 * 60 * 24)  # Cache for 24 hours
+@require_http_methods(["GET"])
+def robots_txt(request):
+    """
+    Generate robots.txt for SEO optimization
+    """
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /admin/",
+        "Disallow: /lms/",
+        "Disallow: /users/login/",
+        "Disallow: /users/register/",
+        "",
+        f"Sitemap: {request.build_absolute_uri(reverse('yitp:sitemap'))}",
+    ]
+
+    return HttpResponse("\n".join(lines), content_type="text/plain")

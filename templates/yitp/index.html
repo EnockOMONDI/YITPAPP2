@@ -1,5 +1,53 @@
-{% extends 'unified/base.html' %}
+{% extends 'yitp/base.html' %}
 {% load static %}
+
+{% block title %}Youth Impact Training Programme - Empowering Youth Through Skills Development & Entrepreneurship{% endblock %}
+
+{% block description %}Transform your future with Youth Impact Training Programme (YITP). Access comprehensive skills development courses, entrepreneurship training, mentorship programs, and career advancement opportunities. Join thousands of successful graduates building impactful careers.{% endblock %}
+
+{% block keywords %}youth training, skills development, entrepreneurship training, career advancement, online courses, mentorship programs, youth empowerment, professional development, YITP, business skills, leadership training, digital skills{% endblock %}
+
+{% block og_title %}Youth Impact Training Programme - Transform Your Future Today{% endblock %}
+{% block og_description %}Join YITP for world-class skills development, entrepreneurship training, and mentorship. Start your journey to success with our expert-led programs designed for ambitious youth.{% endblock %}
+
+{% block breadcrumb_schema %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ request.build_absolute_uri }}"
+    }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Youth Impact Training Programme",
+    "alternateName": "YITP",
+    "url": "{{ request.build_absolute_uri }}",
+    "logo": "{% static 'assets/img/logo/youthImpact.png' %}",
+    "description": "Empowering youth through comprehensive skills development, entrepreneurship training, and career advancement programs.",
+    "foundingDate": "2020",
+    "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "name": "YITP Certificate",
+        "description": "Professional development certificate awarded upon course completion"
+    },
+    "offers": {
+        "@type": "Offer",
+        "category": "Education",
+        "name": "Skills Development Courses",
+        "description": "Comprehensive training programs for youth empowerment"
+    }
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <style>

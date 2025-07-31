@@ -1,0 +1,193 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found - Youth Impact Training Programme{% endblock %}
+{% block description %}The page you're looking for doesn't exist. Explore our comprehensive skills development courses and training programs at Youth Impact Training Programme.{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<main class="error-page">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="bg-light py-3">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'yitp:home' %}" class="text-decoration-none">
+                        <i class="fas fa-home me-1"></i>Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">404 Error</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Error Content -->
+    <section class="error-content section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <!-- Error Illustration -->
+                    <div class="error-illustration mb-5">
+                        <img src="{% static 'assets/img/illustrations/404-error.svg' %}" 
+                             alt="Page not found illustration" 
+                             class="img-fluid" 
+                             style="max-width: 400px;"
+                             loading="eager">
+                    </div>
+
+                    <!-- Error Message -->
+                    <h1 class="error-title display-1 fw-bold text-primary mb-3">404</h1>
+                    <h2 class="error-subtitle h3 mb-4">Oops! Page Not Found</h2>
+                    <p class="error-description lead text-muted mb-5">
+                        The page you're looking for doesn't exist or has been moved. 
+                        Don't worry, let's get you back on track to achieving your goals with YITP.
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="error-actions">
+                        <a href="{% url 'yitp:home' %}" class="btn btn-primary-custom me-3 mb-3">
+                            <i class="fas fa-home me-2"></i>Go Home
+                        </a>
+                        <a href="{% url 'yitp:web_courses_list' %}" class="btn btn-secondary-custom mb-3">
+                            <i class="fas fa-graduation-cap me-2"></i>Browse Courses
+                        </a>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="error-search mt-5">
+                        <h3 class="h5 mb-3">Or search for what you need:</h3>
+                        <form class="search-form" role="search" action="{% url 'yitp:web_courses_list' %}" method="get">
+                            <div class="input-group input-group-lg justify-content-center">
+                                <input type="search" 
+                                       class="form-control" 
+                                       name="q" 
+                                       placeholder="Search courses, topics, or skills..."
+                                       aria-label="Search"
+                                       style="max-width: 400px;">
+                                <button class="btn btn-outline-primary" type="submit" aria-label="Search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Helpful Links -->
+    <section class="helpful-links bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center mb-5">Popular Pages</h3>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-graduation-cap fa-2x text-primary mb-3"></i>
+                            <h5 class="card-title">Our Courses</h5>
+                            <p class="card-text">Explore our comprehensive skills development programs.</p>
+                            <a href="{% url 'yitp:web_courses_list' %}" class="btn btn-outline-primary btn-sm">
+                                View Courses
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-info-circle fa-2x text-primary mb-3"></i>
+                            <h5 class="card-title">About YITP</h5>
+                            <p class="card-text">Learn about our mission to empower youth through education.</p>
+                            <a href="{% url 'yitp:about' %}" class="btn btn-outline-primary btn-sm">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-2x text-primary mb-3"></i>
+                            <h5 class="card-title">Our Team</h5>
+                            <p class="card-text">Meet the experts behind our training programs.</p>
+                            <a href="{% url 'yitp:team' %}" class="btn btn-outline-primary btn-sm">
+                                Meet Team
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                            <h5 class="card-title">Contact Us</h5>
+                            <p class="card-text">Get in touch with our support team for assistance.</p>
+                            <a href="{% url 'yitp:contact' %}" class="btn btn-outline-primary btn-sm">
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Structured Data for Error Page -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "404 Error - Page Not Found",
+    "description": "The requested page could not be found on Youth Impact Training Programme website.",
+    "url": "{{ request.build_absolute_uri }}",
+    "isPartOf": {
+        "@type": "WebSite",
+        "name": "Youth Impact Training Programme",
+        "url": "{{ request.scheme }}://{{ request.get_host }}"
+    }
+}
+</script>
+
+<style>
+/* Custom styles for 404 page */
+.error-page {
+    min-height: calc(100vh - 200px);
+}
+
+.error-title {
+    color: var(--yitp-orange);
+    font-size: 8rem;
+    line-height: 1;
+}
+
+.error-subtitle {
+    color: var(--yitp-dark-blue);
+}
+
+.search-form .form-control:focus {
+    border-color: var(--yitp-orange);
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
+}
+
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 6rem;
+    }
+    
+    .error-actions .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .error-actions .btn:last-child {
+        margin-bottom: 0;
+    }
+}
+</style>
+{% endblock %}

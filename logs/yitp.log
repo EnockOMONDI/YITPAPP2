@@ -9619,3 +9619,108 @@ WARNING 2025-08-01 00:14:21,031 basehttp 38611 6150123520 "GET /static/js/admin-
 INFO 2025-08-01 00:15:30,227 basehttp 38611 6133297152 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 12135
 WARNING 2025-08-01 00:15:30,290 basehttp 38611 6133297152 "GET /static/css/admin-custom.css HTTP/1.1" 404 1819
 WARNING 2025-08-01 00:15:30,290 basehttp 38611 6150123520 "GET /static/js/admin-custom.js HTTP/1.1" 404 1813
+INFO 2025-08-01 01:15:04,538 autoreload 40831 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-01 01:15:34,064 basehttp 40831 6191427584 "GET /sitemap.xml HTTP/1.1" 200 2916
+INFO 2025-08-01 01:15:34,175 basehttp 40831 6191427584 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-08-01 01:15:41,612 basehttp 40831 6191427584 "GET /robots.txt HTTP/1.1" 200 151
+ERROR 2025-08-01 01:15:49,912 log 40831 6191427584 Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 35, in home
+    return render(request, 'yitp/index.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 134, in render
+    compiled_parent = self.get_parent(context)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 131, in get_parent
+    return self.find_template(parent, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 109, in find_template
+    template, origin = context.template.engine.find_template(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 228, in do_block
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'title' appears more than once
+ERROR 2025-08-01 01:15:49,916 basehttp 40831 6191427584 "GET / HTTP/1.1" 500 264405
+INFO 2025-08-01 01:17:18,353 basehttp 40831 6191427584 "GET / HTTP/1.1" 200 53304
+WARNING 2025-08-01 01:17:18,494 basehttp 40831 6191427584 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-01 01:17:20,103 basehttp 40831 6191427584 "GET / HTTP/1.1" 200 53304
+WARNING 2025-08-01 01:17:20,152 basehttp 40831 6191427584 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-01 01:17:40,156 basehttp 40831 6191427584 "GET /register/ HTTP/1.1" 200 15700
+INFO 2025-08-01 01:26:57,683 basehttp 40831 6191427584 "GET /lms/assessments/quiz-success/4/ HTTP/1.1" 302 0
+INFO 2025-08-01 01:26:57,701 basehttp 40831 6191427584 "GET /login/?next=/lms/assessments/quiz-success/4/ HTTP/1.1" 200 13519
+INFO 2025-08-01 01:27:06,918 basehttp 40831 6191427584 "GET / HTTP/1.1" 200 53304
+WARNING 2025-08-01 01:27:06,979 basehttp 40831 6191427584 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-01 01:27:31,941 basehttp 40831 6191427584 "GET /web_courses_list/ HTTP/1.1" 200 96149
+INFO 2025-08-01 01:27:32,263 basehttp 40831 6191427584 "GET /static/assets/img/hero/sylvester.jpeg HTTP/1.1" 200 68707
+INFO 2025-08-01 01:27:32,266 basehttp 40831 6208253952 "GET /static/assets/img/hero/ruth.jpeg HTTP/1.1" 200 97374
+INFO 2025-08-01 01:27:32,279 basehttp 40831 6258733056 "GET /static/assets/img/hero/lilian.jpeg HTTP/1.1" 200 63171
+INFO 2025-08-01 01:27:32,281 basehttp 40831 6241906688 "GET /static/assets/img/hero/levin.jpeg HTTP/1.1" 200 61761
+INFO 2025-08-01 01:27:32,282 basehttp 40831 6225080320 "GET /static/assets/img/hero/meshack.jpeg HTTP/1.1" 200 188051
+INFO 2025-08-01 01:27:32,345 basehttp 40831 6225080320 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2025-08-01 01:28:23,377 basehttp 40831 6191427584 "GET /coursedetail2/ HTTP/1.1" 200 29989
+WARNING 2025-08-01 01:28:23,526 basehttp 40831 6191427584 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-01 01:28:58,840 basehttp 40831 6191427584 "GET /about/ HTTP/1.1" 200 56583
+INFO 2025-08-01 01:29:13,129 basehttp 40831 6191427584 "GET /contact/ HTTP/1.1" 200 50969
+INFO 2025-08-01 01:29:22,982 basehttp 40831 6191427584 "GET /web_courses_list/ HTTP/1.1" 200 96149
+INFO 2025-08-01 01:29:27,441 basehttp 40831 6191427584 "GET /events/ HTTP/1.1" 200 29078
+WARNING 2025-08-01 01:29:27,494 basehttp 40831 6191427584 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-01 01:29:27,649 basehttp 40831 6191427584 "GET /static/assets/img/shape/yellow-bg-2.png HTTP/1.1" 200 2116
+INFO 2025-08-01 01:29:30,949 basehttp 40831 6191427584 "GET /blogs/ HTTP/1.1" 200 25352
+WARNING 2025-08-01 01:29:31,026 basehttp 40831 6191427584 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-01 01:46:23,438 autoreload 40831 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2025-08-01 01:46:25,593 autoreload 42006 8692087488 Watching for file changes with StatReloader
