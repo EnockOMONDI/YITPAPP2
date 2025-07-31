@@ -240,11 +240,11 @@ if IS_PRODUCTION:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'yitplms'),
-            'USER': os.getenv('DB_USER', 'yitplms_owner'),
-            'PASSWORD': os.getenv('DB_PASSWORD', 'npg_LwHI4a8TufWb'),
-            'HOST': os.getenv('DB_HOST', 'ep-spring-block-a5drxziv-pooler.us-east-2.aws.neon.tech'),
-            'PORT': os.getenv('DB_PORT', '5432'),
+            'NAME': os.getenv('DB_NAME', 'postgres'),
+            'USER': os.getenv('DB_USER', 'postgres.ovywuanlidncuecjlyve'),
+            'PASSWORD': os.getenv('DB_PASSWORD', '_zi4DD9LBKAc@Pk'),
+            'HOST': os.getenv('DB_HOST', 'aws-0-eu-west-1.pooler.supabase.com'),
+            'PORT': os.getenv('DB_PORT', '6543'),
             'OPTIONS': {
                 'sslmode': 'require',
                 'connect_timeout': 30,
