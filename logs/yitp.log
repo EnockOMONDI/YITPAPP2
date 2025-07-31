@@ -9562,3 +9562,7 @@ INFO 2025-07-31 23:14:24,063 autoreload 34610 8692087488 /Users/djsean/Desktop/A
 INFO 2025-07-31 23:14:24,856 autoreload 34621 8692087488 Watching for file changes with StatReloader
 INFO 2025-07-31 23:14:38,292 autoreload 34621 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/models.py changed, reloading.
 INFO 2025-07-31 23:14:39,570 autoreload 34634 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:36:12,853 autoreload 34634 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2025-07-31 23:36:13,972 autoreload 35776 8692087488 Watching for file changes with StatReloader
+INFO 2025-07-31 23:37:05,374 autoreload 35776 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2025-07-31 23:37:06,933 autoreload 35802 8692087488 Watching for file changes with StatReloader

@@ -93,7 +93,7 @@ DEBUG = not IS_PRODUCTION
 
 # Allowed Hosts
 if IS_PRODUCTION:
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*.youthimpactglobal.com,youthimpactglobal.com,yitp-django-app.onrender.com,*.onrender.com').split(',')
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*.youthimpactglobal.com,youthimpactglobal.com,yitpapp2.onrender.com,*.onrender.com').split(',')
 else:
     ALLOWED_HOSTS = ['*']  # Permissive for development
 
@@ -692,7 +692,7 @@ MPESA_QUERY_URL = f'{MPESA_BASE_URL}/mpesa/stkpushquery/v1/query'
 
 # M-Pesa Callback URLs
 # These URLs will receive payment notifications from Safaricom
-SITE_URL = os.environ.get('SITE_URL', 'https://yitp-lms.onrender.com')  # Production domain for YITP LMS
+SITE_URL = os.environ.get('SITE_URL', 'https://www.youthimpactglobal.com')  # Production domain for YITP LMS
 MPESA_CALLBACK_URL = f'{SITE_URL}/payments/mpesa/callback/'
 MPESA_RESULT_URL = f'{SITE_URL}/payments/mpesa/result/'
 MPESA_TIMEOUT_URL = f'{SITE_URL}/payments/mpesa/timeout/'

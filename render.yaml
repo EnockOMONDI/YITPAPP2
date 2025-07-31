@@ -46,7 +46,7 @@ services:
 
       # Site Configuration
       - key: SITE_URL
-        value: "https://yitp-lms.onrender.com"
+        value: "https://www.youthimpactglobal.com"
 
       # Admin Configuration
       - key: ADMIN_EMAIL
