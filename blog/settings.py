@@ -635,7 +635,7 @@ if IS_PRODUCTION:
     # Production: Gmail SMTP Backend
     print("📧 Using Gmail SMTP for production email")
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST = 'smtpout.secureserver.net'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
