@@ -10037,3 +10037,4 @@ INFO 2025-08-01 19:50:57,772 basehttp 64450 6238220288 "GET /static/assets/fonts
 INFO 2025-08-01 19:50:58,313 basehttp 64450 6238220288 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
 INFO 2025-08-01 19:51:03,034 basehttp 64450 6170914816 "GET /logout/ HTTP/1.1" 200 14449
 INFO 2025-08-01 19:51:07,083 basehttp 64450 6170914816 "GET /login/ HTTP/1.1" 200 13519
+INFO 2025-08-01 20:47:43,346 autoreload 65702 8692087488 Watching for file changes with StatReloader
