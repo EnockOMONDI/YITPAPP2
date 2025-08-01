@@ -345,7 +345,7 @@ def reverse_intro_course(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('courses', '0001_initial'),
+        ('courses', '0002_alter_lesson_content'),
         ('users', '0001_initial'),
         ('assessments', '0001_initial'),
     ]
