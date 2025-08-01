@@ -1,0 +1,249 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static %}
+
+{% block title %}Import Blog Posts - YITP Admin{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <style>
+        .yitp-import-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .yitp-import-header {
+            background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .yitp-import-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        
+        .yitp-import-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .yitp-step {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .yitp-step-number {
+            background: #ff5d15;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .yitp-step-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a2e53;
+            margin-bottom: 10px;
+        }
+        
+        .yitp-step-content {
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        .yitp-download-template {
+            background: #f8f9fa;
+            border: 2px dashed #1a2e53;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .yitp-download-btn {
+            background: #1a2e53;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .yitp-download-btn:hover {
+            background: #0f1a35;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .yitp-upload-area {
+            border: 2px dashed #ff5d15;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            background: #fff8f5;
+            margin: 20px 0;
+        }
+        
+        .yitp-upload-icon {
+            font-size: 48px;
+            color: #ff5d15;
+            margin-bottom: 15px;
+        }
+        
+        .yitp-requirements {
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .yitp-requirements h4 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        
+        .yitp-requirements ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        
+        .yitp-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .yitp-warning h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .yitp-back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .yitp-back-btn:hover {
+            background: #545b62;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="yitp-import-container">
+    <div class="yitp-import-header">
+        <h1>📥 Import Blog Posts</h1>
+        <p>Upload Excel files to import multiple blog posts into the YITP system</p>
+    </div>
+    
+    <div class="yitp-step">
+        <div class="yitp-step-title">
+            <span class="yitp-step-number">1</span>
+            Download Template
+        </div>
+        <div class="yitp-step-content">
+            <p>Start by downloading our Excel template which includes the correct format, sample data, and detailed instructions.</p>
+            
+            <div class="yitp-download-template">
+                <h4>📋 Excel Import Template</h4>
+                <p>Get the standardized template with sample data and instructions</p>
+                <a href="{% url 'admin:blogapp_post_download_template' %}" class="yitp-download-btn">
+                    📥 Download Template
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="yitp-step">
+        <div class="yitp-step-title">
+            <span class="yitp-step-number">2</span>
+            Prepare Your Data
+        </div>
+        <div class="yitp-step-content">
+            <div class="yitp-requirements">
+                <h4>📋 Required Fields</h4>
+                <ul>
+                    <li><strong>title:</strong> Blog post title (required)</li>
+                    <li><strong>content:</strong> Full blog post content with HTML formatting (required)</li>
+                </ul>
+            </div>
+            
+            <div class="yitp-requirements">
+                <h4>🔧 Optional Fields</h4>
+                <ul>
+                    <li><strong>author:</strong> Author name (defaults to "YITP Admin")</li>
+                    <li><strong>category:</strong> Category name (created automatically if doesn't exist)</li>
+                    <li><strong>tags:</strong> Comma-separated tags</li>
+                    <li><strong>status:</strong> draft, in_review, or published (default: draft)</li>
+                    <li><strong>featured:</strong> TRUE/FALSE for featured posts</li>
+                    <li><strong>trending:</strong> TRUE/FALSE for trending posts</li>
+                    <li><strong>publication_date:</strong> YYYY-MM-DD HH:MM:SS format</li>
+                    <li><strong>featured_image_url:</strong> URL to featured image</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="yitp-step">
+        <div class="yitp-step-title">
+            <span class="yitp-step-number">3</span>
+            Upload Your File
+        </div>
+        <div class="yitp-step-content">
+            <div class="yitp-upload-area">
+                <div class="yitp-upload-icon">📤</div>
+                <h4>Ready to Import?</h4>
+                <p>Click the button below to proceed with the import process</p>
+                <a href="{% url 'admin:blogapp_post_process_import' %}" class="yitp-download-btn">
+                    🚀 Start Import Process
+                </a>
+            </div>
+            
+            <div class="yitp-warning">
+                <h4>⚠️ Important Notes</h4>
+                <ul>
+                    <li>Maximum file size: 10MB</li>
+                    <li>Supported formats: .xlsx, .xls</li>
+                    <li>Categories and tags will be created automatically if they don't exist</li>
+                    <li>Duplicate titles will be skipped to prevent conflicts</li>
+                    <li>You can preview changes before confirming the import</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'admin:blogapp_post_changelist' %}" class="yitp-back-btn">
+            ← Back to Blog Posts
+        </a>
+    </div>
+</div>
+{% endblock %}

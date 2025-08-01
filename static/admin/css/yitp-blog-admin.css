@@ -1,0 +1,352 @@
+/* YITP Blog Admin Styles */
+/* Enhanced styling for blog import/export functionality */
+
+:root {
+    --yitp-orange: #ff5d15;
+    --yitp-dark-blue: #1a2e53;
+    --yitp-light-gray: #f8f9fa;
+    --yitp-border: #dee2e6;
+    --yitp-success: #28a745;
+    --yitp-warning: #ffc107;
+    --yitp-danger: #dc3545;
+}
+
+/* Import/Export Button Styling */
+.import-export-buttons {
+    background: var(--yitp-light-gray);
+    border: 1px solid var(--yitp-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.import-export-buttons h3 {
+    color: var(--yitp-dark-blue);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.yitp-admin-btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.yitp-admin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    text-decoration: none;
+}
+
+.yitp-admin-btn-primary {
+    background: var(--yitp-orange);
+    color: white;
+}
+
+.yitp-admin-btn-primary:hover {
+    background: #e54a0c;
+    color: white;
+}
+
+.yitp-admin-btn-secondary {
+    background: var(--yitp-dark-blue);
+    color: white;
+}
+
+.yitp-admin-btn-secondary:hover {
+    background: #0f1a35;
+    color: white;
+}
+
+.yitp-admin-btn-outline {
+    background: transparent;
+    color: var(--yitp-dark-blue);
+    border: 2px solid var(--yitp-dark-blue);
+}
+
+.yitp-admin-btn-outline:hover {
+    background: var(--yitp-dark-blue);
+    color: white;
+}
+
+.yitp-admin-btn-success {
+    background: var(--yitp-success);
+    color: white;
+}
+
+.yitp-admin-btn-success:hover {
+    background: #218838;
+    color: white;
+}
+
+/* Help Text Styling */
+.import-export-help {
+    background: #e7f3ff;
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 0 6px 6px 0;
+}
+
+.import-export-help h4 {
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.import-export-help ul {
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+
+.import-export-help li {
+    margin-bottom: 5px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Statistics Display */
+.yitp-stats-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--yitp-border);
+}
+
+.yitp-stat-item {
+    text-align: center;
+    flex: 1;
+    padding: 15px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid var(--yitp-border);
+}
+
+.yitp-stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--yitp-orange);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.yitp-stat-label {
+    font-size: 12px;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Import Progress Styling */
+.import-progress {
+    background: white;
+    border: 1px solid var(--yitp-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    background: var(--yitp-light-gray);
+    border-radius: 10px;
+    height: 20px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, var(--yitp-orange), #ff7a3d);
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+/* File Upload Styling */
+.file-upload-area {
+    border: 2px dashed var(--yitp-orange);
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    background: #fff8f5;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+}
+
+.file-upload-area:hover {
+    border-color: #e54a0c;
+    background: #fff0e6;
+}
+
+.file-upload-area.dragover {
+    border-color: var(--yitp-success);
+    background: #f0fff4;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: var(--yitp-orange);
+    margin-bottom: 15px;
+}
+
+.upload-text {
+    color: #495057;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.upload-subtext {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Error and Success Messages */
+.yitp-message {
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border-left: 4px solid;
+}
+
+.yitp-message-success {
+    background: #d4edda;
+    border-color: var(--yitp-success);
+    color: #155724;
+}
+
+.yitp-message-error {
+    background: #f8d7da;
+    border-color: var(--yitp-danger);
+    color: #721c24;
+}
+
+.yitp-message-warning {
+    background: #fff3cd;
+    border-color: var(--yitp-warning);
+    color: #856404;
+}
+
+.yitp-message-info {
+    background: #d1ecf1;
+    border-color: #17a2b8;
+    color: #0c5460;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .yitp-admin-btn {
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .yitp-stats-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .import-export-buttons {
+        padding: 15px;
+    }
+}
+
+/* Table Enhancements */
+.yitp-enhanced-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.yitp-enhanced-table th {
+    background: var(--yitp-dark-blue);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.yitp-enhanced-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--yitp-border);
+}
+
+.yitp-enhanced-table tr:hover {
+    background: var(--yitp-light-gray);
+}
+
+/* Loading Spinner */
+.yitp-spinner {
+    border: 3px solid var(--yitp-light-gray);
+    border-top: 3px solid var(--yitp-orange);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Tooltip Styling */
+.yitp-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.yitp-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--yitp-dark-blue);
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.yitp-tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
