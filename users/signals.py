@@ -5,6 +5,10 @@ from django.dispatch import receiver
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from . models import Profile, InstructorProfile
+import logging
+
+# Set up logger
+logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

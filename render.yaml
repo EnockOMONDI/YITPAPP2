@@ -27,6 +27,8 @@ services:
         value: 6543
 
       # Email Configuration (Gmail SMTP)
+      - key: EMAIL_HOST
+        value: "smtp.gmail.com"
       - key: EMAIL_HOST_USER
         value: "dedeexpeditions@gmail.com"
       - key: EMAIL_HOST_PASSWORD

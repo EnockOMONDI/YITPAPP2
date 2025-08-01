@@ -221,6 +221,54 @@ def create_instructor_with_temporary_password(username, email, first_name, last_
             'message': f'Failed to create instructor account: {str(e)}'
         }
 
+def test_email_configuration():
+    """
+    Test email configuration and connectivity
+    Returns detailed information about email setup
+    """
+    import smtplib
+    import ssl
+
+    try:
+        logger.info("🔍 Testing email configuration...")
+
+        # Check settings
+        config_info = {
+            'EMAIL_HOST': getattr(settings, 'EMAIL_HOST', 'Not set'),
+            'EMAIL_PORT': getattr(settings, 'EMAIL_PORT', 'Not set'),
+            'EMAIL_USE_TLS': getattr(settings, 'EMAIL_USE_TLS', 'Not set'),
+            'EMAIL_HOST_USER': getattr(settings, 'EMAIL_HOST_USER', 'Not set'),
+            'EMAIL_HOST_PASSWORD': '***' if getattr(settings, 'EMAIL_HOST_PASSWORD', None) else 'Not set',
+            'DEFAULT_FROM_EMAIL': getattr(settings, 'DEFAULT_FROM_EMAIL', 'Not set'),
+        }
+
+        logger.info(f"Email configuration: {config_info}")
+
+        # Test SMTP connection
+        context = ssl.create_default_context()
+        context.check_hostname = False
+        context.verify_mode = ssl.CERT_NONE
+
+        server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+        server.starttls(context=context)
+        server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
+        server.quit()
+
+        logger.info("✅ Email configuration test successful")
+        return {
+            'success': True,
+            'message': 'Email configuration is working correctly',
+            'config': config_info
+        }
+
+    except Exception as e:
+        logger.error(f"❌ Email configuration test failed: {str(e)}")
+        return {
+            'success': False,
+            'message': f'Email configuration test failed: {str(e)}',
+            'config': config_info if 'config_info' in locals() else {}
+        }
+
 def send_html_email_direct(subject, html_content, recipient_list, from_email=None, plain_text_content=None):
     """
     Send HTML email directly using smtplib with SSL context handling
@@ -325,9 +373,9 @@ def send_html_email(subject, html_content, recipient_list, from_email=None, plai
         logger.error(f"❌ Django backend also failed for {recipient_list}: {str(e)}")
         return False
 
-def test_email_configuration():
+def test_email_configuration_simple():
     """
-    Test email configuration by sending a test email
+    Simple email configuration test by sending a test email
     Returns True if successful, False otherwise
     """
     try:

@@ -9955,3 +9955,37 @@ WARNING 2025-08-01 18:29:43,043 basehttp 61125 6145847296 "GET /static/js/admin-
 WARNING 2025-08-01 18:29:43,045 basehttp 61125 6129020928 "GET /static/css/admin-custom.css HTTP/1.1" 404 1819
 WARNING 2025-08-01 18:29:43,046 basehttp 61125 6162673664 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
 WARNING 2025-08-01 18:29:43,059 basehttp 61125 6129020928 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-08-01 18:39:36,174 basehttp 61125 6129020928 "GET /admin/toggle-sidebar/ HTTP/1.1" 200 0
+INFO 2025-08-01 18:39:59,761 basehttp 61125 6129020928 "GET /admin/toggle-sidebar/ HTTP/1.1" 200 0
+INFO 2025-08-01 18:40:02,395 basehttp 61125 6129020928 "GET /admin/blogapp/post/ HTTP/1.1" 200 79872
+WARNING 2025-08-01 18:40:02,551 basehttp 61125 6129020928 "GET /static/css/admin-custom.css HTTP/1.1" 404 1819
+INFO 2025-08-01 18:40:02,553 basehttp 61125 6145847296 "GET /static/admin/css/yitp-blog-admin.css HTTP/1.1" 200 6647
+WARNING 2025-08-01 18:40:02,563 basehttp 61125 6162673664 "GET /static/js/admin-custom.js HTTP/1.1" 404 1813
+INFO 2025-08-01 18:40:02,564 basehttp 61125 6213152768 "GET /static/admin/js/yitp-blog-admin.js HTTP/1.1" 200 11475
+INFO 2025-08-01 18:40:02,567 basehttp 61125 6145847296 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-08-01 18:40:02,567 basehttp 61125 6129020928 "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-08-01 18:40:02,571 basehttp 61125 6162673664 "GET /static/admin/js/actions.js HTTP/1.1" 200 8067
+INFO 2025-08-01 18:40:02,572 basehttp 61125 6179500032 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-08-01 18:40:02,572 basehttp 61125 6213152768 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9222
+INFO 2025-08-01 18:40:02,574 basehttp 61125 6145847296 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-08-01 18:40:02,576 basehttp 61125 6129020928 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+WARNING 2025-08-01 18:40:02,584 basehttp 61125 6213152768 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-08-01 18:40:02,586 basehttp 61125 6196326400 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-08-01 18:40:02,587 basehttp 61125 6162673664 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+WARNING 2025-08-01 18:40:02,803 basehttp 61125 6129020928 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-08-01 18:40:07,864 basehttp 61125 6129020928 "GET /admin/blogapp/post/import/ HTTP/1.1" 200 67893
+WARNING 2025-08-01 18:40:07,926 basehttp 61125 6129020928 "GET /static/css/admin-custom.css HTTP/1.1" 404 1819
+WARNING 2025-08-01 18:40:07,934 basehttp 61125 6145847296 "GET /static/js/admin-custom.js HTTP/1.1" 404 1813
+WARNING 2025-08-01 18:40:07,934 basehttp 61125 6162673664 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-08-01 18:40:08,054 basehttp 61125 6129020928 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-08-01 18:40:08,096 basehttp 61125 6129020928 "GET /static/unfold/fonts/inter/Inter-Bold.woff2 HTTP/1.1" 200 114840
+INFO 2025-08-01 18:40:52,472 basehttp 61125 6129020928 "GET /admin/blogapp/post/ HTTP/1.1" 200 79872
+INFO 2025-08-01 18:40:57,366 basehttp 61125 6129020928 "GET /admin/ HTTP/1.1" 200 145437
+INFO 2025-08-01 19:02:53,790 autoreload 61125 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2025-08-01 19:02:56,696 autoreload 62424 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-01 19:03:31,029 autoreload 62424 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/signals.py changed, reloading.
+INFO 2025-08-01 19:03:32,715 autoreload 62464 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-01 19:04:19,271 autoreload 62464 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-08-01 19:04:22,215 autoreload 62497 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-01 19:08:51,709 autoreload 62497 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-08-01 19:08:54,268 autoreload 62651 8692087488 Watching for file changes with StatReloader
