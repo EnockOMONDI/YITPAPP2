@@ -619,7 +619,7 @@
                     <div class="mb-4">
                         <h3 class="mb-3">Content</h3>
                         <div class="lesson-text-content">
-                            {{ lesson.content|linebreaks }}
+                            {{ lesson.content|safe }}
                         </div>
                     </div>
                     {% endif %}
@@ -652,6 +652,30 @@
                     </div>
                 </div>
 
+                <!-- Lesson Completion Guidance -->
+                {% if not next_lesson and lesson.quizzes.exists %}
+                <div class="completion-guidance mb-4" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border: 2px solid #ff5d15; border-radius: 15px; padding: 25px;">
+                    <div class="text-center">
+                        <h4 style="color: #1a2e53; margin-bottom: 15px;">
+                            <i class="fas fa-graduation-cap me-2" style="color: #ff5d15;"></i>
+                            Ready to Complete This Lesson?
+                        </h4>
+                        <p style="color: #333; font-size: 1.1em; line-height: 1.6; margin-bottom: 20px;">
+                            After completing the lesson content and feeling confident with the material,
+                            <strong style="color: #ff5d15;">click "Take Quiz"</strong> to test your understanding and complete this lesson.
+                        </p>
+                        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fas fa-info-circle me-2" style="color: #1a2e53;"></i>
+                                <small style="color: #666;">
+                                    You need <strong>70% or higher</strong> to pass the quiz and complete this lesson.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
                 <!-- Navigation -->
                 <div class="lesson-navigation">
                     <div class="d-flex justify-content-between align-items-center">
@@ -681,9 +705,18 @@
                                 </button>
                                 {% endif %}
                             {% else %}
-                            <button class="nav-button secondary" disabled>
-                                Next<i class="fas fa-chevron-right ms-2"></i>
-                            </button>
+                                <!-- Single-lesson course: Show Take Quiz button instead of Next -->
+                                {% if lesson.quizzes.exists %}
+                                    {% with quiz=lesson.quizzes.first %}
+                                    <a href="{% url 'assessments:quiz_detail' quiz_id=quiz.id %}" class="nav-button" style="background: linear-gradient(135deg, #ff5d15, #1a2e53); color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; box-shadow: 0 4px 12px rgba(255,93,21,0.3);">
+                                        <i class="fas fa-quiz me-2"></i>Take Quiz
+                                    </a>
+                                    {% endwith %}
+                                {% else %}
+                                <button class="nav-button secondary" disabled>
+                                    Next<i class="fas fa-chevron-right ms-2"></i>
+                                </button>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>
