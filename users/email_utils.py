@@ -400,12 +400,17 @@ def test_email_configuration_simple():
         return False
 
 def send_otp_email(user, otp_code):
-    """Send OTP verification email to user"""
+    """Send OTP verification email to user with enhanced verification link"""
     logger.info(f"Preparing to send OTP email to {user.email}")
+
+    # Create verification URL with user ID and auto-fill capability
+    base_url = getattr(settings, 'SITE_URL', 'https://www.youthimpactglobal.com')
+    verification_url = f"{base_url}/verify-otp/?user_id={user.id}&code={otp_code}"
 
     context = {
         'user': user,
         'otp_code': otp_code,
+        'verification_url': verification_url,
         'expiry_minutes': settings.OTP_EXPIRY_MINUTES,
         'site_name': 'Youth Impact Training Programme',
         'support_email': settings.ADMIN_EMAIL

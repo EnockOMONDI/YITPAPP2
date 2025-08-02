@@ -267,9 +267,29 @@ def verify_otp_view(request):
                 'error_help': error_info['help']
             })
 
-    # GET request
+    # GET request - handle auto-fill from email link
     user_id = request.GET.get('user_id')
-    context = {'user_id': user_id}
+    auto_fill_code = request.GET.get('code')  # OTP code from email link
+
+    context = {
+        'user_id': user_id,
+        'auto_fill_code': auto_fill_code,
+        'from_email_link': bool(auto_fill_code)  # Flag to show user came from email
+    }
+
+    # If we have both user_id and code, show helpful message
+    if user_id and auto_fill_code:
+        try:
+            user = User.objects.get(id=user_id)
+            messages.info(
+                request,
+                f"Welcome back! We've pre-filled your verification code from the email link. "
+                f"Simply click 'Verify' to complete your registration."
+            )
+        except User.DoesNotExist:
+            messages.error(request, "Invalid verification link. Please try registering again.")
+            return redirect('users:register')
+
     return render(request, 'users/verify_otp.html', context)
 
 def resend_otp_view(request):

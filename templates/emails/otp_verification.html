@@ -21,13 +21,42 @@
     <div class="otp-expiry">⏰ This code expires in {{ expiry_minutes }} minutes</div>
 </div>
 
-<div class="info-box">
-    <strong>📋 How to use this code:</strong>
-    <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
-        <li>Return to the YITP registration page</li>
-        <li>Enter this 6-digit code in the verification field</li>
-        <li>Click "Verify" to complete your registration</li>
-    </ol>
+<!-- Enhanced Verification Options -->
+<div class="verification-options" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border: 2px solid #ff5d15; border-radius: 15px; padding: 25px; margin: 25px 0; text-align: center;">
+    <h3 style="color: #1a2e53; margin: 0 0 20px 0; font-size: 1.4em;">
+        <i style="color: #ff5d15;">🚀</i> Complete Your Account Verification
+    </h3>
+
+    <!-- Primary Option: Direct Verification Link -->
+    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <h4 style="color: #ff5d15; margin: 0 0 15px 0; font-size: 1.2em;">
+            ✨ Option 1: One-Click Verification (Recommended)
+        </h4>
+        <p style="color: #333; margin-bottom: 20px; line-height: 1.6;">
+            If you closed the verification page, click the button below to return to verification:
+        </p>
+        <a href="{{ verification_url }}" style="display: inline-block; background: linear-gradient(135deg, #ff5d15, #1a2e53); color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 1.1em; box-shadow: 0 4px 15px rgba(255,93,21,0.4); transition: all 0.3s ease;">
+            <i style="margin-right: 8px;">🔐</i>Complete Verification Now
+        </a>
+        <p style="color: #666; margin: 15px 0 0 0; font-size: 0.9em;">
+            This link will automatically fill in your verification code and is valid for {{ expiry_minutes }} minutes.
+        </p>
+    </div>
+
+    <!-- Alternative Option: Manual Code Entry -->
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #dee2e6;">
+        <h4 style="color: #1a2e53; margin: 0 0 15px 0; font-size: 1.1em;">
+            📝 Option 2: Manual Code Entry
+        </h4>
+        <p style="color: #666; margin-bottom: 15px; line-height: 1.6;">
+            Alternatively, you can manually enter the verification code:
+        </p>
+        <ol style="margin: 10px 0 0 20px; line-height: 1.8; color: #555; text-align: left;">
+            <li>Return to the YITP verification page</li>
+            <li>Enter the 6-digit code: <strong style="color: #ff5d15;">{{ otp_code }}</strong></li>
+            <li>Click "Verify" to complete your registration</li>
+        </ol>
+    </div>
 </div>
 
 <div class="warning-box">

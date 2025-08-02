@@ -16,9 +16,19 @@
                         </div>
                         <h5>Email Verification Required</h5>
                         <p class="text-muted">
-                            We've sent a 6-digit verification code to your email address. 
+                            We've sent a 6-digit verification code to your email address.
                             Please enter the code below to complete your registration.
                         </p>
+                        {% if from_email_link %}
+                        <div class="alert alert-info border-0" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border-left: 4px solid #ff5d15 !important;">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-link text-primary me-2"></i>
+                                <small class="mb-0" style="color: #1a2e53; font-weight: 600;">
+                                    Great! Your verification code has been pre-filled from the email link.
+                                </small>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
 
                     {% if messages %}
@@ -51,6 +61,7 @@
                                        required
                                        autocomplete="off"
                                        data-auto-submit="true"
+                                       {% if auto_fill_code %}value="{{ auto_fill_code }}"{% endif %}
                                    style="letter-spacing: 0.5em; font-size: 1.5rem;">
 
                                 <!-- Character Counter and Validation Feedback -->

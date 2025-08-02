@@ -11,9 +11,18 @@ YOUR VERIFICATION CODE: {{ otp_code }}
 
 This code expires in {{ expiry_minutes }} minutes.
 
-HOW TO USE THIS CODE:
-1. Return to the YITP registration page
-2. Enter this 6-digit code in the verification field
+🚀 COMPLETE YOUR ACCOUNT VERIFICATION
+
+✨ OPTION 1: ONE-CLICK VERIFICATION (RECOMMENDED)
+If you closed the verification page, use this direct link:
+{{ verification_url }}
+
+This link will automatically fill in your verification code and is valid for {{ expiry_minutes }} minutes.
+
+📝 OPTION 2: MANUAL CODE ENTRY
+Alternatively, you can manually enter the verification code:
+1. Return to the YITP verification page
+2. Enter this 6-digit code in the verification field: {{ otp_code }}
 3. Click "Verify" to complete your registration
 
 SECURITY NOTICE:
