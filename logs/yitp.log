@@ -10091,3 +10091,117 @@ INFO 2025-08-01 22:20:39,133 basehttp 62651 6172258304 "POST /login/ HTTP/1.1" 2
 INFO 2025-08-01 22:21:10,288 basehttp 62651 6172258304 "POST /login/ HTTP/1.1" 200 14420
 INFO 2025-08-01 22:57:21,375 basehttp 62651 6172258304 "GET /admin/ HTTP/1.1" 302 0
 INFO 2025-08-01 22:57:21,400 basehttp 62651 6172258304 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 11307
+INFO 2025-08-02 14:08:08,985 autoreload 79059 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 14:08:40,078 basehttp 62651 6172258304 "GET /admin HTTP/1.1" 301 0
+INFO 2025-08-02 14:08:40,083 basehttp 62651 6172258304 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-08-02 14:08:40,104 basehttp 62651 6172258304 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 11307
+INFO 2025-08-02 14:08:40,207 basehttp 62651 6172258304 "GET /static/unfold/fonts/inter/styles.css HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,213 basehttp 62651 6172258304 "GET /static/unfold/js/chart/chart.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,214 basehttp 62651 6222737408 "GET /static/unfold/fonts/material-symbols/styles.css HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,220 basehttp 62651 6172258304 "GET /static/unfold/js/htmx/htmx.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,220 basehttp 62651 6256390144 "GET /static/unfold/css/styles.css HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,220 basehttp 62651 6239563776 "GET /static/unfold/css/simplebar/simplebar.css HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,220 basehttp 62651 6222737408 "GET /static/unfold/js/app.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,230 basehttp 62651 6172258304 "GET /static/unfold/js/simplebar/simplebar.js HTTP/1.1" 304 0
+WARNING 2025-08-02 14:08:40,230 basehttp 62651 6205911040 "GET /static/js/admin-custom.js HTTP/1.1" 404 1813
+WARNING 2025-08-02 14:08:40,230 basehttp 62651 6189084672 "GET /static/css/admin-custom.css HTTP/1.1" 404 1819
+INFO 2025-08-02 14:08:40,513 basehttp 62651 6172258304 "GET /static/unfold/js/alpine/alpine.persist.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,514 basehttp 62651 6222737408 "GET /static/unfold/js/alpine/alpine.anchor.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,518 basehttp 62651 6222737408 "GET /static/unfold/js/alpine/alpine.resize.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,520 basehttp 62651 6222737408 "GET /static/unfold/js/alpine/alpine.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,520 basehttp 62651 6172258304 "GET /static/unfold/js/alpine/alpine.sort.js HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,558 basehttp 62651 6222737408 "GET /static/unfold/fonts/inter/Inter-SemiBold.woff2 HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,558 basehttp 62651 6239563776 "GET /static/unfold/fonts/inter/Inter-Medium.woff2 HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:40,560 basehttp 62651 6256390144 "GET /static/unfold/fonts/material-symbols/Material-Symbols-Outlined.woff2 HTTP/1.1" 304 0
+WARNING 2025-08-02 14:08:40,560 basehttp 62651 6172258304 "GET /static/assets/img/yitp-admin-bg.jpg HTTP/1.1" 404 1843
+INFO 2025-08-02 14:08:40,560 basehttp 62651 6189084672 "GET /static/unfold/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 304 0
+INFO 2025-08-02 14:08:52,435 basehttp 62651 6172258304 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 12116
+WARNING 2025-08-02 14:08:52,624 basehttp 62651 6172258304 "GET /static/css/admin-custom.css HTTP/1.1" 404 1819
+WARNING 2025-08-02 14:08:52,625 basehttp 62651 6189084672 "GET /static/js/admin-custom.js HTTP/1.1" 404 1813
+WARNING 2025-08-02 14:08:52,644 basehttp 62651 6172258304 "GET /static/assets/img/yitp-admin-bg.jpg HTTP/1.1" 404 1843
+INFO 2025-08-02 14:14:52,804 basehttp 62651 6172258304 "GET /web_courses_list/ HTTP/1.1" 200 96149
+INFO 2025-08-02 14:14:52,880 basehttp 62651 6172258304 "GET /static/assets/img/hero/sylvester.jpeg HTTP/1.1" 200 68707
+INFO 2025-08-02 14:14:53,108 basehttp 62651 6172258304 "GET /static/assets/img/hero/ruth.jpeg HTTP/1.1" 200 97374
+INFO 2025-08-02 14:14:53,109 basehttp 62651 6325039104 "GET /static/assets/img/hero/meshack.jpeg HTTP/1.1" 200 188051
+INFO 2025-08-02 14:14:53,139 basehttp 62651 6325039104 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-08-02 14:14:53,763 basehttp 62651 6172258304 "GET /static/assets/img/hero/levin.jpeg HTTP/1.1" 200 61761
+INFO 2025-08-02 14:14:53,767 basehttp 62651 6172258304 "GET /static/assets/img/hero/lilian.jpeg HTTP/1.1" 200 63171
+INFO 2025-08-02 14:14:53,943 basehttp 62651 6172258304 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-08-02 14:14:53,949 basehttp 62651 6325039104 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2025-08-02 14:15:05,912 basehttp 62651 6172258304 "GET / HTTP/1.1" 200 53304
+INFO 2025-08-02 14:15:08,663 basehttp 62651 6172258304 "GET /login/ HTTP/1.1" 200 13519
+INFO 2025-08-02 14:15:23,307 basehttp 62651 6172258304 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-08-02 14:15:23,348 basehttp 62651 6172258304 "GET /users/instructor/ HTTP/1.1" 200 45925
+WARNING 2025-08-02 14:15:23,644 basehttp 62651 6172258304 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 14:15:35,880 basehttp 62651 6172258304 "GET /admin HTTP/1.1" 301 0
+INFO 2025-08-02 14:15:35,923 basehttp 62651 6172258304 "GET /admin/ HTTP/1.1" 200 41745
+WARNING 2025-08-02 14:15:35,972 basehttp 62651 6172258304 "GET /static/css/admin-custom.css HTTP/1.1" 404 1819
+WARNING 2025-08-02 14:15:35,974 basehttp 62651 6325039104 "GET /static/js/admin-custom.js HTTP/1.1" 404 1813
+WARNING 2025-08-02 14:15:35,978 basehttp 62651 6341865472 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-08-02 14:15:36,069 basehttp 62651 6172258304 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-08-02 14:15:37,886 log 62651 6172258304 Forbidden (Permission denied): /admin/auth/user/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/options.py", line 716, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1984, in changelist_view
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+WARNING 2025-08-02 14:15:37,898 basehttp 62651 6172258304 "GET /admin/auth/user/ HTTP/1.1" 403 135
+INFO 2025-08-02 14:15:40,206 basehttp 62651 6172258304 "GET /admin/ HTTP/1.1" 200 41745
+INFO 2025-08-02 14:15:55,793 basehttp 62651 6172258304 "GET /lms/courses/courses/ HTTP/1.1" 200 49985
+INFO 2025-08-02 14:15:55,865 basehttp 62651 6172258304 "GET /static/css/yitp-course-branding.css HTTP/1.1" 200 14100
+INFO 2025-08-02 14:16:18,346 basehttp 62651 6172258304 "GET /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 60819
+INFO 2025-08-02 14:24:37,687 autoreload 79584 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 14:39:06,119 basehttp 62651 6172258304 "GET / HTTP/1.1" 200 58194
+WARNING 2025-08-02 14:39:06,189 basehttp 62651 6172258304 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 14:40:09,904 basehttp 62651 6172258304 "GET /users/instructor/profile/ HTTP/1.1" 200 37840
+WARNING 2025-08-02 14:40:10,039 basehttp 62651 6172258304 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 15:49:32,145 autoreload 62651 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/urls.py changed, reloading.
+INFO 2025-08-02 15:49:35,072 autoreload 81784 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 15:49:51,056 autoreload 81784 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-08-02 15:49:52,820 autoreload 81804 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 16:02:50,839 basehttp 81804 6164754432 "GET /sponsorship-request/ HTTP/1.1" 302 0
+INFO 2025-08-02 16:02:50,975 basehttp 81804 6164754432 "GET /profile/ HTTP/1.1" 200 79971
+WARNING 2025-08-02 16:02:51,112 basehttp 81804 6164754432 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 16:04:22,649 basehttp 81804 6164754432 "GET / HTTP/1.1" 200 63734
+WARNING 2025-08-02 16:04:22,716 basehttp 81804 6164754432 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 16:04:26,837 basehttp 81804 6164754432 "GET /sponsorship-request/ HTTP/1.1" 302 0
+INFO 2025-08-02 16:04:26,880 basehttp 81804 6164754432 "GET /profile/ HTTP/1.1" 200 79971
+WARNING 2025-08-02 16:04:26,997 basehttp 81804 6164754432 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 16:08:37,802 autoreload 81804 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-08-02 16:08:41,561 autoreload 82575 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 16:08:57,525 autoreload 82575 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/urls.py changed, reloading.
+INFO 2025-08-02 16:08:58,846 autoreload 82598 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 16:11:52,561 basehttp 82598 6130495488 "GET / HTTP/1.1" 200 63734
+WARNING 2025-08-02 16:11:52,677 basehttp 82598 6130495488 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 16:11:58,553 basehttp 82598 6130495488 "GET /sponsorship-request/ HTTP/1.1" 302 0
+INFO 2025-08-02 16:11:58,588 basehttp 82598 6130495488 "GET /apply-for-sponsorship/ HTTP/1.1" 200 52260
+WARNING 2025-08-02 16:11:58,740 basehttp 82598 6130495488 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873

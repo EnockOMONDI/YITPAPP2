@@ -572,6 +572,85 @@ def send_sponsorship_emails(sponsorship_request):
     admin_email.send()
 
 @login_required
+def dedicated_sponsorship_request(request):
+    """
+    Dedicated sponsorship request page with full form functionality.
+    Provides a standalone page focused specifically on sponsorship applications.
+    """
+    from .models import SponsorshipRequest
+    from .forms import SponsorshipRequestForm
+    from .email_utils import send_sponsorship_confirmation_email, send_sponsorship_admin_notification
+
+    user = request.user
+
+    # Get or create user profile
+    try:
+        profile = user.profile
+    except:
+        profile, created = Profile.objects.get_or_create(user=user)
+
+    # Get existing sponsorship requests for display
+    sponsorship_requests = SponsorshipRequest.objects.filter(user=user).order_by('-created_at')
+
+    # Handle form submission
+    if request.method == 'POST':
+        form = SponsorshipRequestForm(request.POST, request.FILES)
+        form.user = request.user
+
+        if form.is_valid():
+            sponsorship_request = form.save(commit=False)
+            sponsorship_request.user = request.user
+            sponsorship_request.save()
+
+            # Send email notifications
+            try:
+                send_sponsorship_confirmation_email(sponsorship_request)
+                send_sponsorship_admin_notification(sponsorship_request)
+
+                messages.success(
+                    request,
+                    'Your sponsorship request has been submitted successfully! '
+                    'You will receive a confirmation email shortly, and our team will review your request.'
+                )
+            except Exception as e:
+                messages.warning(
+                    request,
+                    'Your sponsorship request was submitted, but there was an issue sending the confirmation email. '
+                    'Our team will still review your request.'
+                )
+
+            return redirect('dedicated_sponsorship_request')
+        else:
+            messages.error(request, 'Please correct the errors below and try again.')
+    else:
+        form = SponsorshipRequestForm()
+
+    context = {
+        'user': user,
+        'profile': profile,
+        'sponsorship_form': form,
+        'sponsorship_requests': sponsorship_requests,
+        'page_title': 'Apply for Sponsorship',
+        'page_description': 'Submit your sponsorship request to access YITP courses with financial assistance.',
+    }
+
+    return render(request, 'users/dedicated_sponsorship_request.html', context)
+
+def sponsorship_request_redirect(request):
+    """
+    Direct link to sponsorship request form with authentication handling.
+    If user is not logged in, redirect to login with next parameter.
+    If user is logged in, redirect to dedicated sponsorship request page.
+    """
+    if request.user.is_authenticated:
+        # User is logged in, redirect to dedicated sponsorship page
+        return redirect('dedicated_sponsorship_request')
+    else:
+        # User is not logged in, redirect to login with next parameter
+        from django.contrib.auth.views import redirect_to_login
+        return redirect_to_login(request.get_full_path(), login_url='login')
+
+@login_required
 def test_email_delivery(request):
     """
     Test email delivery functionality

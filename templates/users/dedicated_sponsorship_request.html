@@ -1,0 +1,417 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ page_title }} - YITP{% endblock %}
+
+{% block description %}{{ page_description }}{% endblock %}
+
+{% block extra_css %}
+<style>
+/* YITP Dedicated Sponsorship Request Page Styles */
+
+/* Fix for navbar overlap - add top margin to account for fixed navbar */
+.sponsorship-content-wrapper {
+    margin-top: 100px; /* Account for fixed navbar height */
+}
+
+/* Responsive navbar spacing adjustments */
+@media (max-width: 991px) {
+    .sponsorship-content-wrapper {
+        margin-top: 90px;
+    }
+}
+
+@media (max-width: 575px) {
+    .sponsorship-content-wrapper {
+        margin-top: 80px;
+    }
+}
+
+/* YITP Brand Colors */
+:root {
+    --yitp-orange: #ff5d15;
+    --yitp-dark-blue: #1a2e53;
+    --yitp-light-gray: #f8f9fa;
+    --yitp-border: #e9ecef;
+}
+
+/* Page Header */
+.sponsorship-header {
+    background: linear-gradient(135deg, var(--yitp-dark-blue) 0%, #2a4a73 100%);
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 40px;
+}
+
+.sponsorship-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.sponsorship-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* Main Content */
+.sponsorship-main {
+    padding: 40px 0;
+}
+
+.sponsorship-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin-bottom: 30px;
+    border: 1px solid var(--yitp-border);
+}
+
+.sponsorship-card h2 {
+    color: var(--yitp-dark-blue);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--yitp-orange);
+    padding-bottom: 10px;
+}
+
+/* Form Styling */
+.sponsorship-form .form-group {
+    margin-bottom: 25px;
+}
+
+.sponsorship-form label {
+    color: var(--yitp-dark-blue);
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.sponsorship-form .form-control {
+    border: 2px solid var(--yitp-border);
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.sponsorship-form .form-control:focus {
+    border-color: var(--yitp-orange);
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
+    outline: none;
+}
+
+.sponsorship-form textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.sponsorship-form .btn-primary {
+    background: var(--yitp-orange);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sponsorship-form .btn-primary:hover {
+    background: #e54a0c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 93, 21, 0.3);
+}
+
+/* Info Boxes */
+.info-box {
+    background: var(--yitp-light-gray);
+    border-left: 4px solid var(--yitp-orange);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 0 8px 8px 0;
+}
+
+.info-box h4 {
+    color: var(--yitp-dark-blue);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.info-box ul {
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+
+.info-box li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Status Cards */
+.status-card {
+    background: white;
+    border: 1px solid var(--yitp-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.status-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-rejected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-under-review {
+    background: #cce7ff;
+    color: #004085;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sponsorship-header {
+        padding: 40px 0;
+    }
+    
+    .sponsorship-header h1 {
+        font-size: 2rem;
+    }
+    
+    .sponsorship-card {
+        padding: 25px;
+    }
+    
+    .sponsorship-form .btn-primary {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+/* Loading Animation */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: button-loading-spinner 1s ease infinite;
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="sponsorship-content-wrapper">
+    <!-- Page Header -->
+    <section class="sponsorship-header">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1>{{ page_title }}</h1>
+                    <p>{{ page_description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="sponsorship-main">
+        <div class="container">
+            <div class="row">
+                <!-- Sponsorship Form -->
+                <div class="col-lg-8">
+                    <div class="sponsorship-card">
+                        <h2><i class="fas fa-hand-holding-heart me-2"></i>Sponsorship Application</h2>
+                        
+                        <!-- Information Box -->
+                        <div class="info-box">
+                            <h4><i class="fas fa-info-circle me-2"></i>About YITP Sponsorship</h4>
+                            <p>Our sponsorship program provides financial assistance to deserving students who demonstrate:</p>
+                            <ul>
+                                <li>Financial need and inability to afford course fees</li>
+                                <li>Strong commitment to personal and professional development</li>
+                                <li>Clear goals for applying learned skills in their community</li>
+                                <li>Willingness to participate actively in the program</li>
+                            </ul>
+                        </div>
+
+                        <!-- Sponsorship Form -->
+                        <form method="post" enctype="multipart/form-data" class="sponsorship-form" id="sponsorshipForm">
+                            {% csrf_token %}
+                            
+                            {{ sponsorship_form|crispy }}
+                            
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                    <i class="fas fa-paper-plane me-2"></i>
+                                    Submit Sponsorship Request
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Process Information -->
+                    <div class="sponsorship-card">
+                        <h2><i class="fas fa-route me-2"></i>Application Process</h2>
+                        <div class="process-steps">
+                            <div class="step mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-weight: 600;">1</div>
+                                    <div>
+                                        <strong>Submit Application</strong>
+                                        <p class="mb-0 text-muted small">Complete and submit this form</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="step-number bg-warning text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-weight: 600;">2</div>
+                                    <div>
+                                        <strong>Review Process</strong>
+                                        <p class="mb-0 text-muted small">Our team reviews your application (5-7 days)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="step-number bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-weight: 600;">3</div>
+                                    <div>
+                                        <strong>Decision & Access</strong>
+                                        <p class="mb-0 text-muted small">Receive decision and course access if approved</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="sponsorship-card">
+                        <h2><i class="fas fa-headset me-2"></i>Need Help?</h2>
+                        <p>If you have questions about the sponsorship program or need assistance with your application:</p>
+                        <div class="contact-info">
+                            <p><i class="fas fa-envelope me-2 text-primary"></i><strong>Email:</strong> <a href="mailto:sponsorship@youthimpactglobal.com">sponsorship@youthimpactglobal.com</a></p>
+                            <p><i class="fas fa-phone me-2 text-primary"></i><strong>Phone:</strong> <a href="tel:+254722646958">+254 722 646 958</a></p>
+                            <p><i class="fab fa-whatsapp me-2 text-success"></i><strong>WhatsApp:</strong> <a href="https://wa.me/254722646958" target="_blank">Chat with us</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous Applications -->
+            {% if sponsorship_requests %}
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="sponsorship-card">
+                        <h2><i class="fas fa-history me-2"></i>Your Previous Applications</h2>
+                        <div class="row">
+                            {% for request in sponsorship_requests %}
+                            <div class="col-md-6 mb-3">
+                                <div class="status-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="mb-1">{{ request.get_program_display }}</h5>
+                                        <span class="status-badge status-{{ request.status }}">{{ request.get_status_display }}</span>
+                                    </div>
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-calendar me-1"></i>
+                                        Submitted: {{ request.created_at|date:"M d, Y" }}
+                                    </p>
+                                    <p class="text-muted mb-0">
+                                        <i class="fas fa-dollar-sign me-1"></i>
+                                        Amount: ${{ request.amount_needed }}
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+
+<!-- Include Footer -->
+{% include 'yitp/footer.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Form submission handling with loading state
+    $('#sponsorshipForm').on('submit', function() {
+        const submitBtn = $('#submitBtn');
+        submitBtn.addClass('btn-loading');
+        submitBtn.prop('disabled', true);
+        submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Submitting...');
+    });
+
+    // File upload validation
+    $('input[type="file"]').on('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            if (file.size > maxSize) {
+                alert('File size must be less than 5MB');
+                $(this).val('');
+            }
+        }
+    });
+
+    // Form validation enhancement
+    $('.form-control').on('blur', function() {
+        if ($(this).hasClass('is-invalid')) {
+            if ($(this).val().trim() !== '') {
+                $(this).removeClass('is-invalid');
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

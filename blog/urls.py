@@ -41,6 +41,12 @@ urlpatterns = [
     path('profile/analytics/', user_views.unified_profile, {'section': 'analytics'}, name='profile_analytics'),
     path('profile/billing/', user_views.unified_profile, {'section': 'billing'}, name='profile_billing'),
 
+    # Sponsorship request direct link with authentication handling
+    path('sponsorship-request/', user_views.sponsorship_request_redirect, name='sponsorship_request'),
+
+    # Dedicated sponsorship request page
+    path('apply-for-sponsorship/', user_views.dedicated_sponsorship_request, name='dedicated_sponsorship_request'),
+
     # OTP verification views
     path('verify-otp/', verify_otp_view, name='verify_otp'),
     path('resend-otp/', resend_otp_view, name='resend_otp'),
