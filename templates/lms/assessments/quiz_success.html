@@ -407,6 +407,75 @@
                 Continue to Next Lesson
             </a>
             {% else %}
+            <!-- Enhanced completion message for YITP prerequisite course -->
+            {% if 'Introduction to YITP' in quiz.lesson.module.course.title %}
+            <div class="text-center">
+                <div class="yitp-completion-notice" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); padding: 30px; border-radius: 15px; margin: 20px 0; border: 2px solid #ff5d15;">
+                    <h3 style="color: #1a2e53; margin-bottom: 20px;">
+                        <i class="fas fa-star" style="color: #ff5d15;"></i>
+                        Congratulations! You have completed the YITP introductory course
+                        <i class="fas fa-star" style="color: #ff5d15;"></i>
+                    </h3>
+
+                    <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0;">
+                        <h4 style="color: #ff5d15; margin-bottom: 15px;">
+                            <i class="fas fa-clock me-2"></i>What happens next?
+                        </h4>
+                        <p style="color: #333; font-size: 1.1em; line-height: 1.6; margin-bottom: 15px;">
+                            <strong>The YITP Team will review your completion and grant access to additional courses within 48 hours.</strong>
+                        </p>
+                        <p style="color: #666; font-size: 1em; line-height: 1.5;">
+                            You will receive an email notification once access is granted to explore our full range of transformational courses.
+                        </p>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <div style="background: #fff5f0; padding: 20px; border-radius: 8px; border: 1px solid #ff5d15;">
+                                <i class="fas fa-envelope fa-2x mb-2" style="color: #ff5d15;"></i>
+                                <h6 style="color: #1a2e53;">Email Notification</h6>
+                                <small style="color: #666;">Within 48 hours</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="background: #f0f4ff; padding: 20px; border-radius: 8px; border: 1px solid #1a2e53;">
+                                <i class="fas fa-unlock-alt fa-2x mb-2" style="color: #1a2e53;"></i>
+                                <h6 style="color: #1a2e53;">Course Access</h6>
+                                <small style="color: #666;">Full catalog unlocked</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="background: #f0fff0; padding: 20px; border-radius: 8px; border: 1px solid #28a745;">
+                                <i class="fas fa-rocket fa-2x mb-2" style="color: #28a745;"></i>
+                                <h6 style="color: #1a2e53;">Learning Journey</h6>
+                                <small style="color: #666;">Transformation begins</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #1a2e53, #ff5d15); border-radius: 10px; color: white;">
+                        <h5 style="margin-bottom: 10px;">
+                            <i class="fas fa-heart me-2"></i>Thank you for choosing YITP!
+                        </h5>
+                        <p style="margin: 0; opacity: 0.9;">
+                            You've taken the first step in your transformational learning journey. We're excited to support your growth and development.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <a href="{% url 'courses:course_detail' slug=quiz.lesson.module.course.slug %}" class="btn-primary-custom me-3" role="button">
+                        <i class="fas fa-certificate me-2"></i>
+                        View Course Summary
+                    </a>
+                    <a href="{% url 'courses:course_list' %}" class="btn-secondary-custom" role="button">
+                        <i class="fas fa-list me-2"></i>
+                        Browse Course Catalog
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <!-- Standard completion message for other courses -->
             <div class="text-center">
                 <h4 class="text-success mb-3">🎓 Course Completed!</h4>
                 <a href="{% url 'courses:course_detail' slug=quiz.lesson.module.course.slug %}" class="btn-primary-custom" role="button">
@@ -414,6 +483,7 @@
                     View Course Summary
                 </a>
             </div>
+            {% endif %}
             {% endif %}
             
             <a href="{% url 'assessments:quiz_results' attempt_id=attempt.id %}" class="btn-secondary-custom" role="button">

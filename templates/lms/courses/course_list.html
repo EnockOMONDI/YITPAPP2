@@ -117,15 +117,31 @@
         {% for course in courses %}
         <div class="col-lg-4 col-md-6">
             <div class="card course-card h-100">
-                {% if course.thumbnail %}
-                <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}" 
-                     style="height: 200px; object-fit: cover;">
-                {% else %}
-                <div class="card-img-top bg-primary d-flex align-items-center justify-content-center" 
-                     style="height: 200px;">
-                    <i class="fas fa-graduation-cap fa-3x text-white"></i>
+                <div class="position-relative">
+                    {% if course.thumbnail %}
+                    <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}"
+                         style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <div class="card-img-top bg-primary d-flex align-items-center justify-content-center"
+                         style="height: 200px;">
+                        <i class="fas fa-graduation-cap fa-3x text-white"></i>
+                    </div>
+                    {% endif %}
+
+                    <!-- Prerequisite Course Badge -->
+                    {% if 'Introduction to YITP' in course.title %}
+                    <div class="position-absolute top-0 start-0 m-2">
+                        <span class="badge" style="background: linear-gradient(135deg, #ff5d15, #1a2e53); color: white; font-size: 0.9rem; padding: 8px 12px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                            <i class="fas fa-star me-1"></i>START HERE
+                        </span>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-2">
+                        <span class="badge bg-warning text-dark" style="font-size: 0.8rem; padding: 6px 10px; border-radius: 15px; font-weight: 600;">
+                            <i class="fas fa-exclamation-circle me-1"></i>MANDATORY
+                        </span>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
                 
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-start mb-2">
@@ -136,6 +152,19 @@
                     </div>
                     
                     <h5 class="card-title">{{ course.title }}</h5>
+
+                    <!-- Prerequisite Course Message -->
+                    {% if 'Introduction to YITP' in course.title %}
+                    <div class="alert alert-info border-0 mb-3" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border-left: 4px solid #ff5d15 !important;">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-info-circle text-primary me-2"></i>
+                            <small class="mb-0" style="color: #1a2e53; font-weight: 600;">
+                                Complete this course to unlock all other courses
+                            </small>
+                        </div>
+                    </div>
+                    {% endif %}
+
                     <p class="card-text text-muted flex-grow-1">
                         {{ course.description|truncatewords:20 }}
                     </p>

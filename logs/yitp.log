@@ -10205,3 +10205,21 @@ WARNING 2025-08-02 16:11:52,677 basehttp 82598 6130495488 "GET /static/assets/fo
 INFO 2025-08-02 16:11:58,553 basehttp 82598 6130495488 "GET /sponsorship-request/ HTTP/1.1" 302 0
 INFO 2025-08-02 16:11:58,588 basehttp 82598 6130495488 "GET /apply-for-sponsorship/ HTTP/1.1" 200 52260
 WARNING 2025-08-02 16:11:58,740 basehttp 82598 6130495488 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 16:36:40,923 basehttp 82598 6130495488 "GET /apply-for-sponsorship/ HTTP/1.1" 200 52260
+INFO 2025-08-02 16:36:43,783 basehttp 82598 6130495488 "GET / HTTP/1.1" 200 63734
+WARNING 2025-08-02 16:36:43,825 basehttp 82598 6130495488 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 16:36:48,826 basehttp 82598 6130495488 "GET /users/instructor/profile/ HTTP/1.1" 200 37840
+WARNING 2025-08-02 16:36:48,857 basehttp 82598 6130495488 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-02 16:36:52,769 basehttp 82598 6130495488 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-08-02 16:36:52,790 basehttp 82598 6130495488 "GET /lms/courses/courses/ HTTP/1.1" 200 49985
+INFO 2025-08-02 16:36:56,611 basehttp 82598 6130495488 "GET /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 60819
+INFO 2025-08-02 16:36:59,781 enrollment_service 82598 6130495488 New enrollment created: enockomondike@gmail.com -> Introduction to YITP: Your Learning Journey Begins
+INFO 2025-08-02 16:37:00,020 enrollment_service 82598 6130495488 Enrollment confirmation email sent to enockomondike@gmail.com
+INFO 2025-08-02 16:37:00,060 enrollment_service 82598 6130495488 Enrollment admin notification sent for enockomondike@gmail.com -> Introduction to YITP: Your Learning Journey Begins
+INFO 2025-08-02 16:37:00,063 basehttp 82598 6130495488 "POST /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/enroll/ HTTP/1.1" 302 0
+INFO 2025-08-02 16:37:00,096 basehttp 82598 6130495488 "GET /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 63894
+INFO 2025-08-02 16:37:10,571 basehttp 82598 6130495488 "GET /lms/courses/courses/ HTTP/1.1" 200 49985
+INFO 2025-08-02 16:45:25,438 basehttp 82598 6130495488 "GET /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 62884
+INFO 2025-08-02 16:45:30,016 basehttp 82598 6130495488 "GET /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/modules/2/ HTTP/1.1" 200 21855
+INFO 2025-08-02 17:43:16,836 autoreload 86945 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 17:43:24,870 basehttp 86945 6202339328 "GET /lms/courses/courses/ HTTP/1.1" 200 51666
