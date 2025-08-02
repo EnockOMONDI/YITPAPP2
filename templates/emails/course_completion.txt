@@ -5,6 +5,19 @@ Congratulations {{ user.first_name|default:user.username }}!
 
 You have successfully completed "{{ course.title }}" through the Youth Impact Training Programme! This is a significant achievement that demonstrates your commitment to learning and personal growth.
 
+{% if 'Introduction to YITP' in course.title %}
+⏰ IMPORTANT: Course Access Review Process
+============================================================
+Your completion is under review! Please allow 48 hours for our team to review your course completion and unlock access to additional courses.
+
+WHAT HAPPENS NEXT:
+• Our instructors will review your quiz performance and lesson completion
+• You'll receive an email notification once additional courses are unlocked
+• This ensures you're fully prepared for the advanced curriculum
+
+============================================================
+{% endif %}
+
 COURSE COMPLETION DETAILS:
 Course: {{ course.title }}
 Completion Date: {{ enrollment.completion_date|date:"F d, Y" }} at {{ enrollment.completion_date|time:"g:i A" }}

@@ -708,7 +708,7 @@
                                 <!-- Single-lesson course: Show Take Quiz button instead of Next -->
                                 {% if lesson.quizzes.exists %}
                                     {% with quiz=lesson.quizzes.first %}
-                                    <a href="{% url 'assessments:quiz_detail' quiz_id=quiz.id %}" class="nav-button" style="background: linear-gradient(135deg, #ff5d15, #1a2e53); color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; box-shadow: 0 4px 12px rgba(255,93,21,0.3);">
+                                    <a href="{% url 'assessments:take_quiz' quiz.id %}" class="nav-button" style="background: linear-gradient(135deg, #ff5d15, #1a2e53); color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; box-shadow: 0 4px 12px rgba(255,93,21,0.3);">
                                         <i class="fas fa-quiz me-2"></i>Take Quiz
                                     </a>
                                     {% endwith %}

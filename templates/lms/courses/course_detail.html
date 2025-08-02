@@ -248,13 +248,11 @@
             
             <div class="col-lg-4">
                 {% if course.thumbnail %}
-                <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" 
+                <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}"
                      class="img-fluid course-thumbnail">
                 {% else %}
-                <div class="course-thumbnail bg-white d-flex align-items-center justify-content-center" 
-                     style="height: 300px;">
-                    <i class="fas fa-graduation-cap fa-5x text-primary"></i>
-                </div>
+                <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" alt="{{ course.title }}"
+                     class="img-fluid course-thumbnail">
                 {% endif %}
             </div>
         </div>
@@ -601,10 +599,8 @@
                         <img src="{{ related_course.thumbnail.url }}" alt="{{ related_course.title }}"
                              class="rounded me-3" width="60" height="45" style="object-fit: cover;">
                         {% else %}
-                        <div class="bg-primary rounded d-flex align-items-center justify-content-center me-3"
-                             style="width: 60px; height: 45px;">
-                            <i class="fas fa-graduation-cap text-white"></i>
-                        </div>
+                        <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" alt="{{ related_course.title }}"
+                             class="rounded me-3" width="60" height="45" style="object-fit: cover;">
                         {% endif %}
                         <div class="flex-grow-1">
                             <h6 class="mb-1">

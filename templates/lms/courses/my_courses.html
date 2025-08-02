@@ -317,9 +317,7 @@
                             {% if enrollment.course.thumbnail %}
                                 <img src="{{ enrollment.course.thumbnail.url }}" alt="{{ enrollment.course.title }}" class="course-thumbnail">
                             {% else %}
-                                <div class="course-thumbnail d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-graduation-cap fa-3x text-muted"></i>
-                                </div>
+                                <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" alt="{{ enrollment.course.title }}" class="course-thumbnail">
                             {% endif %}
                             
                             <div class="course-status status-{{ enrollment.status }}">
