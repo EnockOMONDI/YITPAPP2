@@ -10232,3 +10232,8 @@ INFO 2025-08-02 18:46:25,496 autoreload 89484 8692087488 /Users/djsean/Desktop/A
 INFO 2025-08-02 18:46:28,269 autoreload 89665 8692087488 Watching for file changes with StatReloader
 INFO 2025-08-02 18:46:45,548 autoreload 89665 8692087488 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/otp_views.py changed, reloading.
 INFO 2025-08-02 18:46:47,141 autoreload 89688 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 21:22:15,074 autoreload 94854 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 21:22:29,345 basehttp 94854 6193164288 "GET / HTTP/1.1" 200 63734
+INFO 2025-08-02 21:22:33,704 basehttp 94854 6193164288 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-08-02 21:22:33,731 basehttp 94854 6193164288 "GET /lms/courses/courses/ HTTP/1.1" 200 51632
+INFO 2025-08-02 21:22:33,765 basehttp 94854 6193164288 "GET /static/img/courses/default-course-thumbnail.jpeg HTTP/1.1" 200 192434
