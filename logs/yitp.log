@@ -10223,3 +10223,5 @@ INFO 2025-08-02 16:45:25,438 basehttp 82598 6130495488 "GET /lms/courses/courses
 INFO 2025-08-02 16:45:30,016 basehttp 82598 6130495488 "GET /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/modules/2/ HTTP/1.1" 200 21855
 INFO 2025-08-02 17:43:16,836 autoreload 86945 8692087488 Watching for file changes with StatReloader
 INFO 2025-08-02 17:43:24,870 basehttp 86945 6202339328 "GET /lms/courses/courses/ HTTP/1.1" 200 51666
+INFO 2025-08-02 17:46:10,407 autoreload 87146 8692087488 Watching for file changes with StatReloader
+INFO 2025-08-02 17:46:32,246 basehttp 87146 6159446016 "GET /lms/courses/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 65891
