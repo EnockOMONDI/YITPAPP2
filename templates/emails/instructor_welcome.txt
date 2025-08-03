@@ -8,7 +8,13 @@ Congratulations! Your instructor account has been successfully created for the Y
 🚀 YOUR INSTRUCTOR JOURNEY BEGINS NOW!
 You've been granted access to our Learning Management System with specialized instructor privileges. Let's get you started!
 
-🔐 YOUR LOGIN CREDENTIALS:
+{% if magic_link_url %}🚀 QUICK ACCESS - MAGIC LINK:
+Click this link to automatically log in to your instructor dashboard (no password required):
+{{ magic_link_url }}
+
+⏰ This magic link expires in 10 days and can only be used once for security.
+
+{% endif %}🔐 YOUR LOGIN CREDENTIALS:
 Username: {{ user.username }}
 Email: {{ user.email }}
 {% if temporary_password %}Temporary Password: {{ temporary_password }}{% endif %}

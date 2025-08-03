@@ -4,6 +4,7 @@ from . import views
 from . import instructor_views
 from . import auth_views
 from . import content_management
+from .magic_link_views import magic_login_view, magic_link_status_view, validate_magic_link_api, magic_link_help_view
 
 
 app_name = 'users'
@@ -33,6 +34,12 @@ urlpatterns = [
     path('upload-ajax/', content_management.upload_file_ajax, name='upload_file_ajax'),
     path('bulk-import/', content_management.bulk_import_content, name='bulk_import_content'),
     path('media-library/', content_management.media_library, name='media_library'),
+
+    # Magic Link Authentication URLs
+    path('magic-login/<str:token>/', magic_login_view, name='magic_login'),
+    path('magic-link-status/', magic_link_status_view, name='magic_link_status'),
+    path('api/validate-magic-link/', validate_magic_link_api, name='validate_magic_link_api'),
+    path('magic-link-help/', magic_link_help_view, name='magic_link_help'),
 
 ]
 

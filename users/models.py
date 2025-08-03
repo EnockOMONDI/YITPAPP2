@@ -11,6 +11,7 @@ from django.utils.html import strip_tags
 from shortuuid.django_fields import ShortUUIDField
 from pyuploadcare.dj.models import ImageField
 from django_ckeditor_5.fields import CKEditor5Field
+import hashlib
 
 
 # Create your models here.
@@ -942,3 +943,46 @@ class CourseInstructor(models.Model):
         verbose_name_plural = "Course Instructor Assignments"
         unique_together = ['course', 'instructor']
         ordering = ['-assigned_at']
+
+
+class MagicLinkToken(models.Model):
+    """
+    Model to store magic link tokens for secure authentication
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='magic_tokens')
+    token = models.CharField(max_length=128, unique=True, db_index=True)
+    token_hash = models.CharField(max_length=64, db_index=True)  # SHA256 hash for security
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    used_at = models.DateTimeField(null=True, blank=True)
+    is_used = models.BooleanField(default=False)
+    purpose = models.CharField(max_length=50, default='instructor_welcome')
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.TextField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'users_magic_link_token'
+        verbose_name = 'Magic Link Token'
+        verbose_name_plural = 'Magic Link Tokens'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Magic Link for {self.user.username} - {self.purpose}"
+
+    def is_expired(self):
+        """Check if the token has expired"""
+        return timezone.now() > self.expires_at
+
+    def is_valid(self):
+        """Check if the token is valid (not used and not expired)"""
+        return not self.is_used and not self.is_expired()
+
+    def mark_as_used(self, ip_address=None, user_agent=None):
+        """Mark the token as used"""
+        self.is_used = True
+        self.used_at = timezone.now()
+        if ip_address:
+            self.ip_address = ip_address
+        if user_agent:
+            self.user_agent = user_agent
+        self.save()

@@ -951,6 +951,20 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
         resources_url = f"{base_url}/users/instructor/tutorial/"
         profile_url = f"{base_url}/profile/"
 
+        # Generate magic link for automatic login
+        magic_link_url = None
+        try:
+            from .magic_link_utils import generate_magic_link_url
+            magic_link_url, magic_token = generate_magic_link_url(
+                user=user,
+                purpose='instructor_welcome',
+                expiry_days=10
+            )
+            logger.info(f"Generated magic link for instructor {user.username}")
+        except Exception as e:
+            logger.error(f"Failed to generate magic link for instructor {user.username}: {str(e)}")
+            # Continue without magic link if generation fails
+
         # Email context
         context = {
             'user': user,
@@ -966,6 +980,7 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
             'instructor_dashboard_url': instructor_dashboard_url,
             'resources_url': resources_url,
             'profile_url': profile_url,
+            'magic_link_url': magic_link_url,  # Add magic link to context
             'support_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
             'created_by_admin': created_by_admin,
             'site_name': 'Youth Impact Training Programme'

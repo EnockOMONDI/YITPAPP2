@@ -16,12 +16,42 @@
     You've been granted access to our Learning Management System with specialized instructor privileges. Let's get you started!
 </div>
 
+<!-- Magic Link Section -->
+{% if magic_link_url %}
+<div class="success-box" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border: 2px solid #ff5d15; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+    <strong style="color: #1a2e53; font-size: 18px;">🚀 Quick Access - Magic Link</strong><br>
+    <p style="margin: 10px 0; color: #666;">Click the button below to automatically log in to your instructor dashboard - no password required!</p>
+
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="{{ magic_link_url }}" style="
+            background: linear-gradient(135deg, #ff5d15, #1a2e53);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(255,93,21,0.3);
+            display: inline-block;
+            transition: all 0.3s ease;
+        ">
+            ✨ Access Your Dashboard Instantly
+        </a>
+    </div>
+
+    <p style="margin: 10px 0; color: #666; font-size: 14px; text-align: center;">
+        <strong>⏰ This magic link expires in 10 days</strong><br>
+        <em>For security, this link can only be used once</em>
+    </p>
+</div>
+{% endif %}
+
 <!-- Login Credentials Section -->
 <div class="info-box">
     <strong>🔐 Your Login Credentials:</strong><br>
     <strong>Username:</strong> {{ user.username }}<br>
     <strong>Email:</strong> {{ user.email }}<br>
-    {% if temporary_password %}<strong>Temporary Password:</strong> <code style="background: #f8f9fa; padding: 2px 6px; border-radius: 3px; font-family: monospace;">{{ temporary_password }}</code><br>{% endif %}
+    {% if temporary_password %}<strong>Temporary Password:</strong> <code style="background: #f8f9fa; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 14px; color: #1a2e53; border: 1px solid #ff5d15;">{{ temporary_password }}</code><br>{% endif %}
     <strong>Login URL:</strong> <a href="{{ login_url }}" style="color: #ff5d15; text-decoration: none;">{{ login_url }}</a>
 </div>
 

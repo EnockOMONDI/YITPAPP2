@@ -1,0 +1,239 @@
+{% extends "yitp/basenonav.html" %}
+{% load static %}
+
+{% block title %}Magic Link Error - YITP LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --yitp-orange: #ff5d15;
+        --yitp-dark-blue: #1a2e53;
+        --yitp-light-gray: #f8f9fa;
+    }
+    
+    body {
+        background: linear-gradient(135deg, var(--yitp-light-gray) 0%, #e9ecef 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .error-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+    }
+    
+    .error-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        padding: 3rem 2rem;
+        border: 3px solid var(--yitp-orange);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .error-icon {
+        font-size: 4rem;
+        background: linear-gradient(135deg, var(--yitp-orange), var(--yitp-dark-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+    }
+    
+    .error-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--yitp-dark-blue);
+        margin-bottom: 1rem;
+    }
+    
+    .error-message {
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: #fff3e0;
+        border-left: 4px solid var(--yitp-orange);
+        border-radius: 5px;
+        text-align: left;
+    }
+    
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    
+    .btn-yitp {
+        background: linear-gradient(135deg, var(--yitp-orange), var(--yitp-dark-blue));
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255,93,21,0.3);
+        min-width: 200px;
+    }
+    
+    .btn-yitp:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255,93,21,0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary-yitp {
+        background: transparent;
+        color: var(--yitp-dark-blue);
+        border: 2px solid var(--yitp-dark-blue);
+        padding: 10px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        min-width: 200px;
+    }
+    
+    .btn-secondary-yitp:hover {
+        background: var(--yitp-dark-blue);
+        color: white;
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+    
+    .help-section {
+        background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1));
+        border: 2px solid var(--yitp-orange);
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: left;
+    }
+    
+    .help-title {
+        color: var(--yitp-dark-blue);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .help-list {
+        margin: 0;
+        padding-left: 1.5rem;
+        color: #666;
+    }
+    
+    .help-list li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .suggestions-section {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .suggestions-title {
+        color: var(--yitp-dark-blue);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+        .error-container {
+            padding: 1rem;
+        }
+        
+        .error-card {
+            padding: 2rem 1.5rem;
+        }
+        
+        .error-title {
+            font-size: 1.5rem;
+        }
+        
+        .error-message {
+            font-size: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-card">
+        <div class="error-icon">
+            <i class="fas fa-link"></i>
+        </div>
+        
+        <h1 class="error-title">{{ error_title }}</h1>
+        
+        <div class="error-message">
+            <strong>{{ error_message }}</strong>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="{{ login_url }}" class="btn-yitp">
+                <i class="fas fa-sign-in-alt me-2"></i>Login with Password
+            </a>
+            <a href="{% url 'yitp:home' %}" class="btn-secondary-yitp">
+                <i class="fas fa-home me-2"></i>Back to Homepage
+            </a>
+        </div>
+        
+        <div class="help-section">
+            <h3 class="help-title">
+                <i class="fas fa-info-circle me-2" style="color: var(--yitp-orange);"></i>
+                What Might Have Gone Wrong?
+            </h3>
+            
+            <ul class="help-list">
+                {% for detail in error_details %}
+                    <li>{{ detail }}</li>
+                {% endfor %}
+            </ul>
+            
+            <div class="suggestions-section">
+                <h4 class="suggestions-title">
+                    <i class="fas fa-lightbulb me-2" style="color: var(--yitp-orange);"></i>
+                    What You Can Do
+                </h4>
+                
+                <ul class="help-list">
+                    {% for action in suggested_actions %}
+                        <li>{{ action }}</li>
+                    {% endfor %}
+                </ul>
+                
+                <div style="text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <strong>Need Help?</strong><br>
+                    Contact support at <a href="mailto:{{ support_email }}" style="color: var(--yitp-orange);">{{ support_email }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Auto-focus on the main action button for accessibility
+document.addEventListener('DOMContentLoaded', function() {
+    const mainButton = document.querySelector('.btn-yitp');
+    if (mainButton) {
+        mainButton.focus();
+    }
+});
+</script>
+{% endblock %}
