@@ -255,7 +255,7 @@
                         </div>
                         
                         {% if next_quiz %}
-                        <a href="{% url 'assessments:quiz_detail' next_quiz.id %}" class="btn btn-primary btn-sm w-100 mb-2">
+                        <a href="{% url 'assessments:take_quiz' next_quiz.id %}" class="btn btn-primary btn-sm w-100 mb-2">
                             <i class="fas fa-arrow-right me-1"></i>Next Quiz
                         </a>
                         {% endif %}
@@ -264,11 +264,78 @@
                             <i class="fas fa-exclamation-triangle me-2"></i>
                             You need {{ quiz.passing_score }}% to pass.
                         </div>
+
+                        <!-- Gamification for Failed Attempts -->
+                        <div class="motivation-section mb-3" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border: 2px solid #ff5d15; border-radius: 15px; padding: 20px;">
+                            <div class="text-center">
+                                <h5 style="color: #1a2e53; margin-bottom: 15px;">
+                                    <i class="fas fa-rocket" style="color: #ff5d15;"></i>
+                                    Don't Give Up! You're Learning!
+                                </h5>
+                                <p style="color: #333; margin-bottom: 15px; line-height: 1.6;">
+                                    Every attempt is a step forward. You scored <strong style="color: #ff5d15;">{{ score_percentage|floatformat:1 }}%</strong> -
+                                    that's progress! Keep going and you'll reach the <strong>{{ quiz.passing_score }}%</strong> goal.
+                                </p>
+
+                                <!-- Progress to passing score -->
+                                <div class="progress mb-3" style="height: 25px; background: #f8f9fa;">
+                                    <div class="progress-bar" style="background: linear-gradient(135deg, #ff5d15, #1a2e53); width: {{ score_percentage }}%;">
+                                        <span style="color: white; font-weight: 600;">{{ score_percentage|floatformat:1 }}%</span>
+                                    </div>
+                                    <div class="progress-bar bg-light text-dark" style="width: {{ quiz.passing_score|add:score_percentage|floatformat:0|add:'-100' }}%; border-left: 2px dashed #ff5d15;">
+                                        Goal: {{ quiz.passing_score }}%
+                                    </div>
+                                </div>
+
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="achievement-badge" style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                            <i class="fas fa-brain fa-2x" style="color: #ff5d15;"></i>
+                                            <p class="mb-0 mt-2" style="color: #1a2e53; font-weight: 600;">Learning</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="achievement-badge" style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                            <i class="fas fa-chart-line fa-2x" style="color: #1a2e53;"></i>
+                                            <p class="mb-0 mt-2" style="color: #1a2e53; font-weight: 600;">Improving</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="achievement-badge" style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                            <i class="fas fa-trophy fa-2x" style="color: #ffc107;"></i>
+                                            <p class="mb-0 mt-2" style="color: #1a2e53; font-weight: 600;">Success Ahead</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                         {% if can_retake %}
-                        <a href="{% url 'assessments:take_quiz' quiz.id %}" class="btn btn-warning btn-sm w-100 mb-2">
-                            <i class="fas fa-redo me-1"></i>Retake Quiz
+                        <a href="{% url 'assessments:take_quiz' quiz.id %}" class="btn w-100 mb-3" style="background: linear-gradient(135deg, #ff5d15, #1a2e53); color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(255,93,21,0.3);">
+                            <i class="fas fa-redo me-2"></i>Retake Quiz
                         </a>
+
+                        <!-- Special message for Introduction to YITP course -->
+                        {% if is_intro_course %}
+                        <div class="alert alert-info border-0 mb-3" style="background: linear-gradient(135deg, rgba(26,46,83,0.1), rgba(255,93,21,0.1)); border-left: 4px solid #1a2e53 !important;">
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-info-circle me-2 mt-1" style="color: #1a2e53;"></i>
+                                <div>
+                                    <strong style="color: #1a2e53;">Introductory Course Policy:</strong><br>
+                                    <small style="color: #666; line-height: 1.4;">This introductory course quiz can be taken multiple times with no limit on retakes. Take your time to learn and improve!</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <small class="text-muted d-block text-center mb-2">
+                            Attempt {{ attempts_used }} of {{ quiz.max_attempts|default:"unlimited" }}
+                        </small>
+                        {% endif %}
+                        {% else %}
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Maximum attempts reached ({{ quiz.max_attempts }}). Contact your instructor for help.
+                        </div>
                         {% endif %}
                         
                         {% if study_materials %}

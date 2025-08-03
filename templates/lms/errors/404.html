@@ -1,0 +1,280 @@
+{% extends "yitp/basenonav.html" %}
+{% load static %}
+
+{% block title %}Page Not Found - YITP LMS{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --yitp-orange: #ff5d15;
+        --yitp-dark-blue: #1a2e53;
+        --yitp-light-gray: #f8f9fa;
+    }
+    
+    body {
+        background: linear-gradient(135deg, var(--yitp-light-gray) 0%, #e9ecef 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .error-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+    }
+    
+    .error-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        padding: 3rem 2rem;
+        border: 3px solid var(--yitp-orange);
+        max-width: 700px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .error-icon {
+        font-size: 4rem;
+        background: linear-gradient(135deg, var(--yitp-orange), var(--yitp-dark-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+    }
+    
+    .error-code {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--yitp-dark-blue);
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .error-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--yitp-dark-blue);
+        margin-bottom: 1rem;
+    }
+    
+    .error-description {
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+    
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    
+    .btn-yitp {
+        background: linear-gradient(135deg, var(--yitp-orange), var(--yitp-dark-blue));
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255,93,21,0.3);
+        min-width: 200px;
+    }
+    
+    .btn-yitp:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255,93,21,0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary-yitp {
+        background: transparent;
+        color: var(--yitp-dark-blue);
+        border: 2px solid var(--yitp-dark-blue);
+        padding: 10px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        min-width: 200px;
+    }
+    
+    .btn-secondary-yitp:hover {
+        background: var(--yitp-dark-blue);
+        color: white;
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+    
+    .quick-links {
+        background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1));
+        border: 2px solid var(--yitp-orange);
+        border-radius: 15px;
+        padding: 1.5rem;
+    }
+    
+    .quick-links-title {
+        color: var(--yitp-dark-blue);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        text-align: left;
+    }
+    
+    .link-item {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .link-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .link-item a {
+        color: var(--yitp-dark-blue);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .link-item a:hover {
+        color: var(--yitp-orange);
+        text-decoration: none;
+    }
+    
+    .link-item i {
+        color: var(--yitp-orange);
+        margin-right: 0.5rem;
+    }
+    
+    .link-description {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .error-container {
+            padding: 1rem;
+        }
+        
+        .error-card {
+            padding: 2rem 1.5rem;
+        }
+        
+        .error-code {
+            font-size: 2.5rem;
+        }
+        
+        .error-title {
+            font-size: 1.5rem;
+        }
+        
+        .error-description {
+            font-size: 1rem;
+        }
+        
+        .links-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-card">
+        <div class="error-icon">
+            <i class="fas fa-map-marked-alt"></i>
+        </div>
+        
+        <div class="error-code">404</div>
+        <h1 class="error-title">Content Not Found</h1>
+        
+        <p class="error-description">
+            The lesson, quiz, or course content you're looking for doesn't exist or may have been moved. Let's help you find what you need!
+        </p>
+        
+        <div class="action-buttons">
+            <a href="{% url 'yitp:home' %}" class="btn-yitp">
+                <i class="fas fa-home me-2"></i>Back to Homepage
+            </a>
+            <a href="javascript:history.back()" class="btn-secondary-yitp">
+                <i class="fas fa-arrow-left me-2"></i>Go Back
+            </a>
+        </div>
+        
+        <div class="quick-links">
+            <h3 class="quick-links-title">
+                <i class="fas fa-compass me-2" style="color: var(--yitp-orange);"></i>
+                Find Your Learning Path
+            </h3>
+            <div class="links-grid">
+                <div class="link-item">
+                    <a href="{% url 'courses:course_list' %}">
+                        <i class="fas fa-graduation-cap"></i>My Courses
+                    </a>
+                    <div class="link-description">Access your enrolled courses</div>
+                </div>
+                <div class="link-item">
+                    <a href="{% url 'courses:course_list' %}">
+                        <i class="fas fa-book-open"></i>Browse Courses
+                    </a>
+                    <div class="link-description">Discover new learning opportunities</div>
+                </div>
+                <div class="link-item">
+                    <a href="{% url 'progress:dashboard' %}">
+                        <i class="fas fa-chart-line"></i>Progress Dashboard
+                    </a>
+                    <div class="link-description">Track your learning progress</div>
+                </div>
+                <div class="link-item">
+                    <a href="{% url 'assessments:quiz_list' %}">
+                        <i class="fas fa-tasks"></i>Assessments
+                    </a>
+                    <div class="link-description">View quizzes and assignments</div>
+                </div>
+                <div class="link-item">
+                    <a href="{% url 'users:profile' %}">
+                        <i class="fas fa-user-circle"></i>My Profile
+                    </a>
+                    <div class="link-description">Update your account settings</div>
+                </div>
+                <div class="link-item">
+                    <a href="{% url 'yitp:contact' %}">
+                        <i class="fas fa-envelope"></i>Get Support
+                    </a>
+                    <div class="link-description">Contact our support team</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Auto-focus on the main action button for accessibility
+document.addEventListener('DOMContentLoaded', function() {
+    const mainButton = document.querySelector('.btn-yitp');
+    if (mainButton) {
+        mainButton.focus();
+    }
+});
+</script>
+{% endblock %}

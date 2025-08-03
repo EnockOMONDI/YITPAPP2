@@ -235,18 +235,16 @@ class QuizResultsView(LoginRequiredMixin, DetailView):
         total_questions = questions.count()
         total_points = sum(q.points for q in questions)
 
-        # Calculate correct answers count
-        correct_answers = 0
-        for question in questions:
-            student_answer = attempt.answers.get(str(question.id))
-            if student_answer and attempt._is_correct_answer(question, student_answer):
-                correct_answers += 1
+        # Calculate correct answers count from attempt score
+        # Use the score percentage to calculate correct answers
+        score_percentage = float(attempt.score) if attempt.score else 0
+        correct_answers = int((score_percentage / 100) * total_questions) if total_questions > 0 else 0
 
         # Add calculated values to context
         context['total_questions'] = total_questions
         context['total_points'] = total_points
         context['correct_answers'] = correct_answers
-        context['score_percentage'] = float(attempt.score) if attempt.score else 0
+        context['score_percentage'] = score_percentage
 
         # Format time taken
         if attempt.time_taken:
@@ -258,6 +256,35 @@ class QuizResultsView(LoginRequiredMixin, DetailView):
                 context['time_taken_formatted'] = f"{seconds}s"
         else:
             context['time_taken_formatted'] = "Not recorded"
+
+        # Add retake functionality context
+        from progress.models import QuizAttempt
+        user_attempts = QuizAttempt.objects.filter(
+            student=self.request.user,
+            quiz=quiz
+        ).count()
+
+        context['can_retake'] = (
+            quiz.max_attempts == 0 or  # Unlimited attempts
+            user_attempts < quiz.max_attempts
+        )
+        context['attempts_used'] = user_attempts
+        context['is_intro_course'] = 'Introduction to YITP' in course.title
+
+        # Add question results for detailed review
+        question_results = []
+        if hasattr(attempt, 'answers') and attempt.answers:
+            for question in questions:
+                user_answer = attempt.answers.get(str(question.id))
+                is_correct = user_answer == question.correct_answer if user_answer else False
+                question_results.append({
+                    'question': question,
+                    'user_answer': user_answer,
+                    'is_correct': is_correct,
+                    'user_answer_id': user_answer
+                })
+
+        context['question_results'] = question_results
 
         return context
 

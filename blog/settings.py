@@ -91,6 +91,15 @@ else:
 # Debug Mode
 DEBUG = not IS_PRODUCTION
 
+# Custom Error Pages Configuration
+# Enable custom error pages in production
+if IS_PRODUCTION:
+    # Custom error page handlers will be used
+    CUSTOM_ERROR_PAGES = True
+else:
+    # In development, Django's debug pages are more useful
+    CUSTOM_ERROR_PAGES = False
+
 # Allowed Hosts
 if IS_PRODUCTION:
     ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='www.youthimpactglobal.com,youthimpactglobal.com,*.youthimpactglobal.com,yitpapp2.onrender.com,*.onrender.com').split(',')

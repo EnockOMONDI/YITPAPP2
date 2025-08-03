@@ -24,6 +24,26 @@ from django.contrib.auth import views as auth_views
 from users import views as user_views
 from users.otp_views import verify_otp_view, resend_otp_view, otp_status_view
 
+# Custom error handlers
+from django.shortcuts import render
+from django.http import HttpResponseNotFound, HttpResponseServerError, HttpResponseForbidden, HttpResponseBadRequest
+
+def custom_404_view(request, exception):
+    """Custom 404 error page"""
+    return HttpResponseNotFound(render(request, '404.html'))
+
+def custom_500_view(request):
+    """Custom 500 error page"""
+    return HttpResponseServerError(render(request, '500.html'))
+
+def custom_403_view(request, exception):
+    """Custom 403 error page"""
+    return HttpResponseForbidden(render(request, '403.html'))
+
+def custom_400_view(request, exception):
+    """Custom 400 error page"""
+    return HttpResponseBadRequest(render(request, '400.html'))
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor5/', include('django_ckeditor_5.urls')),  # CKEditor 5 URLs
@@ -101,4 +121,10 @@ urlpatterns = [
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+# Custom error handlers (only used when DEBUG=False)
+handler404 = custom_404_view
+handler500 = custom_500_view
+handler403 = custom_403_view
+handler400 = custom_400_view
 

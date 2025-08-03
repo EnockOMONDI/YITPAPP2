@@ -124,11 +124,13 @@ class QuizAdmin(admin.ModelAdmin):
         attempts = obj.attempts.filter(completed_at__isnull=False)
         if attempts.exists():
             avg = attempts.aggregate(avg_score=Avg('score'))['avg_score']
-            color = '#28a745' if avg >= obj.passing_score else '#dc3545'
-            return format_html(
-                '<span style="color: {}; font-weight: bold;">{:.1f}%</span>',
-                color, avg
-            )
+            if avg is not None:
+                avg_float = float(avg)
+                color = '#28a745' if avg_float >= obj.passing_score else '#dc3545'
+                return format_html(
+                    '<span style="color: {}; font-weight: bold;">{}</span>',
+                    color, f'{avg_float:.1f}%'
+                )
         return '-'
     avg_score.short_description = 'Avg Score'
 
@@ -146,14 +148,25 @@ class QuizAdmin(admin.ModelAdmin):
         attempts = obj.attempts.filter(completed_at__isnull=False)
         if attempts.exists():
             avg_score = attempts.aggregate(avg_score=Avg('score'))['avg_score']
-            pass_rate = (attempts.filter(is_passed=True).count() / attempts.count()) * 100
+            passed_count = attempts.filter(is_passed=True).count()
+            total_count = attempts.count()
+            pass_rate = (passed_count / total_count) * 100 if total_count > 0 else 0
 
-            return format_html(
-                'Average Score: <strong>{:.1f}%</strong><br>'
-                'Pass Rate: <strong>{:.1f}%</strong><br>'
-                'Total Attempts: <strong>{}</strong>',
-                avg_score, pass_rate, attempts.count()
-            )
+            if avg_score is not None:
+                avg_score_float = float(avg_score)
+                return format_html(
+                    'Average Score: <strong>{}</strong><br>'
+                    'Pass Rate: <strong>{}</strong><br>'
+                    'Total Attempts: <strong>{}</strong>',
+                    f'{avg_score_float:.1f}%', f'{pass_rate:.1f}%', total_count
+                )
+            else:
+                return format_html(
+                    'Average Score: <strong>N/A</strong><br>'
+                    'Pass Rate: <strong>{}</strong><br>'
+                    'Total Attempts: <strong>{}</strong>',
+                    f'{pass_rate:.1f}%', total_count
+                )
         return "No attempts yet"
     performance_stats.short_description = 'Performance Statistics'
 
