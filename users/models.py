@@ -124,6 +124,22 @@ class Profile(models.Model):
         default=False,
         help_text="Whether the user's email has been verified via OTP"
     )
+
+    # Email reminder tracking
+    verification_reminder_count = models.IntegerField(
+        default=0,
+        help_text="Number of verification reminder emails sent"
+    )
+    last_reminder_sent = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Timestamp of last verification reminder email sent"
+    )
+    reminder_emails_stopped = models.BooleanField(
+        default=False,
+        help_text="Whether reminder emails have been stopped (max reached or user verified)"
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -346,6 +362,65 @@ class Profile(models.Model):
         """Update the profile completion percentage"""
         self.profile_completion_percentage = self.calculate_profile_completion()
         self.save(update_fields=['profile_completion_percentage', 'updated_at'])
+
+    def needs_verification_reminder(self):
+        """Check if user needs a verification reminder email"""
+        from datetime import timedelta
+        from django.utils import timezone
+
+        # Don't send reminders if already verified or stopped
+        if self.email_verified or self.reminder_emails_stopped:
+            return False
+
+        # Don't send more than 7 reminders
+        if self.verification_reminder_count >= 7:
+            return False
+
+        # Check if 24 hours have passed since last reminder (or registration)
+        now = timezone.now()
+
+        if self.last_reminder_sent:
+            # Check if 24 hours since last reminder
+            time_since_last = now - self.last_reminder_sent
+            return time_since_last >= timedelta(hours=24)
+        else:
+            # Check if 24 hours since registration
+            time_since_registration = now - self.user.date_joined
+            return time_since_registration >= timedelta(hours=24)
+
+    def should_stop_reminders(self):
+        """Check if reminders should be stopped (7 days passed or max reminders reached)"""
+        from datetime import timedelta
+        from django.utils import timezone
+
+        # Stop if already verified
+        if self.email_verified:
+            return True
+
+        # Stop if max reminders reached
+        if self.verification_reminder_count >= 7:
+            return True
+
+        # Stop if 7 days have passed since registration
+        time_since_registration = timezone.now() - self.user.date_joined
+        return time_since_registration >= timedelta(days=7)
+
+    def record_reminder_sent(self):
+        """Record that a reminder email was sent"""
+        from django.utils import timezone
+
+        self.verification_reminder_count += 1
+        self.last_reminder_sent = timezone.now()
+
+        # Stop reminders if we've reached the limit or time limit
+        if self.should_stop_reminders():
+            self.reminder_emails_stopped = True
+
+        self.save(update_fields=[
+            'verification_reminder_count',
+            'last_reminder_sent',
+            'reminder_emails_stopped'
+        ])
         return self.profile_completion_percentage
 
     def get_completion_status(self):

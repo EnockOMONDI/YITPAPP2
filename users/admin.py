@@ -533,11 +533,17 @@ class OTPVerificationAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone_number', 'payment_status', 'payment_amount', 'payment_confirmed_at', 'bio_preview']
+    list_display = [
+        'user', 'email_verified', 'verification_reminder_status',
+        'payment_status', 'payment_amount', 'payment_confirmed_at', 'bio_preview'
+    ]
     search_fields = ['user__username', 'user__email', 'phone_number', 'payment_reference']
-    list_filter = ['user__date_joined', 'payment_status', 'payment_method', 'payment_confirmed_at']
+    list_filter = [
+        'email_verified', 'reminder_emails_stopped', 'verification_reminder_count',
+        'user__date_joined', 'payment_status', 'payment_method', 'payment_confirmed_at'
+    ]
     ordering = ['user__username']
-    readonly_fields = ['payment_confirmed_at']
+    readonly_fields = ['payment_confirmed_at', 'verification_reminder_count', 'last_reminder_sent']
 
     fieldsets = (
         ('User Information', {
@@ -560,6 +566,25 @@ class ProfileAdmin(admin.ModelAdmin):
             return obj.bio[:50] + '...' if len(obj.bio) > 50 else obj.bio
         return 'No bio set'
     bio_preview.short_description = 'Bio Preview'
+
+    def verification_reminder_status(self, obj):
+        """Display verification reminder status"""
+        if obj.email_verified:
+            return format_html('<span style="color: #28a745;">✅ Verified</span>')
+
+        if obj.reminder_emails_stopped:
+            return format_html('<span style="color: #dc3545;">🛑 Stopped ({} sent)</span>', obj.verification_reminder_count)
+
+        if obj.verification_reminder_count > 0:
+            return format_html('<span style="color: #ffc107;">📧 {} reminders sent</span>', obj.verification_reminder_count)
+
+        # Check if user needs verification
+        if not obj.user.is_active or not obj.email_verified:
+            return format_html('<span style="color: #dc3545;">⚠️ Needs verification</span>')
+
+        return format_html('<span style="color: #6c757d;">-</span>')
+
+    verification_reminder_status.short_description = 'Reminder Status'
 
     def confirm_payment(self, request, queryset):
         """Admin action to confirm payment for selected profiles"""
@@ -597,6 +622,77 @@ class ProfileAdmin(admin.ModelAdmin):
             messages.SUCCESS
         )
     mark_payment_expired.short_description = "Mark payment as expired"
+
+    def send_verification_reminder(self, request, queryset):
+        """Admin action to send verification reminder to selected unverified profiles"""
+        from users.email_utils import send_verification_reminder_email, generate_otp
+        from users.models import OTPVerification
+        from datetime import timedelta
+        from django.utils import timezone
+
+        sent_count = 0
+        failed_count = 0
+
+        for profile in queryset:
+            # Only send to unverified users
+            if profile.email_verified:
+                continue
+
+            user = profile.user
+
+            # Get or create OTP
+            current_time = timezone.now()
+            valid_otp = OTPVerification.objects.filter(
+                user=user,
+                is_used=False,
+                is_verified=False,
+                expires_at__gt=current_time
+            ).order_by('-created_at').first()
+
+            if not valid_otp:
+                # Create new OTP
+                otp_code = generate_otp(length=6)
+                expires_at = current_time + timedelta(minutes=200)
+
+                OTPVerification.objects.create(
+                    user=user,
+                    otp_code=otp_code,
+                    expires_at=expires_at
+                )
+            else:
+                otp_code = valid_otp.otp_code
+
+            # Send reminder
+            reminder_count = profile.verification_reminder_count + 1
+            email_sent = send_verification_reminder_email(
+                user=user,
+                otp_code=otp_code,
+                reminder_count=reminder_count
+            )
+
+            if email_sent:
+                profile.record_reminder_sent()
+                sent_count += 1
+            else:
+                failed_count += 1
+
+        if sent_count > 0:
+            self.message_user(
+                request,
+                f'Successfully sent verification reminders to {sent_count} user(s).',
+                messages.SUCCESS
+            )
+
+        if failed_count > 0:
+            self.message_user(
+                request,
+                f'Failed to send reminders to {failed_count} user(s).',
+                messages.ERROR
+            )
+
+    send_verification_reminder.short_description = "Send verification reminder to unverified users"
+
+    actions = ['confirm_payment', 'mark_payment_pending', 'mark_payment_expired', 'send_verification_reminder']
 
 # Non-sponsorship models are intentionally not registered to keep admin focused on sponsorship management
 # If you need to manage these models, uncomment the lines below:

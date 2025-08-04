@@ -6,7 +6,7 @@
 
 {% block extra_css %}
 <style>
-/* YITP Unified Profile Styles - Solid Colors Only */
+/* YITP Unified Profile Styles - Enhanced Design */
 
 /* Fix for navbar overlap - add top margin to account for fixed navbar */
 .profile-content-wrapper {
@@ -24,6 +24,81 @@
     .profile-content-wrapper {
         margin-top: 80px; /* Even less margin on small mobile */
     }
+}
+
+/* Enhanced Security Settings Styles */
+.security-item {
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.security-item:hover {
+    border-color: #ff5d15;
+    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.1);
+}
+
+.security-tips {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #ff5d15;
+}
+
+.account-item {
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.account-item:hover {
+    border-color: #1a2e53;
+    box-shadow: 0 4px 12px rgba(26, 46, 83, 0.1);
+}
+
+.privacy-item {
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.privacy-item:hover {
+    border-color: #dc3545;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
+}
+
+.privacy-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #1a2e53;
+}
+
+/* Enhanced Button Styles */
+.btn-yitp-primary {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-yitp-primary:hover {
+    background: linear-gradient(135deg, #e54d0f 0%, #ff5d15 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 93, 21, 0.3);
+    color: white;
 }
 
 :root {
@@ -637,10 +712,17 @@
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link {% if active_section == 'billing' %}active{% endif %}" 
-                    id="billing-tab" data-bs-toggle="tab" data-bs-target="#billing" 
+            <button class="nav-link {% if active_section == 'billing' %}active{% endif %}"
+                    id="billing-tab" data-bs-toggle="tab" data-bs-target="#billing"
                     type="button" role="tab" aria-controls="billing" aria-selected="{% if active_section == 'billing' %}true{% else %}false{% endif %}">
                 <i class="fas fa-credit-card me-2"></i>Billing
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if active_section == 'settings' %}active{% endif %}"
+                    id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings"
+                    type="button" role="tab" aria-controls="settings" aria-selected="{% if active_section == 'settings' %}true{% else %}false{% endif %}">
+                <i class="fas fa-cog me-2"></i>Account Settings
             </button>
         </li>
     </ul>
@@ -1075,6 +1157,172 @@
                 {% endif %}
             </div>
         </div>
+
+        <!-- Account Settings Tab -->
+        <div class="tab-pane fade {% if active_section == 'settings' %}show active{% endif %}"
+             id="settings" role="tabpanel" aria-labelledby="settings-tab">
+
+            <!-- Security Settings -->
+            <div class="profile-card">
+                <h3 class="section-title">
+                    <i class="fas fa-shield-alt me-2" style="color: #ff5d15;"></i>
+                    Security Settings
+                </h3>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="security-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-1">Password</h5>
+                                    <p class="text-muted mb-0">Keep your account secure with a strong password</p>
+                                </div>
+                                <a href="{% url 'password_reset' %}" class="btn btn-yitp-primary">
+                                    <i class="fas fa-key me-2"></i>Change Password
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="security-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-1">Email Verification</h5>
+                                    <p class="text-muted mb-0">
+                                        {% if profile.email_verified %}
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check me-1"></i>Verified
+                                            </span>
+                                            Your email address is verified
+                                        {% else %}
+                                            <span class="badge bg-warning">
+                                                <i class="fas fa-exclamation-triangle me-1"></i>Unverified
+                                            </span>
+                                            Please verify your email address
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                {% if not profile.email_verified %}
+                                <button class="btn btn-outline-warning">
+                                    <i class="fas fa-envelope me-2"></i>Resend Verification
+                                </button>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="security-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-1">Account Activity</h5>
+                                    <p class="text-muted mb-0">Last login: {{ user.last_login|date:"M d, Y H:i" }}</p>
+                                </div>
+                                <span class="badge bg-light text-dark">
+                                    <i class="fas fa-clock me-1"></i>{{ user.last_login|timesince }} ago
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="security-tips">
+                            <h6 class="text-muted mb-3">
+                                <i class="fas fa-lightbulb me-2"></i>Security Tips
+                            </h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Use a unique password
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Include numbers and symbols
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Keep your email verified
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Log out from shared devices
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Management -->
+            <div class="profile-card">
+                <h3 class="section-title">
+                    <i class="fas fa-user-cog me-2" style="color: #1a2e53;"></i>
+                    Account Management
+                </h3>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="account-item">
+                            <h5 class="mb-2">Profile Information</h5>
+                            <p class="text-muted mb-3">Update your personal information and preferences</p>
+                            <button class="btn btn-outline-primary" onclick="editProfile()">
+                                <i class="fas fa-edit me-2"></i>Edit Profile
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="account-item">
+                            <h5 class="mb-2">Notification Preferences</h5>
+                            <p class="text-muted mb-3">Manage how you receive updates and notifications</p>
+                            <button class="btn btn-outline-secondary" onclick="manageNotifications()">
+                                <i class="fas fa-bell me-2"></i>Manage Notifications
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data & Privacy -->
+            <div class="profile-card">
+                <h3 class="section-title">
+                    <i class="fas fa-user-shield me-2" style="color: #ff5d15;"></i>
+                    Data & Privacy
+                </h3>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="privacy-item">
+                            <h5 class="mb-2">Download Your Data</h5>
+                            <p class="text-muted mb-3">Get a copy of your learning progress, achievements, and account data</p>
+                            <button class="btn btn-outline-info">
+                                <i class="fas fa-download me-2"></i>Request Data Export
+                            </button>
+                        </div>
+
+                        <div class="privacy-item">
+                            <h5 class="mb-2">Account Deletion</h5>
+                            <p class="text-muted mb-3">Permanently delete your account and all associated data</p>
+                            <button class="btn btn-outline-danger" onclick="confirmAccountDeletion()">
+                                <i class="fas fa-trash me-2"></i>Delete Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="privacy-info">
+                            <h6 class="text-muted mb-3">
+                                <i class="fas fa-info-circle me-2"></i>Privacy Information
+                            </h6>
+                            <p class="small text-muted">
+                                Your data is protected according to our privacy policy.
+                                We use your information only to provide and improve our educational services.
+                            </p>
+                            <a href="#" class="small text-decoration-none">
+                                <i class="fas fa-external-link-alt me-1"></i>Read Privacy Policy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1416,6 +1664,25 @@ document.addEventListener('DOMContentLoaded', function() {
             tab.show();
         }
     }
+
+    // Settings Tab Functions
+    window.editProfile = function() {
+        // Show edit profile modal or redirect to edit page
+        alert('Profile editing functionality will be implemented soon!');
+    };
+
+    window.manageNotifications = function() {
+        // Show notification preferences modal
+        alert('Notification management will be implemented soon!');
+    };
+
+    window.confirmAccountDeletion = function() {
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            if (confirm('This will permanently delete all your learning progress, achievements, and account data. Are you absolutely sure?')) {
+                alert('Account deletion functionality will be implemented with proper security measures.');
+            }
+        }
+    };
 });
 </script>
 {% endblock %}

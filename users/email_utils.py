@@ -437,6 +437,56 @@ def send_otp_email(user, otp_code):
 
     return result
 
+def send_verification_reminder_email(user, otp_code, reminder_count):
+    """Send verification reminder email to unverified user"""
+    logger.info(f"Preparing to send verification reminder #{reminder_count} to {user.email}")
+
+    # Create verification URL with user ID and auto-fill capability
+    base_url = getattr(settings, 'SITE_URL', 'https://www.youthimpactglobal.com')
+    verification_url = f"{base_url}/verify-otp/?user_id={user.id}&code={otp_code}"
+
+    # Calculate days remaining (7 days total from registration)
+    from datetime import timedelta
+    from django.utils import timezone
+
+    registration_date = user.date_joined
+    deadline = registration_date + timedelta(days=7)
+    days_remaining = (deadline - timezone.now()).days
+    if days_remaining < 0:
+        days_remaining = 0
+
+    context = {
+        'user': user,
+        'otp_code': otp_code,
+        'verification_url': verification_url,
+        'reminder_count': reminder_count,
+        'days_remaining': days_remaining,
+        'expiry_minutes': settings.OTP_EXPIRY_MINUTES,
+        'site_name': 'Youth Impact Training Programme',
+        'support_email': settings.ADMIN_EMAIL
+    }
+
+    html_content = render_to_string('emails/verification_reminder.html', context)
+    plain_content = render_to_string('emails/verification_reminder.txt', context)
+
+    subject = f"YITP Account Verification Reminder - Complete Your Registration"
+
+    logger.info(f"Sending verification reminder email with subject: {subject}")
+
+    result = send_html_email(
+        subject=subject,
+        html_content=html_content,
+        recipient_list=[user.email],
+        plain_text_content=plain_content
+    )
+
+    if result:
+        logger.info(f"✅ Verification reminder email sent successfully to {user.email}")
+    else:
+        logger.error(f"❌ Failed to send verification reminder email to {user.email}")
+
+    return result
+
 def send_welcome_email(user):
     """Send welcome email to newly registered user"""
     context = {

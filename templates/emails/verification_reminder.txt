@@ -1,17 +1,20 @@
 YOUTH IMPACT TRAINING PROGRAMME
-Email Verification Required
+Account Verification Reminder - Complete Your Registration
 
 Hello {{ user.first_name|default:user.username }}!
 
-Welcome to the Youth Impact Training Programme! We're excited to have you join our community of future leaders.
+We noticed you haven't completed your Youth Impact Training Programme account verification yet. Don't miss out on your opportunity to join our community of future leaders!
 
-To complete your registration and verify your email address, please use the verification code below:
+⏰ ACCOUNT VERIFICATION REMINDER
+This is reminder #{{ reminder_count }} of 7. Complete your verification now to secure your spot in YITP!
+
+Your verification code is ready and waiting. Complete your registration now to access all YITP benefits.
 
 YOUR VERIFICATION CODE: {{ otp_code }}
 
 This code expires in {{ expiry_minutes }} minutes.
 
-🚀 COMPLETE YOUR ACCOUNT VERIFICATION
+🚀 COMPLETE YOUR ACCOUNT VERIFICATION NOW
 
 ✨ RECOMMENDED: ONE-CLICK VERIFICATION
 Click this secure link to instantly verify your account - no typing required!
@@ -25,14 +28,17 @@ If the one-click verification doesn't work, you can manually enter the code:
 Your 6-digit verification code: {{ otp_code }}
 
 Steps for manual entry:
-1. Return to the YITP verification page in your browser
+1. Visit the YITP verification page in your browser
 2. Enter the 6-digit code shown above
 3. Click "Verify" to complete your registration
+
+⚠️ DON'T MISS OUT!
+{% if reminder_count >= 5 %}Final reminders! You have {{ days_remaining }} days left to complete verification.{% else %}Complete your verification within {{ days_remaining }} days to secure your YITP membership.{% endif %}
 
 SECURITY NOTICE:
 - This code is valid for {{ expiry_minutes }} minutes only
 - Never share this code with anyone
-- If you didn't request this code, please ignore this email
+- If you didn't request this account, please ignore this email
 - Contact our support team if you need assistance
 
 Once verified, you'll have full access to:
@@ -42,7 +48,7 @@ Once verified, you'll have full access to:
 ✓ Events: Workshops, webinars, and networking opportunities
 ✓ Support: Sponsorship opportunities and financial assistance
 
-Ready to transform your future? Complete your verification now and start your journey with YITP!
+🎯 Ready to transform your future? Complete your verification now and start your journey with YITP!
 
 If you're having trouble with verification or have any questions, our support team is here to help.
 
