@@ -879,6 +879,161 @@ def get_system_statistics():
     return stats
 
 
+def get_git_commit_history(limit=15):
+    """
+    Fetch recent Git commit history for the timeline
+    Returns formatted commit data for display
+    """
+    import subprocess
+    import json
+    from datetime import datetime
+    import logging
+
+    logger = logging.getLogger(__name__)
+
+    # Default fallback commits if Git is not available
+    fallback_commits = [
+        {
+            'date': '2025-08-04',
+            'title': 'System Status Page Implementation',
+            'description': 'Created comprehensive system status dashboard with real-time production database integration',
+            'author': 'Enock Omondi'
+        },
+        {
+            'date': '2025-08-04',
+            'title': 'Automated Email Reminder System',
+            'description': 'Implemented comprehensive verification reminder system with 7-day automation and YITP branding',
+            'author': 'Enock Omondi'
+        },
+        {
+            'date': '2025-08-03',
+            'title': 'Enhanced Admin Interface',
+            'description': 'Added verification status tracking, bulk actions, and improved user management capabilities',
+            'author': 'Enock Omondi'
+        },
+        {
+            'date': '2025-08-02',
+            'title': 'Magic Link Authentication',
+            'description': 'Deployed secure magic link system with 10-day expiration and enhanced user experience',
+            'author': 'Enock Omondi'
+        },
+        {
+            'date': '2025-08-01',
+            'title': 'Profile Management Enhancement',
+            'description': 'Modern settings interface with completion tracking, responsive design, and YITP branding',
+            'author': 'Enock Omondi'
+        }
+    ]
+
+    try:
+        # Try to get Git commit history
+        git_command = [
+            'git', 'log',
+            f'--max-count={limit}',
+            '--pretty=format:%H|%ad|%s|%an|%b',
+            '--date=short'
+        ]
+
+        result = subprocess.run(
+            git_command,
+            capture_output=True,
+            text=True,
+            timeout=10,
+            cwd='.'
+        )
+
+        if result.returncode == 0 and result.stdout.strip():
+            commits = []
+            for line in result.stdout.strip().split('\n'):
+                if '|' in line:
+                    parts = line.split('|', 4)
+                    if len(parts) >= 4:
+                        commit_hash = parts[0]
+                        commit_date = parts[1]
+                        commit_message = parts[2]
+                        commit_author = parts[3]
+                        commit_body = parts[4] if len(parts) > 4 else ''
+
+                        # Enhanced commit message formatting
+                        title = commit_message.strip()
+
+                        # Create meaningful descriptions based on commit patterns
+                        description = ''
+                        if commit_body.strip():
+                            description = commit_body.strip()[:200] + ('...' if len(commit_body.strip()) > 200 else '')
+                        else:
+                            # Generate meaningful descriptions based on commit message patterns
+                            lower_title = title.lower()
+                            if any(word in lower_title for word in ['status', 'dashboard', 'page']):
+                                description = 'Enhanced system monitoring and status page functionality with real-time updates'
+                            elif any(word in lower_title for word in ['email', 'reminder', 'notification']):
+                                description = 'Improved email notification system and automated reminder functionality'
+                            elif any(word in lower_title for word in ['admin', 'interface', 'management']):
+                                description = 'Enhanced administrative interface and user management capabilities'
+                            elif any(word in lower_title for word in ['auth', 'login', 'magic', 'link']):
+                                description = 'Authentication system improvements and security enhancements'
+                            elif any(word in lower_title for word in ['profile', 'user', 'settings']):
+                                description = 'User profile management and settings interface improvements'
+                            elif any(word in lower_title for word in ['course', 'lesson', 'enrollment']):
+                                description = 'Learning management system enhancements and course functionality'
+                            elif any(word in lower_title for word in ['payment', 'billing', 'subscription']):
+                                description = 'Payment processing and billing system improvements'
+                            elif any(word in lower_title for word in ['fix', 'bug', 'error']):
+                                description = 'Bug fixes and system stability improvements'
+                            elif any(word in lower_title for word in ['update', 'upgrade', 'enhance']):
+                                description = 'System updates and feature enhancements'
+                            elif any(word in lower_title for word in ['security', 'ssl', 'https']):
+                                description = 'Security improvements and system hardening'
+                            elif any(word in lower_title for word in ['database', 'migration', 'model']):
+                                description = 'Database improvements and data model enhancements'
+                            elif any(word in lower_title for word in ['ui', 'ux', 'design', 'style']):
+                                description = 'User interface and user experience improvements'
+                            elif any(word in lower_title for word in ['api', 'endpoint', 'service']):
+                                description = 'API enhancements and service improvements'
+                            elif any(word in lower_title for word in ['test', 'testing', 'validation']):
+                                description = 'Testing improvements and quality assurance enhancements'
+                            elif any(word in lower_title for word in ['deploy', 'deployment', 'production']):
+                                description = 'Deployment improvements and production optimizations'
+                            elif any(word in lower_title for word in ['performance', 'optimization', 'speed']):
+                                description = 'Performance optimizations and system speed improvements'
+                            elif any(word in lower_title for word in ['mobile', 'responsive', 'tablet']):
+                                description = 'Mobile responsiveness and cross-device compatibility improvements'
+                            elif title.startswith(('beta', 'v', 'release', 'version')):
+                                description = f'Version release and deployment updates - {title}'
+                            else:
+                                description = f'Development improvements and system enhancements - {commit_hash[:8]}'
+
+                        # Format the commit for display
+                        formatted_commit = {
+                            'date': commit_date,
+                            'title': title[:100] + ('...' if len(title) > 100 else ''),
+                            'description': description,
+                            'author': 'Enock Omondi'  # Standardize author name as requested
+                        }
+                        commits.append(formatted_commit)
+
+            if commits:
+                logger.info(f"Successfully fetched {len(commits)} Git commits")
+                return commits
+            else:
+                logger.warning("No Git commits found, using fallback data")
+                return fallback_commits
+
+        else:
+            logger.warning(f"Git command failed: {result.stderr}")
+            return fallback_commits
+
+    except subprocess.TimeoutExpired:
+        logger.error("Git command timed out")
+        return fallback_commits
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Git command error: {str(e)}")
+        return fallback_commits
+    except Exception as e:
+        logger.error(f"Unexpected error fetching Git history: {str(e)}")
+        return fallback_commits
+
+
 def get_deployment_info():
     """
     Get deployment information with environment detection
@@ -1061,29 +1216,8 @@ def system_status(request):
         }
     ]
 
-    # Recent updates and improvements
-    recent_updates = [
-        {
-            'date': '2025-08-04',
-            'title': 'Automated Email Reminder System',
-            'description': 'Implemented comprehensive verification reminder system with 7-day automation'
-        },
-        {
-            'date': '2025-08-03',
-            'title': 'Enhanced Admin Interface',
-            'description': 'Added verification status tracking and bulk actions for user management'
-        },
-        {
-            'date': '2025-08-02',
-            'title': 'Magic Link Authentication',
-            'description': 'Deployed secure magic link system with 10-day expiration'
-        },
-        {
-            'date': '2025-08-01',
-            'title': 'Profile Management Enhancement',
-            'description': 'Modern settings interface with completion tracking and responsive design'
-        }
-    ]
+    # Recent updates and improvements from Git commit history
+    recent_updates = get_git_commit_history(limit=12)
 
     # System statistics with enhanced error handling and database verification
     system_stats = get_system_statistics()
