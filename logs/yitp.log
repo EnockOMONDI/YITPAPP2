@@ -11442,3 +11442,16 @@ INFO 2025-08-05 00:19:33,509 basehttp 10624 6165426176 "GET /status/ HTTP/1.1" 2
 WARNING 2025-08-05 00:19:33,537 basehttp 10624 6165426176 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
 INFO 2025-08-05 00:19:34,392 basehttp 10624 6165426176 "GET /status/ HTTP/1.1" 200 65673
 WARNING 2025-08-05 00:19:34,419 basehttp 10624 6165426176 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 00:37:25,189 autoreload 11393 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 00:37:29,201 basehttp 11393 6164885504 "GET /status/ HTTP/1.1" 200 74361
+WARNING 2025-08-05 00:37:29,280 basehttp 11393 6164885504 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 00:37:36,735 basehttp 11393 6164885504 "GET /status/ HTTP/1.1" 200 74361
+WARNING 2025-08-05 00:37:36,830 basehttp 11393 6164885504 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 00:38:22,332 basehttp 11393 6164885504 "GET /status HTTP/1.1" 301 0
+INFO 2025-08-05 00:38:22,446 basehttp 11393 6164885504 "GET /status/ HTTP/1.1" 200 74361
+WARNING 2025-08-05 00:38:22,752 basehttp 11393 6164885504 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 00:38:52,658 autoreload 11393 8311519936 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-08-05 00:38:58,559 autoreload 11468 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 00:43:31,713 autoreload 11631 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 00:43:36,458 basehttp 11631 6203437056 "GET /status/ HTTP/1.1" 200 74529
+WARNING 2025-08-05 00:43:36,592 basehttp 11631 6203437056 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
