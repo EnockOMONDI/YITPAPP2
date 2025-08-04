@@ -709,6 +709,221 @@ def test_email_delivery(request):
     return render(request, 'users/test_email.html')
 
 
+def test_database_connection():
+    """
+    Test database connection and return detailed connection information
+    """
+    from django.db import connection
+    from django.conf import settings
+    import logging
+
+    logger = logging.getLogger(__name__)
+
+    connection_info = {
+        'status': 'Unknown',
+        'database_name': 'Unknown',
+        'database_host': 'Unknown',
+        'database_engine': 'Unknown',
+        'connection_time': None,
+        'error_message': None
+    }
+
+    try:
+        import time
+        start_time = time.time()
+
+        # Test basic connection
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            result = cursor.fetchone()
+
+        connection_time = round((time.time() - start_time) * 1000, 2)  # Convert to milliseconds
+
+        # Get database configuration
+        db_config = settings.DATABASES['default']
+
+        connection_info.update({
+            'status': 'Connected',
+            'database_name': db_config.get('NAME', 'Unknown'),
+            'database_host': db_config.get('HOST', 'localhost'),
+            'database_engine': db_config.get('ENGINE', 'Unknown'),
+            'connection_time': f"{connection_time}ms"
+        })
+
+        # Additional PostgreSQL-specific information
+        if 'postgresql' in db_config.get('ENGINE', ''):
+            try:
+                with connection.cursor() as cursor:
+                    cursor.execute("SELECT version()")
+                    version = cursor.fetchone()[0]
+                    connection_info['database_version'] = version.split(' ')[1] if version else 'Unknown'
+            except Exception as e:
+                logger.warning(f"Could not get PostgreSQL version: {str(e)}")
+
+    except Exception as e:
+        connection_info.update({
+            'status': 'Failed',
+            'error_message': str(e)
+        })
+        logger.error(f"Database connection test failed: {str(e)}")
+
+    return connection_info
+
+
+def get_system_statistics():
+    """
+    Get comprehensive system statistics with robust error handling
+    Ensures accurate data from production database
+    """
+    from django.db import connection
+    from django.conf import settings
+    import logging
+
+    logger = logging.getLogger(__name__)
+
+    # Initialize default stats
+    stats = {
+        'total_users': 'N/A',
+        'active_users': 'N/A',
+        'verified_users': 'N/A',
+        'inactive_users': 'N/A',
+        'total_courses': 'N/A',
+        'published_courses': 'N/A',
+        'draft_courses': 'N/A',
+        'total_enrollments': 'N/A',
+        'active_enrollments': 'N/A',
+        'completed_enrollments': 'N/A',
+        'total_instructors': 'N/A',
+        'verified_instructors': 'N/A',
+        'database_connection': 'Unknown',
+        'database_type': 'Unknown',
+        'environment': 'Unknown'
+    }
+
+    # Test database connection first
+    db_connection = test_database_connection()
+    stats.update({
+        'database_connection': db_connection['status'],
+        'database_host': db_connection['database_host'],
+        'database_name': db_connection['database_name'],
+        'connection_time': db_connection['connection_time'],
+        'database_version': db_connection.get('database_version', 'Unknown')
+    })
+
+    # Determine database type and environment
+    db_engine = settings.DATABASES['default']['ENGINE']
+    if 'postgresql' in db_engine:
+        stats['database_type'] = 'PostgreSQL (Production)'
+        stats['environment'] = 'Production'
+    elif 'sqlite' in db_engine:
+        stats['database_type'] = 'SQLite (Development)'
+        stats['environment'] = 'Development'
+    else:
+        stats['database_type'] = db_engine
+
+    # Only proceed with queries if database connection is successful
+    if db_connection['status'] == 'Connected':
+        try:
+
+            # Get user statistics
+            try:
+                from django.contrib.auth.models import User
+                stats['total_users'] = User.objects.count()
+                stats['active_users'] = User.objects.filter(is_active=True).count()
+                stats['inactive_users'] = User.objects.filter(is_active=False).count()
+
+                # Get verified users from Profile model
+                try:
+                    stats['verified_users'] = Profile.objects.filter(email_verified=True).count()
+                except Exception as e:
+                    logger.warning(f"Could not get verified users count: {str(e)}")
+                    stats['verified_users'] = 'N/A'
+
+            except Exception as e:
+                logger.error(f"Error getting user statistics: {str(e)}")
+
+            # Get course statistics
+            try:
+                from courses.models import Course
+                stats['total_courses'] = Course.objects.count()
+                stats['published_courses'] = Course.objects.filter(is_published=True).count()
+                stats['draft_courses'] = Course.objects.filter(is_published=False).count()
+            except Exception as e:
+                logger.warning(f"Could not get course statistics: {str(e)}")
+
+            # Get enrollment statistics
+            try:
+                from progress.models import Enrollment
+                stats['total_enrollments'] = Enrollment.objects.count()
+                stats['active_enrollments'] = Enrollment.objects.filter(status='active').count()
+                stats['completed_enrollments'] = Enrollment.objects.filter(status='completed').count()
+            except Exception as e:
+                logger.warning(f"Could not get enrollment statistics: {str(e)}")
+
+            # Get instructor statistics
+            try:
+                from users.models import InstructorProfile
+                stats['total_instructors'] = InstructorProfile.objects.count()
+                stats['verified_instructors'] = InstructorProfile.objects.filter(
+                    verification_status='verified', is_active=True
+                ).count()
+            except Exception as e:
+                logger.warning(f"Could not get instructor statistics: {str(e)}")
+
+        except Exception as e:
+            logger.error(f"Error executing database queries: {str(e)}")
+    else:
+        logger.error(f"Database connection failed: {db_connection.get('error_message', 'Unknown error')}")
+        stats['database_type'] = 'Connection Error'
+
+    return stats
+
+
+def get_deployment_info():
+    """
+    Get deployment information with environment detection
+    """
+    from django.conf import settings
+    from datetime import datetime
+    import os
+
+    # Detect current environment
+    is_production = getattr(settings, 'IS_PRODUCTION', False)
+
+    # Get database configuration
+    db_config = settings.DATABASES['default']
+    db_engine = db_config['ENGINE']
+
+    if 'postgresql' in db_engine:
+        database_info = 'Supabase PostgreSQL'
+        if 'neon.tech' in db_config.get('HOST', ''):
+            database_info = 'Neon PostgreSQL'
+        elif 'supabase.com' in db_config.get('HOST', ''):
+            database_info = 'Supabase PostgreSQL'
+    elif 'sqlite' in db_engine:
+        database_info = 'SQLite (Development)'
+    else:
+        database_info = 'Unknown Database'
+
+    # Determine current branch from environment or default
+    current_branch = os.getenv('RENDER_GIT_BRANCH', 'beta8')  # Default to beta8
+
+    deployment_info = {
+        'platform': 'Render.com' if is_production else 'Local Development',
+        'database': database_info,
+        'server': 'Gunicorn' if is_production else 'Django Dev Server',
+        'branch': current_branch,
+        'last_deployment': datetime.now().strftime('%Y-%m-%d'),
+        'uptime_target': '99.9%' if is_production else 'Development',
+        'backup_frequency': 'Daily' if is_production else 'Not Applicable',
+        'environment': 'Production' if is_production else 'Development',
+        'debug_mode': settings.DEBUG,
+        'allowed_hosts': ', '.join(settings.ALLOWED_HOSTS) if settings.ALLOWED_HOSTS != ['*'] else 'All (Development)'
+    }
+
+    return deployment_info
+
+
 def system_status(request):
     """
     Public system status and release information page
@@ -870,38 +1085,11 @@ def system_status(request):
         }
     ]
 
-    # System statistics
-    try:
-        system_stats = {
-            'total_users': User.objects.count(),
-            'active_users': User.objects.filter(is_active=True).count(),
-            'verified_users': Profile.objects.filter(email_verified=True).count(),
-            'total_courses': Course.objects.count(),
-            'published_courses': Course.objects.filter(is_published=True).count(),
-            'total_enrollments': Enrollment.objects.count(),
-            'active_enrollments': Enrollment.objects.filter(status='active').count()
-        }
-    except:
-        system_stats = {
-            'total_users': 'N/A',
-            'active_users': 'N/A',
-            'verified_users': 'N/A',
-            'total_courses': 'N/A',
-            'published_courses': 'N/A',
-            'total_enrollments': 'N/A',
-            'active_enrollments': 'N/A'
-        }
+    # System statistics with enhanced error handling and database verification
+    system_stats = get_system_statistics()
 
-    # Deployment information
-    deployment_info = {
-        'platform': 'Render.com',
-        'database': 'Supabase PostgreSQL',
-        'server': 'Gunicorn',
-        'branch': 'beta7',
-        'last_deployment': '2025-08-04',
-        'uptime_target': '99.9%',
-        'backup_frequency': 'Daily'
-    }
+    # Deployment information with dynamic environment detection
+    deployment_info = get_deployment_info()
 
     context = {
         'current_version': current_version,

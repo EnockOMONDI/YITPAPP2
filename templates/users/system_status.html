@@ -324,23 +324,61 @@
                 <div class="status-card card">
                     <div class="card-header">
                         <i class="fas fa-chart-bar"></i> System Statistics
+                        <small class="float-right">
+                            <i class="fas fa-database"></i> {{ system_stats.database_type }}
+                        </small>
                     </div>
                     <div class="card-body p-0">
+                        <!-- Database Connection Status -->
+                        <div class="metric-card {% if system_stats.database_connection == 'Connected' %}border-success{% else %}border-danger{% endif %}">
+                            <div class="metric-value {% if system_stats.database_connection == 'Connected' %}text-success{% else %}text-danger{% endif %}">
+                                {% if system_stats.database_connection == 'Connected' %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% else %}
+                                    <i class="fas fa-times-circle"></i>
+                                {% endif %}
+                            </div>
+                            <div class="metric-label">Database {{ system_stats.database_connection }}</div>
+                        </div>
+
+                        <!-- User Statistics -->
                         <div class="metric-card">
                             <div class="metric-value">{{ system_stats.total_users }}</div>
                             <div class="metric-label">Total Users</div>
                         </div>
                         <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.active_users }}</div>
+                            <div class="metric-label">Active Users</div>
+                        </div>
+                        <div class="metric-card">
                             <div class="metric-value">{{ system_stats.verified_users }}</div>
                             <div class="metric-label">Verified Users</div>
                         </div>
+
+                        <!-- Course Statistics -->
                         <div class="metric-card">
                             <div class="metric-value">{{ system_stats.published_courses }}</div>
                             <div class="metric-label">Published Courses</div>
                         </div>
                         <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.total_courses }}</div>
+                            <div class="metric-label">Total Courses</div>
+                        </div>
+
+                        <!-- Enrollment Statistics -->
+                        <div class="metric-card">
                             <div class="metric-value">{{ system_stats.active_enrollments }}</div>
                             <div class="metric-label">Active Enrollments</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.total_enrollments }}</div>
+                            <div class="metric-label">Total Enrollments</div>
+                        </div>
+
+                        <!-- Instructor Statistics -->
+                        <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.verified_instructors }}</div>
+                            <div class="metric-label">Verified Instructors</div>
                         </div>
                     </div>
                 </div>
@@ -419,6 +457,11 @@
                 <div class="status-card card">
                     <div class="card-header">
                         <i class="fas fa-server"></i> Deployment Information
+                        <small class="float-right">
+                            <span class="badge {% if deployment_info.environment == 'Production' %}badge-success{% else %}badge-warning{% endif %}">
+                                {{ deployment_info.environment }}
+                            </span>
+                        </small>
                     </div>
                     <div class="card-body">
                         <div class="feature-item">
@@ -435,7 +478,19 @@
                         </div>
                         <div class="feature-item">
                             <span>Branch</span>
-                            <strong>{{ deployment_info.branch }}</strong>
+                            <strong class="text-primary">{{ deployment_info.branch }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Environment</span>
+                            <strong class="{% if deployment_info.environment == 'Production' %}text-success{% else %}text-warning{% endif %}">
+                                {{ deployment_info.environment }}
+                            </strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Debug Mode</span>
+                            <strong class="{% if deployment_info.debug_mode %}text-warning{% else %}text-success{% endif %}">
+                                {% if deployment_info.debug_mode %}Enabled{% else %}Disabled{% endif %}
+                            </strong>
                         </div>
                         <div class="feature-item">
                             <span>Last Deployment</span>
@@ -448,6 +503,10 @@
                         <div class="feature-item">
                             <span>Backup Frequency</span>
                             <strong>{{ deployment_info.backup_frequency }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Allowed Hosts</span>
+                            <small class="text-muted">{{ deployment_info.allowed_hosts|truncatechars:50 }}</small>
                         </div>
                     </div>
                 </div>

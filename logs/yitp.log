@@ -11286,3 +11286,28 @@ INFO 2025-08-04 23:37:06,188 basehttp 9000 6205648896 "GET /static/assets/img/fa
 INFO 2025-08-04 23:37:10,124 basehttp 9000 6205648896 "GET /status HTTP/1.1" 301 0
 INFO 2025-08-04 23:37:10,158 basehttp 9000 6205648896 "GET /status/ HTTP/1.1" 200 61375
 WARNING 2025-08-04 23:37:10,222 basehttp 9000 6205648896 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-04 23:48:30,139 autoreload 9466 8311519936 Watching for file changes with StatReloader
+ERROR 2025-08-04 23:48:47,331 log 9466 6205583360 Internal Server Error: /status/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py", line 1091, in system_status
+    deployment_info = get_deployment_info()
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py", line 915, in get_deployment_info
+    'last_deployment': datetime.now().strftime('%Y-%m-%d'),
+                       ^^^^^^^^
+NameError: name 'datetime' is not defined. Did you forget to import 'datetime'
+ERROR 2025-08-04 23:48:47,337 basehttp 9466 6205583360 "GET /status/ HTTP/1.1" 500 112124
+INFO 2025-08-04 23:48:48,010 basehttp 9466 6205583360 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-08-04 23:49:06,580 autoreload 9466 8311519936 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-08-04 23:49:08,249 autoreload 9503 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-04 23:49:24,481 autoreload 9503 8311519936 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-08-04 23:49:28,488 autoreload 9519 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-04 23:49:30,051 basehttp 9519 6164885504 "GET /status/ HTTP/1.1" 200 64152
+WARNING 2025-08-04 23:49:30,280 basehttp 9519 6164885504 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-04 23:50:41,349 autoreload 9597 8311519936 Watching for file changes with StatReloader
