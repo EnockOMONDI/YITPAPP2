@@ -102,7 +102,7 @@ else:
 
 # Allowed Hosts
 if IS_PRODUCTION:
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='www.youthimpactglobal.com,youthimpactglobal.com,*.youthimpactglobal.com,yitpapp2.onrender.com,*.onrender.com').split(',')
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost:8000,www.youthimpactglobal.com,youthimpactglobal.com,*.youthimpactglobal.com,yitpapp2.onrender.com,*.onrender.com').split(',')
 else:
     ALLOWED_HOSTS = ['*']  # Permissive for development
 

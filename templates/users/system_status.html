@@ -223,17 +223,52 @@
         margin: 1rem 0;
     }
 
+    .executive-summary {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 2px solid var(--yitp-orange);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(255, 93, 21, 0.1);
+    }
+
+    .executive-summary h4 {
+        color: var(--yitp-blue);
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .executive-summary p {
+        color: #495057;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .executive-summary .highlight {
+        color: var(--yitp-orange);
+        font-weight: 600;
+    }
+
     @media (max-width: 768px) {
         .health-score {
             font-size: 2rem;
         }
-        
+
         .status-header {
             padding: 2rem 0;
         }
-        
+
         .metric-value {
             font-size: 1.5rem;
+        }
+
+        .executive-summary {
+            padding: 1.5rem;
+        }
+
+        .executive-summary p {
+            font-size: 1rem;
         }
     }
 </style>
@@ -250,6 +285,16 @@
                 <p class="health-status">{{ system_health.status_text }}</p>
                 <p class="mb-0">Last Updated: {{ last_updated }}</p>
             </div>
+        </div>
+
+        <!-- Executive Summary for Stakeholders -->
+        <div class="executive-summary">
+            <h4><i class="fas fa-info-circle text-primary"></i> What is this page?</h4>
+            <p>
+                This <span class="highlight">System Status Dashboard</span> provides real-time transparency into the health and performance of the YITP Learning Management System.
+                It displays current user engagement metrics, feature implementation progress, and system reliability indicators to help stakeholders monitor platform performance and growth.
+                This information is automatically updated from our live production database to ensure accuracy and build trust through transparency.
+            </p>
         </div>
 
         <!-- Version Navigation -->

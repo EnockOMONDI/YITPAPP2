@@ -11311,3 +11311,134 @@ INFO 2025-08-04 23:49:28,488 autoreload 9519 8311519936 Watching for file change
 INFO 2025-08-04 23:49:30,051 basehttp 9519 6164885504 "GET /status/ HTTP/1.1" 200 64152
 WARNING 2025-08-04 23:49:30,280 basehttp 9519 6164885504 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
 INFO 2025-08-04 23:50:41,349 autoreload 9597 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-04 23:51:22,786 autoreload 9715 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-04 23:51:34,531 basehttp 9715 6196490240 "GET /status HTTP/1.1" 301 0
+INFO 2025-08-04 23:51:34,651 basehttp 9715 6196490240 "GET /status/ HTTP/1.1" 200 64152
+WARNING 2025-08-04 23:51:34,696 basehttp 9715 6196490240 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+WARNING 2025-08-04 23:51:41,390 log 9715 6196490240 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-04 23:51:41,393 basehttp 9715 6196490240 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10155
+WARNING 2025-08-04 23:51:41,993 basehttp 9715 6213316608 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-08-04 23:51:41,996 basehttp 9715 6196490240 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-08-04 23:51:42,014 basehttp 9715 6230142976 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-08-05 00:16:08,643 autoreload 10438 8311519936 Watching for file changes with StatReloader
+ERROR 2025-08-05 00:16:12,019 exception 10438 6194278400 Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING 2025-08-05 00:16:12,022 log 10438 6194278400 Bad Request: /status/
+WARNING 2025-08-05 00:16:12,023 basehttp 10438 6194278400 "GET /status/ HTTP/1.1" 400 8971
+INFO 2025-08-05 00:16:48,096 autoreload 10501 8311519936 Watching for file changes with StatReloader
+ERROR 2025-08-05 00:16:52,292 exception 10438 6194278400 Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING 2025-08-05 00:16:52,296 log 10438 6194278400 Bad Request: /status/
+WARNING 2025-08-05 00:16:52,296 basehttp 10438 6194278400 "GET /status/ HTTP/1.1" 400 8971
+ERROR 2025-08-05 00:16:54,169 exception 10438 6194278400 Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING 2025-08-05 00:16:54,171 log 10438 6194278400 Bad Request: /favicon.ico
+WARNING 2025-08-05 00:16:54,171 basehttp 10438 6194278400 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-08-05 00:17:20,999 exception 10438 6194278400 Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING 2025-08-05 00:17:21,003 log 10438 6194278400 Bad Request: /status
+WARNING 2025-08-05 00:17:21,004 basehttp 10438 6194278400 "GET /status HTTP/1.1" 400 8971
+ERROR 2025-08-05 00:17:21,449 exception 10438 6194278400 Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING 2025-08-05 00:17:21,451 log 10438 6194278400 Bad Request: /favicon.ico
+WARNING 2025-08-05 00:17:21,452 basehttp 10438 6194278400 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-08-05 00:17:23,901 exception 10438 6194278400 Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING 2025-08-05 00:17:23,910 log 10438 6194278400 Bad Request: /status
+WARNING 2025-08-05 00:17:23,911 basehttp 10438 6194278400 "GET /status HTTP/1.1" 400 8971
+ERROR 2025-08-05 00:17:24,108 exception 10438 6194278400 Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+WARNING 2025-08-05 00:17:24,110 log 10438 6194278400 Bad Request: /favicon.ico
+WARNING 2025-08-05 00:17:24,111 basehttp 10438 6194278400 "GET /favicon.ico HTTP/1.1" 400 8971
+INFO 2025-08-05 00:19:13,559 autoreload 10438 8311519936 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2025-08-05 00:19:15,891 autoreload 10578 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 00:19:33,148 autoreload 10624 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 00:19:33,457 basehttp 10624 6165426176 "GET /status HTTP/1.1" 301 0
+INFO 2025-08-05 00:19:33,509 basehttp 10624 6165426176 "GET /status/ HTTP/1.1" 200 65673
+WARNING 2025-08-05 00:19:33,537 basehttp 10624 6165426176 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 00:19:34,392 basehttp 10624 6165426176 "GET /status/ HTTP/1.1" 200 65673
+WARNING 2025-08-05 00:19:34,419 basehttp 10624 6165426176 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
