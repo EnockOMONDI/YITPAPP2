@@ -16,7 +16,31 @@ from .otp_views import send_otp_for_registration
 from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification, test_email_configuration, send_html_email
 
 from django.shortcuts import render,redirect,HttpResponse
-from django.http import Http404
+from django.http import Http404, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+import pytz
+import json
+from datetime import datetime, timedelta
+
+# Import timezone utilities
+try:
+    from .timezone_utils import (
+        get_user_timezone_from_request,
+        convert_to_user_timezone,
+        format_datetime_for_display,
+        create_timezone_context
+    )
+except ImportError:
+    # Fallback functions if timezone_utils not available
+    def get_user_timezone_from_request(request):
+        return None
+    def convert_to_user_timezone(dt, tz=None):
+        return dt
+    def format_datetime_for_display(dt, tz=None, fmt=None):
+        return dt.strftime('%b %d, %Y at %I:%M %p') if dt else ''
+    def create_timezone_context(request):
+        return {}
 
 
 def home(request):
@@ -879,10 +903,10 @@ def get_system_statistics():
     return stats
 
 
-def format_commit_date(date_string):
+def format_commit_date(date_string, user_timezone=None):
     """
-    Format commit date to human-readable format
-    Converts '2025-08-04' to 'Aug 4, 2025 at 2:30 PM'
+    Format commit date to human-readable format with timezone awareness
+    Converts '2025-08-04' to 'Aug 4, 2025 at 2:30 PM' in user's timezone
     """
     from datetime import datetime
     import random
@@ -902,21 +926,40 @@ def format_commit_date(date_string):
         hour = hours[date_hash]
         minute = minutes[minute_hash]
 
-        # Create datetime with time
-        full_datetime = date_obj.replace(hour=hour, minute=minute)
+        # Create datetime with time in server timezone
+        full_datetime = timezone.make_aware(date_obj.replace(hour=hour, minute=minute))
 
-        # Format to human-readable string
-        return full_datetime.strftime('%b %d, %Y at %I:%M %p')
+        # Convert to user timezone if provided
+        if user_timezone:
+            try:
+                user_tz = pytz.timezone(user_timezone)
+                full_datetime = full_datetime.astimezone(user_tz)
+            except pytz.exceptions.UnknownTimeZoneError:
+                pass
+
+        # Return both formatted string and ISO timestamp for JavaScript
+        formatted_date = full_datetime.strftime('%b %d, %Y at %I:%M %p')
+        iso_timestamp = full_datetime.isoformat()
+
+        return {
+            'formatted': formatted_date,
+            'iso': iso_timestamp,
+            'utc': full_datetime.astimezone(pytz.UTC).isoformat()
+        }
 
     except Exception:
         # Fallback to original date if parsing fails
-        return date_string
+        return {
+            'formatted': date_string,
+            'iso': date_string,
+            'utc': date_string
+        }
 
 
-def get_git_commit_history(limit=15):
+def get_git_commit_history(limit=15, user_timezone=None):
     """
     Fetch recent Git commit history for the timeline
-    Returns formatted commit data for display
+    Returns formatted commit data for display with timezone awareness
     """
     import subprocess
     import json
@@ -926,33 +969,51 @@ def get_git_commit_history(limit=15):
     logger = logging.getLogger(__name__)
 
     # Default fallback commits if Git is not available
+    fallback_dates = [
+        format_commit_date('2025-08-04', user_timezone),
+        format_commit_date('2025-08-04', user_timezone),
+        format_commit_date('2025-08-03', user_timezone),
+        format_commit_date('2025-08-02', user_timezone),
+        format_commit_date('2025-08-01', user_timezone)
+    ]
+
     fallback_commits = [
         {
-            'date': format_commit_date('2025-08-04'),
+            'date': fallback_dates[0]['formatted'],
+            'date_iso': fallback_dates[0]['iso'],
+            'date_utc': fallback_dates[0]['utc'],
             'title': 'System Status Page Implementation',
             'description': 'Created comprehensive system status dashboard with real-time production database integration',
             'author': 'Enock Omondi'
         },
         {
-            'date': format_commit_date('2025-08-04'),
+            'date': fallback_dates[1]['formatted'],
+            'date_iso': fallback_dates[1]['iso'],
+            'date_utc': fallback_dates[1]['utc'],
             'title': 'Automated Email Reminder System',
             'description': 'Implemented comprehensive verification reminder system with 7-day automation and YITP branding',
             'author': 'Enock Omondi'
         },
         {
-            'date': format_commit_date('2025-08-03'),
+            'date': fallback_dates[2]['formatted'],
+            'date_iso': fallback_dates[2]['iso'],
+            'date_utc': fallback_dates[2]['utc'],
             'title': 'Enhanced Admin Interface',
             'description': 'Added verification status tracking, bulk actions, and improved user management capabilities',
             'author': 'Enock Omondi'
         },
         {
-            'date': format_commit_date('2025-08-02'),
+            'date': fallback_dates[3]['formatted'],
+            'date_iso': fallback_dates[3]['iso'],
+            'date_utc': fallback_dates[3]['utc'],
             'title': 'Magic Link Authentication',
             'description': 'Deployed secure magic link system with 10-day expiration and enhanced user experience',
             'author': 'Enock Omondi'
         },
         {
-            'date': format_commit_date('2025-08-01'),
+            'date': fallback_dates[4]['formatted'],
+            'date_iso': fallback_dates[4]['iso'],
+            'date_utc': fallback_dates[4]['utc'],
             'title': 'Profile Management Enhancement',
             'description': 'Modern settings interface with completion tracking, responsive design, and YITP branding',
             'author': 'Enock Omondi'
@@ -1037,9 +1098,12 @@ def get_git_commit_history(limit=15):
                             else:
                                 description = f'Development improvements and system enhancements - {commit_hash[:8]}'
 
-                        # Format the commit for display
+                        # Format the commit for display with timezone awareness
+                        date_info = format_commit_date(commit_date, user_timezone)
                         formatted_commit = {
-                            'date': format_commit_date(commit_date),
+                            'date': date_info['formatted'],
+                            'date_iso': date_info['iso'],
+                            'date_utc': date_info['utc'],
                             'title': title[:100] + ('...' if len(title) > 100 else ''),
                             'description': description,
                             'author': 'Enock Omondi'  # Standardize author name as requested
@@ -1250,14 +1314,20 @@ def system_status(request):
         }
     ]
 
+    # Get user timezone for commit history
+    user_timezone = get_user_timezone_from_request(request)
+
     # Recent updates and improvements from Git commit history
-    recent_updates = get_git_commit_history(limit=12)
+    recent_updates = get_git_commit_history(limit=12, user_timezone=user_timezone)
 
     # System statistics with enhanced error handling and database verification
     system_stats = get_system_statistics()
 
     # Deployment information with dynamic environment detection
     deployment_info = get_deployment_info()
+
+    # Add timezone context
+    timezone_context = create_timezone_context(request)
 
     context = {
         'current_version': current_version,
@@ -1270,7 +1340,77 @@ def system_status(request):
         'system_stats': system_stats,
         'deployment_info': deployment_info,
         'page_title': 'System Status & Release Information',
-        'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
+        'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC'),
+        **timezone_context,  # Add timezone context
     }
 
     return render(request, 'users/system_status.html', context)
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def set_timezone(request):
+    """
+    AJAX endpoint to set user's timezone in session
+    """
+    try:
+        timezone_str = request.POST.get('user_timezone')
+
+        if not timezone_str:
+            return JsonResponse({
+                'success': False,
+                'error': 'No timezone provided'
+            }, status=400)
+
+        # Validate timezone
+        try:
+            pytz.timezone(timezone_str)
+        except pytz.exceptions.UnknownTimeZoneError:
+            return JsonResponse({
+                'success': False,
+                'error': 'Invalid timezone'
+            }, status=400)
+
+        # Store in session
+        request.session['user_timezone'] = timezone_str
+
+        return JsonResponse({
+            'success': True,
+            'timezone': timezone_str,
+            'message': f'Timezone set to {timezone_str}'
+        })
+
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=500)
+
+
+def get_timezone_info(request):
+    """
+    Get timezone information for the current user
+    """
+    user_timezone = get_user_timezone_from_request(request)
+    server_timezone = str(timezone.get_current_timezone())
+
+    # Get current time in both timezones
+    now = timezone.now()
+    server_time = now.strftime('%B %d, %Y at %I:%M %p %Z')
+
+    user_time = server_time
+    if user_timezone:
+        try:
+            user_tz = pytz.timezone(user_timezone)
+            user_dt = now.astimezone(user_tz)
+            user_time = user_dt.strftime('%B %d, %Y at %I:%M %p %Z')
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+
+    return JsonResponse({
+        'user_timezone': user_timezone,
+        'server_timezone': server_timezone,
+        'server_time': server_time,
+        'user_time': user_time,
+        'utc_time': now.isoformat(),
+    })

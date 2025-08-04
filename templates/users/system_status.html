@@ -574,7 +574,13 @@
                                         <h6 class="mb-1">{{ update.title }}</h6>
                                         <p class="text-muted mb-1">{{ update.description }}</p>
                                         <small class="text-muted">
-                                            <i class="fas fa-calendar"></i> {{ update.date }}
+                                            <i class="fas fa-calendar"></i>
+                                            <span class="timeline-date"
+                                                  data-utc-time="{{ update.date_utc|default:'' }}"
+                                                  data-format="timeline"
+                                                  title="Click to see in your timezone">
+                                                {{ update.date }}
+                                            </span>
                                             {% if update.author %}
                                                 <span class="mx-2">•</span>
                                                 <i class="fas fa-user"></i> {{ update.author }}
@@ -659,6 +665,42 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         location.reload();
     }, 300000); // 5 minutes
+});
+
+// Timezone Handler Integration
+document.addEventListener('DOMContentLoaded', function() {
+    // Load timezone handler
+    const script = document.createElement('script');
+    script.src = "{% static 'js/timezone-handler.js' %}";
+    script.onload = function() {
+        // Initialize timezone conversion for timeline dates
+        if (window.yitpTimezone) {
+            console.log('YITP Timezone Handler loaded successfully');
+        }
+    };
+    document.head.appendChild(script);
+
+    // Add timezone info to page
+    const timezoneInfo = {
+        userTimezone: '{{ user_timezone|default:"" }}',
+        serverTimezone: '{{ server_timezone|default:"Africa/Nairobi" }}',
+        timezoneOffset: {{ timezone_offset|default:0 }}
+    };
+
+    // Store timezone info globally
+    window.yitpTimezoneInfo = timezoneInfo;
+
+    // Add data attributes to timeline dates for JavaScript conversion
+    const timelineDates = document.querySelectorAll('.update-item small');
+    timelineDates.forEach(dateElement => {
+        const dateText = dateElement.textContent.trim();
+        // Extract date from text and add as data attribute
+        const dateMatch = dateText.match(/(\w{3} \d{1,2}, \d{4} at \d{1,2}:\d{2} [AP]M)/);
+        if (dateMatch) {
+            dateElement.setAttribute('data-original-date', dateMatch[1]);
+            dateElement.classList.add('timeline-date');
+        }
+    });
 });
 </script>
 {% endblock %}

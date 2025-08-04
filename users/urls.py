@@ -41,5 +41,9 @@ urlpatterns = [
     path('api/validate-magic-link/', validate_magic_link_api, name='validate_magic_link_api'),
     path('magic-link-help/', magic_link_help_view, name='magic_link_help'),
 
+    # Timezone Management URLs
+    path('set-timezone/', views.set_timezone, name='set_timezone'),
+    path('timezone-info/', views.get_timezone_info, name='timezone_info'),
+
 ]
 
