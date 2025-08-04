@@ -45,5 +45,8 @@ urlpatterns = [
     path('set-timezone/', views.set_timezone, name='set_timezone'),
     path('timezone-info/', views.get_timezone_info, name='timezone_info'),
 
+    # Debug URLs (for production troubleshooting)
+    path('debug-git/', views.debug_git_info, name='debug_git_info'),
+
 ]
 

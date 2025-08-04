@@ -1023,6 +1023,12 @@ def get_git_commit_history(limit=15, user_timezone=None):
     try:
         # Try to get Git commit history from production deployment branch
         production_branch = 'YITP-BETA-InitialRelease-Aug-1-2025'
+
+        # Log environment information for debugging
+        logger.info(f"Attempting to fetch Git history for branch: {production_branch}")
+        logger.info(f"Requested limit: {limit} commits")
+
+        # First try with branch specification (for full repositories)
         git_command = [
             'git', 'log',
             production_branch,  # Specify the production branch
@@ -1031,6 +1037,15 @@ def get_git_commit_history(limit=15, user_timezone=None):
             '--date=short'
         ]
 
+        # Fallback command without branch specification (for shallow clones)
+        fallback_git_command = [
+            'git', 'log',
+            f'--max-count={limit}',
+            '--pretty=format:%H|%ad|%s|%an|%b',
+            '--date=short'
+        ]
+
+        logger.info(f"Executing Git command: {' '.join(git_command)}")
         result = subprocess.run(
             git_command,
             capture_output=True,
@@ -1040,8 +1055,12 @@ def get_git_commit_history(limit=15, user_timezone=None):
         )
 
         if result.returncode == 0 and result.stdout.strip():
+            logger.info(f"Git command successful. Processing output...")
             commits = []
-            for line in result.stdout.strip().split('\n'):
+            lines = result.stdout.strip().split('\n')
+            logger.info(f"Found {len(lines)} lines in Git output")
+
+            for line_num, line in enumerate(lines, 1):
                 if '|' in line:
                     parts = line.split('|', 4)
                     if len(parts) >= 4:
@@ -1050,6 +1069,8 @@ def get_git_commit_history(limit=15, user_timezone=None):
                         commit_message = parts[2]
                         commit_author = parts[3]  # Keep for potential future use
                         commit_body = parts[4] if len(parts) > 4 else ''
+
+                        logger.debug(f"Processing commit {line_num}: {commit_hash[:8]} - {commit_message[:50]}...")
 
                         # Enhanced commit message formatting
                         title = commit_message.strip()
@@ -1113,24 +1134,19 @@ def get_git_commit_history(limit=15, user_timezone=None):
                         commits.append(formatted_commit)
 
             if commits:
-                logger.info(f"Successfully fetched {len(commits)} Git commits")
+                logger.info(f"Successfully fetched {len(commits)} Git commits from branch {production_branch}")
                 return commits
             else:
-                logger.warning("No Git commits found, using fallback data")
+                logger.warning("No Git commits found in branch output, using fallback data")
                 return fallback_commits
 
         else:
             logger.warning(f"Git command failed for branch {production_branch}: {result.stderr}")
-            # Try fallback without branch specification
-            fallback_command = [
-                'git', 'log',
-                f'--max-count={limit}',
-                '--pretty=format:%H|%ad|%s|%an|%b',
-                '--date=short'
-            ]
+            # Try fallback without branch specification (for shallow clones in production)
+            logger.info("Attempting fallback Git command without branch specification")
             try:
                 fallback_result = subprocess.run(
-                    fallback_command,
+                    fallback_git_command,
                     capture_output=True,
                     text=True,
                     timeout=10,
@@ -1514,3 +1530,70 @@ def get_timezone_info(request):
         'user_time': user_time,
         'utc_time': now.isoformat(),
     })
+
+
+def debug_git_info(request):
+    """
+    Debug endpoint to check Git repository status in production
+    """
+    import subprocess
+    import os
+
+    debug_info = {
+        'timestamp': timezone.now().isoformat(),
+        'environment': 'production' if not settings.DEBUG else 'development',
+    }
+
+    try:
+        # Check current working directory
+        debug_info['cwd'] = os.getcwd()
+
+        # Check if .git directory exists
+        debug_info['git_dir_exists'] = os.path.exists('.git')
+
+        # Get current branch
+        try:
+            branch_result = subprocess.run(['git', 'branch', '--show-current'],
+                                         capture_output=True, text=True, timeout=5)
+            debug_info['current_branch'] = branch_result.stdout.strip() if branch_result.returncode == 0 else 'unknown'
+        except Exception as e:
+            debug_info['current_branch'] = f'error: {str(e)}'
+
+        # Get remote branches
+        try:
+            remote_result = subprocess.run(['git', 'branch', '-r'],
+                                         capture_output=True, text=True, timeout=5)
+            debug_info['remote_branches'] = remote_result.stdout.strip().split('\n') if remote_result.returncode == 0 else []
+        except Exception as e:
+            debug_info['remote_branches'] = f'error: {str(e)}'
+
+        # Test Git log command
+        try:
+            log_result = subprocess.run(['git', 'log', '--oneline', '-5'],
+                                      capture_output=True, text=True, timeout=5)
+            debug_info['recent_commits'] = log_result.stdout.strip().split('\n') if log_result.returncode == 0 else []
+        except Exception as e:
+            debug_info['recent_commits'] = f'error: {str(e)}'
+
+        # Test branch-specific command
+        try:
+            branch_log_result = subprocess.run(['git', 'log', 'YITP-BETA-InitialRelease-Aug-1-2025', '--oneline', '-5'],
+                                             capture_output=True, text=True, timeout=5)
+            debug_info['branch_commits'] = branch_log_result.stdout.strip().split('\n') if branch_log_result.returncode == 0 else []
+            debug_info['branch_command_success'] = branch_log_result.returncode == 0
+        except Exception as e:
+            debug_info['branch_commits'] = f'error: {str(e)}'
+            debug_info['branch_command_success'] = False
+
+        # Test the actual function
+        try:
+            commits = get_git_commit_history(limit=5)
+            debug_info['function_result_count'] = len(commits)
+            debug_info['function_result_titles'] = [commit['title'][:50] for commit in commits[:3]]
+        except Exception as e:
+            debug_info['function_result'] = f'error: {str(e)}'
+
+    except Exception as e:
+        debug_info['error'] = str(e)
+
+    return JsonResponse(debug_info, json_dumps_params={'indent': 2})
