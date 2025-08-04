@@ -11124,3 +11124,165 @@ Traceback (most recent call last):
     raise PermissionDenied
 django.core.exceptions.PermissionDenied
 WARNING 2025-08-03 03:12:48,230 basehttp 4830 6200586240 "GET /admin/progress/lessonprogress/ HTTP/1.1" 403 6531
+INFO 2025-08-04 23:34:43,781 autoreload 8892 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-04 23:35:26,055 basehttp 8892 6133313536 "GET /status HTTP/1.1" 301 0
+ERROR 2025-08-04 23:35:26,187 log 8892 6133313536 Internal Server Error: /status/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py", line 920, in system_status
+    return render(request, 'users/system_status.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 861, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 481, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 693, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 603, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'replace'
+ERROR 2025-08-04 23:35:26,198 basehttp 8892 6133313536 "GET /status/ HTTP/1.1" 500 343053
+INFO 2025-08-04 23:35:26,829 basehttp 8892 6133313536 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-08-04 23:35:26,871 basehttp 8892 6133313536 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-08-04 23:36:27,660 autoreload 9000 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-04 23:36:30,553 basehttp 9000 6205648896 "GET /status/ HTTP/1.1" 200 61375
+INFO 2025-08-04 23:36:30,643 basehttp 9000 6239301632 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-08-04 23:36:30,644 basehttp 9000 6272954368 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-08-04 23:36:30,662 basehttp 9000 6205648896 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-08-04 23:36:30,663 basehttp 9000 6256128000 "GET /static/img/logo/logo-icon.png HTTP/1.1" 200 200544
+WARNING 2025-08-04 23:36:30,674 basehttp 9000 6222475264 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-04 23:36:30,809 basehttp 9000 6272954368 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-08-04 23:36:30,812 basehttp 9000 6222475264 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-08-04 23:36:30,815 basehttp 9000 6239301632 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-08-04 23:36:30,823 basehttp 9000 6256128000 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-08-04 23:36:30,826 basehttp 9000 6272954368 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-08-04 23:36:30,889 basehttp 9000 6239301632 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-08-04 23:36:30,896 basehttp 9000 6289780736 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-08-04 23:36:30,876 basehttp 9000 6205648896 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-08-04 23:36:30,912 basehttp 9000 6256128000 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-08-04 23:36:30,913 basehttp 9000 6289780736 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-08-04 23:36:30,917 basehttp 9000 6205648896 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-08-04 23:36:30,922 basehttp 9000 6239301632 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-08-04 23:36:30,927 basehttp 9000 6272954368 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-08-04 23:36:30,933 basehttp 9000 6205648896 "GET /static/assets/js/main.js HTTP/1.1" 200 8167
+INFO 2025-08-04 23:36:30,936 basehttp 9000 6289780736 "GET /static/assets/css/preloader.css HTTP/1.1" 200 3392
+INFO 2025-08-04 23:36:30,941 basehttp 9000 6239301632 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-08-04 23:36:30,943 basehttp 9000 6222475264 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-08-04 23:36:30,945 basehttp 9000 6256128000 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-08-04 23:36:30,945 basehttp 9000 6205648896 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-08-04 23:36:30,955 basehttp 9000 6239301632 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-08-04 23:36:30,960 basehttp 9000 6289780736 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-08-04 23:36:30,960 basehttp 9000 6222475264 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-08-04 23:36:30,961 basehttp 9000 6239301632 "GET /static/assets/css/default.css HTTP/1.1" 304 0
+INFO 2025-08-04 23:36:30,963 basehttp 9000 6272954368 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-08-04 23:36:30,964 basehttp 9000 6205648896 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-08-04 23:36:30,965 basehttp 9000 6289780736 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-08-04 23:36:30,977 basehttp 9000 6256128000 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-08-04 23:36:30,982 basehttp 9000 6222475264 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-08-04 23:36:31,035 basehttp 9000 6256128000 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-08-04 23:36:31,037 basehttp 9000 6222475264 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-08-04 23:37:04,936 basehttp 9000 6205648896 "GET /status/ HTTP/1.1" 200 61375
+INFO 2025-08-04 23:37:05,054 basehttp 9000 6256128000 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-08-04 23:37:05,066 basehttp 9000 6222475264 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+WARNING 2025-08-04 23:37:05,082 basehttp 9000 6239301632 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-04 23:37:05,083 basehttp 9000 6205648896 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-08-04 23:37:05,085 basehttp 9000 6272954368 "GET /static/img/logo/logo-icon.png HTTP/1.1" 200 200544
+INFO 2025-08-04 23:37:05,152 basehttp 9000 6239301632 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-08-04 23:37:05,154 basehttp 9000 6222475264 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-08-04 23:37:05,155 basehttp 9000 6272954368 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-08-04 23:37:05,155 basehttp 9000 6256128000 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-08-04 23:37:05,156 basehttp 9000 6205648896 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-08-04 23:37:05,157 basehttp 9000 6289780736 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-08-04 23:37:05,211 basehttp 9000 6272954368 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-08-04 23:37:05,220 basehttp 9000 6272954368 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-08-04 23:37:05,224 basehttp 9000 6205648896 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-08-04 23:37:05,232 basehttp 9000 6256128000 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-08-04 23:37:05,242 basehttp 9000 6239301632 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-08-04 23:37:05,320 basehttp 9000 6222475264 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-08-04 23:37:05,338 basehttp 9000 6205648896 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-08-04 23:37:05,339 basehttp 9000 6289780736 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-08-04 23:37:05,344 basehttp 9000 6256128000 "GET /static/assets/js/main.js HTTP/1.1" 200 8167
+INFO 2025-08-04 23:37:05,350 basehttp 9000 6205648896 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-08-04 23:37:05,352 basehttp 9000 6289780736 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-08-04 23:37:05,358 basehttp 9000 6272954368 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-08-04 23:37:05,370 basehttp 9000 6239301632 "GET /static/assets/css/preloader.css HTTP/1.1" 200 3392
+INFO 2025-08-04 23:37:05,379 basehttp 9000 6256128000 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-08-04 23:37:05,381 basehttp 9000 6205648896 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-08-04 23:37:05,386 basehttp 9000 6222475264 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-08-04 23:37:05,392 basehttp 9000 6272954368 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-08-04 23:37:05,400 basehttp 9000 6222475264 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-08-04 23:37:05,403 basehttp 9000 6239301632 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-08-04 23:37:05,404 basehttp 9000 6205648896 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-08-04 23:37:05,405 basehttp 9000 6256128000 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-08-04 23:37:05,432 basehttp 9000 6289780736 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-08-04 23:37:05,495 basehttp 9000 6205648896 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-08-04 23:37:05,504 basehttp 9000 6289780736 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-08-04 23:37:05,554 basehttp 9000 6289780736 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-08-04 23:37:06,188 basehttp 9000 6205648896 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-08-04 23:37:10,124 basehttp 9000 6205648896 "GET /status HTTP/1.1" 301 0
+INFO 2025-08-04 23:37:10,158 basehttp 9000 6205648896 "GET /status/ HTTP/1.1" 200 61375
+WARNING 2025-08-04 23:37:10,222 basehttp 9000 6205648896 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873

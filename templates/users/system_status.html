@@ -1,0 +1,556 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }} - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --yitp-orange: #ff5d15;
+        --yitp-blue: #1a2e53;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+        --info-color: #17a2b8;
+    }
+
+    .content-wrapper {
+        margin-top: 100px;
+        padding-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            margin-top: 90px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    }
+
+    .status-header {
+        background: linear-gradient(135deg, var(--yitp-blue) 0%, var(--yitp-orange) 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        border-radius: 15px;
+    }
+
+    .version-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+
+    .health-score {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .health-status {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    .status-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 2rem;
+    }
+
+    .status-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .status-card .card-header {
+        background: var(--yitp-blue);
+        color: white;
+        border-radius: 15px 15px 0 0 !important;
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+    }
+
+    .progress-custom {
+        height: 8px;
+        border-radius: 10px;
+        background-color: #e9ecef;
+    }
+
+    .progress-bar-custom {
+        border-radius: 10px;
+        transition: width 0.6s ease;
+    }
+
+    .score-excellent { background-color: var(--success-color); }
+    .score-good { background-color: var(--info-color); }
+    .score-warning { background-color: var(--warning-color); }
+    .score-critical { background-color: var(--danger-color); }
+
+    .feature-item {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f8f9fa;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .feature-item:last-child {
+        border-bottom: none;
+    }
+
+    .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .status-complete { background-color: var(--success-color); color: white; }
+    .status-good { background-color: var(--info-color); color: white; }
+    .status-incomplete { background-color: var(--warning-color); color: white; }
+    .status-needs_improvement { background-color: var(--danger-color); color: white; }
+
+    .version-nav {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .version-item {
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .version-item.current {
+        background: var(--yitp-orange);
+        color: white;
+        font-weight: 600;
+    }
+
+    .version-item.planned {
+        background: #e9ecef;
+        color: #6c757d;
+    }
+
+    .version-item:hover:not(.current) {
+        background: #dee2e6;
+    }
+
+    .metric-card {
+        text-align: center;
+        padding: 1.5rem;
+        border-radius: 15px;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--yitp-orange);
+        margin-bottom: 0.5rem;
+    }
+
+    .metric-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .issue-card {
+        border-left: 4px solid;
+        margin-bottom: 1rem;
+    }
+
+    .issue-critical { border-left-color: var(--danger-color); }
+    .issue-high { border-left-color: var(--warning-color); }
+    .issue-medium { border-left-color: var(--info-color); }
+
+    .update-timeline {
+        position: relative;
+        padding-left: 2rem;
+    }
+
+    .update-timeline::before {
+        content: '';
+        position: absolute;
+        left: 0.5rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--yitp-orange);
+    }
+
+    .update-item {
+        position: relative;
+        padding: 1rem 0;
+        margin-left: 1rem;
+    }
+
+    .update-item::before {
+        content: '';
+        position: absolute;
+        left: -1.75rem;
+        top: 1.5rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--yitp-orange);
+        border: 3px solid white;
+        box-shadow: 0 0 0 2px var(--yitp-orange);
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+        margin: 1rem 0;
+    }
+
+    @media (max-width: 768px) {
+        .health-score {
+            font-size: 2rem;
+        }
+        
+        .status-header {
+            padding: 2rem 0;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <!-- Status Header -->
+        <div class="status-header text-center">
+            <div class="container">
+                <div class="version-badge">{{ current_version.name }}</div>
+                <h1 class="health-score">{{ system_health.overall_score }}%</h1>
+                <p class="health-status">{{ system_health.status_text }}</p>
+                <p class="mb-0">Last Updated: {{ last_updated }}</p>
+            </div>
+        </div>
+
+        <!-- Version Navigation -->
+        <div class="version-nav">
+            <h5 class="mb-3"><i class="fas fa-code-branch text-primary"></i> Version Navigation</h5>
+            <div class="row">
+                {% for version in version_history %}
+                <div class="col-md-4 mb-2">
+                    <div class="version-item {% if version.is_current %}current{% else %}planned{% endif %}">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{{ version.version_code }}</strong>
+                                <br>
+                                <small>{{ version.release_date }}</small>
+                            </div>
+                            <span class="badge {% if version.is_current %}badge-light{% else %}badge-secondary{% endif %}">
+                                {{ version.status }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- System Health Overview -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="status-card card">
+                    <div class="card-header">
+                        <i class="fas fa-heartbeat"></i> System Health Overview
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Overall System Health</label>
+                                <div class="progress progress-custom">
+                                    <div class="progress-bar progress-bar-custom score-{% if system_health.overall_score >= 85 %}excellent{% elif system_health.overall_score >= 70 %}good{% elif system_health.overall_score >= 55 %}warning{% else %}critical{% endif %}" 
+                                         style="width: {{ system_health.overall_score }}%"></div>
+                                </div>
+                                <small class="text-muted">{{ system_health.overall_score }}% - {{ system_health.status_text }}</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">User Journey Completion</label>
+                                <div class="progress progress-custom">
+                                    <div class="progress-bar progress-bar-custom score-{% if system_health.user_journey_score >= 85 %}excellent{% elif system_health.user_journey_score >= 70 %}good{% elif system_health.user_journey_score >= 55 %}warning{% else %}critical{% endif %}" 
+                                         style="width: {{ system_health.user_journey_score }}%"></div>
+                                </div>
+                                <small class="text-muted">{{ system_health.user_journey_score }}% - User Experience Flow</small>
+                            </div>
+                        </div>
+                        
+                        <h6 class="mt-4 mb-3">World-Class Standards Breakdown</h6>
+                        {% for key, standard in standards_breakdown.items %}
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span>{{ key|title }}</span>
+                                <span class="text-muted">{{ standard.score }}% / {{ standard.target }}%</span>
+                            </div>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar progress-bar-custom score-{{ standard.status }}" 
+                                     style="width: {{ standard.score }}%"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- System Statistics -->
+                <div class="status-card card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar"></i> System Statistics
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.total_users }}</div>
+                            <div class="metric-label">Total Users</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.verified_users }}</div>
+                            <div class="metric-label">Verified Users</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.published_courses }}</div>
+                            <div class="metric-label">Published Courses</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">{{ system_stats.active_enrollments }}</div>
+                            <div class="metric-label">Active Enrollments</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Implementation Status -->
+        <div class="row mt-4">
+            {% for key, feature_group in feature_status.items %}
+            <div class="col-lg-6 mb-4">
+                <div class="status-card card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-cogs"></i> {{ feature_group.name }}</span>
+                            <span class="badge badge-light">{{ feature_group.score }}%</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress progress-custom mb-3">
+                            <div class="progress-bar progress-bar-custom score-{{ feature_group.status }}"
+                                 style="width: {{ feature_group.score }}%"></div>
+                        </div>
+
+                        {% for feature in feature_group.features %}
+                        <div class="feature-item">
+                            <span>{{ feature.name }}</span>
+                            <span class="status-badge status-{{ feature.status }}">
+                                {% if feature.status == 'needs_improvement' %}
+                                    Needs Improvement
+                                {% elif feature.status == 'incomplete' %}
+                                    Incomplete
+                                {% else %}
+                                    {{ feature.status|title }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Critical Issues & Recommendations -->
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <div class="status-card card">
+                    <div class="card-header">
+                        <i class="fas fa-exclamation-triangle"></i> Critical Issues & Recommendations
+                    </div>
+                    <div class="card-body">
+                        {% for issue in critical_issues %}
+                        <div class="issue-card card issue-{{ issue.priority }}">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="card-title mb-2">{{ issue.title }}</h6>
+                                        <p class="card-text text-muted mb-2">{{ issue.description }}</p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock"></i> ETA: {{ issue.eta }}
+                                        </small>
+                                    </div>
+                                    <span class="badge badge-{% if issue.priority == 'critical' %}danger{% elif issue.priority == 'high' %}warning{% else %}info{% endif %}">
+                                        {{ issue.priority|upper }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Deployment Information -->
+                <div class="status-card card">
+                    <div class="card-header">
+                        <i class="fas fa-server"></i> Deployment Information
+                    </div>
+                    <div class="card-body">
+                        <div class="feature-item">
+                            <span>Platform</span>
+                            <strong>{{ deployment_info.platform }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Database</span>
+                            <strong>{{ deployment_info.database }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Server</span>
+                            <strong>{{ deployment_info.server }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Branch</span>
+                            <strong>{{ deployment_info.branch }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Last Deployment</span>
+                            <strong>{{ deployment_info.last_deployment }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Uptime Target</span>
+                            <strong class="text-success">{{ deployment_info.uptime_target }}</strong>
+                        </div>
+                        <div class="feature-item">
+                            <span>Backup Frequency</span>
+                            <strong>{{ deployment_info.backup_frequency }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Updates Timeline -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="status-card card">
+                    <div class="card-header">
+                        <i class="fas fa-history"></i> Recent Updates & Improvements
+                    </div>
+                    <div class="card-body">
+                        <div class="update-timeline">
+                            {% for update in recent_updates %}
+                            <div class="update-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">{{ update.title }}</h6>
+                                        <p class="text-muted mb-1">{{ update.description }}</p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar"></i> {{ update.date }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact & Support Information -->
+        <div class="row mt-4 mb-5">
+            <div class="col-12">
+                <div class="status-card card">
+                    <div class="card-header">
+                        <i class="fas fa-life-ring"></i> Support & Contact Information
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                                <h6>Email Support</h6>
+                                <p class="text-muted">youthimpactglobal3@gmail.com</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-globe fa-2x text-success mb-3"></i>
+                                <h6>Website</h6>
+                                <p class="text-muted">www.youthimpactglobal.com</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-code fa-2x text-warning mb-3"></i>
+                                <h6>System Version</h6>
+                                <p class="text-muted">{{ current_version.version_code }}</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <p class="text-muted mb-0">
+                                <small>
+                                    This status page provides real-time information about the YITP Learning Management System.
+                                    For technical support or questions, please contact our support team.
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate progress bars on page load
+    const progressBars = document.querySelectorAll('.progress-bar-custom');
+    progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => {
+            bar.style.width = width;
+        }, 500);
+    });
+
+    // Add click handlers for version navigation (future functionality)
+    const versionItems = document.querySelectorAll('.version-item:not(.current)');
+    versionItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Future: Navigate to specific version information
+            console.log('Version navigation clicked:', this.textContent.trim());
+        });
+    });
+
+    // Auto-refresh page every 5 minutes to keep status current
+    setTimeout(() => {
+        location.reload();
+    }, 300000); // 5 minutes
+});
+</script>
+{% endblock %}

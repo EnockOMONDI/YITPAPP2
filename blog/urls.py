@@ -72,6 +72,9 @@ urlpatterns = [
     path('resend-otp/', resend_otp_view, name='resend_otp'),
     path('otp-status/', otp_status_view, name='otp_status'),
 
+    # System status page (public access)
+    path('status/', user_views.system_status, name='system_status'),
+
     # Django built-in authentication views (as backup)
     path('accounts/login/', auth_views.LoginView.as_view(), name='django_login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='django_logout'),
