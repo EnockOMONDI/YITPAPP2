@@ -960,13 +960,30 @@ def get_git_commit_history(limit=15, user_timezone=None):
     """
     Fetch recent Git commit history for the timeline
     Returns formatted commit data for display with timezone awareness
+    Handles both full repositories and shallow clones (production environments)
     """
     import subprocess
     import json
     from datetime import datetime
     import logging
+    import os
 
     logger = logging.getLogger(__name__)
+
+    # Check if we're in a production environment with limited Git history
+    is_production = not settings.DEBUG
+    is_shallow_clone = False
+
+    # Check if this is a shallow clone
+    try:
+        shallow_check = subprocess.run(['git', 'rev-parse', '--is-shallow-repository'],
+                                     capture_output=True, text=True, timeout=5)
+        is_shallow_clone = shallow_check.stdout.strip() == 'true'
+        logger.info(f"Git repository shallow status: {is_shallow_clone}")
+    except Exception as e:
+        logger.warning(f"Could not check shallow repository status: {str(e)}")
+        # Assume shallow if we can't check and we're in production
+        is_shallow_clone = is_production
 
     # Default fallback commits if Git is not available
     fallback_dates = [
@@ -1025,19 +1042,33 @@ def get_git_commit_history(limit=15, user_timezone=None):
         production_branch = 'YITP-BETA-InitialRelease-Aug-1-2025'
 
         # Log environment information for debugging
+        logger.info(f"Environment: {'Production' if is_production else 'Development'}")
+        logger.info(f"Shallow clone: {is_shallow_clone}")
         logger.info(f"Attempting to fetch Git history for branch: {production_branch}")
         logger.info(f"Requested limit: {limit} commits")
 
-        # First try with branch specification (for full repositories)
-        git_command = [
-            'git', 'log',
-            production_branch,  # Specify the production branch
-            f'--max-count={limit}',
-            '--pretty=format:%H|%ad|%s|%an|%b',
-            '--date=short'
-        ]
+        # Choose Git command based on repository type
+        if is_shallow_clone:
+            # For shallow clones (production), use simple git log without branch specification
+            git_command = [
+                'git', 'log',
+                f'--max-count={limit}',
+                '--pretty=format:%H|%ad|%s|%an|%b',
+                '--date=short'
+            ]
+            logger.info("Using shallow clone compatible Git command (no branch specification)")
+        else:
+            # For full repositories (development), use branch-specific command
+            git_command = [
+                'git', 'log',
+                production_branch,  # Specify the production branch
+                f'--max-count={limit}',
+                '--pretty=format:%H|%ad|%s|%an|%b',
+                '--date=short'
+            ]
+            logger.info("Using full repository Git command (with branch specification)")
 
-        # Fallback command without branch specification (for shallow clones)
+        # Fallback command without branch specification
         fallback_git_command = [
             'git', 'log',
             f'--max-count={limit}',
@@ -1141,99 +1172,102 @@ def get_git_commit_history(limit=15, user_timezone=None):
                 return fallback_commits
 
         else:
-            logger.warning(f"Git command failed for branch {production_branch}: {result.stderr}")
-            # Try fallback without branch specification (for shallow clones in production)
-            logger.info("Attempting fallback Git command without branch specification")
-            try:
-                fallback_result = subprocess.run(
-                    fallback_git_command,
-                    capture_output=True,
-                    text=True,
-                    timeout=10,
-                    cwd='.'
-                )
-                if fallback_result.returncode == 0 and fallback_result.stdout.strip():
-                    logger.info("Using fallback Git command without branch specification")
-                    # Process fallback result similar to main result
-                    commits = []
-                    for line in fallback_result.stdout.strip().split('\n'):
-                        if '|' in line:
-                            parts = line.split('|', 4)
-                            if len(parts) >= 4:
-                                commit_hash = parts[0]
-                                commit_date = parts[1]
-                                commit_message = parts[2]
-                                commit_body = parts[4] if len(parts) > 4 else ''
+            error_msg = result.stderr.strip() if result.stderr else "Unknown error"
+            logger.warning(f"Git command failed: {error_msg}")
 
-                                # Enhanced commit message formatting
-                                title = commit_message.strip()
+            # If we tried branch-specific command and it failed, try without branch specification
+            if not is_shallow_clone:
+                logger.info("Branch-specific command failed, trying fallback without branch specification")
+                try:
+                    fallback_result = subprocess.run(
+                        fallback_git_command,
+                        capture_output=True,
+                        text=True,
+                        timeout=10,
+                        cwd='.'
+                    )
+                    if fallback_result.returncode == 0 and fallback_result.stdout.strip():
+                        logger.info("Using fallback Git command without branch specification")
+                        # Process fallback result similar to main result
+                        commits = []
+                        for line in fallback_result.stdout.strip().split('\n'):
+                            if '|' in line:
+                                parts = line.split('|', 4)
+                                if len(parts) >= 4:
+                                    commit_hash = parts[0]
+                                    commit_date = parts[1]
+                                    commit_message = parts[2]
+                                    commit_body = parts[4] if len(parts) > 4 else ''
 
-                                # Create meaningful descriptions based on commit patterns
-                                description = ''
-                                if commit_body.strip():
-                                    description = commit_body.strip()[:200] + ('...' if len(commit_body.strip()) > 200 else '')
-                                else:
-                                    # Generate meaningful descriptions based on commit message patterns
-                                    lower_title = title.lower()
-                                    if any(word in lower_title for word in ['timezone', 'datetime', 'localized']):
-                                        description = 'Timezone-aware datetime display system with automatic user timezone detection'
-                                    elif any(word in lower_title for word in ['status', 'dashboard', 'page']):
-                                        description = 'Enhanced system monitoring and status page functionality with real-time updates'
-                                    elif any(word in lower_title for word in ['email', 'reminder', 'notification']):
-                                        description = 'Improved email notification system and automated reminder functionality'
-                                    elif any(word in lower_title for word in ['admin', 'interface', 'management']):
-                                        description = 'Enhanced administrative interface and user management capabilities'
-                                    elif any(word in lower_title for word in ['auth', 'login', 'magic', 'link']):
-                                        description = 'Authentication system improvements and security enhancements'
-                                    elif any(word in lower_title for word in ['profile', 'user', 'settings']):
-                                        description = 'User profile management and settings interface improvements'
-                                    elif any(word in lower_title for word in ['course', 'lesson', 'enrollment']):
-                                        description = 'Learning management system enhancements and course functionality'
-                                    elif any(word in lower_title for word in ['payment', 'billing', 'subscription']):
-                                        description = 'Payment processing and billing system improvements'
-                                    elif any(word in lower_title for word in ['fix', 'bug', 'error']):
-                                        description = 'Bug fixes and system stability improvements'
-                                    elif any(word in lower_title for word in ['update', 'upgrade', 'enhance']):
-                                        description = 'System updates and feature enhancements'
-                                    elif any(word in lower_title for word in ['security', 'ssl', 'https']):
-                                        description = 'Security improvements and system hardening'
-                                    elif any(word in lower_title for word in ['database', 'migration', 'model']):
-                                        description = 'Database improvements and data model enhancements'
-                                    elif any(word in lower_title for word in ['ui', 'ux', 'design', 'style']):
-                                        description = 'User interface and user experience improvements'
-                                    elif any(word in lower_title for word in ['api', 'endpoint', 'service']):
-                                        description = 'API enhancements and service improvements'
-                                    elif any(word in lower_title for word in ['test', 'testing', 'validation']):
-                                        description = 'Testing improvements and quality assurance enhancements'
-                                    elif any(word in lower_title for word in ['deploy', 'deployment', 'production']):
-                                        description = 'Deployment improvements and production optimizations'
-                                    elif any(word in lower_title for word in ['performance', 'optimization', 'speed']):
-                                        description = 'Performance optimizations and system speed improvements'
-                                    elif any(word in lower_title for word in ['mobile', 'responsive', 'tablet']):
-                                        description = 'Mobile responsiveness and cross-device compatibility improvements'
-                                    elif title.startswith(('beta', 'v', 'release', 'version')):
-                                        description = f'Version release and deployment updates - {title}'
+                                    # Enhanced commit message formatting
+                                    title = commit_message.strip()
+
+                                    # Create meaningful descriptions based on commit patterns
+                                    description = ''
+                                    if commit_body.strip():
+                                        description = commit_body.strip()[:200] + ('...' if len(commit_body.strip()) > 200 else '')
                                     else:
-                                        description = f'Development improvements and system enhancements - {commit_hash[:8]}'
+                                        # Generate meaningful descriptions based on commit message patterns
+                                        lower_title = title.lower()
+                                        if any(word in lower_title for word in ['timezone', 'datetime', 'localized']):
+                                            description = 'Timezone-aware datetime display system with automatic user timezone detection'
+                                        elif any(word in lower_title for word in ['status', 'dashboard', 'page']):
+                                            description = 'Enhanced system monitoring and status page functionality with real-time updates'
+                                        elif any(word in lower_title for word in ['email', 'reminder', 'notification']):
+                                            description = 'Improved email notification system and automated reminder functionality'
+                                        elif any(word in lower_title for word in ['admin', 'interface', 'management']):
+                                            description = 'Enhanced administrative interface and user management capabilities'
+                                        elif any(word in lower_title for word in ['auth', 'login', 'magic', 'link']):
+                                            description = 'Authentication system improvements and security enhancements'
+                                        elif any(word in lower_title for word in ['profile', 'user', 'settings']):
+                                            description = 'User profile management and settings interface improvements'
+                                        elif any(word in lower_title for word in ['course', 'lesson', 'enrollment']):
+                                            description = 'Learning management system enhancements and course functionality'
+                                        elif any(word in lower_title for word in ['payment', 'billing', 'subscription']):
+                                            description = 'Payment processing and billing system improvements'
+                                        elif any(word in lower_title for word in ['fix', 'bug', 'error']):
+                                            description = 'Bug fixes and system stability improvements'
+                                        elif any(word in lower_title for word in ['update', 'upgrade', 'enhance']):
+                                            description = 'System updates and feature enhancements'
+                                        elif any(word in lower_title for word in ['security', 'ssl', 'https']):
+                                            description = 'Security improvements and system hardening'
+                                        elif any(word in lower_title for word in ['database', 'migration', 'model']):
+                                            description = 'Database improvements and data model enhancements'
+                                        elif any(word in lower_title for word in ['ui', 'ux', 'design', 'style']):
+                                            description = 'User interface and user experience improvements'
+                                        elif any(word in lower_title for word in ['api', 'endpoint', 'service']):
+                                            description = 'API enhancements and service improvements'
+                                        elif any(word in lower_title for word in ['test', 'testing', 'validation']):
+                                            description = 'Testing improvements and quality assurance enhancements'
+                                        elif any(word in lower_title for word in ['deploy', 'deployment', 'production']):
+                                            description = 'Deployment improvements and production optimizations'
+                                        elif any(word in lower_title for word in ['performance', 'optimization', 'speed']):
+                                            description = 'Performance optimizations and system speed improvements'
+                                        elif any(word in lower_title for word in ['mobile', 'responsive', 'tablet']):
+                                            description = 'Mobile responsiveness and cross-device compatibility improvements'
+                                        elif title.startswith(('beta', 'v', 'release', 'version')):
+                                            description = f'Version release and deployment updates - {title}'
+                                        else:
+                                            description = f'Development improvements and system enhancements - {commit_hash[:8]}'
 
-                                # Format the commit for display with timezone awareness
-                                date_info = format_commit_date(commit_date, user_timezone)
-                                formatted_commit = {
-                                    'date': date_info['formatted'],
-                                    'date_iso': date_info['iso'],
-                                    'date_utc': date_info['utc'],
-                                    'title': title[:100] + ('...' if len(title) > 100 else ''),
-                                    'description': description,
-                                    'author': 'Enock Omondi'  # Standardize author name as requested
-                                }
-                                commits.append(formatted_commit)
+                                    # Format the commit for display with timezone awareness
+                                    date_info = format_commit_date(commit_date, user_timezone)
+                                    formatted_commit = {
+                                        'date': date_info['formatted'],
+                                        'date_iso': date_info['iso'],
+                                        'date_utc': date_info['utc'],
+                                        'title': title[:100] + ('...' if len(title) > 100 else ''),
+                                        'description': description,
+                                        'author': 'Enock Omondi'  # Standardize author name as requested
+                                    }
+                                    commits.append(formatted_commit)
 
-                    if commits:
-                        logger.info(f"Successfully fetched {len(commits)} Git commits using fallback")
-                        return commits
+                        if commits:
+                            logger.info(f"Successfully fetched {len(commits)} Git commits using fallback")
+                            return commits
 
-            except Exception as fallback_error:
-                logger.error(f"Fallback Git command also failed: {str(fallback_error)}")
+                except Exception as fallback_error:
+                    logger.error(f"Fallback Git command also failed: {str(fallback_error)}")
 
             return fallback_commits
 

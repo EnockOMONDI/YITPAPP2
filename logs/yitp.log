@@ -11461,3 +11461,71 @@ WARNING 2025-08-05 00:57:28,307 basehttp 12984 6157217792 "GET /static/assets/fo
 INFO 2025-08-05 00:58:19,816 basehttp 12984 6157217792 "GET /status HTTP/1.1" 301 0
 INFO 2025-08-05 00:58:19,922 basehttp 12984 6157217792 "GET /status/ HTTP/1.1" 200 75486
 WARNING 2025-08-05 00:58:19,997 basehttp 12984 6157217792 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:24:22,491 autoreload 14278 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 01:24:42,706 basehttp 14278 6127300608 "GET /status/ HTTP/1.1" 200 81950
+WARNING 2025-08-05 01:24:42,842 basehttp 14278 6127300608 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:24:43,409 basehttp 14278 6127300608 "GET /static/js/timezone-handler.js HTTP/1.1" 200 9262
+INFO 2025-08-05 01:24:55,163 basehttp 14278 6127300608 "GET /status/ HTTP/1.1" 200 81950
+WARNING 2025-08-05 01:24:55,232 basehttp 14278 6127300608 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:25:13,125 basehttp 14278 6127300608 "GET /status/ HTTP/1.1" 200 81950
+INFO 2025-08-05 01:25:13,201 basehttp 14278 6177779712 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+WARNING 2025-08-05 01:25:13,202 basehttp 14278 6160953344 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:25:13,208 basehttp 14278 6127300608 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-08-05 01:25:13,209 basehttp 14278 6194606080 "GET /static/img/logo/logo-icon.png HTTP/1.1" 200 200544
+INFO 2025-08-05 01:25:13,210 basehttp 14278 6144126976 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-08-05 01:25:13,467 basehttp 14278 6144126976 - Broken pipe from ('127.0.0.1', 60350)
+INFO 2025-08-05 01:25:14,452 basehttp 14278 6194606080 "GET /status/ HTTP/1.1" 200 81950
+WARNING 2025-08-05 01:25:14,516 basehttp 14278 6194606080 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:25:14,622 basehttp 14278 6177779712 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-08-05 01:25:14,623 basehttp 14278 6127300608 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-08-05 01:25:14,654 basehttp 14278 6144126976 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-08-05 01:25:14,661 basehttp 14278 6127300608 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-08-05 01:25:14,662 basehttp 14278 6194606080 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-08-05 01:25:14,664 basehttp 14278 6160953344 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-08-05 01:25:14,665 basehttp 14278 6177779712 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-08-05 01:25:14,668 basehttp 14278 6211432448 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-08-05 01:25:14,697 basehttp 14278 6144126976 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-08-05 01:25:14,699 basehttp 14278 6160953344 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-08-05 01:25:14,701 basehttp 14278 6177779712 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-08-05 01:25:14,701 basehttp 14278 6127300608 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-08-05 01:25:14,709 basehttp 14278 6160953344 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-08-05 01:25:14,710 basehttp 14278 6144126976 "GET /static/assets/js/main.js HTTP/1.1" 200 8167
+INFO 2025-08-05 01:25:14,713 basehttp 14278 6177779712 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-08-05 01:25:14,727 basehttp 14278 6211432448 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-08-05 01:25:14,735 basehttp 14278 6127300608 "GET /static/assets/css/preloader.css HTTP/1.1" 200 3392
+INFO 2025-08-05 01:25:14,744 basehttp 14278 6194606080 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-08-05 01:25:14,746 basehttp 14278 6160953344 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-08-05 01:25:14,766 basehttp 14278 6177779712 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-08-05 01:25:14,776 basehttp 14278 6211432448 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-08-05 01:25:14,786 basehttp 14278 6177779712 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-08-05 01:25:14,790 basehttp 14278 6211432448 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-08-05 01:25:14,793 basehttp 14278 6160953344 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-08-05 01:25:14,796 basehttp 14278 6144126976 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-08-05 01:25:14,796 basehttp 14278 6127300608 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-08-05 01:25:14,800 basehttp 14278 6177779712 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-08-05 01:25:14,801 basehttp 14278 6194606080 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-08-05 01:25:14,935 basehttp 14278 6177779712 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-08-05 01:25:14,935 basehttp 14278 6194606080 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-08-05 01:25:14,992 basehttp 14278 6127300608 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-08-05 01:25:15,127 basehttp 14278 6127300608 "GET /static/js/timezone-handler.js HTTP/1.1" 200 9262
+INFO 2025-08-05 01:25:15,136 basehttp 14278 6144126976 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-08-05 01:25:51,696 basehttp 14278 6127300608 "GET /status HTTP/1.1" 301 0
+INFO 2025-08-05 01:25:51,912 basehttp 14278 6127300608 "GET /status/ HTTP/1.1" 200 81950
+WARNING 2025-08-05 01:25:52,069 basehttp 14278 6127300608 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:28:55,221 autoreload 14511 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 01:28:57,332 basehttp 14511 6190870528 "GET /status/ HTTP/1.1" 200 81959
+WARNING 2025-08-05 01:28:57,398 basehttp 14511 6190870528 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:28:57,900 basehttp 14511 6190870528 "GET /static/js/timezone-handler.js HTTP/1.1" 304 0
+INFO 2025-08-05 01:40:36,333 autoreload 15098 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 01:40:39,416 basehttp 15098 6128906240 "GET /status/ HTTP/1.1" 200 81959
+WARNING 2025-08-05 01:40:39,562 basehttp 15098 6128906240 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:40:40,627 basehttp 15098 6128906240 "GET /static/js/timezone-handler.js HTTP/1.1" 200 9262
+INFO 2025-08-05 01:48:06,749 autoreload 15633 8311519936 Watching for file changes with StatReloader
+INFO 2025-08-05 01:48:11,311 basehttp 15633 6124351488 "GET /status HTTP/1.1" 301 0
+INFO 2025-08-05 01:48:11,497 basehttp 15633 6124351488 "GET /status/ HTTP/1.1" 200 81998
+WARNING 2025-08-05 01:48:11,854 basehttp 15633 6124351488 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 404 1873
+INFO 2025-08-05 01:48:12,839 basehttp 15633 6124351488 "GET /static/js/timezone-handler.js HTTP/1.1" 304 0
+INFO 2025-08-05 02:10:15,169 autoreload 16425 8311519936 Watching for file changes with StatReloader
+WARNING 2025-08-05 02:11:01,204 log 16425 6123597824 Not Found: /debug-git/
+WARNING 2025-08-05 02:11:01,206 basehttp 16425 6123597824 "GET /debug-git/ HTTP/1.1" 404 10041
+INFO 2025-08-05 02:12:12,522 basehttp 16425 6123597824 "GET /users/debug-git/ HTTP/1.1" 200 2251
