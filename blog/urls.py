@@ -79,13 +79,8 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(), name='django_login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='django_logout'),
 
-    # Password reset functionality with YITP branding
-    path('password_reset/', auth_views.PasswordResetView.as_view(
-        template_name='registration/password_reset_form.html',
-        email_template_name='registration/password_reset_email.html',
-        subject_template_name='registration/password_reset_subject.txt',
-        success_url='/password_reset/done/'
-    ), name='password_reset'),
+    # Password reset functionality with YITP branding and HTML email support
+    path('password_reset/', user_views.CustomPasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='registration/password_reset_done.html'
     ), name='password_reset_done'),

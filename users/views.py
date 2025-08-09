@@ -10,6 +10,11 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile
 from .forms import SponsorshipRequestForm
 from .otp_views import send_otp_for_registration
@@ -1660,6 +1665,67 @@ def get_timezone_info(request):
         'user_time': user_time,
         'utc_time': now.isoformat(),
     })
+
+
+class CustomPasswordResetView(PasswordResetView):
+    """
+    Custom password reset view that sends HTML emails properly
+    """
+    template_name = 'registration/password_reset_form.html'
+    email_template_name = 'registration/password_reset_email.html'
+    subject_template_name = 'registration/password_reset_subject.txt'
+    success_url = '/password_reset/done/'
+
+    def form_valid(self, form):
+        """
+        Override form_valid to send HTML email using our email utility
+        """
+        email = form.cleaned_data['email']
+
+        # Find users with this email
+        users = User.objects.filter(email__iexact=email, is_active=True)
+
+        for user in users:
+            # Generate token and uid
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+            # Prepare email context
+            context = {
+                'user': user,
+                'domain': self.request.get_host(),
+                'protocol': 'https' if self.request.is_secure() else 'http',
+                'uid': uid,
+                'token': token,
+                'site_name': 'Youth Impact Training Programme',
+                'support_email': settings.ADMIN_EMAIL
+            }
+
+            # Render HTML and plain text content
+            html_content = render_to_string(self.email_template_name, context)
+            plain_content = render_to_string('registration/password_reset_email.txt', context)
+            subject = render_to_string(self.subject_template_name, context).strip()
+
+            # Send HTML email using our utility
+            try:
+                from .email_utils import send_html_email
+                send_html_email(
+                    subject=subject,
+                    html_content=html_content,
+                    recipient_list=[user.email],
+                    plain_text_content=plain_content
+                )
+                messages.success(
+                    self.request,
+                    f'Password reset email sent to {email}. Please check your inbox and follow the instructions.'
+                )
+            except Exception as e:
+                messages.error(
+                    self.request,
+                    'There was an error sending the password reset email. Please try again or contact support.'
+                )
+
+        return redirect(self.success_url)
 
 
 def debug_git_info(request):
