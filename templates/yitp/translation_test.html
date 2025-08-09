@@ -1,0 +1,149 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Translation Test - YITP{% endblock %}
+
+{% block content %}
+<div class="content-wrapper" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h1 class="text-center mb-4" style="color: #1a2e53;">
+                            🌐 Translation System Test
+                        </h1>
+                        
+                        <!-- Debug Information -->
+                        <div class="alert alert-info mb-4">
+                            <h5><i class="fas fa-info-circle me-2"></i>Debug Information</h5>
+                            <div id="debug-info">
+                                <p><strong>Current Language:</strong> <span id="current-lang">Loading...</span></p>
+                                <p><strong>Language Selector:</strong> <span id="selector-status">Checking...</span></p>
+                                <p><strong>Google Translate:</strong> <span id="translate-status">Checking...</span></p>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="runDebugCheck()">
+                                <i class="fas fa-refresh me-1"></i>Refresh Debug Info
+                            </button>
+                        </div>
+
+                        <!-- Test Content -->
+                        <div class="test-content">
+                            <h2 style="color: #ff5d15;">Welcome to YITP</h2>
+                            <p>This is a test page to verify that the Google Translate integration is working correctly.</p>
+                            
+                            <h3>Sample Content for Translation</h3>
+                            <ul>
+                                <li>Youth Impact Training Programme</li>
+                                <li>Skills Development</li>
+                                <li>Career Advancement</li>
+                                <li>Professional Training</li>
+                                <li>Entrepreneurship</li>
+                            </ul>
+
+                            <div class="alert alert-warning">
+                                <strong>Instructions:</strong>
+                                <ol>
+                                    <li>Look for the language selector (🌐) in the navigation bar</li>
+                                    <li>Click on it to see the dropdown menu</li>
+                                    <li>Select a language (e.g., French, Swahili, Arabic)</li>
+                                    <li>Watch this content translate in real-time</li>
+                                </ol>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h4>Course Categories</h4>
+                                    <div class="mb-3">
+                                        <span class="badge bg-primary me-2">Digital Marketing</span>
+                                        <span class="badge bg-success me-2">Web Development</span>
+                                        <span class="badge bg-warning me-2">Business Skills</span>
+                                        <span class="badge bg-info me-2">Leadership</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>Contact Information</h4>
+                                    <p>
+                                        <i class="fas fa-envelope text-primary me-2"></i>
+                                        support@youthimpactglobal.com
+                                    </p>
+                                    <p>
+                                        <i class="fas fa-phone text-success me-2"></i>
+                                        +254 700 000 000
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Manual Translation Buttons -->
+                        <div class="mt-4 text-center">
+                            <h5>Manual Translation Test</h5>
+                            <div class="btn-group flex-wrap" role="group">
+                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('en')">🇺🇸 English</button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('fr')">🇫🇷 French</button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('sw')">🇰🇪 Swahili</button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('ar')">🇸🇦 Arabic</button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('pt')">🇵🇹 Portuguese</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function runDebugCheck() {
+    console.log('🔍 Running debug check...');
+    
+    // Check current language
+    const currentLang = window.YITPTranslate ? YITPTranslate.getCurrentLanguage() : 'Unknown';
+    document.getElementById('current-lang').textContent = currentLang;
+    
+    // Check language selector
+    const selector = document.querySelector('.yitp-language-selector');
+    document.getElementById('selector-status').textContent = selector ? '✅ Found' : '❌ Not Found';
+    document.getElementById('selector-status').className = selector ? 'text-success' : 'text-danger';
+    
+    // Check Google Translate
+    const googleElement = document.querySelector('#google_translate_element');
+    const googleCombo = document.querySelector('.goog-te-combo');
+    let translateStatus = '❌ Not Loaded';
+    
+    if (googleElement && googleCombo) {
+        translateStatus = '✅ Fully Loaded';
+    } else if (googleElement) {
+        translateStatus = '⚠️ Partially Loaded';
+    }
+    
+    document.getElementById('translate-status').textContent = translateStatus;
+    document.getElementById('translate-status').className = 
+        translateStatus.includes('✅') ? 'text-success' : 
+        translateStatus.includes('⚠️') ? 'text-warning' : 'text-danger';
+    
+    // Run global debug if available
+    if (window.debugTranslation) {
+        window.debugTranslation();
+    }
+}
+
+function testTranslation(langCode) {
+    console.log(`🧪 Testing translation to ${langCode}`);
+    
+    if (window.YITPTranslate) {
+        YITPTranslate.translateTo(langCode);
+    } else {
+        alert('Translation system not loaded. Please refresh the page.');
+    }
+}
+
+// Run initial debug check when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(runDebugCheck, 2000);
+    
+    // Auto-refresh debug info every 5 seconds
+    setInterval(runDebugCheck, 5000);
+});
+</script>
+{% endblock %}

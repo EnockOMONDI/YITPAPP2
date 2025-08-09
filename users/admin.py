@@ -534,38 +534,187 @@ class OTPVerificationAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = [
-        'user', 'email_verified', 'verification_reminder_status',
-        'payment_status', 'payment_amount', 'payment_confirmed_at', 'bio_preview'
+        'user_info', 'email_verification_status', 'location_display_admin',
+        'payment_status_badge', 'profile_completion_display', 'last_activity'
     ]
-    search_fields = ['user__username', 'user__email', 'phone_number', 'payment_reference']
+    search_fields = [
+        'user__username', 'user__email', 'user__first_name', 'user__last_name',
+        'phone_number', 'payment_reference', 'country', 'city'
+    ]
     list_filter = [
-        'email_verified', 'reminder_emails_stopped', 'verification_reminder_count',
-        'user__date_joined', 'payment_status', 'payment_method', 'payment_confirmed_at'
+        'email_verified', 'country', 'location_source', 'payment_status',
+        'payment_method', 'reminder_emails_stopped', 'user__date_joined'
     ]
-    ordering = ['user__username']
-    readonly_fields = ['payment_confirmed_at', 'verification_reminder_count', 'last_reminder_sent']
+    ordering = ['-user__date_joined']
+    readonly_fields = [
+        'payment_confirmed_at', 'verification_reminder_count', 'last_reminder_sent',
+        'profile_completion_percentage', 'created_at', 'updated_at'
+    ]
+    list_per_page = 50
+
+    actions = [
+        'verify_email_status', 'update_location_from_phone', 'confirm_payment',
+        'mark_payment_pending', 'mark_payment_expired', 'send_verification_reminder'
+    ]
 
     fieldsets = (
-        ('User Information', {
-            'fields': ('user', 'phone_number', 'bio', 'image')
+        ('👤 User Information', {
+            'fields': ('user', 'phone_number', 'bio', 'image'),
+            'classes': ('wide',)
         }),
-        ('Payment Information', {
+        ('✅ Email Verification', {
+            'fields': (
+                'email_verified', 'verification_reminder_count',
+                'last_reminder_sent', 'reminder_emails_stopped'
+            ),
+            'classes': ('wide',)
+        }),
+        ('🌍 Geographic Location', {
+            'fields': (
+                'country', 'city', 'timezone_name',
+                'ip_address', 'location_source'
+            ),
+            'classes': ('wide',)
+        }),
+        ('💳 Payment Information', {
             'fields': (
                 'payment_status', 'payment_amount', 'payment_method',
                 'payment_reference', 'payment_confirmed_at', 'payment_notes'
             ),
             'classes': ('collapse',)
         }),
+        ('📊 Profile Analytics', {
+            'fields': (
+                'profile_completion_percentage', 'total_points',
+                'current_streak', 'longest_streak', 'last_activity_date'
+            ),
+            'classes': ('collapse',)
+        }),
+        ('📅 Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
     )
 
-    actions = ['confirm_payment', 'mark_payment_pending', 'mark_payment_expired']
+    def user_info(self, obj):
+        """Display comprehensive user information with verification status"""
+        user_url = reverse('admin:auth_user_change', args=[obj.user.pk])
+        full_name = obj.user.get_full_name()
+        username = obj.user.username
+        email = obj.user.email
 
-    def bio_preview(self, obj):
-        """Display truncated bio"""
-        if obj.bio and obj.bio != 'Edit your Bio!':
-            return obj.bio[:50] + '...' if len(obj.bio) > 50 else obj.bio
-        return 'No bio set'
-    bio_preview.short_description = 'Bio Preview'
+        # Build user display with available information
+        display_name = full_name if full_name else username
+
+        # Verification badge
+        verification_badge = '✅' if obj.email_verified else '❌'
+
+        return format_html(
+            '<a href="{}" style="font-weight: bold; color: #0073aa; text-decoration: none;">{}</a> {}<br>'
+            '<small style="color: #666;">👤 {}</small><br>'
+            '<small style="color: #666;">📧 {}</small>',
+            user_url,
+            display_name,
+            verification_badge,
+            username if full_name else 'Username: ' + username,
+            email
+        )
+    user_info.short_description = 'User Information'
+    user_info.admin_order_field = 'user__username'
+
+    def email_verification_status(self, obj):
+        """Display email verification status with color coding"""
+        if obj.email_verified:
+            return format_html(
+                '<span style="background: #28a745; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">✅ Verified</span>'
+            )
+        else:
+            reminder_info = f" ({obj.verification_reminder_count} reminders)" if obj.verification_reminder_count > 0 else ""
+            return format_html(
+                '<span style="background: #dc3545; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">❌ Unverified{}</span>',
+                reminder_info
+            )
+    email_verification_status.short_description = 'Email Status'
+    email_verification_status.admin_order_field = 'email_verified'
+
+    def location_display_admin(self, obj):
+        """Display location information in admin"""
+        if obj.country:
+            location_text = obj.location_display
+            source_icon = {
+                'phone': '📱',
+                'ip': '🌐',
+                'manual': '✏️',
+                'unknown': '❓'
+            }.get(obj.location_source, '❓')
+
+            return format_html(
+                '<span style="color: #0073aa;">{} {}</span><br>'
+                '<small style="color: #666;">{} Source: {}</small>',
+                source_icon,
+                location_text,
+                source_icon,
+                obj.get_location_source_display()
+            )
+        else:
+            return format_html('<span style="color: #dc3545; font-style: italic;">Location not set</span>')
+    location_display_admin.short_description = 'Location'
+    location_display_admin.admin_order_field = 'country'
+
+    def payment_status_badge(self, obj):
+        """Display payment status with color coding"""
+        colors = {
+            'unpaid': '#6c757d',
+            'pending': '#ffc107',
+            'confirmed': '#28a745',
+            'expired': '#dc3545',
+            'partially_paid': '#17a2b8',
+            'sponsorship': '#6f42c1',
+        }
+        color = colors.get(obj.payment_status, '#6c757d')
+        return format_html(
+            '<span style="background: {}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">{}</span>',
+            color,
+            obj.get_payment_status_display()
+        )
+    payment_status_badge.short_description = 'Payment Status'
+    payment_status_badge.admin_order_field = 'payment_status'
+
+    def profile_completion_display(self, obj):
+        """Display profile completion percentage with progress bar"""
+        percentage = obj.profile_completion_percentage
+        color = '#28a745' if percentage >= 80 else '#ffc107' if percentage >= 50 else '#dc3545'
+
+        return format_html(
+            '<div style="width: 100px; background: #e9ecef; border-radius: 4px; overflow: hidden;">'
+            '<div style="width: {}%; background: {}; height: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold;">'
+            '{}%</div></div>',
+            percentage,
+            color,
+            int(percentage)
+        )
+    profile_completion_display.short_description = 'Completion'
+    profile_completion_display.admin_order_field = 'profile_completion_percentage'
+
+    def last_activity(self, obj):
+        """Display last login activity"""
+        if obj.user.last_login:
+            from django.utils import timezone
+            now = timezone.now()
+            diff = now - obj.user.last_login
+
+            if diff.days == 0:
+                return format_html('<span style="color: #28a745;">Today</span>')
+            elif diff.days == 1:
+                return format_html('<span style="color: #ffc107;">Yesterday</span>')
+            elif diff.days <= 7:
+                return format_html('<span style="color: #ffc107;">{} days ago</span>', diff.days)
+            else:
+                return format_html('<span style="color: #dc3545;">{} days ago</span>', diff.days)
+        else:
+            return format_html('<span style="color: #6c757d;">Never</span>')
+    last_activity.short_description = 'Last Login'
+    last_activity.admin_order_field = 'user__last_login'
 
     def verification_reminder_status(self, obj):
         """Display verification reminder status"""
@@ -692,7 +841,29 @@ class ProfileAdmin(admin.ModelAdmin):
 
     send_verification_reminder.short_description = "Send verification reminder to unverified users"
 
-    actions = ['confirm_payment', 'mark_payment_pending', 'mark_payment_expired', 'send_verification_reminder']
+    def verify_email_status(self, request, queryset):
+        """Admin action to manually verify email status for selected profiles"""
+        updated = queryset.update(email_verified=True)
+        self.message_user(
+            request,
+            f'Successfully verified email status for {updated} profile(s).',
+            messages.SUCCESS
+        )
+    verify_email_status.short_description = "✅ Verify email status for selected profiles"
+
+    def update_location_from_phone(self, request, queryset):
+        """Admin action to update location information from phone numbers"""
+        updated_count = 0
+        for profile in queryset:
+            if profile.detect_and_update_location():
+                updated_count += 1
+
+        self.message_user(
+            request,
+            f'Successfully updated location for {updated_count} profile(s).',
+            messages.SUCCESS
+        )
+    update_location_from_phone.short_description = "🌍 Update location from phone numbers"
 
 # Non-sponsorship models are intentionally not registered to keep admin focused on sponsorship management
 # If you need to manage these models, uncomment the lines below:
@@ -758,11 +929,38 @@ class InstructorProfileInline(admin.StackedInline):
         return readonly
 
 
+class ProfileInline(admin.StackedInline):
+    """
+    Inline for Profile information in User admin
+    """
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'Profile Information'
+    extra = 0
+
+    fieldsets = (
+        ('Email Verification', {
+            'fields': ('email_verified', 'verification_reminder_count'),
+            'classes': ('wide',)
+        }),
+        ('Location Information', {
+            'fields': ('country', 'city', 'location_source'),
+            'classes': ('wide',)
+        }),
+        ('Payment Status', {
+            'fields': ('payment_status', 'payment_method'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    readonly_fields = ['verification_reminder_count']
+
+
 class CustomUserAdmin(BaseUserAdmin):
     """
-    Enhanced User admin with instructor profile integration and visual indicators
+    Enhanced User admin with profile and instructor profile integration
     """
-    inlines = (InstructorProfileInline,)
+    inlines = (ProfileInline, InstructorProfileInline)
 
     # Override add_fieldsets to include email field in user creation form
     add_fieldsets = (
@@ -776,14 +974,38 @@ class CustomUserAdmin(BaseUserAdmin):
     )
 
     def get_list_display(self, request):
-        """Enhanced list display with instructor role indicators"""
+        """Enhanced list display with profile and instructor information"""
         base_display = list(super().get_list_display(request))
-        # Insert instructor role after username
+        # Insert profile information after username
         if 'username' in base_display:
             username_index = base_display.index('username')
-            base_display.insert(username_index + 1, 'instructor_role_display')
-            base_display.insert(username_index + 2, 'verification_status_display')
+            base_display.insert(username_index + 1, 'email_verification_display')
+            base_display.insert(username_index + 2, 'location_info_display')
+            base_display.insert(username_index + 3, 'instructor_role_display')
+            base_display.insert(username_index + 4, 'verification_status_display')
         return base_display
+
+    def email_verification_display(self, obj):
+        """Display email verification status from profile"""
+        if hasattr(obj, 'profile'):
+            if obj.profile.email_verified:
+                return format_html('<span style="color: #28a745; font-weight: bold;">✅</span>')
+            else:
+                return format_html('<span style="color: #dc3545; font-weight: bold;">❌</span>')
+        return format_html('<span style="color: #6c757d;">-</span>')
+    email_verification_display.short_description = 'Email Verified'
+    email_verification_display.admin_order_field = 'profile__email_verified'
+
+    def location_info_display(self, obj):
+        """Display location information from profile"""
+        if hasattr(obj, 'profile') and obj.profile.country:
+            return format_html(
+                '<span style="color: #0073aa; font-size: 11px;">{}</span>',
+                obj.profile.country
+            )
+        return format_html('<span style="color: #6c757d; font-size: 11px;">-</span>')
+    location_info_display.short_description = 'Location'
+    location_info_display.admin_order_field = 'profile__country'
 
     def instructor_role_display(self, obj):
         """Display instructor role with color coding"""
@@ -902,8 +1124,8 @@ class CustomUserAdmin(BaseUserAdmin):
                     )
 
     def get_queryset(self, request):
-        """Optimize queries with select_related for instructor profiles"""
-        return super().get_queryset(request).select_related('instructor_profile')
+        """Optimize queries with select_related for profiles and instructor profiles"""
+        return super().get_queryset(request).select_related('profile', 'instructor_profile')
 
 
 # Unregister the default User admin and register our custom one

@@ -148,6 +148,12 @@
                                 </ul>
                             </nav>
                         </div>
+
+                        <!-- Language Selector - Desktop -->
+                        <div class="header__language d-none d-lg-block" style="margin-right: 15px;">
+                            <!-- Language selector will be dynamically inserted here by JavaScript -->
+                        </div>
+
                         <!-- Authentication Section -->
                         <div class="header__auth d-none d-sm-block" style="margin-left: 15px; margin-right: 15px;">
                             {% if user.is_authenticated %}
@@ -228,10 +234,7 @@
                             {% endif %}
                         </div>
 
-                        <!-- Contact Button (moved after auth) -->
-                        <div class="header__btn d-none d-lg-block" style="margin-left: 10px;">
-                            <a href="{% url 'yitp:contact' %}" class="e-btn">Contact Us</a>
-                        </div>
+                        <!-- Contact Button removed to make space for language selector -->
                         <div class="sidebar__menu d-xl-none" style="margin-left: 20px;">
                             <div class="sidebar-toggle-btn" id="sidebar-toggle">
                                 <span class="line"></span>
@@ -260,6 +263,19 @@
                 <a href="{% url 'yitp:home' %}">
                     <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 75%;" alt="logo">
                 </a>
+            </div>
+
+            <!-- Mobile Language Selector -->
+            <div class="mobile__language mb-20">
+                <div class="language__selector-mobile">
+                    <h6 class="mobile__menu-title" style="color: #1a2e53; margin-bottom: 15px;">
+                        <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px;"></i>
+                        Choose Language
+                    </h6>
+                    <div id="mobile-language-options" class="mobile__language-grid">
+                        <!-- Mobile language options will be dynamically inserted here -->
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile Authentication Section -->

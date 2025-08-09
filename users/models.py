@@ -125,6 +125,42 @@ class Profile(models.Model):
         help_text="Whether the user's email has been verified via OTP"
     )
 
+    # Geographic Location Fields
+    country = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text="User's country (detected from phone number or IP)"
+    )
+    city = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text="User's city or region"
+    )
+    timezone_name = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text="User's timezone (e.g., Africa/Nairobi, America/New_York)"
+    )
+    ip_address = models.GenericIPAddressField(
+        blank=True,
+        null=True,
+        help_text="IP address used during registration for geolocation"
+    )
+    location_source = models.CharField(
+        max_length=20,
+        choices=[
+            ('phone', 'Phone Number'),
+            ('ip', 'IP Address'),
+            ('manual', 'User Provided'),
+            ('unknown', 'Unknown'),
+        ],
+        default='unknown',
+        help_text="Source of location information"
+    )
+
     # Email reminder tracking
     verification_reminder_count = models.IntegerField(
         default=0,
@@ -404,6 +440,96 @@ class Profile(models.Model):
         # Stop if 7 days have passed since registration
         time_since_registration = timezone.now() - self.user.date_joined
         return time_since_registration >= timedelta(days=7)
+
+    def detect_and_update_location(self, ip_address=None):
+        """Detect and update user location based on phone number and IP address"""
+        location_updated = False
+
+        # Detect country from phone number
+        if self.phone_number and not self.country:
+            country = self._detect_country_from_phone()
+            if country:
+                self.country = country
+                self.location_source = 'phone'
+                location_updated = True
+
+        # Detect location from IP address if provided and no location set
+        if ip_address and not self.country:
+            location_data = self._detect_location_from_ip(ip_address)
+            if location_data:
+                self.country = location_data.get('country')
+                self.city = location_data.get('city')
+                self.timezone_name = location_data.get('timezone')
+                self.ip_address = ip_address
+                self.location_source = 'ip'
+                location_updated = True
+
+        if location_updated:
+            self.save(update_fields=['country', 'city', 'timezone_name', 'ip_address', 'location_source'])
+
+        return location_updated
+
+    def _detect_country_from_phone(self):
+        """Detect country from phone number patterns"""
+        if not self.phone_number:
+            return None
+
+        phone = self.phone_number.strip()
+
+        # Kenya patterns
+        if (phone.startswith('+254') or
+            phone.startswith('254') or
+            phone.startswith('07') or
+            phone.startswith('01')):
+            return 'Kenya'
+
+        # Add more country patterns as needed
+        country_patterns = {
+            '+1': 'United States',
+            '+44': 'United Kingdom',
+            '+234': 'Nigeria',
+            '+256': 'Uganda',
+            '+255': 'Tanzania',
+            '+27': 'South Africa',
+            '+233': 'Ghana',
+            '+91': 'India',
+        }
+
+        for prefix, country in country_patterns.items():
+            if phone.startswith(prefix):
+                return country
+
+        return None
+
+    def _detect_location_from_ip(self, ip_address):
+        """Detect location from IP address (basic implementation)"""
+        # This is a basic implementation
+        # In production, you might want to use a service like GeoIP2 or ipapi
+        try:
+            # For now, return None - can be enhanced with actual IP geolocation service
+            # Example with ipapi.co (requires requests library):
+            # import requests
+            # response = requests.get(f'https://ipapi.co/{ip_address}/json/')
+            # if response.status_code == 200:
+            #     data = response.json()
+            #     return {
+            #         'country': data.get('country_name'),
+            #         'city': data.get('city'),
+            #         'timezone': data.get('timezone')
+            #     }
+            return None
+        except Exception:
+            return None
+
+    @property
+    def location_display(self):
+        """Display location in a user-friendly format"""
+        if self.city and self.country:
+            return f"{self.city}, {self.country}"
+        elif self.country:
+            return self.country
+        else:
+            return "Location not set"
 
     def record_reminder_sent(self):
         """Record that a reminder email was sent"""

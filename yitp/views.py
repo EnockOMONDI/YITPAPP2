@@ -142,7 +142,17 @@ def contact(request):
         messages.info(request, 'Welcome to our contact page! Feel free to reach out to us.')
 
     return render(request, 'yitp/contact.html')
-    
+
+
+def translation_demo(request):
+    """Demo page to showcase the YITP translation system"""
+    return render(request, 'yitp/translation_demo.html')
+
+
+def translation_test(request):
+    """Test page to debug and verify the YITP translation system"""
+    return render(request, 'yitp/translation_test.html')
+
 
 def coursedetail1(request):
     
