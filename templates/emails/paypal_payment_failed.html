@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Payment Failed - YITP</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #dc3545; color: white; padding: 20px; text-align: center; }
+        .content { background-color: #f9f9f9; padding: 30px; }
+        .footer { background-color: #1a2e53; color: white; padding: 20px; text-align: center; }
+        .btn { display: inline-block; background-color: #ff5d15; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 5px; }
+        .btn-retry { background-color: #dc3545; }
+        .error-alert { background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin: 20px 0; }
+        .amount { font-size: 20px; font-weight: bold; color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>❌ Payment Failed</h1>
+            <p>PayPal Payment Could Not Be Processed</p>
+        </div>
+        
+        <div class="content">
+            <h2>Hello {{ user.get_full_name|default:user.username }},</h2>
+            
+            <div class="error-alert">
+                <h4 style="margin-top: 0;">Payment Processing Failed</h4>
+                <p>Unfortunately, your PayPal payment for <strong>{{ course.title }}</strong> could not be processed.</p>
+            </div>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="color: #1a2e53; margin-top: 0;">Payment Details</h3>
+                <p><strong>Course:</strong> {{ course.title }}</p>
+                <p><strong>Amount:</strong> <span class="amount">${{ amount }} USD</span></p>
+                <p><strong>Payment Reference:</strong> {{ payment.reference_number }}</p>
+                {% if error_message %}
+                <p><strong>Error Details:</strong> {{ error_message }}</p>
+                {% endif %}
+            </div>
+            
+            <div style="background-color: #e7f3ff; border-left: 4px solid #2196F3; padding: 15px; margin: 20px 0;">
+                <h4 style="margin-top: 0;">🔄 What You Can Do:</h4>
+                <ol>
+                    <li><strong>Try Again:</strong> Click the retry button below to attempt payment again</li>
+                    <li><strong>Check Payment Method:</strong> Ensure your PayPal account has sufficient funds</li>
+                    <li><strong>Contact Support:</strong> If the issue persists, contact our support team</li>
+                    <li><strong>Alternative Payment:</strong> Consider using M-Pesa or bank transfer</li>
+                </ol>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ retry_url }}" class="btn btn-retry">Retry PayPal Payment</a>
+                <a href="{{ base_url }}" class="btn">Return to Dashboard</a>
+            </div>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4 style="color: #1a2e53; margin-top: 0;">Common Payment Issues:</h4>
+                <ul>
+                    <li>Insufficient funds in PayPal account</li>
+                    <li>Payment method restrictions</li>
+                    <li>Temporary PayPal service issues</li>
+                    <li>Browser or network connectivity problems</li>
+                </ul>
+                <p><strong>Need Help?</strong> Our support team is ready to assist you with your payment.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Youth Impact Training Programme (YITP)</strong></p>
+            <p>Empowering Youth Through Quality Education</p>
+            <p>Support: <a href="mailto:{{ support_email }}" style="color: #ff5d15;">{{ support_email }}</a></p>
+            <p>Website: <a href="{{ base_url }}" style="color: #ff5d15;">{{ base_url }}</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Payment Failed - YITP Admin Alert</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #dc3545; color: white; padding: 20px; text-align: center; }
+        .content { background-color: #f9f9f9; padding: 30px; }
+        .footer { background-color: #1a2e53; color: white; padding: 20px; text-align: center; }
+        .btn { display: inline-block; background-color: #ff5d15; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 0; }
+        .amount { font-size: 20px; font-weight: bold; color: #dc3545; }
+        .admin-panel { background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚠️ PayPal Payment Failed</h1>
+            <p>YITP Admin Alert</p>
+        </div>
+        
+        <div class="content">
+            <h2>PayPal Payment Failure Alert</h2>
+            
+            <div style="background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin: 20px 0;">
+                <h4 style="margin-top: 0;">❌ Payment Processing Failed</h4>
+                <p>A PayPal payment attempt has failed and requires attention.</p>
+            </div>
+            
+            <div class="admin-panel">
+                <h3 style="color: #1a2e53; margin-top: 0;">Failed Payment Details</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Student:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ user.get_full_name }} ({{ user.email }})</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Course:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ course.title }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Amount:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><span class="amount">${{ amount }} USD</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Payment Reference:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ payment.reference_number }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Failure Time:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ payment.created_at|date:"F d, Y H:i" }}</td>
+                    </tr>
+                    {% if error_message %}
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Error Details:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ error_message }}</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4 style="color: #1a2e53; margin-top: 0;">Recommended Actions:</h4>
+                <ul>
+                    <li>🔍 Review payment details in admin panel</li>
+                    <li>📧 Student has been notified of the failure</li>
+                    <li>💬 Consider reaching out to student for support</li>
+                    <li>🔄 Monitor for retry attempts</li>
+                </ul>
+            </div>
+            
+            <div style="background-color: #e7f3ff; border-left: 4px solid #2196F3; padding: 15px; margin: 20px 0;">
+                <h4 style="margin-top: 0;">Common Failure Reasons:</h4>
+                <ul>
+                    <li>Insufficient funds in PayPal account</li>
+                    <li>Payment method restrictions</li>
+                    <li>PayPal service issues</li>
+                    <li>Network connectivity problems</li>
+                    <li>Account verification issues</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ admin_url }}" class="btn">View Payment in Admin</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>YITP Admin Alert System</strong></p>
+            <p>Youth Impact Training Programme</p>
+            <p>Admin Dashboard: <a href="{{ base_url }}/admin/" style="color: #ff5d15;">{{ base_url }}/admin/</a></p>
+        </div>
+    </div>
+</body>
+</html>

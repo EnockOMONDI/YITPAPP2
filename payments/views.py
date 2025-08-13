@@ -322,42 +322,21 @@ def process_mpesa(request):
 @require_POST
 def process_paypal(request):
     """
-    Process PayPal payment verification with enhanced validation and email notifications
+    Process fully automated PayPal payment order creation and redirect to PayPal
     """
     try:
         course_id = request.POST.get('course_id')
         amount = Decimal(request.POST.get('amount'))
-        paypal_payment_id = request.POST.get('paypal_payment_id', '').strip()
-        paypal_payer_id = request.POST.get('paypal_payer_id', '').strip()
         is_installment = request.POST.get('is_installment', 'false').lower() == 'true'
         installment_sequence = int(request.POST.get('installment_sequence', 1))
 
         course = get_object_or_404(Course, id=course_id)
-
-        # Enhanced PayPal transaction ID validation
-        validation_result = _validate_paypal_payment_id(paypal_payment_id)
-        if not validation_result['valid']:
-            messages.error(request, validation_result['message'])
-            return redirect('payments:payment_methods', course_id=course.id)
-
-        # Validate PayPal payer ID if provided
-        if paypal_payer_id:
-            payer_validation = _validate_paypal_payer_id(paypal_payer_id)
-            if not payer_validation['valid']:
-                messages.error(request, payer_validation['message'])
-                return redirect('payments:payment_methods', course_id=course.id)
 
         # Check for existing enrollment
         from progress.models import Enrollment
         if Enrollment.objects.filter(student=request.user, course=course).exists():
             messages.info(request, 'You are already enrolled in this course.')
             return redirect('courses:course_detail', course_id=course.id)
-
-        # Enhanced duplicate payment prevention
-        duplicate_check = _check_duplicate_paypal_payment(request.user, course, paypal_payment_id)
-        if duplicate_check['exists']:
-            messages.info(request, duplicate_check['message'])
-            return redirect('payments:payment_status', payment_id=duplicate_check['payment'].id)
 
         # Create payment record
         payment = PaymentService.create_payment_record(
@@ -369,36 +348,29 @@ def process_paypal(request):
             installment_sequence=installment_sequence
         )
 
-        # Store PayPal details
-        payment.paypal_payment_id = paypal_payment_id
-        if paypal_payer_id:
-            payment.paypal_payer_id = paypal_payer_id
-        payment.save()
-
-        # Send email notifications
+        # Send payment initiation email to user
         from .email_service import PaymentEmailService
+        PaymentEmailService.send_paypal_payment_initiated_notification(payment)
 
-        # Send user confirmation
-        user_email_sent = PaymentEmailService.send_user_payment_submitted_notification(payment)
-        if not user_email_sent:
-            logger.warning(f"Failed to send user confirmation email for payment {payment.reference_number}")
+        # Process PayPal payment using automated service
+        result = PaymentService.process_paypal_payment(payment)
 
-        # Send admin notification
-        admin_email_sent = PaymentEmailService.send_admin_verification_notification(payment)
-        if not admin_email_sent:
-            logger.warning(f"Failed to send admin notification email for payment {payment.reference_number}")
-
-        # Set payment to pending status for manual verification
-        payment.status = 'pending'
-        payment.save()
-
-        messages.success(request, 'PayPal payment submitted successfully! Your transaction ID has been sent to our team and will be verified within 24 hours.')
-        return redirect('payments:payment_status', payment_id=payment.id)
+        if result['success']:
+            # Redirect user to PayPal for payment
+            return redirect(result['paypal_url'])
+        else:
+            # Send failure notification
+            PaymentEmailService.send_paypal_payment_failed_notification(payment, result['message'])
+            messages.error(request, f"PayPal payment setup failed: {result['message']}")
+            return redirect('payments:payment_methods', course_id=course.id)
 
     except Exception as e:
         logger.error(f"PayPal payment processing error: {str(e)}")
-        messages.error(request, 'PayPal payment processing failed. Please try again.')
+        messages.error(request, 'Payment processing failed. Please try again.')
         return redirect('payments:payment_methods', course_id=course_id)
+
+
+# Removed manual verification functions - PayPal is now fully automated
 
 
 @login_required
@@ -572,12 +544,38 @@ def paypal_webhook(request):
                     )
 
                     if confirmation_result['success']:
+                        # Send success email notifications
+                        from .email_service import PaymentEmailService
+                        PaymentEmailService.send_paypal_payment_success_notification(
+                            payment,
+                            capture_result['capture_id']
+                        )
                         logger.info(f"PayPal payment auto-confirmed: {payment.reference_number}")
                     else:
+                        # Send failure notification
+                        from .email_service import PaymentEmailService
+                        PaymentEmailService.send_paypal_payment_failed_notification(
+                            payment,
+                            f"Payment confirmation failed: {confirmation_result.get('message', 'Unknown error')}"
+                        )
                         logger.error(f"Failed to confirm PayPal payment: {payment.reference_number}")
 
                 except Payment.DoesNotExist:
                     logger.error(f"Payment not found for PayPal order: {order_id}")
+                    # Send admin alert for orphaned PayPal payment
+                    from .email_service import PaymentEmailService
+                    try:
+                        # Create a temporary payment object for notification
+                        from django.core.mail import send_mail
+                        send_mail(
+                            subject=f'Orphaned PayPal Payment Alert - Order ID: {order_id}',
+                            message=f'PayPal order {order_id} was captured but no matching payment record found in database. Amount: {capture_result.get("amount", "Unknown")}',
+                            from_email=PaymentEmailService.FROM_EMAIL,
+                            recipient_list=[PaymentEmailService.ADMIN_EMAIL],
+                            fail_silently=True
+                        )
+                    except Exception as e:
+                        logger.error(f"Failed to send orphaned payment alert: {str(e)}")
 
         elif event_type == 'PAYMENT.CAPTURE.COMPLETED':
             # Payment captured successfully

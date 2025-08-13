@@ -561,11 +561,11 @@
                 <div class="payment-instructions">
                     <h6><i class="fas fa-info-circle me-2"></i>PayPal Payment Instructions</h6>
                     <ol class="mb-0">
-                        <li>Click "Pay with PayPal" button below to open PayPal in a new window</li>
-                        <li>Complete your payment on PayPal's secure platform</li>
-                        <li>Return to this page and enter your PayPal transaction ID</li>
-                        <li>Submit the verification form for manual confirmation</li>
-                        <li>Your course access will be activated within 1-2 hours</li>
+                        <li>Click "Pay with PayPal" button below to create your payment order</li>
+                        <li>You'll be redirected to PayPal's secure platform to complete payment</li>
+                        <li>After successful payment, you'll be automatically returned to YITP</li>
+                        <li>Your course access will be activated immediately via automated webhook</li>
+                        <li>You'll receive confirmation emails with your invoice and course access details</li>
                     </ol>
                 </div>
 
@@ -591,44 +591,15 @@
                         </button>
                     </div>
 
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <strong>Secure PayPal Payment:</strong> You'll be redirected to PayPal's secure platform to complete your payment.
-                        After successful payment, you'll be automatically returned to YITP with your course access activated.
+                    <div class="alert alert-success">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        <strong>Fully Automated PayPal Payment:</strong> You'll be redirected to PayPal's secure platform to complete your payment.
+                        After successful payment, you'll be automatically returned to YITP with immediate course access activation.
+                        <br><small class="text-muted mt-1 d-block">
+                            <i class="fas fa-envelope me-1"></i>You'll receive confirmation emails with your invoice and course access details.
+                        </small>
                     </div>
                 </form>
-
-                <!-- Fallback Manual Verification (Hidden by default) -->
-                <div id="paypal-manual-verification" class="mt-4" style="display: none;">
-                    <hr>
-                    <h6 class="text-muted">Alternative: Manual Verification</h6>
-                    <p class="small text-muted">If automatic payment processing fails, you can manually verify your PayPal payment:</p>
-
-                    <form method="post" action="{% url 'payments:process_paypal' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="course_id" value="{{ course.id }}">
-                        <input type="hidden" name="amount" value="{{ course.price }}">
-                        <input type="hidden" name="is_installment" value="false">
-                        <input type="hidden" name="installment_sequence" value="1">
-                        <input type="hidden" name="manual_verification" value="true">
-
-                        <div class="mb-3">
-                            <label for="paypal_transaction_id" class="form-label">PayPal Transaction ID</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="paypal_transaction_id"
-                                   name="paypal_payment_id"
-                                   placeholder="Enter your PayPal transaction ID"
-                                   required>
-                            <div class="form-text">Enter the transaction ID from your PayPal payment confirmation</div>
-                        </div>
-
-                        <button type="submit" class="btn btn-outline-primary">
-                            <i class="fas fa-check me-2"></i>
-                            Submit for Manual Verification
-                        </button>
-                    </form>
-                </div>
             </div>
         </div>
         

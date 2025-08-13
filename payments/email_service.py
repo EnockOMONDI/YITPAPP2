@@ -559,3 +559,267 @@ YITP Team
         except Exception as e:
             logger.error(f"Failed to send renewal reminder to {profile.user.email}: {str(e)}")
             return False
+
+    @staticmethod
+    def send_paypal_payment_initiated_notification(payment):
+        """
+        Send email notification when PayPal payment is initiated
+
+        Args:
+            payment: Payment object
+
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            # Email context
+            context = {
+                'user': payment.user,
+                'course': payment.course,
+                'payment': payment,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'is_installment': payment.is_installment,
+                'installment_sequence': payment.installment_sequence,
+                'base_url': base_url,
+                'support_email': PaymentEmailService.ADMIN_EMAIL,
+            }
+
+            # Render email template
+            html_message = render_to_string('emails/paypal_payment_initiated.html', context)
+            plain_message = strip_tags(html_message)
+
+            # Send email
+            send_mail(
+                subject=f'PayPal Payment Initiated - {payment.course.title}',
+                message=plain_message,
+                html_message=html_message,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                recipient_list=[payment.user.email],
+                fail_silently=False
+            )
+
+            logger.info(f"PayPal payment initiated notification sent to {payment.user.email} for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send PayPal payment initiated notification: {str(e)}")
+            return False
+
+    @staticmethod
+    def send_paypal_payment_success_notification(payment, transaction_id=None):
+        """
+        Send email notification when PayPal payment is successful
+
+        Args:
+            payment: Payment object
+            transaction_id: PayPal transaction ID
+
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            # Generate course access URL
+            try:
+                course_url = f"{base_url}{reverse('courses:course_detail', args=[payment.course.id])}"
+            except:
+                course_url = f"{base_url}/lms/courses/courses/{payment.course.slug}/"
+
+            # Email context
+            context = {
+                'user': payment.user,
+                'course': payment.course,
+                'payment': payment,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'transaction_id': transaction_id or payment.transaction_id,
+                'is_installment': payment.is_installment,
+                'installment_sequence': payment.installment_sequence,
+                'course_url': course_url,
+                'base_url': base_url,
+                'support_email': PaymentEmailService.ADMIN_EMAIL,
+            }
+
+            # Render email template
+            html_message = render_to_string('emails/paypal_payment_success.html', context)
+            plain_message = strip_tags(html_message)
+
+            # Send email to user
+            send_mail(
+                subject=f'Payment Successful - Course Access Activated: {payment.course.title}',
+                message=plain_message,
+                html_message=html_message,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                recipient_list=[payment.user.email],
+                fail_silently=False
+            )
+
+            # Send admin notification
+            PaymentEmailService.send_paypal_admin_success_notification(payment, transaction_id)
+
+            logger.info(f"PayPal payment success notification sent to {payment.user.email} for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send PayPal payment success notification: {str(e)}")
+            return False
+
+    @staticmethod
+    def send_paypal_payment_failed_notification(payment, error_message=None):
+        """
+        Send email notification when PayPal payment fails
+
+        Args:
+            payment: Payment object
+            error_message: Error message from PayPal
+
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            # Generate retry payment URL
+            try:
+                retry_url = f"{base_url}{reverse('payments:payment_methods', args=[payment.course.id])}"
+            except:
+                retry_url = f"{base_url}/payments/methods/{payment.course.id}/"
+
+            # Email context
+            context = {
+                'user': payment.user,
+                'course': payment.course,
+                'payment': payment,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'error_message': error_message,
+                'retry_url': retry_url,
+                'base_url': base_url,
+                'support_email': PaymentEmailService.ADMIN_EMAIL,
+            }
+
+            # Render email template
+            html_message = render_to_string('emails/paypal_payment_failed.html', context)
+            plain_message = strip_tags(html_message)
+
+            # Send email
+            send_mail(
+                subject=f'PayPal Payment Failed - {payment.course.title}',
+                message=plain_message,
+                html_message=html_message,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                recipient_list=[payment.user.email],
+                fail_silently=False
+            )
+
+            # Send admin alert
+            PaymentEmailService.send_paypal_admin_failure_notification(payment, error_message)
+
+            logger.info(f"PayPal payment failed notification sent to {payment.user.email} for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send PayPal payment failed notification: {str(e)}")
+            return False
+
+    @staticmethod
+    def send_paypal_admin_success_notification(payment, transaction_id=None):
+        """
+        Send admin notification when PayPal payment is successful
+
+        Args:
+            payment: Payment object
+            transaction_id: PayPal transaction ID
+
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            # Email context
+            context = {
+                'payment': payment,
+                'user': payment.user,
+                'course': payment.course,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'transaction_id': transaction_id or payment.transaction_id,
+                'is_installment': payment.is_installment,
+                'installment_sequence': payment.installment_sequence,
+                'base_url': base_url,
+                'admin_url': f"{base_url}/admin/payments/payment/{payment.id}/change/",
+            }
+
+            # Render email template
+            html_message = render_to_string('emails/paypal_admin_success.html', context)
+            plain_message = strip_tags(html_message)
+
+            # Send email to admin
+            send_mail(
+                subject=f'PayPal Payment Received - ${payment.amount} USD - {payment.user.get_full_name()}',
+                message=plain_message,
+                html_message=html_message,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                recipient_list=[PaymentEmailService.ADMIN_EMAIL],
+                fail_silently=False
+            )
+
+            logger.info(f"PayPal admin success notification sent for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send PayPal admin success notification: {str(e)}")
+            return False
+
+    @staticmethod
+    def send_paypal_admin_failure_notification(payment, error_message=None):
+        """
+        Send admin notification when PayPal payment fails
+
+        Args:
+            payment: Payment object
+            error_message: Error message from PayPal
+
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            # Email context
+            context = {
+                'payment': payment,
+                'user': payment.user,
+                'course': payment.course,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'error_message': error_message,
+                'base_url': base_url,
+                'admin_url': f"{base_url}/admin/payments/payment/{payment.id}/change/",
+            }
+
+            # Render email template
+            html_message = render_to_string('emails/paypal_admin_failure.html', context)
+            plain_message = strip_tags(html_message)
+
+            # Send email to admin
+            send_mail(
+                subject=f'PayPal Payment Failed - ${payment.amount} USD - {payment.user.get_full_name()}',
+                message=plain_message,
+                html_message=html_message,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                recipient_list=[PaymentEmailService.ADMIN_EMAIL],
+                fail_silently=False
+            )
+
+            logger.info(f"PayPal admin failure notification sent for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send PayPal admin failure notification: {str(e)}")
+            return False

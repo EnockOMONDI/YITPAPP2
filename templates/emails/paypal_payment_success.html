@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - Course Access Activated - YITP</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #28a745; color: white; padding: 20px; text-align: center; }
+        .content { background-color: #f9f9f9; padding: 30px; }
+        .footer { background-color: #1a2e53; color: white; padding: 20px; text-align: center; }
+        .btn { display: inline-block; background-color: #ff5d15; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 10px 5px; }
+        .btn-success { background-color: #28a745; }
+        .success-alert { background-color: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 20px 0; }
+        .amount { font-size: 24px; font-weight: bold; color: #28a745; }
+        .invoice { background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #28a745; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Payment Successful!</h1>
+            <p>Course Access Activated</p>
+        </div>
+        
+        <div class="content">
+            <h2>Congratulations {{ user.get_full_name|default:user.username }}!</h2>
+            
+            <div class="success-alert">
+                <h4 style="margin-top: 0;">✅ Your PayPal payment has been successfully processed!</h4>
+                <p>Your course access has been automatically activated and you can start learning immediately.</p>
+            </div>
+            
+            <div class="invoice">
+                <h3 style="color: #1a2e53; margin-top: 0;">Payment Invoice</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Course:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ course.title }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Amount Paid:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><span class="amount">${{ amount }} USD</span></td>
+                    </tr>
+                    {% if is_installment %}
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Payment Type:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">Installment {{ installment_sequence }} of 2</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Payment Type:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">Full Payment</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Transaction ID:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ transaction_id }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Payment Reference:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ payment.reference_number }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Payment Date:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ payment.created_at|date:"F d, Y H:i" }}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            {% if is_installment and installment_sequence == 1 %}
+            <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0;">
+                <h4 style="margin-top: 0;">📅 Installment Payment Reminder</h4>
+                <p>This is your first installment payment. Your second payment of <strong>${{ amount }} USD</strong> is due within 30 days to maintain full course access.</p>
+            </div>
+            {% endif %}
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ course_url }}" class="btn btn-success">Start Learning Now</a>
+                <a href="{{ base_url }}" class="btn">Go to Dashboard</a>
+            </div>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4 style="color: #1a2e53; margin-top: 0;">What's Next?</h4>
+                <ul>
+                    <li>Access your course materials immediately</li>
+                    <li>Complete lessons at your own pace</li>
+                    <li>Participate in course discussions</li>
+                    <li>Download your certificate upon completion</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Youth Impact Training Programme (YITP)</strong></p>
+            <p>Empowering Youth Through Quality Education</p>
+            <p>Support: <a href="mailto:{{ support_email }}" style="color: #ff5d15;">{{ support_email }}</a></p>
+            <p>Website: <a href="{{ base_url }}" style="color: #ff5d15;">{{ base_url }}</a></p>
+        </div>
+    </div>
+</body>
+</html>
