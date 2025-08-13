@@ -23,4 +23,9 @@ urlpatterns = [
     # M-Pesa callbacks
     path('mpesa/callback/', views.mpesa_callback, name='mpesa_callback'),
     path('mpesa/timeout/', views.mpesa_timeout, name='mpesa_timeout'),
+
+    # PayPal callbacks and webhooks
+    path('paypal/webhook/', views.paypal_webhook, name='paypal_webhook'),
+    path('paypal/return/', views.paypal_return, name='paypal_return'),
+    path('paypal/cancel/', views.paypal_cancel, name='paypal_cancel'),
 ]

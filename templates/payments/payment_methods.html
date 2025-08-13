@@ -284,7 +284,7 @@
                         <small class="text-muted">{{ course.duration_weeks }} weeks • {{ course.category.name }}</small>
                     </div>
                     <div class="amount-display">
-                        KES {{ course.price|floatformat:0 }}
+                        ${{ course.price|floatformat:0 }} USD
                     </div>
                 </div>
             </div>
@@ -299,7 +299,7 @@
                             <label class="form-check-label" for="full_payment">
                                 <strong>Full Payment</strong><br>
                                 <small class="text-muted">Pay the complete course fee now</small><br>
-                                <span class="text-success"><strong>KES {{ course.price|floatformat:0 }}</strong></span>
+                                <span class="text-success"><strong>${{ course.price|floatformat:0 }} USD</strong></span>
                             </label>
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                             <label class="form-check-label" for="installment_payment">
                                 <strong>2-Installment Plan</strong><br>
                                 <small class="text-muted">Pay 50% now, 50% within 30 days</small><br>
-                                <span class="text-warning"><strong>KES {% widthratio course.price 2 1 %} × 2</strong></span>
+                                <span class="text-warning"><strong>${% widthratio course.price 2 1 %} USD × 2</strong></span>
                             </label>
                         </div>
                     </div>
@@ -321,11 +321,11 @@
                     <div class="installment-breakdown">
                         <div class="installment-item">
                             <span><strong>First Payment (Now):</strong></span>
-                            <span><strong>KES {% widthratio course.price 2 1 %}</strong></span>
+                            <span><strong>${% widthratio course.price 2 1 %} USD</strong></span>
                         </div>
                         <div class="installment-item">
                             <span><strong>Second Payment (Within 30 days):</strong></span>
-                            <span><strong>KES {% widthratio course.price 2 1 %}</strong></span>
+                            <span><strong>${% widthratio course.price 2 1 %} USD</strong></span>
                         </div>
                         <div class="installment-item">
                             <span><strong>Course Access:</strong></span>
@@ -452,7 +452,7 @@
                     
                     <button type="submit" class="btn btn-yitp btn-lg mt-3">
                         <i class="fas fa-mobile-alt me-2"></i>
-                        Pay KES {{ course.price|floatformat:0 }} with M-Pesa
+                        Pay ${{ course.price|floatformat:0 }} USD with M-Pesa
                     </button>
                 </form>
             </div>
@@ -510,7 +510,7 @@
                     <div class="bank-detail-item">
                         <span><strong>Amount:</strong></span>
                         <span class="text-primary">
-                            <strong>KES {{ course.price|floatformat:0 }}</strong>
+                            <strong>${{ course.price|floatformat:0 }} USD</strong>
                         </span>
                     </div>
                 </div>
@@ -518,7 +518,7 @@
                 <div class="payment-instructions">
                     <h6><i class="fas fa-info-circle me-2"></i>Payment Instructions</h6>
                     <ol class="mb-0">
-                        <li>Transfer the exact amount (KES {{ course.price|floatformat:0 }}) to the account above</li>
+                        <li>Transfer the exact amount (${{ course.price|floatformat:0 }} USD) to the account above</li>
                         <li>Use your name and course title as the reference</li>
                         <li>Send payment confirmation via WhatsApp to +254722646958</li>
                         <li>Include your transaction reference and course name</li>
@@ -569,51 +569,66 @@
                     </ol>
                 </div>
 
-                <!-- PayPal Payment Button -->
-                <div class="text-center my-4">
-                    <a href="https://www.paypal.com/ncp/payment/FUAJVJ66L978C?reference={{ course.id }}&amount={{ course.price }}"
-                       target="_blank"
-                       class="btn btn-primary btn-lg"
-                       style="background-color: #0070ba; border-color: #0070ba;">
-                        <i class="fab fa-paypal me-2"></i>
-                        Pay KES {{ course.price|floatformat:0 }} with PayPal
-                    </a>
-                </div>
-
-                <!-- PayPal Verification Form -->
-                <form method="post" action="{% url 'payments:process_paypal' %}">
+                <!-- PayPal Payment Form -->
+                <form method="post" action="{% url 'payments:process_paypal' %}" id="paypal-payment-form">
                     {% csrf_token %}
                     <input type="hidden" name="course_id" value="{{ course.id }}">
                     <input type="hidden" name="amount" value="{{ course.price }}">
                     <input type="hidden" name="is_installment" value="false">
                     <input type="hidden" name="installment_sequence" value="1">
 
-                    <div class="mb-3">
-                        <label for="paypal_transaction_id" class="form-label">PayPal Transaction ID</label>
-                        <input type="text"
-                               class="form-control"
-                               id="paypal_transaction_id"
-                               name="paypal_payment_id"
-                               placeholder="Enter your PayPal transaction ID"
-                               required>
-                        <div class="form-text">Enter the transaction ID from your PayPal payment confirmation</div>
+                    <!-- Dynamic PayPal Payment Button -->
+                    <div class="text-center my-4">
+                        <button type="submit"
+                                class="btn btn-primary btn-lg"
+                                style="background-color: #0070ba; border-color: #0070ba;"
+                                id="paypal-payment-btn">
+                            <i class="fab fa-paypal me-2"></i>
+                            <span class="btn-text">Pay ${{ course.price|floatformat:0 }} USD with PayPal</span>
+                            <div class="spinner-border spinner-border-sm ms-2 d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="paypal_payer_id" class="form-label">PayPal Payer ID (Optional)</label>
-                        <input type="text"
-                               class="form-control"
-                               id="paypal_payer_id"
-                               name="paypal_payer_id"
-                               placeholder="Enter your PayPal Payer ID">
-                        <div class="form-text">Optional: Your PayPal Payer ID for additional verification</div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Secure PayPal Payment:</strong> You'll be redirected to PayPal's secure platform to complete your payment.
+                        After successful payment, you'll be automatically returned to YITP with your course access activated.
                     </div>
-
-                    <button type="submit" class="btn btn-yitp btn-lg mt-3">
-                        <i class="fas fa-check me-2"></i>
-                        Verify PayPal Payment
-                    </button>
                 </form>
+
+                <!-- Fallback Manual Verification (Hidden by default) -->
+                <div id="paypal-manual-verification" class="mt-4" style="display: none;">
+                    <hr>
+                    <h6 class="text-muted">Alternative: Manual Verification</h6>
+                    <p class="small text-muted">If automatic payment processing fails, you can manually verify your PayPal payment:</p>
+
+                    <form method="post" action="{% url 'payments:process_paypal' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="course_id" value="{{ course.id }}">
+                        <input type="hidden" name="amount" value="{{ course.price }}">
+                        <input type="hidden" name="is_installment" value="false">
+                        <input type="hidden" name="installment_sequence" value="1">
+                        <input type="hidden" name="manual_verification" value="true">
+
+                        <div class="mb-3">
+                            <label for="paypal_transaction_id" class="form-label">PayPal Transaction ID</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="paypal_transaction_id"
+                                   name="paypal_payment_id"
+                                   placeholder="Enter your PayPal transaction ID"
+                                   required>
+                            <div class="form-text">Enter the transaction ID from your PayPal payment confirmation</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-check me-2"></i>
+                            Submit for Manual Verification
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
         
@@ -722,7 +737,7 @@ function updatePaymentAmounts() {
     const mpesaInstallment = document.querySelector('#mpesa-form input[name="is_installment"]');
 
     if (mpesaButton) {
-        mpesaButton.innerHTML = `<i class="fas fa-mobile-alt me-2"></i>Pay KES ${amountFormatted} with M-Pesa${isInstallment ? ' (First Installment)' : ''}`;
+        mpesaButton.innerHTML = `<i class="fas fa-mobile-alt me-2"></i>Pay $${amountFormatted} USD with M-Pesa${isInstallment ? ' (First Installment)' : ''}`;
     }
     if (mpesaAmount) {
         mpesaAmount.value = amount;
@@ -747,14 +762,12 @@ function updatePaymentAmounts() {
     }
 
     // Update PayPal form
-    const paypalButton = document.querySelector('#paypal-form .btn-primary');
+    const paypalButton = document.querySelector('#paypal-payment-btn .btn-text');
     const paypalAmount = document.querySelector('#paypal-form input[name="amount"]');
     const paypalInstallment = document.querySelector('#paypal-form input[name="is_installment"]');
 
     if (paypalButton) {
-        const href = paypalButton.getAttribute('href').split('&amount=')[0];
-        paypalButton.setAttribute('href', `${href}&amount=${amount}`);
-        paypalButton.innerHTML = `<i class="fab fa-paypal me-2"></i>Pay KES ${amountFormatted} with PayPal${isInstallment ? ' (First Installment)' : ''}`;
+        paypalButton.innerHTML = `Pay $${amountFormatted} USD with PayPal${isInstallment ? ' (First Installment)' : ''}`;
     }
     if (paypalAmount) {
         paypalAmount.value = amount;
@@ -795,5 +808,32 @@ document.getElementById('phone_number').addEventListener('input', function(e) {
     
     e.target.value = value;
 });
+
+// Handle PayPal payment form submission
+const paypalForm = document.getElementById('paypal-payment-form');
+const paypalBtn = document.getElementById('paypal-payment-btn');
+
+if (paypalForm && paypalBtn) {
+    paypalForm.addEventListener('submit', function(e) {
+        // Show loading state
+        const spinner = paypalBtn.querySelector('.spinner-border');
+        const btnText = paypalBtn.querySelector('.btn-text');
+
+        if (spinner && btnText) {
+            spinner.classList.remove('d-none');
+            btnText.textContent = 'Creating PayPal Payment...';
+            paypalBtn.disabled = true;
+        }
+    });
+}
+
+// Show manual verification option if needed
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('paypal_error') === 'true') {
+    const manualVerification = document.getElementById('paypal-manual-verification');
+    if (manualVerification) {
+        manualVerification.style.display = 'block';
+    }
+}
 </script>
 {% endblock %}

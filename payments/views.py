@@ -522,15 +522,145 @@ def mpesa_timeout(request):
     try:
         timeout_data = json.loads(request.body)
         logger.info(f"M-Pesa timeout received: {timeout_data}")
-        
+
         return JsonResponse({
             'ResultCode': 0,
             'ResultDesc': 'Success'
         })
-        
+
     except Exception as e:
         logger.error(f"M-Pesa timeout processing error: {str(e)}")
         return JsonResponse({
             'ResultCode': 1,
             'ResultDesc': 'Failed'
         })
+
+
+@csrf_exempt
+@require_POST
+def paypal_webhook(request):
+    """
+    Handle PayPal webhook notifications for automated payment verification
+    """
+    try:
+        from .paypal_service import PayPalService
+
+        # Verify webhook signature
+        if not PayPalService.verify_webhook_signature(request.body, request.headers):
+            logger.warning("PayPal webhook signature verification failed")
+            return JsonResponse({'status': 'error', 'message': 'Invalid signature'}, status=400)
+
+        webhook_data = json.loads(request.body)
+        logger.info(f"PayPal webhook received: {webhook_data.get('event_type', 'unknown')}")
+
+        event_type = webhook_data.get('event_type')
+
+        if event_type == 'CHECKOUT.ORDER.APPROVED':
+            # Payment approved, capture it
+            order_id = webhook_data['resource']['id']
+            capture_result = PayPalService.capture_payment_order(order_id)
+
+            if capture_result['success']:
+                # Find payment by PayPal order ID
+                try:
+                    payment = Payment.objects.get(paypal_payment_id=order_id)
+
+                    # Confirm payment using existing service
+                    confirmation_result = PaymentService.confirm_payment(
+                        payment.reference_number,
+                        transaction_id=capture_result['capture_id']
+                    )
+
+                    if confirmation_result['success']:
+                        logger.info(f"PayPal payment auto-confirmed: {payment.reference_number}")
+                    else:
+                        logger.error(f"Failed to confirm PayPal payment: {payment.reference_number}")
+
+                except Payment.DoesNotExist:
+                    logger.error(f"Payment not found for PayPal order: {order_id}")
+
+        elif event_type == 'PAYMENT.CAPTURE.COMPLETED':
+            # Payment captured successfully
+            capture_id = webhook_data['resource']['id']
+            logger.info(f"PayPal payment captured: {capture_id}")
+
+        return JsonResponse({'status': 'success'})
+
+    except Exception as e:
+        logger.error(f"PayPal webhook processing error: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+@login_required
+def paypal_return(request):
+    """
+    Handle PayPal payment return (success)
+    """
+    try:
+        payment_id = request.GET.get('payment_id')
+        token = request.GET.get('token')  # PayPal order ID
+        payer_id = request.GET.get('PayerID')
+
+        if not payment_id or not token:
+            messages.error(request, 'Invalid PayPal return parameters.')
+            return redirect('courses:course_list')
+
+        # Get payment object
+        payment = get_object_or_404(Payment, id=payment_id, user=request.user)
+
+        # Capture the payment
+        from .paypal_service import PayPalService
+        capture_result = PayPalService.capture_payment_order(token)
+
+        if capture_result['success']:
+            # Update payment with payer ID and capture ID
+            payment.paypal_payer_id = payer_id
+            payment.transaction_id = capture_result['capture_id']
+            payment.save()
+
+            # Confirm payment
+            confirmation_result = PaymentService.confirm_payment(
+                payment.reference_number,
+                transaction_id=capture_result['capture_id']
+            )
+
+            if confirmation_result['success']:
+                messages.success(request, 'PayPal payment completed successfully! Your course access has been activated.')
+                return redirect('payments:payment_status', payment_id=payment.id)
+            else:
+                messages.error(request, 'Payment captured but confirmation failed. Please contact support.')
+                return redirect('payments:payment_status', payment_id=payment.id)
+        else:
+            messages.error(request, f'PayPal payment capture failed: {capture_result["message"]}')
+            return redirect('payments:payment_status', payment_id=payment.id)
+
+    except Exception as e:
+        logger.error(f"PayPal return processing error: {str(e)}")
+        messages.error(request, 'Payment processing error. Please contact support.')
+        return redirect('courses:course_list')
+
+
+@login_required
+def paypal_cancel(request):
+    """
+    Handle PayPal payment cancellation
+    """
+    try:
+        payment_id = request.GET.get('payment_id')
+
+        if payment_id:
+            payment = get_object_or_404(Payment, id=payment_id, user=request.user)
+            payment.status = 'failed'
+            payment.notes = 'Payment cancelled by user on PayPal'
+            payment.save()
+
+            messages.warning(request, 'PayPal payment was cancelled. You can try again or use a different payment method.')
+            return redirect('payments:payment_methods', course_id=payment.course.id)
+        else:
+            messages.info(request, 'Payment was cancelled.')
+            return redirect('courses:course_list')
+
+    except Exception as e:
+        logger.error(f"PayPal cancel processing error: {str(e)}")
+        messages.info(request, 'Payment was cancelled.')
+        return redirect('courses:course_list')

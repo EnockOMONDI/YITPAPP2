@@ -124,13 +124,13 @@
                                         <button type="submit" class="btn btn-primary btn-lg">
                                             <i class="fas fa-user-plus me-2"></i>
                                             {% if user.profile.has_confirmed_payment %}
-                                                Enroll Now - KES {{ course.price }}
+                                                Enroll Now - ${{ course.price }} USD
                                             {% elif user.profile.has_partial_payment %}
                                                 Enroll Now - Partial Payment Active
                                             {% elif user.profile.has_sponsorship_access %}
                                                 Enroll Now - Sponsored Access
                                             {% else %}
-                                                Enroll Now - KES {{ course.price }}
+                                                Enroll Now - ${{ course.price }} USD
                                             {% endif %}
                                         </button>
                                     </form>
@@ -139,7 +139,7 @@
                                     <div class="d-flex gap-2 flex-wrap">
                                         {% if course and course.id %}
                                             <a href="{% url 'payments:payment_methods' course.id %}" class="btn btn-warning btn-lg">
-                                                <i class="fas fa-credit-card me-2"></i>Pay Now - KES {{ course.price }}
+                                                <i class="fas fa-credit-card me-2"></i>Pay Now - ${{ course.price }} USD
                                             </a>
                                             <a href="{% url 'payments:payment_methods' course.id %}?installment=true" class="btn btn-outline-primary btn-lg">
                                                 <i class="fas fa-calendar-alt me-2"></i>Pay in Installments
@@ -204,7 +204,7 @@
                             </h6>
                             <p class="mb-2">
                                 This course requires payment verification before enrollment.
-                                <strong>Course Fee: KES {{ course.price }}</strong>
+                                <strong>Course Fee: ${{ course.price }} USD</strong>
                             </p>
                             <p class="mb-2">
                                 <strong>Payment Status:</strong> {{ user.profile.payment_status_display }}
@@ -214,8 +214,8 @@
                             <div class="mt-3">
                                 <h6>💳 Payment Options Available:</h6>
                                 <ul class="mb-2">
-                                    <li><strong>Full Payment:</strong> Pay KES {{ course.price }} once</li>
-                                    <li><strong>Installment Plan:</strong> Pay 50% now (KES {{ course.price|floatformat:0|mul:0.5 }}), 50% later</li>
+                                    <li><strong>Full Payment:</strong> Pay ${{ course.price }} USD once</li>
+                                    <li><strong>Installment Plan:</strong> Pay 50% now (${{ course.price|floatformat:0|mul:0.5 }} USD), 50% later</li>
                                     <li><strong>Sponsorship:</strong> Apply for sponsored access</li>
                                 </ul>
                             </div>

@@ -708,7 +708,7 @@ MPESA_TIMEOUT_URL = f'{SITE_URL}/payments/mpesa/timeout/'
 
 # Payment Configuration
 PAYMENT_TIMEOUT_HOURS = 24  # Payment expires after 24 hours
-PAYMENT_CURRENCY = 'KES'
+PAYMENT_CURRENCY = 'USD'  # Standardized to USD across platform
 PAYMENT_PROCESSING_FEE_PERCENTAGE = 0.00  # No processing fee for now
 
 # Bank Transfer Details (for manual payments)
@@ -768,6 +768,41 @@ PAYMENT_SECURITY = {
     'admin_approval_required_above': 50000,  # KES amount requiring admin approval
     'auto_refund_timeout_hours': 72,
 }
+
+# =============================================================================
+# PAYPAL API CONFIGURATION
+# =============================================================================
+
+# PayPal API Credentials
+PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID', 'Ac1haMUNDdVE8SMjwrY_lk01hnQegPaoB7RYEmMBuIabtdo5o8FG1Lo439o89gRAYd0NR9-AOB1bEdAy')
+PAYPAL_CLIENT_SECRET = os.environ.get('PAYPAL_CLIENT_SECRET', 'EOqX8HcFbc_YdNQF0r1-aKXGRABvfTmGnIoNLj_zmPHXyww52ZHcq7rTYrXBFdvdnA9E1hu2a5MykhTq')
+
+# PayPal Environment Configuration
+PAYPAL_MODE = os.environ.get('PAYPAL_MODE', 'sandbox')  # 'sandbox' or 'live'
+PAYPAL_WEBHOOK_ID = os.environ.get('PAYPAL_WEBHOOK_ID', '')
+
+# PayPal API URLs
+if PAYPAL_MODE == 'live':
+    PAYPAL_BASE_URL = 'https://api.paypal.com'
+    PAYPAL_WEB_URL = 'https://www.paypal.com'
+else:
+    PAYPAL_BASE_URL = 'https://api.sandbox.paypal.com'
+    PAYPAL_WEB_URL = 'https://www.sandbox.paypal.com'
+
+# PayPal API Endpoints
+PAYPAL_TOKEN_URL = f'{PAYPAL_BASE_URL}/v1/oauth2/token'
+PAYPAL_PAYMENTS_URL = f'{PAYPAL_BASE_URL}/v2/checkout/orders'
+PAYPAL_WEBHOOK_URL = f'{SITE_URL}/payments/paypal/webhook/'
+
+# PayPal Payment Configuration
+PAYPAL_CURRENCY = 'USD'  # PayPal requires USD for international payments
+PAYPAL_BRAND_NAME = 'Youth Impact Training Programme (YITP)'
+PAYPAL_RETURN_URL = f'{SITE_URL}/payments/paypal/return/'
+PAYPAL_CANCEL_URL = f'{SITE_URL}/payments/paypal/cancel/'
+
+# PayPal Configuration Note:
+# All course prices are stored in USD and no currency conversion is needed
+# PayPal processes payments directly in USD
 
 # =============================================================================
 # CERTIFICATE GENERATION CONFIGURATION

@@ -151,26 +151,37 @@ class PaymentService:
             dict: {'success': bool, 'message': str, 'paypal_url': str or None}
         """
         try:
-            # Generate PayPal payment URL based on existing infrastructure
-            paypal_url = PaymentService._generate_paypal_url(payment)
+            from .paypal_service import PayPalService
 
-            # Update payment with PayPal details
-            if paypal_payment_id:
-                payment.paypal_payment_id = paypal_payment_id
-            if paypal_payer_id:
-                payment.paypal_payer_id = paypal_payer_id
+            # Create PayPal payment order using SDK
+            order_result = PayPalService.create_payment_order(payment)
 
-            payment.status = PaymentService.PENDING
-            payment.save()
+            if order_result['success']:
+                # Update payment with PayPal details
+                payment.paypal_payment_id = order_result['order_id']
+                if paypal_payer_id:
+                    payment.paypal_payer_id = paypal_payer_id
 
-            logger.info(f"PayPal payment initiated: {payment.reference_number}")
+                payment.status = PaymentService.PENDING
+                payment.save()
 
-            return {
-                'success': True,
-                'message': 'PayPal payment initiated. Please complete payment on PayPal.',
-                'paypal_url': paypal_url,
-                'payment_id': payment.reference_number
-            }
+                logger.info(f"PayPal payment order created: {payment.reference_number} -> {order_result['order_id']}")
+
+                return {
+                    'success': True,
+                    'message': 'PayPal payment order created. Please complete payment on PayPal.',
+                    'paypal_url': order_result['approval_url'],
+                    'order_id': order_result['order_id'],
+                    'payment_id': payment.reference_number
+                }
+            else:
+                logger.error(f"PayPal order creation failed for payment {payment.reference_number}: {order_result['message']}")
+                return {
+                    'success': False,
+                    'message': f"PayPal payment failed: {order_result['message']}",
+                    'paypal_url': None,
+                    'payment_id': payment.reference_number
+                }
 
         except Exception as e:
             logger.error(f"PayPal payment processing failed: {str(e)}")

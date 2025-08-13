@@ -41,8 +41,9 @@ crispy-bootstrap5==2024.10
 # Security
 django-cors-headers==4.6.0
 
-# HTTP Requests (for M-Pesa API)
+# HTTP Requests (for M-Pesa and PayPal APIs)
 requests==2.32.3
+paypalrestsdk==1.13.3
 
 # Timezone Support
 pytz==2022.7.1

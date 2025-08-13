@@ -18,13 +18,21 @@
                         <div class="alert alert-info mb-4">
                             <h5><i class="fas fa-info-circle me-2"></i>Debug Information</h5>
                             <div id="debug-info">
-                                <p><strong>Current Language:</strong> <span id="current-lang">Loading...</span></p>
-                                <p><strong>Language Selector:</strong> <span id="selector-status">Checking...</span></p>
-                                <p><strong>Google Translate:</strong> <span id="translate-status">Checking...</span></p>
+                                <p><strong>Translate Button:</strong> <span id="button-status">Checking...</span></p>
+                                <p><strong>Google Translate Widget:</strong> <span id="widget-status">Checking...</span></p>
+                                <p><strong>Widget Visible:</strong> <span id="visibility-status">Checking...</span></p>
                             </div>
-                            <button class="btn btn-sm btn-outline-primary" onclick="runDebugCheck()">
-                                <i class="fas fa-refresh me-1"></i>Refresh Debug Info
-                            </button>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-sm btn-outline-primary" onclick="runDebugCheck()">
+                                    <i class="fas fa-refresh me-1"></i>Refresh Debug
+                                </button>
+                                <button class="btn btn-sm btn-outline-success" onclick="toggleGoogleTranslate()">
+                                    <i class="fas fa-globe me-1"></i>Toggle Widget
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="debugYITPTranslation()">
+                                    <i class="fas fa-bug me-1"></i>Full Debug
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Test Content -->
@@ -75,16 +83,13 @@
                             </div>
                         </div>
 
-                        <!-- Manual Translation Buttons -->
+                        <!-- Manual Translation Test -->
                         <div class="mt-4 text-center">
-                            <h5>Manual Translation Test</h5>
-                            <div class="btn-group flex-wrap" role="group">
-                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('en')">🇺🇸 English</button>
-                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('fr')">🇫🇷 French</button>
-                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('sw')">🇰🇪 Swahili</button>
-                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('ar')">🇸🇦 Arabic</button>
-                                <button class="btn btn-outline-primary btn-sm" onclick="testTranslation('pt')">🇵🇹 Portuguese</button>
-                            </div>
+                            <h5>Translation Widget Test</h5>
+                            <p class="text-muted">Click the button below to show/hide the Google Translate widget, then use it to translate this page.</p>
+                            <button class="btn btn-primary" onclick="toggleGoogleTranslate()" style="background: #ff5d15; border-color: #ff5d15;">
+                                <i class="fas fa-globe me-2"></i>Toggle Google Translate Widget
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -96,52 +101,43 @@
 <script>
 function runDebugCheck() {
     console.log('🔍 Running debug check...');
-    
-    // Check current language
-    const currentLang = window.YITPTranslate ? YITPTranslate.getCurrentLanguage() : 'Unknown';
-    document.getElementById('current-lang').textContent = currentLang;
-    
-    // Check language selector
-    const selector = document.querySelector('.yitp-language-selector');
-    document.getElementById('selector-status').textContent = selector ? '✅ Found' : '❌ Not Found';
-    document.getElementById('selector-status').className = selector ? 'text-success' : 'text-danger';
-    
-    // Check Google Translate
-    const googleElement = document.querySelector('#google_translate_element');
-    const googleCombo = document.querySelector('.goog-te-combo');
-    let translateStatus = '❌ Not Loaded';
-    
-    if (googleElement && googleCombo) {
-        translateStatus = '✅ Fully Loaded';
-    } else if (googleElement) {
-        translateStatus = '⚠️ Partially Loaded';
-    }
-    
-    document.getElementById('translate-status').textContent = translateStatus;
-    document.getElementById('translate-status').className = 
-        translateStatus.includes('✅') ? 'text-success' : 
-        translateStatus.includes('⚠️') ? 'text-warning' : 'text-danger';
-    
-    // Run global debug if available
-    if (window.debugTranslation) {
-        window.debugTranslation();
-    }
-}
 
-function testTranslation(langCode) {
-    console.log(`🧪 Testing translation to ${langCode}`);
-    
-    if (window.YITPTranslate) {
-        YITPTranslate.translateTo(langCode);
-    } else {
-        alert('Translation system not loaded. Please refresh the page.');
+    // Check translate button
+    const button = document.querySelector('.yitp-translate-btn');
+    document.getElementById('button-status').textContent = button ? '✅ Found' : '❌ Not Found';
+    document.getElementById('button-status').className = button ? 'text-success' : 'text-danger';
+
+    // Check Google Translate widget
+    const widget = document.querySelector('#google_translate_element');
+    const combo = document.querySelector('.goog-te-combo');
+    let widgetStatus = '❌ Not Loaded';
+
+    if (widget && combo) {
+        widgetStatus = '✅ Fully Loaded';
+    } else if (widget) {
+        widgetStatus = '⚠️ Partially Loaded';
+    }
+
+    document.getElementById('widget-status').textContent = widgetStatus;
+    document.getElementById('widget-status').className =
+        widgetStatus.includes('✅') ? 'text-success' :
+        widgetStatus.includes('⚠️') ? 'text-warning' : 'text-danger';
+
+    // Check widget visibility
+    const isVisible = widget && widget.style.display !== 'none';
+    document.getElementById('visibility-status').textContent = isVisible ? '✅ Visible' : '❌ Hidden';
+    document.getElementById('visibility-status').className = isVisible ? 'text-success' : 'text-danger';
+
+    // Run global debug if available
+    if (window.debugYITPTranslation) {
+        window.debugYITPTranslation();
     }
 }
 
 // Run initial debug check when page loads
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(runDebugCheck, 2000);
-    
+
     // Auto-refresh debug info every 5 seconds
     setInterval(runDebugCheck, 5000);
 });

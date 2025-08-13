@@ -78,7 +78,7 @@ def generate_magic_link_url(user, purpose='instructor_welcome', expiry_days=10):
     magic_token = generate_magic_link_token(user, purpose, expiry_days)
     
     # Build the magic link URL
-    base_url = getattr(settings, 'SITE_URL', 'https://yitp-lms.onrender.com')
+    base_url = getattr(settings, 'SITE_URL', 'https://www.youthimpactglobal.com')
     magic_link_path = reverse('users:magic_login', kwargs={'token': magic_token.token})
     magic_link_url = f"{base_url}{magic_link_path}"
     

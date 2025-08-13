@@ -845,7 +845,7 @@ def send_course_creation_notification(instructor, course):
         'difficulty_level': course.get_difficulty_level_display(),
         'estimated_duration': course.estimated_duration,
         'category': course.category.name if course.category else 'Uncategorized',
-        'admin_url': f"https://yitp-lms.onrender.com/admin/courses/course/{course.id}/change/",
+        'admin_url': f"https://www.youthimpactglobal.com/admin/courses/course/{course.id}/change/",
         'site_name': 'Youth Impact Training Programme',
         'admin_email': settings.ADMIN_EMAIL
     }

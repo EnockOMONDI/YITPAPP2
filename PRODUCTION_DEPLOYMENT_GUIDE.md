@@ -59,7 +59,7 @@ MPESA_PASSKEY: bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919
 
 #### **Site Configuration:**
 ```yaml
-SITE_URL: https://yitp-lms.onrender.com
+SITE_URL: https://www.youthimpactglobal.com
 ADMIN_EMAIL: youthimpactglobal3@gmail.com
 ```
 
@@ -162,10 +162,10 @@ All environment variables are pre-configured in render.yaml and will be automati
 8. **Database Operations**
 
 ### **Expected URLs:**
-- **Homepage:** https://yitp-lms.onrender.com/
-- **LMS Dashboard:** https://yitp-lms.onrender.com/lms/courses/
-- **Admin Panel:** https://yitp-lms.onrender.com/admin/
-- **Payment Methods:** https://yitp-lms.onrender.com/payments/methods/{course_id}/
+- **Homepage:** https://www.youthimpactglobal.com/
+- **LMS Dashboard:** https://www.youthimpactglobal.com/lms/courses/
+- **Admin Panel:** https://www.youthimpactglobal.com/admin/
+- **Payment Methods:** https://www.youthimpactglobal.com/payments/methods/{course_id}/
 
 ---
 

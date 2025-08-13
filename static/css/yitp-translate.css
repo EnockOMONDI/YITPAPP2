@@ -3,14 +3,14 @@
  * Maintains YITP branding while providing clean translation UI
  */
 
-/* Language Selector Styles */
-.yitp-language-selector {
+/* Simplified Language Button Styles */
+.header__language {
+    display: flex;
+    align-items: center;
     margin-left: 10px;
-    position: relative;
-    z-index: 1000;
 }
 
-.yitp-language-selector .dropdown-toggle {
+.yitp-translate-btn {
     color: #1a2e53 !important;
     font-weight: 500;
     padding: 8px 12px;
@@ -24,18 +24,14 @@
     cursor: pointer;
 }
 
-.yitp-language-selector .dropdown-toggle:hover {
-    background-color: rgba(255, 93, 21, 0.1);
+.yitp-translate-btn:hover {
+    background-color: rgba(255, 93, 21, 0.1) !important;
     color: #ff5d15 !important;
 }
 
-.yitp-language-selector .dropdown-toggle:focus {
+.yitp-translate-btn:focus {
     box-shadow: 0 0 0 2px rgba(255, 93, 21, 0.25);
     outline: none;
-}
-
-.yitp-language-selector .dropdown-toggle::after {
-    display: none; /* Hide default Bootstrap arrow */
 }
 
 /* Language Dropdown Menu */
@@ -177,34 +173,40 @@
     }
 }
 
-/* Google Translate Widget Customization */
+/* Google Translate Widget Styling */
+#google_translate_element {
+    border: 1px solid rgba(26, 46, 83, 0.1);
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#google_translate_element .goog-te-gadget {
+    font-family: inherit;
+    font-size: 14px;
+}
+
+#google_translate_element .goog-te-gadget-simple {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+/* Hide Google Translate banner */
 .goog-te-banner-frame {
     display: none !important;
 }
 
-.goog-te-menu-value {
-    padding: 3px !important;
-}
-
-.goog-te-gadget {
-    display: none !important;
-}
-
+/* Style the language selector in the widget */
 .goog-te-combo {
-    display: none !important;
-}
-
-#google_translate_element {
-    display: none !important;
-}
-
-/* Hide Google Translate branding */
-.goog-logo-link {
-    display: none !important;
-}
-
-.goog-te-gadget-icon {
-    display: none !important;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 /* Ensure translated content maintains YITP styling */

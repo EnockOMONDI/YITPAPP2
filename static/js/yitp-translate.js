@@ -1,7 +1,11 @@
 /**
- * YITP Google Translate Integration
+ * YITP Google Translate Integration - Simplified & Reliable
  * Provides seamless translation functionality for the entire YITP platform
  */
+
+// Global variables for Google Translate
+let googleTranslateLoaded = false;
+let googleTranslateInitialized = false;
 
 // YITP Translation Configuration
 const YITPTranslate = {
@@ -18,12 +22,20 @@ const YITPTranslate = {
 
     // Current language state
     currentLanguage: 'en',
-    
+
     // Google Translate element
     googleTranslateElement: null,
 
+    // Initialization flag
+    initialized: false,
+
     // Initialize translation system
     init: function() {
+        if (this.initialized) {
+            console.log('🔄 Translation system already initialized');
+            return;
+        }
+
         console.log('🌐 Initializing YITP Translation System...');
         try {
             this.loadSavedLanguage();
@@ -33,11 +45,12 @@ const YITPTranslate = {
             console.log('✅ Language selector created');
 
             this.initializeGoogleTranslate();
-            console.log('✅ Google Translate initialized');
+            console.log('✅ Google Translate initialization started');
 
             this.bindEvents();
             console.log('✅ Events bound');
 
+            this.initialized = true;
             console.log('🎉 YITP Translation System Initialized Successfully');
         } catch (error) {
             console.error('❌ Error initializing translation system:', error);
@@ -142,7 +155,7 @@ const YITPTranslate = {
         `).join('');
     },
 
-    // Initialize Google Translate
+    // Initialize Google Translate - Simplified approach
     initializeGoogleTranslate: function() {
         console.log('🔄 Initializing Google Translate...');
 
@@ -156,107 +169,126 @@ const YITPTranslate = {
             console.log('📦 Google Translate container created');
         }
 
-        // Set global callback first
-        const self = this;
-        window.googleTranslateElementInit = function() {
+        // Simple global callback
+        window.googleTranslateElementInit = () => {
             console.log('🚀 Google Translate callback triggered');
             try {
-                self.googleTranslateElement = new google.translate.TranslateElement({
-                    pageLanguage: 'en',
-                    includedLanguages: Object.keys(self.languages).join(','),
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                    autoDisplay: false,
-                    multilanguagePage: true
-                }, 'google_translate_element');
+                if (window.google && window.google.translate) {
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'en',
+                        includedLanguages: 'en,fr,sw,ar,pt,ha,am',
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                        autoDisplay: false
+                    }, 'google_translate_element');
 
-                console.log('✅ Google Translate element created');
+                    googleTranslateInitialized = true;
+                    console.log('✅ Google Translate element created successfully');
 
-                // Apply saved language after initialization
-                setTimeout(() => {
-                    if (self.currentLanguage !== 'en') {
-                        console.log('🔄 Applying saved language:', self.currentLanguage);
-                        self.translateTo(self.currentLanguage);
-                    }
-                }, 2000);
+                    // Apply saved language after a delay
+                    setTimeout(() => {
+                        if (YITPTranslate.currentLanguage !== 'en') {
+                            YITPTranslate.applyTranslation(YITPTranslate.currentLanguage);
+                        }
+                    }, 1500);
+                }
             } catch (error) {
                 console.error('❌ Error creating Google Translate element:', error);
             }
         };
 
-        // Load Google Translate script
-        if (!window.google || !window.google.translate) {
+        // Load Google Translate script if not already loaded
+        if (!googleTranslateLoaded) {
             console.log('📥 Loading Google Translate script...');
             const script = document.createElement('script');
             script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
             script.async = true;
-            script.onerror = function() {
-                console.error('❌ Failed to load Google Translate script');
-            };
-            script.onload = function() {
+            script.onload = () => {
+                googleTranslateLoaded = true;
                 console.log('✅ Google Translate script loaded');
             };
+            script.onerror = () => {
+                console.error('❌ Failed to load Google Translate script');
+            };
             document.head.appendChild(script);
-        } else {
-            console.log('♻️ Google Translate already loaded, initializing...');
+        } else if (window.google && window.google.translate) {
             window.googleTranslateElementInit();
         }
     },
 
     // Translate to specific language
     translateTo: function(langCode) {
-        if (!this.languages[langCode]) return;
+        if (!this.languages[langCode]) {
+            console.warn('❌ Unsupported language code:', langCode);
+            return;
+        }
 
-        // Update UI
+        console.log('🌐 Translating to:', langCode, this.languages[langCode].name);
+
+        // Update UI first
         this.updateLanguageSelector(langCode);
         this.saveLanguage(langCode);
 
-        // Trigger Google Translate
-        if (langCode === 'en') {
-            // Reset to original language
-            this.resetTranslation();
-        } else {
-            // Translate to target language
-            this.triggerGoogleTranslate(langCode);
-        }
+        // Apply translation
+        this.applyTranslation(langCode);
 
         // Update page metadata
         this.updatePageMetadata(langCode);
     },
 
-    // Trigger Google Translate programmatically
-    triggerGoogleTranslate: function(langCode, retryCount = 0) {
-        console.log(`🔄 Attempting to translate to ${langCode} (attempt ${retryCount + 1})`);
-
-        const selectElement = document.querySelector('.goog-te-combo');
-        if (selectElement) {
-            console.log('✅ Google Translate select element found');
-            selectElement.value = langCode;
-            selectElement.dispatchEvent(new Event('change'));
-            console.log(`🌐 Translation triggered for ${langCode}`);
-
-            // Show translation status
-            this.showTranslationStatus(`Translating to ${this.languages[langCode].name}...`);
+    // Apply translation using Google Translate
+    applyTranslation: function(langCode) {
+        if (langCode === 'en') {
+            this.resetToEnglish();
         } else {
-            console.warn(`⚠️ Google Translate select element not found (attempt ${retryCount + 1})`);
-            // Retry up to 10 times with increasing delays
-            if (retryCount < 10) {
-                const delay = Math.min(500 * (retryCount + 1), 5000);
-                setTimeout(() => this.triggerGoogleTranslate(langCode, retryCount + 1), delay);
-            } else {
-                console.error('❌ Failed to find Google Translate element after 10 attempts');
-                this.showTranslationStatus('Translation failed. Please refresh the page.', 'error');
-            }
+            this.triggerGoogleTranslate(langCode);
         }
     },
 
-    // Reset translation to original language
-    resetTranslation: function() {
+    // Reset to English
+    resetToEnglish: function() {
+        console.log('🔄 Resetting to English...');
         const selectElement = document.querySelector('.goog-te-combo');
         if (selectElement) {
             selectElement.value = '';
             selectElement.dispatchEvent(new Event('change'));
+            console.log('✅ Reset to English');
+        } else {
+            console.warn('⚠️ Google Translate select element not found for reset');
         }
     },
+
+    // Trigger Google Translate programmatically - Simplified
+    triggerGoogleTranslate: function(langCode) {
+        console.log(`🔄 Triggering translation to ${langCode}`);
+
+        // Wait for Google Translate to be ready
+        const attemptTranslation = (attempts = 0) => {
+            const selectElement = document.querySelector('.goog-te-combo');
+
+            if (selectElement) {
+                console.log('✅ Google Translate select element found');
+                selectElement.value = langCode;
+                selectElement.dispatchEvent(new Event('change'));
+                console.log(`🌐 Translation triggered for ${langCode}`);
+                this.showTranslationStatus(`Translating to ${this.languages[langCode].name}...`);
+                return true;
+            } else if (attempts < 20) {
+                // Retry with exponential backoff
+                const delay = Math.min(100 * Math.pow(1.5, attempts), 2000);
+                console.log(`⚠️ Retrying translation in ${delay}ms (attempt ${attempts + 1})`);
+                setTimeout(() => attemptTranslation(attempts + 1), delay);
+                return false;
+            } else {
+                console.error('❌ Failed to find Google Translate element after 20 attempts');
+                this.showTranslationStatus('Translation unavailable. Please refresh the page.', 'error');
+                return false;
+            }
+        };
+
+        attemptTranslation();
+    },
+
+
 
     // Update language selector UI
     updateLanguageSelector: function(langCode) {
@@ -441,23 +473,29 @@ const YITPTranslate = {
     }
 };
 
-// Initialize when DOM is ready
+// Initialize when DOM is ready - Simplified approach
 document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 DOM Content Loaded - Initializing YITP Translation...');
 
-    // Add a small delay to ensure all scripts are loaded
-    setTimeout(() => {
-        YITPTranslate.init();
-    }, 100);
+    // Initialize immediately
+    YITPTranslate.init();
 });
 
-// Also try to initialize on window load as fallback
+// Fallback initialization on window load
 window.addEventListener('load', function() {
-    if (!document.querySelector('.yitp-language-selector')) {
+    if (!YITPTranslate.initialized) {
         console.log('🔄 Fallback initialization on window load...');
         YITPTranslate.init();
     }
 });
+
+// Additional fallback with delay
+setTimeout(() => {
+    if (!YITPTranslate.initialized) {
+        console.log('🔄 Delayed fallback initialization...');
+        YITPTranslate.init();
+    }
+}, 2000);
 
 // Export for global access
 window.YITPTranslate = YITPTranslate;
@@ -466,8 +504,30 @@ window.YITPTranslate = YITPTranslate;
 window.debugTranslation = function() {
     console.log('🐛 Translation Debug Info:');
     console.log('Current Language:', YITPTranslate.currentLanguage);
+    console.log('Initialized:', YITPTranslate.initialized);
     console.log('Language Selector:', document.querySelector('.yitp-language-selector'));
+    console.log('Language Container:', document.querySelector('.header__language'));
     console.log('Google Translate Element:', document.querySelector('#google_translate_element'));
     console.log('Google Translate Combo:', document.querySelector('.goog-te-combo'));
+    console.log('Google Translate Loaded:', googleTranslateLoaded);
+    console.log('Google Translate Initialized:', googleTranslateInitialized);
     console.log('Available Languages:', YITPTranslate.languages);
+};
+
+// Manual initialization function for testing
+window.initTranslation = function() {
+    console.log('🔧 Manual translation initialization...');
+    YITPTranslate.init();
+};
+
+// Manual language selector creation for testing
+window.createLanguageSelector = function() {
+    console.log('🔧 Manual language selector creation...');
+    YITPTranslate.createLanguageSelector();
+};
+
+// Test translation function
+window.testTranslation = function(langCode) {
+    console.log('🧪 Testing translation to:', langCode);
+    YITPTranslate.translateTo(langCode);
 };

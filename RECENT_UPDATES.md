@@ -142,10 +142,10 @@ course_builder/
 ## 🔗 **Access Points**
 
 ### **Production URLs**
-- **Main Dashboard:** https://yitp-lms.onrender.com/course-builder/
-- **Course Wizard:** https://yitp-lms.onrender.com/course-builder/wizard/
-- **Media Library:** https://yitp-lms.onrender.com/course-builder/media/
-- **Content Templates:** https://yitp-lms.onrender.com/course-builder/templates/
+- **Main Dashboard:** https://www.youthimpactglobal.com/course-builder/
+- **Course Wizard:** https://www.youthimpactglobal.com/course-builder/wizard/
+- **Media Library:** https://www.youthimpactglobal.com/course-builder/media/
+- **Content Templates:** https://www.youthimpactglobal.com/course-builder/templates/
 
 ### **Development URLs**
 - **Local Dashboard:** http://127.0.0.1:8002/course-builder/
