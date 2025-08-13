@@ -649,17 +649,23 @@ def send_sponsorship_status_admin_notification(sponsorship_request, old_status, 
     )
 
 
-def send_enrollment_confirmation_email(user, course, enrollment):
-    """Send enrollment confirmation email to user"""
+def send_enrollment_confirmation_email(user, course, enrollment, payment_context=None):
+    """Send enrollment confirmation email to user with payment context"""
     logger.info(f"Preparing to send enrollment confirmation email to {user.email} for course {course.title}")
 
     context = {
         'user': user,
         'course': course,
+        'enrollment': enrollment,
         'enrollment_date': enrollment.enrollment_date,
         'course_url': f"{settings.SITE_URL}/lms/courses/{course.slug}/" if hasattr(settings, 'SITE_URL') else f"/lms/courses/{course.slug}/",
+        'base_url': getattr(settings, 'SITE_URL', 'https://www.youthimpactglobal.com'),
         'support_email': settings.ADMIN_EMAIL,
-        'site_name': 'Youth Impact Training Programme'
+        'site_name': 'Youth Impact Training Programme',
+        # Payment context
+        'payment_status': payment_context.get('payment_status', 'pending') if payment_context else 'pending',
+        'is_installment': payment_context.get('is_installment', False) if payment_context else False,
+        'installment_sequence': payment_context.get('installment_sequence', 1) if payment_context else 1,
     }
 
     html_content = render_to_string('emails/enrollment_confirmation.html', context)
@@ -684,8 +690,8 @@ def send_enrollment_confirmation_email(user, course, enrollment):
     return result
 
 
-def send_enrollment_admin_notification(user, course, enrollment):
-    """Send enrollment notification email to admin"""
+def send_enrollment_admin_notification(user, course, enrollment, payment_context=None):
+    """Send enrollment notification email to admin with payment context"""
     logger.info(f"Preparing to send enrollment admin notification for {user.email} enrolling in {course.title}")
 
     # Calculate enrollment statistics
@@ -701,7 +707,11 @@ def send_enrollment_admin_notification(user, course, enrollment):
         'total_enrolled': total_enrolled,
         'remaining_spots': remaining_spots,
         'admin_url': f"{settings.SITE_URL}/admin/progress/enrollment/{enrollment.id}/change/" if hasattr(settings, 'SITE_URL') else f"/admin/progress/enrollment/{enrollment.id}/change/",
-        'site_name': 'Youth Impact Training Programme'
+        'site_name': 'Youth Impact Training Programme',
+        # Payment context
+        'payment_status': payment_context.get('payment_status', 'pending') if payment_context else 'pending',
+        'is_installment': payment_context.get('is_installment', False) if payment_context else False,
+        'installment_sequence': payment_context.get('installment_sequence', 1) if payment_context else 1,
     }
 
     html_content = render_to_string('emails/enrollment_admin_notification.html', context)

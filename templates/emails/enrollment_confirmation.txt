@@ -11,7 +11,7 @@ Instructor: {{ course.instructor.get_full_name|default:course.instructor.usernam
 Difficulty: {{ course.get_difficulty_level_display }}
 Duration: {{ course.estimated_duration }} hours
 Enrollment Date: {{ enrollment_date|date:"F d, Y" }} at {{ enrollment_date|time:"g:i A" }}
-{% if course.price > 0 %}Course Fee: KES {{ course.price }}{% else %}Course Fee: Free{% endif %}
+{% if course.price > 0 %}Course Fee: ${{ course.price }} USD{% else %}Course Fee: Free{% endif %}
 
 COURSE DESCRIPTION:
 {{ course.description|truncatewords:50 }}
@@ -22,12 +22,19 @@ LEARNING OBJECTIVES:
 {% if course.prerequisites %}PREREQUISITES:
 {{ course.prerequisites|truncatewords:20 }}
 
-{% endif %}NEXT STEPS:
+{% endif %}PAYMENT STATUS:
+{% if payment_status == 'confirmed' %}
+{% if is_installment %}✅ PARTIAL PAYMENT CONFIRMED: You've completed installment {{ installment_sequence|default:1 }} of 2. You have 30-day access. Second payment of ${{ course.price|floatformat:2 }} USD due within 30 days for lifetime access.{% else %}✅ FULL PAYMENT CONFIRMED: Your payment of ${{ course.price }} USD has been confirmed. You now have lifetime access to this course.{% endif %}
+{% elif payment_status == 'partially_paid' %}📅 PARTIAL PAYMENT CONFIRMED: You've completed installment 1 of 2. You have 30-day access. Second payment of ${{ course.price|floatformat:2 }} USD due within 30 days for lifetime access.
+{% elif course.price > 0 %}💰 PAYMENT PROCESSING: Your payment is being verified. Course access will be activated upon confirmation.
+{% else %}🆓 FREE COURSE: No payment required - enjoy your free course!{% endif %}
+
+NEXT STEPS:
 - Access your course materials through your YITP dashboard
 - Complete modules in the recommended sequence
 - Participate in discussions and assignments
 - Track your progress and earn your certificate
-{% if course.price > 0 %}- Ensure your payment is confirmed to maintain access{% endif %}
+{% if payment_status == 'partially_paid' %}- Complete your second installment payment within 30 days{% endif %}
 
 COURSE ACCESS:
 Visit your dashboard: {{ course_url }}

@@ -146,10 +146,16 @@ class EnrollmentService:
             raise ValidationError(f"Failed to process enrollment: {str(e)}")
 
     @staticmethod
-    def send_enrollment_notifications(user, course, enrollment):
+    def send_enrollment_notifications(user, course, enrollment, payment_context=None):
         """
-        Send enrollment confirmation emails with comprehensive error handling
-        
+        Send enrollment confirmation emails with comprehensive error handling and payment context
+
+        Args:
+            user: User object
+            course: Course object
+            enrollment: Enrollment object
+            payment_context: Dict with payment info {'payment_status': str, 'is_installment': bool, 'installment_sequence': int}
+
         Returns:
             dict: {'user_email_sent': bool, 'admin_email_sent': bool, 'errors': list}
         """
@@ -161,9 +167,9 @@ class EnrollmentService:
 
         # Send user confirmation email
         try:
-            send_enrollment_confirmation_email(user, course, enrollment)
+            send_enrollment_confirmation_email(user, course, enrollment, payment_context)
             results['user_email_sent'] = True
-            logger.info(f"Enrollment confirmation email sent to {user.email}")
+            logger.info(f"Enrollment confirmation email sent to {user.email} with payment context: {payment_context}")
         except Exception as e:
             error_msg = f"Failed to send enrollment confirmation email to {user.email}: {str(e)}"
             logger.error(error_msg)
@@ -171,9 +177,9 @@ class EnrollmentService:
 
         # Send admin notification email
         try:
-            send_enrollment_admin_notification(user, course, enrollment)
+            send_enrollment_admin_notification(user, course, enrollment, payment_context)
             results['admin_email_sent'] = True
-            logger.info(f"Enrollment admin notification sent for {user.email} -> {course.title}")
+            logger.info(f"Enrollment admin notification sent for {user.email} -> {course.title} with payment context: {payment_context}")
         except Exception as e:
             error_msg = f"Failed to send enrollment admin notification: {str(e)}"
             logger.error(error_msg)

@@ -358,6 +358,24 @@ class PaymentService:
                     profile.payment_expiration_date = None
                 profile.save()
 
+                # Send enrollment notification emails with payment context
+                try:
+                    from courses.enrollment_service import EnrollmentService
+                    payment_context = {
+                        'payment_status': profile.payment_status,
+                        'is_installment': payment.is_installment,
+                        'installment_sequence': payment.installment_sequence or 1,
+                    }
+
+                    email_results = EnrollmentService.send_enrollment_notifications(
+                        payment.user, payment.course, enrollment, payment_context
+                    )
+
+                    logger.info(f"Enrollment notification emails sent for {payment.user.email}: {email_results}")
+
+                except Exception as e:
+                    logger.error(f"Failed to send enrollment notification emails: {str(e)}")
+
                 return {
                     'success': True,
                     'message': 'Payment confirmed and course enrollment completed.',

@@ -27,7 +27,7 @@
     <strong>Difficulty:</strong> {{ course.get_difficulty_level_display }}<br>
     <strong>Duration:</strong> {{ course.estimated_duration }} hours<br>
     {% if course.price > 0 %}
-    <strong>Course Fee:</strong> KES {{ course.price }}<br>
+    <strong>Course Fee:</strong> ${{ course.price }} USD<br>
     {% else %}
     <strong>Course Fee:</strong> Free<br>
     {% endif %}
@@ -45,10 +45,29 @@
 </div>
 
 {% if course.price > 0 %}
-<div class="content-text" style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 20px 0;">
-    <strong>💰 Payment Required:</strong><br>
-    This is a paid course. Please verify that the student's payment has been confirmed before they can access course materials.
+    {% if payment_status == 'confirmed' %}
+        {% if is_installment %}
+<div class="content-text" style="background-color: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>📅 Partial Payment Confirmed:</strong><br>
+    Student has completed installment {{ installment_sequence|default:1 }} of 2 via PayPal. 30-day access activated. Second payment of ${{ course.price|floatformat:2 }} USD due within 30 days.
 </div>
+        {% else %}
+<div class="content-text" style="background-color: #d4edda; border: 1px solid #28a745; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>✅ Payment Confirmed:</strong><br>
+    Student has completed full payment of ${{ course.price }} USD via PayPal and has been automatically enrolled with lifetime access.
+</div>
+        {% endif %}
+    {% elif payment_status == 'partially_paid' %}
+<div class="content-text" style="background-color: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>📅 Partial Payment Confirmed:</strong><br>
+    Student has completed installment 1 of 2 via PayPal. 30-day access activated. Second payment of ${{ course.price|floatformat:2 }} USD due within 30 days.
+</div>
+    {% else %}
+<div class="content-text" style="background-color: #f8d7da; border: 1px solid #dc3545; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <strong>💰 Payment Pending:</strong><br>
+    This is a paid course (${{ course.price }} USD). Payment verification is in progress. Course access will be activated upon payment confirmation.
+</div>
+    {% endif %}
 {% endif %}
 
 <div class="cta-container">
@@ -78,12 +97,15 @@
 
 <div class="content-text">
     <ul style="text-align: left; margin: 0; padding-left: 20px;">
-        {% if course.price > 0 %}
-        <li>Verify student payment status</li>
+        {% if course.price > 0 and payment_status != 'confirmed' and payment_status != 'partially_paid' %}
+        <li>Monitor payment confirmation status</li>
         {% endif %}
         <li>Monitor student progress and engagement</li>
         <li>Check if additional support is needed</li>
         <li>Update course capacity if approaching limit</li>
+        {% if payment_status == 'partially_paid' %}
+        <li>Track second installment payment due date</li>
+        {% endif %}
     </ul>
 </div>
 
