@@ -11778,3 +11778,37 @@ INFO 2025-08-13 23:21:26,673 autoreload 52964 8645491392 /Users/djsean/Desktop/A
 INFO 2025-08-13 23:21:30,425 autoreload 53076 8645491392 Watching for file changes with StatReloader
 INFO 2025-08-13 23:22:17,983 autoreload 53076 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
 INFO 2025-08-13 23:22:20,896 autoreload 53117 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-14 16:30:37,962 autoreload 53117 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-14 16:30:44,521 autoreload 69609 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-14 17:13:29,710 enrollment_service 71310 8645491392 Enrollment confirmation email sent to direso3598@jobzyy.com with payment context: {'payment_status': 'confirmed', 'is_installment': True, 'installment_sequence': 1}
+INFO 2025-08-14 17:13:34,867 enrollment_service 71310 8645491392 Enrollment admin notification sent for direso3598@jobzyy.com -> Understanding Purpose In life with payment context: {'payment_status': 'confirmed', 'is_installment': True, 'installment_sequence': 1}
+ERROR 2025-08-14 17:22:35,362 exception 71709 8645491392 Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+WARNING 2025-08-14 17:22:35,522 log 71709 8645491392 Bad Request: /payments/paypal/webhook/
+ERROR 2025-08-14 17:22:39,008 exception 71709 8645491392 Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+WARNING 2025-08-14 17:22:39,047 log 71709 8645491392 Bad Request: /payments/paypal/webhook/

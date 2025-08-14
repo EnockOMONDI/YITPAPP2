@@ -1,0 +1,279 @@
+/**
+ * YITP Admin Custom CSS
+ * Custom styling for Django admin interface with YITP branding
+ */
+
+/* YITP Brand Colors */
+:root {
+    --yitp-orange: #ff5d15;
+    --yitp-dark-blue: #1a2e53;
+    --yitp-light-blue: #e7f3ff;
+    --yitp-success: #28a745;
+    --yitp-warning: #ffc107;
+    --yitp-danger: #dc3545;
+}
+
+/* Admin Header Branding */
+#header {
+    background-color: var(--yitp-dark-blue) !important;
+    border-bottom: 3px solid var(--yitp-orange) !important;
+}
+
+#site-name {
+    color: var(--yitp-orange) !important;
+    font-weight: bold !important;
+}
+
+#site-name:hover {
+    color: #ffffff !important;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background-color: var(--yitp-light-blue) !important;
+    border-bottom: 1px solid var(--yitp-orange) !important;
+}
+
+.breadcrumbs a {
+    color: var(--yitp-dark-blue) !important;
+}
+
+/* Payment Status Styling */
+.field-status .payment-confirmed,
+.payment-status-confirmed {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    font-weight: bold !important;
+    border: 1px solid #c3e6cb !important;
+}
+
+.field-status .payment-pending,
+.payment-status-pending {
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    border: 1px solid #ffeaa7 !important;
+}
+
+.field-status .payment-failed,
+.payment-status-failed {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+/* Amount Display Enhancement */
+.field-amount_display {
+    font-weight: bold !important;
+    color: var(--yitp-orange) !important;
+    font-size: 1.1em !important;
+}
+
+/* Payment Method Badges */
+.field-payment_method {
+    font-weight: 500 !important;
+}
+
+.payment-method-paypal {
+    background-color: #0070ba !important;
+    color: white !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-size: 0.9em !important;
+}
+
+.payment-method-mpesa {
+    background-color: #00a651 !important;
+    color: white !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-size: 0.9em !important;
+}
+
+.payment-method-bank {
+    background-color: var(--yitp-dark-blue) !important;
+    color: white !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-size: 0.9em !important;
+}
+
+/* Quick Actions Panel */
+.yitp-quick-actions {
+    background: linear-gradient(135deg, var(--yitp-light-blue) 0%, #f8f9fa 100%) !important;
+    border: 1px solid var(--yitp-orange) !important;
+    border-radius: 8px !important;
+    padding: 15px !important;
+    margin: 15px 0 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.yitp-quick-actions h4 {
+    color: var(--yitp-dark-blue) !important;
+    margin: 0 0 10px 0 !important;
+    font-size: 1.2em !important;
+    border-bottom: 2px solid var(--yitp-orange) !important;
+    padding-bottom: 5px !important;
+}
+
+/* Button Styling */
+.btn-yitp-primary {
+    background-color: var(--yitp-orange) !important;
+    border-color: var(--yitp-orange) !important;
+    color: white !important;
+}
+
+.btn-yitp-primary:hover {
+    background-color: #e54a0c !important;
+    border-color: #e54a0c !important;
+}
+
+.btn-yitp-secondary {
+    background-color: var(--yitp-dark-blue) !important;
+    border-color: var(--yitp-dark-blue) !important;
+    color: white !important;
+}
+
+.btn-yitp-secondary:hover {
+    background-color: #152340 !important;
+    border-color: #152340 !important;
+}
+
+/* Table Enhancements */
+.results table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+.results th {
+    background-color: var(--yitp-dark-blue) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 12px 8px !important;
+}
+
+.results tr:nth-child(even) {
+    background-color: #f8f9fa !important;
+}
+
+.results tr:hover {
+    background-color: var(--yitp-light-blue) !important;
+}
+
+/* Form Enhancements */
+.form-row {
+    border-bottom: 1px solid #e9ecef !important;
+    padding: 10px 0 !important;
+}
+
+.form-row:last-child {
+    border-bottom: none !important;
+}
+
+/* Enrollment Status Indicators */
+.enrollment-active {
+    background-color: var(--yitp-success) !important;
+    color: white !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+    font-size: 0.9em !important;
+}
+
+.enrollment-inactive {
+    background-color: var(--yitp-danger) !important;
+    color: white !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+    font-size: 0.9em !important;
+}
+
+.enrollment-pending {
+    background-color: var(--yitp-warning) !important;
+    color: #212529 !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+    font-size: 0.9em !important;
+}
+
+/* Progress Indicators */
+.progress-indicator {
+    background-color: #e9ecef !important;
+    border-radius: 10px !important;
+    height: 20px !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.progress-bar {
+    background-color: var(--yitp-orange) !important;
+    height: 100% !important;
+    border-radius: 10px !important;
+    transition: width 0.3s ease !important;
+}
+
+/* Alert Enhancements */
+.alert-yitp {
+    border-left: 4px solid var(--yitp-orange) !important;
+    background-color: var(--yitp-light-blue) !important;
+    border-color: var(--yitp-orange) !important;
+    color: var(--yitp-dark-blue) !important;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .yitp-quick-actions {
+        padding: 10px !important;
+    }
+    
+    .yitp-quick-actions h4 {
+        font-size: 1.1em !important;
+    }
+    
+    .field-amount_display {
+        font-size: 1em !important;
+    }
+}
+
+/* Loading States */
+.yitp-loading {
+    position: relative !important;
+}
+
+.yitp-loading::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--yitp-orange) !important;
+    border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e54a0c !important;
+}

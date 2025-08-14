@@ -225,7 +225,7 @@ class PayPalService:
             
             if response.status_code == 201:
                 capture_response = response.json()
-                
+
                 # Extract capture ID
                 capture_id = None
                 purchase_units = capture_response.get('purchase_units', [])
@@ -233,21 +233,58 @@ class PayPalService:
                     captures = purchase_units[0].get('payments', {}).get('captures', [])
                     if captures:
                         capture_id = captures[0]['id']
-                
+
                 logger.info(f"PayPal payment captured: {order_id} -> {capture_id}")
-                
+
                 return {
                     'success': True,
                     'capture_id': capture_id,
                     'capture_data': capture_response,
                     'message': 'Payment captured successfully'
                 }
+            elif response.status_code == 422:
+                # Handle specific 422 errors
+                try:
+                    error_response = response.json()
+                    error_name = error_response.get('name', '')
+                    error_details = error_response.get('details', [])
+
+                    # Check if this is an "already captured" error
+                    if error_name == 'UNPROCESSABLE_ENTITY':
+                        for detail in error_details:
+                            if detail.get('issue') == 'ORDER_ALREADY_CAPTURED':
+                                logger.info(f"PayPal order {order_id} already captured")
+
+                                # Try to get existing capture information
+                                existing_capture_id = PayPalService.get_existing_capture_id(order_id)
+
+                                return {
+                                    'success': False,  # Mark as false to trigger special handling
+                                    'capture_id': existing_capture_id,
+                                    'already_captured': True,
+                                    'message': 'ORDER_ALREADY_CAPTURED'
+                                }
+
+                    logger.error(f"PayPal capture failed with 422: {response.text}")
+                    return {
+                        'success': False,
+                        'capture_id': None,
+                        'message': f'Payment capture failed: {error_response.get("message", "Unprocessable entity")}'
+                    }
+
+                except json.JSONDecodeError:
+                    logger.error(f"PayPal capture failed with 422 (invalid JSON): {response.text}")
+                    return {
+                        'success': False,
+                        'capture_id': None,
+                        'message': f'Payment capture failed: HTTP 422'
+                    }
             else:
                 logger.error(f"PayPal capture failed: {response.status_code} - {response.text}")
                 return {
                     'success': False,
                     'capture_id': None,
-                    'message': f'Payment capture failed: {response.status_code}'
+                    'message': f'Payment capture failed: HTTP {response.status_code}'
                 }
                 
         except Exception as e:
@@ -257,7 +294,58 @@ class PayPalService:
                 'capture_id': None,
                 'message': f'Payment capture failed: {str(e)}'
             }
-    
+
+    @staticmethod
+    def get_existing_capture_id(order_id):
+        """
+        Get existing capture ID for an already captured order
+
+        Args:
+            order_id (str): PayPal order ID
+
+        Returns:
+            str: Capture ID if found, None otherwise
+        """
+        try:
+            # Get access token
+            token_response = PayPalService.get_access_token()
+            if not token_response['success']:
+                return None
+
+            access_token = token_response['access_token']
+
+            headers = {
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {access_token}'
+            }
+
+            # Get order details to find capture ID
+            order_url = f"{settings.PAYPAL_PAYMENTS_URL}/{order_id}"
+
+            response = requests.get(
+                order_url,
+                headers=headers,
+                timeout=30
+            )
+
+            if response.status_code == 200:
+                order_data = response.json()
+                purchase_units = order_data.get('purchase_units', [])
+
+                if purchase_units:
+                    captures = purchase_units[0].get('payments', {}).get('captures', [])
+                    if captures:
+                        capture_id = captures[0]['id']
+                        logger.info(f"Found existing capture ID: {capture_id} for order: {order_id}")
+                        return capture_id
+
+            logger.warning(f"Could not find existing capture ID for order: {order_id}")
+            return None
+
+        except Exception as e:
+            logger.error(f"Error getting existing capture ID: {str(e)}")
+            return None
+
     @staticmethod
     def verify_webhook_signature(request_body, headers):
         """

@@ -512,10 +512,12 @@ def mpesa_timeout(request):
 @require_POST
 def paypal_webhook(request):
     """
-    Handle PayPal webhook notifications for automated payment verification
+    Handle PayPal webhook notifications for automated payment verification with idempotency
     """
     try:
         from .paypal_service import PayPalService
+        from .email_service import PaymentEmailService
+        from django.db import transaction
 
         # Verify webhook signature
         if not PayPalService.verify_webhook_signature(request.body, request.headers):
@@ -523,69 +525,199 @@ def paypal_webhook(request):
             return JsonResponse({'status': 'error', 'message': 'Invalid signature'}, status=400)
 
         webhook_data = json.loads(request.body)
-        logger.info(f"PayPal webhook received: {webhook_data.get('event_type', 'unknown')}")
+        event_type = webhook_data.get('event_type', 'unknown')
+        logger.info(f"PayPal webhook received: {event_type}")
 
-        event_type = webhook_data.get('event_type')
-
+        # Extract relevant IDs based on event type
         if event_type == 'CHECKOUT.ORDER.APPROVED':
-            # Payment approved, capture it
             order_id = webhook_data['resource']['id']
-            capture_result = PayPalService.capture_payment_order(order_id)
+            return handle_order_approved(order_id)
 
-            if capture_result['success']:
-                # Find payment by PayPal order ID
-                try:
-                    payment = Payment.objects.get(paypal_payment_id=order_id)
+        elif event_type == 'PAYMENT.CAPTURE.COMPLETED':
+            capture_data = webhook_data['resource']
+            capture_id = capture_data['id']
+            # Get order ID from capture data
+            order_id = capture_data.get('supplementary_data', {}).get('related_ids', {}).get('order_id')
+            if not order_id:
+                # Try alternative path for order ID
+                order_id = capture_data.get('invoice_id') or capture_data.get('custom_id')
 
-                    # Confirm payment using existing service
-                    confirmation_result = PaymentService.confirm_payment(
-                        payment.reference_number,
-                        transaction_id=capture_result['capture_id']
-                    )
+            return handle_capture_completed(order_id, capture_id, capture_data)
 
-                    if confirmation_result['success']:
-                        # Send success email notifications
-                        from .email_service import PaymentEmailService
+        return JsonResponse({'status': 'success', 'message': f'Event {event_type} acknowledged'})
+
+    except Exception as e:
+        logger.error(f"PayPal webhook processing error: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+def handle_order_approved(order_id):
+    """
+    Handle CHECKOUT.ORDER.APPROVED webhook with idempotency checks
+    """
+    try:
+        from .paypal_service import PayPalService
+        from .email_service import PaymentEmailService
+        from django.db import transaction
+
+        # Find payment by PayPal order ID
+        try:
+            payment = Payment.objects.get(paypal_payment_id=order_id)
+        except Payment.DoesNotExist:
+            logger.error(f"Payment not found for PayPal order: {order_id}")
+            return JsonResponse({'status': 'error', 'message': 'Payment not found'}, status=404)
+
+        # Idempotency check: If payment is already confirmed, don't process again
+        if payment.status == 'confirmed':
+            logger.info(f"Payment {payment.reference_number} already confirmed, skipping duplicate webhook")
+            return JsonResponse({'status': 'success', 'message': 'Payment already processed'})
+
+        # Check if payment is in a state that can be captured
+        if payment.status not in ['pending']:
+            logger.warning(f"Payment {payment.reference_number} status is {payment.status}, cannot capture")
+            return JsonResponse({'status': 'success', 'message': f'Payment status is {payment.status}'})
+
+        # Attempt to capture the payment
+        capture_result = PayPalService.capture_payment_order(order_id)
+
+        if capture_result['success']:
+            # Use database transaction to ensure atomicity
+            with transaction.atomic():
+                # Refresh payment object to avoid race conditions
+                payment.refresh_from_db()
+
+                # Double-check status after refresh
+                if payment.status == 'confirmed':
+                    logger.info(f"Payment {payment.reference_number} was confirmed by another process")
+                    return JsonResponse({'status': 'success', 'message': 'Payment already confirmed'})
+
+                # Confirm payment using existing service
+                confirmation_result = PaymentService.confirm_payment(
+                    payment.reference_number,
+                    transaction_id=capture_result['capture_id']
+                )
+
+                if confirmation_result['success']:
+                    logger.info(f"PayPal payment auto-confirmed: {payment.reference_number}")
+
+                    # Send success email notifications (outside transaction to avoid blocking)
+                    try:
                         PaymentEmailService.send_paypal_payment_success_notification(
                             payment,
                             capture_result['capture_id']
                         )
-                        logger.info(f"PayPal payment auto-confirmed: {payment.reference_number}")
-                    else:
-                        # Send failure notification
-                        from .email_service import PaymentEmailService
+                    except Exception as e:
+                        logger.error(f"Failed to send success notification: {str(e)}")
+
+                    return JsonResponse({'status': 'success', 'message': 'Payment confirmed and notifications sent'})
+                else:
+                    logger.error(f"Failed to confirm PayPal payment: {payment.reference_number}")
+
+                    # Send failure notification
+                    try:
                         PaymentEmailService.send_paypal_payment_failed_notification(
                             payment,
                             f"Payment confirmation failed: {confirmation_result.get('message', 'Unknown error')}"
                         )
-                        logger.error(f"Failed to confirm PayPal payment: {payment.reference_number}")
-
-                except Payment.DoesNotExist:
-                    logger.error(f"Payment not found for PayPal order: {order_id}")
-                    # Send admin alert for orphaned PayPal payment
-                    from .email_service import PaymentEmailService
-                    try:
-                        # Create a temporary payment object for notification
-                        from django.core.mail import send_mail
-                        send_mail(
-                            subject=f'Orphaned PayPal Payment Alert - Order ID: {order_id}',
-                            message=f'PayPal order {order_id} was captured but no matching payment record found in database. Amount: {capture_result.get("amount", "Unknown")}',
-                            from_email=PaymentEmailService.FROM_EMAIL,
-                            recipient_list=[PaymentEmailService.ADMIN_EMAIL],
-                            fail_silently=True
-                        )
                     except Exception as e:
-                        logger.error(f"Failed to send orphaned payment alert: {str(e)}")
+                        logger.error(f"Failed to send failure notification: {str(e)}")
 
-        elif event_type == 'PAYMENT.CAPTURE.COMPLETED':
-            # Payment captured successfully
-            capture_id = webhook_data['resource']['id']
-            logger.info(f"PayPal payment captured: {capture_id}")
+                    return JsonResponse({'status': 'error', 'message': 'Payment confirmation failed'}, status=500)
+        else:
+            # Handle capture failure (including ORDER_ALREADY_CAPTURED)
+            error_message = capture_result.get('message', 'Unknown error')
 
-        return JsonResponse({'status': 'success'})
+            # Check if this is an "already captured" error (which is actually success)
+            if 'ORDER_ALREADY_CAPTURED' in error_message or 'already captured' in error_message.lower():
+                logger.info(f"PayPal order {order_id} already captured, treating as success")
+
+                # Try to find the capture ID from the error or use a placeholder
+                capture_id = capture_result.get('capture_id') or f"CAPTURED_{order_id}"
+
+                # Confirm payment if not already confirmed
+                if payment.status != 'confirmed':
+                    with transaction.atomic():
+                        payment.refresh_from_db()
+                        if payment.status != 'confirmed':
+                            confirmation_result = PaymentService.confirm_payment(
+                                payment.reference_number,
+                                transaction_id=capture_id
+                            )
+
+                            if confirmation_result['success']:
+                                logger.info(f"PayPal payment confirmed after already-captured: {payment.reference_number}")
+
+                                # Send success notification
+                                try:
+                                    PaymentEmailService.send_paypal_payment_success_notification(
+                                        payment,
+                                        capture_id
+                                    )
+                                except Exception as e:
+                                    logger.error(f"Failed to send success notification: {str(e)}")
+
+                return JsonResponse({'status': 'success', 'message': 'Payment already captured and confirmed'})
+            else:
+                logger.error(f"PayPal capture failed for order {order_id}: {error_message}")
+
+                # Send failure notification
+                try:
+                    PaymentEmailService.send_paypal_payment_failed_notification(
+                        payment,
+                        f"PayPal capture failed: {error_message}"
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to send failure notification: {str(e)}")
+
+                return JsonResponse({'status': 'error', 'message': f'Capture failed: {error_message}'}, status=500)
 
     except Exception as e:
-        logger.error(f"PayPal webhook processing error: {str(e)}")
+        logger.error(f"Error handling order approved webhook: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+def handle_capture_completed(order_id, capture_id, capture_data):
+    """
+    Handle PAYMENT.CAPTURE.COMPLETED webhook
+    """
+    try:
+        from .email_service import PaymentEmailService
+
+        logger.info(f"PayPal payment captured: {capture_id} for order: {order_id}")
+
+        # If we have order_id, try to find and confirm payment
+        if order_id:
+            try:
+                payment = Payment.objects.get(paypal_payment_id=order_id)
+
+                # If payment is not yet confirmed, confirm it now
+                if payment.status != 'confirmed':
+                    confirmation_result = PaymentService.confirm_payment(
+                        payment.reference_number,
+                        transaction_id=capture_id
+                    )
+
+                    if confirmation_result['success']:
+                        logger.info(f"PayPal payment confirmed via capture webhook: {payment.reference_number}")
+
+                        # Send success notification if not already sent
+                        try:
+                            PaymentEmailService.send_paypal_payment_success_notification(
+                                payment,
+                                capture_id
+                            )
+                        except Exception as e:
+                            logger.error(f"Failed to send success notification: {str(e)}")
+                else:
+                    logger.info(f"Payment {payment.reference_number} already confirmed")
+
+            except Payment.DoesNotExist:
+                logger.warning(f"Payment not found for PayPal order: {order_id} (capture: {capture_id})")
+
+        return JsonResponse({'status': 'success', 'message': 'Capture completed processed'})
+
+    except Exception as e:
+        logger.error(f"Error handling capture completed webhook: {str(e)}")
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 

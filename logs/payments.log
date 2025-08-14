@@ -102,3 +102,8 @@ INFO 2025-08-14 00:16:19,213 payment_service 55443 8645491392 Payment record cre
 INFO 2025-08-14 00:16:22,297 paypal_service 55443 8645491392 PayPal order created: 9VU12590TK7699207 for payment YITP-20250813-15E8F006
 INFO 2025-08-14 15:20:08,746 payment_service 67363 8645491392 Payment record created: YITP-20250814-873B43B6 for youthimpactglobal3@gmail.com - Method: paypal
 INFO 2025-08-14 15:20:11,854 paypal_service 67363 8645491392 PayPal order created: 7U885394FL267741N for payment YITP-20250814-873B43B6
+ERROR 2025-08-14 16:42:51,527 email_service 70089 8645491392 Failed to send PayPal payment success notification: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+ERROR 2025-08-14 16:42:52,319 email_service 70089 8645491392 Failed to send PayPal admin success notification: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+INFO 2025-08-14 17:22:33,109 payment_service 71709 8645491392 Payment record created: YITP-20250814-937EF9E3 for webhook@test.com - Method: paypal
+ERROR 2025-08-14 17:22:49,026 email_service 71709 8645491392 Failed to send PayPal payment success notification: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+ERROR 2025-08-14 17:22:49,832 email_service 71709 8645491392 Failed to send PayPal admin success notification: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
