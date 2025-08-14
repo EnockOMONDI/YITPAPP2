@@ -31,7 +31,7 @@
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
         <span style="font-weight: 600; color: #1a2e53;">Amount Paid:</span>
-        <span><strong>KES {{ payment.amount|floatformat:0 }}</strong></span>
+        <span><strong>${{ payment.amount|floatformat:2 }} USD</strong></span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
         <span style="font-weight: 600; color: #1a2e53;">Payment Type:</span>
@@ -55,7 +55,7 @@
     <h4 style="margin-top: 0; color: #1a2e53;">📅 Installment Payment Access</h4>
     <p><strong>First Installment Verified:</strong> You now have 30 days of course access.</p>
     <p><strong>Access Expires:</strong> {{ user.profile.payment_expiration_date|date:"F d, Y" }}</p>
-    <p><strong>Second Payment Due:</strong> Complete your remaining payment of KES {{ user.profile.remaining_installment_amount|floatformat:0 }} before the expiry date for unlimited access.</p>
+    <p><strong>Second Payment Due:</strong> Complete your remaining payment of ${{ user.profile.remaining_installment_amount|floatformat:2 }} USD before the expiry date for unlimited access.</p>
 </div>
 {% else %}
 <div class="success-box">

@@ -1,6 +1,7 @@
 *.pyc
 __pycache__/
 .env
+.env.example
 .venv
 db.sqlite3
 media/

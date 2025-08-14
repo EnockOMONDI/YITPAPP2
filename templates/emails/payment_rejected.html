@@ -31,7 +31,7 @@
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
         <span style="font-weight: 600; color: #1a2e53;">Amount:</span>
-        <span>KES {{ payment.amount|floatformat:0 }}</span>
+        <span>${{ payment.amount|floatformat:2 }} USD</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
         <span style="font-weight: 600; color: #1a2e53;">Payment Method:</span>

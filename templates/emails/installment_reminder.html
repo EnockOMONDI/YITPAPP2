@@ -15,8 +15,8 @@
 <div class="info-box">
     <h3 style="margin-top: 0; color: #1a2e53;">📋 Payment Status</h3>
     <p><strong>Course:</strong> {{ course.title }}</p>
-    <p><strong>First Installment:</strong> ✅ Paid (KES {{ first_payment_amount|floatformat:0 }})</p>
-    <p><strong>Second Installment:</strong> ⏳ Due (KES {{ remaining_amount|floatformat:0 }})</p>
+    <p><strong>First Installment:</strong> ✅ Paid (${{ first_payment_amount|floatformat:2 }} USD)</p>
+    <p><strong>Second Installment:</strong> ⏳ Due (${{ remaining_amount|floatformat:2 }} USD)</p>
     <p><strong>Payment Due Date:</strong> {{ payment_due_date|date:"F d, Y" }}</p>
     <p><strong>Days Remaining:</strong> {{ days_remaining }} days</p>
 </div>

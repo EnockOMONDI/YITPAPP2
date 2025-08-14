@@ -121,7 +121,8 @@ class PaymentAdmin(admin.ModelAdmin):
     
     def amount_display(self, obj):
         """Display formatted amount"""
-        return f"KES {obj.amount:,.0f}"
+        currency = obj.currency or 'USD'
+        return f"${obj.amount:,.2f} {currency}"
     amount_display.short_description = 'Amount'
     
     def payment_method_display(self, obj):

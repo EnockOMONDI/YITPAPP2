@@ -27,11 +27,11 @@
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
         <span style="font-weight: 600; color: #1a2e53;">First Payment:</span>
-        <span>✅ KES {{ first_payment_amount|floatformat:0 }} (Paid)</span>
+        <span>✅ ${{ first_payment_amount|floatformat:2 }} USD (Paid)</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
         <span style="font-weight: 600; color: #1a2e53;">Remaining Balance:</span>
-        <span style="color: #dc3545; font-weight: bold;">KES {{ remaining_amount|floatformat:0 }}</span>
+        <span style="color: #dc3545; font-weight: bold;">${{ remaining_amount|floatformat:2 }} USD</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
         <span style="font-weight: 600; color: #1a2e53;">Access Expires:</span>
@@ -76,7 +76,7 @@
 <!-- Urgent Action Button -->
 <div style="text-align: center; margin: 30px 0;">
     <a href="{{ payment_url }}" class="btn" style="background-color: #dc3545; color: white; text-decoration: none; padding: 18px 40px; border-radius: 8px; font-weight: 700; font-size: 18px; box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);">
-        🚨 PAY NOW - {{ remaining_amount|floatformat:0 }} KES
+        🚨 PAY NOW - ${{ remaining_amount|floatformat:2 }} USD
     </a>
 </div>
 

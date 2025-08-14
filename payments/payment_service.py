@@ -219,7 +219,7 @@ class PaymentService:
             params = {
                 'reference': payment.reference_number,
                 'amount': str(payment.amount),
-                'currency': payment.currency or 'KES'
+                'currency': payment.currency or 'USD'
             }
 
             paypal_url = f"{base_url}?{urlencode(params)}"

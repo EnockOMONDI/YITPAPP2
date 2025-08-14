@@ -501,16 +501,41 @@ def calculate_learning_streak(recent_activity):
 
 
 def get_payment_history(user):
-    """Get user's payment history"""
+    """Get user's payment history from Payment model"""
+    from payments.models import Payment
+
     payment_history = []
-    if hasattr(user, 'profile') and user.profile.payment_confirmed_at:
+
+    # Get payments from Payment model (primary source)
+    payments = Payment.objects.filter(user=user).order_by('-created_at')
+
+    for payment in payments:
+        payment_history.append({
+            'date': payment.confirmed_at or payment.created_at,
+            'amount': payment.amount,
+            'method': payment.get_payment_method_display(),
+            'reference': payment.reference_number,
+            'status': payment.get_status_display(),
+            'currency': payment.currency or 'USD',
+            'is_installment': payment.is_installment,
+            'installment_sequence': payment.installment_sequence,
+            'course': payment.course.title if payment.course else 'N/A'
+        })
+
+    # Fallback to profile data if no Payment records exist (legacy support)
+    if not payment_history and hasattr(user, 'profile') and user.profile.payment_confirmed_at:
         payment_history.append({
             'date': user.profile.payment_confirmed_at,
             'amount': user.profile.payment_amount or 0,
             'method': user.profile.get_payment_method_display() if user.profile.payment_method else 'N/A',
             'reference': user.profile.payment_reference or 'N/A',
-            'status': 'Confirmed'
+            'status': 'Confirmed',
+            'currency': 'USD',
+            'is_installment': False,
+            'installment_sequence': None,
+            'course': 'Legacy Payment'
         })
+
     return payment_history
 
 

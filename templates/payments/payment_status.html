@@ -171,7 +171,7 @@
                 </div>
                 <div class="detail-row">
                     <span><strong>Amount:</strong></span>
-                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                    <span>${{ payment.amount|floatformat:2 }} {{ payment.currency|default:"USD" }}</span>
                 </div>
                 <div class="detail-row">
                     <span><strong>Payment Method:</strong></span>
@@ -246,7 +246,7 @@
                 </div>
                 <div class="detail-row">
                     <span><strong>Amount:</strong></span>
-                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                    <span>${{ payment.amount|floatformat:2 }} {{ payment.currency|default:"USD" }}</span>
                 </div>
                 <div class="detail-row">
                     <span><strong>Payment Method:</strong></span>
@@ -308,7 +308,7 @@
                     {% endif %}
                     <p class="text-start">
                         To speed up verification, please send your payment confirmation via WhatsApp to
-                        <a href="https://wa.me/254722646958?text=Payment%20Confirmation%0AReference:%20{{ payment.reference_number }}%0ACourse:%20{{ payment.course.title }}%0AAmount:%20KES%20{{ payment.amount|floatformat:0 }}"
+                        <a href="https://wa.me/254722646958?text=Payment%20Confirmation%0AReference:%20{{ payment.reference_number }}%0ACourse:%20{{ payment.course.title }}%0AAmount:%20${{ payment.amount|floatformat:2 }}%20{{ payment.currency|default:"USD" }}"
                            target="_blank" class="whatsapp-link">
                             <i class="fab fa-whatsapp me-1"></i>
                             +254722646958
@@ -338,7 +338,7 @@
                 </div>
                 <div class="detail-row">
                     <span><strong>Amount:</strong></span>
-                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                    <span>${{ payment.amount|floatformat:2 }} {{ payment.currency|default:"USD" }}</span>
                 </div>
                 <div class="detail-row">
                     <span><strong>Payment Method:</strong></span>
@@ -395,7 +395,7 @@
                 </div>
                 <div class="detail-row">
                     <span><strong>Amount:</strong></span>
-                    <span>KES {{ payment.amount|floatformat:0 }}</span>
+                    <span>${{ payment.amount|floatformat:2 }} {{ payment.currency|default:"USD" }}</span>
                 </div>
                 <div class="detail-row">
                     <span><strong>Payment Method:</strong></span>

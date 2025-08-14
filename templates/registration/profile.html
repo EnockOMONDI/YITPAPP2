@@ -520,7 +520,7 @@
                         {% if user.profile.payment_amount %}
                         <div class="info__item">
                             <span class="info__label">Amount Paid:</span>
-                            <span class="info__value">KES {{ user.profile.payment_amount }}</span>
+                            <span class="info__value">${{ user.profile.payment_amount|floatformat:2 }} USD</span>
                         </div>
                         {% endif %}
 

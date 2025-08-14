@@ -11742,3 +11742,39 @@ INFO 2025-08-13 19:09:22,938 autoreload 43446 8645491392 /Users/djsean/Desktop/A
 INFO 2025-08-13 19:09:27,538 autoreload 44970 8645491392 Watching for file changes with StatReloader
 INFO 2025-08-13 19:16:57,899 autoreload 44970 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
 INFO 2025-08-13 19:17:06,231 autoreload 45274 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:22:53,638 autoreload 45274 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:22:57,231 autoreload 47194 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:23:21,165 autoreload 47194 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:23:22,570 autoreload 47221 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:24:29,079 autoreload 47221 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:24:31,152 autoreload 47255 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:30:35,130 autoreload 47255 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:30:37,474 autoreload 47444 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:31:54,269 autoreload 47444 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:31:56,090 autoreload 47475 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:32:16,118 autoreload 47475 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:32:17,711 autoreload 47507 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:33:20,303 autoreload 47507 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:33:21,831 autoreload 47544 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:38:59,845 autoreload 47544 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:39:01,598 autoreload 47680 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 20:39:21,843 autoreload 47680 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/views.py changed, reloading.
+INFO 2025-08-13 20:39:23,264 autoreload 47692 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 22:35:31,133 autoreload 47692 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-08-13 22:35:36,843 autoreload 50893 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 22:36:13,767 autoreload 50893 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/email_utils.py changed, reloading.
+INFO 2025-08-13 22:36:17,304 autoreload 50939 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 22:38:24,441 autoreload 50939 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/payment_service.py changed, reloading.
+INFO 2025-08-13 22:38:26,229 autoreload 50992 8645491392 Watching for file changes with StatReloader
+ERROR 2025-08-13 22:41:39,469 enrollment_service 51166 8645491392 Failed to send enrollment confirmation email to emailtest@yitp.com: Invalid filter: 'mul'
+ERROR 2025-08-13 22:41:39,767 enrollment_service 51166 8645491392 Failed to send enrollment admin notification: Invalid filter: 'mul'
+INFO 2025-08-13 22:46:04,005 enrollment_service 51308 8645491392 Enrollment confirmation email sent to emailtest@yitp.com with payment context: {'payment_status': 'confirmed', 'is_installment': False, 'installment_sequence': 1}
+INFO 2025-08-13 22:46:12,887 enrollment_service 51308 8645491392 Enrollment admin notification sent for emailtest@yitp.com -> Understanding Purpose In life with payment context: {'payment_status': 'confirmed', 'is_installment': False, 'installment_sequence': 1}
+INFO 2025-08-13 23:18:47,593 autoreload 50992 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/models.py changed, reloading.
+INFO 2025-08-13 23:18:51,684 autoreload 52953 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 23:19:11,268 autoreload 52953 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/admin.py changed, reloading.
+INFO 2025-08-13 23:19:13,582 autoreload 52964 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 23:21:26,673 autoreload 52964 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/payments/payment_service.py changed, reloading.
+INFO 2025-08-13 23:21:30,425 autoreload 53076 8645491392 Watching for file changes with StatReloader
+INFO 2025-08-13 23:22:17,983 autoreload 53076 8645491392 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-08-13 23:22:20,896 autoreload 53117 8645491392 Watching for file changes with StatReloader
