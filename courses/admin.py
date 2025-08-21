@@ -216,24 +216,6 @@ class CourseAdmin(admin.ModelAdmin):
         )
     reject_courses.short_description = "Reject selected courses"
     
-    fieldsets = (
-        ('Basic Information', {
-            'fields': ('title', 'slug', 'description', 'instructor', 'category')
-        }),
-        ('Course Details', {
-            'fields': ('learning_objectives', 'prerequisites', 'difficulty_level', 'estimated_duration')
-        }),
-        ('Media and Pricing', {
-            'fields': ('thumbnail', 'price', 'enrollment_limit')
-        }),
-        ('Publication', {
-            'fields': ('is_published', 'is_featured')
-        }),
-        ('Timestamps', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
-        })
-    )
 
 
 class LessonInline(admin.TabularInline):

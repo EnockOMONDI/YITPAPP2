@@ -290,9 +290,10 @@
                             <div id="lessonContentEditor" style="display: none;">
                                 <div class="mb-3">
                                     <label for="lessonContent" class="form-label">Lesson Content</label>
-                                    <textarea id="lessonContent" name="content" class="tinymce">
-                                        <h3>Welcome to this lesson!</h3>
-                                        <p>Start creating your engaging content here...</p>
+                                    <textarea id="lessonContent" name="content" class="form-control" rows="10" placeholder="Enter lesson content here...">
+Welcome to this lesson!
+
+Start creating your engaging content here...
                                     </textarea>
                                 </div>
 
@@ -452,27 +453,16 @@
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-<script src="https://cdn.tiny.cloud/1/qu2jb8k2dyah1y5pjdglgob206f26juotj3u82hzd7mvyz1x/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- TinyMCE removed - using CKEditor5 via Django admin integration -->
 {% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'js/course-builder.js' %}"></script>
 <script>
-// Initialize TinyMCE when on step 3
+// Content editing functionality (TinyMCE removed)
 if ({{ current_step }} === 3) {
-    tinymce.init({
-        selector: 'textarea.tinymce',
-        height: 500,
-        menubar: true,
-        branding: false,
-        promotion: false,
-        plugins: [
-            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons',
-            'template', 'codesample', 'hr', 'pagebreak', 'nonbreaking',
-            'toc', 'imagetools', 'textpattern', 'noneditable', 'quickbars'
-        ],
+    console.log('Content editing step loaded - using plain text editing');
+    // Enhanced textarea functionality can be added here if needed
         toolbar1: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
         toolbar2: 'forecolor backcolor | insertdatetime | codesample | hr pagebreak | template | fullscreen preview | help',
         quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',

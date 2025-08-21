@@ -1,61 +1,31 @@
 {
   "course": {
-    "title": "Understanding Purpose in Life (UPL) 101",
-    "slug": "understanding-purpose-in-life-upl-101",
-    "description": "A culturally grounded journey into discovering, living, and sustaining life purpose through African proverbs and folktales, reflective practice, and service-oriented leadership. Learners explore the difference between purpose, vision, and goals; cultivate ‘definiteness of purpose’; balance life domains; and transform purpose into daily habits, service, and community impact.",
-    "learning_objectives": "1) Explain the relationship between purpose, vision, and goals, and apply seven clarity questions to personal reflection. 2) Describe and practice ‘definiteness of purpose’ and create a flexible action plan for daily progress. 3) Use the Wheel of Life to assess balance across career, financial, spiritual, physical, intellectual, family, and social domains. 4) Demonstrate humility, selflessness, and service as integral expressions of purpose. 5) Compose a personal purpose statement aligned with values, strengths, and desired legacy. 6) Translate purpose into weekly habits, a one-year action plan, and a small community project.",
-    "prerequisites": "None (interest in personal growth and community service recommended).",
-    "difficulty_level": "intermediate",
-    "estimated_duration": 10,
+    "title": "The Youth Impact Training Programme (YITP) — 9-Week Virtual Training",
+    "slug": "yitp-9-week-virtual-training",
+    "description": "The Youth Impact Training Programme (YITP) is a comprehensive 9-week virtual training designed to equip young people with essential life skills, career readiness, and entrepreneurial knowledge. Our mission is to empower youth with practical skills and a success-driven mindset to help them excel in both employment and business.\n\n📌 Additional Benefits\n- Networking & Mentorship Sessions\n- Professional Certification\n- 100% Virtual & Flexible Learning\n- Industry Expert Instructors\n\n🎯 Who Can Join?\n- High School Students (15+ years)\n- College & University Students\n- Graduates & Young Professionals\n- Job Seekers & Employees",
+    "learning_objectives": "Equip learners with practical life skills, career readiness, and foundational entrepreneurship knowledge; develop a success-driven mindset; and prepare participants to apply skills in both employment and business contexts.",
+    "prerequisites": "None",
+    "difficulty_level": "beginner",
+    "estimated_duration": 325,
     "thumbnail": "",
     "status": "in_review",
     "is_published": false,
     "is_featured": false,
     "enrollment_limit": 0,
     "price": 0.0,
-    "instructor": null,
-    "category": null
+    "instructor": 1,
+    "category": 1
   },
   "modules": [
     {
       "id": "M1",
-      "course_slug": "understanding-purpose-in-life-upl-101",
-      "title": "Discovering the Foundations of Purpose",
-      "description": "Introduces purpose, contrasts it with vision and goals, and applies seven clarity questions; explores the Baobab ‘tree of life’ lesson and the call to service.",
+      "course_slug": "yitp-9-week-virtual-training",
+      "title": "Module 1 — UPL 101 Full Module",
+      "description": "A complete module combining UPL 101 content (foundations, definiteness of purpose, service, and purpose-in-action) into one coherent learning path.",
       "sort_order": 1,
       "is_published": false,
       "unlock_criteria": {},
-      "estimated_duration": 150
-    },
-    {
-      "id": "M2",
-      "course_slug": "understanding-purpose-in-life-upl-101",
-      "title": "Definiteness of Purpose & Balanced Living",
-      "description": "Builds the skill of ‘definiteness of purpose,’ daily action planning, and life balance via Zig Ziglar’s Wheel of Life; integrates habits from Og Mandino.",
-      "sort_order": 2,
-      "is_published": false,
-      "unlock_criteria": {},
-      "estimated_duration": 150
-    },
-    {
-      "id": "M3",
-      "course_slug": "understanding-purpose-in-life-upl-101",
-      "title": "Purpose, Service, and Overcoming Obstacles",
-      "description": "Grounds purpose in humility and selflessness, emphasizes ‘send the elevator back down,’ and rehearses obstacle navigation with faith, courage, and clarity.",
-      "sort_order": 3,
-      "is_published": false,
-      "unlock_criteria": {},
-      "estimated_duration": 150
-    },
-    {
-      "id": "M4",
-      "course_slug": "understanding-purpose-in-life-upl-101",
-      "title": "Define, Live, Share—Purpose in Action",
-      "description": "Draft purpose statements, build weekly schedules, design community projects, and commit to a one-year action plan; integrates ‘clay lamp’ and village proverb lessons.",
-      "sort_order": 4,
-      "is_published": false,
-      "unlock_criteria": {},
-      "estimated_duration": 150
+      "estimated_duration": 325
     }
   ],
   "lessons": [
@@ -73,7 +43,11 @@
       "estimated_duration": 15,
       "learning_objectives": "Retell the bricklayers story and extract its purpose lens (‘inside job’).",
       "resources": [
-        { "title": "Facilitator Prompt: Three Builders", "type": "text", "url": "" }
+        {
+          "title": "Facilitator Prompt: Three Builders",
+          "type": "text",
+          "url": ""
+        }
       ]
     },
     {
@@ -165,7 +139,11 @@
       "estimated_duration": 10,
       "learning_objectives": "Explain the Baobab metaphor and connect it to service as purpose.",
       "resources": [
-        { "title": "One Earth — African Baobab Tree", "type": "article", "url": "https://www.oneearth.org/species-of-the-week-african-baobab-tree/" }
+        {
+          "title": "One Earth — African Baobab Tree",
+          "type": "article",
+          "url": "https://www.oneearth.org/species-of-the-week-african-baobab-tree/"
+        }
       ]
     },
     {
@@ -200,13 +178,13 @@
     },
     {
       "id": "L2_1",
-      "module_id": "M2",
+      "module_id": "M1",
       "title": "Definiteness of Purpose — Overview",
       "content_type": "text",
       "content": "<h3>Definiteness of Purpose</h3><p>‘Get clear, get hungry, get moving, stay locked in.’ Napoleon Hill: ‘Definiteness of purpose is the starting point of all achievement.’</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 1,
+      "sort_order": 10,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 15,
@@ -215,13 +193,13 @@
     },
     {
       "id": "L2_2",
-      "module_id": "M2",
+      "module_id": "M1",
       "title": "From Vision to Daily Calendar — Consistent Action",
       "content_type": "text",
       "content": "<p>Create a flexible plan; convert purpose into daily micro-actions; track progress in calendar.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 2,
+      "sort_order": 11,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 15,
@@ -230,13 +208,13 @@
     },
     {
       "id": "L2_3",
-      "module_id": "M2",
+      "module_id": "M1",
       "title": "Wheel of Life — Seven Spokes (Part A)",
       "content_type": "text",
       "content": "<p>Rate Career, Financial, Spiritual; identify one improvement for each.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 3,
+      "sort_order": 12,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 10,
@@ -245,13 +223,13 @@
     },
     {
       "id": "L2_4",
-      "module_id": "M2",
+      "module_id": "M1",
       "title": "Wheel of Life — Seven Spokes (Part B)",
       "content_type": "text",
       "content": "<p>Rate Physical, Intellectual, Family, Social; set one habit per domain.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 4,
+      "sort_order": 13,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 10,
@@ -260,13 +238,13 @@
     },
     {
       "id": "L2_5",
-      "module_id": "M2",
+      "module_id": "M1",
       "title": "Og Mandino’s Habits (Part A)",
       "content_type": "text",
       "content": "<p>Begin with gratitude; greet the day with love; persist until you succeed; live each day as if it is your last.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 5,
+      "sort_order": 14,
       "is_published": false,
       "is_mandatory": false,
       "estimated_duration": 10,
@@ -275,13 +253,13 @@
     },
     {
       "id": "L2_6",
-      "module_id": "M2",
+      "module_id": "M1",
       "title": "Og Mandino’s Habits (Part B)",
       "content_type": "text",
       "content": "<p>Master emotions; multiply your value; take action now.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 6,
+      "sort_order": 15,
       "is_published": false,
       "is_mandatory": false,
       "estimated_duration": 10,
@@ -290,13 +268,13 @@
     },
     {
       "id": "L3_1",
-      "module_id": "M3",
+      "module_id": "M1",
       "title": "‘Send the Elevator Back Down’ — Service as Legacy",
       "content_type": "text",
       "content": "<p>Mentoring and multiplying impact: success becomes legacy when you lift others as you rise.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 1,
+      "sort_order": 16,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 10,
@@ -305,13 +283,13 @@
     },
     {
       "id": "L3_2",
-      "module_id": "M3",
+      "module_id": "M1",
       "title": "Mother Teresa — Small Acts, Great Love",
       "content_type": "text",
       "content": "<p>Start where you are; see people, not problems; love through action; do small things well; keep your heart soft.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 2,
+      "sort_order": 17,
       "is_published": false,
       "is_mandatory": false,
       "estimated_duration": 10,
@@ -320,13 +298,13 @@
     },
     {
       "id": "L3_3",
-      "module_id": "M3",
+      "module_id": "M1",
       "title": "Mandela — Unity, Justice, Forgiveness",
       "content_type": "text",
       "content": "<p>Choose unity; stand for justice; forgive to create the future; lead by example; see the bigger picture.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 3,
+      "sort_order": 18,
       "is_published": false,
       "is_mandatory": false,
       "estimated_duration": 10,
@@ -335,13 +313,13 @@
     },
     {
       "id": "L3_4",
-      "module_id": "M3",
+      "module_id": "M1",
       "title": "Humility & Selflessness — Five Practices",
       "content_type": "text",
       "content": "<p>Put mission above ego; listen; share the stage; serve unconditionally; stay grounded.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 4,
+      "sort_order": 19,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 10,
@@ -350,13 +328,13 @@
     },
     {
       "id": "L3_5",
-      "module_id": "M3",
+      "module_id": "M1",
       "title": "Folktale — The Tortoise and the Heavy Load",
       "content_type": "text",
       "content": "<p>Steady progress despite obstacles; take one micro-step at a time.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 5,
+      "sort_order": 20,
       "is_published": false,
       "is_mandatory": false,
       "estimated_duration": 10,
@@ -365,13 +343,13 @@
     },
     {
       "id": "L3_6",
-      "module_id": "M3",
+      "module_id": "M1",
       "title": "Fear vs. Faith; Courage; Inner Clarity",
       "content_type": "text",
       "content": "<p>Contrast fear and faith; rehearse courage; write a visualization script for breaking a barrier.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 6,
+      "sort_order": 21,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 15,
@@ -380,13 +358,13 @@
     },
     {
       "id": "L4_1",
-      "module_id": "M4",
+      "module_id": "M1",
       "title": "Drafting Your Purpose Statement (Part A)",
       "content_type": "text",
       "content": "<p>Align passions, strengths, and values; Success Afrika techniques for clarity.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 1,
+      "sort_order": 22,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 15,
@@ -395,13 +373,13 @@
     },
     {
       "id": "L4_2",
-      "module_id": "M4",
+      "module_id": "M1",
       "title": "Drafting Your Purpose Statement (Part B) — Peer Review",
       "content_type": "text",
       "content": "<p>Refine the draft using a peer feedback checklist; iterate to sharpen clarity and alignment.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 2,
+      "sort_order": 23,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 10,
@@ -410,13 +388,13 @@
     },
     {
       "id": "L4_3",
-      "module_id": "M4",
+      "module_id": "M1",
       "title": "Purpose into Schedule — Weekly Planner",
       "content_type": "text",
       "content": "<p>Convert purpose to time blocks; habits and time-management insights for sustainable action.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 3,
+      "sort_order": 24,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 10,
@@ -425,13 +403,13 @@
     },
     {
       "id": "L4_4",
-      "module_id": "M4",
+      "module_id": "M1",
       "title": "Proverb — The Child & the Village",
       "content_type": "text",
       "content": "<p>‘The child who is not embraced by the village will burn it down to feel its warmth.’ Purpose thrives in connection and contribution.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 4,
+      "sort_order": 25,
       "is_published": false,
       "is_mandatory": false,
       "estimated_duration": 10,
@@ -440,13 +418,13 @@
     },
     {
       "id": "L4_5",
-      "module_id": "M4",
+      "module_id": "M1",
       "title": "Anecdote — The Clay Lamp: Sharing Your Light",
       "content_type": "text",
       "content": "<p>A small lamp lights many others without losing its flame — sharing purpose multiplies it.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 5,
+      "sort_order": 26,
       "is_published": false,
       "is_mandatory": false,
       "estimated_duration": 10,
@@ -455,13 +433,13 @@
     },
     {
       "id": "L4_6",
-      "module_id": "M4",
+      "module_id": "M1",
       "title": "Community Project Mini-Design",
       "content_type": "text",
       "content": "<p>Draft a small community project aligned to purpose: need, beneficiaries, activities, timeline, and metrics.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 6,
+      "sort_order": 27,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 15,
@@ -470,13 +448,13 @@
     },
     {
       "id": "L4_7",
-      "module_id": "M4",
+      "module_id": "M1",
       "title": "River & Stone — Persistence and One-Year Plan",
       "content_type": "text",
       "content": "<p>Water shapes rock over time; build a 12-month action plan with milestones and review cadence.</p>",
       "video_url": "",
       "presentation_file": "",
-      "sort_order": 7,
+      "sort_order": 28,
       "is_published": false,
       "is_mandatory": true,
       "estimated_duration": 15,
@@ -556,7 +534,12 @@
       "quiz_id": "Q_L1_1",
       "question_text": "In the ‘Three Builders’ story, what best explains the third bricklayer’s response?",
       "question_type": "multiple_choice",
-      "options": ["He was paid more", "He understood the larger purpose of his work", "He worked fewer hours", "He wanted recognition"],
+      "options": [
+        "He was paid more",
+        "He understood the larger purpose of his work",
+        "He worked fewer hours",
+        "He wanted recognition"
+      ],
       "correct_answer": "He understood the larger purpose of his work",
       "explanation": "The third bricklayer connected his task to a cathedral, showing a purpose-driven mindset (‘inside job’).",
       "points": 1,
@@ -566,7 +549,10 @@
       "quiz_id": "Q_L1_1",
       "question_text": "True or False: Purpose and mindset shape how we interpret our daily actions.",
       "question_type": "true_false",
-      "options": ["True", "False"],
+      "options": [
+        "True",
+        "False"
+      ],
       "correct_answer": "True",
       "explanation": "The lesson emphasizes that interpretation flows from purpose and mindset.",
       "points": 1,
@@ -587,9 +573,30 @@
       "question_text": "Match each term to the best description.",
       "question_type": "matching",
       "options": [
-        { "left": "Purpose", "right_options": ["Reason for being", "Anticipated future", "Specific outcomes"] },
-        { "left": "Vision", "right_options": ["Reason for being", "Anticipated future", "Specific outcomes"] },
-        { "left": "Goals", "right_options": ["Reason for being", "Anticipated future", "Specific outcomes"] }
+        {
+          "left": "Purpose",
+          "right_options": [
+            "Reason for being",
+            "Anticipated future",
+            "Specific outcomes"
+          ]
+        },
+        {
+          "left": "Vision",
+          "right_options": [
+            "Reason for being",
+            "Anticipated future",
+            "Specific outcomes"
+          ]
+        },
+        {
+          "left": "Goals",
+          "right_options": [
+            "Reason for being",
+            "Anticipated future",
+            "Specific outcomes"
+          ]
+        }
       ],
       "correct_answer": "{\"Purpose\":\"Reason for being\",\"Vision\":\"Anticipated future\",\"Goals\":\"Specific outcomes\"}",
       "explanation": "Purpose → Vision → Goals sequence and definitions.",
@@ -600,7 +607,10 @@
       "quiz_id": "Q_L1_4",
       "question_text": "True or False: Goals give rise to purpose.",
       "question_type": "true_false",
-      "options": ["True", "False"],
+      "options": [
+        "True",
+        "False"
+      ],
       "correct_answer": "False",
       "explanation": "Purpose begets vision; vision begets goals, not the other way around.",
       "points": 1,
@@ -610,7 +620,12 @@
       "quiz_id": "Q_L2_1",
       "question_text": "According to Napoleon Hill, what is ‘the starting point of all achievement’?",
       "question_type": "multiple_choice",
-      "options": ["Positive thinking", "Definiteness of purpose", "Time management", "Wealth creation"],
+      "options": [
+        "Positive thinking",
+        "Definiteness of purpose",
+        "Time management",
+        "Wealth creation"
+      ],
       "correct_answer": "Definiteness of purpose",
       "explanation": "This direct quotation anchors the lesson.",
       "points": 1,
@@ -655,7 +670,10 @@
       "quiz_id": "Q_L4_7",
       "question_text": "True or False: Persistence works like water shaping rock over time.",
       "question_type": "true_false",
-      "options": ["True", "False"],
+      "options": [
+        "True",
+        "False"
+      ],
       "correct_answer": "True",
       "explanation": "This is the lesson’s core allegory.",
       "points": 1,
@@ -682,14 +700,27 @@
       "assignment_type": "reflection",
       "submission_format": "both",
       "max_file_size": 10485760,
-      "allowed_file_types": ["pdf", "docx", "txt"],
+      "allowed_file_types": [
+        "pdf",
+        "docx",
+        "txt"
+      ],
       "due_date": null,
       "max_score": 20,
       "rubric": {
         "criteria": [
-          { "name": "Clarity & Depth", "max_points": 8 },
-          { "name": "Connection to Questions", "max_points": 8 },
-          { "name": "Mechanics & Organization", "max_points": 4 }
+          {
+            "name": "Clarity & Depth",
+            "max_points": 8
+          },
+          {
+            "name": "Connection to Questions",
+            "max_points": 8
+          },
+          {
+            "name": "Mechanics & Organization",
+            "max_points": 4
+          }
         ]
       }
     },
@@ -702,14 +733,27 @@
       "assignment_type": "project",
       "submission_format": "both",
       "max_file_size": 10485760,
-      "allowed_file_types": ["pdf", "docx", "xlsx"],
+      "allowed_file_types": [
+        "pdf",
+        "docx",
+        "xlsx"
+      ],
       "due_date": null,
       "max_score": 30,
       "rubric": {
         "criteria": [
-          { "name": "Completeness", "max_points": 10 },
-          { "name": "Realism", "max_points": 10 },
-          { "name": "Alignment with Purpose", "max_points": 10 }
+          {
+            "name": "Completeness",
+            "max_points": 10
+          },
+          {
+            "name": "Realism",
+            "max_points": 10
+          },
+          {
+            "name": "Alignment with Purpose",
+            "max_points": 10
+          }
         ]
       }
     },
@@ -722,14 +766,28 @@
       "assignment_type": "project",
       "submission_format": "both",
       "max_file_size": 10485760,
-      "allowed_file_types": ["pdf", "docx", "jpg", "png"],
+      "allowed_file_types": [
+        "pdf",
+        "docx",
+        "jpg",
+        "png"
+      ],
       "due_date": null,
       "max_score": 30,
       "rubric": {
         "criteria": [
-          { "name": "Humility & Service", "max_points": 10 },
-          { "name": "Impact & Evidence", "max_points": 10 },
-          { "name": "Reflection Depth", "max_points": 10 }
+          {
+            "name": "Humility & Service",
+            "max_points": 10
+          },
+          {
+            "name": "Impact & Evidence",
+            "max_points": 10
+          },
+          {
+            "name": "Reflection Depth",
+            "max_points": 10
+          }
         ]
       }
     },
@@ -742,14 +800,27 @@
       "assignment_type": "reflection",
       "submission_format": "both",
       "max_file_size": 10485760,
-      "allowed_file_types": ["pdf", "docx", "txt"],
+      "allowed_file_types": [
+        "pdf",
+        "docx",
+        "txt"
+      ],
       "due_date": null,
       "max_score": 20,
       "rubric": {
         "criteria": [
-          { "name": "Clarity", "max_points": 8 },
-          { "name": "Alignment (values/strengths)", "max_points": 8 },
-          { "name": "Mechanics", "max_points": 4 }
+          {
+            "name": "Clarity",
+            "max_points": 8
+          },
+          {
+            "name": "Alignment (values/strengths)",
+            "max_points": 8
+          },
+          {
+            "name": "Mechanics",
+            "max_points": 4
+          }
         ]
       }
     },
@@ -762,14 +833,26 @@
       "assignment_type": "project",
       "submission_format": "both",
       "max_file_size": 10485760,
-      "allowed_file_types": ["pdf", "docx"],
+      "allowed_file_types": [
+        "pdf",
+        "docx"
+      ],
       "due_date": null,
       "max_score": 40,
       "rubric": {
         "criteria": [
-          { "name": "Clarity & Feasibility", "max_points": 15 },
-          { "name": "Alignment with Purpose", "max_points": 15 },
-          { "name": "Impact Metrics", "max_points": 10 }
+          {
+            "name": "Clarity & Feasibility",
+            "max_points": 15
+          },
+          {
+            "name": "Alignment with Purpose",
+            "max_points": 15
+          },
+          {
+            "name": "Impact Metrics",
+            "max_points": 10
+          }
         ]
       }
     },
@@ -782,14 +865,27 @@
       "assignment_type": "research",
       "submission_format": "both",
       "max_file_size": 10485760,
-      "allowed_file_types": ["pdf", "docx", "xlsx"],
+      "allowed_file_types": [
+        "pdf",
+        "docx",
+        "xlsx"
+      ],
       "due_date": null,
       "max_score": 40,
       "rubric": {
         "criteria": [
-          { "name": "Milestone Structure", "max_points": 15 },
-          { "name": "Feasibility & Resources", "max_points": 15 },
-          { "name": "Reflection & Risks", "max_points": 10 }
+          {
+            "name": "Milestone Structure",
+            "max_points": 15
+          },
+          {
+            "name": "Feasibility & Resources",
+            "max_points": 15
+          },
+          {
+            "name": "Reflection & Risks",
+            "max_points": 10
+          }
         ]
       }
     }
@@ -803,7 +899,10 @@
       "file_path": "",
       "external_url": "https://www.youtube.com/",
       "metadata": {},
-      "tags": ["motivation", "africa"],
+      "tags": [
+        "motivation",
+        "africa"
+      ],
       "is_public": true
     },
     {
@@ -814,7 +913,10 @@
       "file_path": "",
       "external_url": "https://www.success.com/",
       "metadata": {},
-      "tags": ["success", "productivity"],
+      "tags": [
+        "success",
+        "productivity"
+      ],
       "is_public": true
     },
     {
@@ -825,7 +927,9 @@
       "file_path": "",
       "external_url": "",
       "metadata": {},
-      "tags": ["book"],
+      "tags": [
+        "book"
+      ],
       "is_public": false
     },
     {
@@ -836,7 +940,9 @@
       "file_path": "",
       "external_url": "",
       "metadata": {},
-      "tags": ["book"],
+      "tags": [
+        "book"
+      ],
       "is_public": false
     },
     {
@@ -847,16 +953,48 @@
       "file_path": "",
       "external_url": "",
       "metadata": {},
-      "tags": ["book"],
+      "tags": [
+        "book"
+      ],
       "is_public": false
     }
   ],
   "lesson_contents": [
-    { "lesson_id": "L1_7", "content_item_id": "CI_2", "sort_order": 1, "is_required": false },
-    { "lesson_id": "L2_1", "content_item_id": "CI_3", "sort_order": 1, "is_required": false },
-    { "lesson_id": "L2_5", "content_item_id": "CI_4", "sort_order": 1, "is_required": false },
-    { "lesson_id": "L4_3", "content_item_id": "CI_2", "sort_order": 1, "is_required": false },
-    { "lesson_id": "L3_1", "content_item_id": "CI_1", "sort_order": 1, "is_required": false },
-    { "lesson_id": "L2_4", "content_item_id": "CI_5", "sort_order": 1, "is_required": false }
+    {
+      "lesson_id": "L1_7",
+      "content_item_id": "CI_2",
+      "sort_order": 1,
+      "is_required": false
+    },
+    {
+      "lesson_id": "L2_1",
+      "content_item_id": "CI_3",
+      "sort_order": 1,
+      "is_required": false
+    },
+    {
+      "lesson_id": "L2_5",
+      "content_item_id": "CI_4",
+      "sort_order": 1,
+      "is_required": false
+    },
+    {
+      "lesson_id": "L4_3",
+      "content_item_id": "CI_2",
+      "sort_order": 1,
+      "is_required": false
+    },
+    {
+      "lesson_id": "L3_1",
+      "content_item_id": "CI_1",
+      "sort_order": 1,
+      "is_required": false
+    },
+    {
+      "lesson_id": "L2_4",
+      "content_item_id": "CI_5",
+      "sort_order": 1,
+      "is_required": false
+    }
   ]
 }

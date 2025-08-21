@@ -357,6 +357,33 @@ UPLOADCARE = {
 
 # CKEditor 5 configuration
 CKEDITOR_5_CONFIGS = {
+    'course_content': {
+        'toolbar': {
+            'items': [
+                'heading', '|',
+                'bold', 'italic', 'underline', '|',
+                'fontColor', 'fontBackgroundColor', '|',
+                'alignment', '|',
+                'numberedList', 'bulletedList', '|',
+                'outdent', 'indent', '|',
+                'link', 'insertImage', 'insertTable', '|',
+                'blockQuote', 'codeBlock', '|',
+                'undo', 'redo'
+            ]
+        },
+        'language': 'en',
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', 'imageStyle:full', 'imageStyle:side'
+            ]
+        },
+        'table': {
+            'contentToolbar': [
+                'tableColumn', 'tableRow', 'mergeTableCells'
+            ]
+        },
+        'height': 300,
+    },
     'default': {
         'toolbar': {
             'items': [

@@ -267,7 +267,7 @@ def payment_methods(request, course_id):
     from progress.models import Enrollment
     if Enrollment.objects.filter(student=request.user, course=course).exists():
         messages.info(request, 'You are already enrolled in this course.')
-        return redirect('courses:course_detail', course_id=course.id)
+        return redirect('courses:course_detail', slug=course.slug)
     
     context = {
         'course': course,
@@ -336,7 +336,7 @@ def process_paypal(request):
         from progress.models import Enrollment
         if Enrollment.objects.filter(student=request.user, course=course).exists():
             messages.info(request, 'You are already enrolled in this course.')
-            return redirect('courses:course_detail', course_id=course.id)
+            return redirect('courses:course_detail', slug=course.slug)
 
         # Create payment record
         payment = PaymentService.create_payment_record(
@@ -398,7 +398,7 @@ def process_bank_transfer(request):
         from progress.models import Enrollment
         if Enrollment.objects.filter(student=request.user, course=course).exists():
             messages.info(request, 'You are already enrolled in this course.')
-            return redirect('courses:course_detail', course_id=course.id)
+            return redirect('courses:course_detail', slug=course.slug)
 
         # Enhanced duplicate payment prevention
         duplicate_check = _check_duplicate_bank_payment(request.user, course, transaction_id)

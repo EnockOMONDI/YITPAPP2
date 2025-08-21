@@ -55,8 +55,18 @@ class Course(models.Model):
 
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    description = models.TextField()
-    learning_objectives = models.TextField(help_text="What students will learn")
+    description = CKEditor5Field(
+        'Description',
+        config_name='course_content',
+        blank=True,
+        help_text="Rich text course description with formatting and media"
+    )
+    learning_objectives = CKEditor5Field(
+        'Learning Objectives',
+        config_name='course_content',
+        blank=True,
+        help_text="What students will learn - use rich text formatting"
+    )
     prerequisites = models.TextField(blank=True, help_text="Required knowledge or skills")
     difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_LEVELS, default='beginner')
     estimated_duration = models.IntegerField(help_text="Estimated duration in hours")
