@@ -102,7 +102,7 @@ else:
 
 # Allowed Hosts
 if IS_PRODUCTION:
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost:8000,www.youthimpactglobal.com,youthimpactglobal.com,*.youthimpactglobal.com,yitpapp2.onrender.com,*.onrender.com').split(',')
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost:8000,www.youthimpactglobal.com,youthimpactglobal.com,*.youthimpactglobal.com,yitpapp2.onrender.com,*.onrender.com,testserver').split(',')
 else:
     ALLOWED_HOSTS = ['*']  # Permissive for development
 
@@ -317,6 +317,12 @@ STATIC_URL = '/static/'
 # Additional directories to look for static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+]
+
+# Static files finders - prioritize Django Unfold admin files
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
 if IS_PRODUCTION:
