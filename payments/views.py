@@ -256,6 +256,83 @@ def _check_duplicate_bank_payment(user, course, transaction_id):
     }
 
 
+def _validate_mpesa_reference(mpesa_reference):
+    """
+    Validate M-Pesa reference code format and length
+
+    Args:
+        mpesa_reference: M-Pesa reference code to validate
+
+    Returns:
+        dict: {'valid': bool, 'message': str}
+    """
+    if not mpesa_reference:
+        return {
+            'valid': False,
+            'message': 'M-Pesa reference code is required.'
+        }
+
+    # Remove whitespace and convert to uppercase
+    mpesa_reference = mpesa_reference.strip().upper()
+
+    # Check exact length (M-Pesa references are typically 10 characters)
+    if len(mpesa_reference) != 10:
+        return {
+            'valid': False,
+            'message': 'M-Pesa reference code must be exactly 10 characters long.'
+        }
+
+    # Check for valid characters (alphanumeric only)
+    if not re.match(r'^[A-Z0-9]+$', mpesa_reference):
+        return {
+            'valid': False,
+            'message': 'M-Pesa reference code contains invalid characters. Only letters and numbers are allowed.'
+        }
+
+    # Check for duplicate reference across all payments
+    if Payment.objects.filter(transaction_id=mpesa_reference).exists():
+        return {
+            'valid': False,
+            'message': 'This M-Pesa reference code has already been used. Please check your transaction history or contact support.'
+        }
+
+    return {
+        'valid': True,
+        'message': 'Valid M-Pesa reference code.'
+    }
+
+
+def _check_duplicate_mpesa_payment(user, course, mpesa_reference):
+    """
+    Check for duplicate M-Pesa payments
+
+    Args:
+        user: User making the payment
+        course: Course being paid for
+        mpesa_reference: M-Pesa reference code
+
+    Returns:
+        dict: {'exists': bool, 'message': str, 'payment': Payment or None}
+    """
+    # Check for duplicate reference
+    duplicate_transaction = Payment.objects.filter(
+        transaction_id=mpesa_reference
+    ).first()
+
+    if duplicate_transaction:
+        return {
+            'exists': True,
+            'message': 'This M-Pesa reference code has already been used. Please check your payment history.',
+            'payment': duplicate_transaction
+        }
+
+    return {
+        'exists': False,
+        'message': 'No duplicate payment found.',
+        'payment': None
+    }
+
+
 @login_required
 def payment_methods(request, course_id):
     """
@@ -440,6 +517,76 @@ def process_bank_transfer(request):
     except Exception as e:
         logger.error(f"Bank transfer payment processing error: {str(e)}")
         messages.error(request, 'Bank transfer payment processing failed. Please try again.')
+        return redirect('payments:payment_methods', course_id=course_id)
+
+
+@login_required
+@require_POST
+def process_mpesa_paybill(request):
+    """
+    Process M-Pesa Paybill payment verification with enhanced validation and email notifications
+    """
+    try:
+        course_id = request.POST.get('course_id')
+        amount = Decimal(request.POST.get('amount'))
+        mpesa_reference = request.POST.get('mpesa_reference', '').strip().upper()
+        is_installment = request.POST.get('is_installment', 'false').lower() == 'true'
+        installment_sequence = int(request.POST.get('installment_sequence', 1))
+
+        course = get_object_or_404(Course, id=course_id)
+
+        # Enhanced M-Pesa reference validation
+        validation_result = _validate_mpesa_reference(mpesa_reference)
+        if not validation_result['valid']:
+            messages.error(request, validation_result['message'])
+            return redirect('payments:payment_methods', course_id=course.id)
+
+        # Check for existing enrollment
+        from progress.models import Enrollment
+        if Enrollment.objects.filter(student=request.user, course=course).exists():
+            messages.info(request, 'You are already enrolled in this course.')
+            return redirect('courses:course_detail', slug=course.slug)
+
+        # Enhanced duplicate payment prevention
+        duplicate_check = _check_duplicate_mpesa_payment(request.user, course, mpesa_reference)
+        if duplicate_check['exists']:
+            messages.info(request, duplicate_check['message'])
+            return redirect('payments:payment_status', payment_id=duplicate_check['payment'].id)
+
+        # Create payment record
+        payment = PaymentService.create_payment_record(
+            user=request.user,
+            course=course,
+            amount=amount,
+            payment_method='mpesa_paybill',
+            is_installment=is_installment,
+            installment_sequence=installment_sequence
+        )
+
+        # Store M-Pesa reference
+        payment.transaction_id = mpesa_reference
+        payment.status = 'pending'
+        payment.save()
+
+        # Send email notifications
+        from .email_service import PaymentEmailService
+
+        # Send user confirmation
+        user_email_sent = PaymentEmailService.send_user_mpesa_submitted_notification(payment)
+        if not user_email_sent:
+            logger.warning(f"Failed to send user confirmation email for payment {payment.reference_number}")
+
+        # Send admin notification
+        admin_email_sent = PaymentEmailService.send_admin_mpesa_verification_notification(payment)
+        if not admin_email_sent:
+            logger.warning(f"Failed to send admin notification email for payment {payment.reference_number}")
+
+        messages.success(request, 'M-Pesa payment submitted successfully! Your M-Pesa reference has been sent to our team and will be verified within 1 hour.')
+        return redirect('payments:payment_status', payment_id=payment.id)
+
+    except Exception as e:
+        logger.error(f"M-Pesa payment processing error: {str(e)}")
+        messages.error(request, 'M-Pesa payment processing failed. Please try again.')
         return redirect('payments:payment_methods', course_id=course_id)
 
 

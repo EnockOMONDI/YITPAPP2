@@ -16,6 +16,7 @@ urlpatterns = [
     path('process/mpesa/', views.process_mpesa, name='process_mpesa'),
     path('process/paypal/', views.process_paypal, name='process_paypal'),
     path('process/bank-transfer/', views.process_bank_transfer, name='process_bank_transfer'),
+    path('process/mpesa-paybill/', views.process_mpesa_paybill, name='process_mpesa_paybill'),
     
     # Payment status
     path('status/<int:payment_id>/', views.payment_status, name='payment_status'),

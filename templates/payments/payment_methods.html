@@ -1,6 +1,7 @@
 {% extends 'unified/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load payment_filters %}
 
 {% block title %}Payment Methods - YITP{% endblock %}
 
@@ -364,24 +365,24 @@
                     </div>
                 </div>
 
-                <!-- Bank Transfer Payment -->
+                <!-- M-Pesa Paybill Payment -->
                 <div class="payment-method-card" data-method="bank" onclick="selectPaymentMethod('bank')">
                     <div class="d-flex align-items-center">
                         <div class="payment-method-icon bank-icon">
-                            <i class="fas fa-university"></i>
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
                         <div class="flex-grow-1">
-                            <h6 class="mb-1">Bank Transfer</h6>
-                            <small class="text-muted">Direct bank transfer to YITP account</small>
+                            <h6 class="mb-1">M-Pesa Paybill</h6>
+                            <small class="text-muted">Pay with M-Pesa using Paybill number</small>
                         </div>
                         <div class="text-end">
-                            <small class="text-warning">⏱ 1-2 hours</small>
+                            <small class="text-warning">⏱ Up to 1 hour</small>
                         </div>
                     </div>
                 </div>
 
                 <!-- M-Pesa Payment (Disabled) -->
-                <div class="payment-method-card disabled-method">
+                <!-- <div class="payment-method-card disabled-method">
                     <div class="d-flex align-items-center">
                         <div class="payment-method-icon mpesa-icon" style="opacity: 0.5;">
                             <i class="fas fa-mobile-alt"></i>
@@ -394,10 +395,10 @@
                             Currently Unavailable
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Credit/Debit Card Payment (Disabled) -->
-                <div class="payment-method-card disabled-method">
+                <!-- <div class="payment-method-card disabled-method">
                     <div class="d-flex align-items-center">
                         <div class="payment-method-icon card-icon" style="opacity: 0.5;">
                             <i class="fas fa-credit-card"></i>
@@ -410,7 +411,7 @@
                             Currently Unavailable
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             
             <!-- M-Pesa Payment Form -->
@@ -457,96 +458,87 @@
                 </form>
             </div>
             
-            <!-- Bank Transfer Form -->
+            <!-- M-Pesa Paybill Form -->
             <div id="bank-form" class="payment-form">
                 <h5 style="color: #1a2e53;">
-                    <i class="fas fa-university me-2"></i>
-                    Bank Transfer Payment
+                    <i class="fas fa-mobile-alt me-2"></i>
+                    M-Pesa Paybill Payment
                 </h5>
-                
+
                 <div class="bank-details">
-                    <h6>YITP Bank Account Details</h6>
-                    
-                    <div class="bank-detail-item">
-                        <span><strong>Bank Name:</strong></span>
-                        <span>
-                            Absa Bank Kenya
-                            <button type="button" class="copy-button" onclick="copyToClipboard('Absa Bank Kenya')">
-                                Copy
-                            </button>
-                        </span>
-                    </div>
-                    
-                    <div class="bank-detail-item">
-                        <span><strong>Account Name:</strong></span>
-                        <span>
-                            Youth Impact Training Programme
-                            <button type="button" class="copy-button" onclick="copyToClipboard('Youth Impact Training Programme')">
-                                Copy
-                            </button>
-                        </span>
-                    </div>
-                    
-                    <div class="bank-detail-item">
-                        <span><strong>Account Number:</strong></span>
-                        <span>
-                            2046381648
-                            <button type="button" class="copy-button" onclick="copyToClipboard('2046381648')">
-                                Copy
-                            </button>
-                        </span>
-                    </div>
-                    
+                    <h6>YITP M-Pesa Paybill Details</h6>
+
                     <div class="bank-detail-item">
                         <span><strong>Paybill Number:</strong></span>
                         <span>
-                            303030
-                            <button type="button" class="copy-button" onclick="copyToClipboard('303030')">
+                            4132847
+                            <button type="button" class="copy-button" onclick="copyToClipboard('4132847')">
                                 Copy
                             </button>
                         </span>
                     </div>
-                    
+
+                    <div class="bank-detail-item">
+                        <span><strong>Account Number:</strong></span>
+                        <span>
+                            {{ user.profile.phone_number|default:user.username }}
+                            <button type="button" class="copy-button" onclick="copyToClipboard('{{ user.profile.phone_number|default:user.username }}')">
+                                Copy
+                            </button>
+                        </span>
+                    </div>
+
                     <div class="bank-detail-item">
                         <span><strong>Amount:</strong></span>
                         <span class="text-primary">
-                            <strong>${{ course.price|floatformat:0 }} USD</strong>
+                            <strong>KES {{ course.price|to_kes }}</strong>
+                            <small class="text-muted">(~${{ course.price|floatformat:0 }} USD)</small>
                         </span>
                     </div>
                 </div>
-                
+
                 <div class="payment-instructions">
-                    <h6><i class="fas fa-info-circle me-2"></i>Payment Instructions</h6>
+                    <h6><i class="fas fa-info-circle me-2"></i>M-Pesa Payment Instructions</h6>
                     <ol class="mb-0">
-                        <li>Transfer the exact amount (${{ course.price|floatformat:0 }} USD) to the account above</li>
-                        <li>Use your name and course title as the reference</li>
-                        <li>Send payment confirmation via WhatsApp to +254722646958</li>
-                        <li>Include your transaction reference and course name</li>
-                        <li>Payment verification takes 1-2 hours during business hours</li>
+                        <li>Go to M-Pesa menu on your phone</li>
+                        <li>Select "Lipa na M-Pesa" → "Pay Bill"</li>
+                        <li>Enter Paybill Number: <strong>4132847</strong></li>
+                        <li>Enter Account Number: <strong>{{ user.profile.phone_number|default:user.username }}</strong></li>
+                        <li>Enter Amount: <strong>KES {{ course.price|to_kes }}</strong></li>
+                        <li>Enter your M-Pesa PIN to complete payment</li>
+                        <li>You will receive an M-Pesa confirmation SMS</li>
+                        <li>Submit the M-Pesa reference code below</li>
                     </ol>
                 </div>
                 
-                <form method="post" action="{% url 'payments:process_bank_transfer' %}">
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-clock me-2"></i>
+                    <strong>Processing Time:</strong> Payment verification takes up to 1 hour after M-Pesa confirmation.
+                </div>
+
+                <form method="post" action="{% url 'payments:process_mpesa_paybill' %}">
                     {% csrf_token %}
                     <input type="hidden" name="course_id" value="{{ course.id }}">
                     <input type="hidden" name="amount" value="{{ course.price }}">
                     <input type="hidden" name="is_installment" value="false">
                     <input type="hidden" name="installment_sequence" value="1">
-                    
+
                     <div class="mb-3 mt-3">
-                        <label for="bank_reference" class="form-label">Transaction Reference</label>
+                        <label for="mpesa_reference" class="form-label">M-Pesa Reference Code</label>
                         <input type="text"
                                class="form-control"
-                               id="bank_reference"
-                               name="transaction_id"
-                               placeholder="Enter your bank transaction reference"
+                               id="mpesa_reference"
+                               name="mpesa_reference"
+                               placeholder="Enter M-Pesa confirmation code (e.g., QGH7X8Y9Z0)"
+                               pattern="[A-Z0-9]{10}"
+                               maxlength="10"
                                required>
-                        <div class="form-text">Enter your bank transaction reference for verification</div>
+                        <div class="form-text">Enter the 10-character M-Pesa reference code from your confirmation SMS</div>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-yitp btn-lg mt-3">
-                        <i class="fas fa-university me-2"></i>
-                        Confirm Bank Transfer
+                        <i class="fas fa-mobile-alt me-2"></i>
+                        Submit M-Pesa Payment
                     </button>
                 </form>
             </div>
@@ -677,9 +669,20 @@ function selectPaymentMethod(method) {
     updatePaymentAmounts();
 }
 
-// Auto-select PayPal on page load
+// Auto-select PayPal on page load and handle URL parameters
 document.addEventListener('DOMContentLoaded', function() {
     selectPaymentMethod('paypal');
+
+    // Check for installment parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('installment') === 'true') {
+        // Select installment payment option
+        const installmentRadio = document.getElementById('installment_payment');
+        if (installmentRadio) {
+            installmentRadio.checked = true;
+            togglePaymentOption(); // Show installment details
+        }
+    }
 });
 
 function togglePaymentOption() {

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Payment Submitted - YITP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .email-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .success-box .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .payment-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #1a2e53;
+        }
+        
+        .detail-value {
+            color: #333;
+            text-align: right;
+        }
+        
+        .mpesa-reference {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .mpesa-reference .code {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #856404;
+            letter-spacing: 2px;
+        }
+        
+        .next-steps {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .next-steps h3 {
+            margin-top: 0;
+            color: #1a2e53;
+        }
+        
+        .next-steps ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .next-steps li {
+            margin: 8px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff5d15;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background: #e54a0c;
+        }
+        
+        .btn-secondary {
+            background: #1a2e53;
+        }
+        
+        .btn-secondary:hover {
+            background: #152340;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .footer a {
+            color: #ff5d15;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                text-align: left;
+            }
+            
+            .detail-value {
+                text-align: left;
+                margin-top: 5px;
+                font-weight: 500;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📱 M-Pesa Payment Submitted</h1>
+            <p>Youth Impact Training Programme</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <p>Dear {{ user.get_full_name|default:user.username }},</p>
+            
+            <div class="success-box">
+                <div class="icon">✅</div>
+                <strong>M-Pesa Payment Successfully Submitted!</strong><br>
+                Your payment has been received and is being processed.
+            </div>
+            
+            <p>Thank you for submitting your M-Pesa payment for <strong>{{ course.title }}</strong>. We have received your payment details and our team will verify your transaction within the next hour.</p>
+            
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <h3 style="margin-top: 0; color: #1a2e53;">Payment Details</h3>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Course:</span>
+                    <span class="detail-value">{{ course.title }}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Amount:</span>
+                    <span class="detail-value">${{ amount }} USD</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method:</span>
+                    <span class="detail-value">M-Pesa Paybill</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Payment Type:</span>
+                    <span class="detail-value">
+                        {% if is_installment %}
+                            Installment {{ installment_sequence }} of 2
+                        {% else %}
+                            Full Payment
+                        {% endif %}
+                    </span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Reference Number:</span>
+                    <span class="detail-value">{{ payment.reference_number }}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value" style="color: #856404; font-weight: 600;">Pending Verification</span>
+                </div>
+            </div>
+            
+            <!-- M-Pesa Reference -->
+            <div class="mpesa-reference">
+                <strong>Your M-Pesa Reference Code:</strong><br>
+                <div class="code">{{ mpesa_reference }}</div>
+                <small>Keep this reference for your records</small>
+            </div>
+            
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3>📋 What Happens Next?</h3>
+                <ol>
+                    <li><strong>Verification Process:</strong> Our team will verify your M-Pesa payment within 1 hour</li>
+                    <li><strong>Email Confirmation:</strong> You'll receive a confirmation email once payment is verified</li>
+                    <li><strong>Course Access:</strong> Immediate access to your course materials upon verification</li>
+                    <li><strong>Welcome Package:</strong> Course orientation and getting started guide</li>
+                </ol>
+                
+                <p><strong>⏰ Processing Time:</strong> Up to 1 hour during business hours (Monday-Friday, 8 AM - 6 PM EAT)</p>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ payment_status_url }}" class="btn">Check Payment Status</a>
+                <a href="{{ base_url }}/lms/courses/{{ course.slug }}/" class="btn btn-secondary">View Course</a>
+            </div>
+            
+            <!-- Support Information -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4 style="margin-top: 0; color: #1a2e53;">Need Help?</h4>
+                <p>If you have any questions about your payment or need assistance:</p>
+                <ul>
+                    <li>📧 Email: <a href="mailto:{{ support_email }}">{{ support_email }}</a></li>
+                    <li>📱 WhatsApp: +254722646958</li>
+                    <li>⏰ Support Hours: Monday-Friday, 8 AM - 6 PM EAT</li>
+                </ul>
+            </div>
+            
+            <p>Thank you for choosing the Youth Impact Training Programme. We're excited to support your learning journey!</p>
+            
+            <p>Best regards,<br>
+            <strong>The YITP Team</strong></p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                <strong>Youth Impact Training Programme</strong><br>
+                This is an automated confirmation email. Please do not reply to this email.<br>
+                For support, contact: <a href="mailto:{{ support_email }}">{{ support_email }}</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -101,7 +101,63 @@ class PaymentEmailService:
         except Exception as e:
             logger.error(f"Failed to send admin verification notification for payment {payment.reference_number}: {str(e)}")
             return False
-    
+
+    @staticmethod
+    def send_admin_mpesa_verification_notification(payment):
+        """
+        Send email notification to admin when M-Pesa payment requires verification
+
+        Args:
+            payment: Payment object requiring verification
+
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            # Email context
+            context = {
+                'payment': payment,
+                'user': payment.user,
+                'course': payment.course,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'mpesa_reference': payment.transaction_id,
+                'is_installment': payment.is_installment,
+                'installment_sequence': payment.installment_sequence,
+                'base_url': base_url,
+                'admin_url': f"{base_url}/admin/payments/payment/{payment.id}/change/",
+                'verification_url': f"{base_url}/admin/payments/payment/{payment.id}/change/",
+            }
+
+            # Render email templates
+            html_content = render_to_string('emails/admin_mpesa_verification_needed.html', context)
+            text_content = strip_tags(html_content)
+
+            # Email subject
+            subject = f"🔔 YITP: M-Pesa Payment Verification Required - {payment.reference_number}"
+
+            # Create email message
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                to=[PaymentEmailService.ADMIN_EMAIL],
+                reply_to=[PaymentEmailService.FROM_EMAIL]
+            )
+            email.attach_alternative(html_content, "text/html")
+
+            # Send email
+            email.send()
+
+            logger.info(f"Admin M-Pesa verification notification sent for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send admin M-Pesa verification notification for payment {payment.reference_number}: {str(e)}")
+            return False
+
     @staticmethod
     def send_user_payment_submitted_notification(payment):
         """
@@ -157,7 +213,107 @@ class PaymentEmailService:
         except Exception as e:
             logger.error(f"Failed to send user payment confirmation for payment {payment.reference_number}: {str(e)}")
             return False
-    
+
+    @staticmethod
+    def send_user_mpesa_submitted_notification(payment):
+        """
+        Send confirmation email to user when M-Pesa payment is submitted
+
+        Args:
+            payment: Payment object that was submitted
+
+        Returns:
+            bool: True if email sent successfully, False otherwise
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            # Email context
+            context = {
+                'user': payment.user,
+                'course': payment.course,
+                'payment': payment,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'mpesa_reference': payment.transaction_id,
+                'is_installment': payment.is_installment,
+                'installment_sequence': payment.installment_sequence,
+                'base_url': base_url,
+                'support_email': PaymentEmailService.ADMIN_EMAIL,
+                'payment_status_url': f"{base_url}/payments/status/{payment.id}/",
+            }
+
+            # Render email templates
+            html_content = render_to_string('emails/user_mpesa_submitted.html', context)
+            text_content = strip_tags(html_content)
+
+            # Email subject
+            subject = f"✅ YITP: M-Pesa Payment Submitted Successfully - {payment.course.title}"
+
+            # Create email message
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                to=[payment.user.email],
+                reply_to=[PaymentEmailService.FROM_EMAIL]
+            )
+            email.attach_alternative(html_content, "text/html")
+
+            # Send email
+            email.send()
+
+            logger.info(f"User M-Pesa confirmation sent to {payment.user.email} for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send user M-Pesa confirmation for payment {payment.reference_number}: {str(e)}")
+            return False
+
+    @staticmethod
+    def send_user_mpesa_submitted_notification(payment):
+        """
+        Send confirmation email to user when M-Pesa payment is submitted
+        """
+        try:
+            base_url = PaymentEmailService.get_base_url()
+
+            context = {
+                'user': payment.user,
+                'course': payment.course,
+                'payment': payment,
+                'amount': payment.amount,
+                'currency': 'USD',
+                'mpesa_reference': payment.transaction_id,
+                'is_installment': payment.is_installment,
+                'installment_sequence': payment.installment_sequence,
+                'base_url': base_url,
+                'support_email': PaymentEmailService.ADMIN_EMAIL,
+                'payment_status_url': f"{base_url}/payments/status/{payment.id}/",
+            }
+
+            html_content = render_to_string('emails/user_mpesa_submitted.html', context)
+            text_content = strip_tags(html_content)
+
+            subject = f"✅ YITP: M-Pesa Payment Submitted Successfully - {payment.course.title}"
+
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=PaymentEmailService.FROM_EMAIL,
+                to=[payment.user.email],
+                reply_to=[PaymentEmailService.FROM_EMAIL]
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
+            logger.info(f"User M-Pesa confirmation sent to {payment.user.email} for payment {payment.reference_number}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send user M-Pesa confirmation for payment {payment.reference_number}: {str(e)}")
+            return False
+
     @staticmethod
     def send_payment_verified_notification(payment):
         """
