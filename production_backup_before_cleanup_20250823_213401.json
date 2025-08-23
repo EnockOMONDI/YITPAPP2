@@ -1,0 +1,4827 @@
+[
+{
+  "model": "courses.category",
+  "pk": 1,
+  "fields": {
+    "name": "Platform Training",
+    "slug": "platform-training",
+    "description": "Courses focused on learning how to use the YITP platform effectively",
+    "parent": null,
+    "icon": "",
+    "color": "#2563EB",
+    "sort_order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "courses.category",
+  "pk": 2,
+  "fields": {
+    "name": "Virtual Training",
+    "slug": "virtual-training",
+    "description": "Virtual training programs and online courses for skill development",
+    "parent": null,
+    "icon": "",
+    "color": "#2563EB",
+    "sort_order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 1,
+  "fields": {
+    "title": "Introduction to YITP: Your Learning Journey Begins",
+    "slug": "introduction-to-yitp-your-learning-journey-begins",
+    "description": "Welcome to the Youth Impact Training Programme! This comprehensive introductory course is designed to help you get started on your learning journey with YITP.\r\n\r\nIn this course, you will:\r\n• Understand YITP's mission and how we're transforming lives through education\r\n• Learn to navigate our learning platform effectively\r\n• Discover how to track your progress and complete assignments\r\n• Access support resources and contact information\r\n\r\nThis is a mandatory first course for all new students and takes approximately 25 minutes to complete. Upon successful completion, you'll be ready to explore our full range of courses and begin your transformational learning experience.",
+    "learning_objectives": "By the end of this course, you will be able to:\r\n\r\n1. Explain YITP's mission and core values\r\n2. Navigate the YITP learning platform confidently\r\n3. Track your learning progress effectively\r\n4. Complete assignments and assessments\r\n5. Access support resources when needed\r\n6. Understand the structure of YITP courses",
+    "prerequisites": "None - This is the starting point for all YITP students",
+    "difficulty_level": "beginner",
+    "estimated_duration": 1,
+    "thumbnail": "",
+    "status": "published",
+    "is_published": true,
+    "is_featured": true,
+    "enrollment_limit": null,
+    "price": "0.00",
+    "instructor": [
+      "yitpteam"
+    ],
+    "category": 1,
+    "submitted_for_review_at": null,
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "",
+    "created_at": "2025-08-01T18:26:22.795Z",
+    "updated_at": "2025-08-02T20:29:20.929Z"
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 2,
+  "fields": {
+    "title": "Understanding Purpose In life",
+    "slug": "understanding-purpose-in-life",
+    "description": "Understanding Purpose in Life (UPL 101) is an 8-session course designed to guide participants in discovering, defining, and living their life’s purpose. Using a blend of interactive teaching, African proverbs, folktales, personal testimonies, peer exercises, and reflective journaling, the course fosters a deep cultural and personal connection to purpose. It draws on insights from figures like Gandhi, Mandela, Mother Teresa, Napoleon Hill, Og Mandino, and Zig Ziglar, emphasizing service, resilience, and practical application.",
+    "learning_objectives": "Session 1: Introduction to Life’s Purpose (1 hour)\r\n\r\nIntroduces the concept of purpose through the \"Story of Three Builders,\" exploring the essence of purpose versus goals and vision. Activities include reflective journaling on moments of fulfillment.\r\nSession 2: The Foundations of Purpose (1.5 hours)\r\n\r\nExamines foundational principles using the \"Baobab Tree\" story, incorporating Napoleon Hill’s definiteness of purpose and Zig Ziglar’s Wheel of Life for self-assessment.\r\nSession 3: Purpose and Service (1 hour)\r\n\r\nLinks purpose to serving others, inspired by Wangari Maathai and Mother Teresa, with an African proverb and reflection on personal service.\r\nSession 4: Overcoming Obstacles to Purpose (1 hour)\r\n\r\nAddresses challenges using the \"Tortoise and the Heavy Load\" story, focusing on courage, faith, and visualization to overcome barriers.",
+    "prerequisites": "",
+    "difficulty_level": "beginner",
+    "estimated_duration": 120,
+    "thumbnail": "",
+    "status": "published",
+    "is_published": true,
+    "is_featured": false,
+    "enrollment_limit": null,
+    "price": "2.00",
+    "instructor": [
+      "beryl"
+    ],
+    "category": 1,
+    "submitted_for_review_at": "2025-08-13T14:55:19.797Z",
+    "reviewed_at": "2025-08-13T15:55:17.908Z",
+    "reviewed_by": [
+      "yitpmainmain"
+    ],
+    "review_notes": "Published via Django shell - fixing publication issue",
+    "created_at": "2025-08-13T14:55:19.073Z",
+    "updated_at": "2025-08-13T16:27:41.687Z"
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 5,
+  "fields": {
+    "title": "The Youth Impact Training Programme (YITP) — 9-Week Virtual Training",
+    "slug": "yitp-9-week-virtual-training",
+    "description": "<p>The Youth Impact Training Programme (YITP) is a comprehensive 9-week virtual training designed to equip young people with essential life skills, career readiness, and entrepreneurial knowledge. Our mission is to empower youth with practical skills and a success-driven mindset to help them excel in both employment and business. 📌 Additional Benefits - Networking &amp; Mentorship Sessions - Professional Certification - 100% Virtual &amp; Flexible Learning - Industry Expert Instructors 🎯 Who Can Join? - High School Students (15+ years) - College &amp; University Students - Graduates &amp; Young Professionals - Job Seekers &amp; Employees</p>",
+    "learning_objectives": "<p>Equip learners with practical life skills, career readiness, and foundational entrepreneurship knowledge; develop a success-driven mindset; and prepare participants to apply skills in both employment and business contexts.</p>",
+    "prerequisites": "None",
+    "difficulty_level": "beginner",
+    "estimated_duration": 323,
+    "thumbnail": "",
+    "status": "published",
+    "is_published": true,
+    "is_featured": true,
+    "enrollment_limit": null,
+    "price": "39.00",
+    "instructor": [
+      "yitpmain"
+    ],
+    "category": 2,
+    "submitted_for_review_at": null,
+    "reviewed_at": null,
+    "reviewed_by": null,
+    "review_notes": "",
+    "created_at": "2025-08-21T23:10:00.368Z",
+    "updated_at": "2025-08-22T08:14:39.773Z"
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 1,
+  "fields": {
+    "course": 1,
+    "title": "Getting Started with YITP",
+    "description": "Introduction to the Youth Impact Training Programme platform and learning system",
+    "sort_order": 1,
+    "is_published": true,
+    "unlock_criteria": {},
+    "estimated_duration": 25,
+    "created_at": "2025-08-01T18:26:23.276Z",
+    "updated_at": "2025-08-01T18:26:23.276Z"
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 2,
+  "fields": {
+    "course": 2,
+    "title": "Module 1: Introduction to Purpose",
+    "description": "Understanding the fundamentals of finding your purpose in life",
+    "sort_order": 1,
+    "is_published": true,
+    "unlock_criteria": {},
+    "estimated_duration": 60,
+    "created_at": "2025-08-13T15:58:35.784Z",
+    "updated_at": "2025-08-13T15:58:35.787Z"
+  }
+},
+{
+  "model": "courses.module",
+  "pk": 11,
+  "fields": {
+    "course": 5,
+    "title": "Module 1 — UPL 101 Full Module",
+    "description": "A complete module combining UPL 101 content (foundations, definiteness of purpose, service, and purpose-in-action) into one coherent learning path.",
+    "sort_order": 1,
+    "is_published": true,
+    "unlock_criteria": {},
+    "estimated_duration": 325,
+    "created_at": "2025-08-21T23:10:00.718Z",
+    "updated_at": "2025-08-21T23:10:00.718Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 1,
+  "fields": {
+    "module": 1,
+    "title": "Welcome to Youth Impact Training Programme",
+    "content_type": "text",
+    "content": "\n    <div style=\"font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;\">\n        <div style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%); color: white; padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;\">\n            <h1 style=\"margin: 0; font-size: 2.5em;\">Welcome to YITP! 🎓</h1>\n            <p style=\"margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.9;\">Your Learning Journey Begins Here</p>\n        </div>\n\n        <div style=\"background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #ff5d15;\">\n            <h2 style=\"color: #1a2e53; margin-top: 0;\">🌟 What is YITP?</h2>\n            <p style=\"line-height: 1.6; color: #333;\">\n                The <strong>Youth Impact Training Programme (YITP)</strong> is a transformational educational initiative designed to empower young people with the skills, knowledge, and confidence they need to create positive change in their communities and beyond.\n            </p>\n            <p style=\"line-height: 1.6; color: #333;\">\n                Our mission is simple yet powerful: <em>\"Transforming lives through accessible, high-quality education that builds leaders for tomorrow.\"</em>\n            </p>\n        </div>\n\n        <div style=\"background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);\">\n            <h2 style=\"color: #1a2e53; margin-top: 0;\">🎯 Our Core Values</h2>\n            <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;\">\n                <div style=\"padding: 15px; background: #fff5f0; border-radius: 6px; border: 1px solid #ff5d15;\">\n                    <h3 style=\"color: #ff5d15; margin-top: 0;\">💡 Innovation</h3>\n                    <p style=\"margin-bottom: 0; color: #666;\">Embracing new ideas and creative solutions to drive positive change.</p>\n                </div>\n                <div style=\"padding: 15px; background: #f0f4ff; border-radius: 6px; border: 1px solid #1a2e53;\">\n                    <h3 style=\"color: #1a2e53; margin-top: 0;\">🤝 Collaboration</h3>\n                    <p style=\"margin-bottom: 0; color: #666;\">Working together to achieve greater impact than we could alone.</p>\n                </div>\n                <div style=\"padding: 15px; background: #f0fff0; border-radius: 6px; border: 1px solid #28a745;\">\n                    <h3 style=\"color: #28a745; margin-top: 0;\">🌱 Growth</h3>\n                    <p style=\"margin-bottom: 0; color: #666;\">Continuous learning and development for personal and professional excellence.</p>\n                </div>\n            </div>\n        </div>\n\n        <div style=\"background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);\">\n            <h2 style=\"color: #1a2e53; margin-top: 0;\">🧭 Navigating Your YITP Learning Platform</h2>\n            <p style=\"line-height: 1.6; color: #333;\">\n                Our learning platform is designed to be intuitive and user-friendly. Here's how to make the most of your learning experience:\n            </p>\n            \n            <div style=\"margin: 20px 0;\">\n                <h3 style=\"color: #ff5d15;\">📊 Dashboard</h3>\n                <p style=\"color: #666; margin-left: 20px;\">Your central hub showing course progress, upcoming assignments, and achievements.</p>\n                \n                <h3 style=\"color: #ff5d15;\">📚 Course Catalog</h3>\n                <p style=\"color: #666; margin-left: 20px;\">Browse and enroll in courses that match your interests and career goals.</p>\n                \n                <h3 style=\"color: #ff5d15;\">📈 Progress Tracking</h3>\n                <p style=\"color: #666; margin-left: 20px;\">Monitor your learning journey with detailed progress reports and completion certificates.</p>\n                \n                <h3 style=\"color: #ff5d15;\">💬 Support Center</h3>\n                <p style=\"color: #666; margin-left: 20px;\">Get help when you need it through our comprehensive support resources.</p>\n            </div>\n        </div>\n\n        <div style=\"background: #fff5f0; padding: 25px; border-radius: 8px; margin-bottom: 25px; border: 2px solid #ff5d15;\">\n            <h2 style=\"color: #1a2e53; margin-top: 0;\">📋 How to Complete Assignments & Track Progress</h2>\n            <ol style=\"line-height: 1.8; color: #333;\">\n                <li><strong>Read Each Lesson Carefully:</strong> Take your time to understand the content before moving forward.</li>\n                <li><strong>Complete Knowledge Checks:</strong> Each lesson includes quizzes to test your understanding (70% passing score required).</li>\n                <li><strong>Track Your Progress:</strong> Use the progress bar to see how much of the course you've completed.</li>\n                <li><strong>Earn Your Certificate:</strong> Successfully complete all lessons and assessments to receive your completion certificate.</li>\n                <li><strong>Apply Your Learning:</strong> Use the knowledge and skills you've gained in real-world situations.</li>\n            </ol>\n        </div>\n\n        <div style=\"background: #f0f4ff; padding: 25px; border-radius: 8px; margin-bottom: 25px; border: 2px solid #1a2e53;\">\n            <h2 style=\"color: #1a2e53; margin-top: 0;\">🆘 Support Resources & Contact Information</h2>\n            <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;\">\n                <div>\n                    <h3 style=\"color: #ff5d15;\">📧 Email Support</h3>\n                    <p style=\"color: #666;\">For technical issues or course questions:<br>\n                    <strong>youthimpactglobal3@gmail.com</strong></p>\n                </div>\n                <div>\n                    <h3 style=\"color: #ff5d15;\">📚 Help Center</h3>\n                    <p style=\"color: #666;\">Access our comprehensive FAQ and tutorial library through the platform's Help section.</p>\n                </div>\n                <div>\n                    <h3 style=\"color: #ff5d15;\">⏰ Response Time</h3>\n                    <p style=\"color: #666;\">We typically respond to support requests within 24 hours during business days.</p>\n                </div>\n                <div>\n                    <h3 style=\"color: #ff5d15;\">🌐 Community</h3>\n                    <p style=\"color: #666;\">Connect with fellow learners through our discussion forums and study groups.</p>\n                </div>\n            </div>\n        </div>\n\n        <div style=\"background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 25px; border-radius: 8px; text-align: center;\">\n            <h2 style=\"margin-top: 0;\">🚀 Ready to Begin Your Journey?</h2>\n            <p style=\"font-size: 1.1em; margin-bottom: 20px;\">\n                Congratulations! You now have everything you need to succeed on the YITP platform. \n                Remember, every expert was once a beginner, and every journey starts with a single step.\n            </p>\n            <p style=\"font-size: 1.2em; font-weight: bold; margin-bottom: 0;\">\n                Let's transform your potential into impact! 💪\n            </p>\n        </div>\n    </div>\n    ",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 1,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "",
+    "resources": [],
+    "created_at": "2025-08-01T18:26:23.757Z",
+    "updated_at": "2025-08-01T18:26:23.761Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 2,
+  "fields": {
+    "module": 2,
+    "title": "Lesson 1: What is Purpose?",
+    "content_type": "",
+    "content": "<h2>Welcome to Understanding Purpose in Life</h2><p>In this lesson, we will explore the fundamental concepts of purpose and how it shapes our lives.</p><p>Purpose is the reason for which something is done or created or for which something exists. When it comes to personal purpose, it is about understanding your why - the driving force behind your actions and decisions.</p><h3>Key Topics:</h3><ul><li>Defining personal purpose</li><li>The importance of purpose in life</li><li>How to discover your purpose</li><li>Living with intention</li></ul>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 1,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 30,
+    "learning_objectives": "",
+    "resources": [],
+    "created_at": "2025-08-13T15:58:35.995Z",
+    "updated_at": "2025-08-13T15:58:36.046Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 59,
+  "fields": {
+    "module": 11,
+    "title": "Story of the Three Builders: Purpose & Meaning",
+    "content_type": "html",
+    "content": "<h3>The Story of the Three Builders</h3><p>Based on the rebuilding of St. Paul’s Cathedral (1666). Three bricklayers respond differently to the same task—earning money, building a strong wall, building a cathedral where people gather and pray. The lesson: <em>Everything is an inside job.</em> How we interpret action flows from purpose and mindset.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 1,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Retell the bricklayers story and extract its purpose lens (‘inside job’).",
+    "resources": [
+      {
+        "url": "",
+        "type": "text",
+        "title": "Facilitator Prompt: Three Builders"
+      }
+    ],
+    "created_at": "2025-08-21T23:10:00.884Z",
+    "updated_at": "2025-08-21T23:30:51.565Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 60,
+  "fields": {
+    "module": 11,
+    "title": "Seven Questions for Purpose Clarity (Part A)",
+    "content_type": "html",
+    "content": "<h3>Seven Questions for Clarity (1–4)</h3><ol><li>What makes you feel most alive?</li><li>What problem in the world gets you most emotionally charged?</li><li>What are you naturally good at?</li><li>What is your life’s most meaningful event or experience?</li></ol><p>Journaling prompts accompany each question.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 2,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Apply questions 1–4 to personal reflection; capture 3–5 insights.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:01.053Z",
+    "updated_at": "2025-08-21T23:30:51.737Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 61,
+  "fields": {
+    "module": 11,
+    "title": "Seven Questions for Purpose Clarity (Part B)",
+    "content_type": "html",
+    "content": "<h3>Seven Questions for Clarity (5–7)</h3><ol start='5'><li>What would you do if you had zero fear?</li><li>Who is your idol, living or dead, and why?</li><li>What do you want to be your enduring legacy?</li></ol>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 3,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Apply questions 5–7; draft 3–5 sentence personal insights.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:01.236Z",
+    "updated_at": "2025-08-21T23:30:51.912Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 62,
+  "fields": {
+    "module": 11,
+    "title": "Purpose vs. Vision vs. Goals",
+    "content_type": "html",
+    "content": "<h3>Definitions & Flow</h3><ul><li><strong>Purpose</strong>: reason for being.</li><li><strong>Vision</strong>: anticipated future; direction for outcomes.</li><li><strong>Goals</strong>: specific, desired outcomes guiding action.</li></ul><p>Sequence: Purpose → Vision → Goals.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 4,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Differentiate purpose, vision, and goals; explain sequencing.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:01.399Z",
+    "updated_at": "2025-08-21T23:30:52.081Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 63,
+  "fields": {
+    "module": 11,
+    "title": "Purpose-Driven Lives: Gandhi",
+    "content_type": "html",
+    "content": "<h3>Gandhi: Non-violence & Integrity</h3><p>Gandhi emphasized living, thinking, and acting rightly; non-violent resistance; and liberation.</p><blockquote>“The main purpose of life is to live rightly, think rightly, act rightly. The soul must languish when we give all our thought to the body.”</blockquote>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 5,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Identify Gandhi’s purpose and one behavior to emulate this week.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:01.560Z",
+    "updated_at": "2025-08-21T23:30:52.262Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 64,
+  "fields": {
+    "module": 11,
+    "title": "Purpose-Driven Lives: Mandela & Mother Teresa",
+    "content_type": "html",
+    "content": "<h3>Mandela & Mother Teresa</h3><p>Mandela: justice, unity, courage, forgiveness; Mother Teresa: compassion, doing small things with great love.</p><blockquote>“For to be free is not merely to cast off one’s chains, but to live in a way that respects and enhances the freedom of others.” — Nelson Mandela</blockquote>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 6,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Describe how resilience and compassion express purpose; select one behavior to practice.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:01.730Z",
+    "updated_at": "2025-08-21T23:30:52.434Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 65,
+  "fields": {
+    "module": 11,
+    "title": "The Baobab—‘Tree of Life’: Service Orientation",
+    "content_type": "html",
+    "content": "<h3>The Baobab Tree</h3><p>A legendary ‘tree of life’ sustaining communities via fruit, water storage, shelter; a metaphor that true purpose sustains others and serves the community.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 7,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Explain the Baobab metaphor and connect it to service as purpose.",
+    "resources": [
+      {
+        "url": "https://www.oneearth.org/species-of-the-week-african-baobab-tree/",
+        "type": "article",
+        "title": "One Earth — African Baobab Tree"
+      }
+    ],
+    "created_at": "2025-08-21T23:10:01.894Z",
+    "updated_at": "2025-08-21T23:30:52.607Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 66,
+  "fields": {
+    "module": 11,
+    "title": "Major vs. Minor Purposes",
+    "content_type": "html",
+    "content": "<p>You have a major (life) purpose and minor purposes that should feed into the major purpose.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 8,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Distinguish major and minor purposes; align examples accordingly.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:02.089Z",
+    "updated_at": "2025-08-21T23:30:52.778Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 67,
+  "fields": {
+    "module": 11,
+    "title": "Reflection Journal — ‘When did I feel most alive?’",
+    "content_type": "html",
+    "content": "<p>Guided journaling: capture meaningful experiences; identify themes across moments of aliveness and fulfillment.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 9,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Journal to surface themes pointing to personal purpose.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:02.249Z",
+    "updated_at": "2025-08-21T23:30:52.950Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 68,
+  "fields": {
+    "module": 11,
+    "title": "Definiteness of Purpose — Overview",
+    "content_type": "html",
+    "content": "<h3>Definiteness of Purpose</h3><p>‘Get clear, get hungry, get moving, stay locked in.’ Napoleon Hill: ‘Definiteness of purpose is the starting point of all achievement.’</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 10,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Define and justify definiteness of purpose as driver of achievement.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:02.484Z",
+    "updated_at": "2025-08-21T23:30:53.122Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 69,
+  "fields": {
+    "module": 11,
+    "title": "From Vision to Daily Calendar — Consistent Action",
+    "content_type": "html",
+    "content": "<p>Create a flexible plan; convert purpose into daily micro-actions; track progress in calendar.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 11,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Draft 3 micro-actions aligned to definite purpose and schedule them.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:02.650Z",
+    "updated_at": "2025-08-21T23:30:53.306Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 70,
+  "fields": {
+    "module": 11,
+    "title": "Wheel of Life — Seven Spokes (Part A)",
+    "content_type": "html",
+    "content": "<p>Rate Career, Financial, Spiritual; identify one improvement for each.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 12,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Assess three domains and propose one improvement each.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:02.814Z",
+    "updated_at": "2025-08-21T23:30:53.475Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 71,
+  "fields": {
+    "module": 11,
+    "title": "Wheel of Life — Seven Spokes (Part B)",
+    "content_type": "html",
+    "content": "<p>Rate Physical, Intellectual, Family, Social; set one habit per domain.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 13,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Assess four domains and set one habit per domain.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:02.976Z",
+    "updated_at": "2025-08-21T23:30:53.695Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 72,
+  "fields": {
+    "module": 11,
+    "title": "Og Mandino’s Habits (Part A)",
+    "content_type": "html",
+    "content": "<p>Begin with gratitude; greet the day with love; persist until you succeed; live each day as if it is your last.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 14,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Explain first four habits and propose daily cues.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:03.143Z",
+    "updated_at": "2025-08-21T23:30:53.930Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 73,
+  "fields": {
+    "module": 11,
+    "title": "Og Mandino’s Habits (Part B)",
+    "content_type": "html",
+    "content": "<p>Master emotions; multiply your value; take action now.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 15,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Plan one ‘act now’ behavior for tomorrow morning.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:03.318Z",
+    "updated_at": "2025-08-21T23:30:54.263Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 74,
+  "fields": {
+    "module": 11,
+    "title": "‘Send the Elevator Back Down’ — Service as Legacy",
+    "content_type": "html",
+    "content": "<p>Mentoring and multiplying impact: success becomes legacy when you lift others as you rise.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 16,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Explain the proverb and identify one mentee to support this month.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:03.492Z",
+    "updated_at": "2025-08-21T23:30:54.513Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 75,
+  "fields": {
+    "module": 11,
+    "title": "Mother Teresa — Small Acts, Great Love",
+    "content_type": "html",
+    "content": "<p>Start where you are; see people, not problems; love through action; do small things well; keep your heart soft.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 17,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Identify 3 actionable small acts to perform this week.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:03.664Z",
+    "updated_at": "2025-08-21T23:30:54.714Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 76,
+  "fields": {
+    "module": 11,
+    "title": "Mandela — Unity, Justice, Forgiveness",
+    "content_type": "html",
+    "content": "<p>Choose unity; stand for justice; forgive to create the future; lead by example; see the bigger picture.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 18,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Translate one leadership principle into a behavior this week.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:03.834Z",
+    "updated_at": "2025-08-21T23:30:54.913Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 77,
+  "fields": {
+    "module": 11,
+    "title": "Humility & Selflessness — Five Practices",
+    "content_type": "html",
+    "content": "<p>Put mission above ego; listen; share the stage; serve unconditionally; stay grounded.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 19,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Explain five practices and choose one to apply today.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:04.014Z",
+    "updated_at": "2025-08-21T23:30:55.096Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 78,
+  "fields": {
+    "module": 11,
+    "title": "Folktale — The Tortoise and the Heavy Load",
+    "content_type": "html",
+    "content": "<p>Steady progress despite obstacles; take one micro-step at a time.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 20,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Name one ‘heavy load’ and one micro-step forward.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:04.184Z",
+    "updated_at": "2025-08-21T23:30:55.391Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 79,
+  "fields": {
+    "module": 11,
+    "title": "Fear vs. Faith; Courage; Inner Clarity",
+    "content_type": "html",
+    "content": "<p>Contrast fear and faith; rehearse courage; write a visualization script for breaking a barrier.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 21,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Draft a personal visualization script for overcoming an obstacle.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:04.362Z",
+    "updated_at": "2025-08-21T23:30:55.565Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 80,
+  "fields": {
+    "module": 11,
+    "title": "Drafting Your Purpose Statement (Part A)",
+    "content_type": "html",
+    "content": "<p>Align passions, strengths, and values; Success Afrika techniques for clarity.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 22,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Produce a first-draft purpose statement (3–5 sentences).",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:04.535Z",
+    "updated_at": "2025-08-21T23:30:55.735Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 81,
+  "fields": {
+    "module": 11,
+    "title": "Drafting Your Purpose Statement (Part B) — Peer Review",
+    "content_type": "html",
+    "content": "<p>Refine the draft using a peer feedback checklist; iterate to sharpen clarity and alignment.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 23,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Refine purpose statement via peer feedback.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:04.696Z",
+    "updated_at": "2025-08-21T23:30:55.905Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 82,
+  "fields": {
+    "module": 11,
+    "title": "Purpose into Schedule — Weekly Planner",
+    "content_type": "html",
+    "content": "<p>Convert purpose to time blocks; habits and time-management insights for sustainable action.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 24,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 10,
+    "learning_objectives": "Create a weekly schedule aligned with purpose.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:04.862Z",
+    "updated_at": "2025-08-21T23:30:56.073Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 83,
+  "fields": {
+    "module": 11,
+    "title": "Proverb — The Child & the Village",
+    "content_type": "html",
+    "content": "<p>‘The child who is not embraced by the village will burn it down to feel its warmth.’ Purpose thrives in connection and contribution.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 25,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Explain the proverb and propose one way to build belonging.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:05.023Z",
+    "updated_at": "2025-08-21T23:30:56.242Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 84,
+  "fields": {
+    "module": 11,
+    "title": "Anecdote — The Clay Lamp: Sharing Your Light",
+    "content_type": "html",
+    "content": "<p>A small lamp lights many others without losing its flame — sharing purpose multiplies it.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 26,
+    "is_published": true,
+    "is_mandatory": false,
+    "estimated_duration": 10,
+    "learning_objectives": "Identify one way to ‘light others’ this week.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:05.201Z",
+    "updated_at": "2025-08-21T23:30:56.417Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 85,
+  "fields": {
+    "module": 11,
+    "title": "Community Project Mini-Design",
+    "content_type": "html",
+    "content": "<p>Draft a small community project aligned to purpose: need, beneficiaries, activities, timeline, and metrics.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 27,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Produce a one-page mini-proposal for a community project.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:05.376Z",
+    "updated_at": "2025-08-21T23:30:56.586Z"
+  }
+},
+{
+  "model": "courses.lesson",
+  "pk": 86,
+  "fields": {
+    "module": 11,
+    "title": "River & Stone — Persistence and One-Year Plan",
+    "content_type": "html",
+    "content": "<p>Water shapes rock over time; build a 12-month action plan with milestones and review cadence.</p>",
+    "video_url": "",
+    "presentation_file": "",
+    "sort_order": 28,
+    "is_published": true,
+    "is_mandatory": true,
+    "estimated_duration": 15,
+    "learning_objectives": "Draft a 12-month action plan with quarterly milestones.",
+    "resources": [],
+    "created_at": "2025-08-21T23:10:05.583Z",
+    "updated_at": "2025-08-21T23:30:56.754Z"
+  }
+},
+{
+  "model": "assessments.quiz",
+  "pk": 1,
+  "fields": {
+    "lesson": 1,
+    "title": "YITP Platform Knowledge Check",
+    "description": "Test your understanding of the YITP platform and learning system. You need 70% to pass.",
+    "instructions": "Read each question carefully and select the best answer. You have 3 attempts to pass with 70% or higher.",
+    "time_limit": 10,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "is_randomized": false,
+    "show_results": true,
+    "is_published": true,
+    "created_at": "2025-08-01T18:26:24.245Z"
+  }
+},
+{
+  "model": "assessments.quiz",
+  "pk": 7,
+  "fields": {
+    "lesson": 59,
+    "title": "Foundations: Three Builders",
+    "description": "Knowledge check on the ‘inside job’ lens and purpose framing.",
+    "instructions": "Choose the best answer. Read explanations after each item.",
+    "time_limit": 5,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "is_randomized": true,
+    "show_results": true,
+    "is_published": false,
+    "created_at": "2025-08-21T23:10:08.035Z"
+  }
+},
+{
+  "model": "assessments.quiz",
+  "pk": 8,
+  "fields": {
+    "lesson": 62,
+    "title": "Purpose vs Vision vs Goals",
+    "description": "Check understanding of definitions and sequencing.",
+    "instructions": "Match terms and select correct statements.",
+    "time_limit": 7,
+    "max_attempts": 2,
+    "passing_score": 70,
+    "is_randomized": true,
+    "show_results": true,
+    "is_published": false,
+    "created_at": "2025-08-21T23:10:08.218Z"
+  }
+},
+{
+  "model": "assessments.quiz",
+  "pk": 9,
+  "fields": {
+    "lesson": 68,
+    "title": "Definiteness of Purpose",
+    "description": "Key ideas from Napoleon Hill and daily focus.",
+    "instructions": "Multiple choice & T/F.",
+    "time_limit": 7,
+    "max_attempts": 2,
+    "passing_score": 70,
+    "is_randomized": true,
+    "show_results": true,
+    "is_published": false,
+    "created_at": "2025-08-21T23:10:08.389Z"
+  }
+},
+{
+  "model": "assessments.quiz",
+  "pk": 10,
+  "fields": {
+    "lesson": 79,
+    "title": "Fear vs Faith & Courage",
+    "description": "Contrast key terms and visualize breakthrough.",
+    "instructions": "Multiple choice & short answer.",
+    "time_limit": 10,
+    "max_attempts": 2,
+    "passing_score": 70,
+    "is_randomized": true,
+    "show_results": true,
+    "is_published": false,
+    "created_at": "2025-08-21T23:10:08.568Z"
+  }
+},
+{
+  "model": "assessments.quiz",
+  "pk": 11,
+  "fields": {
+    "lesson": 86,
+    "title": "Purpose in Action — Planning",
+    "description": "Milestones and persistence check.",
+    "instructions": "T/F and fill-in-the-blank.",
+    "time_limit": 10,
+    "max_attempts": 2,
+    "passing_score": 70,
+    "is_randomized": true,
+    "show_results": true,
+    "is_published": false,
+    "created_at": "2025-08-21T23:10:08.813Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 1,
+  "fields": {
+    "quiz": 1,
+    "question_text": "What is the main mission of YITP (Youth Impact Training Programme)?",
+    "question_type": "multiple_choice",
+    "options": [
+      "To provide entertainment for young people",
+      "Transforming lives through accessible, high-quality education that builds leaders for tomorrow",
+      "To sell online courses for profit",
+      "To replace traditional education systems"
+    ],
+    "correct_answer": "Transforming lives through accessible, high-quality education that builds leaders for tomorrow",
+    "explanation": "",
+    "points": 10,
+    "sort_order": 1,
+    "created_at": "2025-08-01T18:26:24.728Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 2,
+  "fields": {
+    "quiz": 1,
+    "question_text": "What percentage score do you need to pass a YITP quiz?",
+    "question_type": "multiple_choice",
+    "options": [
+      "50%",
+      "60%",
+      "70%",
+      "80%"
+    ],
+    "correct_answer": "70%",
+    "explanation": "",
+    "points": 10,
+    "sort_order": 2,
+    "created_at": "2025-08-01T18:26:25.205Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 3,
+  "fields": {
+    "quiz": 1,
+    "question_text": "Which of the following are core values of YITP?",
+    "question_type": "multiple_choice",
+    "options": [
+      "Innovation",
+      "Collaboration",
+      "Growth",
+      "Competition"
+    ],
+    "correct_answer": "Innovation",
+    "explanation": "",
+    "points": 15,
+    "sort_order": 3,
+    "created_at": "2025-08-01T18:26:25.681Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 4,
+  "fields": {
+    "quiz": 1,
+    "question_text": "What is the primary email address for YITP support?",
+    "question_type": "multiple_choice",
+    "options": [
+      "support@yitp.com",
+      "youthimpactglobal3@gmail.com",
+      "help@youthimpact.org",
+      "info@yitp.edu"
+    ],
+    "correct_answer": "youthimpactglobal3@gmail.com",
+    "explanation": "",
+    "points": 10,
+    "sort_order": 4,
+    "created_at": "2025-08-01T18:26:26.157Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 5,
+  "fields": {
+    "quiz": 1,
+    "question_text": "How long does it typically take for YITP support to respond to requests?",
+    "question_type": "multiple_choice",
+    "options": [
+      "Within 1 hour",
+      "Within 24 hours during business days",
+      "Within 1 week",
+      "Support is not available"
+    ],
+    "correct_answer": "Within 24 hours during business days",
+    "explanation": "",
+    "points": 10,
+    "sort_order": 5,
+    "created_at": "2025-08-01T18:26:26.632Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 6,
+  "fields": {
+    "quiz": 1,
+    "question_text": "True or False: This introductory course is mandatory for all new YITP students.",
+    "question_type": "true_false",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correct_answer": "True",
+    "explanation": "",
+    "points": 10,
+    "sort_order": 6,
+    "created_at": "2025-08-01T18:26:27.109Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 7,
+  "fields": {
+    "quiz": 1,
+    "question_text": "What should you do if you need help while taking a course?",
+    "question_type": "multiple_choice",
+    "options": [
+      "Give up and quit the course",
+      "Skip the difficult parts",
+      "Contact support at youthimpactglobal3@gmail.com or use the Help Center",
+      "Guess the answers randomly"
+    ],
+    "correct_answer": "Contact support at youthimpactglobal3@gmail.com or use the Help Center",
+    "explanation": "",
+    "points": 15,
+    "sort_order": 7,
+    "created_at": "2025-08-01T18:26:27.585Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 8,
+  "fields": {
+    "quiz": 1,
+    "question_text": "What happens when you successfully complete all lessons and assessments in a YITP course?",
+    "question_type": "multiple_choice",
+    "options": [
+      "Nothing happens",
+      "You receive a completion certificate",
+      "You are automatically enrolled in the next course",
+      "You have to pay additional fees"
+    ],
+    "correct_answer": "You receive a completion certificate",
+    "explanation": "",
+    "points": 20,
+    "sort_order": 8,
+    "created_at": "2025-08-01T18:26:28.061Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 20,
+  "fields": {
+    "quiz": 7,
+    "question_text": "In the ‘Three Builders’ story, what best explains the third bricklayer’s response?",
+    "question_type": "multiple_choice",
+    "options": [
+      "He was paid more",
+      "He understood the larger purpose of his work",
+      "He worked fewer hours",
+      "He wanted recognition"
+    ],
+    "correct_answer": "He understood the larger purpose of his work",
+    "explanation": "The third bricklayer connected his task to a cathedral, showing a purpose-driven mindset (‘inside job’).",
+    "points": 1,
+    "sort_order": 1,
+    "created_at": "2025-08-21T23:10:08.980Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 21,
+  "fields": {
+    "quiz": 7,
+    "question_text": "True or False: Purpose and mindset shape how we interpret our daily actions.",
+    "question_type": "true_false",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correct_answer": "True",
+    "explanation": "The lesson emphasizes that interpretation flows from purpose and mindset.",
+    "points": 1,
+    "sort_order": 2,
+    "created_at": "2025-08-21T23:10:09.157Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 22,
+  "fields": {
+    "quiz": 7,
+    "question_text": "Fill in the blank: ‘Everything is an ____ job.’",
+    "question_type": "fill_blank",
+    "options": [],
+    "correct_answer": "inside",
+    "explanation": "The phrase from the lesson.",
+    "points": 1,
+    "sort_order": 3,
+    "created_at": "2025-08-21T23:10:09.328Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 23,
+  "fields": {
+    "quiz": 8,
+    "question_text": "Match each term to the best description.",
+    "question_type": "matching",
+    "options": [
+      {
+        "left": "Purpose",
+        "right_options": [
+          "Reason for being",
+          "Anticipated future",
+          "Specific outcomes"
+        ]
+      },
+      {
+        "left": "Vision",
+        "right_options": [
+          "Reason for being",
+          "Anticipated future",
+          "Specific outcomes"
+        ]
+      },
+      {
+        "left": "Goals",
+        "right_options": [
+          "Reason for being",
+          "Anticipated future",
+          "Specific outcomes"
+        ]
+      }
+    ],
+    "correct_answer": "{\"Purpose\":\"Reason for being\",\"Vision\":\"Anticipated future\",\"Goals\":\"Specific outcomes\"}",
+    "explanation": "Purpose → Vision → Goals sequence and definitions.",
+    "points": 3,
+    "sort_order": 1,
+    "created_at": "2025-08-21T23:10:09.497Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 24,
+  "fields": {
+    "quiz": 8,
+    "question_text": "True or False: Goals give rise to purpose.",
+    "question_type": "true_false",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correct_answer": "False",
+    "explanation": "Purpose begets vision; vision begets goals, not the other way around.",
+    "points": 1,
+    "sort_order": 2,
+    "created_at": "2025-08-21T23:10:09.670Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 25,
+  "fields": {
+    "quiz": 9,
+    "question_text": "According to Napoleon Hill, what is ‘the starting point of all achievement’?",
+    "question_type": "multiple_choice",
+    "options": [
+      "Positive thinking",
+      "Definiteness of purpose",
+      "Time management",
+      "Wealth creation"
+    ],
+    "correct_answer": "Definiteness of purpose",
+    "explanation": "This direct quotation anchors the lesson.",
+    "points": 1,
+    "sort_order": 1,
+    "created_at": "2025-08-21T23:10:09.840Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 26,
+  "fields": {
+    "quiz": 9,
+    "question_text": "Short Answer: List two elements of the ‘get clear, get hungry, get moving, stay locked in’ framework.",
+    "question_type": "short_answer",
+    "options": [],
+    "correct_answer": "Any two of: get clear; get hungry; get moving; stay locked in.",
+    "explanation": "Learners should recall at least two elements; partial credit per rubric.",
+    "points": 2,
+    "sort_order": 2,
+    "created_at": "2025-08-21T23:10:10.002Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 27,
+  "fields": {
+    "quiz": 10,
+    "question_text": "Which statement best contrasts fear and faith?",
+    "question_type": "multiple_choice",
+    "options": [
+      "Fear and faith are identical emotional states",
+      "Fear focuses on what can go wrong; faith focuses on what can be made right",
+      "Faith denies challenges exist",
+      "Fear guarantees failure"
+    ],
+    "correct_answer": "Fear focuses on what can go wrong; faith focuses on what can be made right",
+    "explanation": "The lesson contrasts orientation and focus, not denial of reality.",
+    "points": 1,
+    "sort_order": 1,
+    "created_at": "2025-08-21T23:10:10.178Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 28,
+  "fields": {
+    "quiz": 10,
+    "question_text": "Short Answer: Describe one courageous action you will take this week.",
+    "question_type": "short_answer",
+    "options": [],
+    "correct_answer": "Free response aligned to lesson content.",
+    "explanation": "Instructor reviews alignment and feasibility.",
+    "points": 2,
+    "sort_order": 2,
+    "created_at": "2025-08-21T23:10:10.348Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 29,
+  "fields": {
+    "quiz": 11,
+    "question_text": "True or False: Persistence works like water shaping rock over time.",
+    "question_type": "true_false",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correct_answer": "True",
+    "explanation": "This is the lesson’s core allegory.",
+    "points": 1,
+    "sort_order": 1,
+    "created_at": "2025-08-21T23:10:10.519Z"
+  }
+},
+{
+  "model": "assessments.question",
+  "pk": 30,
+  "fields": {
+    "quiz": 11,
+    "question_text": "Fill in the blank: A one-year plan should include quarterly ______.",
+    "question_type": "fill_blank",
+    "options": [],
+    "correct_answer": "milestones",
+    "explanation": "Milestones structure long-term progress.",
+    "points": 1,
+    "sort_order": 2,
+    "created_at": "2025-08-21T23:10:10.679Z"
+  }
+},
+{
+  "model": "assessments.assignment",
+  "pk": 7,
+  "fields": {
+    "lesson": 67,
+    "title": "Reflection Paper — When did I feel most alive?",
+    "description": "Reflective journaling on meaningful experiences and themes.",
+    "instructions": "Write 400–600 words connecting your experiences to the Seven Questions for Clarity.",
+    "assignment_type": "reflection",
+    "submission_format": "both",
+    "max_file_size": 10485760,
+    "allowed_file_types": [
+      "pdf",
+      "docx",
+      "txt"
+    ],
+    "due_date": null,
+    "max_score": 20,
+    "rubric": {
+      "criteria": [
+        {
+          "name": "Clarity & Depth",
+          "max_points": 8
+        },
+        {
+          "name": "Connection to Questions",
+          "max_points": 8
+        },
+        {
+          "name": "Mechanics & Organization",
+          "max_points": 4
+        }
+      ]
+    },
+    "is_peer_reviewed": false,
+    "created_at": "2025-08-21T23:10:10.854Z"
+  }
+},
+{
+  "model": "assessments.assignment",
+  "pk": 8,
+  "fields": {
+    "lesson": 71,
+    "title": "Personal Balance Snapshot",
+    "description": "Submit Wheel of Life scores and a 7-day micro-habit plan across seven domains.",
+    "instructions": "Attach your scores (0–10) and a table of daily actions for the next 7 days.",
+    "assignment_type": "project",
+    "submission_format": "both",
+    "max_file_size": 10485760,
+    "allowed_file_types": [
+      "pdf",
+      "docx",
+      "xlsx"
+    ],
+    "due_date": null,
+    "max_score": 30,
+    "rubric": {
+      "criteria": [
+        {
+          "name": "Completeness",
+          "max_points": 10
+        },
+        {
+          "name": "Realism",
+          "max_points": 10
+        },
+        {
+          "name": "Alignment with Purpose",
+          "max_points": 10
+        }
+      ]
+    },
+    "is_peer_reviewed": false,
+    "created_at": "2025-08-21T23:10:11.031Z"
+  }
+},
+{
+  "model": "assessments.assignment",
+  "pk": 9,
+  "fields": {
+    "lesson": 74,
+    "title": "Mentor-a-Peer Micro-Service",
+    "description": "Plan and execute one act of service/mentoring; document impact.",
+    "instructions": "Submit 500–700 words and evidence (photo/log).",
+    "assignment_type": "project",
+    "submission_format": "both",
+    "max_file_size": 10485760,
+    "allowed_file_types": [
+      "pdf",
+      "docx",
+      "jpg",
+      "png"
+    ],
+    "due_date": null,
+    "max_score": 30,
+    "rubric": {
+      "criteria": [
+        {
+          "name": "Humility & Service",
+          "max_points": 10
+        },
+        {
+          "name": "Impact & Evidence",
+          "max_points": 10
+        },
+        {
+          "name": "Reflection Depth",
+          "max_points": 10
+        }
+      ]
+    },
+    "is_peer_reviewed": false,
+    "created_at": "2025-08-21T23:10:11.196Z"
+  }
+},
+{
+  "model": "assessments.assignment",
+  "pk": 10,
+  "fields": {
+    "lesson": 81,
+    "title": "Purpose Statement (Revised)",
+    "description": "Upload a refined purpose statement after peer feedback.",
+    "instructions": "Provide a 3–5 sentence statement and a brief rationale (100–150 words).",
+    "assignment_type": "reflection",
+    "submission_format": "both",
+    "max_file_size": 10485760,
+    "allowed_file_types": [
+      "pdf",
+      "docx",
+      "txt"
+    ],
+    "due_date": null,
+    "max_score": 20,
+    "rubric": {
+      "criteria": [
+        {
+          "name": "Clarity",
+          "max_points": 8
+        },
+        {
+          "name": "Alignment (values/strengths)",
+          "max_points": 8
+        },
+        {
+          "name": "Mechanics",
+          "max_points": 4
+        }
+      ]
+    },
+    "is_peer_reviewed": false,
+    "created_at": "2025-08-21T23:10:11.356Z"
+  }
+},
+{
+  "model": "assessments.assignment",
+  "pk": 11,
+  "fields": {
+    "lesson": 85,
+    "title": "Community Project Mini-Design",
+    "description": "Design a small project aligned to purpose with need, beneficiaries, activities, and metrics.",
+    "instructions": "Submit a 1-page proposal (max 500 words) with timeline and success criteria.",
+    "assignment_type": "project",
+    "submission_format": "both",
+    "max_file_size": 10485760,
+    "allowed_file_types": [
+      "pdf",
+      "docx"
+    ],
+    "due_date": null,
+    "max_score": 40,
+    "rubric": {
+      "criteria": [
+        {
+          "name": "Clarity & Feasibility",
+          "max_points": 15
+        },
+        {
+          "name": "Alignment with Purpose",
+          "max_points": 15
+        },
+        {
+          "name": "Impact Metrics",
+          "max_points": 10
+        }
+      ]
+    },
+    "is_peer_reviewed": false,
+    "created_at": "2025-08-21T23:10:11.528Z"
+  }
+},
+{
+  "model": "assessments.assignment",
+  "pk": 12,
+  "fields": {
+    "lesson": 86,
+    "title": "One-Year Action Plan",
+    "description": "Create a 12-month action plan with quarterly milestones and review cadence.",
+    "instructions": "Upload plan (table or document) including milestones, habits, and support network.",
+    "assignment_type": "research",
+    "submission_format": "both",
+    "max_file_size": 10485760,
+    "allowed_file_types": [
+      "pdf",
+      "docx",
+      "xlsx"
+    ],
+    "due_date": null,
+    "max_score": 40,
+    "rubric": {
+      "criteria": [
+        {
+          "name": "Milestone Structure",
+          "max_points": 15
+        },
+        {
+          "name": "Feasibility & Resources",
+          "max_points": 15
+        },
+        {
+          "name": "Reflection & Risks",
+          "max_points": 10
+        }
+      ]
+    },
+    "is_peer_reviewed": false,
+    "created_at": "2025-08-21T23:10:11.697Z"
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 1,
+  "fields": {
+    "student": [
+      "yitpteam"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-02T14:57:00.241Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-02T16:20:14.850Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 3,
+  "fields": {
+    "student": [
+      "adminyitp"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-02T16:30:51.387Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "100.00",
+    "last_accessed": "2025-08-05T17:17:26.890Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 4,
+  "fields": {
+    "student": [
+      "terry67"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-02T17:32:21.086Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-02T17:32:54.233Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 5,
+  "fields": {
+    "student": [
+      "vik12"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-03T00:57:56.227Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-04T05:47:20.037Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 6,
+  "fields": {
+    "student": [
+      "enockomondi"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-04T06:17:01.742Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": null,
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 7,
+  "fields": {
+    "student": [
+      "CharlesMuhanji"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-04T09:08:50.040Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-05T06:46:18.381Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 8,
+  "fields": {
+    "student": [
+      "beryl"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-04T12:58:03.559Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-04T12:58:42.048Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 9,
+  "fields": {
+    "student": [
+      "Bushcasiuos"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-08T11:19:35.623Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-08T11:20:48.753Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 10,
+  "fields": {
+    "student": [
+      "yitpmain"
+    ],
+    "course": 1,
+    "enrollment_date": "2025-08-13T15:38:16.114Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-13T15:39:01.890Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 11,
+  "fields": {
+    "student": [
+      "yitpmain"
+    ],
+    "course": 2,
+    "enrollment_date": "2025-08-13T19:15:05.741Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": null,
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 12,
+  "fields": {
+    "student": [
+      "email_test_user"
+    ],
+    "course": 2,
+    "enrollment_date": "2025-08-13T19:41:36.830Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": null,
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 13,
+  "fields": {
+    "student": [
+      "ENOCK2"
+    ],
+    "course": 2,
+    "enrollment_date": "2025-08-13T20:06:16.535Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": "2025-08-13T20:06:48.578Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 14,
+  "fields": {
+    "student": [
+      "delete"
+    ],
+    "course": 2,
+    "enrollment_date": "2025-08-14T14:13:25.913Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": null,
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 15,
+  "fields": {
+    "student": [
+      "enock2"
+    ],
+    "course": 2,
+    "enrollment_date": "2025-08-14T16:01:39.040Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "100.00",
+    "last_accessed": "2025-08-14T16:02:01.415Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 16,
+  "fields": {
+    "student": [
+      "yitpmain"
+    ],
+    "course": 5,
+    "enrollment_date": "2025-08-21T23:16:16.857Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "21.43",
+    "last_accessed": "2025-08-21T23:59:41.430Z",
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.enrollment",
+  "pk": 17,
+  "fields": {
+    "student": [
+      "test_student"
+    ],
+    "course": 5,
+    "enrollment_date": "2025-08-22T06:17:41.604Z",
+    "completion_date": null,
+    "status": "active",
+    "progress_percentage": "0.00",
+    "last_accessed": null,
+    "certificate_issued": false,
+    "privacy_settings": {}
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 2,
+  "fields": {
+    "enrollment": 1,
+    "lesson": 1,
+    "status": "in_progress",
+    "started_at": "2025-08-02T15:05:22.158Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 3,
+  "fields": {
+    "enrollment": 3,
+    "lesson": 1,
+    "status": "completed",
+    "started_at": "2025-08-02T16:31:10.802Z",
+    "completed_at": "2025-08-05T17:16:37.269Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 4,
+  "fields": {
+    "enrollment": 4,
+    "lesson": 1,
+    "status": "in_progress",
+    "started_at": "2025-08-02T17:32:54.111Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 5,
+  "fields": {
+    "enrollment": 5,
+    "lesson": 1,
+    "status": "in_progress",
+    "started_at": "2025-08-03T01:00:21.346Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 6,
+  "fields": {
+    "enrollment": 7,
+    "lesson": 1,
+    "status": "in_progress",
+    "started_at": "2025-08-04T09:09:45.106Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 7,
+  "fields": {
+    "enrollment": 8,
+    "lesson": 1,
+    "status": "in_progress",
+    "started_at": "2025-08-04T12:58:41.929Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 8,
+  "fields": {
+    "enrollment": 9,
+    "lesson": 1,
+    "status": "in_progress",
+    "started_at": "2025-08-08T11:20:48.632Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 9,
+  "fields": {
+    "enrollment": 10,
+    "lesson": 1,
+    "status": "in_progress",
+    "started_at": "2025-08-13T15:39:01.771Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 10,
+  "fields": {
+    "enrollment": 13,
+    "lesson": 2,
+    "status": "in_progress",
+    "started_at": "2025-08-13T20:06:48.458Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 11,
+  "fields": {
+    "enrollment": 15,
+    "lesson": 2,
+    "status": "completed",
+    "started_at": "2025-08-14T16:02:01.294Z",
+    "completed_at": "2025-08-14T16:02:15.183Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 12,
+  "fields": {
+    "enrollment": 16,
+    "lesson": 59,
+    "status": "completed",
+    "started_at": "2025-08-21T23:40:51.547Z",
+    "completed_at": "2025-08-21T23:41:55.474Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 13,
+  "fields": {
+    "enrollment": 16,
+    "lesson": 60,
+    "status": "completed",
+    "started_at": "2025-08-21T23:42:13.934Z",
+    "completed_at": "2025-08-21T23:55:56.082Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 14,
+  "fields": {
+    "enrollment": 16,
+    "lesson": 61,
+    "status": "completed",
+    "started_at": "2025-08-21T23:56:06.925Z",
+    "completed_at": "2025-08-21T23:56:15.397Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 15,
+  "fields": {
+    "enrollment": 16,
+    "lesson": 62,
+    "status": "completed",
+    "started_at": "2025-08-21T23:56:27.002Z",
+    "completed_at": "2025-08-21T23:56:41.436Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 16,
+  "fields": {
+    "enrollment": 16,
+    "lesson": 63,
+    "status": "completed",
+    "started_at": "2025-08-21T23:56:53.547Z",
+    "completed_at": "2025-08-21T23:57:00.834Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 17,
+  "fields": {
+    "enrollment": 16,
+    "lesson": 64,
+    "status": "completed",
+    "started_at": "2025-08-21T23:57:11.114Z",
+    "completed_at": "2025-08-21T23:57:19.247Z",
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 18,
+  "fields": {
+    "enrollment": 16,
+    "lesson": 65,
+    "status": "in_progress",
+    "started_at": "2025-08-21T23:57:34.897Z",
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.lessonprogress",
+  "pk": 19,
+  "fields": {
+    "enrollment": 17,
+    "lesson": 59,
+    "status": "completed",
+    "started_at": null,
+    "completed_at": null,
+    "time_spent": 0,
+    "attempts": 0,
+    "score": null
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 1,
+  "fields": {
+    "student": [
+      "adminyitp"
+    ],
+    "quiz": 1,
+    "enrollment": 3,
+    "attempt_number": 1,
+    "started_at": "2025-08-02T16:31:59.453Z",
+    "completed_at": "2025-08-02T16:31:59.811Z",
+    "score": "75.00",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": true
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 2,
+  "fields": {
+    "student": [
+      "terry67"
+    ],
+    "quiz": 1,
+    "enrollment": 4,
+    "attempt_number": 1,
+    "started_at": "2025-08-02T17:36:02.745Z",
+    "completed_at": "2025-08-02T17:36:03.120Z",
+    "score": "62.50",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": false
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 3,
+  "fields": {
+    "student": [
+      "adminyitp"
+    ],
+    "quiz": 1,
+    "enrollment": 3,
+    "attempt_number": 1,
+    "started_at": "2025-08-02T23:02:06.986Z",
+    "completed_at": "2025-08-02T23:02:07.366Z",
+    "score": "50.00",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": false
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 4,
+  "fields": {
+    "student": [
+      "adminyitp"
+    ],
+    "quiz": 1,
+    "enrollment": 3,
+    "attempt_number": 1,
+    "started_at": "2025-08-02T23:06:03.600Z",
+    "completed_at": "2025-08-02T23:06:03.962Z",
+    "score": "12.50",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": false
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 5,
+  "fields": {
+    "student": [
+      "vik12"
+    ],
+    "quiz": 1,
+    "enrollment": 5,
+    "attempt_number": 1,
+    "started_at": "2025-08-03T01:05:23.489Z",
+    "completed_at": "2025-08-03T01:05:23.858Z",
+    "score": "100.00",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": true
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 6,
+  "fields": {
+    "student": [
+      "vik12"
+    ],
+    "quiz": 1,
+    "enrollment": 5,
+    "attempt_number": 1,
+    "started_at": "2025-08-04T05:48:18.520Z",
+    "completed_at": "2025-08-04T05:48:18.899Z",
+    "score": "50.00",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": false
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 7,
+  "fields": {
+    "student": [
+      "vik12"
+    ],
+    "quiz": 1,
+    "enrollment": 5,
+    "attempt_number": 1,
+    "started_at": "2025-08-04T05:49:31.627Z",
+    "completed_at": "2025-08-04T05:49:31.985Z",
+    "score": "100.00",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": true
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 8,
+  "fields": {
+    "student": [
+      "beryl"
+    ],
+    "quiz": 1,
+    "enrollment": 8,
+    "attempt_number": 1,
+    "started_at": "2025-08-04T13:00:55.746Z",
+    "completed_at": "2025-08-04T13:00:56.112Z",
+    "score": "87.50",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": true
+  }
+},
+{
+  "model": "progress.quizattempt",
+  "pk": 9,
+  "fields": {
+    "student": [
+      "Bushcasiuos"
+    ],
+    "quiz": 1,
+    "enrollment": 9,
+    "attempt_number": 1,
+    "started_at": "2025-08-08T11:29:16.304Z",
+    "completed_at": "2025-08-08T11:29:16.677Z",
+    "score": "87.50",
+    "answers": {},
+    "time_taken": null,
+    "is_passed": true
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 1,
+  "fields": {
+    "student": [
+      "adminyitp"
+    ],
+    "achievement_type": "quiz_performance",
+    "title": "Quiz Taker",
+    "description": "Passed your first quiz",
+    "badge_icon": "fas fa-question-circle",
+    "points": 15,
+    "earned_at": "2025-08-02T16:32:01.023Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 2,
+  "fields": {
+    "student": [
+      "vik12"
+    ],
+    "achievement_type": "quiz_performance",
+    "title": "Quiz Taker",
+    "description": "Passed your first quiz",
+    "badge_icon": "fas fa-question-circle",
+    "points": 15,
+    "earned_at": "2025-08-03T01:05:25.090Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 3,
+  "fields": {
+    "student": [
+      "vik12"
+    ],
+    "achievement_type": "perfect_score",
+    "title": "Perfectionist",
+    "description": "Achieved your first perfect score",
+    "badge_icon": "fas fa-star",
+    "points": 25,
+    "earned_at": "2025-08-03T01:05:25.571Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 4,
+  "fields": {
+    "student": [
+      "beryl"
+    ],
+    "achievement_type": "quiz_performance",
+    "title": "Quiz Taker",
+    "description": "Passed your first quiz",
+    "badge_icon": "fas fa-question-circle",
+    "points": 15,
+    "earned_at": "2025-08-04T13:00:57.318Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 5,
+  "fields": {
+    "student": [
+      "adminyitp"
+    ],
+    "achievement_type": "lesson_completion",
+    "title": "First Steps",
+    "description": "Completed your first lesson",
+    "badge_icon": "fas fa-baby",
+    "points": 10,
+    "earned_at": "2025-08-05T17:16:38.954Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 6,
+  "fields": {
+    "student": [
+      "Bushcasiuos"
+    ],
+    "achievement_type": "quiz_performance",
+    "title": "Quiz Taker",
+    "description": "Passed your first quiz",
+    "badge_icon": "fas fa-question-circle",
+    "points": 15,
+    "earned_at": "2025-08-08T11:29:17.890Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 7,
+  "fields": {
+    "student": [
+      "enock2"
+    ],
+    "achievement_type": "lesson_completion",
+    "title": "First Steps",
+    "description": "Completed your first lesson",
+    "badge_icon": "fas fa-baby",
+    "points": 10,
+    "earned_at": "2025-08-14T16:02:16.790Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 8,
+  "fields": {
+    "student": [
+      "yitpmain"
+    ],
+    "achievement_type": "lesson_completion",
+    "title": "First Steps",
+    "description": "Completed your first lesson",
+    "badge_icon": "fas fa-baby",
+    "points": 10,
+    "earned_at": "2025-08-21T23:41:57.064Z"
+  }
+},
+{
+  "model": "progress.achievement",
+  "pk": 9,
+  "fields": {
+    "student": [
+      "yitpmain"
+    ],
+    "achievement_type": "lesson_completion",
+    "title": "Getting Started",
+    "description": "Completed 5 lessons",
+    "badge_icon": "fas fa-seedling",
+    "points": 50,
+    "earned_at": "2025-08-21T23:57:02.295Z"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "yiptadmin00"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "16.67",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-07-31T21:52:11.021Z",
+    "updated_at": "2025-07-31T21:52:11.021Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "yitpteam"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-01T16:21:05.163Z",
+    "updated_at": "2025-08-01T16:21:05.163Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "MBUGUA"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": true,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-01T16:56:38.561Z",
+    "updated_at": "2025-08-01T16:59:33.878Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "rennypascal"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "+25478392992",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-01T17:37:09.475Z",
+    "updated_at": "2025-08-01T17:39:46.189Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "gershomokwemba"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0717201350",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T11:13:57.511Z",
+    "updated_at": "2025-08-02T11:15:11.534Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "Mei"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0745360792",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T11:29:13.174Z",
+    "updated_at": "2025-08-02T11:38:59.516Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "RichardMutie"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T11:38:40.171Z",
+    "updated_at": "2025-08-02T11:38:40.171Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "Freddy munga"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 1,
+    "last_reminder_sent": "2025-08-04T17:12:56.112Z",
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T12:12:22.221Z",
+    "updated_at": "2025-08-02T12:12:22.221Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "adminyitp"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "16.67",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T15:10:37.749Z",
+    "updated_at": "2025-08-05T17:16:38.593Z",
+    "total_points": 60,
+    "current_streak": 1,
+    "longest_streak": 1,
+    "last_activity_date": "2025-08-05"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 15,
+  "fields": {
+    "user": [
+      "Brill38d"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0714193384",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T16:59:43.635Z",
+    "updated_at": "2025-08-02T17:23:57.308Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "terry67"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0110942815",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T17:28:21.027Z",
+    "updated_at": "2025-08-02T17:29:34.599Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 17,
+  "fields": {
+    "user": [
+      "Euginelethal"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0728826517",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-02T18:33:09.482Z",
+    "updated_at": "2025-08-02T18:33:09.979Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 18,
+  "fields": {
+    "user": [
+      "vik12"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": true,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-03T00:51:49.941Z",
+    "updated_at": "2025-08-04T05:49:32.590Z",
+    "total_points": 120,
+    "current_streak": 2,
+    "longest_streak": 2,
+    "last_activity_date": "2025-08-04"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "opiyorobbinson2@gmail.com"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "+254110568423",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-03T03:43:37.756Z",
+    "updated_at": "2025-08-03T03:44:26.335Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "enockomondi"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0726436676",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T06:15:23.646Z",
+    "updated_at": "2025-08-04T06:16:17.463Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "Wycliffe"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0745585252",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T08:47:19.168Z",
+    "updated_at": "2025-08-04T08:48:00.275Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "CharlesMuhanji"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "+254114348590",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T09:04:34.646Z",
+    "updated_at": "2025-08-04T09:05:19.065Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "Veronicaaajiambo2021@gmail.com"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0704784494",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T10:05:58.055Z",
+    "updated_at": "2025-08-04T10:05:58.560Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "Val@2000"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0745370491",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T10:41:29.356Z",
+    "updated_at": "2025-08-04T10:41:29.859Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "Elna"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0793543612",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T11:45:07.064Z",
+    "updated_at": "2025-08-04T11:45:07.578Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 26,
+  "fields": {
+    "user": [
+      "Byron"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0790483365",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T12:47:32.429Z",
+    "updated_at": "2025-08-04T12:48:21.408Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "beryl"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0722646958",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T12:54:57.712Z",
+    "updated_at": "2025-08-04T13:00:56.713Z",
+    "total_points": 30,
+    "current_streak": 1,
+    "longest_streak": 1,
+    "last_activity_date": "2025-08-04"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "jaymesgachie"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0748859557",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T13:22:19.252Z",
+    "updated_at": "2025-08-04T13:23:47.128Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "Emmwa"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T17:11:12.836Z",
+    "updated_at": "2025-08-04T17:11:12.836Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "XPERESA247"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T17:11:13.716Z",
+    "updated_at": "2025-08-04T17:11:13.716Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "emmwa01"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-04T17:11:14.471Z",
+    "updated_at": "2025-08-04T17:11:14.471Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 36,
+  "fields": {
+    "user": [
+      "Morris"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0799211182",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-05T04:52:20.417Z",
+    "updated_at": "2025-08-05T04:53:40.979Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "Daniel otieno"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0705524297",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-05T07:04:27.436Z",
+    "updated_at": "2025-08-05T07:05:08.996Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 38,
+  "fields": {
+    "user": [
+      "Wendy112"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0768992556",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-06T12:11:29.895Z",
+    "updated_at": "2025-08-06T12:11:30.411Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 39,
+  "fields": {
+    "user": [
+      "Raphy"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0791232530",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-06T12:24:10.089Z",
+    "updated_at": "2025-08-06T12:24:10.592Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 40,
+  "fields": {
+    "user": [
+      "Petermumo"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": true,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-06T13:45:01.711Z",
+    "updated_at": "2025-08-06T13:47:14.178Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 42,
+  "fields": {
+    "user": [
+      "seanke"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0726436676",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-06T14:55:28.680Z",
+    "updated_at": "2025-08-06T14:56:47.128Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 43,
+  "fields": {
+    "user": [
+      "Dzeko"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0112352709",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-07T05:20:24.610Z",
+    "updated_at": "2025-08-07T05:20:25.125Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 44,
+  "fields": {
+    "user": [
+      "Bushcasiuos"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-08T10:55:39.366Z",
+    "updated_at": "2025-08-08T11:29:17.285Z",
+    "total_points": 30,
+    "current_streak": 1,
+    "longest_streak": 1,
+    "last_activity_date": "2025-08-08"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 45,
+  "fields": {
+    "user": [
+      "Owaksharon"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0795662800",
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": false,
+    "country": "Kenya",
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "phone",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-08T21:15:54.802Z",
+    "updated_at": "2025-08-08T21:15:55.317Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 48,
+  "fields": {
+    "user": [
+      "yitpmainmain"
+    ],
+    "image": "default.jpg",
+    "bio": "YITP Main Administrator Account - Full system access",
+    "phone_number": "+254700000000",
+    "payment_status": "confirmed",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "83.33",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": "Nairobi",
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "manual",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-09T18:11:26.887Z",
+    "updated_at": "2025-08-09T18:14:28.073Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 49,
+  "fields": {
+    "user": [
+      "chrisoyier"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": "Nairobi",
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "manual",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-09T18:29:07.924Z",
+    "updated_at": "2025-08-09T18:29:07.924Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 50,
+  "fields": {
+    "user": [
+      "yitpmain"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "confirmed",
+    "payment_confirmed_at": "2025-08-13T19:14:18.392Z",
+    "payment_method": null,
+    "payment_amount": "1.00",
+    "payment_reference": "YITP-20250813-96B65C55",
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "16.67",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-13T08:24:29.757Z",
+    "updated_at": "2025-08-21T23:57:20.317Z",
+    "total_points": 60,
+    "current_streak": 1,
+    "longest_streak": 1,
+    "last_activity_date": "2025-08-21"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 51,
+  "fields": {
+    "user": [
+      "NaomiJuma"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": true,
+    "country": "Kenya",
+    "city": "Nairobi",
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "ip",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-13T08:30:12.098Z",
+    "updated_at": "2025-08-13T14:37:58.871Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 52,
+  "fields": {
+    "user": [
+      "paypal_test_user"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-13T18:42:22.341Z",
+    "updated_at": "2025-08-13T18:42:22.341Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 53,
+  "fields": {
+    "user": [
+      "email_test_user"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-13T19:41:35.758Z",
+    "updated_at": "2025-08-13T19:41:35.759Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 54,
+  "fields": {
+    "user": [
+      "ENOCK2"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0700363057",
+    "payment_status": "confirmed",
+    "payment_confirmed_at": "2025-08-13T20:02:34.751Z",
+    "payment_method": null,
+    "payment_amount": "1.00",
+    "payment_reference": "YITP-20250813-3D9CFB27",
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-13T19:59:03.483Z",
+    "updated_at": "2025-08-13T20:02:34.751Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 61,
+  "fields": {
+    "user": [
+      "delete"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "+25478392992",
+    "payment_status": "confirmed",
+    "payment_confirmed_at": "2025-08-14T12:58:15.010Z",
+    "payment_method": null,
+    "payment_amount": "1.00",
+    "payment_reference": "YITP-20250814-F5FEC58C",
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-14T12:53:12.725Z",
+    "updated_at": "2025-08-14T12:58:15.011Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 62,
+  "fields": {
+    "user": [
+      "webhook_test_user"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-14T14:22:30.476Z",
+    "updated_at": "2025-08-14T14:22:30.476Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 63,
+  "fields": {
+    "user": [
+      "enock2"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": "0721115572",
+    "payment_status": "confirmed",
+    "payment_confirmed_at": "2025-08-14T15:58:18.602Z",
+    "payment_method": null,
+    "payment_amount": "2.00",
+    "payment_reference": "YITP-20250814-541B2055",
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "66.67",
+    "email_verified": true,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-14T15:53:48.978Z",
+    "updated_at": "2025-08-14T16:02:16.426Z",
+    "total_points": 10,
+    "current_streak": 1,
+    "longest_streak": 1,
+    "last_activity_date": "2025-08-14"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 64,
+  "fields": {
+    "user": [
+      "test_student"
+    ],
+    "image": "default.jpg",
+    "bio": "Edit your Bio!",
+    "phone_number": null,
+    "payment_status": "unpaid",
+    "payment_confirmed_at": null,
+    "payment_method": null,
+    "payment_amount": null,
+    "payment_reference": null,
+    "payment_notes": "",
+    "partial_payment_date": null,
+    "payment_expiration_date": null,
+    "installment_amount_paid": null,
+    "total_course_price": null,
+    "sponsorship_request": null,
+    "profile_completion_percentage": "50.00",
+    "email_verified": false,
+    "country": null,
+    "city": null,
+    "timezone_name": null,
+    "ip_address": null,
+    "location_source": "unknown",
+    "verification_reminder_count": 0,
+    "last_reminder_sent": null,
+    "reminder_emails_stopped": false,
+    "created_at": "2025-08-22T06:17:40.685Z",
+    "updated_at": "2025-08-22T06:17:40.685Z",
+    "total_points": 0,
+    "current_streak": 0,
+    "longest_streak": 0,
+    "last_activity_date": null
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "MBUGUA"
+    ],
+    "otp_code": "105473",
+    "created_at": "2025-08-01T16:56:39.175Z",
+    "expires_at": "2025-08-01T20:16:39.174Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "rennypascal"
+    ],
+    "otp_code": "843133",
+    "created_at": "2025-08-01T17:37:10.349Z",
+    "expires_at": "2025-08-01T20:57:10.348Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "gershomokwemba"
+    ],
+    "otp_code": "900339",
+    "created_at": "2025-08-02T11:13:58.373Z",
+    "expires_at": "2025-08-02T14:33:58.372Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "Mei"
+    ],
+    "otp_code": "491440",
+    "created_at": "2025-08-02T11:29:14.027Z",
+    "expires_at": "2025-08-02T14:49:14.027Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "Freddy munga"
+    ],
+    "otp_code": "913709",
+    "created_at": "2025-08-02T12:12:22.850Z",
+    "expires_at": "2025-08-02T15:32:22.850Z",
+    "is_verified": false,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "Brill38d"
+    ],
+    "otp_code": "749459",
+    "created_at": "2025-08-02T16:59:44.507Z",
+    "expires_at": "2025-08-02T20:19:44.506Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "terry67"
+    ],
+    "otp_code": "964764",
+    "created_at": "2025-08-02T17:28:21.875Z",
+    "expires_at": "2025-08-02T20:48:21.875Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "Euginelethal"
+    ],
+    "otp_code": "130573",
+    "created_at": "2025-08-02T18:33:10.344Z",
+    "expires_at": "2025-08-02T21:53:10.343Z",
+    "is_verified": false,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "vik12"
+    ],
+    "otp_code": "288476",
+    "created_at": "2025-08-03T00:51:50.566Z",
+    "expires_at": "2025-08-03T04:11:50.566Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "opiyorobbinson2@gmail.com"
+    ],
+    "otp_code": "690791",
+    "created_at": "2025-08-03T03:43:38.629Z",
+    "expires_at": "2025-08-03T07:03:38.629Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "enockomondi"
+    ],
+    "otp_code": "227608",
+    "created_at": "2025-08-04T06:15:24.509Z",
+    "expires_at": "2025-08-04T09:35:24.509Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 15,
+  "fields": {
+    "user": [
+      "Wycliffe"
+    ],
+    "otp_code": "370502",
+    "created_at": "2025-08-04T08:47:20.048Z",
+    "expires_at": "2025-08-04T12:07:20.048Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "CharlesMuhanji"
+    ],
+    "otp_code": "855299",
+    "created_at": "2025-08-04T09:04:35.524Z",
+    "expires_at": "2025-08-04T12:24:35.523Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 17,
+  "fields": {
+    "user": [
+      "Veronicaaajiambo2021@gmail.com"
+    ],
+    "otp_code": "084144",
+    "created_at": "2025-08-04T10:05:58.931Z",
+    "expires_at": "2025-08-04T13:25:58.931Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 18,
+  "fields": {
+    "user": [
+      "Val@2000"
+    ],
+    "otp_code": "173294",
+    "created_at": "2025-08-04T10:41:30.233Z",
+    "expires_at": "2025-08-04T14:01:30.233Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "Elna"
+    ],
+    "otp_code": "498287",
+    "created_at": "2025-08-04T11:45:07.951Z",
+    "expires_at": "2025-08-04T15:05:07.951Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "Byron"
+    ],
+    "otp_code": "234179",
+    "created_at": "2025-08-04T12:47:33.292Z",
+    "expires_at": "2025-08-04T16:07:33.292Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "beryl"
+    ],
+    "otp_code": "379418",
+    "created_at": "2025-08-04T12:54:58.576Z",
+    "expires_at": "2025-08-04T16:14:58.576Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "jaymesgachie"
+    ],
+    "otp_code": "591056",
+    "created_at": "2025-08-04T13:22:20.140Z",
+    "expires_at": "2025-08-04T16:42:20.140Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "yiptadmin00"
+    ],
+    "otp_code": "119394",
+    "created_at": "2025-08-04T17:10:46.327Z",
+    "expires_at": "2025-08-04T20:30:46.326Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "yitpteam"
+    ],
+    "otp_code": "397838",
+    "created_at": "2025-08-04T17:10:47.529Z",
+    "expires_at": "2025-08-04T20:30:47.528Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "adminyitp"
+    ],
+    "otp_code": "899046",
+    "created_at": "2025-08-04T17:10:48.513Z",
+    "expires_at": "2025-08-04T20:30:48.512Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 27,
+  "fields": {
+    "user": [
+      "RichardMutie"
+    ],
+    "otp_code": "132679",
+    "created_at": "2025-08-04T17:11:07.920Z",
+    "expires_at": "2025-08-04T20:31:07.522Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "Freddy munga"
+    ],
+    "otp_code": "515398",
+    "created_at": "2025-08-04T17:11:08.927Z",
+    "expires_at": "2025-08-04T20:31:08.536Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "Euginelethal"
+    ],
+    "otp_code": "160810",
+    "created_at": "2025-08-04T17:11:11.046Z",
+    "expires_at": "2025-08-04T20:31:10.669Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 30,
+  "fields": {
+    "user": [
+      "Morris"
+    ],
+    "otp_code": "000277",
+    "created_at": "2025-08-05T04:52:21.282Z",
+    "expires_at": "2025-08-05T08:12:21.281Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 31,
+  "fields": {
+    "user": [
+      "Daniel otieno"
+    ],
+    "otp_code": "376224",
+    "created_at": "2025-08-05T07:04:28.317Z",
+    "expires_at": "2025-08-05T10:24:28.317Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 32,
+  "fields": {
+    "user": [
+      "Wendy112"
+    ],
+    "otp_code": "446978",
+    "created_at": "2025-08-06T12:11:30.778Z",
+    "expires_at": "2025-08-06T15:31:30.777Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "Raphy"
+    ],
+    "otp_code": "628431",
+    "created_at": "2025-08-06T12:24:10.954Z",
+    "expires_at": "2025-08-06T15:44:10.954Z",
+    "is_verified": false,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "Raphy"
+    ],
+    "otp_code": "901715",
+    "created_at": "2025-08-06T12:25:09.856Z",
+    "expires_at": "2025-08-06T15:45:09.855Z",
+    "is_verified": false,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "Raphy"
+    ],
+    "otp_code": "783232",
+    "created_at": "2025-08-06T12:26:18.101Z",
+    "expires_at": "2025-08-06T15:46:18.101Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 36,
+  "fields": {
+    "user": [
+      "Petermumo"
+    ],
+    "otp_code": "114899",
+    "created_at": "2025-08-06T13:45:02.346Z",
+    "expires_at": "2025-08-06T17:05:02.345Z",
+    "is_verified": false,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "Petermumo"
+    ],
+    "otp_code": "205081",
+    "created_at": "2025-08-06T13:46:19.837Z",
+    "expires_at": "2025-08-06T17:06:19.836Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 39,
+  "fields": {
+    "user": [
+      "seanke"
+    ],
+    "otp_code": "351961",
+    "created_at": "2025-08-06T14:55:29.552Z",
+    "expires_at": "2025-08-06T18:15:29.552Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 40,
+  "fields": {
+    "user": [
+      "Dzeko"
+    ],
+    "otp_code": "086747",
+    "created_at": "2025-08-07T05:20:25.495Z",
+    "expires_at": "2025-08-07T08:40:25.495Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 41,
+  "fields": {
+    "user": [
+      "Owaksharon"
+    ],
+    "otp_code": "087608",
+    "created_at": "2025-08-08T21:15:55.686Z",
+    "expires_at": "2025-08-09T00:35:55.685Z",
+    "is_verified": false,
+    "is_used": false
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 42,
+  "fields": {
+    "user": [
+      "ENOCK2"
+    ],
+    "otp_code": "717138",
+    "created_at": "2025-08-13T19:59:04.337Z",
+    "expires_at": "2025-08-13T23:19:04.337Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 43,
+  "fields": {
+    "user": [
+      "delete"
+    ],
+    "otp_code": "424563",
+    "created_at": "2025-08-14T12:53:13.589Z",
+    "expires_at": "2025-08-14T16:13:13.588Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.otpverification",
+  "pk": 44,
+  "fields": {
+    "user": [
+      "enock2"
+    ],
+    "otp_code": "866818",
+    "created_at": "2025-08-14T15:53:49.866Z",
+    "expires_at": "2025-08-14T19:13:49.866Z",
+    "is_verified": true,
+    "is_used": true
+  }
+},
+{
+  "model": "users.sponsorshiprequest",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "yitpteam"
+    ],
+    "course": null,
+    "program": "youth_impact_training empowerment",
+    "program_other": "",
+    "amount_needed": "600.00",
+    "financial_situation": "student",
+    "financial_situation_other": "",
+    "reason": "jfjfjfjfjfjfjfjfjffjfufjdyjddddhdhdhhddhdhdhdhdht sghshfzfzrsfhvjgkhkhhlhkbjvhcdhdhhcfhdhhncckhcm hcmjknljpoargjhahlrwigfilvabwblr,aKbfvaliwrgbvksz,brfivawhrFPJAJRWgbakuwirlgfiavbliwrhufioaw",
+    "supporting_document": "",
+    "emergency_contact_name": "sean",
+    "emergency_contact_phone": "0726436676",
+    "emergency_contact_email": "srlgen.aken@gmail.com",
+    "emergency_contact_relationship": "kgkjgjg",
+    "status": "pending",
+    "admin_notes": "",
+    "approved_by": null,
+    "approved_at": null,
+    "rejection_reason": "",
+    "created_at": "2025-08-02T13:51:22.702Z",
+    "updated_at": "2025-08-02T13:51:22.702Z",
+    "reviewed_at": null,
+    "reviewed_by": null
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "yitpteam"
+    ],
+    "instructor_role": "course_instructor",
+    "bio": "",
+    "qualifications": "",
+    "years_experience": 0,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-08-01T16:21:06.586Z",
+    "updated_at": "2025-08-01T16:21:06.586Z",
+    "verified_at": null,
+    "verified_by": null,
+    "specializations": []
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "adminyitp"
+    ],
+    "instructor_role": "course_instructor",
+    "bio": "",
+    "qualifications": "",
+    "years_experience": 0,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-08-09T16:58:58.878Z",
+    "updated_at": "2025-08-09T17:06:22.561Z",
+    "verified_at": null,
+    "verified_by": null,
+    "specializations": []
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "chrisoyier"
+    ],
+    "instructor_role": "course_instructor",
+    "bio": "",
+    "qualifications": "",
+    "years_experience": 0,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-08-09T18:29:08.046Z",
+    "updated_at": "2025-08-09T18:29:08.046Z",
+    "verified_at": null,
+    "verified_by": null,
+    "specializations": []
+  }
+},
+{
+  "model": "users.instructorprofile",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "yitpmainmain"
+    ],
+    "instructor_role": "course_instructor",
+    "bio": "",
+    "qualifications": "",
+    "years_experience": 0,
+    "linkedin_url": "",
+    "website_url": "",
+    "office_hours": "",
+    "verification_status": "verified",
+    "is_active": true,
+    "can_create_courses": true,
+    "can_manage_assessments": true,
+    "can_view_analytics": true,
+    "created_at": "2025-08-10T16:56:28.246Z",
+    "updated_at": "2025-08-10T16:56:28.246Z",
+    "verified_at": null,
+    "verified_by": null,
+    "specializations": []
+  }
+},
+{
+  "model": "users.magiclinktoken",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "adminyitp"
+    ],
+    "token": "13:HwdIOST-EveWOMDSAWObCZtnjhtCkBz86gjwjttvJ1g:instructor_welcome:1ukmuL:eaBlzSJH1KRa1wdiW-q7oTkeJmv2AVnL8Fj9qp7Wv9c",
+    "token_hash": "35e109e1495d5d038f10a89b575ce0fb5afc25953e1704e16a9f88715dad9a6c",
+    "created_at": "2025-08-09T16:59:01.853Z",
+    "expires_at": "2025-08-19T16:59:01.614Z",
+    "used_at": null,
+    "is_used": false,
+    "purpose": "instructor_welcome",
+    "ip_address": null,
+    "user_agent": null
+  }
+},
+{
+  "model": "users.magiclinktoken",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "chrisoyier"
+    ],
+    "token": "46:hk3RYSvuQbP8TeN1E_mdX4dRCzOMd8_KHiNyRRHTvAw:instructor_welcome:1ukoJc:YhvS05nBgowBijAPI8uN5tgfPgIDArl1JXClljBQuvo",
+    "token_hash": "8dba934a8c4890102c40488b285e90e0f6d1e053255a0381bf55fa5a5d695dd6",
+    "created_at": "2025-08-09T18:29:12.832Z",
+    "expires_at": "2025-08-19T18:29:12.591Z",
+    "used_at": null,
+    "is_used": false,
+    "purpose": "instructor_welcome",
+    "ip_address": null,
+    "user_agent": null
+  }
+},
+{
+  "model": "users.magiclinktoken",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "yitpmainmain"
+    ],
+    "token": "45:ZonOA-BQDZbCg8vvsX69_1vEKgKLHP-c9chnNTuj5H4:instructor_welcome:1ul9LU:rXWOgm8R2nexsTHdKFmdLOTUc1C9J_9n8O0d_7eIBpg",
+    "token_hash": "5ef6cc742088b086204057a0449ca4257c384258228369b2765c994420ebdf35",
+    "created_at": "2025-08-10T16:56:32.267Z",
+    "expires_at": "2025-08-20T16:56:32.026Z",
+    "used_at": null,
+    "is_used": false,
+    "purpose": "instructor_welcome",
+    "ip_address": null,
+    "user_agent": null
+  }
+}
+]

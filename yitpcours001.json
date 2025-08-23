@@ -1,0 +1,274 @@
+{
+  "course": {
+    "title": "Youth Impact Training Programme (YITP)",
+    "description": "YITP is organized into six units designed to transform participants’ mindset, skills, and career prospects. Unit 1, Understanding Purpose in Life (UPL), focuses on discovering strengths, clarifying values, setting goals, and drafting a personal mission statement through self-discovery exercises and workshops.",
+    "learning_objectives": [
+      "Practice structured self-discovery and values clarification",
+      "Set goals aligned to purpose and career direction",
+      "Draft a personal mission/ purpose statement"
+    ],
+    "prerequisites": "",
+    "difficulty_level": "beginner",
+    "status": "draft",
+    "is_published": false,
+    "is_featured": false,
+    "category": "Personal Development"
+  },
+  "modules": [
+    {
+      "title": "Understanding Purpose in Life (UPL 101)",
+      "description": "An 8-lesson, 2-week part-time module guiding learners to define, live, and share a life purpose through African stories, classic personal-growth frameworks, reflective journaling, and peer activities.",
+      "sort_order": 1,
+      "estimated_duration": 600,
+      "is_published": false,
+      "unlock_criteria": {
+        "sequential_lessons": true,
+        "lesson_gates": [
+          { "lesson_sort_order": 2, "requires": { "quiz_title": "Lesson 1 Checkpoint", "min_score": 70 } },
+          { "lesson_sort_order": 3, "requires": { "quiz_title": "Lesson 2 Checkpoint", "min_score": 70 } }
+        ]
+      },
+      "lessons": [
+        {
+          "title": "Lesson 1: Introduction to Life’s Purpose",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Understand what purpose means and why it matters.</p><h3>Key Ideas</h3><ul><li>The Story of the Three Builders (cathedral vision).</li><li>7 Questions for Clarity.</li><li>Purpose → Vision → Goals; exemplars: Gandhi, Mandela, Mother Teresa.</li></ul><h3>Activity</h3><p>Reflective journaling: “When did I feel most alive and fulfilled?”</p>",
+          "presentation_file": "UPL-101-Lesson-1.pdf",
+          "sort_order": 1,
+          "estimated_duration": 60,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Define life purpose; distinguish purpose, vision, and goals; identify personal clarity signals.",
+          "resources": [
+            { "label": "Gandhi quote & context", "url": "https://example.com/gandhi-context" }
+          ],
+          "quiz": {
+            "title": "Lesson 1 Checkpoint",
+            "description": "Short check on core ideas from Lesson 1.",
+            "instructions": "Score ≥70% to unlock Lesson 2.",
+            "time_limit": null,
+            "max_attempts": 2,
+            "passing_score": 70,
+            "is_randomized": true,
+            "show_results": true,
+            "is_published": true,
+            "questions": [
+              {
+                "sort_order": 1,
+                "question_text": "In the Three Builders story, the third bricklayer describes himself as a…",
+                "question_type": "multiple_choice",
+                "options": ["Bricklayer", "Builder", "Cathedral builder", "Architect"],
+                "correct_answer": "Cathedral builder",
+                "explanation": "He connects his task to a larger, meaningful vision.",
+                "points": 5
+              },
+              {
+                "sort_order": 2,
+                "question_text": "How we interpret actions depends on the purpose behind them.",
+                "question_type": "true_false",
+                "correct_answer": true,
+                "explanation": "Mindset and purpose shape our interpretation of work.",
+                "points": 5
+              },
+              {
+                "sort_order": 3,
+                "question_text": "Which order is correct?",
+                "question_type": "multiple_choice",
+                "options": ["Goals → Purpose → Vision", "Purpose → Vision → Goals", "Vision → Goals → Purpose", "Goals → Vision → Purpose"],
+                "correct_answer": "Purpose → Vision → Goals",
+                "explanation": "Purpose begets vision; vision begets goals.",
+                "points": 5
+              },
+              {
+                "sort_order": 4,
+                "question_text": "The 7 Questions are intended to help discover one’s purpose.",
+                "question_type": "true_false",
+                "correct_answer": true,
+                "explanation": "They are a guided self-discovery prompt set.",
+                "points": 5
+              },
+              {
+                "sort_order": 5,
+                "question_text": "Which leader is correctly paired with the theme highlighted in this lesson?",
+                "question_type": "multiple_choice",
+                "options": [
+                  "Gandhi — compassion in Calcutta",
+                  "Mandela — nonviolence in India",
+                  "Mother Teresa — nonviolent resistance",
+                  "Mandela — fight for justice"
+                ],
+                "correct_answer": "Mandela — fight for justice",
+                "explanation": "Mandela’s purpose centered on liberation and justice.",
+                "points": 5
+              }
+            ]
+          }
+        },
+        {
+          "title": "Lesson 2: Foundations of Purpose",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Explore foundational principles for finding purpose.</p><h3>Key Ideas</h3><ul><li>Baobab “Tree of Life” — service and sustenance.</li><li>Napoleon Hill: Definiteness of Purpose — get clear, fuel desire, act daily.</li><li>Zig Ziglar’s Wheel of Life — balanced growth across domains.</li></ul><h3>Activity</h3><p>Rate your Wheel of Life and identify one improvement in each spoke.</p>",
+          "presentation_file": "UPL-101-Lesson-2.pdf",
+          "sort_order": 2,
+          "estimated_duration": 90,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Explain ‘definiteness of purpose’; connect purpose to service; apply the Wheel of Life.",
+          "resources": [
+            { "label": "African Baobab (One Earth)", "url": "https://www.oneearth.org/species-of-the-week-african-baobab-tree/" }
+          ],
+          "quiz": {
+            "title": "Lesson 2 Checkpoint",
+            "description": "Short check on Lesson 2 concepts.",
+            "instructions": "Score ≥70% to unlock Lesson 3.",
+            "time_limit": null,
+            "max_attempts": 2,
+            "passing_score": 70,
+            "is_randomized": true,
+            "show_results": true,
+            "is_published": true,
+            "questions": [
+              {
+                "sort_order": 1,
+                "question_text": "The baobab is called the “tree of life” because it sustains communities with food and water storage.",
+                "question_type": "true_false",
+                "correct_answer": true,
+                "explanation": "It stores water and produces nutrient-dense fruit.",
+                "points": 5
+              },
+              {
+                "sort_order": 2,
+                "question_text": "A key takeaway from the baobab story is:",
+                "question_type": "multiple_choice",
+                "options": [
+                  "Purpose is only personal, not about service",
+                  "Minor purposes must replace the major purpose",
+                  "Life purpose includes serving others",
+                  "Purpose means avoiding challenges"
+                ],
+                "correct_answer": "Life purpose includes serving others",
+                "explanation": "Service is central to sustainable purpose.",
+                "points": 5
+              },
+              {
+                "sort_order": 3,
+                "question_text": "Hill’s ‘Definiteness of Purpose’ emphasizes first:",
+                "question_type": "multiple_choice",
+                "options": [
+                  "Start action randomly",
+                  "Know exactly what you want",
+                  "Avoid planning",
+                  "Ignore desire"
+                ],
+                "correct_answer": "Know exactly what you want",
+                "explanation": "Clarity precedes planning and action.",
+                "points": 5
+              },
+              {
+                "sort_order": 4,
+                "question_text": "The Wheel of Life suggests balancing multiple domains to avoid a ‘wobbly ride’.",
+                "question_type": "true_false",
+                "correct_answer": true,
+                "explanation": "Imbalance across spokes disrupts progress.",
+                "points": 5
+              },
+              {
+                "sort_order": 5,
+                "question_text": "Which daily habit aligns with Og Mandino’s approach?",
+                "question_type": "multiple_choice",
+                "options": [
+                  "Delay action until conditions are perfect",
+                  "Keep emotions unmanaged",
+                  "Practice daily gratitude",
+                  "Avoid learning new skills"
+                ],
+                "correct_answer": "Practice daily gratitude",
+                "explanation": "Gratitude is a core Mandino habit.",
+                "points": 5
+              }
+            ]
+          }
+        },
+        {
+          "title": "Lesson 3: Purpose and Service",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Connect personal purpose to service.</p><h3>Key Ideas</h3><ul><li>“Send the Elevator Back Down” proverb — mentorship and opportunity.</li><li>Lessons from Mother Teresa and Nelson Mandela.</li><li>Humility and selflessness as foundations of service.</li></ul><h3>Activity</h3><p>Reflection: Who are you serving today and how?</p>",
+          "presentation_file": "UPL-101-Lesson-3.pdf",
+          "sort_order": 3,
+          "estimated_duration": 60,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Describe how service multiplies impact; identify practical acts of daily service.",
+          "resources": []
+        },
+        {
+          "title": "Lesson 4: Overcoming Obstacles to Purpose",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Push through internal and external challenges.</p><h3>Key Ideas</h3><ul><li>Folktale: Tortoise and the Heavy Load.</li><li>Fear vs. faith; courage in adversity.</li><li>Building inner clarity.</li></ul><h3>Activity</h3><p>Visualization: picture breaking through a major barrier.</p>",
+          "presentation_file": "UPL-101-Lesson-4.pdf",
+          "sort_order": 4,
+          "estimated_duration": 60,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Recognize typical blockers; apply visualization for resilience.",
+          "resources": []
+        },
+        {
+          "title": "Lesson 5: Tools to Define Your Purpose",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Craft a personal purpose statement.</p><h3>Key Ideas</h3><ul><li>Anecdote: Fisherman & Merchant.</li><li>Success Afrika techniques; passions & strengths; values alignment.</li></ul><h3>Activity</h3><p>Draft your purpose statement and get peer feedback.</p>",
+          "presentation_file": "UPL-101-Lesson-5.pdf",
+          "sort_order": 5,
+          "estimated_duration": 90,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Synthesize passions, strengths, and values into a clear statement.",
+          "resources": []
+        },
+        {
+          "title": "Lesson 6: Purpose in Action",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Integrate purpose into daily living.</p><h3>Key Ideas</h3><ul><li>Proverb: “The child who is not embraced by the village…”</li><li>Purposeful habits; time management; African exemplars.</li></ul><h3>Activity</h3><p>Create a weekly schedule aligned with your purpose.</p>",
+          "presentation_file": "UPL-101-Lesson-6.pdf",
+          "sort_order": 6,
+          "estimated_duration": 90,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Plan habitual, time-bound actions aligned to purpose.",
+          "resources": []
+        },
+        {
+          "title": "Lesson 7: Sharing & Sustaining Your Purpose",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Inspire others and sustain momentum.</p><h3>Key Ideas</h3><ul><li>Clay Lamp story; Zig Ziglar’s ‘help others get what they want’.</li><li>Ongoing growth via Success Afrika and other resources.</li></ul><h3>Activity</h3><p>Design a small community project that reflects your purpose.</p>",
+          "presentation_file": "UPL-101-Lesson-7.pdf",
+          "sort_order": 7,
+          "estimated_duration": 90,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Translate purpose into community impact and mentorship.",
+          "resources": []
+        },
+        {
+          "title": "Lesson 8: Reflection & Forward Planning",
+          "content_type": "text",
+          "content": "<h2>Objective</h2><p>Consolidate learning and set a clear path forward.</p><h3>Key Ideas</h3><ul><li>Allegory: River & Stone — persistence shapes outcomes.</li><li>Review purpose statements; resilience strategies; inspiring by example.</li></ul><h3>Activity</h3><p>Present purpose statements and one-year action plans.</p>",
+          "presentation_file": "UPL-101-Lesson-8.pdf",
+          "sort_order": 8,
+          "estimated_duration": 60,
+          "is_mandatory": true,
+          "is_published": false,
+          "learning_objectives": "Finalize a purpose statement and a 12-month action plan.",
+          "resources": []
+        }
+      ],
+      "module_resources": [
+        { "label": "Success Afrika YouTube", "url": "https://www.youtube.com/" },
+        { "label": "Success.com (purpose & productivity)", "url": "https://www.success.com/" },
+        { "label": "Book: Think and Grow Rich — Napoleon Hill", "url": "" },
+        { "label": "Book: The Greatest Salesman in the World — Og Mandino", "url": "" },
+        { "label": "Book: See You at the Top — Zig Ziglar", "url": "" }
+      ]
+    }
+  ]
+}
