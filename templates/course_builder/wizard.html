@@ -296,6 +296,80 @@
         color: #28a745;
         font-weight: bold;
     }
+
+    /* Enhanced Multi-Content Lesson Editor Styles */
+    .resources-container {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .resource-item {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: white;
+        transition: all 0.3s ease;
+    }
+
+    .resource-item:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .resource-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .resource-type-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .resource-preview {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+
+    .template-card {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .template-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .template-card.selected {
+        border-color: #ff5d15;
+        background: #fff5f0;
+    }
+
+    .template-preview {
+        max-height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .template-preview::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: linear-gradient(transparent, white);
+    }
 </style>
 {% endblock %}
 
@@ -433,6 +507,85 @@
 
                 <div class="row">
                     <div class="col-lg-8">
+                        <!-- Template Selection Panel -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-magic me-2"></i>Quick Start Templates
+                                    </h5>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toggleTemplatePanel()">
+                                        <i class="fas fa-chevron-up" id="templateToggleIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body" id="templatePanel">
+                                <p class="text-muted mb-3">Choose from prebuilt templates to quickly create professional lesson content</p>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="template-card" onclick="selectTemplate('introduction')">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-play-circle text-primary fa-2x me-3"></i>
+                                                <div>
+                                                    <h6 class="mb-0">Introduction Lesson</h6>
+                                                    <small class="text-muted">Perfect for topic introductions</small>
+                                                </div>
+                                            </div>
+                                            <div class="template-preview">
+                                                <p class="small text-muted">Includes welcome section, learning objectives, key concepts, and takeaways.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="template-card" onclick="selectTemplate('case_study')">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-search text-success fa-2x me-3"></i>
+                                                <div>
+                                                    <h6 class="mb-0">Case Study</h6>
+                                                    <small class="text-muted">Real-world examples and analysis</small>
+                                                </div>
+                                            </div>
+                                            <div class="template-preview">
+                                                <p class="small text-muted">Structured format for presenting case studies with analysis questions.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="template-card" onclick="selectTemplate('practical_exercise')">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-tools text-warning fa-2x me-3"></i>
+                                                <div>
+                                                    <h6 class="mb-0">Practical Exercise</h6>
+                                                    <small class="text-muted">Hands-on learning activities</small>
+                                                </div>
+                                            </div>
+                                            <div class="template-preview">
+                                                <p class="small text-muted">Step-by-step instructions for practical exercises and activities.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="template-card" onclick="selectTemplate('summary')">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-check-circle text-info fa-2x me-3"></i>
+                                                <div>
+                                                    <h6 class="mb-0">Summary & Review</h6>
+                                                    <small class="text-muted">Consolidate key learnings</small>
+                                                </div>
+                                            </div>
+                                            <div class="template-preview">
+                                                <p class="small text-muted">Review key concepts, takeaways, and next steps.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div id="contentCreation">
                             <div class="mb-3">
                                 <label for="lessonSelector" class="form-label">Select Lesson to Edit</label>
@@ -443,150 +596,116 @@
                             </div>
 
                             <div id="lessonContentEditor" style="display: none;">
-                                <!-- Content Type Selection -->
-                                <div class="mb-3">
-                                    <label class="form-label">Content Type</label>
-                                    <div class="btn-group w-100" role="group" id="contentTypeSelector">
-                                        <input type="radio" class="btn-check" name="contentType" id="contentText" value="text" checked>
-                                        <label class="btn btn-outline-primary" for="contentText">
-                                            <i class="fas fa-align-left me-2"></i>Text
-                                        </label>
-
-                                        <input type="radio" class="btn-check" name="contentType" id="contentVideo" value="video">
-                                        <label class="btn btn-outline-primary" for="contentVideo">
-                                            <i class="fas fa-video me-2"></i>Video
-                                        </label>
-
-                                        <input type="radio" class="btn-check" name="contentType" id="contentDocument" value="document">
-                                        <label class="btn btn-outline-primary" for="contentDocument">
-                                            <i class="fas fa-file-pdf me-2"></i>Document
-                                        </label>
-
-                                        <input type="radio" class="btn-check" name="contentType" id="contentAudio" value="audio">
-                                        <label class="btn btn-outline-primary" for="contentAudio">
-                                            <i class="fas fa-volume-up me-2"></i>Audio
-                                        </label>
+                                <!-- Enhanced Multi-Content Lesson Editor -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                            <i class="fas fa-edit me-2"></i>Lesson Content Editor
+                                        </h5>
                                     </div>
-                                </div>
+                                    <div class="card-body">
+                                        <!-- Primary Content Section -->
+                                        <div class="mb-4">
+                                            <h6 class="text-primary">
+                                                <i class="fas fa-star me-2"></i>Primary Content
+                                            </h6>
+                                            <p class="text-muted small">Main lesson content that students will see first</p>
 
-                                <!-- Text Content Editor -->
-                                <div id="textContentPanel" class="content-panel">
-                                    <div class="mb-3">
-                                        <label for="lessonContent" class="form-label">Lesson Content</label>
-                                        <div id="lessonContentEditor" class="border rounded">
-                                            <!-- CKEditor5 will be initialized here -->
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Video Content Panel -->
-                                <div id="videoContentPanel" class="content-panel" style="display: none;">
-                                    <div class="mb-3">
-                                        <label for="videoUrl" class="form-label">Video URL</label>
-                                        <input type="url" class="form-control" id="videoUrl" placeholder="https://youtube.com/watch?v=... or https://vimeo.com/...">
-                                        <div class="form-text">Supports YouTube, Vimeo, and direct video URLs</div>
-                                    </div>
-                                    <div id="videoPreview" class="mb-3" style="display: none;">
-                                        <label class="form-label">Preview</label>
-                                        <div class="ratio ratio-16x9">
-                                            <iframe id="videoFrame" src="" allowfullscreen></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Document Upload Panel -->
-                                <div id="documentContentPanel" class="content-panel" style="display: none;">
-                                    <div class="mb-3">
-                                        <label class="form-label">Upload Document</label>
-                                        <div id="documentUploadArea" class="upload-area border-dashed border-2 rounded p-4 text-center">
-                                            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
-                                            <p class="mb-2">Drag and drop your PDF file here, or click to browse</p>
-                                            <p class="text-muted small">Supports PDF files up to 50MB</p>
-                                            <input type="file" id="documentFileInput" accept=".pdf" style="display: none;">
-                                            <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('documentFileInput').click()">
-                                                Choose File
-                                            </button>
-                                        </div>
-                                        <div id="documentPreview" class="mt-3" style="display: none;">
-                                            <div class="d-flex align-items-center">
-                                                <i class="fas fa-file-pdf text-danger me-2"></i>
-                                                <span id="documentFileName"></span>
-                                                <button type="button" class="btn btn-sm btn-outline-danger ms-auto" onclick="removeDocument()">
-                                                    <i class="fas fa-times"></i>
-                                                </button>
+                                            <div class="mb-3">
+                                                <label for="primaryContentEditor" class="form-label">Lesson Content</label>
+                                                <div id="primaryContentEditor" class="border rounded">
+                                                    <!-- CKEditor5 will be initialized here -->
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <!-- Audio Content Panel -->
-                                <div id="audioContentPanel" class="content-panel" style="display: none;">
-                                    <div class="mb-3">
-                                        <label for="audioUrl" class="form-label">Audio URL (Optional)</label>
-                                        <input type="url" class="form-control" id="audioUrl" placeholder="https://example.com/audio.mp3">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Or Upload Audio File</label>
-                                        <div id="audioUploadArea" class="upload-area border-dashed border-2 rounded p-4 text-center">
-                                            <i class="fas fa-music fa-3x text-muted mb-3"></i>
-                                            <p class="mb-2">Drag and drop your audio file here, or click to browse</p>
-                                            <p class="text-muted small">Supports MP3, WAV, OGG files up to 100MB</p>
-                                            <input type="file" id="audioFileInput" accept=".mp3,.wav,.ogg" style="display: none;">
-                                            <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('audioFileInput').click()">
-                                                Choose File
+                                        <!-- Additional Resources Section -->
+                                        <div class="mb-4">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <h6 class="text-success mb-0">
+                                                        <i class="fas fa-plus-circle me-2"></i>Additional Resources
+                                                    </h6>
+                                                    <p class="text-muted small mb-0">Supplementary materials to enhance learning</p>
+                                                </div>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                        <i class="fas fa-plus me-1"></i>Add Resource
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#" onclick="addResource('video')">
+                                                            <i class="fas fa-video me-2"></i>Video
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="addResource('document')">
+                                                            <i class="fas fa-file-pdf me-2"></i>PDF Document
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="addResource('image')">
+                                                            <i class="fas fa-image me-2"></i>Image
+                                                        </a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="addResource('audio')">
+                                                            <i class="fas fa-volume-up me-2"></i>Audio
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div id="resourcesList" class="resources-container">
+                                                <!-- Resources will be added here dynamically -->
+                                            </div>
+
+                                            <div id="noResourcesMessage" class="text-center text-muted py-4" style="border: 2px dashed #dee2e6; border-radius: 8px;">
+                                                <i class="fas fa-folder-open fa-3x mb-3"></i>
+                                                <p>No additional resources added yet.</p>
+                                                <p class="small">Click "Add Resource" to include videos, documents, images, or audio files.</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Lesson Settings -->
+                                        <div class="mb-4">
+                                            <h6 class="text-info">
+                                                <i class="fas fa-cog me-2"></i>Lesson Settings
+                                            </h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="lessonDuration" class="form-label">Estimated Duration (minutes)</label>
+                                                        <input type="number" class="form-control" id="lessonDuration" value="30" min="1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="lessonDifficulty" class="form-label">Difficulty Level</label>
+                                                        <select class="form-select" id="lessonDifficulty">
+                                                            <option value="beginner">Beginner</option>
+                                                            <option value="intermediate">Intermediate</option>
+                                                            <option value="advanced">Advanced</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="lessonObjectives" class="form-label">Learning Objectives</label>
+                                                <textarea class="form-control" id="lessonObjectives" rows="3" placeholder="What will students learn from this lesson?"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Action Buttons -->
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-success" onclick="saveLessonContent()">
+                                                <i class="fas fa-save me-2"></i>Save Lesson
+                                            </button>
+                                            <button type="button" class="btn btn-outline-info" onclick="previewLesson()">
+                                                <i class="fas fa-eye me-2"></i>Preview
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" onclick="clearLessonEditor()">
+                                                <i class="fas fa-times me-2"></i>Clear
                                             </button>
                                         </div>
-                                        <div id="audioPreview" class="mt-3" style="display: none;">
-                                            <audio controls class="w-100">
-                                                <source id="audioSource" src="" type="audio/mpeg">
-                                                Your browser does not support the audio element.
-                                            </audio>
-                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- Common Fields -->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="lessonDuration" class="form-label">Duration (minutes)</label>
-                                            <input type="number" class="form-control" id="lessonDuration" min="1" value="30">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="lessonObjectives" class="form-label">Learning Objectives</label>
-                                            <textarea class="form-control" id="lessonObjectives" rows="3" placeholder="What will students learn?"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
 
-Start creating your engaging content here...
-                                    </textarea>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="videoUrl" class="form-label">Video URL (Optional)</label>
-                                            <input type="url" class="form-control" id="videoUrl" placeholder="https://youtube.com/watch?v=...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="lessonDuration" class="form-label">Estimated Duration (minutes)</label>
-                                            <input type="number" class="form-control" id="lessonDuration" value="30" min="1">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Action Buttons -->
-                                <div class="d-flex gap-2 mb-3">
-                                    <button type="button" class="btn btn-outline-primary" onclick="openMediaLibrary()">
-                                        <i class="fas fa-images me-2"></i>Media Library
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary" onclick="insertContentTemplate()">
-                                        <i class="fas fa-puzzle-piece me-2"></i>Insert Template
                                     </button>
                                     <button type="button" class="btn btn-success" onclick="saveLessonContent()" id="saveContentBtn">
                                         <i class="fas fa-save me-2"></i>Save Content
@@ -1053,7 +1172,9 @@ Start creating your engaging content here...
 <script>
 // Global variables
 let currentEditor = null;
+let primaryContentEditor = null;
 let currentLessonData = {};
+let lessonResources = [];
 let uploadcareWidget = null;
 
 // Initialize content creation functionality
@@ -1080,9 +1201,9 @@ if ({{ current_step }} === 4) {
 function initializeContentCreation() {
     console.log('Initializing enhanced content creation...');
 
-    // Initialize CKEditor5 for text content
+    // Initialize CKEditor5 for primary content
     ClassicEditor
-        .create(document.querySelector('#lessonContentEditor'), {
+        .create(document.querySelector('#primaryContentEditor'), {
             toolbar: {
                 items: [
                     'heading', '|',
@@ -1106,26 +1227,507 @@ function initializeContentCreation() {
             }
         })
         .then(editor => {
-            currentEditor = editor;
-            console.log('CKEditor5 initialized successfully');
+            primaryContentEditor = editor;
+            console.log('Primary content editor initialized successfully');
         })
         .catch(error => {
             console.error('Error initializing CKEditor5:', error);
         });
 }
-            {
-                title: 'Key Takeaway',
-                description: 'Highlight important information',
-                content: '<div style="background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;"><h4 style="color: #ff5d15; margin-top: 0;">💡 Key Takeaway</h4><p>Your important message here...</p></div>'
-            },
-            {
-                title: 'Exercise',
-                description: 'Template for exercises and activities',
-                content: '<div style="background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;"><h4 style="color: #1a2e53; margin-top: 0;">🎯 Exercise</h4><p><strong>Instructions:</strong></p><ol><li>Step 1</li><li>Step 2</li><li>Step 3</li></ol></div>'
+
+// ===== ENHANCED MULTI-CONTENT LESSON FUNCTIONS =====
+
+// Add resource to lesson
+function addResource(type) {
+    const resourceId = 'resource_' + Date.now();
+    let resourceHtml = '';
+
+    switch(type) {
+        case 'video':
+            resourceHtml = createVideoResourceHtml(resourceId);
+            break;
+        case 'document':
+            resourceHtml = createDocumentResourceHtml(resourceId);
+            break;
+        case 'image':
+            resourceHtml = createImageResourceHtml(resourceId);
+            break;
+        case 'audio':
+            resourceHtml = createAudioResourceHtml(resourceId);
+            break;
+    }
+
+    document.getElementById('resourcesList').insertAdjacentHTML('beforeend', resourceHtml);
+    document.getElementById('noResourcesMessage').style.display = 'none';
+
+    // Initialize upload handlers for the new resource
+    initializeResourceUploadHandlers(resourceId, type);
+
+    // Add to resources array
+    lessonResources.push({
+        id: resourceId,
+        type: type,
+        title: '',
+        url: '',
+        description: ''
+    });
+}
+
+// Create video resource HTML
+function createVideoResourceHtml(resourceId) {
+    return `
+        <div class="resource-item" id="${resourceId}">
+            <div class="resource-header">
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-primary resource-type-badge me-2">Video</span>
+                    <strong>Video Resource</strong>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeResource('${resourceId}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Video Title</label>
+                <input type="text" class="form-control resource-title" placeholder="Enter video title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Video URL</label>
+                <input type="url" class="form-control resource-url" placeholder="https://youtube.com/watch?v=... or https://vimeo.com/..." onchange="previewVideo('${resourceId}')">
+                <div class="form-text">Supports YouTube, Vimeo, and direct video URLs</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description (Optional)</label>
+                <textarea class="form-control resource-description" rows="2" placeholder="Brief description of this video"></textarea>
+            </div>
+
+            <div class="resource-preview" id="${resourceId}_preview" style="display: none;">
+                <div class="ratio ratio-16x9">
+                    <iframe src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Create document resource HTML
+function createDocumentResourceHtml(resourceId) {
+    return `
+        <div class="resource-item" id="${resourceId}">
+            <div class="resource-header">
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-danger resource-type-badge me-2">Document</span>
+                    <strong>PDF Document</strong>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeResource('${resourceId}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Document Title</label>
+                <input type="text" class="form-control resource-title" placeholder="Enter document title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload PDF Document</label>
+                <div class="upload-area border-dashed border-2 rounded p-4 text-center" id="${resourceId}_upload">
+                    <i class="fas fa-file-pdf fa-3x text-danger mb-3"></i>
+                    <p class="mb-2">Drag and drop your PDF here, or click to browse</p>
+                    <p class="text-muted small">Maximum file size: 50MB</p>
+                    <input type="file" class="resource-file-input" accept=".pdf" style="display: none;">
+                    <button type="button" class="btn btn-outline-primary" onclick="document.querySelector('#${resourceId} .resource-file-input').click()">
+                        Choose File
+                    </button>
+                </div>
+                <div class="resource-preview mt-3" id="${resourceId}_preview" style="display: none;">
+                    <div class="d-flex align-items-center p-3 bg-light rounded">
+                        <i class="fas fa-file-pdf fa-2x text-danger me-3"></i>
+                        <div>
+                            <div class="fw-bold resource-file-name"></div>
+                            <div class="text-muted small resource-file-size"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description (Optional)</label>
+                <textarea class="form-control resource-description" rows="2" placeholder="Brief description of this document"></textarea>
+            </div>
+        </div>
+    `;
+}
+
+// Create image resource HTML
+function createImageResourceHtml(resourceId) {
+    return `
+        <div class="resource-item" id="${resourceId}">
+            <div class="resource-header">
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-success resource-type-badge me-2">Image</span>
+                    <strong>Image Resource</strong>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeResource('${resourceId}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Image Title</label>
+                <input type="text" class="form-control resource-title" placeholder="Enter image title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload Image</label>
+                <div class="upload-area border-dashed border-2 rounded p-4 text-center" id="${resourceId}_upload">
+                    <i class="fas fa-image fa-3x text-success mb-3"></i>
+                    <p class="mb-2">Drag and drop your image here, or click to browse</p>
+                    <p class="text-muted small">Supports JPG, PNG, GIF up to 10MB</p>
+                    <input type="file" class="resource-file-input" accept=".jpg,.jpeg,.png,.gif" style="display: none;">
+                    <button type="button" class="btn btn-outline-primary" onclick="document.querySelector('#${resourceId} .resource-file-input').click()">
+                        Choose File
+                    </button>
+                </div>
+                <div class="resource-preview mt-3" id="${resourceId}_preview" style="display: none;">
+                    <img class="img-fluid rounded" style="max-height: 200px;" alt="Preview">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description (Optional)</label>
+                <textarea class="form-control resource-description" rows="2" placeholder="Brief description of this image"></textarea>
+            </div>
+        </div>
+    `;
+}
+
+// Create audio resource HTML
+function createAudioResourceHtml(resourceId) {
+    return `
+        <div class="resource-item" id="${resourceId}">
+            <div class="resource-header">
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-info resource-type-badge me-2">Audio</span>
+                    <strong>Audio Resource</strong>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeResource('${resourceId}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Audio Title</label>
+                <input type="text" class="form-control resource-title" placeholder="Enter audio title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload Audio File</label>
+                <div class="upload-area border-dashed border-2 rounded p-4 text-center" id="${resourceId}_upload">
+                    <i class="fas fa-volume-up fa-3x text-info mb-3"></i>
+                    <p class="mb-2">Drag and drop your audio file here, or click to browse</p>
+                    <p class="text-muted small">Supports MP3, WAV, OGG up to 100MB</p>
+                    <input type="file" class="resource-file-input" accept=".mp3,.wav,.ogg" style="display: none;">
+                    <button type="button" class="btn btn-outline-primary" onclick="document.querySelector('#${resourceId} .resource-file-input').click()">
+                        Choose File
+                    </button>
+                </div>
+                <div class="resource-preview mt-3" id="${resourceId}_preview" style="display: none;">
+                    <audio controls class="w-100">
+                        <source src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description (Optional)</label>
+                <textarea class="form-control resource-description" rows="2" placeholder="Brief description of this audio"></textarea>
+            </div>
+        </div>
+    `;
+}
+
+// Remove resource
+function removeResource(resourceId) {
+    if (confirm('Are you sure you want to remove this resource?')) {
+        document.getElementById(resourceId).remove();
+        lessonResources = lessonResources.filter(r => r.id !== resourceId);
+
+        if (lessonResources.length === 0) {
+            document.getElementById('noResourcesMessage').style.display = 'block';
+        }
+    }
+}
+
+// Preview video
+function previewVideo(resourceId) {
+    const urlInput = document.querySelector(`#${resourceId} .resource-url`);
+    const preview = document.getElementById(`${resourceId}_preview`);
+    const iframe = preview.querySelector('iframe');
+
+    const url = urlInput.value.trim();
+    if (!url) {
+        preview.style.display = 'none';
+        return;
+    }
+
+    let embedUrl = '';
+
+    // YouTube
+    if (url.includes('youtube.com/watch?v=') || url.includes('youtu.be/')) {
+        const videoId = url.includes('youtu.be/')
+            ? url.split('youtu.be/')[1].split('?')[0]
+            : url.split('v=')[1].split('&')[0];
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+    }
+    // Vimeo
+    else if (url.includes('vimeo.com/')) {
+        const videoId = url.split('vimeo.com/')[1].split('?')[0];
+        embedUrl = `https://player.vimeo.com/video/${videoId}`;
+    }
+    // Direct video URL
+    else if (url.match(/\.(mp4|webm|ogg)$/i)) {
+        iframe.outerHTML = `<video controls class="w-100"><source src="${url}" type="video/mp4">Your browser does not support the video tag.</video>`;
+        preview.style.display = 'block';
+        return;
+    }
+
+    if (embedUrl) {
+        iframe.src = embedUrl;
+        preview.style.display = 'block';
+    } else {
+        preview.style.display = 'none';
+        showAlert('Invalid video URL. Please use YouTube, Vimeo, or direct video links.', 'warning');
+    }
+}
+
+// Initialize resource upload handlers
+function initializeResourceUploadHandlers(resourceId, type) {
+    const fileInput = document.querySelector(`#${resourceId} .resource-file-input`);
+    const uploadArea = document.getElementById(`${resourceId}_upload`);
+    const preview = document.getElementById(`${resourceId}_preview`);
+
+    if (!fileInput || !uploadArea) return;
+
+    // File input change handler
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            handleResourceFileUpload(file, resourceId, type);
+        }
+    });
+
+    // Drag and drop handlers
+    uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        uploadArea.classList.add('border-primary');
+    });
+
+    uploadArea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        uploadArea.classList.remove('border-primary');
+    });
+
+    uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        uploadArea.classList.remove('border-primary');
+
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            handleResourceFileUpload(file, resourceId, type);
+        }
+    });
+}
+
+// Handle resource file upload
+function handleResourceFileUpload(file, resourceId, type) {
+    // Validate file type and size
+    const maxSizes = {
+        'document': 50 * 1024 * 1024, // 50MB
+        'image': 10 * 1024 * 1024,    // 10MB
+        'audio': 100 * 1024 * 1024    // 100MB
+    };
+
+    const allowedTypes = {
+        'document': ['application/pdf'],
+        'image': ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'],
+        'audio': ['audio/mpeg', 'audio/wav', 'audio/ogg']
+    };
+
+    if (file.size > maxSizes[type]) {
+        showAlert(`File too large. Maximum size for ${type} is ${maxSizes[type] / (1024 * 1024)}MB`, 'error');
+        return;
+    }
+
+    if (!allowedTypes[type].includes(file.type)) {
+        showAlert(`Invalid file type for ${type}. Please check allowed formats.`, 'error');
+        return;
+    }
+
+    // Show upload progress
+    showProgress(`Uploading ${file.name}...`);
+
+    // Use Uploadcare for file upload
+    if (window.uploadcare) {
+        const dialog = uploadcare.openDialog(null, {
+            publicKey: 'demopublickey', // Replace with your Uploadcare public key
+            multiple: false,
+            crop: type === 'image' ? 'free' : false
+        });
+
+        dialog.done(function(file) {
+            file.promise().done(function(fileInfo) {
+                hideProgress();
+                updateResourcePreview(resourceId, type, fileInfo.cdnUrl, file.name);
+
+                // Update resource data
+                const resource = lessonResources.find(r => r.id === resourceId);
+                if (resource) {
+                    resource.url = fileInfo.cdnUrl;
+                    resource.fileName = file.name;
+                }
+
+                showAlert(`${type.charAt(0).toUpperCase() + type.slice(1)} uploaded successfully!`, 'success');
+            });
+        });
+    } else {
+        // Fallback: simulate upload for demo
+        setTimeout(() => {
+            hideProgress();
+            const fakeUrl = URL.createObjectURL(file);
+            updateResourcePreview(resourceId, type, fakeUrl, file.name);
+
+            const resource = lessonResources.find(r => r.id === resourceId);
+            if (resource) {
+                resource.url = fakeUrl;
+                resource.fileName = file.name;
             }
-        ],
-        setup: function (editor) {
-            editor.on('change', function () {
+
+            showAlert(`${type.charAt(0).toUpperCase() + type.slice(1)} uploaded successfully!`, 'success');
+        }, 1000);
+    }
+}
+
+// Update resource preview
+function updateResourcePreview(resourceId, type, url, fileName) {
+    const preview = document.getElementById(`${resourceId}_preview`);
+    const uploadArea = document.getElementById(`${resourceId}_upload`);
+
+    if (type === 'document') {
+        preview.querySelector('.resource-file-name').textContent = fileName;
+        preview.querySelector('.resource-file-size').textContent = 'PDF Document';
+        preview.style.display = 'block';
+        uploadArea.style.display = 'none';
+    } else if (type === 'image') {
+        const img = preview.querySelector('img');
+        img.src = url;
+        img.alt = fileName;
+        preview.style.display = 'block';
+        uploadArea.style.display = 'none';
+    } else if (type === 'audio') {
+        const audio = preview.querySelector('audio source');
+        audio.src = url;
+        preview.querySelector('audio').load();
+        preview.style.display = 'block';
+        uploadArea.style.display = 'none';
+    }
+}
+
+// Enhanced save lesson content
+function saveLessonContent() {
+    const lessonId = document.getElementById('lessonSelector').value;
+    if (!lessonId) {
+        showAlert('Please select a lesson first', 'warning');
+        return;
+    }
+
+    // Collect primary content
+    const primaryContent = primaryContentEditor ? primaryContentEditor.getData() : '';
+
+    // Collect lesson settings
+    const duration = document.getElementById('lessonDuration').value;
+    const difficulty = document.getElementById('lessonDifficulty').value;
+    const objectives = document.getElementById('lessonObjectives').value;
+
+    // Collect all resources
+    const resources = [];
+    lessonResources.forEach(resource => {
+        const resourceElement = document.getElementById(resource.id);
+        if (resourceElement) {
+            const title = resourceElement.querySelector('.resource-title').value;
+            const description = resourceElement.querySelector('.resource-description').value;
+
+            resources.push({
+                type: resource.type,
+                title: title,
+                url: resource.url,
+                description: description,
+                fileName: resource.fileName
+            });
+        }
+    });
+
+    showProgress('Saving enhanced lesson content...');
+
+    // Save via AJAX
+    const formData = new FormData();
+    formData.append('action', 'save_lesson_content');
+    formData.append('lesson_id', lessonId);
+    formData.append('content_type', 'enhanced');
+    formData.append('primary_content', primaryContent);
+    formData.append('resources', JSON.stringify(resources));
+    formData.append('duration', duration);
+    formData.append('difficulty', difficulty);
+    formData.append('learning_objectives', objectives);
+    formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+
+    fetch('/course-builder/api/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideProgress();
+        if (data.success) {
+            showAlert('Enhanced lesson content saved successfully!', 'success');
+        } else {
+            showAlert('Error saving lesson content: ' + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        hideProgress();
+        console.error('Error:', error);
+        showAlert('Error saving lesson content', 'error');
+    });
+}
+
+// Preview lesson
+function previewLesson() {
+    showAlert('Lesson preview functionality coming soon!', 'info');
+}
+
+// Clear lesson editor
+function clearLessonEditor() {
+    if (confirm('Are you sure you want to clear all lesson content? This action cannot be undone.')) {
+        if (primaryContentEditor) {
+            primaryContentEditor.setData('');
+        }
+
+        document.getElementById('lessonDuration').value = '30';
+        document.getElementById('lessonDifficulty').value = 'beginner';
+        document.getElementById('lessonObjectives').value = '';
+
+        // Clear all resources
+        lessonResources = [];
+        document.getElementById('resourcesList').innerHTML = '';
+        document.getElementById('noResourcesMessage').style.display = 'block';
+
+        showAlert('Lesson editor cleared', 'info');
+    }
+}
                 if (window.courseBuilder) {
                     clearTimeout(window.courseBuilder.contentSaveTimeout);
                     window.courseBuilder.contentSaveTimeout = setTimeout(() => {
@@ -2107,6 +2709,178 @@ function previewAssignment() {
 // Edit assessment
 function editAssessment(assessmentId, type) {
     showAssessmentAlert(`Edit ${type} functionality coming soon!`, 'info');
+}
+
+// ===== TEMPLATE MANAGEMENT FUNCTIONS =====
+
+// Toggle template panel
+function toggleTemplatePanel() {
+    const panel = document.getElementById('templatePanel');
+    const icon = document.getElementById('templateToggleIcon');
+
+    if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        icon.className = 'fas fa-chevron-up';
+    } else {
+        panel.style.display = 'none';
+        icon.className = 'fas fa-chevron-down';
+    }
+}
+
+// Template definitions
+const LESSON_TEMPLATES = {
+    'introduction': {
+        'title': 'Introduction to [Topic]',
+        'content_type': 'text',
+        'estimated_duration': 30,
+        'learning_objectives': 'Understand the basic concepts and importance of [topic]',
+        'content': `<h2>Welcome to [Topic]</h2>
+
+<p>In this lesson, we'll explore the fundamental concepts of [topic] and understand why it's important in today's world.</p>
+
+<h3>What You'll Learn</h3>
+<ul>
+    <li>Key definitions and terminology</li>
+    <li>Historical context and development</li>
+    <li>Current applications and relevance</li>
+    <li>Future trends and opportunities</li>
+</ul>
+
+<div style="background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;">
+    <h4 style="color: #ff5d15; margin-top: 0;">💡 Key Takeaway</h4>
+    <p>Understanding [topic] is essential for [specific benefit or application].</p>
+</div>
+
+<h3>Getting Started</h3>
+<p>Let's begin by exploring the basic concepts...</p>`
+    },
+    'case_study': {
+        'title': '[Topic] Case Study',
+        'content_type': 'text',
+        'estimated_duration': 45,
+        'learning_objectives': 'Analyze real-world applications and learn from practical examples',
+        'content': `<h2>Case Study: [Case Study Title]</h2>
+
+<h3>Background</h3>
+<p>In this case study, we'll examine [brief description of the case].</p>
+
+<h3>The Situation</h3>
+<p>[Describe the situation, challenges, and context]</p>
+
+<h3>Key Players</h3>
+<ul>
+    <li><strong>[Person/Organization 1]:</strong> [Role and significance]</li>
+    <li><strong>[Person/Organization 2]:</strong> [Role and significance]</li>
+</ul>
+
+<div style="background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <h4 style="color: #1a2e53; margin-top: 0;">🎯 Analysis Questions</h4>
+    <ol>
+        <li>What were the key factors that led to success?</li>
+        <li>What challenges were encountered and how were they overcome?</li>
+        <li>What lessons can be applied to similar situations?</li>
+        <li>What would you have done differently?</li>
+    </ol>
+</div>
+
+<h3>Results and Impact</h3>
+<p>[Describe the outcomes and long-term impact]</p>`
+    },
+    'practical_exercise': {
+        'title': '[Topic] Practical Exercise',
+        'content_type': 'text',
+        'estimated_duration': 60,
+        'learning_objectives': 'Apply theoretical knowledge through hands-on practice',
+        'content': `<h2>Practical Exercise: [Exercise Title]</h2>
+
+<h3>Objective</h3>
+<p>In this exercise, you will [describe what students will accomplish].</p>
+
+<div style="background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <h4 style="color: #1a2e53; margin-top: 0;">📋 Step-by-Step Instructions</h4>
+    <ol>
+        <li><strong>Step 1:</strong> [Detailed instruction]</li>
+        <li><strong>Step 2:</strong> [Detailed instruction]</li>
+        <li><strong>Step 3:</strong> [Detailed instruction]</li>
+    </ol>
+</div>
+
+<div style="background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;">
+    <h4 style="color: #ff5d15; margin-top: 0;">💡 Pro Tip</h4>
+    <p>[Helpful tip or best practice related to the exercise]</p>
+</div>`
+    },
+    'summary': {
+        'title': '[Topic] Summary',
+        'content_type': 'text',
+        'estimated_duration': 20,
+        'learning_objectives': 'Review and consolidate key concepts and takeaways',
+        'content': `<h2>Summary: [Topic]</h2>
+
+<p>Congratulations on completing this section on [topic]! Let's review the key concepts and takeaways.</p>
+
+<h3>Key Concepts Covered</h3>
+<ul>
+    <li><strong>[Concept 1]:</strong> [Brief explanation]</li>
+    <li><strong>[Concept 2]:</strong> [Brief explanation]</li>
+    <li><strong>[Concept 3]:</strong> [Brief explanation]</li>
+</ul>
+
+<div style="background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;">
+    <h4 style="color: #ff5d15; margin-top: 0;">🎯 Remember</h4>
+    <p>[Most important point to remember from this section]</p>
+</div>
+
+<h3>Next Steps</h3>
+<p>Now that you understand [topic], you're ready to continue learning!</p>`
+    }
+};
+
+// Select template
+function selectTemplate(templateKey) {
+    const lessonId = document.getElementById('lessonSelector').value;
+    if (!lessonId) {
+        showAlert('Please select a lesson first before applying a template', 'warning');
+        return;
+    }
+
+    const template = LESSON_TEMPLATES[templateKey];
+    if (!template) {
+        showAlert('Template not found', 'error');
+        return;
+    }
+
+    // Confirm template application
+    if (primaryContentEditor && primaryContentEditor.getData().trim()) {
+        if (!confirm('This will replace the current lesson content. Are you sure you want to continue?')) {
+            return;
+        }
+    }
+
+    // Apply template to lesson editor
+    if (primaryContentEditor) {
+        primaryContentEditor.setData(template.content);
+    }
+
+    // Update lesson settings
+    document.getElementById('lessonDuration').value = template.estimated_duration;
+    document.getElementById('lessonObjectives').value = template.learning_objectives;
+
+    // Visual feedback
+    document.querySelectorAll('.template-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    event.target.closest('.template-card').classList.add('selected');
+
+    showAlert(`${templateKey.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} template applied successfully!`, 'success');
+
+    // Auto-collapse template panel
+    setTimeout(() => {
+        const panel = document.getElementById('templatePanel');
+        if (panel.style.display !== 'none') {
+            toggleTemplatePanel();
+        }
+    }, 1500);
 }
 </script>
 {% endblock %}

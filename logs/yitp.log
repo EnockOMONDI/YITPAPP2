@@ -13081,3 +13081,6 @@ INFO 2025-08-25 13:03:06,862 basehttp 7180 6206042112 "GET /login/?next=/course-
 INFO 2025-08-25 13:53:52,958 autoreload 7864 8513485504 Watching for file changes with StatReloader
 INFO 2025-08-25 13:55:33,333 basehttp 7180 6206042112 "GET /course-builder/wizard/step/4/ HTTP/1.1" 302 0
 INFO 2025-08-25 13:55:33,364 basehttp 7180 6206042112 "GET /login/?next=/course-builder/wizard/step/4/ HTTP/1.1" 200 13519
+INFO 2025-08-25 17:06:17,823 autoreload 13218 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 17:07:04,188 basehttp 13218 6191198208 "GET /course-builder/wizard/step/3/ HTTP/1.1" 302 0
+INFO 2025-08-25 17:07:04,325 basehttp 13218 6191198208 "GET /login/?next=/course-builder/wizard/step/3/ HTTP/1.1" 200 13519
