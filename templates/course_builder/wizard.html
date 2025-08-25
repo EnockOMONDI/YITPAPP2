@@ -220,6 +220,82 @@
     .border-dashed {
         border-style: dashed !important;
     }
+
+    /* Assessment Creation Styles */
+    .assessment-panel {
+        transition: all 0.3s ease;
+    }
+
+    .question-item {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: white;
+        transition: all 0.3s ease;
+    }
+
+    .question-item:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .question-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .question-type-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .rubric-criteria-item {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        background: #f8f9fa;
+    }
+
+    .assessments-list .assessment-item {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        background: white;
+        transition: all 0.3s ease;
+    }
+
+    .assessments-list .assessment-item:hover {
+        background: #f8f9fa;
+        cursor: pointer;
+    }
+
+    .assessment-type-icon {
+        width: 20px;
+        text-align: center;
+    }
+
+    .questions-container {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .rubric-container {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .option-input {
+        margin-bottom: 0.5rem;
+    }
+
+    .correct-answer-indicator {
+        color: #28a745;
+        font-weight: bold;
+    }
 </style>
 {% endblock %}
 
@@ -554,10 +630,325 @@ Start creating your engaging content here...
             <div id="step4" class="wizard-step">
                 <h2 class="mb-4">Assessments</h2>
                 <p class="text-muted mb-4">Create quizzes and assignments to test student knowledge.</p>
-                
-                <div id="assessmentCreation">
-                    <!-- Assessment creation interface will be loaded here -->
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Assessment Type Selection -->
+                        <div class="mb-4">
+                            <div class="btn-group w-100" role="group" id="assessmentTypeSelector">
+                                <input type="radio" class="btn-check" name="assessmentType" id="assessmentQuiz" value="quiz" checked>
+                                <label class="btn btn-outline-primary" for="assessmentQuiz">
+                                    <i class="fas fa-question-circle me-2"></i>Quiz
+                                </label>
+
+                                <input type="radio" class="btn-check" name="assessmentType" id="assessmentAssignment" value="assignment">
+                                <label class="btn btn-outline-primary" for="assessmentAssignment">
+                                    <i class="fas fa-tasks me-2"></i>Assignment
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Lesson Selection -->
+                        <div class="mb-3">
+                            <label for="assessmentLessonSelector" class="form-label">Select Lesson for Assessment</label>
+                            <select class="form-select" id="assessmentLessonSelector">
+                                <option value="">Choose a lesson...</option>
+                                <!-- Lessons will be populated dynamically -->
+                            </select>
+                        </div>
+
+                        <!-- Quiz Creation Panel -->
+                        <div id="quizCreationPanel" class="assessment-panel">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-question-circle me-2"></i>Quiz Details
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="quizTitle" class="form-label">Quiz Title</label>
+                                                <input type="text" class="form-control" id="quizTitle" placeholder="Enter quiz title">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="quizTimeLimit" class="form-label">Time Limit (minutes)</label>
+                                                <input type="number" class="form-control" id="quizTimeLimit" min="1" placeholder="Optional">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="quizDescription" class="form-label">Description</label>
+                                        <textarea class="form-control" id="quizDescription" rows="3" placeholder="Brief description of the quiz"></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="quizInstructions" class="form-label">Instructions</label>
+                                        <textarea class="form-control" id="quizInstructions" rows="3" placeholder="Instructions for students taking the quiz"></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="quizMaxAttempts" class="form-label">Max Attempts</label>
+                                                <input type="number" class="form-control" id="quizMaxAttempts" value="1" min="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="quizPassingScore" class="form-label">Passing Score (%)</label>
+                                                <input type="number" class="form-control" id="quizPassingScore" value="70" min="0" max="100">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input" type="checkbox" id="quizRandomized">
+                                                <label class="form-check-label" for="quizRandomized">
+                                                    Randomize Questions
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="quizShowResults" checked>
+                                                <label class="form-check-label" for="quizShowResults">
+                                                    Show Results Immediately
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Questions Section -->
+                            <div class="card mt-3">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-list me-2"></i>Questions
+                                    </h5>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="addQuestion()">
+                                        <i class="fas fa-plus me-1"></i>Add Question
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div id="questionsList" class="questions-container">
+                                        <!-- Questions will be added here dynamically -->
+                                    </div>
+
+                                    <div id="noQuestionsMessage" class="text-center text-muted py-4">
+                                        <i class="fas fa-question-circle fa-3x mb-3"></i>
+                                        <p>No questions added yet. Click "Add Question" to get started.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quiz Actions -->
+                            <div class="d-flex gap-2 mt-3">
+                                <button type="button" class="btn btn-success" onclick="saveQuiz()">
+                                    <i class="fas fa-save me-2"></i>Save Quiz
+                                </button>
+                                <button type="button" class="btn btn-outline-info" onclick="previewQuiz()">
+                                    <i class="fas fa-eye me-2"></i>Preview Quiz
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="clearQuizForm()">
+                                    <i class="fas fa-times me-2"></i>Clear Form
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Assignment Creation Panel -->
+                        <div id="assignmentCreationPanel" class="assessment-panel" style="display: none;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-tasks me-2"></i>Assignment Details
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="assignmentTitle" class="form-label">Assignment Title</label>
+                                                <input type="text" class="form-control" id="assignmentTitle" placeholder="Enter assignment title">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="assignmentType" class="form-label">Assignment Type</label>
+                                                <select class="form-select" id="assignmentType">
+                                                    <option value="business_plan">Business Plan</option>
+                                                    <option value="swot_analysis">SWOT Analysis</option>
+                                                    <option value="case_study">Case Study Analysis</option>
+                                                    <option value="reflection">Reflection Paper</option>
+                                                    <option value="presentation">Presentation</option>
+                                                    <option value="project">Project Work</option>
+                                                    <option value="research">Research Assignment</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="assignmentDescription" class="form-label">Description</label>
+                                        <textarea class="form-control" id="assignmentDescription" rows="3" placeholder="Brief description of the assignment"></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="assignmentInstructions" class="form-label">Instructions</label>
+                                        <div id="assignmentInstructionsEditor" class="border rounded">
+                                            <!-- CKEditor5 will be initialized here -->
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="assignmentSubmissionFormat" class="form-label">Submission Format</label>
+                                                <select class="form-select" id="assignmentSubmissionFormat">
+                                                    <option value="text">Text Only</option>
+                                                    <option value="file">File Upload Only</option>
+                                                    <option value="both">Text and File</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="assignmentMaxScore" class="form-label">Max Score</label>
+                                                <input type="number" class="form-control" id="assignmentMaxScore" value="100" min="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="assignmentDueDate" class="form-label">Due Date (Optional)</label>
+                                                <input type="datetime-local" class="form-control" id="assignmentDueDate">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="assignmentMaxFileSize" class="form-label">Max File Size (MB)</label>
+                                                <input type="number" class="form-control" id="assignmentMaxFileSize" value="10" min="1" max="100">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="assignmentAllowedTypes" class="form-label">Allowed File Types</label>
+                                                <input type="text" class="form-control" id="assignmentAllowedTypes" placeholder="pdf,doc,docx,txt" value="pdf,doc,docx,txt">
+                                                <small class="text-muted">Comma-separated file extensions</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="assignmentPeerReview">
+                                        <label class="form-check-label" for="assignmentPeerReview">
+                                            Enable Peer Review
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rubric Section -->
+                            <div class="card mt-3">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-clipboard-list me-2"></i>Grading Rubric
+                                    </h5>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="addRubricCriteria()">
+                                        <i class="fas fa-plus me-1"></i>Add Criteria
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div id="rubricCriteriaList" class="rubric-container">
+                                        <!-- Rubric criteria will be added here dynamically -->
+                                    </div>
+
+                                    <div id="noRubricMessage" class="text-center text-muted py-4">
+                                        <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+                                        <p>No grading criteria added yet. Click "Add Criteria" to create a rubric.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Assignment Actions -->
+                            <div class="d-flex gap-2 mt-3">
+                                <button type="button" class="btn btn-success" onclick="saveAssignment()">
+                                    <i class="fas fa-save me-2"></i>Save Assignment
+                                </button>
+                                <button type="button" class="btn btn-outline-info" onclick="previewAssignment()">
+                                    <i class="fas fa-eye me-2"></i>Preview Assignment
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="clearAssignmentForm()">
+                                    <i class="fas fa-times me-2"></i>Clear Form
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assessment Management Sidebar -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-list me-2"></i>Course Assessments
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="assessmentsList" class="assessments-list">
+                                    <!-- Existing assessments will be loaded here -->
+                                </div>
+
+                                <div id="noAssessmentsMessage" class="text-center text-muted py-4">
+                                    <i class="fas fa-clipboard-check fa-3x mb-3"></i>
+                                    <p class="small">No assessments created yet. Create your first quiz or assignment to get started.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Assessment Statistics -->
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-chart-bar me-2"></i>Assessment Statistics
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="border-end">
+                                            <h4 class="mb-0" id="totalQuizzes">0</h4>
+                                            <small class="text-muted">Quizzes</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4 class="mb-0" id="totalAssignments">0</h4>
+                                        <small class="text-muted">Assignments</small>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="border-end">
+                                            <h5 class="mb-0" id="totalQuestions">0</h5>
+                                            <small class="text-muted">Questions</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h5 class="mb-0" id="totalPoints">0</h5>
+                                        <small class="text-muted">Total Points</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Save Status -->
+                <div id="assessmentSaveStatus" class="alert" style="display: none;"></div>
             </div>
             {% endif %}
 
@@ -672,6 +1063,16 @@ if ({{ current_step }} === 3) {
         populateLessonsFromSession();
         setupContentTypeHandlers();
         setupFileUploadHandlers();
+    });
+}
+
+// Initialize assessment creation functionality
+if ({{ current_step }} === 4) {
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeAssessmentCreation();
+        populateLessonsForAssessments();
+        setupAssessmentTypeHandlers();
+        loadExistingAssessments();
     });
 }
 
@@ -1054,6 +1455,658 @@ function populateLessonForm(lesson) {
     // Populate common fields
     document.getElementById('lessonDuration').value = lesson.estimated_duration || 30;
     document.getElementById('lessonObjectives').value = lesson.learning_objectives || '';
+}
+
+// ===== ASSESSMENT CREATION FUNCTIONS =====
+
+// Global variables for assessments
+let currentQuestions = [];
+let currentRubricCriteria = [];
+let assignmentInstructionsEditor = null;
+
+// Initialize assessment creation
+function initializeAssessmentCreation() {
+    console.log('Initializing assessment creation...');
+
+    // Initialize CKEditor5 for assignment instructions
+    ClassicEditor
+        .create(document.querySelector('#assignmentInstructionsEditor'), {
+            toolbar: {
+                items: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', '|',
+                    'bulletedList', 'numberedList', '|',
+                    'link', 'blockQuote', '|',
+                    'undo', 'redo'
+                ]
+            }
+        })
+        .then(editor => {
+            assignmentInstructionsEditor = editor;
+            console.log('Assignment instructions editor initialized');
+        })
+        .catch(error => {
+            console.error('Error initializing assignment editor:', error);
+        });
+}
+
+// Setup assessment type handlers
+function setupAssessmentTypeHandlers() {
+    const assessmentTypeInputs = document.querySelectorAll('input[name="assessmentType"]');
+    assessmentTypeInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            switchAssessmentType(this.value);
+        });
+    });
+}
+
+// Switch between assessment types
+function switchAssessmentType(type) {
+    // Hide all assessment panels
+    document.querySelectorAll('.assessment-panel').forEach(panel => {
+        panel.style.display = 'none';
+    });
+
+    // Show selected assessment panel
+    const targetPanel = document.getElementById(type + 'CreationPanel');
+    if (targetPanel) {
+        targetPanel.style.display = 'block';
+    }
+}
+
+// Populate lessons for assessments
+function populateLessonsForAssessments() {
+    const sessionId = document.getElementById('sessionId').value;
+    if (!sessionId) return;
+
+    fetch(`/course-builder/api/?action=get_lessons&session_id=${sessionId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const selector = document.getElementById('assessmentLessonSelector');
+                selector.innerHTML = '<option value="">Choose a lesson...</option>';
+
+                data.lessons.forEach(lesson => {
+                    const option = document.createElement('option');
+                    option.value = lesson.id;
+                    option.textContent = `${lesson.module_title} - ${lesson.title}`;
+                    selector.appendChild(option);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error loading lessons for assessments:', error);
+        });
+}
+
+// Add question to quiz
+function addQuestion() {
+    const questionId = 'question_' + Date.now();
+    const questionHtml = `
+        <div class="question-item" id="${questionId}">
+            <div class="question-header">
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-primary question-type-badge me-2">Multiple Choice</span>
+                    <strong>Question ${currentQuestions.length + 1}</strong>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary me-1" onclick="editQuestion('${questionId}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeQuestion('${questionId}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Question Text</label>
+                <textarea class="form-control question-text" rows="2" placeholder="Enter your question here..."></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Question Type</label>
+                <select class="form-select question-type" onchange="updateQuestionType('${questionId}', this.value)">
+                    <option value="multiple_choice">Multiple Choice</option>
+                    <option value="true_false">True/False</option>
+                    <option value="short_answer">Short Answer</option>
+                </select>
+            </div>
+
+            <div class="question-options" id="${questionId}_options">
+                <label class="form-label">Answer Options</label>
+                <div class="option-input">
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <input class="form-check-input" type="radio" name="${questionId}_correct" value="0">
+                        </div>
+                        <input type="text" class="form-control" placeholder="Option A">
+                    </div>
+                </div>
+                <div class="option-input">
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <input class="form-check-input" type="radio" name="${questionId}_correct" value="1">
+                        </div>
+                        <input type="text" class="form-control" placeholder="Option B">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="addOption('${questionId}')">
+                    <i class="fas fa-plus me-1"></i>Add Option
+                </button>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Points</label>
+                        <input type="number" class="form-control question-points" value="1" min="1">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Explanation (Optional)</label>
+                        <textarea class="form-control question-explanation" rows="2" placeholder="Explain the correct answer..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('questionsList').insertAdjacentHTML('beforeend', questionHtml);
+    document.getElementById('noQuestionsMessage').style.display = 'none';
+
+    currentQuestions.push({
+        id: questionId,
+        type: 'multiple_choice',
+        text: '',
+        options: ['', ''],
+        correct_answer: 0,
+        points: 1,
+        explanation: ''
+    });
+
+    updateQuestionNumbers();
+}
+
+// Update question type
+function updateQuestionType(questionId, type) {
+    const optionsContainer = document.getElementById(questionId + '_options');
+    const badge = document.querySelector(`#${questionId} .question-type-badge`);
+
+    badge.textContent = type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+    if (type === 'true_false') {
+        optionsContainer.innerHTML = `
+            <label class="form-label">Correct Answer</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="${questionId}_correct" value="true" id="${questionId}_true">
+                <label class="form-check-label" for="${questionId}_true">True</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="${questionId}_correct" value="false" id="${questionId}_false">
+                <label class="form-check-label" for="${questionId}_false">False</label>
+            </div>
+        `;
+    } else if (type === 'short_answer') {
+        optionsContainer.innerHTML = `
+            <label class="form-label">Sample Answer</label>
+            <textarea class="form-control" rows="2" placeholder="Provide a sample correct answer..."></textarea>
+        `;
+    } else {
+        // Multiple choice - restore options
+        optionsContainer.innerHTML = `
+            <label class="form-label">Answer Options</label>
+            <div class="option-input">
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input class="form-check-input" type="radio" name="${questionId}_correct" value="0">
+                    </div>
+                    <input type="text" class="form-control" placeholder="Option A">
+                </div>
+            </div>
+            <div class="option-input">
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input class="form-check-input" type="radio" name="${questionId}_correct" value="1">
+                    </div>
+                    <input type="text" class="form-control" placeholder="Option B">
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary" onclick="addOption('${questionId}')">
+                <i class="fas fa-plus me-1"></i>Add Option
+            </button>
+        `;
+    }
+}
+
+// Add option to multiple choice question
+function addOption(questionId) {
+    const optionsContainer = document.getElementById(questionId + '_options');
+    const optionInputs = optionsContainer.querySelectorAll('.option-input');
+    const optionIndex = optionInputs.length;
+    const optionLetter = String.fromCharCode(65 + optionIndex); // A, B, C, D...
+
+    const optionHtml = `
+        <div class="option-input">
+            <div class="input-group">
+                <div class="input-group-text">
+                    <input class="form-check-input" type="radio" name="${questionId}_correct" value="${optionIndex}">
+                </div>
+                <input type="text" class="form-control" placeholder="Option ${optionLetter}">
+                <button type="button" class="btn btn-outline-danger" onclick="removeOption(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    `;
+
+    const addButton = optionsContainer.querySelector('button');
+    addButton.insertAdjacentHTML('beforebegin', optionHtml);
+}
+
+// Remove option from multiple choice question
+function removeOption(button) {
+    const optionInput = button.closest('.option-input');
+    optionInput.remove();
+}
+
+// Remove question
+function removeQuestion(questionId) {
+    if (confirm('Are you sure you want to remove this question?')) {
+        document.getElementById(questionId).remove();
+        currentQuestions = currentQuestions.filter(q => q.id !== questionId);
+        updateQuestionNumbers();
+
+        if (currentQuestions.length === 0) {
+            document.getElementById('noQuestionsMessage').style.display = 'block';
+        }
+    }
+}
+
+// Update question numbers
+function updateQuestionNumbers() {
+    const questionItems = document.querySelectorAll('.question-item');
+    questionItems.forEach((item, index) => {
+        const questionNumber = item.querySelector('strong');
+        if (questionNumber) {
+            questionNumber.textContent = `Question ${index + 1}`;
+        }
+    });
+}
+
+// Save quiz
+function saveQuiz() {
+    const lessonId = document.getElementById('assessmentLessonSelector').value;
+    if (!lessonId) {
+        showAssessmentAlert('Please select a lesson for this quiz', 'warning');
+        return;
+    }
+
+    const title = document.getElementById('quizTitle').value.trim();
+    if (!title) {
+        showAssessmentAlert('Please enter a quiz title', 'warning');
+        return;
+    }
+
+    if (currentQuestions.length === 0) {
+        showAssessmentAlert('Please add at least one question', 'warning');
+        return;
+    }
+
+    showProgress('Saving quiz...');
+
+    // Collect quiz data
+    const quizData = {
+        lesson_id: lessonId,
+        title: title,
+        description: document.getElementById('quizDescription').value,
+        instructions: document.getElementById('quizInstructions').value,
+        time_limit: document.getElementById('quizTimeLimit').value || null,
+        max_attempts: document.getElementById('quizMaxAttempts').value,
+        passing_score: document.getElementById('quizPassingScore').value,
+        is_randomized: document.getElementById('quizRandomized').checked,
+        show_results: document.getElementById('quizShowResults').checked,
+        questions: collectQuestionData()
+    };
+
+    // Save via AJAX
+    const formData = new FormData();
+    formData.append('action', 'create_quiz');
+    formData.append('quiz_data', JSON.stringify(quizData));
+    formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+
+    fetch('/course-builder/api/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideProgress();
+        if (data.success) {
+            showAssessmentAlert('Quiz saved successfully!', 'success');
+            clearQuizForm();
+            loadExistingAssessments();
+        } else {
+            showAssessmentAlert('Error saving quiz: ' + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        hideProgress();
+        console.error('Error:', error);
+        showAssessmentAlert('Error saving quiz', 'error');
+    });
+}
+
+// Collect question data from form
+function collectQuestionData() {
+    const questions = [];
+    const questionItems = document.querySelectorAll('.question-item');
+
+    questionItems.forEach((item, index) => {
+        const questionId = item.id;
+        const questionText = item.querySelector('.question-text').value;
+        const questionType = item.querySelector('.question-type').value;
+        const points = parseInt(item.querySelector('.question-points').value) || 1;
+        const explanation = item.querySelector('.question-explanation').value;
+
+        let options = [];
+        let correctAnswer = '';
+
+        if (questionType === 'multiple_choice') {
+            const optionInputs = item.querySelectorAll('.option-input input[type="text"]');
+            options = Array.from(optionInputs).map(input => input.value).filter(val => val.trim());
+
+            const correctRadio = item.querySelector(`input[name="${questionId}_correct"]:checked`);
+            correctAnswer = correctRadio ? correctRadio.value : '0';
+        } else if (questionType === 'true_false') {
+            const correctRadio = item.querySelector(`input[name="${questionId}_correct"]:checked`);
+            correctAnswer = correctRadio ? correctRadio.value : 'true';
+        } else if (questionType === 'short_answer') {
+            const sampleAnswer = item.querySelector('textarea');
+            correctAnswer = sampleAnswer ? sampleAnswer.value : '';
+        }
+
+        questions.push({
+            question_text: questionText,
+            question_type: questionType,
+            options: options,
+            correct_answer: correctAnswer,
+            points: points,
+            explanation: explanation,
+            sort_order: index + 1
+        });
+    });
+
+    return questions;
+}
+
+// Clear quiz form
+function clearQuizForm() {
+    document.getElementById('quizTitle').value = '';
+    document.getElementById('quizDescription').value = '';
+    document.getElementById('quizInstructions').value = '';
+    document.getElementById('quizTimeLimit').value = '';
+    document.getElementById('quizMaxAttempts').value = '1';
+    document.getElementById('quizPassingScore').value = '70';
+    document.getElementById('quizRandomized').checked = false;
+    document.getElementById('quizShowResults').checked = true;
+
+    document.getElementById('questionsList').innerHTML = '';
+    document.getElementById('noQuestionsMessage').style.display = 'block';
+    currentQuestions = [];
+}
+
+// Add rubric criteria
+function addRubricCriteria() {
+    const criteriaId = 'criteria_' + Date.now();
+    const criteriaHtml = `
+        <div class="rubric-criteria-item" id="${criteriaId}">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <strong>Criteria ${currentRubricCriteria.length + 1}</strong>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeRubricCriteria('${criteriaId}')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mb-2">
+                <input type="text" class="form-control criteria-name" placeholder="Criteria name (e.g., Content Quality)">
+            </div>
+            <div class="mb-2">
+                <textarea class="form-control criteria-description" rows="2" placeholder="Description of this criteria..."></textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label small">Max Points</label>
+                    <input type="number" class="form-control criteria-points" value="10" min="1">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label small">Weight (%)</label>
+                    <input type="number" class="form-control criteria-weight" value="25" min="1" max="100">
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('rubricCriteriaList').insertAdjacentHTML('beforeend', criteriaHtml);
+    document.getElementById('noRubricMessage').style.display = 'none';
+
+    currentRubricCriteria.push({
+        id: criteriaId,
+        name: '',
+        description: '',
+        points: 10,
+        weight: 25
+    });
+}
+
+// Remove rubric criteria
+function removeRubricCriteria(criteriaId) {
+    if (confirm('Are you sure you want to remove this criteria?')) {
+        document.getElementById(criteriaId).remove();
+        currentRubricCriteria = currentRubricCriteria.filter(c => c.id !== criteriaId);
+
+        if (currentRubricCriteria.length === 0) {
+            document.getElementById('noRubricMessage').style.display = 'block';
+        }
+    }
+}
+
+// Save assignment
+function saveAssignment() {
+    const lessonId = document.getElementById('assessmentLessonSelector').value;
+    if (!lessonId) {
+        showAssessmentAlert('Please select a lesson for this assignment', 'warning');
+        return;
+    }
+
+    const title = document.getElementById('assignmentTitle').value.trim();
+    if (!title) {
+        showAssessmentAlert('Please enter an assignment title', 'warning');
+        return;
+    }
+
+    showProgress('Saving assignment...');
+
+    // Collect assignment data
+    const assignmentData = {
+        lesson_id: lessonId,
+        title: title,
+        assignment_type: document.getElementById('assignmentType').value,
+        description: document.getElementById('assignmentDescription').value,
+        instructions: assignmentInstructionsEditor ? assignmentInstructionsEditor.getData() : '',
+        submission_format: document.getElementById('assignmentSubmissionFormat').value,
+        max_score: document.getElementById('assignmentMaxScore').value,
+        due_date: document.getElementById('assignmentDueDate').value || null,
+        max_file_size: document.getElementById('assignmentMaxFileSize').value,
+        allowed_file_types: document.getElementById('assignmentAllowedTypes').value,
+        peer_review_enabled: document.getElementById('assignmentPeerReview').checked,
+        rubric_criteria: collectRubricData()
+    };
+
+    // Save via AJAX
+    const formData = new FormData();
+    formData.append('action', 'create_assignment');
+    formData.append('assignment_data', JSON.stringify(assignmentData));
+    formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+
+    fetch('/course-builder/api/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideProgress();
+        if (data.success) {
+            showAssessmentAlert('Assignment saved successfully!', 'success');
+            clearAssignmentForm();
+            loadExistingAssessments();
+        } else {
+            showAssessmentAlert('Error saving assignment: ' + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        hideProgress();
+        console.error('Error:', error);
+        showAssessmentAlert('Error saving assignment', 'error');
+    });
+}
+
+// Collect rubric data
+function collectRubricData() {
+    const criteria = [];
+    const criteriaItems = document.querySelectorAll('.rubric-criteria-item');
+
+    criteriaItems.forEach((item, index) => {
+        const name = item.querySelector('.criteria-name').value;
+        const description = item.querySelector('.criteria-description').value;
+        const points = parseInt(item.querySelector('.criteria-points').value) || 10;
+        const weight = parseInt(item.querySelector('.criteria-weight').value) || 25;
+
+        if (name.trim()) {
+            criteria.push({
+                name: name,
+                description: description,
+                max_points: points,
+                weight: weight,
+                sort_order: index + 1
+            });
+        }
+    });
+
+    return criteria;
+}
+
+// Clear assignment form
+function clearAssignmentForm() {
+    document.getElementById('assignmentTitle').value = '';
+    document.getElementById('assignmentType').value = 'business_plan';
+    document.getElementById('assignmentDescription').value = '';
+    if (assignmentInstructionsEditor) {
+        assignmentInstructionsEditor.setData('');
+    }
+    document.getElementById('assignmentSubmissionFormat').value = 'text';
+    document.getElementById('assignmentMaxScore').value = '100';
+    document.getElementById('assignmentDueDate').value = '';
+    document.getElementById('assignmentMaxFileSize').value = '10';
+    document.getElementById('assignmentAllowedTypes').value = 'pdf,doc,docx,txt';
+    document.getElementById('assignmentPeerReview').checked = false;
+
+    document.getElementById('rubricCriteriaList').innerHTML = '';
+    document.getElementById('noRubricMessage').style.display = 'block';
+    currentRubricCriteria = [];
+}
+
+// Load existing assessments
+function loadExistingAssessments() {
+    const sessionId = document.getElementById('sessionId').value;
+    if (!sessionId) return;
+
+    fetch(`/course-builder/api/?action=get_assessments&session_id=${sessionId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayAssessmentsList(data.assessments);
+                updateAssessmentStatistics(data.statistics);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading assessments:', error);
+        });
+}
+
+// Display assessments list
+function displayAssessmentsList(assessments) {
+    const container = document.getElementById('assessmentsList');
+    const noAssessmentsMessage = document.getElementById('noAssessmentsMessage');
+
+    if (assessments.length === 0) {
+        container.innerHTML = '';
+        noAssessmentsMessage.style.display = 'block';
+        return;
+    }
+
+    noAssessmentsMessage.style.display = 'none';
+
+    const assessmentsHtml = assessments.map(assessment => `
+        <div class="assessment-item" onclick="editAssessment('${assessment.id}', '${assessment.type}')">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="d-flex align-items-center mb-1">
+                        <i class="fas ${assessment.type === 'quiz' ? 'fa-question-circle' : 'fa-tasks'} assessment-type-icon me-2"></i>
+                        <strong class="small">${assessment.title}</strong>
+                    </div>
+                    <div class="text-muted small">
+                        ${assessment.lesson_title} • ${assessment.type === 'quiz' ? assessment.question_count + ' questions' : 'Assignment'}
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-${assessment.type === 'quiz' ? 'primary' : 'success'} small">
+                        ${assessment.type.toUpperCase()}
+                    </span>
+                    <div class="text-muted small mt-1">
+                        ${assessment.type === 'quiz' ? assessment.total_points + ' pts' : assessment.max_score + ' pts'}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    container.innerHTML = assessmentsHtml;
+}
+
+// Update assessment statistics
+function updateAssessmentStatistics(stats) {
+    document.getElementById('totalQuizzes').textContent = stats.total_quizzes || 0;
+    document.getElementById('totalAssignments').textContent = stats.total_assignments || 0;
+    document.getElementById('totalQuestions').textContent = stats.total_questions || 0;
+    document.getElementById('totalPoints').textContent = stats.total_points || 0;
+}
+
+// Show assessment alert
+function showAssessmentAlert(message, type) {
+    const alertDiv = document.getElementById('assessmentSaveStatus');
+    alertDiv.className = `alert alert-${type === 'error' ? 'danger' : type}`;
+    alertDiv.textContent = message;
+    alertDiv.style.display = 'block';
+
+    setTimeout(() => {
+        alertDiv.style.display = 'none';
+    }, 5000);
+}
+
+// Preview quiz
+function previewQuiz() {
+    showAssessmentAlert('Quiz preview functionality coming soon!', 'info');
+}
+
+// Preview assignment
+function previewAssignment() {
+    showAssessmentAlert('Assignment preview functionality coming soon!', 'info');
+}
+
+// Edit assessment
+function editAssessment(assessmentId, type) {
+    showAssessmentAlert(`Edit ${type} functionality coming soon!`, 'info');
 }
 </script>
 {% endblock %}

@@ -9,10 +9,12 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.text import slugify
 from django.db import models
+from django.db.models import Count, Sum
+from django.utils import timezone
 import json
 
 from courses.models import Course, Module, Lesson, Category
-from assessments.models import Quiz, Question
+from assessments.models import Quiz, Question, Assignment, RubricCriteria
 from users.models import InstructorProfile
 from .models import CourseTemplate, ContentBlock, QuestionBank, CourseBuilderSession
 
@@ -155,6 +157,8 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             return self.get_lessons(request)
         elif action == 'get_lesson_content':
             return self.get_lesson_content(request)
+        elif action == 'get_assessments':
+            return self.get_assessments(request)
         elif action == 'get_session':
             return self.get_session(request)
         else:
@@ -175,6 +179,8 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             return self.save_lesson_content(request)
         elif action == 'create_quiz':
             return self.create_quiz(request)
+        elif action == 'create_assignment':
+            return self.create_assignment(request)
         elif action == 'publish_course':
             return self.publish_course(request)
         elif action == 'get_template':
@@ -461,23 +467,27 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
     def create_quiz(self, request):
         """Create quiz for a lesson"""
         try:
-            lesson_id = request.POST.get('lesson_id')
-            quiz_title = request.POST.get('quiz_title')
-            quiz_description = request.POST.get('quiz_description', '')
-            questions_data = json.loads(request.POST.get('questions_data', '[]'))
+            quiz_data = json.loads(request.POST.get('quiz_data', '{}'))
 
+            lesson_id = quiz_data.get('lesson_id')
             lesson = get_object_or_404(Lesson, id=lesson_id, module__course__instructor=request.user)
 
             # Create quiz
             quiz = Quiz.objects.create(
                 lesson=lesson,
-                title=quiz_title,
-                description=quiz_description,
-                passing_score=70,
+                title=quiz_data.get('title'),
+                description=quiz_data.get('description', ''),
+                instructions=quiz_data.get('instructions', ''),
+                time_limit=quiz_data.get('time_limit'),
+                max_attempts=quiz_data.get('max_attempts', 1),
+                passing_score=quiz_data.get('passing_score', 70),
+                is_randomized=quiz_data.get('is_randomized', False),
+                show_results=quiz_data.get('show_results', True),
                 is_published=False
             )
 
             # Create questions
+            questions_data = quiz_data.get('questions', [])
             for question_data in questions_data:
                 Question.objects.create(
                     quiz=quiz,
@@ -611,6 +621,135 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
                 'session_data': session.session_data,
                 'current_step': session.current_step,
                 'course_id': session.course.id if session.course else None
+            })
+
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    def create_assignment(self, request):
+        """Create assignment for a lesson"""
+        try:
+            assignment_data = json.loads(request.POST.get('assignment_data', '{}'))
+
+            lesson_id = assignment_data.get('lesson_id')
+            lesson = get_object_or_404(Lesson, id=lesson_id, module__course__instructor=request.user)
+
+            # Create assignment
+            assignment = Assignment.objects.create(
+                lesson=lesson,
+                title=assignment_data.get('title'),
+                description=assignment_data.get('description', ''),
+                instructions=assignment_data.get('instructions', ''),
+                assignment_type=assignment_data.get('assignment_type', 'business_plan'),
+                submission_format=assignment_data.get('submission_format', 'text'),
+                max_score=assignment_data.get('max_score', 100),
+                due_date=assignment_data.get('due_date'),
+                max_file_size=int(assignment_data.get('max_file_size', 10)) * 1024 * 1024,  # Convert MB to bytes
+                allowed_file_types=assignment_data.get('allowed_file_types', '').split(','),
+                is_peer_reviewed=assignment_data.get('peer_review_enabled', False)
+            )
+
+            # Create rubric criteria
+            rubric_criteria = assignment_data.get('rubric_criteria', [])
+            for criteria_data in rubric_criteria:
+                RubricCriteria.objects.create(
+                    assignment=assignment,
+                    criteria_name=criteria_data.get('name'),
+                    description=criteria_data.get('description', ''),
+                    max_points=criteria_data.get('max_points', 10),
+                    weight=criteria_data.get('weight', 25),
+                    sort_order=criteria_data.get('sort_order', 0)
+                )
+
+            return JsonResponse({
+                'success': True,
+                'assignment_id': assignment.id,
+                'message': 'Assignment created successfully'
+            })
+
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    def get_assessments(self, request):
+        """Get all assessments for the course being built"""
+        try:
+            session_id = request.GET.get('session_id')
+            session = get_object_or_404(CourseBuilderSession, id=session_id, instructor=request.user)
+
+            # Get course from session data
+            course_data = session.session_data.get('course', {})
+            course_title = course_data.get('title', '')
+
+            # Get all lessons from session
+            modules_data = session.session_data.get('modules', [])
+            lesson_ids = []
+            for module_data in modules_data:
+                for lesson_data in module_data.get('lessons', []):
+                    if lesson_data.get('id'):
+                        lesson_ids.append(lesson_data['id'])
+
+            # Get quizzes and assignments for these lessons
+            quizzes = Quiz.objects.filter(
+                lesson__id__in=lesson_ids,
+                lesson__module__course__instructor=request.user
+            ).select_related('lesson', 'lesson__module').annotate(
+                question_count=Count('questions'),
+                total_quiz_points=Sum('questions__points')
+            )
+
+            assignments = Assignment.objects.filter(
+                lesson__id__in=lesson_ids,
+                lesson__module__course__instructor=request.user
+            ).select_related('lesson', 'lesson__module')
+
+            # Format assessments data
+            assessments = []
+
+            # Add quizzes
+            for quiz in quizzes:
+                assessments.append({
+                    'id': quiz.id,
+                    'type': 'quiz',
+                    'title': quiz.title,
+                    'lesson_title': quiz.lesson.title,
+                    'question_count': quiz.question_count or 0,
+                    'total_points': quiz.total_quiz_points or 0,
+                    'passing_score': quiz.passing_score,
+                    'time_limit': quiz.time_limit,
+                    'created_at': quiz.created_at.isoformat()
+                })
+
+            # Add assignments
+            for assignment in assignments:
+                assessments.append({
+                    'id': assignment.id,
+                    'type': 'assignment',
+                    'title': assignment.title,
+                    'lesson_title': assignment.lesson.title,
+                    'assignment_type': assignment.assignment_type,
+                    'max_score': assignment.max_score,
+                    'due_date': assignment.due_date.isoformat() if assignment.due_date else None,
+                    'submission_format': assignment.submission_format,
+                    'created_at': assignment.created_at.isoformat()
+                })
+
+            # Calculate statistics
+            total_quizzes = quizzes.count()
+            total_assignments = assignments.count()
+            total_questions = sum(quiz.question_count or 0 for quiz in quizzes)
+            total_points = sum(quiz.total_quiz_points or 0 for quiz in quizzes) + sum(assignment.max_score for assignment in assignments)
+
+            statistics = {
+                'total_quizzes': total_quizzes,
+                'total_assignments': total_assignments,
+                'total_questions': total_questions,
+                'total_points': total_points
+            }
+
+            return JsonResponse({
+                'success': True,
+                'assessments': assessments,
+                'statistics': statistics
             })
 
         except Exception as e:

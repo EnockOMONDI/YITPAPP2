@@ -13037,3 +13037,44 @@ INFO 2025-08-25 11:23:40,205 autoreload 3626 8513485504 /Users/djsean/Desktop/AP
 INFO 2025-08-25 11:23:41,693 autoreload 3645 8513485504 Watching for file changes with StatReloader
 INFO 2025-08-25 11:23:41,693 autoreload 3644 8513485504 Watching for file changes with StatReloader
 INFO 2025-08-25 11:28:21,522 basehttp 3645 6195851264 "GET /login/ HTTP/1.1" 200 13519
+INFO 2025-08-25 12:08:58,101 basehttp 3645 6195851264 "GET /course-builder/wizard/step/3/ HTTP/1.1" 302 0
+INFO 2025-08-25 12:08:58,163 basehttp 3645 6195851264 "GET /login/?next=/course-builder/wizard/step/3/ HTTP/1.1" 200 13519
+INFO 2025-08-25 12:12:20,479 basehttp 3645 6195851264 "POST /login/?next=/course-builder/wizard/step/3/ HTTP/1.1" 200 14420
+INFO 2025-08-25 12:44:38,152 autoreload 3644 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:44:38,150 autoreload 3645 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:44:45,352 autoreload 6678 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:44:45,352 autoreload 6676 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:45:09,592 autoreload 6676 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:45:09,594 autoreload 6678 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:45:11,394 autoreload 6700 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:45:11,394 autoreload 6699 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:45:50,642 autoreload 6700 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:45:50,645 autoreload 6699 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:45:52,620 autoreload 6717 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:45:52,621 autoreload 6718 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:47:11,340 autoreload 6717 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:47:11,349 autoreload 6718 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:47:13,541 autoreload 6739 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:47:13,541 autoreload 6740 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:47:37,528 autoreload 6739 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:47:37,529 autoreload 6740 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:47:39,529 autoreload 6774 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:47:39,529 autoreload 6773 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:53:16,120 autoreload 6774 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:53:16,124 autoreload 6773 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:53:20,480 autoreload 6948 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:53:20,480 autoreload 6947 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:58:29,128 autoreload 6948 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:58:29,146 autoreload 6947 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:58:34,845 autoreload 7116 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:58:34,846 autoreload 7115 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:58:56,238 autoreload 7115 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:58:56,239 autoreload 7116 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:58:57,830 autoreload 7154 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:58:57,830 autoreload 7153 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:59:24,614 autoreload 7153 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:59:24,633 autoreload 7154 8513485504 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/course_builder/views.py changed, reloading.
+INFO 2025-08-25 12:59:26,618 autoreload 7180 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 12:59:26,619 autoreload 7179 8513485504 Watching for file changes with StatReloader
+INFO 2025-08-25 13:03:06,731 basehttp 7180 6206042112 "GET /course-builder/wizard/step/4/ HTTP/1.1" 302 0
+INFO 2025-08-25 13:03:06,862 basehttp 7180 6206042112 "GET /login/?next=/course-builder/wizard/step/4/ HTTP/1.1" 200 13519
