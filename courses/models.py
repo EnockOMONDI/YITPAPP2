@@ -229,6 +229,8 @@ class Lesson(models.Model):
     CONTENT_TYPES = [
         ('text', 'Text Content'),
         ('video', 'Video'),
+        ('document', 'Document (PDF)'),
+        ('audio', 'Audio'),
         ('presentation', 'Presentation'),
         ('exercise', 'Interactive Exercise'),
         ('quiz', 'Quiz'),
@@ -245,6 +247,8 @@ class Lesson(models.Model):
         help_text="Rich text content with formatting, images, and interactive elements"
     )
     video_url = models.URLField(blank=True, help_text="YouTube, Vimeo, or other video URL")
+    document_url = models.URLField(blank=True, help_text="Uploadcare URL for PDF documents")
+    audio_url = models.URLField(blank=True, help_text="URL for audio content")
     presentation_file = models.FileField(upload_to='presentations/', blank=True, null=True)
     sort_order = models.IntegerField(default=0)
     is_published = models.BooleanField(default=False)

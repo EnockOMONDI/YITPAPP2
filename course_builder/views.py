@@ -147,6 +147,19 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
     API endpoint for course builder AJAX operations
     """
 
+    def get(self, request, *args, **kwargs):
+        """Handle GET requests for data retrieval"""
+        action = request.GET.get('action')
+
+        if action == 'get_lessons':
+            return self.get_lessons(request)
+        elif action == 'get_lesson_content':
+            return self.get_lesson_content(request)
+        elif action == 'get_session':
+            return self.get_session(request)
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid action'})
+
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action')
 
@@ -158,6 +171,8 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             return self.update_course_structure(request)
         elif action == 'add_content':
             return self.add_content(request)
+        elif action == 'save_lesson_content':
+            return self.save_lesson_content(request)
         elif action == 'create_quiz':
             return self.create_quiz(request)
         elif action == 'publish_course':
@@ -281,7 +296,7 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             return JsonResponse({'success': False, 'error': str(e)})
 
     def add_content(self, request):
-        """Add content to lessons"""
+        """Add content to lessons (legacy method)"""
         try:
             lesson_id = request.POST.get('lesson_id')
             content = request.POST.get('content', '')
@@ -295,6 +310,149 @@ class CourseBuilderAPIView(LoginRequiredMixin, InstructorRequiredMixin, View):
             return JsonResponse({
                 'success': True,
                 'message': 'Content added successfully'
+            })
+
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    def save_lesson_content(self, request):
+        """Enhanced method to save lesson content with multiple content types"""
+        try:
+            lesson_id = request.POST.get('lesson_id')
+            content_type = request.POST.get('content_type', 'text')
+            content = request.POST.get('content', '')
+            duration = request.POST.get('duration', 30)
+            learning_objectives = request.POST.get('learning_objectives', '')
+
+            # Get additional content type specific data
+            video_url = request.POST.get('video_url', '')
+            document_url = request.POST.get('document_url', '')
+            audio_url = request.POST.get('audio_url', '')
+
+            lesson = get_object_or_404(Lesson, id=lesson_id, module__course__instructor=request.user)
+
+            # Update lesson fields
+            lesson.content_type = content_type
+            lesson.content = content
+            lesson.estimated_duration = int(duration)
+            lesson.learning_objectives = learning_objectives
+
+            # Update content type specific fields
+            if content_type == 'video':
+                lesson.video_url = video_url
+            elif content_type == 'document':
+                lesson.document_url = document_url
+            elif content_type == 'audio':
+                lesson.audio_url = audio_url
+
+            lesson.save()
+
+            # Return updated lesson data
+            lesson_data = {
+                'id': lesson.id,
+                'title': lesson.title,
+                'content_type': lesson.content_type,
+                'content': lesson.content,
+                'estimated_duration': lesson.estimated_duration,
+                'learning_objectives': lesson.learning_objectives,
+                'video_url': getattr(lesson, 'video_url', ''),
+                'document_url': getattr(lesson, 'document_url', ''),
+                'audio_url': getattr(lesson, 'audio_url', ''),
+            }
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Lesson content saved successfully',
+                'lesson_data': lesson_data
+            })
+
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    def get_lessons(self, request):
+        """Get lessons for a course builder session"""
+        try:
+            session_id = request.GET.get('session_id')
+            session = get_object_or_404(CourseBuilderSession, id=session_id, instructor=request.user)
+
+            lessons = []
+
+            if session.course:
+                # Get lessons from actual course
+                for module in session.course.modules.all():
+                    for lesson in module.lessons.all():
+                        lessons.append({
+                            'id': lesson.id,
+                            'title': lesson.title,
+                            'module_title': module.title,
+                            'content_type': getattr(lesson, 'content_type', 'text'),
+                            'estimated_duration': lesson.estimated_duration
+                        })
+            else:
+                # Get lessons from session data
+                session_data = session.session_data or {}
+                modules_data = session_data.get('modules', [])
+
+                lesson_id = 1
+                for module_data in modules_data:
+                    module_title = module_data.get('title', 'Untitled Module')
+                    for lesson_data in module_data.get('lessons', []):
+                        lessons.append({
+                            'id': f"temp_{lesson_id}",
+                            'title': lesson_data.get('title', 'Untitled Lesson'),
+                            'module_title': module_title,
+                            'content_type': lesson_data.get('content_type', 'text'),
+                            'estimated_duration': lesson_data.get('estimated_duration', 30)
+                        })
+                        lesson_id += 1
+
+            return JsonResponse({
+                'success': True,
+                'lessons': lessons
+            })
+
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    def get_lesson_content(self, request):
+        """Get content for a specific lesson"""
+        try:
+            lesson_id = request.GET.get('lesson_id')
+
+            if lesson_id.startswith('temp_'):
+                # Handle temporary lesson from session data
+                return JsonResponse({
+                    'success': True,
+                    'lesson': {
+                        'id': lesson_id,
+                        'title': 'Lesson',
+                        'content_type': 'text',
+                        'content': '',
+                        'estimated_duration': 30,
+                        'learning_objectives': '',
+                        'video_url': '',
+                        'document_url': '',
+                        'audio_url': '',
+                    }
+                })
+
+            lesson = get_object_or_404(Lesson, id=lesson_id, module__course__instructor=request.user)
+
+            lesson_data = {
+                'id': lesson.id,
+                'title': lesson.title,
+                'content_type': getattr(lesson, 'content_type', 'text'),
+                'content': lesson.content,
+                'estimated_duration': lesson.estimated_duration,
+                'learning_objectives': lesson.learning_objectives,
+                'video_url': getattr(lesson, 'video_url', ''),
+                'document_url': getattr(lesson, 'document_url', ''),
+                'audio_url': getattr(lesson, 'audio_url', ''),
+            }
+
+            return JsonResponse({
+                'success': True,
+                'lesson': lesson_data
             })
 
         except Exception as e:
