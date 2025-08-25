@@ -54,7 +54,7 @@ services:
       - key: PAYPAL_MODE
         value: "live"
       - key: PAYPAL_WEBHOOK_ID
-        value: "https://www.youthimpactglobal.com/payments/paypal/webhook/"  
+        value: "86J87791JU267113S"  
 
       # Site Configuration
       - key: SITE_URL
