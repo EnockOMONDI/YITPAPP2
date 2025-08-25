@@ -46,15 +46,15 @@ services:
       - key: MPESA_PASSKEY
         value: "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
 
-      # PayPal API Configuration
+      # PayPal API Configuration - LIVE PRODUCTION
       - key: PAYPAL_CLIENT_ID
-        value: "Ac1haMUNDdVE8SMjwrY_lk01hnQegPaoB7RYEmMBuIabtdo5o8FG1Lo439o89gRAYd0NR9-AOB1bEdAy"
+        value: "AcZ8rCsyFeympsh1tPzIEpPorEPtmGT40qZkS-YsE6pxxtMyqJ18BjfriE07hiGxOEMnBom_H6VoWdD9"
       - key: PAYPAL_CLIENT_SECRET
-        value: "EOqX8HcFbc_YdNQF0r1-aKXGRABvfTmGnIoNLj_zmPHXyww52ZHcq7rTYrXBFdvdnA9E1hu2a5MykhTq"
+        value: "EEvqKEvfY7ZqDfO067JliUSGcJKzWo_8HWjWPp7xxEvfX6FXlyfNFIDFhMhq4IahEgH_FMPBpyTMFyca"
       - key: PAYPAL_MODE
-        value: "sandbox"
+        value: "live"
       - key: PAYPAL_WEBHOOK_ID
-        value: "83J77159BP9970500"
+        value: "https://www.youthimpactglobal.com/payments/paypal/webhook/"  
 
       # Site Configuration
       - key: SITE_URL
