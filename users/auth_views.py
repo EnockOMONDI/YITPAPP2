@@ -20,9 +20,17 @@ class InstructorAwareLoginView(auth_views.LoginView):
     
     def get_success_url(self):
         """
-        Redirect instructors to their dashboard, others to default page
+        Redirect superusers to admin dashboard, instructors to their dashboard, others to default page
         """
         user = self.request.user
+
+        # Check if user is a superuser first
+        if user.is_superuser:
+            messages.success(
+                self.request,
+                f"Welcome back, {user.get_full_name() or user.username}! You're logged in as Super Administrator."
+            )
+            return reverse('users:superuser_dashboard')
 
         # Check if user has instructor profile
         try:

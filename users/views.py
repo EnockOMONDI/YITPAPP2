@@ -1941,6 +1941,125 @@ def superuser_dashboard(request):
         })
     daily_registrations.reverse()
 
+    # Git Repository Information
+    def get_git_info():
+        """Get git repository information using subprocess"""
+        import subprocess
+        import os
+        from django.conf import settings
+
+        git_info = {
+            'branch': 'main',
+            'status': 'Clean',
+            'recent_commits': [],
+            'previous_commits': [],
+            'recent_commits_count': 0
+        }
+
+        try:
+            # Get current working directory (should be the project root)
+            project_root = getattr(settings, 'BASE_DIR', os.getcwd())
+
+            # Get current branch
+            try:
+                result = subprocess.run(['git', 'branch', '--show-current'],
+                                      capture_output=True, text=True, cwd=project_root, timeout=5)
+                if result.returncode == 0:
+                    git_info['branch'] = result.stdout.strip() or 'main'
+            except:
+                pass
+
+            # Get repository status
+            try:
+                result = subprocess.run(['git', 'status', '--porcelain'],
+                                      capture_output=True, text=True, cwd=project_root, timeout=5)
+                if result.returncode == 0:
+                    git_info['status'] = 'Clean' if not result.stdout.strip() else 'Modified'
+            except:
+                pass
+
+            # Get recent commits (last 15)
+            try:
+                result = subprocess.run([
+                    'git', 'log', '--oneline', '--pretty=format:%h|%s|%an|%ad',
+                    '--date=iso', '-15'
+                ], capture_output=True, text=True, cwd=project_root, timeout=10)
+
+                if result.returncode == 0:
+                    commits = []
+                    for line in result.stdout.strip().split('\n'):
+                        if line:
+                            parts = line.split('|', 3)
+                            if len(parts) == 4:
+                                hash_short, message, author, date_str = parts
+                                try:
+                                    # Parse the date
+                                    from datetime import datetime
+                                    commit_date = datetime.fromisoformat(date_str.replace(' +0000', '').replace(' +0100', '').replace(' +0200', ''))
+                                    commits.append({
+                                        'hash': hash_short,
+                                        'message': message,
+                                        'author': author,
+                                        'date': commit_date
+                                    })
+                                except:
+                                    # Fallback if date parsing fails
+                                    commits.append({
+                                        'hash': hash_short,
+                                        'message': message,
+                                        'author': author,
+                                        'date': timezone.now()
+                                    })
+
+                    git_info['recent_commits'] = commits
+                    git_info['recent_commits_count'] = len(commits)
+            except:
+                pass
+
+            # Get previous commits (16-50)
+            try:
+                result = subprocess.run([
+                    'git', 'log', '--oneline', '--pretty=format:%h|%s|%an|%ad',
+                    '--date=iso', '--skip=15', '-35'
+                ], capture_output=True, text=True, cwd=project_root, timeout=10)
+
+                if result.returncode == 0:
+                    commits = []
+                    for line in result.stdout.strip().split('\n'):
+                        if line:
+                            parts = line.split('|', 3)
+                            if len(parts) == 4:
+                                hash_short, message, author, date_str = parts
+                                try:
+                                    from datetime import datetime
+                                    commit_date = datetime.fromisoformat(date_str.replace(' +0000', '').replace(' +0100', '').replace(' +0200', ''))
+                                    commits.append({
+                                        'hash': hash_short,
+                                        'message': message,
+                                        'author': author,
+                                        'date': commit_date
+                                    })
+                                except:
+                                    commits.append({
+                                        'hash': hash_short,
+                                        'message': message,
+                                        'author': author,
+                                        'date': timezone.now()
+                                    })
+
+                    git_info['previous_commits'] = commits
+            except:
+                pass
+
+        except Exception as e:
+            # If any git operation fails, return default values
+            pass
+
+        return git_info
+
+    # Get git information
+    git_data = get_git_info()
+
     context = {
         # User Analytics
         'total_users': total_users,
@@ -1986,6 +2105,13 @@ def superuser_dashboard(request):
         'db_status': db_status,
         'db_status_class': db_status_class,
         'current_time': timezone.now(),
+
+        # Git Repository Information
+        'git_branch': git_data['branch'],
+        'git_status': git_data['status'],
+        'recent_commits': git_data['recent_commits'],
+        'previous_commits': git_data['previous_commits'],
+        'recent_commits_count': git_data['recent_commits_count'],
     }
 
     return render(request, 'users/superuser_dashboard.html', context)

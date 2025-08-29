@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YITP Business Dashboard - Victor</title>
-
+    
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
+    
     <style>
         :root {
             --yitp-orange: #ff5d15;
@@ -18,12 +18,12 @@
             --success-green: #28a745;
             --warning-yellow: #ffc107;
         }
-
+        
         body {
             background-color: var(--yitp-light-gray);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
+        
         /* Header Styles */
         .dashboard-header {
             background: linear-gradient(135deg, var(--yitp-blue) 0%, #2a4073 100%);
@@ -31,18 +31,18 @@
             padding: 2rem 0;
             margin-bottom: 2rem;
         }
-
+        
         .welcome-text {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
-
+        
         .last-updated {
             opacity: 0.8;
             font-size: 0.9rem;
         }
-
+        
         /* Navigation Pills */
         .nav-pills .nav-link {
             background: white;
@@ -54,20 +54,20 @@
             border-radius: 25px;
             transition: all 0.3s ease;
         }
-
+        
         .nav-pills .nav-link:hover {
             background: var(--yitp-orange);
             color: white;
             border-color: var(--yitp-orange);
             transform: translateY(-2px);
         }
-
+        
         .nav-pills .nav-link.active {
             background: var(--yitp-orange);
             color: white;
             border-color: var(--yitp-orange);
         }
-
+        
         /* Metric Cards */
         .metric-card {
             background: white;
@@ -78,49 +78,49 @@
             border-left: 5px solid var(--yitp-orange);
             height: 100%;
         }
-
+        
         .metric-card:hover {
             transform: translateY(-5px);
         }
-
+        
         .metric-card.blue {
             border-left-color: var(--yitp-blue);
         }
-
+        
         .metric-card.green {
             border-left-color: var(--success-green);
         }
-
+        
         .metric-card.yellow {
             border-left-color: var(--warning-yellow);
         }
-
+        
         .metric-value {
             font-size: 2.5rem;
             font-weight: bold;
             color: var(--yitp-blue);
             margin-bottom: 0.5rem;
         }
-
+        
         .metric-label {
             color: #6c757d;
             font-size: 1rem;
             margin-bottom: 0.5rem;
         }
-
+        
         .metric-change {
             font-size: 0.875rem;
             font-weight: 500;
         }
-
+        
         .metric-change.positive {
             color: var(--success-green);
         }
-
+        
         .metric-change.negative {
             color: #dc3545;
         }
-
+        
         /* Action Buttons */
         .action-btn {
             background: var(--yitp-orange);
@@ -135,30 +135,30 @@
             transition: all 0.3s ease;
             margin: 0.25rem;
         }
-
+        
         .action-btn:hover {
             background: #e54a0c;
             color: white;
             text-decoration: none;
             transform: translateY(-1px);
         }
-
+        
         .action-btn.secondary {
             background: var(--yitp-blue);
         }
-
+        
         .action-btn.secondary:hover {
             background: #2a4073;
         }
-
+        
         .action-btn.success {
             background: var(--success-green);
         }
-
+        
         .action-btn.success:hover {
             background: #218838;
         }
-
+        
         /* Simple Charts */
         .simple-chart {
             background: white;
@@ -171,19 +171,19 @@
             flex-direction: column;
             justify-content: center;
         }
-
+        
         .chart-value {
             font-size: 3rem;
             font-weight: bold;
             color: var(--yitp-orange);
             margin-bottom: 0.5rem;
         }
-
+        
         .chart-label {
             color: #6c757d;
             font-size: 1.1rem;
         }
-
+        
         /* Tables */
         .simple-table {
             background: white;
@@ -191,7 +191,7 @@
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
+        
         .simple-table th {
             background: var(--yitp-blue);
             color: white;
@@ -199,13 +199,13 @@
             font-weight: 600;
             padding: 1rem;
         }
-
+        
         .simple-table td {
             border-color: #e9ecef;
             padding: 1rem;
             vertical-align: middle;
         }
-
+        
         /* Status Badges */
         .status-badge {
             padding: 0.25rem 0.75rem;
@@ -213,22 +213,22 @@
             font-size: 0.875rem;
             font-weight: 500;
         }
-
+        
         .status-active {
             background: #d4edda;
             color: #155724;
         }
-
+        
         .status-completed {
             background: #cce7ff;
             color: #004085;
         }
-
+        
         .status-pending {
             background: #fff3cd;
             color: #856404;
         }
-
+        
         /* Insight Boxes */
         .insight-box {
             background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
@@ -237,7 +237,7 @@
             margin: 1rem 0;
             border-left: 4px solid #2196f3;
         }
-
+        
         .insight-title {
             font-weight: bold;
             color: #1565c0;
@@ -245,27 +245,27 @@
             display: flex;
             align-items: center;
         }
-
+        
         .insight-text {
             color: #424242;
             margin-bottom: 0;
         }
-
+        
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .metric-value {
                 font-size: 2rem;
             }
-
+            
             .nav-pills .nav-link {
                 margin: 0.25rem 0;
                 text-align: center;
             }
-
+            
             .welcome-text {
                 font-size: 1.5rem;
             }
-
+            
             .action-btn {
                 display: block;
                 margin: 0.5rem 0;
@@ -299,6 +299,7 @@
             </div>
         </div>
     </div>
+
     <!-- Main Dashboard Content -->
     <div class="container">
         <!-- Navigation Pills -->
@@ -328,11 +329,6 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="actions-tab" data-bs-toggle="pill" data-bs-target="#actions" type="button" role="tab">
                             <i class="fas fa-bolt me-2"></i>Quick Actions
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="development-tab" data-bs-toggle="pill" data-bs-target="#development" type="button" role="tab">
-                            <i class="fas fa-code-branch me-2"></i>Development Status
                         </button>
                     </li>
                 </ul>
@@ -406,9 +402,8 @@
                             <div class="insight-text">
                                 {% if total_users > 0 %}
                                     You have {{ total_users }} users with {{ active_enrollments }} active enrollments.
-                                    {% if total_revenue > 0 and total_users > 0 %}
-                                        {% widthratio total_revenue 1 total_users as avg_revenue %}
-                                        Your average revenue per user is ${{ avg_revenue|default:0 }}.
+                                    {% if total_revenue > 0 %}
+                                        Your average revenue per user is ${{ total_revenue|floatformat:0|div:total_users|default:0 }}.
                                     {% endif %}
                                     {% if new_users_7d > 0 %}
                                         Great job! You gained {{ new_users_7d }} new users this week.
@@ -439,12 +434,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="simple-chart">
-                            {% if total_paid_users > 0 %}
-                                {% widthratio total_revenue 1 total_paid_users as avg_order %}
-                                <div class="chart-value">${{ avg_order|default:0 }}</div>
-                            {% else %}
-                                <div class="chart-value">$0</div>
-                            {% endif %}
+                            <div class="chart-value">${{ avg_order_value|default:0 }}</div>
                             <div class="chart-label">Average Order Value</div>
                         </div>
                     </div>
@@ -472,16 +462,10 @@
                             <div class="metric-value">{{ active_users_30d|default:0 }}</div>
                             <div class="metric-label">Active Users (30 days)</div>
                             <div class="metric-change">
-                                {% if total_users > 0 %}
-                                    {% widthratio active_users_30d 1 total_users as active_pct %}
-                                    {% widthratio active_pct 1 100 as active_percentage %}
-                                    <i class="fas fa-percentage me-1"></i>{{ active_percentage|default:0 }}% of total users
-                                {% else %}
-                                    <i class="fas fa-percentage me-1"></i>0% of total users
-                                {% endif %}
+                                <i class="fas fa-percentage me-1"></i>{{ active_percentage|default:0 }}% of total users
                             </div>
                             <div class="mt-2">
-                                <a href="/admin/auth/user/?is_active=True" class="action-btn">View Active Users</a>
+                                <a href="/admin/auth/user/?last_login__gte={{ thirty_days_ago|date:'Y-m-d' }}" class="action-btn">View Active Users</a>
                             </div>
                         </div>
                     </div>
@@ -562,7 +546,7 @@
                             <div class="metric-value">{{ completion_rate|default:0 }}%</div>
                             <div class="metric-label">Average Completion Rate</div>
                             <div class="metric-change positive">
-                                <i class="fas fa-trophy me-1"></i>{{ completed_enrollments|default:0 }} completed
+                                <i class="fas fa-trophy me-1"></i>{{ completed_courses|default:0 }} completed
                             </div>
                             <div class="mt-2">
                                 <a href="/admin/progress/enrollment/?status=completed" class="action-btn">View Completed</a>
@@ -571,13 +555,13 @@
                     </div>
                     <div class="col-md-4">
                         <div class="metric-card green">
-                            <div class="metric-value">{{ avg_quiz_score|default:0 }}</div>
-                            <div class="metric-label">Average Quiz Score</div>
+                            <div class="metric-value">{{ avg_course_rating|default:0 }}</div>
+                            <div class="metric-label">Average Course Rating</div>
                             <div class="metric-change">
-                                <i class="fas fa-star me-1"></i>Based on quiz attempts
+                                <i class="fas fa-star me-1"></i>Based on student feedback
                             </div>
                             <div class="mt-2">
-                                <a href="/admin/courses/course/" class="action-btn">View Courses</a>
+                                <a href="/admin/courses/course/" class="action-btn">View Ratings</a>
                             </div>
                         </div>
                     </div>
@@ -601,20 +585,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% if popular_courses %}
-                                        {% for course in popular_courses %}
+                                    {% if course_performance %}
+                                        {% for course in course_performance %}
                                         <tr>
                                             <td>
                                                 <strong>{{ course.title|truncatechars:50 }}</strong><br>
-                                                <small class="text-muted">Course ID: {{ course.id }}</small>
+                                                <small class="text-muted">{{ course.instructor.username }}</small>
                                             </td>
                                             <td>{{ course.enrollment_count|default:0 }}</td>
                                             <td>
-                                                <span class="status-badge status-completed">
-                                                    {{ completion_rate|default:0 }}%
+                                                <span class="status-badge {% if course.completion_rate >= 70 %}status-completed{% elif course.completion_rate >= 40 %}status-pending{% else %}status-active{% endif %}">
+                                                    {{ course.completion_rate|default:0 }}%
                                                 </span>
                                             </td>
-                                            <td>${{ total_revenue|default:0 }}</td>
+                                            <td>${{ course.revenue|default:0 }}</td>
                                             <td>
                                                 <a href="/admin/courses/course/{{ course.id }}/change/" class="action-btn" style="font-size: 0.75rem;">
                                                     <i class="fas fa-edit"></i>
@@ -654,12 +638,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="metric-card blue">
-                            {% if total_paid_users > 0 %}
-                                {% widthratio total_revenue 1 total_paid_users as avg_order %}
-                                <div class="metric-value">${{ avg_order|default:0 }}</div>
-                            {% else %}
-                                <div class="metric-value">$0</div>
-                            {% endif %}
+                            <div class="metric-value">${{ avg_order_value|default:0 }}</div>
                             <div class="metric-label">Average Order Value</div>
                             <div class="metric-change">
                                 <i class="fas fa-calculator me-1"></i>Per transaction
@@ -683,13 +662,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="metric-card">
-                            {% if total_paid_users > 0 and pending_payments >= 0 %}
-                                {% widthratio total_paid_users 1 total_paid_users as success_rate %}
-                                {% widthratio success_rate 100 1 as payment_success %}
-                                <div class="metric-value">{{ payment_success|default:95 }}%</div>
-                            {% else %}
-                                <div class="metric-value">95%</div>
-                            {% endif %}
+                            <div class="metric-value">{{ payment_success_rate|default:0 }}%</div>
                             <div class="metric-label">Payment Success Rate</div>
                             <div class="metric-change positive">
                                 <i class="fas fa-check me-1"></i>Last 30 days
@@ -773,8 +746,8 @@
                                 <a href="/admin/auth/user/?is_active=True" class="action-btn secondary">
                                     <i class="fas fa-user-check me-2"></i>Active Users Only
                                 </a>
-                                <a href="/admin/auth/user/?date_joined__gte=2024-01-01" class="action-btn">
-                                    <i class="fas fa-calendar me-2"></i>Recent Users
+                                <a href="/admin/auth/user/?date_joined__gte={{ seven_days_ago|date:'Y-m-d' }}" class="action-btn">
+                                    <i class="fas fa-calendar me-2"></i>New Users (7 days)
                                 </a>
                             </div>
                         </div>
@@ -864,189 +837,6 @@
                                 <a href="/users/superuser/export/payments/" class="action-btn success">
                                     <i class="fas fa-credit-card me-2"></i>Export Payments CSV
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Development Status Tab -->
-            <div class="tab-pane fade" id="development" role="tabpanel">
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="insight-box">
-                            <div class="insight-title">
-                                <i class="fas fa-code-branch me-2"></i>Development Overview
-                            </div>
-                            <div class="insight-text">
-                                Track recent development activity and code changes for your YITP platform.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Git Repository Status -->
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <div class="metric-card">
-                            <div class="metric-value">{{ git_branch|default:"main" }}</div>
-                            <div class="metric-label">Current Branch</div>
-                            <div class="metric-change">
-                                <i class="fas fa-code-branch me-1"></i>Active development branch
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="metric-card blue">
-                            <div class="metric-value">{{ recent_commits_count|default:0 }}</div>
-                            <div class="metric-label">Recent Commits</div>
-                            <div class="metric-change">
-                                <i class="fas fa-history me-1"></i>Last 30 days
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="metric-card green">
-                            <div class="metric-value">{{ git_status|default:"Clean" }}</div>
-                            <div class="metric-label">Repository Status</div>
-                            <div class="metric-change">
-                                <i class="fas fa-check me-1"></i>Working directory
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Commits -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="simple-table-container">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-history me-2"></i>Recent Commits
-                                </h5>
-                                <span class="text-muted">Last 15 commits</span>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table simple-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Commit</th>
-                                            <th>Message</th>
-                                            <th>Author</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% if recent_commits %}
-                                            {% for commit in recent_commits %}
-                                            <tr>
-                                                <td>
-                                                    <code class="text-primary">{{ commit.hash }}</code>
-                                                </td>
-                                                <td>
-                                                    <strong>{{ commit.message|truncatechars:60 }}</strong>
-                                                    {% if commit.message|length > 60 %}
-                                                        <br><small class="text-muted">{{ commit.message }}</small>
-                                                    {% endif %}
-                                                </td>
-                                                <td>{{ commit.author }}</td>
-                                                <td>
-                                                    <span class="text-muted">{{ commit.date|date:"M d, Y H:i" }}</span>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        {% else %}
-                                            <tr>
-                                                <td colspan="4" class="text-center text-muted py-4">
-                                                    <i class="fas fa-code-branch fa-2x mb-2"></i><br>
-                                                    No git repository found or no commits available.
-                                                </td>
-                                            </tr>
-                                        {% endif %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Previous Commits -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="simple-table-container">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-archive me-2"></i>Previous Commits
-                                </h5>
-                                <span class="text-muted">Historical development activity</span>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table simple-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Commit</th>
-                                            <th>Message</th>
-                                            <th>Author</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% if previous_commits %}
-                                            {% for commit in previous_commits %}
-                                            <tr>
-                                                <td>
-                                                    <code class="text-secondary">{{ commit.hash }}</code>
-                                                </td>
-                                                <td>
-                                                    <strong>{{ commit.message|truncatechars:60 }}</strong>
-                                                    {% if commit.message|length > 60 %}
-                                                        <br><small class="text-muted">{{ commit.message }}</small>
-                                                    {% endif %}
-                                                </td>
-                                                <td>{{ commit.author }}</td>
-                                                <td>
-                                                    <span class="text-muted">{{ commit.date|date:"M d, Y H:i" }}</span>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        {% else %}
-                                            <tr>
-                                                <td colspan="4" class="text-center text-muted py-4">
-                                                    <i class="fas fa-archive fa-2x mb-2"></i><br>
-                                                    No previous commits to display.
-                                                </td>
-                                            </tr>
-                                        {% endif %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Development Actions -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="simple-table-container">
-                            <h5 class="mb-3">
-                                <i class="fas fa-tools me-2"></i>Development Actions
-                            </h5>
-                            <div class="insight-text mb-3">
-                                Quick access to development and deployment tools.
-                            </div>
-                            <div class="d-flex flex-wrap gap-2">
-                                <a href="/admin/" class="action-btn">
-                                    <i class="fas fa-cog me-2"></i>Admin Interface
-                                </a>
-                                <a href="/admin/auth/user/" class="action-btn secondary">
-                                    <i class="fas fa-users me-2"></i>Manage Users
-                                </a>
-                                <a href="/admin/courses/course/" class="action-btn success">
-                                    <i class="fas fa-graduation-cap me-2"></i>Manage Courses
-                                </a>
-                                <button class="action-btn" style="background: #6c757d;" onclick="location.reload()">
-                                    <i class="fas fa-sync-alt me-2"></i>Refresh Data
-                                </button>
                             </div>
                         </div>
                     </div>
