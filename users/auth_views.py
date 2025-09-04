@@ -193,3 +193,5 @@ class InstructorLogoutView(auth_views.LogoutView):
                 messages.success(request, "You've been logged out successfully.")
         
         return super().dispatch(request, *args, **kwargs)
+
+# Updated: 2025-09-08T01:13:27.320852
