@@ -15847,3 +15847,4 @@ INFO 2025-09-08 01:09:20,391 basehttp 56578 6125580288 "GET /users/superuser/pro
 INFO 2025-09-08 01:10:46,652 basehttp 56578 6125580288 "GET /users/superuser/profile/ HTTP/1.1" 200 99445
 INFO 2025-09-08 01:13:24,094 autoreload 56578 8585804480 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
 INFO 2025-09-08 01:13:27,139 autoreload 58212 8585804480 Watching for file changes with StatReloader
+INFO 2025-09-08 01:13:28,733 autoreload 58212 8585804480 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
