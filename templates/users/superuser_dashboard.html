@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YITP Super Admin Dashboard</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --yitp-orange: #ff5d15;
+            --yitp-blue: #1a2e53;
+            --yitp-light-gray: #f8f9fa;
+        }
+        
+        body {
+            background-color: var(--yitp-light-gray);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .navbar-brand {
+            color: var(--yitp-orange) !important;
+            font-weight: bold;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--yitp-orange), #ff7a3d);
+            color: white;
+        }
+        
+        .stat-card.blue {
+            background: linear-gradient(135deg, var(--yitp-blue), #2a4073);
+        }
+        
+        .stat-card.success {
+            background: linear-gradient(135deg, #28a745, #34ce57);
+        }
+        
+        .stat-card.warning {
+            background: linear-gradient(135deg, #ffc107, #ffcd39);
+            color: #333;
+        }
+        
+        .btn-yitp {
+            background-color: var(--yitp-orange);
+            border-color: var(--yitp-orange);
+            color: white;
+        }
+        
+        .btn-yitp:hover {
+            background-color: #e54a0c;
+            border-color: #e54a0c;
+            color: white;
+        }
+        
+        .sidebar {
+            background-color: var(--yitp-blue);
+            min-height: 100vh;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 4px 0;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background-color: var(--yitp-orange);
+            color: white;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        
+        .table-responsive {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .badge-yitp {
+            background-color: var(--yitp-orange);
+        }
+        
+        .text-yitp {
+            color: var(--yitp-orange);
+        }
+        
+        .border-yitp {
+            border-color: var(--yitp-orange) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--yitp-blue);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-crown me-2"></i>YITP Super Admin
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text text-white me-3">
+                    <i class="fas fa-user-shield me-1"></i>{{ user.get_full_name|default:user.username }}
+                </span>
+                <a class="nav-link text-white" href="/admin/">
+                    <i class="fas fa-cog me-1"></i>Django Admin
+                </a>
+                <a class="nav-link text-white" href="/logout/">
+                    <i class="fas fa-sign-out-alt me-1"></i>Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar p-0">
+                <div class="p-3">
+                    <h6 class="text-white mb-3">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </h6>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#overview">
+                            <i class="fas fa-chart-line me-2"></i>Overview
+                        </a>
+                        <a class="nav-link" href="#users">
+                            <i class="fas fa-users me-2"></i>Users
+                        </a>
+                        <a class="nav-link" href="#courses">
+                            <i class="fas fa-graduation-cap me-2"></i>Courses
+                        </a>
+                        <a class="nav-link" href="#payments">
+                            <i class="fas fa-credit-card me-2"></i>Payments
+                        </a>
+                        <a class="nav-link" href="#system">
+                            <i class="fas fa-server me-2"></i>System
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10">
+                <div class="p-4">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h1 class="h3 mb-0">Super Admin Dashboard</h1>
+                            <p class="text-muted">Welcome back, {{ user.get_full_name|default:user.username }}!</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-yitp me-2" onclick="refreshDashboard()">
+                                <i class="fas fa-sync-alt me-1"></i>Refresh
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fas fa-download me-1"></i>Export Data
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/users/superuser/export/users/">
+                                        <i class="fas fa-users me-2"></i>Users CSV
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="/users/superuser/export/enrollments/">
+                                        <i class="fas fa-graduation-cap me-2"></i>Enrollments CSV
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="/users/superuser/export/payments/">
+                                        <i class="fas fa-credit-card me-2"></i>Payments CSV
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="card stat-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-users fa-2x mb-2"></i>
+                                    <h3 class="mb-0">{{ stats.total_users }}</h3>
+                                    <p class="mb-0">Total Users</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stat-card blue">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-graduation-cap fa-2x mb-2"></i>
+                                    <h3 class="mb-0">{{ stats.total_enrollments }}</h3>
+                                    <p class="mb-0">Total Enrollments</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stat-card success">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-dollar-sign fa-2x mb-2"></i>
+                                    <h3 class="mb-0">${{ stats.total_revenue|floatformat:0 }}</h3>
+                                    <p class="mb-0">Total Revenue</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stat-card warning">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-book fa-2x mb-2"></i>
+                                    <h3 class="mb-0">{{ stats.total_courses }}</h3>
+                                    <p class="mb-0">Active Courses</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-line me-2 text-yitp"></i>User Registration Trend
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="userChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-pie me-2 text-yitp"></i>Revenue Distribution
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container">
+                                        <canvas id="revenueChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-clock me-2 text-yitp"></i>Recent Enrollments
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Student</th>
+                                                    <th>Course</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for enrollment in recent_enrollments %}
+                                                <tr>
+                                                    <td>{{ enrollment.student.get_full_name|default:enrollment.student.username }}</td>
+                                                    <td>{{ enrollment.course.title }}</td>
+                                                    <td>{{ enrollment.enrollment_date|date:"M d, Y" }}</td>
+                                                    <td>
+                                                        <span class="badge badge-yitp">{{ enrollment.status|title }}</span>
+                                                    </td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="4" class="text-center text-muted">No recent enrollments</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-exclamation-triangle me-2 text-yitp"></i>System Status
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span>Database</span>
+                                        <span class="badge bg-success">Online</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span>Email Service</span>
+                                        <span class="badge bg-success">Active</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span>Payment Gateway</span>
+                                        <span class="badge bg-success">Connected</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Storage</span>
+                                        <span class="badge bg-warning text-dark">85% Used</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // User Registration Chart
+            const userCtx = document.getElementById('userChart').getContext('2d');
+            new Chart(userCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'New Users',
+                        data: [12, 19, 3, 5, 2, 3],
+                        borderColor: '#ff5d15',
+                        backgroundColor: 'rgba(255, 93, 21, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['PayPal', 'M-Pesa', 'Bank Transfer', 'Other'],
+                    datasets: [{
+                        data: [300, 50, 100, 40],
+                        backgroundColor: ['#ff5d15', '#1a2e53', '#28a745', '#ffc107']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+
+        // Refresh Dashboard
+        function refreshDashboard() {
+            location.reload();
+        }
+
+        // Auto-refresh every 5 minutes
+        setInterval(refreshDashboard, 300000);
+    </script>
+</body>
+</html>

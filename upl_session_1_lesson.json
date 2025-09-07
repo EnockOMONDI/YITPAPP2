@@ -1,0 +1,70 @@
+{
+  "lesson_id": "upl_session_1",
+  "title": "Session 1: Introduction to Life's Purpose",
+  "content_type": "enhanced",
+  "estimated_duration": 60,
+  "learning_objectives": "Understand the concept of purpose and why it matters in life. Explore the difference between goals, vision, and purpose through real-world examples.",
+  "primary_content": "<h2 style=\"color: #1a2e53; border-bottom: 2px solid #ff5d15; padding-bottom: 0.5rem;\">Introduction to Life’s Purpose (1 hour)</h2>\n<div style=\"background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;\"><h4 style=\"color: #ff5d15; margin-top: 0;\">💡 Key Takeaway</h4><p><strong>Learning Objective:</strong> Understand the concept of purpose and why it matters.</p></div>\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">📖 the Three Builders: The story of the three bricklayers is based on the rebuilding of St. Paul’s Cathedral after a fire burned through London in 1666.</h3>\n<p>An architect was visiting the project site and loved to interact with those doing the work and approached three bricklayers. He asked them each individually, “what are you doing?”.</p>\n<p>The first bricklayer replied, “I’m a bricklayer. I’m working hard to lay bricks to earn money so I can feed my family.” The man seemed tired and wasn’t as far along with his work as the others.</p>\n<p>The second bricklayer says, “I’m a builder. I’m building the finest, strongest wall. This wall will be a foundation for this building and will protect everyone who is inside.”</p>\n<p>The third bricklayer replied with energy and a light in his eye, “I’m a cathedral builder. I’m building a great cathedral, where people can gather, pray and celebrate the Almighty.”</p>\n<p>This is a demonstration that everything we experience is based on our understanding of purpose and depth of vision. Everything is “an inside job.” How we interpret what we do, or experience, is based on the purpose of the action and the actor, for the actor’s mindset reflects on purpose.</p>\n<h3 style=\"color: #1a2e53; margin-top: 2rem;\">🔑 Key Topics</h3>\n<h4 style=\"color: #0c5460;\">🤔 7 Questions for Clarity</h4>\n<p>What makes you feel most alive?</p>\n<p>What problem in the world gets you most emotionally charged?</p>\n<p>What are you naturally good at?</p>\n<p>What is your life’s most meaningful event or experience?</p>\n<p>What would you do if you had zero fear?</p>\n<p>Who is your idol, living or dead, and why?</p>\n<p>What do you want to be your enduring legacy?</p>\n<p>Answer the foregoing questions sincerely, for therein lies the discovery of your purpose.</p>\n<p>Difference between goals, vision, and purpose.</p>\n<p>Purpose begets vision</p>\n<p>Vision begets goals</p>\n<p>Purpose: The reason for which something is done or created or for which something exists. Your purpose is the reason for your being.</p>\n<p>Vision: An act or power of anticipating which will or may come to be – giving direction for the outcome of goals and purpose</p>\n<p>Goals: specific, desired outcomes that guide actions and effort towards a particular predetermined end</p>\n<p>Purpose-driven lives: Gandhi’s nonviolence, Mandela’s fight for justice, Mother Teresa’s compassion.</p>\n<p>Gandhi, Mandela and Mother Teresa are shining examples of lives well lived with purpose. Gandhi left his law practice behind and focused on liberating Asia and Africa from the yolks of colonial rule. He often took expeditions to South Africa to fellowship with the who were engaged in freedom struggle.</p>\n<p>His crown jewel of endeavor came in the form of relentless non-violent resistance against British rule of his nation, India. He summed it all in the following thought.</p>\n<p>“The main purpose of life is to live rightly, think rightly, act rightly. The soul must languish when we give all our thought to the body.” Mahatma Gandhi</p>\n<p>Mandela’s purposeful find for the liberation of his nation landed him in much trouble, and he was imprisoned and even labelled a terrorist among other things. It was his purpose that fueled his staying power. And he stayed the course until he birthed a rainbow nation out of Apartheid.</p>\n<p>“For to be free is not merely to cast off one’s chains, but to live in a way that respects and enhances the freedom of others.” – Nelson Mandela</p>\n<p>Mother Teresa’s life in Calcutta and beyond touched the world in a manner most special. Her compassion lingers on years after her demise. She did not only contribute to the assuaging of pain, but she also took part in it due to a purpose greater than herself.</p>\n<p>“Help the poor while living among them, sharing their experience and treating them with kindness, compassion and empathy, but never pity.” – Mother Teresa</p>\n<p>Napoleon Hill’s 17 Success Principles Lists Definiteness of Purpose as the top attribute in ensuring achievement.</p>\n<div style=\"background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;\"><h4 style=\"color: #1a2e53; margin-top: 0;\">🎯 Activity</h4><p>Reflective journaling—“When did I feel most alive and fulfilled?” journalize on your personal experiences that felt, and those that feel, most meaningful.</p></div>",
+  "additional_resources": [
+    {
+      "type": "document",
+      "title": "Session 1 PDF Download",
+      "url": "https://ucarecdn.com/session-1-pdf/",
+      "description": "Complete Session 1 content in PDF format"
+    }
+  ],
+  "assessment": {
+    "quiz": {
+      "title": "Session 1 Knowledge Check",
+      "description": "Test your understanding of key concepts from this session",
+      "instructions": "Answer all true/false questions based on the session content. You have 3 attempts to achieve the passing score.",
+      "time_limit": null,
+      "max_attempts": 3,
+      "passing_score": 70,
+      "is_randomized": false,
+      "show_results": true,
+      "questions": [
+        {
+          "question_text": "According to the story of the three builders, the third bricklayer saw himself as building a cathedral.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. The third bricklayer replied with energy that he was building a great cathedral where people could gather, pray and celebrate.",
+          "sort_order": 1
+        },
+        {
+          "question_text": "Purpose and vision are the same thing according to the course material.",
+          "question_type": "true_false",
+          "correct_answer": "false",
+          "points": 2,
+          "explanation": "False. Purpose is the reason for which something exists, while vision is the power of anticipating what will come to be.",
+          "sort_order": 2
+        },
+        {
+          "question_text": "Gandhi's main purpose in life was to live rightly, think rightly, and act rightly.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. Gandhi stated: 'The main purpose of life is to live rightly, think rightly, act rightly.'",
+          "sort_order": 3
+        },
+        {
+          "question_text": "Napoleon Hill lists Definiteness of Purpose as the second most important success principle.",
+          "question_type": "true_false",
+          "correct_answer": "false",
+          "points": 2,
+          "explanation": "False. Napoleon Hill lists Definiteness of Purpose as the TOP attribute in ensuring achievement.",
+          "sort_order": 4
+        },
+        {
+          "question_text": "The course suggests that discovering your purpose requires answering seven specific questions sincerely.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. The course presents 7 Questions for Clarity and states that answering them sincerely leads to discovering your purpose.",
+          "sort_order": 5
+        }
+      ]
+    }
+  }
+}

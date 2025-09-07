@@ -48,5 +48,12 @@ urlpatterns = [
     # Debug URLs (for production troubleshooting)
     path('debug-git/', views.debug_git_info, name='debug_git_info'),
 
+    # Super Admin Dashboard URLs
+    path('superuser/profile/', views.superuser_dashboard, name='superuser_dashboard'),
+    path('superuser/export/users/', views.export_users_csv, name='export_users_csv'),
+    path('superuser/export/enrollments/', views.export_enrollments_csv, name='export_enrollments_csv'),
+    path('superuser/export/payments/', views.export_payments_csv, name='export_payments_csv'),
+    path('superuser/api/data/', views.dashboard_api_data, name='dashboard_api_data'),
+
 ]
 

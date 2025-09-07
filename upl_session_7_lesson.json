@@ -1,0 +1,70 @@
+{
+  "lesson_id": "upl_session_7",
+  "title": "Session 7: Sharing and Sustaining Your Purpose",
+  "content_type": "enhanced",
+  "estimated_duration": 90,
+  "learning_objectives": "Learn how to share your purpose with others and create sustainable practices for long-term growth. Build support networks and community impact.",
+  "primary_content": "<h2 style=\"color: #1a2e53; border-bottom: 2px solid #ff5d15; padding-bottom: 0.5rem;\">Session 7: Sharing and Sustaining Your Purpose (90 minutes)</h2>\n\n<div style=\"background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;\"><h4 style=\"color: #ff5d15; margin-top: 0;\">💡 Key Takeaway</h4><p><strong>Learning Objective:</strong> Learn how to share your purpose with others and create sustainable practices for long-term growth.</p></div>\n\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">📖 The Clay Lamp</h3>\n<p>In a village, there was a small clay lamp that burned brightly. One night, many people came asking for light. The lamp worried, \"If I light all these other lamps, will my flame grow smaller?\" But as the lamp lit one candle after another, its flame remained strong. Soon the whole village glowed with light, and the original lamp realized: sharing your light doesn't diminish it—it multiplies it.</p>\n\n<h3 style=\"color: #1a2e53; margin-top: 2rem;\">🔑 Key Topics</h3>\n<p><strong>Zig Ziglar's Principle:</strong> \"Help others get what they want, and you'll get what you want.\" Understanding how serving others amplifies your own purpose.</p>\n\n<div style=\"background: #f5f5f5; border-left: 4px solid #6c757d; padding: 1rem; margin: 1rem 0; font-style: italic;\"><p style=\"margin: 0; font-size: 1.1em;\">\"A life not lived for others is not a life\"</p><p style=\"margin: 0.5rem 0 0 0; text-align: right; font-weight: bold;\">— Mother Teresa</p></div>\n\n<p><strong>Gandhi's Enduring Influence:</strong> How purpose-driven lives continue to impact others long after we're gone. The ripple effect of authentic purpose.</p>\n\n<p><strong>Building Your Support Network:</strong></p>\n<ul>\n<li>Finding mentors and accountability partners</li>\n<li>Creating communities around shared purpose</li>\n<li>Ongoing growth through Success Afrika and other resources</li>\n</ul>\n\n<p><strong>Sustaining Purpose Through Challenges:</strong></p>\n<ul>\n<li>Maintaining motivation during difficult times</li>\n<li>Adapting your purpose as you grow</li>\n<li>Learning from setbacks and failures</li>\n</ul>\n\n<div style=\"background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;\"><h4 style=\"color: #1a2e53; margin-top: 0;\">🎯 Activity</h4><p><strong>Community Impact Project:</strong> Design a small community project that reflects your purpose. Create a plan to share your purpose with 3 people this month. Identify resources (books, courses, mentors) for ongoing growth.</p></div>\n\n<h4 style=\"color: #0c5460;\">🤔 Sharing and Sustainability Questions</h4>\n<ul>\n<li>How can you use your purpose to serve others?</li>\n<li>What legacy do you want to leave through your purpose?</li>\n<li>Who could you mentor or inspire on their purpose journey?</li>\n</ul>\n",
+  "additional_resources": [
+    {
+      "type": "document",
+      "title": "Session 7 PDF Download",
+      "url": "https://ucarecdn.com/session-7-pdf/",
+      "description": "Complete Session 7 content in PDF format"
+    }
+  ],
+  "assessment": {
+    "quiz": {
+      "title": "Session 7 Knowledge Check",
+      "description": "Test your understanding of key concepts from this session",
+      "instructions": "Answer all true/false questions based on the session content. You have 3 attempts to achieve the passing score.",
+      "time_limit": null,
+      "max_attempts": 3,
+      "passing_score": 70,
+      "is_randomized": false,
+      "show_results": true,
+      "questions": [
+        {
+          "question_text": "The clay lamp story teaches that sharing your light diminishes your own flame.",
+          "question_type": "true_false",
+          "correct_answer": "false",
+          "points": 2,
+          "explanation": "False. The story teaches that a small lamp lit many others without losing its flame - sharing your light strengthens it.",
+          "sort_order": 1
+        },
+        {
+          "question_text": "Zig Ziglar's principle is 'help others get what they want' and you'll get what you want.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. This is one of Zig Ziglar's most famous principles about helping others achieve their goals.",
+          "sort_order": 2
+        },
+        {
+          "question_text": "Gandhi's influence ended when his life ended.",
+          "question_type": "true_false",
+          "correct_answer": "false",
+          "points": 2,
+          "explanation": "False. The session discusses Gandhi's enduring influence, showing how purpose-driven lives continue to impact others long after death.",
+          "sort_order": 3
+        },
+        {
+          "question_text": "Designing a community project is an effective way to share your purpose with others.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. The session activity involves designing a small community project that reflects your purpose.",
+          "sort_order": 4
+        },
+        {
+          "question_text": "Ongoing growth through resources like Success Afrika is discouraged once you find your purpose.",
+          "question_type": "true_false",
+          "correct_answer": "false",
+          "points": 2,
+          "explanation": "False. The session emphasizes ongoing growth via Success Afrika and other resources as essential for sustaining purpose.",
+          "sort_order": 5
+        }
+      ]
+    }
+  }
+}

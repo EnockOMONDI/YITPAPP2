@@ -1,0 +1,70 @@
+{
+  "lesson_id": "upl_session_8",
+  "title": "Session 8: Reflection and Forward Planning",
+  "content_type": "enhanced",
+  "estimated_duration": 60,
+  "learning_objectives": "Consolidate your learning, refine your purpose, and create a concrete plan for moving forward. Develop strategies for resilience and continuous growth.",
+  "primary_content": "<h2 style=\"color: #1a2e53; border-bottom: 2px solid #ff5d15; padding-bottom: 0.5rem;\">Session 8: Reflection and Forward Planning (60 minutes)</h2>\n\n<div style=\"background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;\"><h4 style=\"color: #ff5d15; margin-top: 0;\">💡 Key Takeaway</h4><p><strong>Learning Objective:</strong> Consolidate your learning, refine your purpose, and create a concrete plan for moving forward.</p></div>\n\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">📖 The River and the Stone</h3>\n<p>A young person asked an elder, \"How does the river carve through the hardest rock?\" The elder replied, \"Not through force, but through persistence. Drop by drop, day by day, the water shapes even the mightiest stone. Your purpose is like that river—gentle but persistent, it will shape your life and the world around you.\"</p>\n\n<h3 style=\"color: #1a2e53; margin-top: 2rem;\">🔑 Key Topics</h3>\n<p><strong>Consolidating Your Learning:</strong></p>\n<ul>\n<li>Reviewing and refining your purpose statement</li>\n<li>Identifying key insights from the 8-session journey</li>\n<li>Recognizing growth and transformation</li>\n</ul>\n\n<div style=\"background: #f5f5f5; border-left: 4px solid #6c757d; padding: 1rem; margin: 1rem 0; font-style: italic;\"><p style=\"margin: 0; font-size: 1.1em;\">\"The best time to plant a tree was 20 years ago. The second best time is now\"</p><p style=\"margin: 0.5rem 0 0 0; text-align: right; font-weight: bold;\">— Chinese Proverb</p></div>\n\n<p><strong>Creating Your Action Plan:</strong></p>\n<ul>\n<li>Setting 90-day, 6-month, and 1-year goals</li>\n<li>Identifying resources and support systems</li>\n<li>Building accountability measures</li>\n</ul>\n\n<p><strong>Strategies for Resilience:</strong></p>\n<ul>\n<li>Maintaining purpose during challenging times</li>\n<li>Adapting and evolving your purpose</li>\n<li>Learning from setbacks and course corrections</li>\n</ul>\n\n<p><strong>Inspiring Others:</strong> How to become a beacon of purpose for others through your example and story.</p>\n\n<div style=\"background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;\"><h4 style=\"color: #1a2e53; margin-top: 0;\">🎯 Activity</h4><p><strong>Final Integration Activity:</strong> Present your refined purpose statement and one-year action plan to the group. Create a personal mission statement that incorporates everything you've learned. Write a letter to yourself to open in 6 months, describing your purpose journey and commitments.</p></div>\n\n<h4 style=\"color: #0c5460;\">🤔 Forward-Looking Questions</h4>\n<ul>\n<li>How has your understanding of purpose evolved through this course?</li>\n<li>What is your biggest commitment moving forward?</li>\n<li>How will you measure progress on your purpose journey?</li>\n<li>What support do you need to stay on track?</li>\n</ul>\n\n<div style=\"background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;\"><h4 style=\"color: #ff5d15; margin-top: 0;\">💡 Key Takeaway</h4><p><strong>Course Completion:</strong> Congratulations on completing Understanding Purpose in Life! You now have the tools, insights, and community to live a purpose-driven life. Remember: your purpose is not a destination—it's a journey of continuous growth and service.</p></div>\n",
+  "additional_resources": [
+    {
+      "type": "document",
+      "title": "Session 8 PDF Download",
+      "url": "https://ucarecdn.com/session-8-pdf/",
+      "description": "Complete Session 8 content in PDF format"
+    }
+  ],
+  "assessment": {
+    "quiz": {
+      "title": "Session 8 Knowledge Check",
+      "description": "Test your understanding of key concepts from this session",
+      "instructions": "Answer all true/false questions based on the session content. You have 3 attempts to achieve the passing score.",
+      "time_limit": null,
+      "max_attempts": 3,
+      "passing_score": 70,
+      "is_randomized": false,
+      "show_results": true,
+      "questions": [
+        {
+          "question_text": "The river and stone allegory teaches that purpose shapes life through sudden dramatic changes.",
+          "question_type": "true_false",
+          "correct_answer": "false",
+          "points": 2,
+          "explanation": "False. The allegory teaches that purpose shapes life through steady persistence, like water gradually shaping the hardest rock.",
+          "sort_order": 1
+        },
+        {
+          "question_text": "Reviewing and refining your purpose statement is an important part of forward planning.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. The session includes reviewing purpose statements as a key component of consolidating learning.",
+          "sort_order": 2
+        },
+        {
+          "question_text": "Resilience strategies are unnecessary once you have a clear purpose.",
+          "question_type": "true_false",
+          "correct_answer": "false",
+          "points": 2,
+          "explanation": "False. The session specifically covers strategies for resilience as essential for maintaining purpose over time.",
+          "sort_order": 3
+        },
+        {
+          "question_text": "Inspiring others through example is more powerful than inspiring through words alone.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. The session emphasizes inspiring others through example as a key way to share and sustain your purpose.",
+          "sort_order": 4
+        },
+        {
+          "question_text": "Creating a one-year action plan is part of the final session activities.",
+          "question_type": "true_false",
+          "correct_answer": "true",
+          "points": 2,
+          "explanation": "True. The session activity includes presenting purpose statements and one-year action plans.",
+          "sort_order": 5
+        }
+      ]
+    }
+  }
+}
