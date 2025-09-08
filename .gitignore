@@ -1,11 +1,122 @@
-*.pyc
-__pycache__/
+# =============================================================================
+# YITP Security & Deployment .gitignore
+# =============================================================================
+
+# =============================================================================
+# SENSITIVE DATA & CREDENTIALS
+# =============================================================================
 .env
-.env.example
-.venv
+.env.local
+.env.production
+.env.staging
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# =============================================================================
+# DATABASE FILES
+# =============================================================================
+*.sqlite3
+*.db
 db.sqlite3
-media/
+db_development.sqlite3
+db_production.sqlite3
+*.sql
+*.dump
+
+# =============================================================================
+# PYTHON CACHE & COMPILED FILES
+# =============================================================================
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.Python
+
+# =============================================================================
+# VIRTUAL ENVIRONMENTS
+# =============================================================================
+.env/
+.venv/
+env/
+env_new/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# =============================================================================
+# DJANGO SPECIFIC
+# =============================================================================
 staticfiles/
-# Do NOT include these lines if they exist:
-# blogapp/
-# *.py
+static_collected/
+media/
+uploads/
+*.log
+local_settings.py
+celerybeat-schedule
+celerybeat.pid
+
+# =============================================================================
+# DEVELOPMENT & IDE FILES
+# =============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =============================================================================
+# DOCUMENTATION & DEVELOPMENT SCRIPTS
+# =============================================================================
+*.md
+!README.md
+!CHANGELOG.md
+dashboard_audit_script.py
+fix_yitp_course_issues.py
+resolve_static_conflicts.py
+create_historical_commits.py
+test_*.py
+debug_*.py
+temp_*.py
+
+# =============================================================================
+# BACKUP & TEMPORARY FILES
+# =============================================================================
+*.bak
+*.backup
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =============================================================================
+# DEPLOYMENT & BUILD FILES
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.sass-cache/
+*.css.map
+*.js.map
+
+# =============================================================================
+# SECURITY AUDIT FILES
+# =============================================================================
+YITP_SECURITY_AUDIT_REPORT.md
+YITP_DEVELOPMENT_STATUS_ENHANCEMENT_COMPLETE.md
+*_AUDIT_*.md
+*_SECURITY_*.md

@@ -113,7 +113,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # =============================================================================
 
 # TinyMCE API Key for Course Builder
-TINYMCE_API_KEY = os.getenv('TINYMCE_API_KEY', 'qu2jb8k2dyah1y5pjdglgob206f26juotj3u82hzd7mvyz1x')
+TINYMCE_API_KEY = config('TINYMCE_API_KEY')
 
 
 
@@ -244,16 +244,16 @@ WHITENOISE_MANIFEST_STRICT = False
 # =============================================================================
 
 if IS_PRODUCTION:
-    # Production: PostgreSQL (Neon) Database
+    # Production: PostgreSQL (Supabase) Database
     print("📊 Using PostgreSQL database for production")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'postgres'),
-            'USER': os.getenv('DB_USER', 'postgres.ovywuanlidncuecjlyve'),
-            'PASSWORD': os.getenv('DB_PASSWORD', '_zi4DD9LBKAc@Pk'),
-            'HOST': os.getenv('DB_HOST', 'aws-0-eu-west-1.pooler.supabase.com'),
-            'PORT': os.getenv('DB_PORT', '6543'),
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT'),
             'OPTIONS': {
                 'sslmode': 'require',
                 'connect_timeout': 30,
@@ -353,8 +353,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 UPLOADCARE = {
   # Don’t forget to set real keys when it gets real :)
 
-  'pub_key': '18ad19435c41077ca842',
-  'secret': 'b27f8995d2e4b66cbf02',
+  'pub_key': config('UPLOADCARE_PUBLIC_KEY'),
+  'secret': config('UPLOADCARE_SECRET_KEY'),
 }
 
 # ============================================================================
@@ -677,12 +677,12 @@ if IS_PRODUCTION:
     # Production: Gmail SMTP Backend
     print("📧 Using Gmail SMTP for production email")
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'  # Fixed: Use Gmail SMTP server
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
     EMAIL_USE_SSL = False
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'dedeexpeditions@gmail.com')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'roqu frlt wvof rqxk')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
     EMAIL_TIMEOUT = 30
 
     # SSL certificate handling for production
@@ -700,7 +700,7 @@ else:
 DEFAULT_FROM_EMAIL = f'YOUTH IMPACT GLOBAL <{EMAIL_HOST_USER}>'
 
 # Admin email for notifications
-ADMIN_EMAIL = 'youthimpactglobal3@gmail.com'
+ADMIN_EMAIL = config('ADMIN_EMAIL')
 
 # OTP Configuration
 OTP_EXPIRY_MINUTES = 200
@@ -711,16 +711,15 @@ OTP_LENGTH = 6
 # =============================================================================
 
 # M-Pesa API Credentials
-# Note: These are development/sandbox credentials. For production, use environment variables
-MPESA_CONSUMER_KEY = os.environ.get('MPESA_CONSUMER_KEY', 'UMi2MLMFIdaOS8vRFiWLG40CJ4GzWAGAHbwFROxe473iZ6gQ')
-MPESA_CONSUMER_SECRET = os.environ.get('MPESA_CONSUMER_SECRET', '2K3IJkdE7uxLJm9Nis3mhO3TZHqmowc0ndI9abTGxGJ4gcAdvdAZ5C9tx9wrAWRp')
+MPESA_CONSUMER_KEY = config('MPESA_CONSUMER_KEY')
+MPESA_CONSUMER_SECRET = config('MPESA_CONSUMER_SECRET')
 
 # M-Pesa Business Configuration
-MPESA_SHORTCODE = os.environ.get('MPESA_SHORTCODE', '174379')  # Sandbox shortcode
-MPESA_PASSKEY = os.environ.get('MPESA_PASSKEY', 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919')  # Sandbox passkey
+MPESA_SHORTCODE = config('MPESA_SHORTCODE')
+MPESA_PASSKEY = config('MPESA_PASSKEY')
 
 # M-Pesa API URLs (Sandbox vs Production)
-MPESA_ENVIRONMENT = os.environ.get('MPESA_ENVIRONMENT', 'sandbox')  # 'sandbox' or 'production'
+MPESA_ENVIRONMENT = config('MPESA_ENVIRONMENT', default='sandbox')
 
 if MPESA_ENVIRONMENT == 'production':
     MPESA_BASE_URL = 'https://api.safaricom.co.ke'
@@ -807,12 +806,12 @@ PAYMENT_SECURITY = {
 # =============================================================================
 
 # PayPal API Credentials
-PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID', 'Ac1haMUNDdVE8SMjwrY_lk01hnQegPaoB7RYEmMBuIabtdo5o8FG1Lo439o89gRAYd0NR9-AOB1bEdAy')
-PAYPAL_CLIENT_SECRET = os.environ.get('PAYPAL_CLIENT_SECRET', 'EOqX8HcFbc_YdNQF0r1-aKXGRABvfTmGnIoNLj_zmPHXyww52ZHcq7rTYrXBFdvdnA9E1hu2a5MykhTq')
+PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
+PAYPAL_CLIENT_SECRET = config('PAYPAL_CLIENT_SECRET')
 
 # PayPal Environment Configuration
-PAYPAL_MODE = os.environ.get('PAYPAL_MODE', 'sandbox')  # 'sandbox' or 'live'
-PAYPAL_WEBHOOK_ID = os.environ.get('PAYPAL_WEBHOOK_ID', '')
+PAYPAL_MODE = config('PAYPAL_MODE', default='sandbox')
+PAYPAL_WEBHOOK_ID = config('PAYPAL_WEBHOOK_ID', default='')
 
 # PayPal API URLs
 if PAYPAL_MODE == 'live':

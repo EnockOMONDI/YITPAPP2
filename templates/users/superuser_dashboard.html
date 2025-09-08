@@ -229,6 +229,58 @@
             color: #856404;
         }
 
+        /* Commit Badge Styles */
+        .commit-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .commit-badge i {
+            margin-right: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .badge-feature {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-fix {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-enhance {
+            background: #cce7ff;
+            color: #004085;
+        }
+
+        .badge-security {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge-ux {
+            background: #e2e3f1;
+            color: #383d41;
+        }
+
+        .badge-audit {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .badge-research {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
         /* Insight Boxes */
         .insight-box {
             background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
@@ -944,10 +996,12 @@
                                                     <code class="text-primary">{{ commit.hash }}</code>
                                                 </td>
                                                 <td>
-                                                    <strong>{{ commit.message|truncatechars:60 }}</strong>
-                                                    {% if commit.message|length > 60 %}
-                                                        <br><small class="text-muted">{{ commit.message }}</small>
-                                                    {% endif %}
+                                                    <div class="commit-message">
+                                                        <strong>{{ commit.message|truncatechars:60 }}</strong>
+                                                        {% if commit.message|length > 60 %}
+                                                            <br><small class="text-muted">{{ commit.message }}</small>
+                                                        {% endif %}
+                                                    </div>
                                                 </td>
                                                 <td>{{ commit.author }}</td>
                                                 <td>
@@ -998,10 +1052,12 @@
                                                     <code class="text-secondary">{{ commit.hash }}</code>
                                                 </td>
                                                 <td>
-                                                    <strong>{{ commit.message|truncatechars:60 }}</strong>
-                                                    {% if commit.message|length > 60 %}
-                                                        <br><small class="text-muted">{{ commit.message }}</small>
-                                                    {% endif %}
+                                                    <div class="commit-message">
+                                                        <strong>{{ commit.message|truncatechars:60 }}</strong>
+                                                        {% if commit.message|length > 60 %}
+                                                            <br><small class="text-muted">{{ commit.message }}</small>
+                                                        {% endif %}
+                                                    </div>
                                                 </td>
                                                 <td>{{ commit.author }}</td>
                                                 <td>
@@ -1084,6 +1140,41 @@
                 }
             });
         });
+
+        // Add commit badges with icons
+        function addCommitBadges() {
+            const commitMessages = document.querySelectorAll('.commit-message');
+
+            commitMessages.forEach(messageElement => {
+                const message = messageElement.textContent;
+                let badge = '';
+
+                if (message.includes('[FEATURE]')) {
+                    badge = '<span class="commit-badge badge-feature"><i class="fas fa-plus-circle"></i>Feature</span>';
+                } else if (message.includes('[FIX]')) {
+                    badge = '<span class="commit-badge badge-fix"><i class="fas fa-wrench"></i>Fix</span>';
+                } else if (message.includes('[ENHANCE]')) {
+                    badge = '<span class="commit-badge badge-enhance"><i class="fas fa-arrow-up"></i>Enhance</span>';
+                } else if (message.includes('[SECURITY]')) {
+                    badge = '<span class="commit-badge badge-security"><i class="fas fa-shield-alt"></i>Security</span>';
+                } else if (message.includes('[UX]')) {
+                    badge = '<span class="commit-badge badge-ux"><i class="fas fa-paint-brush"></i>UX</span>';
+                } else if (message.includes('[AUDIT]')) {
+                    badge = '<span class="commit-badge badge-audit"><i class="fas fa-search"></i>Audit</span>';
+                } else if (message.includes('[RESEARCH]')) {
+                    badge = '<span class="commit-badge badge-research"><i class="fas fa-microscope"></i>Research</span>';
+                }
+
+                if (badge) {
+                    // Remove the badge text from the message and add the visual badge
+                    const cleanMessage = message.replace(/\[(FEATURE|FIX|ENHANCE|SECURITY|UX|AUDIT|RESEARCH)\]\s*/, '');
+                    messageElement.innerHTML = badge + cleanMessage;
+                }
+            });
+        }
+
+        // Run badge enhancement on page load
+        document.addEventListener('DOMContentLoaded', addCommitBadges);
     </script>
 </body>
 </html>

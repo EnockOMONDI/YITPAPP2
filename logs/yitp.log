@@ -15848,3 +15848,22 @@ INFO 2025-09-08 01:10:46,652 basehttp 56578 6125580288 "GET /users/superuser/pro
 INFO 2025-09-08 01:13:24,094 autoreload 56578 8585804480 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
 INFO 2025-09-08 01:13:27,139 autoreload 58212 8585804480 Watching for file changes with StatReloader
 INFO 2025-09-08 01:13:28,733 autoreload 58212 8585804480 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-09-08 01:13:30,040 autoreload 58359 8585804480 Watching for file changes with StatReloader
+INFO 2025-09-08 01:13:50,238 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 98468
+INFO 2025-09-08 01:16:12,458 autoreload 58988 8585804480 Watching for file changes with StatReloader
+INFO 2025-09-08 01:17:23,677 autoreload 59324 8585804480 Watching for file changes with StatReloader
+INFO 2025-09-08 01:19:30,133 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 98468
+INFO 2025-09-08 01:19:32,703 autoreload 59835 8585804480 Watching for file changes with StatReloader
+INFO 2025-09-08 01:20:48,824 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 98468
+INFO 2025-09-08 01:21:12,057 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 302 0
+INFO 2025-09-08 01:26:23,660 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 98468
+INFO 2025-09-08 01:26:42,897 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 98468
+INFO 2025-09-08 01:27:04,260 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 99582
+INFO 2025-09-08 01:27:24,487 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 101596
+INFO 2025-09-08 01:27:56,018 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 101596
+INFO 2025-09-08 01:28:39,004 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 103824
+INFO 2025-09-08 01:29:13,088 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 109148
+INFO 2025-09-08 01:29:23,801 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 109148
+INFO 2025-09-08 01:29:51,000 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 109148
+INFO 2025-09-08 01:30:51,215 basehttp 58359 6202683392 "GET /users/superuser/profile/ HTTP/1.1" 200 109148
+INFO 2025-09-08 09:21:31,136 autoreload 2439 8625027776 Watching for file changes with StatReloader
