@@ -1985,6 +1985,12 @@ def superuser_dashboard(request):
                     '--date=iso', '-15'
                 ], capture_output=True, text=True, cwd=project_root, timeout=10)
 
+                if settings.DEBUG:
+                    print(f"Git log command return code: {result.returncode}")
+                    print(f"Git log stdout length: {len(result.stdout) if result.stdout else 0}")
+                    if result.stderr:
+                        print(f"Git log stderr: {result.stderr}")
+
                 if result.returncode == 0:
                     commits = []
                     for line in result.stdout.strip().split('\n'):
@@ -2052,8 +2058,11 @@ def superuser_dashboard(request):
                 pass
 
         except Exception as e:
-            # If any git operation fails, return default values
-            pass
+            # If any git operation fails, return default values with debug info
+            if settings.DEBUG:
+                print(f"Git integration error: {e}")
+                import traceback
+                traceback.print_exc()
 
         return git_info
 

@@ -38,6 +38,44 @@ import crispy_bootstrap5
 print('✅ crispy_bootstrap5 imported successfully')
 "
 
+# Git Repository Setup for Dashboard Integration
+echo "🔧 Setting up Git repository for dashboard integration..."
+echo "================================================"
+
+# Check if we're in a git repository
+if [ -d ".git" ]; then
+    echo "✅ Git repository detected"
+
+    # Check current git status
+    echo "📊 Current git status:"
+    git status --porcelain || echo "Git status check failed"
+
+    # Check current branch
+    echo "🌿 Current branch:"
+    git branch --show-current || echo "Branch check failed"
+
+    # Check if we have a shallow clone
+    if [ -f ".git/shallow" ]; then
+        echo "⚠️  Shallow clone detected - fetching full history for dashboard..."
+        # Unshallow the repository to get full commit history
+        git fetch --unshallow || echo "Failed to unshallow repository"
+
+        # Fetch all branches and tags
+        git fetch --all --tags || echo "Failed to fetch all branches"
+
+        echo "✅ Full git history now available"
+    else
+        echo "✅ Full git repository already available"
+    fi
+
+    # Show recent commits for verification
+    echo "📝 Recent commits (for dashboard verification):"
+    git log --oneline -10 || echo "Git log failed"
+
+else
+    echo "❌ No git repository found - dashboard git integration will show defaults"
+fi
+
 # Detailed repository and environment diagnostics
 echo "🔍 Repository and Environment Diagnostics..."
 echo "================================================"
