@@ -198,6 +198,47 @@ class Profile(models.Model):
         help_text="Date of last learning activity for streak calculation"
     )
 
+    # Trial System Fields
+    TRIAL_STATUS_CHOICES = [
+        ('none', 'No Trial'),
+        ('active', 'Active Trial'),
+        ('expired', 'Trial Expired'),
+        ('converted', 'Converted to Paid'),
+    ]
+
+    trial_status = models.CharField(
+        max_length=20,
+        choices=TRIAL_STATUS_CHOICES,
+        default='none',
+        help_text="Current trial status for the user"
+    )
+    trial_started_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Date and time when trial was started"
+    )
+    trial_course = models.ForeignKey(
+        'courses.Course',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='trial_users',
+        help_text="Course for which trial access was granted"
+    )
+    trial_lessons_accessed = models.JSONField(
+        default=list,
+        help_text="List of lesson IDs accessed during trial"
+    )
+    trial_quizzes_taken = models.JSONField(
+        default=list,
+        help_text="List of quiz IDs taken during trial"
+    )
+    trial_conversion_prompted_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Date when user was first prompted to upgrade from trial"
+    )
+
     def __str__(self):
         return self.user.get_username()
 
@@ -345,6 +386,77 @@ class Profile(models.Model):
         self.save(update_fields=[
             'payment_status', 'sponsorship_request', 'payment_confirmed_at', 'payment_method'
         ])
+
+    # Trial System Properties and Methods
+    @property
+    def has_active_trial(self):
+        """Check if user has an active trial"""
+        return self.trial_status == 'active'
+
+    @property
+    def has_trial_access(self):
+        """Check if user has any form of trial access (active or converted)"""
+        return self.trial_status in ['active', 'converted']
+
+    @property
+    def trial_status_display(self):
+        """Get human-readable trial status with emoji"""
+        status_icons = {
+            'none': '⚪ No Trial',
+            'active': '🟢 Active Trial',
+            'expired': '🔴 Trial Expired',
+            'converted': '✅ Converted to Paid',
+        }
+        return status_icons.get(self.trial_status, self.get_trial_status_display())
+
+    @property
+    def has_any_access(self):
+        """Check if user has any form of access (payment, trial, or sponsorship)"""
+        return self.has_any_payment_access or self.has_active_trial
+
+    def start_trial(self, course):
+        """Start trial access for a specific course"""
+        self.trial_status = 'active'
+        self.trial_started_at = timezone.now()
+        self.trial_course = course
+        self.trial_lessons_accessed = []
+        self.trial_quizzes_taken = []
+        self.trial_conversion_prompted_at = None
+
+        self.save(update_fields=[
+            'trial_status', 'trial_started_at', 'trial_course',
+            'trial_lessons_accessed', 'trial_quizzes_taken', 'trial_conversion_prompted_at'
+        ])
+
+    def track_trial_lesson_access(self, lesson_id):
+        """Track that a lesson was accessed during trial"""
+        if self.has_active_trial and lesson_id not in self.trial_lessons_accessed:
+            self.trial_lessons_accessed.append(lesson_id)
+            self.save(update_fields=['trial_lessons_accessed'])
+
+    def track_trial_quiz_access(self, quiz_id):
+        """Track that a quiz was taken during trial"""
+        if self.has_active_trial and quiz_id not in self.trial_quizzes_taken:
+            self.trial_quizzes_taken.append(quiz_id)
+            self.save(update_fields=['trial_quizzes_taken'])
+
+    def convert_trial_to_paid(self):
+        """Convert trial to paid access"""
+        if self.has_active_trial:
+            self.trial_status = 'converted'
+            self.save(update_fields=['trial_status'])
+
+    def expire_trial(self):
+        """Expire trial access"""
+        if self.trial_status == 'active':
+            self.trial_status = 'expired'
+            self.save(update_fields=['trial_status'])
+
+    def prompt_trial_conversion(self):
+        """Mark that user was prompted to convert trial"""
+        if self.has_active_trial and not self.trial_conversion_prompted_at:
+            self.trial_conversion_prompted_at = timezone.now()
+            self.save(update_fields=['trial_conversion_prompted_at'])
 
     def has_admin_privileges(self):
         """Check if user has admin privileges for monitoring"""

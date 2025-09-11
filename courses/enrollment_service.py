@@ -101,6 +101,72 @@ class EnrollmentService:
         return {'is_valid': True}
 
     @staticmethod
+    def validate_trial_enrollment_eligibility(user, course):
+        """
+        Validate if user is eligible for trial enrollment
+
+        Returns:
+            dict: {'is_valid': bool, 'error_message': str or None}
+        """
+        # Check if course is published
+        if not course.is_published:
+            return {
+                'is_valid': False,
+                'error_message': f'Course "{course.title}" is not currently available for trial.'
+            }
+
+        # Check if course supports trials (only paid courses can have trials)
+        if course.price <= 0:
+            return {
+                'is_valid': False,
+                'error_message': f'Trial access is not available for free courses.'
+            }
+
+        # Check if user already has an active trial for this course
+        try:
+            profile = user.profile
+        except:
+            # Create profile if it doesn't exist
+            from users.models import Profile
+            profile = Profile.objects.create(user=user)
+
+        # Check if user already has active trial
+        if profile.has_active_trial and profile.trial_course == course:
+            return {
+                'is_valid': False,
+                'error_message': f'You already have an active trial for "{course.title}".'
+            }
+
+        # Check if user already has paid access
+        if profile.has_any_payment_access:
+            return {
+                'is_valid': False,
+                'error_message': f'You already have paid access to courses. Trial is not needed.'
+            }
+
+        # Check if user has already used trial for this course
+        if profile.trial_status in ['expired', 'converted'] and profile.trial_course == course:
+            return {
+                'is_valid': False,
+                'error_message': f'You have already used your trial for "{course.title}". Please purchase the full course to continue.'
+            }
+
+        # Check if already enrolled (including trial enrollments)
+        existing_enrollment = Enrollment.objects.filter(
+            student=user,
+            course=course
+        ).first()
+
+        if existing_enrollment:
+            return {
+                'is_valid': False,
+                'error_message': f'You are already enrolled in "{course.title}".',
+                'existing_enrollment': existing_enrollment
+            }
+
+        return {'is_valid': True}
+
+    @staticmethod
     @transaction.atomic
     def process_enrollment(user, course):
         """
@@ -144,6 +210,63 @@ class EnrollmentService:
         except Exception as e:
             logger.error(f"Enrollment processing failed for {user.email} -> {course.title}: {str(e)}")
             raise ValidationError(f"Failed to process enrollment: {str(e)}")
+
+    @staticmethod
+    @transaction.atomic
+    def process_trial_enrollment(user, course):
+        """
+        Process trial enrollment with trial-specific settings
+
+        Returns:
+            dict: {
+                'success': bool,
+                'enrollment': Enrollment or None,
+                'message': str,
+                'created': bool
+            }
+        """
+        try:
+            # Create trial enrollment
+            enrollment, created = Enrollment.objects.get_or_create(
+                student=user,
+                course=course,
+                defaults={
+                    'status': 'active',
+                    'enrollment_type': 'trial',
+                    'progress_percentage': 0.00,
+                    'trial_boundaries': {'max_lessons': 2, 'max_modules': 1}
+                }
+            )
+
+            if created:
+                # Start trial in user profile
+                try:
+                    profile = user.profile
+                except:
+                    from users.models import Profile
+                    profile = Profile.objects.create(user=user)
+
+                profile.start_trial(course)
+
+                logger.info(f"New trial enrollment created: {user.email} -> {course.title}")
+                return {
+                    'success': True,
+                    'enrollment': enrollment,
+                    'message': f'Successfully started trial for "{course.title}". You have access to the first 2 lessons.',
+                    'created': True
+                }
+            else:
+                logger.info(f"Existing trial enrollment found: {user.email} -> {course.title}")
+                return {
+                    'success': False,
+                    'enrollment': enrollment,
+                    'message': f'You already have trial access to "{course.title}"',
+                    'created': False
+                }
+
+        except Exception as e:
+            logger.error(f"Trial enrollment processing failed for {user.email} -> {course.title}: {str(e)}")
+            raise ValidationError(f"Failed to process trial enrollment: {str(e)}")
 
     @staticmethod
     def send_enrollment_notifications(user, course, enrollment, payment_context=None):
@@ -267,3 +390,72 @@ class EnrollmentService:
         else:
             # Handle ID-based lookup
             return get_object_or_404(Course, id=course_identifier, is_published=True)
+
+    @classmethod
+    def enroll_user_in_trial(cls, user, course):
+        """
+        Complete trial enrollment process with validation, processing, and notifications
+
+        Returns:
+            dict: {
+                'success': bool,
+                'enrollment': Enrollment or None,
+                'message': str,
+                'email_results': dict,
+                'created': bool
+            }
+        """
+        # Step 1: Validate trial eligibility
+        validation_result = cls.validate_trial_enrollment_eligibility(user, course)
+        if not validation_result['is_valid']:
+            return {
+                'success': False,
+                'enrollment': validation_result.get('existing_enrollment'),
+                'message': validation_result['error_message'],
+                'email_results': None,
+                'created': False
+            }
+
+        # Step 2: Process trial enrollment
+        try:
+            enrollment_result = cls.process_trial_enrollment(user, course)
+
+            # Step 3: Send notifications if trial enrollment was successful
+            email_results = None
+            if enrollment_result['success'] and enrollment_result['created']:
+                # Send trial-specific notifications
+                trial_context = {
+                    'is_trial': True,
+                    'trial_lessons': 2,
+                    'trial_message': 'You have access to the first 2 lessons and their quizzes.'
+                }
+                email_results = cls.send_enrollment_notifications(
+                    user, course, enrollment_result['enrollment'], trial_context
+                )
+
+            return {
+                'success': enrollment_result['success'],
+                'enrollment': enrollment_result['enrollment'],
+                'message': enrollment_result['message'],
+                'email_results': email_results,
+                'created': enrollment_result['created']
+            }
+
+        except ValidationError as e:
+            logger.error(f"Trial enrollment validation error: {str(e)}")
+            return {
+                'success': False,
+                'enrollment': None,
+                'message': str(e),
+                'email_results': None,
+                'created': False
+            }
+        except Exception as e:
+            logger.error(f"Unexpected trial enrollment error: {str(e)}")
+            return {
+                'success': False,
+                'enrollment': None,
+                'message': f"An unexpected error occurred during trial enrollment. Please try again or contact support.",
+                'email_results': None,
+                'created': False
+            }

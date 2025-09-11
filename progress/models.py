@@ -17,12 +17,28 @@ class Enrollment(models.Model):
         ('dropped', 'Dropped'),
         ('suspended', 'Suspended'),
     ]
-    
+
+    ENROLLMENT_TYPE_CHOICES = [
+        ('paid', 'Paid Enrollment'),
+        ('trial', 'Trial Enrollment'),
+        ('sponsored', 'Sponsored Enrollment'),
+    ]
+
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
     enrollment_date = models.DateTimeField(default=timezone.now)
     completion_date = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
+    enrollment_type = models.CharField(
+        max_length=20,
+        choices=ENROLLMENT_TYPE_CHOICES,
+        default='paid',
+        help_text="Type of enrollment (paid, trial, or sponsored)"
+    )
+    trial_boundaries = models.JSONField(
+        default=dict,
+        help_text="Trial access boundaries (e.g., {'max_lessons': 2, 'max_modules': 1})"
+    )
     progress_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     last_accessed = models.DateTimeField(null=True, blank=True)
     certificate_issued = models.BooleanField(default=False)
@@ -148,7 +164,89 @@ class Enrollment(models.Model):
         except Exception:
             # Return existing certificate if creation fails
             return getattr(self, 'certificate', None)
-    
+
+    # Trial System Methods
+    @property
+    def is_trial_enrollment(self):
+        """Check if this is a trial enrollment"""
+        return self.enrollment_type == 'trial'
+
+    @property
+    def is_paid_enrollment(self):
+        """Check if this is a paid enrollment"""
+        return self.enrollment_type == 'paid'
+
+    @property
+    def is_sponsored_enrollment(self):
+        """Check if this is a sponsored enrollment"""
+        return self.enrollment_type == 'sponsored'
+
+    def get_trial_boundaries(self):
+        """Get trial access boundaries"""
+        if self.is_trial_enrollment:
+            return self.trial_boundaries or {'max_lessons': 2, 'max_modules': 1}
+        return {}
+
+    def set_trial_boundaries(self, max_lessons=2, max_modules=1):
+        """Set trial access boundaries"""
+        if self.is_trial_enrollment:
+            self.trial_boundaries = {
+                'max_lessons': max_lessons,
+                'max_modules': max_modules
+            }
+            self.save(update_fields=['trial_boundaries'])
+
+    def can_access_lesson_in_trial(self, lesson):
+        """Check if trial user can access a specific lesson"""
+        if not self.is_trial_enrollment:
+            return True  # Non-trial users have full access
+
+        boundaries = self.get_trial_boundaries()
+        max_lessons = boundaries.get('max_lessons', 2)
+
+        # Get all lessons in the course ordered by module and sort_order
+        course_lessons = self.course.get_ordered_lessons()
+
+        # Find the position of the requested lesson
+        try:
+            lesson_position = list(course_lessons).index(lesson) + 1
+            return lesson_position <= max_lessons
+        except ValueError:
+            return False
+
+    def can_access_quiz_in_trial(self, quiz):
+        """Check if trial user can access a specific quiz"""
+        if not self.is_trial_enrollment:
+            return True  # Non-trial users have full access
+
+        # Trial users can access quizzes for lessons they can access
+        if hasattr(quiz, 'lesson') and quiz.lesson:
+            return self.can_access_lesson_in_trial(quiz.lesson)
+
+        return False
+
+    def get_trial_accessible_lessons(self):
+        """Get list of lessons accessible during trial"""
+        if not self.is_trial_enrollment:
+            return self.course.get_ordered_lessons()
+
+        boundaries = self.get_trial_boundaries()
+        max_lessons = boundaries.get('max_lessons', 2)
+
+        course_lessons = self.course.get_ordered_lessons()
+        return course_lessons[:max_lessons]
+
+    def convert_trial_to_paid(self):
+        """Convert trial enrollment to paid enrollment"""
+        if self.is_trial_enrollment:
+            self.enrollment_type = 'paid'
+            self.trial_boundaries = {}
+            self.save(update_fields=['enrollment_type', 'trial_boundaries'])
+
+            # Update user's trial status
+            if hasattr(self.student, 'profile'):
+                self.student.profile.convert_trial_to_paid()
+
     class Meta:
         unique_together = ['student', 'course']
         verbose_name = "Enrollment"

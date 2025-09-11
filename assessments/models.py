@@ -37,7 +37,44 @@ class Quiz(models.Model):
     @property
     def total_points(self):
         return sum(question.points for question in self.questions.all())
-    
+
+    def is_accessible_for_user(self, user):
+        """
+        Check if quiz is accessible for the given user based on trial boundaries and enrollment
+        """
+        from courses.trial_service import TrialAccessService
+
+        # Check trial access boundaries
+        trial_access = TrialAccessService.can_access_quiz(user, self)
+        if trial_access['is_trial_user']:
+            if not trial_access['can_access']:
+                return False, trial_access['reason']
+            # Trial user can access this quiz, continue with normal checks
+
+        # Check if user can access the associated lesson
+        lesson_access, lesson_message = self.lesson.is_accessible_for_user(user)
+        if not lesson_access:
+            return False, f"Cannot access quiz: {lesson_message}"
+
+        return True, "Quiz is accessible."
+
+    def can_user_attempt(self, user):
+        """
+        Check if user can attempt this quiz (considering attempt limits and trial access)
+        """
+        # First check basic accessibility
+        can_access, access_message = self.is_accessible_for_user(user)
+        if not can_access:
+            return False, access_message
+
+        # Check attempt limits
+        if self.max_attempts > 0:
+            attempt_count = QuizAttempt.objects.filter(user=user, quiz=self).count()
+            if attempt_count >= self.max_attempts:
+                return False, f"Maximum attempts ({self.max_attempts}) reached for this quiz."
+
+        return True, "Quiz attempt allowed."
+
     class Meta:
         verbose_name = "Quiz"
         verbose_name_plural = "Quizzes"

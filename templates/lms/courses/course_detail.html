@@ -135,8 +135,16 @@
                                         </button>
                                     </form>
                                 {% else %}
-                                    <!-- Payment Required - Show Payment Options -->
+                                    <!-- Trial and Payment Options -->
                                     <div class="d-flex gap-2 flex-wrap">
+                                        <!-- Start Free Trial Button -->
+                                        {% if not user.profile.has_active_trial %}
+                                            <a href="{% url 'courses:start_trial' course.slug %}" class="btn btn-success btn-lg">
+                                                <i class="fas fa-gift me-2"></i>Start Free Trial
+                                            </a>
+                                        {% endif %}
+
+                                        <!-- Payment Options -->
                                         {% if course and course.id %}
                                             <a href="{% url 'payments:payment_methods' course.id %}" class="btn btn-warning btn-lg">
                                                 <i class="fas fa-credit-card me-2"></i>Pay Now - ${{ course.price }} USD
@@ -237,12 +245,17 @@
                         <span>{{ enrollment.progress_percentage|floatformat:0 }}%</span>
                     </div>
                     <div class="progress" style="height: 8px;">
-                        <div class="progress-bar" role="progressbar" 
+                        <div class="progress-bar" role="progressbar"
                              style="width: {{ enrollment.progress_percentage }}%"
-                             aria-valuenow="{{ enrollment.progress_percentage }}" 
+                             aria-valuenow="{{ enrollment.progress_percentage }}"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
+                {% endif %}
+
+                <!-- Trial Status Display -->
+                {% if user.is_authenticated %}
+                    {% include 'lms/trial/trial_status.html' with course=course %}
                 {% endif %}
             </div>
             
@@ -673,6 +686,12 @@
         </div>
     </div>
 </div>
+
+<!-- Trial Upgrade Prompts -->
+{% if user.is_authenticated and user.profile.has_active_trial %}
+    {% include 'lms/trial/upgrade_prompt.html' with course=course trial_progress=trial_progress %}
+{% endif %}
+
 </div> <!-- End course-detail-content-wrapper -->
 {% endblock %}
 

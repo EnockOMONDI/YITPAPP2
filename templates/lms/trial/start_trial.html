@@ -1,0 +1,320 @@
+{% extends 'lms/base.html' %}
+{% load static %}
+
+{% block title %}Start Free Trial - {{ course.title }} | YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+.trial-hero {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 40px;
+}
+
+.trial-feature-card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.trial-feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.trial-cta-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 40px 0;
+    border-radius: 15px;
+    margin: 40px 0;
+}
+
+.course-preview {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.lesson-preview-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items-center;
+}
+
+.lesson-preview-item:last-child {
+    border-bottom: none;
+}
+
+.lesson-preview-item.accessible {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.lesson-preview-item.locked {
+    background: linear-gradient(135deg, #f8d7da 0%, #f1b0b7 100%);
+    opacity: 0.7;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Trial Hero Section -->
+    <div class="trial-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="fas fa-gift me-3"></i>Start Your Free Trial
+                    </h1>
+                    <p class="lead mb-4">
+                        Experience the first 2 lessons of "{{ course.title }}" completely free. 
+                        No payment required, no commitment needed.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <div class="trial-stat">
+                            <h3 class="mb-0">2</h3>
+                            <small>Free Lessons</small>
+                        </div>
+                        <div class="trial-stat">
+                            <h3 class="mb-0">✓</h3>
+                            <small>Full Quizzes</small>
+                        </div>
+                        <div class="trial-stat">
+                            <h3 class="mb-0">0</h3>
+                            <small>Payment Required</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="{% static 'images/trial-illustration.svg' %}" alt="Free Trial" class="img-fluid" style="max-height: 300px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Course Preview -->
+        <div class="row mb-5">
+            <div class="col-lg-8">
+                <div class="course-preview">
+                    <div class="p-4 bg-primary text-white">
+                        <h3 class="mb-2">{{ course.title }}</h3>
+                        <p class="mb-0">{{ course.description|truncatewords:20|striptags }}</p>
+                    </div>
+                    
+                    <div class="lesson-preview-list">
+                        {% for lesson in course.get_ordered_lessons|slice:":5" %}
+                            <div class="lesson-preview-item {% if forloop.counter <= 2 %}accessible{% else %}locked{% endif %}">
+                                <div class="lesson-icon me-3">
+                                    {% if forloop.counter <= 2 %}
+                                        <i class="fas fa-play-circle text-success fa-2x"></i>
+                                    {% else %}
+                                        <i class="fas fa-lock text-muted fa-2x"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">Lesson {{ forloop.counter }}: {{ lesson.title }}</h6>
+                                    <small class="text-muted">{{ lesson.description|truncatewords:10|striptags }}</small>
+                                </div>
+                                <div class="lesson-status">
+                                    {% if forloop.counter <= 2 %}
+                                        <span class="badge bg-success">Trial Access</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Upgrade Required</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        
+                        {% if course.get_ordered_lessons|length > 5 %}
+                            <div class="lesson-preview-item locked">
+                                <div class="lesson-icon me-3">
+                                    <i class="fas fa-ellipsis-h text-muted fa-2x"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">+ {{ course.get_ordered_lessons|length|add:"-5" }} more lessons</h6>
+                                    <small class="text-muted">Available with full course access</small>
+                                </div>
+                                <div class="lesson-status">
+                                    <span class="badge bg-secondary">Upgrade Required</span>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Trial Benefits -->
+                <div class="card trial-feature-card mb-4">
+                    <div class="card-body text-center">
+                        <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                        <h5>What's Included</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>First 2 lessons</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Interactive quizzes</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Progress tracking</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Full learning experience</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Course Info -->
+                <div class="card trial-feature-card">
+                    <div class="card-body">
+                        <h6 class="card-title">Course Details</h6>
+                        <p><strong>Instructor:</strong> {{ course.instructor.get_full_name }}</p>
+                        <p><strong>Duration:</strong> {{ course.estimated_duration }} hours</p>
+                        <p><strong>Level:</strong> {{ course.get_difficulty_level_display }}</p>
+                        <p><strong>Full Price:</strong> KES {{ course.price|floatformat:0 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trial Features -->
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="card trial-feature-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                        <h5>No Time Pressure</h5>
+                        <p>Take your time to explore the first 2 lessons at your own pace. No expiration on trial access.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card trial-feature-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-credit-card fa-3x text-success mb-3"></i>
+                        <h5>No Payment Required</h5>
+                        <p>Start learning immediately without entering any payment information. Upgrade only when you're ready.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card trial-feature-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-graduation-cap fa-3x text-warning mb-3"></i>
+                        <h5>Full Experience</h5>
+                        <p>Experience the complete learning flow including lessons, quizzes, and progress tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="trial-cta-section text-center">
+            <div class="container">
+                <h2 class="mb-4">Ready to Start Your Learning Journey?</h2>
+                <p class="lead mb-4">
+                    Join thousands of students who have transformed their skills with YITP courses.
+                </p>
+                
+                {% if user_trial_status.has_trial %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        You already have an active trial for {{ user_trial_status.trial_course.title }}.
+                    </div>
+                    <a href="{% url 'courses:course_detail' user_trial_status.trial_course.slug %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-right me-2"></i>Continue Your Trial
+                    </a>
+                {% elif user.profile.has_any_payment_access %}
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>
+                        You already have paid access to courses. No trial needed!
+                    </div>
+                    <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-success btn-lg">
+                        <i class="fas fa-play me-2"></i>Access Full Course
+                    </a>
+                {% else %}
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play me-2"></i>Start Free Trial Now
+                        </button>
+                    </form>
+                    <p class="mt-3 text-muted">
+                        <small>
+                            <i class="fas fa-shield-alt me-1"></i>
+                            100% free trial • No credit card required • Instant access
+                        </small>
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+                <div class="accordion" id="trialFAQ">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                What exactly do I get with the free trial?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#trialFAQ">
+                            <div class="accordion-body">
+                                You get full access to the first 2 lessons of the course, including all interactive content, quizzes, and progress tracking. This gives you a complete preview of the learning experience.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                Do I need to provide payment information?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#trialFAQ">
+                            <div class="accordion-body">
+                                No! The trial is completely free with no payment information required. You only pay when you decide to upgrade to full course access.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                How do I upgrade to the full course?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#trialFAQ">
+                            <div class="accordion-body">
+                                When you're ready to continue beyond the trial lessons, you'll see upgrade prompts with payment options including PayPal, M-Pesa, and installment plans.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Track trial page views
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'trial_page_viewed', {
+            'course_id': '{{ course.id }}',
+            'course_title': '{{ course.title }}'
+        });
+    }
+});
+
+// Track trial start button clicks
+document.querySelector('form button[type="submit"]')?.addEventListener('click', function() {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'trial_start_clicked', {
+            'course_id': '{{ course.id }}',
+            'course_title': '{{ course.title }}'
+        });
+    }
+});
+</script>
+{% endblock %}

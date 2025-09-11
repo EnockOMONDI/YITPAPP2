@@ -1,0 +1,282 @@
+{% load static %}
+
+<!-- Trial Upgrade Prompt Modal -->
+<div class="modal fade" id="trialUpgradeModal" tabindex="-1" aria-labelledby="trialUpgradeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-white">
+                <h5 class="modal-title" id="trialUpgradeModalLabel">
+                    <i class="fas fa-star me-2"></i>Upgrade to Full Access
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <div class="trial-completion-badge">
+                        <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                        <h4 class="text-primary">Great Progress!</h4>
+                        <p class="text-muted">You've completed your trial lessons. Ready to continue your learning journey?</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="trial-summary-card">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-check-circle me-2"></i>What You've Accomplished
+                            </h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Completed {{ trial_progress.completed_lessons|length }} lessons</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Passed {{ trial_progress.completed_quizzes|length }} quizzes</li>
+                                <li><i class="fas fa-check text-success me-2"></i>{{ trial_progress.trial_completion_percentage|floatformat:0 }}% trial completion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="full-access-benefits">
+                            <h6 class="fw-bold text-primary">
+                                <i class="fas fa-unlock me-2"></i>Unlock Full Access
+                            </h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-play text-primary me-2"></i>All {{ course.total_lessons }} lessons</li>
+                                <li><i class="fas fa-question-circle text-primary me-2"></i>Complete quiz assessments</li>
+                                <li><i class="fas fa-certificate text-primary me-2"></i>Course completion certificate</li>
+                                <li><i class="fas fa-support text-primary me-2"></i>Instructor support</li>
+                                <li><i class="fas fa-infinity text-primary me-2"></i>Lifetime access</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-section mt-4 p-3 bg-light rounded">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="mb-1">{{ course.title }}</h5>
+                            <p class="text-muted mb-0">Complete course access</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="price-display">
+                                <span class="h4 text-primary fw-bold">KES {{ course.price|floatformat:0 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-options mt-3">
+                    <h6 class="fw-bold">Choose Your Payment Method:</h6>
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-primary w-100" onclick="selectPaymentMethod('paypal')">
+                                <i class="fab fa-paypal me-2"></i>PayPal
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-success w-100" onclick="selectPaymentMethod('mpesa')">
+                                <i class="fas fa-mobile-alt me-2"></i>M-Pesa
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-outline-secondary w-100" onclick="selectPaymentMethod('installment')">
+                            <i class="fas fa-calendar-alt me-2"></i>2-Installment Plan (50% now, 50% in 30 days)
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Continue Trial Later
+                </button>
+                <button type="button" class="btn btn-primary" id="upgradeNowBtn">
+                    <i class="fas fa-credit-card me-2"></i>Upgrade Now
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trial Boundary Warning Banner -->
+<div class="trial-boundary-banner d-none" id="trialBoundaryBanner">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="d-flex align-items-center">
+            <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
+            <div class="flex-grow-1">
+                <h6 class="alert-heading mb-1">Trial Limit Reached</h6>
+                <p class="mb-2">You've reached the end of your trial access. Upgrade now to continue learning!</p>
+                <button class="btn btn-warning btn-sm" onclick="showUpgradeModal()">
+                    <i class="fas fa-arrow-up me-1"></i>Upgrade Now
+                </button>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+
+<!-- Trial Progress Indicator -->
+<div class="trial-progress-indicator" id="trialProgressIndicator">
+    <div class="card border-primary">
+        <div class="card-header bg-primary text-white">
+            <h6 class="mb-0">
+                <i class="fas fa-clock me-2"></i>Trial Progress
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="progress mb-2" style="height: 8px;">
+                <div class="progress-bar bg-primary" role="progressbar" 
+                     style="width: {{ trial_progress.trial_completion_percentage }}%"
+                     aria-valuenow="{{ trial_progress.trial_completion_percentage }}" 
+                     aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <small class="text-muted">{{ trial_progress.completed_lessons|length }}/{{ trial_progress.accessible_lessons|length }} lessons</small>
+                <small class="text-primary fw-bold">{{ trial_progress.trial_completion_percentage|floatformat:0 }}% complete</small>
+            </div>
+            {% if trial_progress.trial_completion_percentage >= 100 %}
+                <div class="mt-2">
+                    <button class="btn btn-primary btn-sm w-100" onclick="showUpgradeModal()">
+                        <i class="fas fa-star me-1"></i>Upgrade to Continue
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.trial-completion-badge {
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.trial-summary-card, .full-access-benefits {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.trial-summary-card {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 1px solid #b8dacc;
+}
+
+.full-access-benefits {
+    background: linear-gradient(135deg, #cce5ff 0%, #b3d9ff 100%);
+    border: 1px solid #99ccff;
+}
+
+.pricing-section {
+    border: 2px solid #ff5d15;
+    background: linear-gradient(135deg, #fff5f2 0%, #ffe8e0 100%);
+}
+
+.price-display {
+    position: relative;
+}
+
+.trial-boundary-banner {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 90%;
+    max-width: 600px;
+}
+
+.trial-progress-indicator {
+    position: sticky;
+    top: 120px;
+    z-index: 1040;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .trial-boundary-banner {
+        top: 80px;
+        width: 95%;
+    }
+    
+    .trial-progress-indicator {
+        top: 100px;
+    }
+}
+</style>
+
+<script>
+let selectedPaymentMethod = null;
+
+function selectPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    
+    // Update button states
+    document.querySelectorAll('.payment-options button').forEach(btn => {
+        btn.classList.remove('btn-primary', 'btn-success');
+        btn.classList.add('btn-outline-primary');
+    });
+    
+    // Highlight selected method
+    event.target.classList.remove('btn-outline-primary', 'btn-outline-success', 'btn-outline-secondary');
+    if (method === 'mpesa') {
+        event.target.classList.add('btn-success');
+    } else {
+        event.target.classList.add('btn-primary');
+    }
+    
+    // Enable upgrade button
+    document.getElementById('upgradeNowBtn').disabled = false;
+}
+
+function showUpgradeModal() {
+    const modal = new bootstrap.Modal(document.getElementById('trialUpgradeModal'));
+    modal.show();
+    
+    // Track upgrade prompt
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'trial_upgrade_prompt_shown', {
+            'course_id': '{{ course.id }}',
+            'trial_completion': '{{ trial_progress.trial_completion_percentage }}'
+        });
+    }
+}
+
+function hideTrialBoundaryBanner() {
+    document.getElementById('trialBoundaryBanner').classList.add('d-none');
+}
+
+// Handle upgrade button click
+document.getElementById('upgradeNowBtn').addEventListener('click', function() {
+    if (!selectedPaymentMethod) {
+        alert('Please select a payment method first.');
+        return;
+    }
+    
+    // Redirect to appropriate payment page
+    const courseId = '{{ course.id }}';
+    let redirectUrl = '';
+    
+    switch(selectedPaymentMethod) {
+        case 'paypal':
+            redirectUrl = `/courses/${courseId}/enroll/?method=paypal`;
+            break;
+        case 'mpesa':
+            redirectUrl = `/courses/${courseId}/enroll/?method=mpesa`;
+            break;
+        case 'installment':
+            redirectUrl = `/courses/${courseId}/enroll/?method=installment`;
+            break;
+    }
+    
+    if (redirectUrl) {
+        window.location.href = redirectUrl;
+    }
+});
+
+// Auto-show upgrade modal if trial is complete
+document.addEventListener('DOMContentLoaded', function() {
+    {% if trial_progress.trial_completion_percentage >= 100 %}
+        setTimeout(showUpgradeModal, 2000);
+    {% endif %}
+});
+</script>

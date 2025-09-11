@@ -188,7 +188,15 @@ class Course(models.Model):
             return Quiz.objects.filter(lesson_id__in=lesson_ids)
         except ImportError:
             return Quiz.objects.none()
-    
+
+    def get_ordered_lessons(self):
+        """Get all lessons in the course ordered by module and lesson sort_order"""
+        lessons = []
+        for module in self.modules.filter(is_published=True).order_by('sort_order'):
+            module_lessons = module.lessons.filter(is_published=True).order_by('sort_order')
+            lessons.extend(module_lessons)
+        return lessons
+
     class Meta:
         verbose_name = "Course"
         verbose_name_plural = "Courses"
@@ -264,12 +272,13 @@ class Lesson(models.Model):
     
     def is_accessible_for_user(self, user):
         """
-        Check if lesson is accessible for the given user based on prerequisites
+        Check if lesson is accessible for the given user based on prerequisites and trial boundaries
         """
         from progress.models import Enrollment, LessonProgress
+        from .trial_service import TrialAccessService
 
         try:
-            # Check if user is enrolled in the course
+            # Check if user is enrolled in the course (including trial enrollments)
             enrollment = Enrollment.objects.get(
                 student=user,
                 course=self.module.course,
@@ -278,7 +287,14 @@ class Lesson(models.Model):
         except Enrollment.DoesNotExist:
             return False, "You must be enrolled in this course to access lessons."
 
-        # First lesson in first module is always accessible
+        # Check trial access boundaries first
+        trial_access = TrialAccessService.can_access_lesson(user, self)
+        if trial_access['is_trial_user']:
+            if not trial_access['can_access']:
+                return False, trial_access['reason']
+            # Trial user can access this lesson, continue with normal progression checks
+
+        # First lesson in first module is always accessible (if within trial boundaries)
         if self.is_first_lesson_in_course():
             return True, "First lesson is always accessible."
 
