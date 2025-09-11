@@ -15,7 +15,7 @@ class Quiz(models.Model):
     description = models.TextField(blank=True)
     instructions = models.TextField(blank=True)
     time_limit = models.IntegerField(null=True, blank=True, help_text="Time limit in minutes")
-    max_attempts = models.IntegerField(default=1)
+    max_attempts = models.IntegerField(default=15, help_text="Maximum number of attempts allowed (0 for unlimited)")
     passing_score = models.IntegerField(default=70, help_text="Minimum score to pass (percentage)")
     is_randomized = models.BooleanField(default=False, help_text="Randomize question order")
     show_results = models.BooleanField(default=True, help_text="Show results immediately after completion")

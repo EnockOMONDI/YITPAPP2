@@ -332,9 +332,44 @@
                         </small>
                         {% endif %}
                         {% else %}
-                        <div class="alert alert-warning">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            Maximum attempts reached ({{ quiz.max_attempts }}). Contact your instructor for help.
+                        <div class="alert alert-info border-0 shadow-sm">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-graduation-cap text-primary" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2 mb-1">Learning Journey Complete</h6>
+                                <small class="text-muted">You've used all {{ quiz.max_attempts }} attempts</small>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <a href="mailto:{{ quiz.lesson.module.course.instructor.email }}?subject=Quiz Support - {{ quiz.title }}&body=Hi {{ quiz.lesson.module.course.instructor.get_full_name|default:quiz.lesson.module.course.instructor.username }},
+
+I've completed all {{ quiz.max_attempts }} attempts for the quiz '{{ quiz.title }}' and would like some guidance on how to improve.
+
+My final score: {{ attempt.percentage|default:'N/A' }}%
+Course: {{ quiz.lesson.module.course.title }}
+Lesson: {{ quiz.lesson.title }}
+
+Could you please provide some feedback or additional resources to help me understand the material better?
+
+Thank you!
+{{ user.get_full_name|default:user.username }}"
+                                   class="btn btn-primary btn-sm">
+                                    <i class="fas fa-envelope me-1"></i>
+                                    Get Instructor Help
+                                </a>
+
+                                <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}"
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-book-open me-1"></i>
+                                    Review Lesson Content
+                                </a>
+                            </div>
+
+                            <div class="mt-3 text-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-heart me-1 text-danger"></i>
+                                    Remember: Every attempt is a step forward in your learning journey!
+                                </small>
+                            </div>
                         </div>
                         {% endif %}
                         

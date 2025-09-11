@@ -98,8 +98,18 @@
                                     {{ quiz.best_score }}%
                                 </div>
                             </div>
-                            <small class="text-muted">
-                                Attempts: {{ quiz.user_attempts }}/{{ quiz.max_attempts }}
+                            <small class="text-muted d-flex align-items-center">
+                                <i class="fas fa-redo me-1"></i>
+                                <span>Attempts: {{ quiz.user_attempts }}/{{ quiz.max_attempts|default:"∞" }}</span>
+                                {% if quiz.max_attempts > 0 %}
+                                    {% if quiz.user_attempts < quiz.max_attempts %}
+                                        <span class="badge bg-success text-white ms-2 small">
+                                            {{ quiz.max_attempts|add:"-"|add:quiz.user_attempts }} remaining
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark ms-2 small">All used</span>
+                                    {% endif %}
+                                {% endif %}
                             </small>
                         </div>
                     {% endif %}
