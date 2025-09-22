@@ -1,4 +1,5 @@
 {% load static %}
+{% load course_extras %}
 
 <!-- Trial Status Component -->
 {% if user.profile.has_active_trial %}
@@ -78,7 +79,7 @@
 <!-- Trial Lesson Access Info -->
 {% if user.profile.has_active_trial and lesson %}
 <div class="trial-lesson-info mb-3">
-    {% with lesson_access=lesson.is_accessible_for_user:user %}
+    {% with lesson_access=lesson|lesson_accessible_for_user:user %}
         {% if lesson_access.0 %}
             <div class="alert alert-info" role="alert">
                 <div class="d-flex align-items-center">
@@ -106,7 +107,7 @@
 <!-- Trial Quiz Access Info -->
 {% if user.profile.has_active_trial and quiz %}
 <div class="trial-quiz-info mb-3">
-    {% with quiz_access=quiz.is_accessible_for_user:user %}
+    {% with quiz_access=quiz|quiz_accessible_for_user:user %}
         {% if quiz_access.0 %}
             <div class="alert alert-success" role="alert">
                 <div class="d-flex align-items-center">

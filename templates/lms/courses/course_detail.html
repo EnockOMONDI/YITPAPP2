@@ -107,13 +107,29 @@
                     {% if user.is_authenticated %}
                         {% if is_enrolled %}
                             {% if enrollment.progress_percentage > 0 %}
-                                <a href="{% url 'courses:module_detail' course.slug modules.first.id %}" class="btn btn-success btn-lg">
-                                    <i class="fas fa-play me-2"></i>Continue Learning
-                                </a>
+                                {% if next_lesson %}
+                                    <a href="{% url 'courses:lesson_detail' course.slug next_lesson.id %}" class="btn btn-success btn-lg">
+                                        <i class="fas fa-play me-2"></i>Continue Learning
+                                        <small class="d-block">Next: {{ next_lesson.title|truncatechars:30 }}</small>
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-success btn-lg">
+                                        <i class="fas fa-check-circle me-2"></i>Course Complete!
+                                        <small class="d-block">Review your progress</small>
+                                    </a>
+                                {% endif %}
                             {% else %}
-                                <a href="{% url 'courses:module_detail' course.slug modules.first.id %}" class="btn btn-success btn-lg">
-                                    <i class="fas fa-play me-2"></i>Start Course
-                                </a>
+                                {% if next_lesson %}
+                                    <a href="{% url 'courses:lesson_detail' course.slug next_lesson.id %}" class="btn btn-success btn-lg">
+                                        <i class="fas fa-play me-2"></i>Start Course
+                                        <small class="d-block">Begin with: {{ next_lesson.title|truncatechars:30 }}</small>
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-success btn-lg">
+                                        <i class="fas fa-info-circle me-2"></i>Course Available
+                                        <small class="d-block">No lessons available yet</small>
+                                    </a>
+                                {% endif %}
                             {% endif %}
                         {% else %}
                             {% if course.price > 0 %}
@@ -138,10 +154,18 @@
                                     <!-- Trial and Payment Options -->
                                     <div class="d-flex gap-2 flex-wrap">
                                         <!-- Start Free Trial Button -->
-                                        {% if not user.profile.has_active_trial %}
-                                            <a href="{% url 'courses:start_trial' course.slug %}" class="btn btn-success btn-lg">
-                                                <i class="fas fa-gift me-2"></i>Start Free Trial
-                                            </a>
+                                        {% if trial_available %}
+                                            {% if not user.profile.has_active_trial %}
+                                                <a href="{% url 'courses:start_trial' course.slug %}" class="btn btn-success btn-lg">
+                                                    <i class="fas fa-gift me-2"></i>Start Free Trial
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            <!-- Trial Not Available Message -->
+                                            <div class="alert alert-info mb-3 w-100">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                {{ trial_unavailable_reason }}
+                                            </div>
                                         {% endif %}
 
                                         <!-- Payment Options -->
@@ -161,12 +185,26 @@
                                 {% endif %}
                             {% else %}
                                 <!-- Free Course Enrollment -->
-                                <form method="post" action="{% url 'courses:enroll' course.slug %}" class="d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-primary btn-lg">
-                                        <i class="fas fa-user-plus me-2"></i>Enroll Now - Free
-                                    </button>
-                                </form>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <form method="post" action="{% url 'courses:enroll' course.slug %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-user-plus me-2"></i>Enroll Now - Free
+                                        </button>
+                                    </form>
+
+                                    <!-- Trial option for free courses (if available) -->
+                                    {% if trial_available and not user.profile.has_active_trial %}
+                                        <a href="{% url 'courses:start_trial' course.slug %}" class="btn btn-outline-success btn-lg">
+                                            <i class="fas fa-gift me-2"></i>Try First 2 Lessons
+                                        </a>
+                                    {% elif not trial_available %}
+                                        <div class="alert alert-info mt-2 w-100">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            {{ trial_unavailable_reason }}
+                                        </div>
+                                    {% endif %}
+                                </div>
                             {% endif %}
                         {% endif %}
                     {% else %}

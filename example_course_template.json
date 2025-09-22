@@ -1,0 +1,295 @@
+{
+  "session_id": "example-course-2025",
+  "course_title": "Professional Development Fundamentals",
+  "course_description": "A comprehensive course covering essential concepts and practical applications for professional growth and development in the modern workplace.",
+  "course_category": "Professional Development",
+  "difficulty_level": "beginner",
+  "estimated_duration": 3.0,
+  "price": 39.0,
+  "currency": "USD",
+  "total_sessions": 3,
+  "modules": [
+    {
+      "title": "Module 1: Core Concepts and Applications",
+      "description": "This module covers essential concepts and practical applications through 3 comprehensive lessons.",
+      "sort_order": 1,
+      "estimated_duration": 180,
+      "lessons": [
+        {
+          "id": "lesson_1",
+          "title": "Introduction to Professional Development",
+          "content_type": "enhanced",
+          "estimated_duration": 60,
+          "learning_objectives": "Understand the fundamental concepts of professional development and its importance in career growth.",
+          "primary_content": "<h2 style=\"color: #1a2e53; border-bottom: 2px solid #ff5d15; padding-bottom: 0.5rem;\">Introduction to Professional Development</h2>\n<div style=\"background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;\">\n<h4 style=\"color: #ff5d15; margin-top: 0;\">💡 Key Takeaway</h4>\n<p><strong>Learning Objective:</strong> Understand the fundamental concepts of professional development and its importance in career growth.</p>\n</div>\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">What is Professional Development?</h3>\n<p>Professional development refers to the ongoing process of acquiring new skills, knowledge, and competencies that enhance your ability to perform effectively in your current role and prepare for future career opportunities.</p>\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">Key Benefits</h3>\n<p>Professional development offers numerous benefits including improved job performance, increased career opportunities, enhanced confidence, and greater job satisfaction.</p>\n<div style=\"background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;\">\n<h4 style=\"color: #1a2e53; margin-top: 0;\">🎯 Activity</h4>\n<p>Reflect on the concepts presented in this lesson and consider how you can apply them in your current situation or future goals.</p>\n</div>",
+          "additional_resources": [
+            {
+              "type": "document",
+              "title": "Introduction to Professional Development - Reference Material",
+              "url": "https://ucarecdn.com/placeholder-url/",
+              "description": "Additional reference material for Introduction to Professional Development"
+            }
+          ],
+          "sort_order": 1,
+          "is_preview": true,
+          "assessment": {
+            "quiz": {
+              "title": "Introduction to Professional Development - Knowledge Check",
+              "description": "Test your understanding of the key concepts from this lesson",
+              "instructions": "Answer all questions based on the lesson content. You have 15 attempts to achieve the passing score of 70%.",
+              "time_limit": null,
+              "max_attempts": 15,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "Professional development is an ongoing process of acquiring new skills and knowledge.",
+                  "question_type": "true_false",
+                  "correct_answer": "true",
+                  "points": 2,
+                  "explanation": "True. Professional development is indeed an ongoing process that involves continuously acquiring new skills, knowledge, and competencies.",
+                  "sort_order": 1
+                },
+                {
+                  "question_text": "Which of the following best describes professional development?",
+                  "question_type": "multiple_choice",
+                  "correct_answer": "An ongoing process of acquiring new skills and knowledge for career growth",
+                  "options": [
+                    "An ongoing process of acquiring new skills and knowledge for career growth",
+                    "A one-time training event",
+                    "Only formal education and degrees",
+                    "Something only managers need to worry about"
+                  ],
+                  "points": 2,
+                  "explanation": "Professional development is best described as an ongoing process of acquiring new skills and knowledge for career growth.",
+                  "sort_order": 2
+                },
+                {
+                  "question_text": "Professional development involves acquiring new _______ and knowledge to enhance career growth.",
+                  "question_type": "fill_in_blank",
+                  "correct_answer": "skills",
+                  "alternative_answers": ["competencies", "abilities", "capabilities"],
+                  "points": 2,
+                  "explanation": "Professional development focuses on acquiring new skills and knowledge that enhance your ability to perform effectively and advance in your career.",
+                  "sort_order": 3,
+                  "case_sensitive": false
+                },
+                {
+                  "question_text": "Which of the following are benefits of professional development? (Select all that apply)",
+                  "question_type": "multiple_select",
+                  "correct_answers": [
+                    "Improved job performance",
+                    "Enhanced confidence",
+                    "Better career opportunities"
+                  ],
+                  "options": [
+                    "Improved job performance",
+                    "Enhanced confidence",
+                    "Better career opportunities",
+                    "Guaranteed salary increase",
+                    "Elimination of all workplace stress"
+                  ],
+                  "points": 3,
+                  "explanation": "Professional development provides benefits including improved performance, enhanced confidence, and better career opportunities. However, it doesn't guarantee salary increases or eliminate all workplace stress.",
+                  "sort_order": 4,
+                  "partial_credit": true
+                },
+                {
+                  "question_text": "Match the following professional development concepts with their descriptions:",
+                  "question_type": "matching",
+                  "pairs": [
+                    {"term": "Skill Building", "definition": "Developing specific abilities and competencies"},
+                    {"term": "Networking", "definition": "Building professional relationships and connections"},
+                    {"term": "Goal Setting", "definition": "Defining clear objectives for career growth"},
+                    {"term": "Self-Assessment", "definition": "Evaluating personal strengths and development areas"}
+                  ],
+                  "points": 2,
+                  "explanation": "Understanding these key concepts and their applications is essential for effective professional development planning and implementation.",
+                  "sort_order": 5
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "lesson_2",
+          "title": "Building Essential Skills",
+          "content_type": "enhanced",
+          "estimated_duration": 60,
+          "learning_objectives": "Identify and develop essential skills for professional success in today's workplace.",
+          "primary_content": "<h2 style=\"color: #1a2e53; border-bottom: 2px solid #ff5d15; padding-bottom: 0.5rem;\">Building Essential Skills</h2>\n<div style=\"background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;\">\n<h4 style=\"color: #ff5d15; margin-top: 0;\">💡 Key Takeaway</h4>\n<p><strong>Learning Objective:</strong> Identify and develop essential skills for professional success in today's workplace.</p>\n</div>\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">Core Professional Skills</h3>\n<p>Essential professional skills include communication, problem-solving, time management, teamwork, adaptability, and leadership capabilities.</p>\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">Skill Development Strategies</h3>\n<p>Effective skill development requires deliberate practice, seeking feedback, continuous learning, and applying new skills in real-world situations.</p>\n<div style=\"background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;\">\n<h4 style=\"color: #1a2e53; margin-top: 0;\">🎯 Activity</h4>\n<p>Reflect on the concepts presented in this lesson and consider how you can apply them in your current situation or future goals.</p>\n</div>",
+          "additional_resources": [
+            {
+              "type": "document",
+              "title": "Building Essential Skills - Reference Material",
+              "url": "https://ucarecdn.com/placeholder-url/",
+              "description": "Additional reference material for Building Essential Skills"
+            }
+          ],
+          "sort_order": 2,
+          "is_preview": true,
+          "assessment": {
+            "quiz": {
+              "title": "Building Essential Skills - Knowledge Check",
+              "description": "Test your understanding of the key concepts from this lesson",
+              "instructions": "Answer all questions based on the lesson content. You have 15 attempts to achieve the passing score of 70%.",
+              "time_limit": null,
+              "max_attempts": 15,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "Communication is one of the core professional skills mentioned in this lesson.",
+                  "question_type": "true_false",
+                  "correct_answer": "true",
+                  "points": 2,
+                  "explanation": "True. Communication is indeed listed as one of the essential professional skills for workplace success.",
+                  "sort_order": 1
+                },
+                {
+                  "question_text": "Which of the following is NOT mentioned as a core professional skill?",
+                  "question_type": "multiple_choice",
+                  "correct_answer": "Technical programming only",
+                  "options": [
+                    "Communication",
+                    "Problem-solving",
+                    "Technical programming only",
+                    "Time management"
+                  ],
+                  "points": 2,
+                  "explanation": "Technical programming only is not mentioned as a core professional skill. The lesson focuses on broader skills applicable across professions.",
+                  "sort_order": 2
+                },
+                {
+                  "question_text": "Effective skill development requires deliberate _______ and seeking feedback from others.",
+                  "question_type": "fill_in_blank",
+                  "correct_answer": "practice",
+                  "alternative_answers": ["training", "effort", "application"],
+                  "points": 2,
+                  "explanation": "Effective skill development requires deliberate practice combined with seeking feedback and applying skills in real-world situations.",
+                  "sort_order": 3,
+                  "case_sensitive": false
+                },
+                {
+                  "question_text": "Which of the following are mentioned as essential professional skills? (Select all that apply)",
+                  "question_type": "multiple_select",
+                  "correct_answers": [
+                    "Communication",
+                    "Problem-solving",
+                    "Time management",
+                    "Adaptability"
+                  ],
+                  "options": [
+                    "Communication",
+                    "Problem-solving",
+                    "Time management",
+                    "Adaptability",
+                    "Mind reading",
+                    "Perfect memory"
+                  ],
+                  "points": 3,
+                  "explanation": "The lesson mentions communication, problem-solving, time management, and adaptability as essential professional skills. Mind reading and perfect memory are not realistic professional skills.",
+                  "sort_order": 4,
+                  "partial_credit": true
+                },
+                {
+                  "question_text": "Match the skill development strategies with their descriptions:",
+                  "question_type": "matching",
+                  "pairs": [
+                    {"term": "Deliberate Practice", "definition": "Focused, intentional skill improvement activities"},
+                    {"term": "Seeking Feedback", "definition": "Actively requesting input on performance"},
+                    {"term": "Real-world Application", "definition": "Using new skills in actual work situations"},
+                    {"term": "Continuous Learning", "definition": "Ongoing acquisition of new knowledge and skills"}
+                  ],
+                  "points": 2,
+                  "explanation": "These strategies work together to create effective skill development: deliberate practice builds competency, feedback guides improvement, real-world application reinforces learning, and continuous learning ensures ongoing growth.",
+                  "sort_order": 5
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "lesson_3",
+          "title": "Creating Your Development Plan",
+          "content_type": "enhanced",
+          "estimated_duration": 60,
+          "learning_objectives": "Learn how to create and implement a personalized professional development plan.",
+          "primary_content": "<h2 style=\"color: #1a2e53; border-bottom: 2px solid #ff5d15; padding-bottom: 0.5rem;\">Creating Your Development Plan</h2>\n<div style=\"background: #fff8e1; border-left: 4px solid #ff5d15; padding: 1rem; margin: 1rem 0;\">\n<h4 style=\"color: #ff5d15; margin-top: 0;\">💡 Key Takeaway</h4>\n<p><strong>Learning Objective:</strong> Learn how to create and implement a personalized professional development plan.</p>\n</div>\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">Planning Framework</h3>\n<p>A successful development plan includes clear goals, specific actions, timelines, resources needed, and methods for measuring progress.</p>\n<h3 style=\"color: #ff5d15; margin-top: 2rem;\">Implementation Strategies</h3>\n<p>Effective implementation requires regular review, flexibility to adjust plans, accountability measures, and consistent action toward your goals.</p>\n<div style=\"background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;\">\n<h4 style=\"color: #1a2e53; margin-top: 0;\">🎯 Activity</h4>\n<p>Reflect on the concepts presented in this lesson and consider how you can apply them in your current situation or future goals.</p>\n</div>",
+          "additional_resources": [
+            {
+              "type": "document",
+              "title": "Creating Your Development Plan - Reference Material",
+              "url": "https://ucarecdn.com/placeholder-url/",
+              "description": "Additional reference material for Creating Your Development Plan"
+            }
+          ],
+          "sort_order": 3,
+          "is_preview": false,
+          "assessment": {
+            "quiz": {
+              "title": "Creating Your Development Plan - Knowledge Check",
+              "description": "Test your understanding of the key concepts from this lesson",
+              "instructions": "Answer all questions based on the lesson content. You have 15 attempts to achieve the passing score of 70%.",
+              "time_limit": null,
+              "max_attempts": 15,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "A successful development plan should include clear goals and specific actions.",
+                  "question_type": "true_false",
+                  "correct_answer": "true",
+                  "points": 2,
+                  "explanation": "True. A successful development plan requires clear goals, specific actions, timelines, and methods for measuring progress.",
+                  "sort_order": 1
+                },
+                {
+                  "question_text": "Development plans should never be changed once created.",
+                  "question_type": "true_false",
+                  "correct_answer": "false",
+                  "points": 2,
+                  "explanation": "False. Effective implementation requires flexibility to adjust plans as circumstances change and new opportunities arise.",
+                  "sort_order": 2
+                },
+                {
+                  "question_text": "Which element is essential for a successful development plan?",
+                  "question_type": "multiple_choice",
+                  "correct_answer": "Methods for measuring progress",
+                  "options": [
+                    "Methods for measuring progress",
+                    "Expensive training programs only",
+                    "Approval from all colleagues",
+                    "Waiting for perfect conditions"
+                  ],
+                  "points": 2,
+                  "explanation": "Methods for measuring progress are essential for tracking your development and ensuring you're moving toward your goals.",
+                  "sort_order": 3
+                },
+                {
+                  "question_text": "Regular review is important for effective plan implementation.",
+                  "question_type": "true_false",
+                  "correct_answer": "true",
+                  "points": 2,
+                  "explanation": "True. Regular review allows you to assess progress, make necessary adjustments, and stay on track with your development goals.",
+                  "sort_order": 4
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "created_at": "2025-09-21T12:00:00.000000",
+  "status": "draft",
+  "generation_info": {
+    "generator_version": "1.0.0",
+    "source_files": ["example_content.pptx"],
+    "total_content_units": 3,
+    "generation_date": "2025-09-21T12:00:00.000000"
+  }
+}

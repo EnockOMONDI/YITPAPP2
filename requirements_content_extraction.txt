@@ -1,0 +1,211 @@
+# YITP Content Extraction System Requirements
+# Install with: pip install -r requirements_content_extraction.txt
+
+# Core dependencies for content extraction
+python-pptx>=0.6.21          # PowerPoint file processing
+pdfplumber>=0.7.6            # PDF text and table extraction
+beautifulsoup4>=4.12.2       # HTML processing and cleaning
+Pillow>=10.0.0               # Image processing support
+
+# Alternative PDF processing (lightweight)
+PyPDF2>=3.0.1                # Alternative PDF reader
+
+# Text processing and utilities
+regex>=2023.8.8              # Advanced regex support
+python-dateutil>=2.8.2      # Date parsing utilities
+pathlib2>=2.3.7             # Enhanced path handling (Python < 3.4)
+
+# JSON schema validation (optional)
+jsonschema>=4.19.0           # JSON schema validation
+
+# Development and testing (optional)
+pytest>=7.4.0               # Testing framework
+pytest-cov>=4.1.0           # Coverage reporting
+
+# Additional utilities
+tqdm>=4.66.0                 # Progress bars for long operations
+click>=8.1.7                 # Enhanced command line interface (alternative to argparse)
+
+# Image extraction from PDFs (optional)
+pdf2image>=1.16.3           # Convert PDF pages to images
+Wand>=0.6.11                 # ImageMagick binding for advanced image processing
+
+# Text analysis (optional)
+nltk>=3.8.1                  # Natural language processing
+spacy>=3.6.1                 # Advanced NLP (for content analysis)
+
+# Excel support (if needed for data files)
+openpyxl>=3.1.2             # Excel file reading/writing
+pandas>=2.0.3               # Data manipulation (if processing spreadsheets)
+
+# Web scraping (if extracting from online sources)
+requests>=2.31.0            # HTTP requests
+lxml>=4.9.3                 # XML/HTML parsing
+
+# Markdown processing (if converting to/from markdown)
+markdown>=3.4.4             # Markdown to HTML conversion
+python-markdown>=3.4.4     # Enhanced markdown processing
+
+# Configuration management
+python-decouple>=3.8        # Environment variable management
+pyyaml>=6.0.1               # YAML configuration files
+
+# Logging and monitoring
+loguru>=0.7.0               # Enhanced logging
+rich>=13.5.2                # Rich text and beautiful formatting in terminal
+
+# File format detection
+python-magic>=0.4.27       # File type detection
+filetype>=1.2.0            # Alternative file type detection
+
+# Text cleaning and normalization
+ftfy>=6.1.1                 # Fix text encoding issues
+unidecode>=1.3.6           # Unicode to ASCII transliteration
+
+# Progress tracking for large files
+alive-progress>=3.1.4      # Alternative progress bars
+
+# Memory optimization for large files
+psutil>=5.9.5              # System and process utilities
+memory-profiler>=0.61.0    # Memory usage profiling
+
+# Parallel processing (for large batches)
+joblib>=1.3.2              # Parallel processing utilities
+multiprocessing-logging>=0.3.4  # Logging in multiprocessing
+
+# Data validation
+cerberus>=1.3.4            # Data validation
+marshmallow>=3.20.1        # Object serialization/deserialization
+
+# Caching (for repeated operations)
+diskcache>=5.6.3           # Disk-based caching
+cachetools>=5.3.1          # In-memory caching utilities
+
+# File watching (for auto-processing)
+watchdog>=3.0.0            # File system event monitoring
+
+# Archive handling (for compressed files)
+patool>=1.12.0             # Archive file extraction
+py7zr>=0.20.6              # 7-zip archive support
+
+# Database support (for metadata storage)
+sqlite3                     # Built-in SQLite support
+sqlalchemy>=2.0.20         # ORM for database operations
+
+# HTTP server (for preview/testing)
+flask>=2.3.3               # Lightweight web framework
+jinja2>=3.1.2              # Template engine
+
+# Documentation generation
+sphinx>=7.1.2              # Documentation generator
+sphinx-rtd-theme>=1.3.0    # Read the Docs theme
+
+# Code quality and formatting
+black>=23.7.0              # Code formatter
+flake8>=6.0.0              # Code linting
+isort>=5.12.0              # Import sorting
+
+# Type checking
+mypy>=1.5.1                # Static type checking
+types-requests>=2.31.0     # Type stubs for requests
+
+# Security scanning
+bandit>=1.7.5              # Security linter
+safety>=2.3.5              # Dependency vulnerability scanner
+
+# Performance profiling
+line-profiler>=4.1.1       # Line-by-line profiling
+py-spy>=0.3.14             # Sampling profiler
+
+# Environment management
+virtualenv>=20.24.3        # Virtual environment creation
+pipenv>=2023.7.23          # Dependency management
+
+# Backup and versioning
+gitpython>=3.1.32          # Git integration
+dulwich>=0.21.5           # Pure Python Git implementation
+
+# Notification system (for completion alerts)
+plyer>=2.1.0               # Cross-platform notifications
+
+# Configuration templates
+cookiecutter>=2.3.0        # Project template generation
+
+# API integration (for Uploadcare)
+uploadcare>=3.0.0          # Uploadcare Python SDK
+boto3>=1.28.57             # AWS SDK (if using S3)
+
+# Monitoring and metrics
+prometheus-client>=0.17.1  # Metrics collection
+statsd>=4.0.1              # StatsD client
+
+# Internationalization
+babel>=2.12.1              # Internationalization utilities
+polib>=1.2.0               # PO file handling
+
+# Machine learning (for content analysis)
+scikit-learn>=1.3.0        # Machine learning library
+transformers>=4.33.2       # Hugging Face transformers (for NLP)
+
+# Cloud storage integration
+google-cloud-storage>=2.10.0  # Google Cloud Storage
+azure-storage-blob>=12.17.0   # Azure Blob Storage
+
+# Workflow automation
+celery>=5.3.1              # Distributed task queue
+redis>=4.6.0               # Redis client (for Celery)
+
+# Data export formats
+xlsxwriter>=3.1.3          # Excel file writing
+reportlab>=4.0.4           # PDF generation
+weasyprint>=59.0           # HTML to PDF conversion
+
+# Content analysis
+textstat>=0.7.3            # Text readability statistics
+langdetect>=1.0.9          # Language detection
+polyglot>=16.7.4           # Multilingual NLP
+
+# Image processing enhancements
+opencv-python>=4.8.0       # Computer vision library
+pytesseract>=0.3.10        # OCR (Optical Character Recognition)
+
+# Audio processing (if handling audio content)
+pydub>=0.25.1              # Audio manipulation
+speech-recognition>=3.10.0 # Speech to text
+
+# Video processing (if handling video content)
+moviepy>=1.0.3             # Video editing
+ffmpeg-python>=0.2.0       # FFmpeg wrapper
+
+# Web automation (for online content extraction)
+selenium>=4.11.2           # Web browser automation
+playwright>=1.37.0         # Modern web automation
+
+# API rate limiting
+ratelimit>=2.2.1           # Rate limiting utilities
+backoff>=2.2.1             # Exponential backoff
+
+# Content similarity and deduplication
+difflib                     # Built-in text comparison
+fuzzywuzzy>=0.18.0         # Fuzzy string matching
+python-levenshtein>=0.21.1 # Fast string distance calculation
+
+# Workflow orchestration
+prefect>=2.11.5            # Modern workflow orchestration
+airflow>=2.7.0             # Apache Airflow (alternative)
+
+# Error tracking
+sentry-sdk>=1.29.2         # Error tracking and performance monitoring
+
+# Development tools
+ipython>=8.14.0            # Enhanced Python shell
+jupyter>=1.0.0             # Jupyter notebooks
+notebook>=7.0.2            # Jupyter notebook server
+
+# Documentation and help
+sphinx-autodoc-typehints>=1.24.0  # Type hints in documentation
+sphinx-click>=5.0.1               # Click command documentation
+
+# Final note: Install core dependencies first, then add optional ones as needed
+# Core installation: pip install python-pptx pdfplumber beautifulsoup4 pillow
+# Full installation: pip install -r requirements_content_extraction.txt

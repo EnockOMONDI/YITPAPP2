@@ -54,7 +54,7 @@ def start_trial(request, course_slug):
                 # Redirect to first lesson
                 first_lesson = course.get_ordered_lessons()[0] if course.get_ordered_lessons() else None
                 if first_lesson:
-                    return redirect('lms:lesson_detail', lesson_id=first_lesson.id)
+                    return redirect('courses:lesson_detail', course_slug=course.slug, lesson_id=first_lesson.id)
                 else:
                     return redirect('courses:course_detail', slug=course.slug)
             else:
@@ -282,20 +282,17 @@ def trial_completion_summary(request, course_slug):
     return render(request, 'lms/trial/trial_completion_summary.html', context)
 
 
-# URL patterns for trial views (to be added to courses/urls.py)
-"""
+# URL patterns for trial views
 from django.urls import path
-from . import trial_views
 
 trial_urlpatterns = [
-    path('trial/start/<slug:course_slug>/', trial_views.start_trial, name='start_trial'),
-    path('trial/status/<slug:course_slug>/', trial_views.trial_status, name='trial_status'),
-    path('trial/status-api/<slug:course_slug>/', trial_views.trial_status_api, name='trial_status_api'),
-    path('trial/convert/<slug:course_slug>/', trial_views.convert_trial_to_paid, name='convert_trial_to_paid'),
-    path('trial/lesson-access/<int:lesson_id>/', trial_views.check_lesson_access, name='check_lesson_access'),
-    path('trial/quiz-access/<int:quiz_id>/', trial_views.check_quiz_access, name='check_quiz_access'),
-    path('trial/dashboard/', trial_views.TrialDashboardView.as_view(), name='trial_dashboard'),
-    path('trial/track-access/', trial_views.track_trial_access, name='track_trial_access'),
-    path('trial/completion/<slug:course_slug>/', trial_views.trial_completion_summary, name='trial_completion_summary'),
+    path('trial/start/<slug:course_slug>/', start_trial, name='start_trial'),
+    path('trial/status/<slug:course_slug>/', trial_status, name='trial_status'),
+    path('trial/status-api/<slug:course_slug>/', trial_status_api, name='trial_status_api'),
+    path('trial/convert/<slug:course_slug>/', convert_trial_to_paid, name='convert_trial_to_paid'),
+    path('trial/lesson-access/<int:lesson_id>/', check_lesson_access, name='check_lesson_access'),
+    path('trial/quiz-access/<int:quiz_id>/', check_quiz_access, name='check_quiz_access'),
+    path('trial/dashboard/', TrialDashboardView.as_view(), name='trial_dashboard'),
+    path('trial/track-access/', track_trial_access, name='track_trial_access'),
+    path('trial/completion/<slug:course_slug>/', trial_completion_summary, name='trial_completion_summary'),
 ]
-"""

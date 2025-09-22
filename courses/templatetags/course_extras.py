@@ -30,3 +30,23 @@ def mul(value, arg):
         return float(value) * float(arg)
     except (ValueError, TypeError):
         return 0
+
+@register.filter
+def lesson_accessible_for_user(lesson, user):
+    """Check if lesson is accessible for the given user"""
+    if lesson and user and hasattr(lesson, 'is_accessible_for_user'):
+        try:
+            return lesson.is_accessible_for_user(user)
+        except Exception:
+            return False, "Unable to check accessibility"
+    return False, "Invalid lesson or user"
+
+@register.filter
+def quiz_accessible_for_user(quiz, user):
+    """Check if quiz is accessible for the given user"""
+    if quiz and user and hasattr(quiz, 'is_accessible_for_user'):
+        try:
+            return quiz.is_accessible_for_user(user)
+        except Exception:
+            return False, "Unable to check accessibility"
+    return False, "Invalid quiz or user"

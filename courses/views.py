@@ -150,7 +150,11 @@ class CourseDetailView(DetailView):
         user_progress = {}
         if self.request.user.is_authenticated:
             try:
-                enrollment = Enrollment.objects.get(student=self.request.user, course=course)
+                enrollment = Enrollment.objects.get(
+                    student=self.request.user,
+                    course=course,
+                    status='active'
+                )
                 context['enrollment'] = enrollment
                 context['is_enrolled'] = True
 
@@ -162,12 +166,33 @@ class CourseDetailView(DetailView):
                 for progress in lesson_progress:
                     user_progress[progress.lesson.id] = progress
 
+                # Add next lesson information for better navigation
+                next_lesson = None
+                if enrollment.progress_percentage > 0:
+                    # Find the next incomplete lesson
+                    completed_lessons = [p.lesson.id for p in lesson_progress if p.is_completed]
+                    all_lessons = course.get_ordered_lessons()
+                    for lesson in all_lessons:
+                        if lesson.id not in completed_lessons:
+                            next_lesson = lesson
+                            break
+                else:
+                    # If no progress, start with first lesson
+                    all_lessons = course.get_ordered_lessons()
+                    next_lesson = all_lessons[0] if all_lessons else None
+
+                context['next_lesson'] = next_lesson
+
             except Enrollment.DoesNotExist:
                 context['is_enrolled'] = False
         else:
             context['is_enrolled'] = False
 
         context['user_progress'] = user_progress
+
+        # Determine trial access eligibility
+        context['trial_available'] = self._should_offer_trial_access(course)
+        context['trial_unavailable_reason'] = self._get_trial_unavailable_reason(course)
 
         # Get course reviews and calculate average rating
         reviews = course.reviews.filter(is_published=True).select_related('student')
@@ -201,6 +226,38 @@ class CourseDetailView(DetailView):
         ).exclude(id=course.id)[:3]
 
         return context
+
+    def _should_offer_trial_access(self, course):
+        """
+        Determine if trial access should be offered for this course
+
+        Trial access rules:
+        - All courses should offer free trial access by default (paid and free courses)
+        - Exception: Courses with only one module/unit OR only one lesson should NOT have trial access
+        """
+        # Check if course has sufficient content for trial
+        total_modules = course.total_modules
+        total_lessons = course.total_lessons
+
+        # If course has only one module OR only one lesson, no trial
+        if total_modules <= 1 or total_lessons <= 1:
+            return False
+
+        return True
+
+    def _get_trial_unavailable_reason(self, course):
+        """
+        Get the reason why trial access is not available
+        """
+        total_modules = course.total_modules
+        total_lessons = course.total_lessons
+
+        if total_modules <= 1:
+            return f"Trial not available - This course contains only one module. Full access required."
+        elif total_lessons <= 1:
+            return f"Trial not available - This course contains only one lesson. Full access required."
+
+        return None
 
 
 class EnrollView(LoginRequiredMixin, View):

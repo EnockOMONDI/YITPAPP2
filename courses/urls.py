@@ -1,6 +1,7 @@
 from django.urls import path
 from django.views.generic import RedirectView
 from . import views
+from .trial_views import trial_urlpatterns
 
 app_name = 'courses'
 
@@ -21,3 +22,5 @@ urlpatterns = [
     path('profile/', RedirectView.as_view(pattern_name='profile_lms', permanent=False), name='lms_profile_redirect'),
 ]
 
+# Include trial-related URL patterns
+urlpatterns += trial_urlpatterns
