@@ -2,7 +2,7 @@ services:
   - type: web
     name: django-blog
     env: python
-    branch: ourseupdatesmain
+    branch: courseupdatesmain
     buildCommand: chmod +x build_fallback.sh && ./build_fallback.sh
     startCommand: gunicorn blog.wsgi:application
     envVars:
