@@ -4,37 +4,314 @@
 
 {% block title %}Taking: {{ quiz.title }} - YITP LMS{% endblock %}
 
+{% block extra_css %}
+<style>
+    /* Mobile-First Quiz Design */
+    .quiz-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 1rem;
+    }
+
+    /* Mobile-first margins and spacing */
+    .quiz-wrapper {
+        margin-top: 80px; /* Start with mobile margin */
+    }
+
+    @media (min-width: 576px) {
+        .quiz-wrapper {
+            margin-top: 90px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .quiz-wrapper {
+            margin-top: 100px;
+        }
+    }
+
+    /* Mobile-first question cards */
+    .question-card {
+        margin-bottom: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .question-header {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        padding: 1rem;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .question-content {
+        padding: 1.5rem;
+    }
+
+    @media (min-width: 576px) {
+        .question-content {
+            padding: 2rem;
+        }
+    }
+
+    /* Mobile-first form elements */
+    .form-check {
+        margin-bottom: 0.75rem;
+        padding: 1rem;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .form-check:hover {
+        border-color: #007bff;
+        background-color: #f8f9ff;
+    }
+
+    .form-check-input:checked {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .form-control {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    /* Mobile-first quiz navigation */
+    .quiz-navigation {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #ddd;
+        flex-direction: column;
+    }
+
+    @media (min-width: 576px) {
+        .quiz-navigation {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    /* Mobile-first buttons */
+    .btn-quiz {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        border: none;
+        border-radius: 8px;
+        padding: 0.875rem 1.5rem;
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        transition: all 0.3s ease;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .btn-quiz:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 93, 21, 0.3);
+        color: white;
+    }
+
+    .btn-quiz-secondary {
+        background: transparent;
+        border: 2px solid #1a2e53;
+        color: #1a2e53;
+        border-radius: 8px;
+        padding: 0.875rem 1.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        transition: all 0.3s ease;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .btn-quiz-secondary:hover {
+        background: #1a2e53;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    @media (min-width: 576px) {
+        .btn-quiz,
+        .btn-quiz-secondary {
+            width: auto;
+        }
+    }
+
+    /* Mobile-first question navigator */
+    .question-navigator {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+    }
+
+    .question-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    @media (min-width: 576px) {
+        .question-grid {
+            grid-template-columns: repeat(6, 1fr);
+        }
+    }
+
+    .question-nav-btn {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        background: white;
+        color: #6c757d;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+    }
+
+    .question-nav-btn:hover {
+        transform: scale(1.05);
+    }
+
+    .question-nav-btn.active {
+        background: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+    .question-nav-btn.answered {
+        background: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+
+    /* Mobile-first timer */
+    .timer-display {
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 8px;
+        padding: 0.75rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #dc3545;
+    }
+
+    /* Touch-friendly interactions */
+    @media (hover: none) and (pointer: coarse) {
+        .form-check {
+            transform: none !important;
+        }
+
+        .form-check:active {
+            transform: scale(0.98);
+        }
+
+        .btn-quiz:active,
+        .btn-quiz-secondary:active {
+            transform: scale(0.95);
+        }
+
+        .question-nav-btn:active {
+            transform: scale(0.95);
+        }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        .question-card {
+            border: 2px solid #000;
+        }
+
+        .form-check {
+            border: 2px solid #000;
+        }
+
+        .form-control {
+            border: 2px solid #000;
+        }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .form-check,
+        .btn-quiz,
+        .btn-quiz-secondary,
+        .question-nav-btn {
+            transition: none;
+        }
+
+        .form-check:hover,
+        .btn-quiz:hover,
+        .btn-quiz-secondary:hover,
+        .question-nav-btn:hover {
+            transform: none;
+        }
+    }
+
+    /* Focus states for accessibility */
+    .form-check:focus-within,
+    .form-control:focus,
+    .btn-quiz:focus,
+    .btn-quiz-secondary:focus {
+        outline: 2px solid #007bff;
+        outline-offset: 2px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid py-4">
-    <!-- Quiz Header -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h4 class="text-primary mb-1">{{ quiz.title }}</h4>
-                            <small class="text-muted">
-                                {{ questions.count }} question{{ questions.count|pluralize }}
-                            </small>
+<div class="quiz-container">
+    <div class="quiz-wrapper">
+        <!-- Quiz Header -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                    <div>
+                        <h4 class="text-primary mb-1">{{ quiz.title }}</h4>
+                        <small class="text-muted">
+                            {{ questions.count }} question{{ questions.count|pluralize }}
+                        </small>
+                    </div>
+                    <div class="text-start text-md-end w-100 w-md-auto">
+                        {% if quiz.time_limit %}
+                        <div id="timer" class="timer-display">
+                            <i class="fas fa-clock me-1"></i>
+                            <span id="time-remaining">{{ quiz.time_limit }} minutes</span>
                         </div>
-                        <div class="text-end">
-                            {% if quiz.time_limit %}
-                            <div id="timer" class="h5 text-warning mb-1">
-                                <i class="fas fa-clock me-1"></i>
-                                <span id="time-remaining">{{ quiz.time_limit }} minutes</span>
-                            </div>
-                            <small class="text-muted">Time Limit</small>
-                            {% endif %}
-                        </div>
+                        <small class="text-muted d-block">Time Limit</small>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Quiz Form -->
-    <form method="post" id="quiz-form">
+    <form method="post" id="quiz-form" data-quiz-id="{{ quiz.id }}" data-questions="{{ questions|length }}" data-current="{{ current_question_number }}" data-answered="{{ answered_count }}" data-time-limit="{{ quiz.time_limit|default:0 }}">
         {% csrf_token %}
         
         <div class="row">
@@ -145,18 +422,14 @@
                 <!-- Submit Button -->
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <a href="{% url 'assessments:quiz_detail' quiz_id=quiz.id %}" class="btn btn-outline-secondary">
-                                    <i class="fas fa-arrow-left me-1"></i>Back to Quiz Details
-                                </a>
-                            </div>
+                        <div class="quiz-navigation">
+                            <a href="{% url 'assessments:quiz_detail' quiz_id=quiz.id %}" class="btn-quiz-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>Back to Quiz Details
+                            </a>
 
-                            <div>
-                                <button type="submit" class="btn btn-success btn-lg" id="submit-quiz">
-                                    <i class="fas fa-check me-1"></i>Submit Quiz
-                                </button>
-                            </div>
+                            <button type="submit" class="btn-quiz" id="submit-quiz">
+                                <i class="fas fa-check me-1"></i>Submit Quiz
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -165,34 +438,28 @@
             <!-- Sidebar -->
             <div class="col-lg-4">
                 <!-- Question Navigator -->
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header bg-white border-bottom">
-                        <h6 class="card-title mb-0">
-                            <i class="fas fa-list me-2"></i>Question Navigator
-                        </h6>
+                <div class="question-navigator">
+                    <h6 class="card-title mb-3">
+                        <i class="fas fa-list me-2"></i>Question Navigator
+                    </h6>
+                    <div class="question-grid">
+                        {% for q_num in question_numbers %}
+                        <button type="submit" name="action" value="goto"
+                                class="question-nav-btn
+                                {% if q_num == current_question_number %}active
+                                {% elif q_num in answered_questions %}answered
+                                {% endif %}"
+                                data-question="{{ q_num }}">
+                            {{ q_num }}
+                        </button>
+                        {% endfor %}
                     </div>
-                    <div class="card-body">
-                        <div class="row g-2">
-                            {% for q_num in question_numbers %}
-                            <div class="col-3">
-                                <button type="submit" name="action" value="goto" 
-                                        class="btn btn-sm w-100 question-nav-btn
-                                        {% if q_num == current_question_number %}btn-primary
-                                        {% elif q_num in answered_questions %}btn-success
-                                        {% else %}btn-outline-secondary{% endif %}"
-                                        data-question="{{ q_num }}">
-                                    {{ q_num }}
-                                </button>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        
-                        <div class="mt-3">
-                            <small class="text-muted">
-                                <span class="badge bg-success me-1"></span>Answered: {{ answered_count }}<br>
-                                <span class="badge bg-outline-secondary me-1"></span>Remaining: {{ remaining_count }}
-                            </small>
-                        </div>
+
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <span class="badge bg-success me-1"></span>Answered: {{ answered_count }}<br>
+                            <span class="badge bg-secondary me-1"></span>Remaining: {{ remaining_count }}
+                        </small>
                     </div>
                 </div>
 
@@ -242,56 +509,346 @@
 
 {% block extra_js %}
 <script>
-$(document).ready(function() {
-    // Timer functionality disabled for now - needs proper context variables
-    // let timeRemaining = {{ quiz.time_limit|default:0 }} * 60;
-    // ... timer code would go here
-    
-    // Question navigation
-    $('.question-nav-btn').click(function(e) {
-        e.preventDefault();
-        const questionNum = $(this).data('question');
-        $('#goto-question').val(questionNum);
-        $(this).closest('form').submit();
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile-first enhancements
+
+    // Touch-friendly form interactions
+    const formChecks = document.querySelectorAll('.form-check');
+    formChecks.forEach(check => {
+        check.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        });
+
+        check.addEventListener('touchend', function() {
+            this.style.transform = '';
+        });
     });
-    
-    // Finish quiz confirmation
-    $('#finish-quiz').click(function(e) {
-        if (!confirm('Are you sure you want to finish this quiz? You will not be able to change your answers after submitting.')) {
+
+    // Question navigation with mobile support
+    const navButtons = document.querySelectorAll('.question-nav-btn');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
             e.preventDefault();
-        }
+            const questionNum = this.dataset.question;
+            document.getElementById('goto-question').value = questionNum;
+            this.closest('form').submit();
+        });
+
+        // Touch feedback for navigation buttons
+        button.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+
+        button.addEventListener('touchend', function() {
+            this.style.transform = '';
+        });
     });
-    
-    // Auto-save answers
-    $('input[name="answer"], textarea[name="answer"]').change(function() {
-        // Auto-save functionality could be implemented here
+
+    // Submit quiz confirmation with mobile-friendly modal
+    const submitButton = document.getElementById('submit-quiz');
+    if (submitButton) {
+        submitButton.addEventListener('click', function(e) {
+            // Check if all questions are answered
+            const unansweredQuestions = checkUnansweredQuestions();
+            if (unansweredQuestions > 0) {
+                e.preventDefault();
+                showUnansweredModal(unansweredQuestions);
+                return;
+            }
+
+            if (!confirm('Are you sure you want to finish this quiz? You will not be able to change your answers after submitting.')) {
+                e.preventDefault();
+            }
+        });
+    }
+
+    // Auto-save answers with debouncing
+    let saveTimeout;
+    const answerInputs = document.querySelectorAll('input[name^="question_"], textarea[name^="question_"], select[name^="question_"]');
+    answerInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                // Auto-save functionality could be implemented here
+                console.log('Answer changed for question:', this.name);
+            }, 1000);
+        });
     });
 
     // Handle matching questions
-    $('.matching-select').change(function() {
-        var questionId = $(this).data('question');
-        var itemLetter = $(this).data('item');
-        var selectedValue = $(this).val();
+    const matchingSelects = document.querySelectorAll('.matching-select');
+    matchingSelects.forEach(select => {
+        select.addEventListener('change', function() {
+            const questionId = this.dataset.question;
+            const itemLetter = this.dataset.item;
+            const selectedValue = this.value;
 
-        // Collect all matches for this question
-        var matches = [];
-        $('.matching-select[data-question="' + questionId + '"]').each(function() {
-            var item = $(this).data('item');
-            var value = $(this).val();
-            if (value) {
-                matches.push(item + '-' + value);
+            // Collect all matches for this question
+            const matches = [];
+            document.querySelectorAll('.matching-select[data-question="' + questionId + '"]').forEach(sel => {
+                const item = sel.dataset.item;
+                const value = sel.value;
+                if (value) {
+                    matches.push(item + '-' + value);
+                }
+            });
+
+            // Update hidden input with comma-separated matches
+            const hiddenInput = document.getElementById('matching_answer_' + questionId);
+            if (hiddenInput) {
+                hiddenInput.value = matches.join(',');
             }
         });
-
-        // Update hidden input with comma-separated matches
-        $('#matching_answer_' + questionId).val(matches.join(','));
     });
 
-    // Prevent accidental page refresh
+    // Prevent accidental page refresh with mobile consideration
+    let isSubmitting = false;
     window.addEventListener('beforeunload', function(e) {
-        e.preventDefault();
-        e.returnValue = '';
+        if (!isSubmitting) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
     });
+
+    // Mark form as submitting when actually submitting
+    document.querySelector('form').addEventListener('submit', function() {
+        isSubmitting = true;
+    });
+
+    // Keyboard navigation for accessibility
+    document.addEventListener('keydown', function(e) {
+        // Allow form submission with Ctrl/Cmd + Enter
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            const submitBtn = document.getElementById('submit-quiz');
+            if (submitBtn) {
+                submitBtn.click();
+            }
+        }
+    });
+
+    // Progressive enhancement for larger screens
+    function handleResize() {
+        const isMobile = window.innerWidth < 768;
+
+        // Adjust behavior based on screen size
+        if (isMobile) {
+            // On mobile, ensure touch targets are adequate
+            navButtons.forEach(btn => {
+                btn.style.minHeight = '44px';
+                btn.style.minWidth = '44px';
+            });
+        }
+    }
+
+    // Initial call and resize listener
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Helper functions
+    function checkUnansweredQuestions() {
+        let unanswered = 0;
+        // This would need to be implemented based on the specific form structure
+        // For now, return 0 to allow submission
+        return unanswered;
+    }
+
+    function showUnansweredModal(count) {
+        // Create and show a modal for unanswered questions
+        const modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning text-dark">
+                        <h5 class="modal-title">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Unanswered Questions
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>You have ${count} unanswered question${count > 1 ? 's' : ''}. Are you sure you want to submit?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Review Answers</button>
+                        <button type="button" class="btn btn-warning" onclick="forceSubmitQuiz()">Submit Anyway</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
+
+        modal.addEventListener('hidden.bs.modal', function() {
+            modal.remove();
+        });
+    }
+
+    // Make forceSubmitQuiz available globally
+    window.forceSubmitQuiz = function() {
+        isSubmitting = true;
+        document.querySelector('form').submit();
+    };
+
+    // Quiz Completion State Management
+    class QuizStateManager {
+        constructor(quizData) {
+            this.quizId = quizData.quizId;
+            this.questions = quizData.questions;
+            this.currentQuestion = quizData.currentQuestion;
+            this.answeredQuestions = quizData.answeredQuestions;
+            this.timeLimit = quizData.timeLimit;
+            this.startTime = Date.now();
+            this.isCompleted = false;
+
+            this.init();
+        }
+
+        init() {
+            this.updateProgress();
+            this.setupAutoSave();
+            this.setupTimeTracking();
+            this.updateNavigationState();
+        }
+
+        updateProgress() {
+            const progress = (this.answeredQuestions / this.questions) * 100;
+            const progressFill = document.querySelector('.progress-fill');
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+
+            // Update progress text
+            const progressText = document.querySelector('.question-counter');
+            if (progressText) {
+                progressText.textContent = `Question ${this.currentQuestion} of ${this.questions} (${this.answeredQuestions} answered)`;
+            }
+        }
+
+        setupAutoSave() {
+            // Auto-save every 30 seconds
+            setInterval(() => {
+                if (!this.isCompleted && !isSubmitting) {
+                    this.saveProgress();
+                }
+            }, 30000);
+
+            // Save on page unload
+            window.addEventListener('beforeunload', () => {
+                if (!this.isCompleted && !isSubmitting) {
+                    this.saveProgress();
+                }
+            });
+        }
+
+        setupTimeTracking() {
+            if (this.timeLimit > 0) {
+                const timerElement = document.getElementById('time-remaining');
+                if (timerElement) {
+                    this.updateTimer();
+                    setInterval(() => this.updateTimer(), 1000);
+                }
+            }
+        }
+
+        updateTimer() {
+            const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
+            const remaining = (this.timeLimit * 60) - elapsed;
+
+            if (remaining <= 0) {
+                this.handleTimeUp();
+                return;
+            }
+
+            const minutes = Math.floor(remaining / 60);
+            const seconds = remaining % 60;
+            const timerElement = document.getElementById('time-remaining');
+
+            if (timerElement) {
+                timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                // Warning colors
+                if (remaining <= 300) { // 5 minutes
+                    timerElement.style.color = '#dc3545';
+                    if (remaining <= 60) { // 1 minute
+                        timerElement.style.animation = 'pulse 1s infinite';
+                    }
+                }
+            }
+        }
+
+        handleTimeUp() {
+            notificationSystem.warning('Time is up! Your quiz will be submitted automatically.', 'Time\'s Up');
+            setTimeout(() => {
+                isSubmitting = true;
+                document.querySelector('form').submit();
+            }, 3000);
+        }
+
+        updateNavigationState() {
+            const navButtons = document.querySelectorAll('.question-nav-btn');
+            navButtons.forEach(button => {
+                const questionNum = parseInt(button.dataset.question);
+                button.classList.remove('active', 'answered');
+
+                if (questionNum === this.currentQuestion) {
+                    button.classList.add('active');
+                }
+            });
+        }
+
+        saveProgress() {
+            // Save current progress to localStorage
+            const progressData = {
+                quizId: this.quizId,
+                currentQuestion: this.currentQuestion,
+                answeredQuestions: this.answeredQuestions,
+                timestamp: Date.now()
+            };
+
+            localStorage.setItem(`quiz_progress_${this.quizId}`, JSON.stringify(progressData));
+        }
+
+        loadProgress() {
+            const saved = localStorage.getItem(`quiz_progress_${this.quizId}`);
+            if (saved) {
+                const progressData = JSON.parse(saved);
+                // Check if progress is recent (within last hour)
+                if (Date.now() - progressData.timestamp < 3600000) {
+                    return progressData;
+                }
+            }
+            return null;
+        }
+
+        markCompleted() {
+            this.isCompleted = true;
+            localStorage.removeItem(`quiz_progress_${this.quizId}`);
+        }
+
+        getCompletionStatus() {
+            return {
+                answered: this.answeredQuestions,
+                total: this.questions,
+                percentage: Math.round((this.answeredQuestions / this.questions) * 100),
+                timeSpent: Math.floor((Date.now() - this.startTime) / 1000)
+            };
+        }
+    }
+
+    // Initialize quiz state manager
+    const quizForm = document.getElementById('quiz-form');
+    const quizData = {
+        quizId: parseInt(quizForm.dataset.quizId) || 0,
+        questions: parseInt(quizForm.dataset.questions) || 0,
+        currentQuestion: parseInt(quizForm.dataset.current) || 1,
+        answeredQuestions: parseInt(quizForm.dataset.answered) || 0,
+        timeLimit: parseInt(quizForm.dataset.timeLimit) || 0
+    };
+    const quizStateManager = new QuizStateManager(quizData);
+
+    // Make it globally available
+    window.quizStateManager = quizStateManager;
 });
 </script>
 {% endblock %}

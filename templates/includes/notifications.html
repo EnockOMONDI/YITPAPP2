@@ -1,0 +1,524 @@
+{# Comprehensive Notification System for YITP LMS #}
+{# Include this template in base templates for global notification support #}
+
+{# Notification Styles #}
+<style>
+/* Notification System Styles */
+.notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 400px;
+    pointer-events: none;
+}
+
+.notification {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 10px;
+    padding: 0;
+    overflow: hidden;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    border-left: 4px solid;
+    position: relative;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification.hide {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.notification.success {
+    border-left-color: #28a745;
+}
+
+.notification.error {
+    border-left-color: #dc3545;
+}
+
+.notification.warning {
+    border-left-color: #ffc107;
+}
+
+.notification.info {
+    border-left-color: #17a2b8;
+}
+
+.notification-header {
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification.success .notification-header {
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.notification.error .notification-header {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.notification.warning .notification-header {
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.notification.info .notification-header {
+    background: rgba(23, 162, 184, 0.1);
+}
+
+.notification-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+    color: #333;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.notification-close:hover {
+    background: rgba(0,0,0,0.1);
+    color: #333;
+}
+
+.notification-body {
+    padding: 16px;
+}
+
+.notification-message {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+}
+
+.notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: currentColor;
+    border-radius: 0 0 8px 8px;
+    animation: notificationProgress linear forwards;
+}
+
+.notification.success .notification-progress {
+    background: #28a745;
+}
+
+.notification.error .notification-progress {
+    background: #dc3545;
+}
+
+.notification.warning .notification-progress {
+    background: #ffc107;
+}
+
+.notification.info .notification-progress {
+    background: #17a2b8;
+}
+
+@keyframes notificationProgress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+    .notifications-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .notification {
+        margin-bottom: 8px;
+    }
+
+    .notification-header {
+        padding: 10px 12px;
+    }
+
+    .notification-body {
+        padding: 12px;
+    }
+}
+
+/* Alert Styles for inline alerts */
+.alert-custom {
+    border-radius: 8px;
+    border: none;
+    padding: 16px;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: currentColor;
+}
+
+.alert-custom.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.alert-custom.error {
+    background: rgba(220, 53, 69, 0.1);
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.alert-custom.warning {
+    background: rgba(255, 193, 7, 0.1);
+    color: #856404;
+    border-left: 4px solid #ffc107;
+}
+
+.alert-custom.info {
+    background: rgba(23, 162, 184, 0.1);
+    color: #0c5460;
+    border-left: 4px solid #17a2b8;
+}
+
+.alert-custom .alert-icon {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+}
+
+.alert-custom .alert-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.alert-custom .alert-message {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Toast notifications for quick feedback */
+.toast-custom {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-left: 4px solid;
+    animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast-custom.success {
+    border-left-color: #28a745;
+}
+
+.toast-custom.error {
+    border-left-color: #dc3545;
+}
+
+.toast-custom.warning {
+    border-left-color: #ffc107;
+}
+
+.toast-custom.info {
+    border-left-color: #17a2b8;
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-custom.fade-out {
+    animation: toastFadeOut 0.3s ease-in forwards;
+}
+
+@keyframes toastFadeOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+</style>
+
+{# Notification Container #}
+<div class="notifications-container" id="notifications-container">
+    {# Notifications will be dynamically added here #}
+</div>
+
+{# Notification JavaScript #}
+<script>
+// Comprehensive Notification System
+class NotificationSystem {
+    constructor() {
+        this.container = document.getElementById('notifications-container');
+        this.notifications = [];
+        this.init();
+    }
+
+    init() {
+        // Create container if it doesn't exist
+        if (!this.container) {
+            this.container = document.createElement('div');
+            this.container.className = 'notifications-container';
+            this.container.id = 'notifications-container';
+            document.body.appendChild(this.container);
+        }
+    }
+
+    // Show a notification
+    show(message, type = 'info', title = '', duration = 5000) {
+        const notification = this.createNotification(message, type, title, duration);
+        this.container.appendChild(notification);
+        this.notifications.push(notification);
+
+        // Trigger show animation
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+
+        // Auto-hide after duration
+        if (duration > 0) {
+            setTimeout(() => {
+                this.hide(notification);
+            }, duration);
+        }
+
+        return notification;
+    }
+
+    // Create notification element
+    createNotification(message, type, title, duration) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+
+        const header = title ? `
+            <div class="notification-header">
+                <h6 class="notification-title">${title}</h6>
+                <button class="notification-close" onclick="notificationSystem.hide(this.parentElement.parentElement)">&times;</button>
+            </div>
+        ` : '';
+
+        const progressBar = duration > 0 ? `<div class="notification-progress" style="animation-duration: ${duration}ms;"></div>` : '';
+
+        notification.innerHTML = `
+            ${header}
+            <div class="notification-body">
+                <p class="notification-message">${message}</p>
+            </div>
+            ${progressBar}
+        `;
+
+        return notification;
+    }
+
+    // Hide a notification
+    hide(notification) {
+        notification.classList.add('hide');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+            this.notifications = this.notifications.filter(n => n !== notification);
+        }, 300);
+    }
+
+    // Hide all notifications
+    hideAll() {
+        this.notifications.forEach(notification => this.hide(notification));
+    }
+
+    // Success notification
+    success(message, title = 'Success', duration = 5000) {
+        return this.show(message, 'success', title, duration);
+    }
+
+    // Error notification
+    error(message, title = 'Error', duration = 7000) {
+        return this.show(message, 'error', title, duration);
+    }
+
+    // Warning notification
+    warning(message, title = 'Warning', duration = 6000) {
+        return this.show(message, 'warning', title, duration);
+    }
+
+    // Info notification
+    info(message, title = 'Info', duration = 5000) {
+        return this.show(message, 'info', title, duration);
+    }
+
+    // Show alert (inline)
+    alert(message, type = 'info', title = '', targetElement = null) {
+        const alert = this.createAlert(message, type, title);
+
+        if (targetElement) {
+            targetElement.appendChild(alert);
+        } else {
+            // Insert at top of main content
+            const mainContent = document.querySelector('.container, .container-fluid, main');
+            if (mainContent) {
+                mainContent.insertBefore(alert, mainContent.firstChild);
+            } else {
+                document.body.insertBefore(alert, document.body.firstChild);
+            }
+        }
+
+        // Auto-remove after 10 seconds
+        setTimeout(() => {
+            if (alert.parentNode) {
+                alert.parentNode.removeChild(alert);
+            }
+        }, 10000);
+
+        return alert;
+    }
+
+    // Create alert element
+    createAlert(message, type, title) {
+        const alert = document.createElement('div');
+        alert.className = `alert-custom ${type}`;
+
+        const iconClass = {
+            success: 'fas fa-check-circle',
+            error: 'fas fa-exclamation-triangle',
+            warning: 'fas fa-exclamation-circle',
+            info: 'fas fa-info-circle'
+        }[type] || 'fas fa-info-circle';
+
+        alert.innerHTML = `
+            <div class="d-flex align-items-start">
+                <i class="alert-icon ${iconClass} mt-1"></i>
+                <div class="flex-grow-1">
+                    ${title ? `<div class="alert-title">${title}</div>` : ''}
+                    <div class="alert-message">${message}</div>
+                </div>
+                <button type="button" class="btn-close ms-2" onclick="this.parentElement.parentElement.remove()"></button>
+            </div>
+        `;
+
+        return alert;
+    }
+
+    // Show toast notification
+    toast(message, type = 'info', duration = 3000) {
+        const toast = this.createToast(message, type);
+        this.container.appendChild(toast);
+
+        // Auto-remove
+        setTimeout(() => {
+            toast.classList.add('fade-out');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, duration);
+
+        return toast;
+    }
+
+    // Create toast element
+    createToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = `toast-custom ${type}`;
+
+        const iconClass = {
+            success: 'fas fa-check-circle',
+            error: 'fas fa-exclamation-triangle',
+            warning: 'fas fa-exclamation-circle',
+            info: 'fas fa-info-circle'
+        }[type] || 'fas fa-info-circle';
+
+        toast.innerHTML = `
+            <div class="d-flex align-items-center">
+                <i class="${iconClass} me-2"></i>
+                <span>${message}</span>
+            </div>
+        `;
+
+        return toast;
+    }
+}
+
+// Initialize notification system
+const notificationSystem = new NotificationSystem();
+
+// Make it globally available
+window.notificationSystem = notificationSystem;
+
+// Utility functions for common notifications
+window.showSuccess = (message, title) => notificationSystem.success(message, title);
+window.showError = (message, title) => notificationSystem.error(message, title);
+window.showWarning = (message, title) => notificationSystem.warning(message, title);
+window.showInfo = (message, title) => notificationSystem.info(message, title);
+
+// AJAX error handler
+window.handleAjaxError = function(xhr, status, error) {
+    let message = 'An unexpected error occurred.';
+
+    if (xhr.responseJSON && xhr.responseJSON.message) {
+        message = xhr.responseJSON.message;
+    } else if (xhr.status === 0) {
+        message = 'Network error. Please check your connection.';
+    } else if (xhr.status === 404) {
+        message = 'The requested resource was not found.';
+    } else if (xhr.status === 500) {
+        message = 'Server error. Please try again later.';
+    }
+
+    notificationSystem.error(message, 'Request Failed');
+};
+
+// Success handler for AJAX requests
+window.handleAjaxSuccess = function(message, title = 'Success') {
+    notificationSystem.success(message, title);
+};
+</script>

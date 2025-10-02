@@ -271,7 +271,7 @@
         width: 10px;
         height: 10px;
         background: #ff5d15;
-        animation: confettiFall 3s linear infinite;
+        animation: confettiFall 5s linear infinite; /* Extended duration for longer celebration */
     }
     
     @keyframes confettiFall {
@@ -520,10 +520,10 @@ function createConfetti() {
         confettiContainer.appendChild(confetti);
     }
     
-    // Remove confetti after animation
+    // Remove confetti after extended animation duration
     setTimeout(() => {
         confettiContainer.innerHTML = '';
-    }, 6000);
+    }, 10000); // Extended from 6 to 10 seconds for better celebration experience
 }
 
 // Initialize page
