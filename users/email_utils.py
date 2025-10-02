@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db import models
 import logging
-
+#updates
 logger = logging.getLogger(__name__)
 
 def generate_otp(length=6):
