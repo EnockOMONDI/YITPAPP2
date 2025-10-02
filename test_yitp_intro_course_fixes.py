@@ -212,7 +212,7 @@ def test_completion_email():
                 print(f"❌ Plain text email missing: '{indicator}'")
         
         # Check YITP branding colors in HTML
-        if '#ff5d15' in html_content and '#1a2e53' in html_content:
+        if '#EF7722' in html_content and '#FAA533' in html_content:
             print("✅ HTML email includes YITP brand colors")
         else:
             print("⚠️ HTML email missing YITP brand colors")

@@ -8,22 +8,506 @@
 <link rel="stylesheet" href="{% static 'css/yitp-course-branding.css' %}">
 
 <style>
-    /* Fix for navbar overlap - add top margin to account for fixed navbar */
+    /* ===== MOBILE-FIRST COURSE DETAIL STYLES ===== */
+
+    /* Base mobile styles */
     .course-detail-content-wrapper {
-        margin-top: 100px; /* Account for fixed navbar height (~60px content + 40px padding) */
+        margin-top: 80px; /* Base margin for mobile */
+        padding: 0 15px;
     }
 
-    /* Responsive navbar spacing adjustments */
-    @media (max-width: 991px) {
+    /* Course Hero Section - Mobile First */
+    .course-hero {
+        padding: 1.5rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .course-hero .row {
+        --bs-gutter-x: 1rem;
+    }
+
+    .course-hero .col-lg-8,
+    .course-hero .col-lg-4 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Course Title - Mobile optimized */
+    .course-hero h1 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+
+    /* Course Stats - Mobile grid */
+    .course-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+        font-size: 0.875rem;
+    }
+
+    .stat-item i {
+        color: rgba(255,255,255,0.8);
+        font-size: 1rem;
+    }
+
+    /* Action Buttons - Mobile stack */
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .action-buttons .btn small {
+        display: block;
+        font-size: 0.8rem;
+        opacity: 0.9;
+        margin-top: 0.25rem;
+    }
+
+    /* Progress Bar - Mobile optimized */
+    .progress-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .progress {
+        height: 6px;
+        border-radius: 3px;
+    }
+
+    /* Course Thumbnail - Mobile responsive */
+    .course-thumbnail {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Main Content Layout */
+    .main-content {
+        margin-bottom: 2rem;
+    }
+
+    /* Sidebar - Mobile stack */
+    .course-sidebar {
+        margin-top: 2rem;
+    }
+
+    /* Instructor Card - Mobile optimized */
+    .instructor-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .instructor-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-color);
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .instructor-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        display: block;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 0.25rem;
+    }
+
+    /* Course Info Card */
+    .course-info-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .info-item {
+        text-align: center;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .info-label {
+        font-size: 0.8rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .info-value {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    /* Module Cards - Mobile optimized */
+    .module-card {
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .module-header {
+        padding: 1rem 1.5rem;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .module-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .module-meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.875rem;
+        color: #666;
+    }
+
+    .module-content {
+        padding: 0;
+    }
+
+    .lesson-item {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background-color 0.2s;
+    }
+
+    .lesson-item:hover {
+        background: #f8f9fa;
+    }
+
+    .lesson-item:last-child {
+        border-bottom: none;
+    }
+
+    .lesson-info {
+        flex: 1;
+        margin-right: 1rem;
+    }
+
+    .lesson-title {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+    }
+
+    .lesson-meta {
+        font-size: 0.8rem;
+        color: #666;
+        display: flex;
+        gap: 1rem;
+    }
+
+    .lesson-action {
+        flex-shrink: 0;
+    }
+
+    /* Payment Sections - Mobile optimized */
+    .payment-card {
+        background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1));
+        border: 2px solid var(--primary-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .payment-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .payment-option {
+        padding: 1rem;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        background: white;
+        text-align: center;
+        transition: all 0.2s;
+    }
+
+    .payment-option:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 2px 8px rgba(255,93,21,0.2);
+    }
+
+    .payment-option-icon {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .payment-option-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .payment-option-desc {
+        font-size: 0.875rem;
+        color: #666;
+    }
+
+    /* Reviews Section - Mobile optimized */
+    .review-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .review-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .reviewer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .reviewer-info {
+        flex: 1;
+    }
+
+    .reviewer-name {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .review-rating {
+        margin-bottom: 0.5rem;
+    }
+
+    .review-content {
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Share Modal - Mobile optimized */
+    .share-modal .modal-dialog {
+        margin: 1rem;
+    }
+
+    .share-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .share-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        border-radius: 8px;
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        transition: transform 0.2s;
+    }
+
+    .share-btn:hover {
+        transform: translateY(-2px);
+        color: white;
+        text-decoration: none;
+    }
+
+    .share-btn.facebook { background: #1877f2; }
+    .share-btn.twitter { background: #1da1f2; }
+    .share-btn.linkedin { background: #0077b5; }
+    .share-btn.email { background: #6c757d; }
+
+    /* ===== TABLET AND DESKTOP ENHANCEMENTS ===== */
+    @media (min-width: 768px) {
         .course-detail-content-wrapper {
-            margin-top: 90px; /* Slightly less margin on mobile */
+            margin-top: 90px;
+            padding: 0 30px;
+        }
+
+        .course-hero {
+            padding: 2rem 0;
+        }
+
+        .course-stats-grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .action-buttons {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .main-content,
+        .course-sidebar {
+            margin-top: 0;
+        }
+
+        .instructor-stats {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .info-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .share-buttons {
+            grid-template-columns: repeat(4, 1fr);
         }
     }
 
-    @media (max-width: 575px) {
+    @media (min-width: 992px) {
         .course-detail-content-wrapper {
-            margin-top: 80px; /* Even less margin on small mobile */
+            margin-top: 100px;
+            padding: 0 50px;
         }
+
+        .course-hero .row {
+            --bs-gutter-x: 2rem;
+        }
+
+        .action-buttons .btn {
+            flex: none;
+            width: auto;
+        }
+
+        .module-meta {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lesson-item {
+            padding: 1.25rem 2rem;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .course-detail-content-wrapper {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 0 60px;
+        }
+    }
+
+    /* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+    @media (prefers-reduced-motion: reduce) {
+        .action-buttons .btn,
+        .share-btn,
+        .lesson-item {
+            transition: none;
+        }
+
+        .progress-fill {
+            transition: none;
+        }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        .course-hero {
+            background: #000;
+            color: #fff;
+        }
+
+        .stat-item {
+            background: #fff;
+            color: #000;
+            border: 1px solid #000;
+        }
+
+        .module-card,
+        .instructor-card,
+        .course-info-card,
+        .review-card {
+            border: 2px solid #000;
+        }
+    }
+
+    /* Focus management */
+    .action-buttons .btn:focus,
+    .share-btn:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
     }
 </style>
 {% endblock %}
@@ -58,52 +542,49 @@
                 <h1 class="display-4 fw-bold mb-3">{{ course.title }}</h1>
                 <p class="lead mb-4">{{ course.description }}</p>
                 
-                <!-- Course Stats -->
-                <div class="row g-3 mb-4">
-                    <div class="col-auto">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-clock me-2"></i>
-                            <span>{{ course.estimated_duration }} hours</span>
+                <!-- Course Stats - Mobile First Grid -->
+                <div class="course-stats-grid mb-4">
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <div class="fw-bold">{{ course.estimated_duration }}</div>
+                            <div class="small opacity-75">hours</div>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-users me-2"></i>
-                            <span>{{ enrolled_count }} students</span>
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <div class="fw-bold">{{ enrolled_count }}</div>
+                            <div class="small opacity-75">students</div>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-book me-2"></i>
-                            <span>{{ total_modules }} modules</span>
+                    <div class="stat-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <div class="fw-bold">{{ total_modules }}</div>
+                            <div class="small opacity-75">modules</div>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-play-circle me-2"></i>
-                            <span>{{ total_lessons }} lessons</span>
+                    <div class="stat-item">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <div class="fw-bold">{{ total_lessons }}</div>
+                            <div class="small opacity-75">lessons</div>
                         </div>
                     </div>
                     {% if average_rating > 0 %}
-                    <div class="col-auto">
-                        <div class="d-flex align-items-center">
-                            <div class="rating-stars me-2">
-                                {% for i in "12345" %}
-                                    {% if forloop.counter <= average_rating %}
-                                        <i class="fas fa-star"></i>
-                                    {% else %}
-                                        <i class="far fa-star"></i>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                            <span>{{ average_rating }} ({{ rating_count }} reviews)</span>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <div class="fw-bold">{{ average_rating }}</div>
+                            <div class="small opacity-75">{{ rating_count }} reviews</div>
                         </div>
                     </div>
                     {% endif %}
                 </div>
                 
-                <!-- Action Buttons -->
-                <div class="d-flex gap-3 mb-3">
+                <!-- Action Buttons - Mobile First -->
+                <div class="action-buttons mb-3">
                     {% if user.is_authenticated %}
                         {% if is_enrolled %}
                             {% if enrollment.progress_percentage > 0 %}
@@ -275,18 +756,18 @@
                 </div>
                 {% endif %}
                 
-                <!-- Progress for Enrolled Users -->
+                <!-- Progress for Enrolled Users - Mobile Optimized -->
                 {% if is_enrolled and enrollment.progress_percentage > 0 %}
-                <div class="mt-4">
+                <div class="progress-section mt-4">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span>Your Progress</span>
-                        <span>{{ enrollment.progress_percentage|floatformat:0 }}%</span>
+                        <span class="fw-bold">Your Progress</span>
+                        <span class="fw-bold text-primary">{{ enrollment.progress_percentage|floatformat:0 }}%</span>
                     </div>
-                    <div class="progress" style="height: 8px;">
-                        <div class="progress-bar" role="progressbar"
-                             style="width: {{ enrollment.progress_percentage }}%"
-                             aria-valuenow="{{ enrollment.progress_percentage }}"
-                             aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" style="height: 8px; border-radius: 4px;">
+                        <div class="progress-bar bg-primary" role="progressbar"
+                              style="width: {{ enrollment.progress_percentage|default:0 }}%"
+                              aria-valuenow="{{ enrollment.progress_percentage|default:0 }}"
+                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
                 {% endif %}
@@ -310,11 +791,11 @@
     </div>
 </section>
 
-<!-- Main Content -->
-<div class="container py-5">
+<!-- Main Content - Mobile First Layout -->
+<div class="container py-4">
     <div class="row">
         <!-- Main Content Column -->
-        <div class="col-lg-8">
+        <div class="col-lg-8 main-content">
             <!-- Prerequisite Course Notice -->
             {% if 'Introduction to YITP' in course.title %}
             <div class="card mb-4 border-0" style="background: linear-gradient(135deg, rgba(255,93,21,0.05), rgba(26,46,83,0.05));">
@@ -396,18 +877,14 @@
                 <div class="card-body p-0">
                     {% for module in modules %}
                     <div class="module-card">
-                        <div class="card-header bg-light">
+                        <div class="module-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">
+                                <h5 class="module-title">
                                     <i class="fas fa-folder me-2"></i>{{ module.title }}
                                 </h5>
-                                <div class="d-flex align-items-center gap-3">
-                                    <small class="text-muted">
-                                        <i class="fas fa-clock me-1"></i>{{ module.estimated_duration }} min
-                                    </small>
-                                    <small class="text-muted">
-                                        {{ module.lessons.count }} lesson{{ module.lessons.count|pluralize }}
-                                    </small>
+                                <div class="module-meta">
+                                    <span><i class="fas fa-clock"></i> {{ module.estimated_duration }} min</span>
+                                    <span>{{ module.lessons.count }} lesson{{ module.lessons.count|pluralize }}</span>
                                     {% if is_enrolled %}
                                     <button class="btn btn-sm btn-outline-primary" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#module{{ module.id }}"
@@ -424,27 +901,17 @@
 
                         {% if is_enrolled %}
                         <div class="collapse" id="module{{ module.id }}">
-                            <div class="card-body p-0">
+                            <div class="module-content">
                                 {% for lesson in module.lessons.all %}
                                 <div class="lesson-item">
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-3">
-                                            <i class="far fa-circle text-muted"></i>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-1">{{ lesson.title }}</h6>
-                                            <div class="d-flex align-items-center gap-3">
-                                                <small class="text-muted">
-                                                    <i class="fas fa-play me-1"></i>
-                                                    {{ lesson.get_content_type_display }}
-                                                </small>
-                                                <small class="text-muted">
-                                                    <i class="fas fa-clock me-1"></i>{{ lesson.estimated_duration }} min
-                                                </small>
-                                            </div>
+                                    <div class="lesson-info">
+                                        <h6 class="lesson-title">{{ lesson.title }}</h6>
+                                        <div class="lesson-meta">
+                                            <span><i class="fas fa-play"></i> {{ lesson.get_content_type_display }}</span>
+                                            <span><i class="fas fa-clock"></i> {{ lesson.estimated_duration }} min</span>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="lesson-action">
                                         <a href="{% url 'courses:lesson_detail' course.slug lesson.id %}"
                                            class="btn btn-sm btn-outline-primary">
                                             Start
@@ -479,34 +946,31 @@
                 <div class="card-body">
                     {% for review in reviews %}
                     <div class="review-card">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <div class="d-flex align-items-center">
-                                {% if review.student.profile_picture %}
-                                <img src="{{ review.student.profile_picture.url }}" alt="{{ review.student.get_full_name }}"
-                                     class="rounded-circle me-3" width="40" height="40">
-                                {% else %}
-                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
-                                     style="width: 40px; height: 40px;">
-                                    <i class="fas fa-user text-white"></i>
-                                </div>
-                                {% endif %}
-                                <div>
-                                    <h6 class="mb-0">{{ review.student.get_full_name }}</h6>
-                                    <div class="rating-stars">
-                                        {% for i in "12345" %}
-                                            {% if forloop.counter <= review.rating %}
-                                                <i class="fas fa-star"></i>
-                                            {% else %}
-                                                <i class="far fa-star"></i>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
+                        <div class="review-header">
+                            {% if review.student.profile_picture %}
+                            <img src="{{ review.student.profile_picture.url }}" alt="{{ review.student.get_full_name }}"
+                                 class="reviewer-avatar">
+                            {% else %}
+                            <div class="reviewer-avatar bg-primary d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            {% endif %}
+                            <div class="reviewer-info">
+                                <div class="reviewer-name">{{ review.student.get_full_name }}</div>
+                                <div class="review-rating">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= review.rating %}
+                                            <i class="fas fa-star"></i>
+                                        {% else %}
+                                            <i class="far fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                             <small class="text-muted">{{ review.created_at|date:"M d, Y" }}</small>
                         </div>
                         {% if review.review_text %}
-                        <p class="mb-0">{{ review.review_text }}</p>
+                        <div class="review-content">{{ review.review_text }}</div>
                         {% endif %}
                     </div>
                     {% endfor %}
@@ -523,17 +987,16 @@
             {% endif %}
         </div>
 
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-            <!-- Instructor Card -->
+        <!-- Sidebar - Mobile First -->
+        <div class="col-lg-4 course-sidebar">
+            <!-- Instructor Card - Mobile Optimized -->
             <div class="instructor-card mb-4">
                 <div class="text-center mb-3">
                     {% if course.instructor.profile_picture %}
                     <img src="{{ course.instructor.profile_picture.url }}" alt="{{ course.instructor.get_full_name }}"
-                         class="rounded-circle mb-3" width="80" height="80">
+                         class="instructor-avatar">
                     {% else %}
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                         style="width: 80px; height: 80px;">
+                    <div class="instructor-avatar">
                         <i class="fas fa-user fa-2x text-white"></i>
                     </div>
                     {% endif %}
@@ -547,89 +1010,71 @@
                 <p class="text-muted mb-3">{{ course.instructor.bio|truncatewords:30 }}</p>
                 {% endif %}
 
-                <div class="row text-center">
-                    <div class="col-6">
-                        <div class="border-end">
-                            <h6 class="mb-0">{{ course.instructor.courses_taught.count }}</h6>
-                            <small class="text-muted">Courses</small>
-                        </div>
+                <div class="instructor-stats">
+                    <div>
+                        <div class="stat-number">{{ course.instructor.courses_taught.count }}</div>
+                        <div class="stat-label">Courses</div>
                     </div>
-                    <div class="col-6">
-                        <h6 class="mb-0">{{ enrolled_count }}</h6>
-                        <small class="text-muted">Students</small>
+                    <div>
+                        <div class="stat-number">{{ enrolled_count }}</div>
+                        <div class="stat-label">Students</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Course Info Card -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-info-circle me-2"></i>Course Information
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Duration:</span>
-                                <span class="fw-bold">{{ course.estimated_duration }} hours</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Difficulty:</span>
-                                <span class="fw-bold">{{ course.get_difficulty_level_display }}</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Modules:</span>
-                                <span class="fw-bold">{{ total_modules }}</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Lessons:</span>
-                                <span class="fw-bold">{{ total_lessons }}</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Students:</span>
-                                <span class="fw-bold">{{ enrolled_count }}</span>
-                            </div>
-                        </div>
-                        {% if average_rating > 0 %}
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Rating:</span>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating-stars me-2">
-                                        {% for i in "12345" %}
-                                            {% if forloop.counter <= average_rating %}
-                                                <i class="fas fa-star"></i>
-                                            {% else %}
-                                                <i class="far fa-star"></i>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                    <span class="fw-bold">{{ average_rating }}</span>
+            <!-- Course Info Card - Mobile Optimized -->
+            <div class="course-info-card">
+                <h5 class="mb-3">
+                    <i class="fas fa-info-circle me-2"></i>Course Information
+                </h5>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Duration</div>
+                        <div class="info-value">{{ course.estimated_duration }}h</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Difficulty</div>
+                        <div class="info-value">{{ course.get_difficulty_level_display }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Modules</div>
+                        <div class="info-value">{{ total_modules }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Lessons</div>
+                        <div class="info-value">{{ total_lessons }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Students</div>
+                        <div class="info-value">{{ enrolled_count }}</div>
+                    </div>
+                    {% if average_rating > 0 %}
+                    <div class="info-item">
+                        <div class="info-label">Rating</div>
+                        <div class="info-value">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="rating-stars me-2">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= average_rating %}
+                                            <i class="fas fa-star"></i>
+                                        {% else %}
+                                            <i class="far fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
+                                {{ average_rating }}
                             </div>
                         </div>
-                        {% endif %}
-                        <div class="col-12">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Price:</span>
-                                <span class="fw-bold {% if course.price > 0 %}text-primary{% else %}text-success{% endif %}">
-                                    {% if course.price > 0 %}
-                                        ${{ course.price }}
-                                    {% else %}
-                                        Free
-                                    {% endif %}
-                                </span>
-                            </div>
+                    </div>
+                    {% endif %}
+                    <div class="info-item">
+                        <div class="info-label">Price</div>
+                        <div class="info-value {% if course.price > 0 %}text-primary{% else %}text-success{% endif %}">
+                            {% if course.price > 0 %}
+                                ${{ course.price }}
+                            {% else %}
+                                Free
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -682,9 +1127,9 @@
     </div>
 </div>
 
-<!-- Share Modal -->
-<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Share Modal - Mobile Optimized -->
+<div class="modal fade share-modal" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="shareModalLabel">Share this Course</h5>
@@ -702,22 +1147,26 @@
                     </div>
                 </div>
 
-                <div class="social-share justify-content-center">
+                <div class="share-buttons">
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
-                       target="_blank" class="bg-primary" title="Share on Facebook">
+                       target="_blank" class="share-btn facebook" title="Share on Facebook">
                         <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
                     </a>
                     <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ course.title|urlencode }}"
-                       target="_blank" class="bg-info" title="Share on Twitter">
+                       target="_blank" class="share-btn twitter" title="Share on Twitter">
                         <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
                     </a>
                     <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}"
-                       target="_blank" class="bg-primary" title="Share on LinkedIn">
+                       target="_blank" class="share-btn linkedin" title="Share on LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
                     </a>
                     <a href="mailto:?subject={{ course.title|urlencode }}&body=Check out this course: {{ request.build_absolute_uri|urlencode }}"
-                       class="bg-secondary" title="Share via Email">
+                       class="share-btn email" title="Share via Email">
                         <i class="fas fa-envelope"></i>
+                        <span>Email</span>
                     </a>
                 </div>
             </div>
@@ -755,7 +1204,7 @@ $(document).ready(function() {
 
     // Auto-expand first module if enrolled
     {% if is_enrolled and modules %}
-    $('#module{{ modules.first.id }}').addClass('show');
+    $('#module{{ modules.first.id|default:1 }}').addClass('show');
     {% endif %}
 });
 

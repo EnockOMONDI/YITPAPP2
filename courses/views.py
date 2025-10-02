@@ -170,7 +170,7 @@ class CourseDetailView(DetailView):
                 next_lesson = None
                 if enrollment.progress_percentage > 0:
                     # Find the next incomplete lesson
-                    completed_lessons = [p.lesson.id for p in lesson_progress if p.is_completed]
+                    completed_lessons = [p.lesson.id for p in lesson_progress if p.status == 'completed']
                     all_lessons = course.get_ordered_lessons()
                     for lesson in all_lessons:
                         if lesson.id not in completed_lessons:

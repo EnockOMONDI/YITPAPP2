@@ -65,7 +65,7 @@ class Command(BaseCommand):
             html_content = '''
             <html>
             <body>
-                <h2 style="color: #1a2e53;">🎓 YITP Email Test</h2>
+                <h2 style="color: #FAA533;">🎓 YITP Email Test</h2>
                 <p>This is a test email from the Youth Impact Training Programme system.</p>
                 <p><strong>Email configuration is working correctly!</strong></p>
                 <hr>

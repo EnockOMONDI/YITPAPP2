@@ -7,23 +7,573 @@
 <link rel="stylesheet" href="{% static 'css/yitp-course-branding.css' %}">
 
 <style>
-    /* Fix for navbar overlap - add top margin to account for fixed navbar */
+    /* ===== MOBILE-FIRST LESSON DETAIL STYLES ===== */
+
+    /* Base mobile styles */
     .lesson-detail-content-wrapper {
-        margin-top: 100px; /* Account for fixed navbar height (~60px content + 40px padding) */
+        margin-top: 80px; /* Base margin for mobile */
+        padding: 0 15px;
     }
 
-    /* Responsive navbar spacing adjustments */
-    @media (max-width: 991px) {
+    /* Lesson Header - Mobile First */
+    .lesson-header {
+        background: linear-gradient(135deg, var(--yitp-primary), var(--yitp-secondary));
+        color: var(--yitp-white);
+        padding: 1.5rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .lesson-header .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .breadcrumb-custom {
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .breadcrumb-custom a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+    }
+
+    .breadcrumb-custom a:hover {
+        color: white;
+    }
+
+    .breadcrumb-custom span {
+        color: white;
+    }
+
+    /* Lesson Title - Mobile optimized */
+    .lesson-header h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+
+    /* Lesson Meta - Mobile grid */
+    .lesson-meta {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: rgba(255,255,255,0.9);
+    }
+
+    .lesson-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .lesson-meta i {
+        opacity: 0.8;
+    }
+
+    /* Lesson Content - Mobile First */
+    .lesson-content {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+
+    /* Video Container - Mobile responsive */
+    .lesson-video {
+        width: 100%;
+        height: 200px;
+        border-radius: 8px;
+        background: #f8fafc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+        border: 2px dashed #e2e8f0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .lesson-video iframe,
+    .lesson-video video {
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+    }
+
+    /* Lesson Objectives - Mobile optimized */
+    .lesson-objectives {
+        background: #f0f9ff;
+        border: 1px solid #bae6fd;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .lesson-objectives h4 {
+        color: #0c4a6e;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .lesson-objectives ul {
+        margin: 0;
+        padding-left: 1rem;
+    }
+
+    .lesson-objectives li {
+        margin-bottom: 0.5rem;
+        color: #0c4a6e;
+        line-height: 1.5;
+    }
+
+    /* Lesson Navigation - Mobile stack */
+    .lesson-navigation {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+
+    .nav-button {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-button:last-child {
+        margin-bottom: 0;
+    }
+
+    .nav-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255,93,21,0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .nav-button.secondary {
+        background: #6b7280;
+    }
+
+    .nav-button.secondary:hover {
+        background: #4b5563;
+        box-shadow: 0 5px 15px rgba(107, 114, 128, 0.4);
+    }
+
+    .nav-button.locked {
+        background: #f3f4f6 !important;
+        color: #9ca3af !important;
+        border: 1px solid #e5e7eb !important;
+        cursor: not-allowed !important;
+    }
+
+    .nav-button.locked:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Sidebar - Mobile First */
+    .lesson-sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+
+    /* Progress Section - Mobile optimized */
+    .lesson-progress {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .progress-bar-custom {
+        height: 6px;
+        border-radius: 3px;
+        background: #e2e8f0;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 3px;
+        transition: width 0.3s ease;
+    }
+
+    /* Completion Button - Mobile optimized */
+    .completion-button {
+        background: #10b981;
+        border: none;
+        border-radius: 8px;
+        padding: 1rem;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .completion-button:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .completion-button:disabled {
+        background: #6b7280;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .completion-button.completed {
+        background: #10b981 !important;
+        cursor: default;
+    }
+
+    /* Quiz Requirement Notice - Mobile optimized */
+    .quiz-requirement-notice {
+        background: linear-gradient(135deg, rgba(255,193,7,0.1), rgba(255,193,7,0.05));
+        border: 1px solid #ffc107;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .quiz-requirement-notice .alert {
+        background: rgba(255,255,255,0.8);
+        border: none;
+        border-radius: 6px;
+        padding: 1rem;
+    }
+
+    /* Lesson Locked - Mobile optimized */
+    .lesson-locked {
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        border-radius: 12px;
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .lesson-locked .icon {
+        font-size: 3rem;
+        color: #f59e0b;
+        margin-bottom: 1rem;
+    }
+
+    .lesson-locked h3 {
+        color: #92400e;
+        margin-bottom: 0.5rem;
+    }
+
+    .lesson-locked p {
+        color: #78350f;
+        margin-bottom: 0;
+    }
+
+    /* Chat Widget - Mobile optimized */
+    .lesson-chat-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .chat-toggle-btn {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        border: none;
+        border-radius: 50px;
+        padding: 12px 18px;
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(255, 93, 21, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .chat-toggle-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 93, 21, 0.4);
+        color: white;
+    }
+
+    .chat-notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #dc3545;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: pulse 2s infinite;
+    }
+
+    .chat-panel {
+        position: absolute;
+        bottom: 60px;
+        right: 0;
+        width: 300px;
+        height: 350px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideInUp 0.3s ease-out;
+    }
+
+    .chat-header {
+        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        color: white;
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chat-header h5 {
+        margin: 0;
+        font-size: 1rem;
+        flex-grow: 1;
+    }
+
+    .close-chat {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+
+    .close-chat:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .chat-messages {
+        flex-grow: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background: #f8f9fa;
+    }
+
+    .chat-input {
+        padding: 15px;
+        border-top: 1px solid #e9ecef;
+        display: flex;
+        gap: 10px;
+    }
+
+    .chat-input input {
+        flex-grow: 1;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        padding: 8px 15px;
+        outline: none;
+    }
+
+    .chat-input button {
+        background: #ff5d15;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 15px;
+        color: white;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .chat-input button:hover {
+        background: #e54d0f;
+    }
+
+    .chat-message {
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        border-radius: 12px;
+        max-width: 80%;
+        word-wrap: break-word;
+        font-size: 0.875rem;
+    }
+
+    .chat-message.user {
+        background: #ff5d15;
+        color: white;
+        margin-left: auto;
+        border-bottom-right-radius: 5px;
+    }
+
+    .chat-message.instructor {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-bottom-left-radius: 5px;
+    }
+
+    .chat-message-time {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-top: 3px;
+    }
+
+    /* ===== TABLET AND DESKTOP ENHANCEMENTS ===== */
+    @media (min-width: 768px) {
         .lesson-detail-content-wrapper {
-            margin-top: 90px; /* Slightly less margin on mobile */
+            margin-top: 90px;
+            padding: 0 30px;
+        }
+
+        .lesson-header {
+            padding: 2rem 0;
+        }
+
+        .lesson-meta {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .lesson-video {
+            height: 300px;
+        }
+
+        .lesson-content {
+            padding: 2rem;
+        }
+
+        .nav-button {
+            width: auto;
+            margin-bottom: 0;
+        }
+
+        .chat-panel {
+            width: 350px;
+            height: 400px;
         }
     }
 
-    @media (max-width: 575px) {
+    @media (min-width: 992px) {
         .lesson-detail-content-wrapper {
-            margin-top: 80px; /* Even less margin on small mobile */
+            margin-top: 100px;
+            padding: 0 50px;
+        }
+
+        .lesson-meta {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .lesson-video {
+            height: 400px;
         }
     }
+
+    @media (min-width: 1200px) {
+        .lesson-detail-content-wrapper {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 0 60px;
+        }
+    }
+
+    /* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+    @media (prefers-reduced-motion: reduce) {
+        .nav-button,
+        .completion-button,
+        .chat-toggle-btn,
+        .progress-fill {
+            transition: none;
+        }
+
+        .chat-notification-badge {
+            animation: none;
+        }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        .lesson-header {
+            background: #000;
+            color: #fff;
+        }
+
+        .lesson-content,
+        .lesson-sidebar,
+        .lesson-navigation {
+            border: 2px solid #000;
+        }
+    }
+
+    /* Focus management */
+    .nav-button:focus,
+    .completion-button:focus,
+    .chat-toggle-btn:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes slideInUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+{% endblock %}
 
     .lesson-header {
         background: linear-gradient(135deg, var(--yitp-primary), var(--yitp-secondary));
@@ -564,11 +1114,11 @@
     </div>
 </section>
 
-<!-- Lesson Content -->
+<!-- Lesson Content - Mobile First Layout -->
 <section class="py-4">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8 main-content">
                 {% if not is_accessible %}
                 <!-- Lesson Locked Message -->
                 <div class="lesson-locked">
@@ -724,28 +1274,28 @@
                 {% endif %}
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-lg-4 lesson-sidebar-container">
                 {% if is_accessible %}
-                <!-- Lesson Progress -->
+                <!-- Lesson Progress - Mobile Optimized -->
                 <div class="lesson-sidebar">
                     <h4 class="mb-3">Lesson Progress</h4>
                     <div class="lesson-progress">
                         <div class="d-flex justify-content-between mb-2">
-                            <span class="text-muted">Progress</span>
-                            <span class="text-muted">
+                            <span class="fw-bold">Progress</span>
+                            <span class="fw-bold text-primary">
                                 {% if progress.status == 'completed' %}100%
                                 {% elif progress.status == 'in_progress' %}50%
                                 {% else %}0%{% endif %}
                             </span>
                         </div>
                         <div class="progress-bar-custom">
-                            <div class="progress-fill" style="width: {% if progress.status == 'completed' %}100%{% elif progress.status == 'in_progress' %}50%{% else %}0%{% endif %}"></div>
+                            <div class="progress-fill" style="width: {% if progress.status == 'completed' %}100%{% elif progress.status == 'in_progress' %}50%{% else %}0%{% endif %}%"></div>
                         </div>
-                        <small class="text-muted">
+                        <small class="text-muted mt-2 d-block">
                             {% if progress.status == 'completed' %}
-                                Lesson completed!
+                                <i class="fas fa-check-circle text-success me-1"></i>Lesson completed!
                             {% else %}
-                                Mark as complete when finished
+                                <i class="fas fa-clock text-muted me-1"></i>Mark as complete when finished
                             {% endif %}
                         </small>
                     </div>
@@ -809,43 +1359,45 @@
                 </div>
                 {% endif %}
                 
-                <!-- Lesson Information -->
+                <!-- Lesson Information - Mobile Optimized -->
                 <div class="lesson-sidebar">
                     <h4 class="mb-3">Lesson Details</h4>
-                    
-                    <div class="mb-3">
-                        <strong>Duration:</strong><br>
-                        <span class="text-muted">{{ lesson.estimated_duration|default:"5" }} minutes</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <strong>Type:</strong><br>
-                        <span class="text-muted">{{ lesson.get_lesson_type_display|default:"Standard Lesson" }}</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <strong>Module:</strong><br>
-                        <span class="text-muted">{{ lesson.module.title }}</span>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <strong>Course:</strong><br>
-                        <span class="text-muted">{{ lesson.module.course.title }}</span>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Duration</div>
+                            <div class="info-value">{{ lesson.estimated_duration|default:"5" }} min</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Type</div>
+                            <div class="info-value">{{ lesson.get_lesson_type_display|default:"Standard Lesson" }}</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Module</div>
+                            <div class="info-value">{{ lesson.module.title }}</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-label">Course</div>
+                            <div class="info-value">{{ lesson.module.course.title }}</div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Quick Actions -->
+                <!-- Quick Actions - Mobile Optimized -->
                 <div class="lesson-sidebar">
                     <h4 class="mb-3">Quick Actions</h4>
-                    
+
                     <div class="d-grid gap-2">
-                        <a href="{% if lesson.module.course %}{% url 'courses:course_detail' slug=lesson.module.course.slug %}{% else %}#{% endif %}" class="btn btn-outline-primary">
+                        <a href="{% if lesson.module.course %}{% url 'courses:course_detail' slug=lesson.module.course.slug %}{% else %}#{% endif %}" class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-book me-2"></i>Course Overview
                         </a>
-                        <a href="{% url 'courses:my_courses' %}" class="btn btn-outline-secondary">
+                        <a href="{% url 'courses:my_courses' %}" class="btn btn-outline-secondary btn-sm">
                             <i class="fas fa-list me-2"></i>My Courses
                         </a>
-                        <a href="{% url 'courses:dashboard' %}" class="btn btn-outline-secondary">
+                        <a href="{% url 'courses:dashboard' %}" class="btn btn-outline-secondary btn-sm">
                             <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                         </a>
                     </div>

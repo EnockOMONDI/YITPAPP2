@@ -218,7 +218,7 @@ def verify_yitp_static_assets():
         with open(branding_css, 'r') as f:
             content = f.read()
             print(f"   File size: {len(content)} characters")
-            print(f"   Contains YITP colors: {'#ff5d15' in content and '#1a2e53' in content}")
+            print(f"   Contains YITP colors: {'#EF7722' in content and '#FAA533' in content}")
     
     return len(missing_assets) == 0
 

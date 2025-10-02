@@ -180,6 +180,28 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
         attempt.save()
 
         if passed:
+            # Mark the lesson as completed when quiz is passed
+            from progress.models import LessonProgress
+            lesson_progress, created = LessonProgress.objects.get_or_create(
+                enrollment=enrollment,
+                lesson=quiz.lesson,
+                defaults={
+                    'status': 'completed',
+                    'completed_at': timezone.now(),
+                    'score': score
+                }
+            )
+
+            # If lesson progress already exists but wasn't completed, mark it as completed
+            if not created and lesson_progress.status != 'completed':
+                lesson_progress.status = 'completed'
+                lesson_progress.completed_at = timezone.now()
+                lesson_progress.score = score
+                lesson_progress.save()
+
+            # Update enrollment progress
+            enrollment.update_progress()
+
             # Award points and achievements for passing quiz
             from progress.services import GamificationService
             gamification_result = GamificationService.award_lesson_completion_points(

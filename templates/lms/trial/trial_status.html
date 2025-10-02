@@ -133,7 +133,7 @@
 {% endif %}
 
 <!-- Trial Benefits Showcase -->
-{% if not user.profile.has_active_trial and not user.profile.has_any_payment_access %}
+{% if not user.profile.has_active_trial and not user.profile.has_any_payment_access and not user.profile.trial_lessons_accessed %}
 <div class="trial-benefits-showcase mb-3">
     <div class="card border-primary">
         <div class="card-header bg-primary text-white">

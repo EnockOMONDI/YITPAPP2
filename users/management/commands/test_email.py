@@ -53,11 +53,11 @@ class Command(BaseCommand):
             <html>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
                 <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h2 style="color: #ff5d15;">🎉 YITP Email Configuration Test</h2>
+                    <h2 style="color: #EF7722;">🎉 YITP Email Configuration Test</h2>
                     <p>This is a test email to verify that the YITP email configuration is working correctly.</p>
                     
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="color: #1a2e53; margin-top: 0;">Configuration Details:</h3>
+                        <h3 style="color: #FAA533; margin-top: 0;">Configuration Details:</h3>
                         <ul>
                             <li><strong>Email Backend:</strong> {settings.EMAIL_BACKEND}</li>
                             <li><strong>Email Host:</strong> {settings.EMAIL_HOST}</li>
