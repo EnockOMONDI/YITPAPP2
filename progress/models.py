@@ -347,16 +347,29 @@ class QuizAttempt(models.Model):
     
     def _is_correct_answer(self, question, student_answer):
         """Check if student answer is correct"""
+        # Handle None/empty answers
+        if not student_answer:
+            return False
+
         if question.question_type == 'multiple_choice':
-            return student_answer == question.correct_answer
+            return student_answer.strip() == question.correct_answer.strip()
         elif question.question_type == 'true_false':
-            return student_answer.lower() == question.correct_answer.lower()
-        elif question.question_type == 'short_answer':
             return student_answer.lower().strip() == question.correct_answer.lower().strip()
+        elif question.question_type == 'short_answer':
+            # Allow for case-insensitive comparison with basic normalization
+            student_clean = student_answer.lower().strip()
+            correct_clean = question.correct_answer.lower().strip()
+            return student_clean == correct_clean
+        elif question.question_type == 'essay':
+            # Essays require manual grading - always return False for auto-grading
+            return False
         elif question.question_type == 'matching':
-            # For matching questions, compare the answer format A-3,B-2,C-1
             return self._check_matching_answer(question, student_answer)
-        # For essay questions, manual grading is required
+        elif question.question_type == 'fill_blank':
+            # Fill in the blank - case insensitive comparison
+            return student_answer.lower().strip() == question.correct_answer.lower().strip()
+
+        # Unknown question type
         return False
 
     def _check_matching_answer(self, question, student_answer):
