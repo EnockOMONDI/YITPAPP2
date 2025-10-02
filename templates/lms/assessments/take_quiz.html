@@ -105,6 +105,38 @@
                                 <textarea class="form-control" name="question_{{ question.id }}" rows="8"
                                           placeholder="Write your essay here..." required></textarea>
                             </div>
+
+                        {% elif question.question_type == 'matching' %}
+                            <!-- Matching -->
+                            <div class="form-group">
+                                {% for item in question.options %}
+                                    {% if 'A)' in item or 'B)' in item or 'C)' in item %}
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-bold">{{ item }}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-select matching-select" data-question="{{ question.id }}" data-item="{{ item|slice:':1' }}" required>
+                                                    <option value="">Select match...</option>
+                                                    {% for option in question.options %}
+                                                        {% if '1)' in option or '2)' in option or '3)' in option %}
+                                                            <option value="{{ option|slice:':1' }}">{{ option }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                <input type="hidden" name="question_{{ question.id }}" id="matching_answer_{{ question.id }}" value="">
+                            </div>
+
+                        {% elif question.question_type == 'fill_blank' %}
+                            <!-- Fill in the Blank -->
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="question_{{ question.id }}"
+                                       placeholder="Fill in the blank..." required>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
@@ -211,47 +243,9 @@
 {% block extra_js %}
 <script>
 $(document).ready(function() {
-    let timeRemaining = {{ time_remaining_seconds }};
-    let warningShown = false;
-    
-    // Timer countdown
-    function updateTimer() {
-        if (timeRemaining <= 0) {
-            // Auto-submit quiz
-            $('#quiz-form').append('<input type="hidden" name="action" value="auto_submit">');
-            $('#quiz-form').submit();
-            return;
-        }
-        
-        // Show warning at 5 minutes
-        if (timeRemaining <= 300 && !warningShown) {
-            $('#timeWarningModal').modal('show');
-            warningShown = true;
-        }
-        
-        const hours = Math.floor(timeRemaining / 3600);
-        const minutes = Math.floor((timeRemaining % 3600) / 60);
-        const seconds = timeRemaining % 60;
-        
-        let timeString = '';
-        if (hours > 0) {
-            timeString = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        } else {
-            timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        }
-        
-        $('#time-remaining').text(timeString);
-        
-        // Change color when time is running low
-        if (timeRemaining <= 300) {
-            $('#timer').removeClass('text-warning').addClass('text-danger');
-        }
-        
-        timeRemaining--;
-    }
-    
-    // Update timer every second
-    setInterval(updateTimer, 1000);
+    // Timer functionality disabled for now - needs proper context variables
+    // let timeRemaining = {{ quiz.time_limit|default:0 }} * 60;
+    // ... timer code would go here
     
     // Question navigation
     $('.question-nav-btn').click(function(e) {
@@ -272,7 +266,27 @@ $(document).ready(function() {
     $('input[name="answer"], textarea[name="answer"]').change(function() {
         // Auto-save functionality could be implemented here
     });
-    
+
+    // Handle matching questions
+    $('.matching-select').change(function() {
+        var questionId = $(this).data('question');
+        var itemLetter = $(this).data('item');
+        var selectedValue = $(this).val();
+
+        // Collect all matches for this question
+        var matches = [];
+        $('.matching-select[data-question="' + questionId + '"]').each(function() {
+            var item = $(this).data('item');
+            var value = $(this).val();
+            if (value) {
+                matches.push(item + '-' + value);
+            }
+        });
+
+        // Update hidden input with comma-separated matches
+        $('#matching_answer_' + questionId).val(matches.join(','));
+    });
+
     // Prevent accidental page refresh
     window.addEventListener('beforeunload', function(e) {
         e.preventDefault();
