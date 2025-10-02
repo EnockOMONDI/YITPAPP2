@@ -353,8 +353,38 @@ class QuizAttempt(models.Model):
             return student_answer.lower() == question.correct_answer.lower()
         elif question.question_type == 'short_answer':
             return student_answer.lower().strip() == question.correct_answer.lower().strip()
+        elif question.question_type == 'matching':
+            # For matching questions, compare the answer format A-3,B-2,C-1
+            return self._check_matching_answer(question, student_answer)
         # For essay questions, manual grading is required
         return False
+
+    def _check_matching_answer(self, question, student_answer):
+        """Check if matching question answer is correct"""
+        if not student_answer or not question.correct_answer:
+            return False
+
+        try:
+            # Parse student answer (format: "A-3,B-2,C-1")
+            student_matches = {}
+            for pair in student_answer.split(','):
+                if '-' in pair:
+                    item, match = pair.split('-', 1)
+                    student_matches[item.strip()] = match.strip()
+
+            # Parse correct answer
+            correct_matches = {}
+            for pair in question.correct_answer.split(','):
+                if '-' in pair:
+                    item, match = pair.split('-', 1)
+                    correct_matches[item.strip()] = match.strip()
+
+            # Check if all matches are correct
+            return student_matches == correct_matches
+
+        except Exception:
+            # If parsing fails, consider it incorrect
+            return False
 
     def get_feedback(self):
         """Generate detailed feedback on quiz performance"""

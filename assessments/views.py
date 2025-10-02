@@ -160,23 +160,23 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
             started_at=timezone.now()
         )
 
-        # Process answers and calculate score
-        total_questions = quiz.questions.count()
-        correct_answers = 0
+        # Process answers and calculate score using QuizAttempt's grading logic
+        answers = {}
 
         for question in quiz.questions.all():
             user_answer = request.POST.get(f'question_{question.id}')
-            if user_answer == question.correct_answer:
-                correct_answers += 1
+            if user_answer:
+                answers[str(question.id)] = user_answer
 
-        # Calculate score
-        score = (correct_answers / total_questions) * 100 if total_questions > 0 else 0
-        passed = score >= quiz.passing_score
+        # Store answers in attempt
+        attempt.answers = answers
 
-        # Update attempt
-        attempt.score = score
-        attempt.is_passed = passed
-        attempt.completed_at = timezone.now()
+        # Calculate score using the proper grading method
+        score = attempt.calculate_score()
+        passed = attempt.is_passed
+
+        # Mark attempt as completed
+        attempt.mark_completed()
         attempt.save()
 
         if passed:
