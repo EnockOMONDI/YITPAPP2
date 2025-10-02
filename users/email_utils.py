@@ -295,8 +295,8 @@ def send_html_email_direct(subject, html_content, recipient_list, from_email=Non
         context.check_hostname = False
         context.verify_mode = ssl.CERT_NONE
 
-        # Connect to Gmail SMTP
-        server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT)
+        # Connect to Gmail SMTP with timeout
+        server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT, timeout=10)
         server.starttls(context=context)
         server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
 

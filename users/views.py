@@ -296,12 +296,20 @@ def login(request):
             if user.is_active:
                 auth.login(request, user)
 
-                # Send login notification email
-                try:
-                    send_login_notification(user, request)
-                except Exception as e:
-                    # Don't fail login if email notification fails
-                    pass
+                # Send login notification email (non-blocking)
+                import threading
+                def send_notification_async():
+                    try:
+                        send_login_notification(user, request)
+                    except Exception as e:
+                        # Log but don't fail login
+                        import logging
+                        logger = logging.getLogger(__name__)
+                        logger.error(f"Login notification failed: {str(e)}")
+
+                # Start email sending in background thread with timeout
+                notification_thread = threading.Thread(target=send_notification_async, daemon=True)
+                notification_thread.start()
 
                 # Handle remember me functionality
                 if not remember_me:
