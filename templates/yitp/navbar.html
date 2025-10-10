@@ -162,7 +162,7 @@
                                 <!-- Authenticated User Menu -->
                                 <div class="auth__user-menu d-flex align-items-center">
                                     <div class="user__info dropdown">
-                                        <a href="#" class="user__toggle d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a href="#" class="user__toggle d-flex align-items-center" id="yitpUserDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="user__avatar">
                                                 <span class="avatar__text" >
                                                     {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
@@ -179,7 +179,7 @@
                                                 <i style="color: #ff5d15;" class="fas fa-chevron-down ml-5"></i>
                                             </div>
                                         </a>
-                                        <ul class="dropdown-menu user__dropdown" aria-labelledby="userDropdown">
+                                        <ul class="dropdown-menu user__dropdown" aria-labelledby="yitpUserDropdown">
                                             <li class="dropdown-header">
                                                 <div class="user__info-full">
                                                     <strong class="user__fullname">
@@ -373,4 +373,3 @@
     </div>
 </div>
 <div class="body-overlay"></div>
-# Updated: 2025-09-08T01:13:27.656083

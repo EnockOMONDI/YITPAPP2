@@ -99,8 +99,10 @@
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     </noscript>
 
+    <!-- Critical CSS (Load Immediately) -->
+    <link rel="stylesheet" href="{% static 'assets/css/preloader-optimized.css' %}">
+
     <!-- Progressive CSS Loading -->
-    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" media="print" onload="this.media='all'">
@@ -168,20 +170,25 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <!-- pre loader area start -->
+    <!-- YITP Optimized Preloader -->
     <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="loading-content">
-                    <img class="loading-logo-text" src="{% static 'img/logo/logo.png' %}" style="width: 50%;" alt="">
-                    <div class="loading-stroke">
-                        <img class="loading-logo-icon" src="{% static 'img/logo/logo-icon.png' %}" alt="">
-                    </div>
-                </div>
+        <div class="loading-content">
+            <img class="loading-logo" src="{% static 'img/logo/logo.png' %}" alt="YITP Logo">
+            <div class="loading-text">Youth Impact Training Programme</div>
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
             </div>
-        </div>  
+            <div class="loading-progress">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
     </div>
-    <!-- pre loader area end -->
+    <!-- Preloader End -->
 
     <!-- back to top start -->
     <div class="progress-wrap">
@@ -267,20 +274,31 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
+    <!-- Critical JavaScript (Load Immediately) -->
     <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
-    <script src="{% static 'assets/js/vendor/waypoints.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.meanmenu.js' %}"></script>
-    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
-    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.fancybox.min.js' %}"></script>
-    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'assets/js/parallax.min.js' %}"></script>
-    <script src="{% static 'assets/js/backToTop.js' %}"></script>
-    <script src="{% static 'assets/js/purecounter.js' %}"></script>
-    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
-    <script src="{% static 'assets/js/wow.min.js' %}"></script>
-    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+
+    <!-- Non-Critical JavaScript (Load Asynchronously) -->
+    <script src="{% static 'assets/js/vendor/waypoints.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/jquery.meanmenu.js' %}" defer></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/jquery.fancybox.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/parallax.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/backToTop.js' %}" defer></script>
+    <script src="{% static 'assets/js/purecounter.js' %}" defer></script>
+    <script src="{% static 'assets/js/ajax-form.js' %}" defer></script>
+    <script src="{% static 'assets/js/wow.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}" defer></script>
+    <!-- YITP Optimized Preloader (Load Early) -->
+    <script src="{% static 'assets/js/preloader-optimized.js' %}" async></script>
+
+    <!-- YITP Performance Monitor (Development/Testing) -->
+    {% if debug %}
+    <script src="{% static 'assets/js/performance-monitor.js' %}" defer></script>
+    {% endif %}
+
     <script src="{% static 'assets/js/main.js' %}"></script>
 
     <!-- Django Messages JavaScript -->

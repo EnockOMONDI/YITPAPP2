@@ -173,45 +173,331 @@
     }
 }
 
-/* Google Translate Widget Styling */
+/* YITP-Branded Google Translate Widget Styling */
 #google_translate_element {
-    border: 1px solid rgba(26, 46, 83, 0.1);
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 93, 21, 0.2) !important;
+    border-radius: 8px !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.15) !important;
+    padding: 8px !important;
+    margin-top: 8px !important;
+}
+
+/* Visible widget styling */
+#google_translate_element.yitp-translate-widget-visible {
+    background: white !important;
+    border: 2px solid #ff5d15 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(255, 93, 21, 0.2) !important;
+    padding: 15px !important;
 }
 
 #google_translate_element .goog-te-gadget {
-    font-family: inherit;
-    font-size: 14px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 14px !important;
+    color: #1a2e53 !important;
 }
 
 #google_translate_element .goog-te-gadget-simple {
-    background-color: transparent;
-    border: none;
-    font-size: 14px;
-    display: inline-block;
-    padding: 0;
-    margin: 0;
+    background-color: transparent !important;
+    border: none !important;
+    font-size: 14px !important;
+    display: inline-block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #1a2e53 !important;
 }
 
-/* Hide Google Translate banner */
+/* COMPREHENSIVE GOOGLE TRANSLATE BANNER HIDING */
+/* Hide all Google Translate banners and frames */
 .goog-te-banner-frame {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Only hide banner-specific skiptranslate elements, not dropdown containers */
+body > .skiptranslate:not([id*="google_translate_element"]):not([class*="goog-te"]) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Only hide banner iframes, not dropdown iframes */
+.skiptranslate iframe[src*="banner"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+}
+
+/* Prevent Google from adding top margin/padding to body */
+body {
+    top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* ENSURE GOOGLE TRANSLATE DROPDOWN FUNCTIONALITY */
+/* Make sure essential dropdown elements are visible */
+.goog-te-combo,
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-menu-value,
+#google_translate_element .goog-te-gadget,
+#google_translate_element .goog-te-gadget-simple {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Hide Google branding text but keep functional elements */
+.goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+    display: none !important; /* Hide "Select Language" text */
+}
+
+.goog-te-gadget-simple .goog-te-menu-value span:first-child {
     display: none !important;
 }
 
-/* Style the language selector in the widget */
+/* Hide Google logo and powered by text */
+.goog-logo-link {
+    display: none !important;
+}
+
+.goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span[style*="color"] {
+    display: none !important;
+}
+
+/* YITP-Branded Language Selector Dropdown */
 .goog-te-combo {
-    margin: 5px 0;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    margin: 5px 0 !important;
+    padding: 8px 12px !important;
+    border: 2px solid #ff5d15 !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%) !important;
+    color: white !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    min-width: 150px !important;
+}
+
+.goog-te-combo:hover {
+    background: linear-gradient(135deg, #e04a0f 0%, #cc4209 100%) !important;
+    box-shadow: 0 2px 8px rgba(255, 93, 21, 0.3) !important;
+    transform: translateY(-1px) !important;
+}
+
+.goog-te-combo:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(255, 93, 21, 0.25) !important;
+}
+
+/* Style the dropdown options */
+.goog-te-combo option {
+    background: white !important;
+    color: #1a2e53 !important;
+    padding: 8px !important;
+    font-weight: 500 !important;
+}
+
+.goog-te-combo option:hover {
+    background: rgba(255, 93, 21, 0.1) !important;
+}
+
+/* Enhanced Google Translate Widget Container */
+.goog-te-gadget {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    color: #1a2e53 !important;
+}
+
+.goog-te-gadget-simple {
+    background: transparent !important;
+    border: none !important;
+    font-size: 14px !important;
+    color: #1a2e53 !important;
+}
+
+/* Style the menu value (current language display) */
+.goog-te-menu-value {
+    color: #1a2e53 !important;
+    font-weight: 500 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+.goog-te-menu-value span {
+    color: #1a2e53 !important;
+    font-weight: 500 !important;
+}
+
+/* Hide Google Translate attribution */
+.goog-te-gadget .goog-te-gadget-simple a {
+    display: none !important;
+}
+
+/* Style the translate element container */
+#google_translate_element .goog-te-gadget-simple {
+    background: white !important;
+    border: 2px solid #ff5d15 !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.15) !important;
+}
+
+/* Additional banner hiding for different Google Translate versions - More Specific */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+body > .skiptranslate iframe[src*="banner"],
+.skiptranslate > iframe[src*="banner"],
+iframe.skiptranslate[src*="banner"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+}
+
+/* ENHANCED YITP-Branded Google Translate Menu Frame */
+.goog-te-menu-frame {
+    border: 2px solid #ff5d15 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(255, 93, 21, 0.2) !important;
+    background: white !important;
+    z-index: 10000 !important;
+}
+
+.goog-te-menu2 {
+    background: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+.goog-te-menu2-item {
+    padding: 12px 16px !important;
+    color: #1a2e53 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 500 !important;
+    border-bottom: 1px solid rgba(26, 46, 83, 0.1) !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+}
+
+.goog-te-menu2-item:hover {
+    background: linear-gradient(135deg, rgba(255, 93, 21, 0.1) 0%, rgba(255, 93, 21, 0.05) 100%) !important;
+    color: #ff5d15 !important;
+    font-weight: 600 !important;
+}
+
+.goog-te-menu2-item-selected {
+    background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.goog-te-menu2-item-selected:hover {
+    background: linear-gradient(135deg, #e04a0f 0%, #cc4209 100%) !important;
+    color: white !important;
+}
+
+/* Style menu item text */
+.goog-te-menu2-item .goog-te-menu2-item-text {
+    color: inherit !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: inherit !important;
+}
+
+/* Hide Google branding in menu */
+.goog-te-menu2-item .goog-te-menu2-item-selected .goog-te-menu2-item-text {
+    color: inherit !important;
+}
+
+/* Style the menu header if it exists */
+.goog-te-menu2-item:first-child {
+    border-top-left-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+.goog-te-menu2-item:last-child {
+    border-bottom-left-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+    border-bottom: none !important;
+}
+
+/* Responsive Google Translate Widget */
+@media (max-width: 768px) {
+    #google_translate_element {
+        margin-top: 12px !important;
+        padding: 10px !important;
+    }
+
+    .goog-te-combo {
+        min-width: 120px !important;
+        font-size: 13px !important;
+        padding: 6px 10px !important;
+    }
+
+    .goog-te-menu-frame {
+        max-width: 90vw !important;
+    }
+}
+
+/* TARGETED GOOGLE TRANSLATE BANNER PREVENTION */
+/* Only hide actual banner elements, not functional dropdown elements */
+[id*="goog-te-banner"],
+[class*="goog-te-banner"],
+[id*="google_translate_banner"],
+[class*="google_translate_banner"],
+.skiptranslate[style*="height"][style*="position: fixed"],
+iframe[src*="translate.google"][src*="banner"],
+iframe[src*="translate_a"][src*="banner"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    position: absolute !important;
+    left: -10000px !important;
+    top: -10000px !important;
+    z-index: -1 !important;
+}
+
+/* Prevent Google from modifying body styles */
+body[style*="top"],
+body[style*="margin-top"],
+body[style*="padding-top"] {
+    top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Ensure YITP navbar stays at top */
+.header__area {
+    top: 0 !important;
+    position: fixed !important;
+    z-index: 999 !important;
 }
 
 /* Ensure translated content maintains YITP styling */
 body.translated {
-    font-family: inherit !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .translated .navbar-brand,

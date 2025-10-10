@@ -421,7 +421,11 @@
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="yitp-hero-image mt-4 mt-lg-0">
-                    <img src="{% static 'assets/img/hero/hero-1.jpg' %}" alt="YITP Students Learning" class="img-fluid">
+                    <img src="{% static 'assets/img/hero/hero-1.jpg' %}"
+                         alt="YITP Students Learning"
+                         class="img-fluid"
+                         loading="eager"
+                         decoding="async">
                 </div>
             </div>
         </div>
@@ -435,10 +439,18 @@
                 <div class="yitp-about-images">
                     <div class="row g-3">
                         <div class="col-8">
-                            <img src="{% static 'assets/img/about/D.jpg' %}" alt="YITP Training Session" class="img-fluid rounded-3 shadow">
+                            <img src="{% static 'assets/img/about/D.jpg' %}"
+                                 alt="YITP Training Session"
+                                 class="img-fluid rounded-3 shadow"
+                                 loading="lazy"
+                                 decoding="async">
                         </div>
                         <div class="col-4">
-                            <img src="{% static 'assets/img/about/D2.jpg' %}" alt="YITP Students" class="img-fluid rounded-3 shadow mb-3">
+                            <img src="{% static 'assets/img/about/D2.jpg' %}"
+                                 alt="YITP Students"
+                                 class="img-fluid rounded-3 shadow mb-3"
+                                 loading="lazy"
+                                 decoding="async">
                             <div class="yitp-student-count bg-white rounded-3 p-3 shadow-sm text-center">
                                 <div class="d-flex justify-content-center mb-2">
                                     <img src="{% static 'assets/img/hero/1.jpg' %}" alt="Student" class="rounded-circle me-1" style="width: 30px; height: 30px; object-fit: cover;">

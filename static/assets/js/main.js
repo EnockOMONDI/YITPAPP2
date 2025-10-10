@@ -30,12 +30,12 @@
 (function ($) {
 "use strict";
 
-	var windowOn = $(window);
+	// Wait for DOM to be ready
+	$(document).ready(function() {
+		var windowOn = $(window);
 	////////////////////////////////////////////////////
-    // 01. PreLoader Js
-	windowOn.on('load',function() {
-		$("#loading").fadeOut(500);
-	});
+    // 01. PreLoader Js - OPTIMIZED VERSION LOADED SEPARATELY
+	// Note: Preloader is now handled by preloader-optimized.js for better performance
 
 	////////////////////////////////////////////////////
     // 02. Mobile Menu Js
@@ -335,4 +335,5 @@
 		$(this).addClass('active').parent().siblings().find('.hover__active').removeClass('active');
 	});
 
+	}); // End document ready
 })(jQuery);
