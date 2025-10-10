@@ -1,44 +1,99 @@
 /**
- * YITP Google Translate - Ultra Simple Implementation
- * Just the basic Google Translate widget with minimal customization
+ * YITP Google Translate - Native Dropdown Implementation
+ * Shows Google's native language dropdown directly in navbar
  */
 
-// Google Translate initialization with banner hiding
+// Google Translate initialization with native dropdown
 function googleTranslateElementInit() {
-    console.log('🚀 Initializing Google Translate...');
+    console.log('🚀 Initializing YITP Native Google Translate...');
 
-    // Create widget in the main container
-    new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,fr,sw,ar,pt,ha,am',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-    }, 'google_translate_element');
-
-    // Also create in navbar if container exists
-    const navbarContainer = document.getElementById('google_translate_element_navbar');
+    // Create native widget directly in navbar container
+    const navbarContainer = document.querySelector('.header__language');
     if (navbarContainer) {
+        // Clear any existing content
+        navbarContainer.innerHTML = '';
+
+        // Create container for Google Translate widget
+        const translateContainer = document.createElement('div');
+        translateContainer.id = 'google_translate_element';
+        translateContainer.style.cssText = `
+            display: block !important;
+            visibility: visible !important;
+        `;
+        navbarContainer.appendChild(translateContainer);
+
+        // Initialize Google Translate with native dropdown
         new google.translate.TranslateElement({
             pageLanguage: 'en',
             includedLanguages: 'en,fr,sw,ar,pt,ha,am',
             layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false
-        }, 'google_translate_element_navbar');
+            autoDisplay: false,
+            multilanguagePage: true
+        }, 'google_translate_element');
 
-        navbarContainer.style.display = 'block';
+        console.log('✅ Native Google Translate dropdown initialized in navbar');
+
+        // Apply YITP styling after widget loads
+        setTimeout(function() {
+            applyYITPStyling();
+        }, 1500);
+    } else {
+        console.log('❌ Navbar language container not found');
     }
-
-    // Hide Google Translate banner immediately and continuously
-    hideGoogleTranslateBanner();
-
-    // Set up mutation observer to hide banner if it appears
-    setupBannerHiding();
-
-    console.log('✅ Google Translate initialized with banner hiding');
 }
 
-// Function to hide Google Translate banner (more targeted)
+// Apply YITP styling to Google Translate elements
+function applyYITPStyling() {
+    console.log('🎨 Applying YITP styling to native Google Translate...');
+
+    // Style the main widget container
+    const widget = document.getElementById('google_translate_element');
+    if (widget) {
+        widget.style.cssText = `
+            display: block !important;
+            visibility: visible !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        `;
+    }
+
+    // Style the dropdown selector with YITP branding
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+        combo.style.cssText = `
+            background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%) !important;
+            color: white !important;
+            border: 2px solid #ff5d15 !important;
+            border-radius: 6px !important;
+            padding: 8px 12px !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            cursor: pointer !important;
+            min-width: 150px !important;
+            box-shadow: 0 2px 8px rgba(255, 93, 21, 0.2) !important;
+        `;
+
+        console.log('✅ YITP styling applied to dropdown');
+    } else {
+        console.log('⏳ Dropdown not ready yet, will retry...');
+        // Retry after a short delay
+        setTimeout(applyYITPStyling, 500);
+    }
+
+    // Style the gadget container
+    const gadget = document.querySelector('.goog-te-gadget');
+    if (gadget) {
+        gadget.style.cssText = `
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-size: 14px !important;
+        `;
+    }
+}
+
+// Hide Google Translate banner (targeted approach)
 function hideGoogleTranslateBanner() {
+    console.log('🚫 Hiding Google Translate banner...');
+
     // Only hide actual banner elements, not dropdown containers
     const bannerSelectors = [
         '.goog-te-banner-frame',
@@ -69,168 +124,47 @@ function hideGoogleTranslateBanner() {
     document.body.style.paddingTop = '0';
 }
 
-// Set up mutation observer to continuously hide banner
-function setupBannerHiding() {
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'childList') {
-                // Check for new banner elements
-                hideGoogleTranslateBanner();
-            }
-        });
-    });
-
-    // Observe the entire document for changes
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-
-    // Also hide banner every 500ms as a fallback
-    setInterval(hideGoogleTranslateBanner, 500);
-}
-
-// Create translate button that shows the widget
-function createTranslateButton() {
-    const container = document.querySelector('.header__language');
-    if (!container) return;
-    
-    // Only create if not already exists
-    if (container.querySelector('.yitp-translate-btn')) return;
-    
-    const button = document.createElement('button');
-    button.className = 'btn yitp-translate-btn';
-    button.innerHTML = `
-        <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px;"></i>
-        <span>Translate</span>
-    `;
-    button.style.cssText = `
-        background: none; 
-        border: none; 
-        color: #1a2e53; 
-        padding: 8px 12px; 
-        border-radius: 6px; 
-        transition: all 0.3s ease;
-        font-weight: 500;
-    `;
-    
-    button.onclick = function() {
-        console.log('🌐 YITP Translate button clicked');
-
-        const widget = document.getElementById('google_translate_element');
-        const navbarWidget = document.getElementById('google_translate_element_navbar');
-
-        console.log('Widget found:', !!widget);
-        console.log('Widget content:', widget ? widget.innerHTML : 'No widget');
-
-        if (widget) {
-            if (widget.style.display === 'none' || !widget.style.display) {
-                console.log('📖 Showing Google Translate widget');
-
-                // Show widget with minimal positioning to avoid conflicts
-                widget.style.display = 'block';
-                widget.style.position = 'fixed';
-                widget.style.top = '80px';
-                widget.style.right = '20px';
-                widget.style.zIndex = '10000';
-                widget.style.maxWidth = '300px';
-
-                // Let CSS handle the styling instead of JavaScript
-                widget.classList.add('yitp-translate-widget-visible');
-
-                // Check what Google Translate elements are present
-                setTimeout(() => {
-                    const combo = widget.querySelector('.goog-te-combo');
-                    const gadget = widget.querySelector('.goog-te-gadget');
-                    console.log('Combo found:', !!combo);
-                    console.log('Gadget found:', !!gadget);
-                    console.log('Widget HTML:', widget.innerHTML);
-                }, 500);
-            } else {
-                console.log('🔒 Hiding Google Translate widget');
-                widget.style.display = 'none';
-                widget.classList.remove('yitp-translate-widget-visible');
-            }
-        } else {
-            console.log('❌ Google Translate widget not found');
-        }
-        
-        // Toggle navbar widget visibility
-        if (navbarWidget) {
-            navbarWidget.style.display = navbarWidget.style.display === 'none' ? 'block' : 'none';
-        }
-    };
-    
-    // Add hover effects
-    button.onmouseover = function() {
-        this.style.backgroundColor = 'rgba(255, 93, 21, 0.1)';
-        this.style.color = '#ff5d15';
-    };
-    button.onmouseout = function() {
-        this.style.backgroundColor = 'transparent';
-        this.style.color = '#1a2e53';
-    };
-    
-    container.appendChild(button);
-}
-
 // Initialize everything
 function initTranslation() {
-    console.log('🌐 Initializing YITP Translation...');
-    
-    // Create main Google Translate container
-    let container = document.getElementById('google_translate_element');
-    if (!container) {
-        container = document.createElement('div');
-        container.id = 'google_translate_element';
-        container.style.display = 'none';
-        document.body.appendChild(container);
+    console.log('🌐 Initializing YITP Native Translation System...');
+
+    // Check if navbar language container exists
+    const navbarContainer = document.querySelector('.header__language');
+    if (!navbarContainer) {
+        console.log('❌ Navbar language container not found');
+        return;
     }
-    
-    // Create translate button
-    createTranslateButton();
-    
+
     // Load Google Translate script
     if (!document.querySelector('script[src*="translate.google.com"]')) {
         const script = document.createElement('script');
         script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
         script.async = true;
         document.head.appendChild(script);
+
+        console.log('📡 Loading Google Translate API for native dropdown...');
     }
-    
-    console.log('✅ Translation initialization complete');
+
+    // Set up banner hiding
+    setTimeout(hideGoogleTranslateBanner, 2000);
+
+    console.log('✅ YITP Native Translation initialization complete');
 }
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', initTranslation);
 
-// Make functions globally available for testing
-window.toggleGoogleTranslate = function() {
+// Debug function for testing
+window.debugYITPTranslation = function() {
+    console.log('🔍 YITP Translation Debug Info:');
+    console.log('Widget exists:', !!document.getElementById('google_translate_element'));
+    console.log('Button exists:', !!document.querySelector('.yitp-translate-btn'));
+    console.log('Google script loaded:', !!document.querySelector('script[src*="translate.google.com"]'));
+    console.log('Combo dropdown exists:', !!document.querySelector('.goog-te-combo'));
+
     const widget = document.getElementById('google_translate_element');
     if (widget) {
-        if (widget.style.display === 'none' || !widget.style.display) {
-            widget.style.display = 'block';
-            widget.style.position = 'fixed';
-            widget.style.top = '100px';
-            widget.style.right = '20px';
-            widget.style.zIndex = '9999';
-            widget.style.background = 'white';
-            widget.style.padding = '15px';
-            widget.style.borderRadius = '8px';
-            widget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-            widget.style.border = '1px solid #ddd';
-        } else {
-            widget.style.display = 'none';
-        }
+        console.log('Widget HTML:', widget.innerHTML);
+        console.log('Widget display:', widget.style.display);
     }
-};
-
-// Debug function
-window.debugYITPTranslation = function() {
-    console.log('🐛 YITP Translation Debug:');
-    console.log('Translate Button:', document.querySelector('.yitp-translate-btn'));
-    console.log('Main Widget:', document.querySelector('#google_translate_element'));
-    console.log('Navbar Widget:', document.querySelector('#google_translate_element_navbar'));
-    console.log('Google Translate Combo:', document.querySelector('.goog-te-combo'));
-    console.log('Widget Visible:', document.getElementById('google_translate_element')?.style.display !== 'none');
 };

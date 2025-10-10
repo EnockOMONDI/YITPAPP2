@@ -117,21 +117,7 @@
                 <div class="col-xxl-2 col-xl-2 col-lg-3 d-none d-lg-block">
                     <div class="header__category" style="padding-left: 10px;">
                         <nav>
-                            <ul>
-                                <li>
-                                    <a href="{% url 'yitp:web_courses_list' %}" class="cat-menu d-flex align-items-center" style="padding: 8px 12px; white-space: nowrap;">
-                                        <div class="cat-dot-icon d-inline-block" style="margin-right: 8px;">
-                                            <!-- SVG content -->
-                                        </div>
-                                        <span>View Course</span>
-                                    </a>
-                                    <ul class="cat-submenu">
-                                        <li style="padding-left: 30px; color: #1a2e53;">
-                                            <a href="{% url 'yitp:web_courses_list' %}">YITP Course & Units</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                         
                         </nav>
                     </div>
                 </div>
@@ -140,9 +126,9 @@
                         <div class="main-menu d-none d-xl-block" style="margin-right: 20px;">
                             <nav id="mobile-menu">
                                 <ul class="d-flex align-items-center" style="margin: 0; padding: 0; list-style: none;">
+                                    <li style="margin-right: 25px;"><a href="{% url 'yitp:web_courses_list' %}">Courses</a></li>
                                     <li style="margin-right: 25px;"><a href="{% url 'yitp:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">Our Story</a></li>
                                     <li style="margin-right: 25px;"><a href="{% url 'yitp:team' %}" class="{% if request.resolver_match.url_name == 'team' %}active{% endif %}">The Team</a></li>
-                                    <li style="margin-right: 25px;"><a href="{% url 'yitp:registration' %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}">How To Get Started?</a></li>
                                     <li style="margin-right: 25px;"><a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">Blogs & News</a></li>
                                     <li style="margin-right: 25px;"><a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>
                                 </ul>

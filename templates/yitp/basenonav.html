@@ -13,7 +13,7 @@
     
     <!-- CSS here -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/preloader-optimized.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
@@ -35,20 +35,22 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <!-- pre loader area start -->
+    <!-- YITP Optimized Preloader -->
     <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="loading-content">
-                    <img class="loading-logo-text" src="{% static 'img/logo/logo.png' %}" style="width: 50%;" alt="">
-                    <div class="loading-stroke">
-                        <img class="loading-logo-icon" src="{% static 'img/logo/logo-icon.png' %}" alt="">
-                    </div>
+        <div class="loading-content">
+            <img class="loading-logo" src="{% static 'img/logo/logo.png' %}" alt="YITP Logo">
+            <div class="loading-text">
+                <h3>Youth Impact Training Programme</h3>
+                <p>Empowering Youth Through Education</p>
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
-    <!-- pre loader area end -->
+    <!-- Preloader End -->
 
     <!-- back to top start -->
     <div class="progress-wrap">
@@ -149,6 +151,9 @@
     <script src="{% static 'assets/js/wow.min.js' %}"></script>
     <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
+
+    <!-- YITP Optimized Preloader -->
+    <script src="{% static 'assets/js/preloader-optimized.js' %}" async></script>
 
     <!-- Django Messages JavaScript -->
     <script>
