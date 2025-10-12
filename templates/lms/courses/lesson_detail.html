@@ -1057,23 +1057,106 @@
         margin-right: 1rem;
     }
     
+    /* Lesson Progress Card Styles */
+    .lesson-progress-card {
+        margin-bottom: 2rem;
+    }
+
+    .lesson-progress-card .card {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #ffffff, #f8fafc);
+    }
+
+    .lesson-progress-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .lesson-progress-card .progress-status .badge {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn-primary-yitp {
+        background: var(--yitp-primary);
+        border-color: var(--yitp-primary);
+        color: white;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary-yitp:hover {
+        background: #e54d0f;
+        border-color: #e54d0f;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 93, 21, 0.3);
+    }
+
+    .btn-secondary-yitp {
+        background: var(--yitp-secondary);
+        border-color: var(--yitp-secondary);
+        color: white;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary-yitp:hover {
+        background: #152a4a;
+        border-color: #152a4a;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(26, 46, 83, 0.3);
+    }
+
+    .btn-outline-secondary {
+        border: 2px solid #e2e8f0;
+        color: #64748b;
+        background: transparent;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: not-allowed;
+    }
+
+    .btn-outline-secondary:disabled {
+        opacity: 0.6;
+    }
+
     @media (max-width: 768px) {
         .lesson-header {
             padding: 1.5rem 0;
         }
-        
+
         .lesson-video {
             height: 250px;
         }
-        
+
         .lesson-content {
             padding: 1.5rem;
         }
-        
+
         .lesson-meta {
             flex-direction: column;
             align-items: flex-start;
             gap: 0.5rem;
+        }
+
+        .lesson-progress-card .card-body {
+            padding: 1rem;
+        }
+
+        .lesson-progress-card .d-flex {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .lesson-progress-card .justify-content-md-end {
+            justify-content: center !important;
         }
     }
 </style>
@@ -1137,9 +1220,86 @@
                     {% endif %}
                 </div>
                 {% else %}
+                <!-- Lesson Progress Card - Top of Page -->
+                <div class="lesson-progress-card mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <h5 class="card-title mb-2">
+                                        <i class="fas fa-chart-line me-2" style="color: var(--yitp-primary);"></i>
+                                        Lesson Progress
+                                    </h5>
+                                    <div class="progress-status">
+                                        {% if progress.status == 'completed' %}
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check-circle me-1"></i>Completed
+                                            </span>
+                                        {% elif progress.status == 'in_progress' %}
+                                            <span class="badge bg-warning">
+                                                <i class="fas fa-clock me-1"></i>In Progress
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">
+                                                <i class="fas fa-play me-1"></i>Not Started
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                                        <!-- Quiz Button -->
+                                        {% if quiz_status.has_quiz %}
+                                            {% if progress.status != 'completed' and not quiz_status.has_passed %}
+                                                <a href="{{ quiz_status.quiz_url }}" class="btn btn-primary-yitp">
+                                                    <i class="fas fa-quiz me-2"></i>
+                                                    {% if quiz_status.attempts_count > 0 %}Retake Quiz{% else %}Take Quiz{% endif %}
+                                                </a>
+                                                <small class="text-muted align-self-center">
+                                                    Complete the quiz ({{ quiz_status.passing_score }}% required) to mark lesson as complete
+                                                </small>
+                                            {% elif quiz_status.has_passed %}
+                                                <button class="btn btn-success" disabled>
+                                                    <i class="fas fa-trophy me-2"></i>Quiz Passed ({{ quiz_status.best_score|floatformat:1 }}%)
+                                                </button>
+                                            {% endif %}
+                                        {% else %}
+                                            <!-- Complete Lesson Button (No Quiz) -->
+                                            {% if progress.status != 'completed' %}
+                                                <button class="btn btn-primary-yitp" onclick="attemptLessonCompletion()">
+                                                    <i class="fas fa-check me-2"></i>Complete Lesson
+                                                </button>
+                                                <small class="text-muted align-self-center">
+                                                    Click to mark this lesson as complete
+                                                </small>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        <!-- Next Lesson Button -->
+                                        {% if next_lesson %}
+                                            {% if progress.status == 'completed' and next_lesson_accessible %}
+                                                <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}"
+                                                   class="btn btn-secondary-yitp">
+                                                    <i class="fas fa-arrow-right me-2"></i>Next Lesson
+                                                </a>
+                                            {% else %}
+                                                <button class="btn btn-outline-secondary" disabled title="Complete current lesson to unlock">
+                                                    <i class="fas fa-lock me-2"></i>Next Lesson (Locked)
+                                                </button>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Main Lesson Content -->
                 <div class="lesson-content">
-                    <!-- Video/Media Section -->
+                    <!-- Video/Media Section - COMMENTED OUT FOR NOW -->
+                    <!--
                     <div class="lesson-video">
                         <div class="text-center">
                             <i class="fas fa-play-circle fa-4x text-muted mb-3"></i>
@@ -1147,6 +1307,7 @@
                             <p class="text-muted">Video player will be integrated here</p>
                         </div>
                     </div>
+                    -->
                     
                     <!-- Lesson Objectives -->
                     {% if lesson.learning_objectives %}
@@ -1441,10 +1602,19 @@
 {% block extra_js %}
 <script>
 function attemptLessonCompletion() {
-    const button = document.querySelector('.completion-button');
+    // Try to find button in progress card first, then fallback to sidebar
+    const button = document.querySelector('.lesson-progress-card .btn-primary-yitp') ||
+                  document.querySelector('.completion-button');
     const progressFill = document.querySelector('.progress-fill');
     const progressText = document.querySelector('.lesson-progress small');
     const nextButton = document.querySelector('.nav-button:last-child');
+    const progressCardBadge = document.querySelector('.lesson-progress-card .progress-status .badge');
+    const nextLessonButton = document.querySelector('.lesson-progress-card .btn-outline-secondary');
+
+    if (!button) {
+        console.error('Completion button not found');
+        return;
+    }
 
     // Disable button and show loading state
     button.disabled = true;
@@ -1470,9 +1640,19 @@ function attemptLessonCompletion() {
             button.innerHTML = '<i class="fas fa-check-circle me-2"></i>Completed';
             button.style.background = '#10b981';
             button.disabled = true;
+            button.classList.remove('btn-primary-yitp');
+            button.classList.add('btn-success');
+
+            // Update progress card badge
+            if (progressCardBadge) {
+                progressCardBadge.innerHTML = '<i class="fas fa-check-circle me-1"></i>Completed';
+                progressCardBadge.className = 'badge bg-success';
+            }
 
             // Update progress bar
-            progressFill.style.width = '100%';
+            if (progressFill) {
+                progressFill.style.width = '100%';
+            }
 
             // Update progress text
             if (progressText) {
@@ -1519,7 +1699,17 @@ function attemptLessonCompletion() {
             if (data.next_lesson_accessible && data.next_lesson_url) {
                 message += `\n\nNext lesson "${data.next_lesson_title}" is now unlocked!`;
 
-                // Update next button if it exists
+                // Update next button in progress card
+                if (nextLessonButton) {
+                    nextLessonButton.disabled = false;
+                    nextLessonButton.className = 'btn btn-secondary-yitp';
+                    nextLessonButton.innerHTML = '<i class="fas fa-arrow-right me-2"></i>Next Lesson';
+                    nextLessonButton.onclick = () => window.location.href = data.next_lesson_url;
+                    nextLessonButton.style.cursor = 'pointer';
+                    nextLessonButton.removeAttribute('title');
+                }
+
+                // Update next button in sidebar if it exists
                 if (nextButton && nextButton.classList.contains('locked')) {
                     nextButton.classList.remove('locked');
                     nextButton.disabled = false;

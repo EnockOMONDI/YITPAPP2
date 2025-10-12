@@ -52,7 +52,7 @@ class Course6UpdateVerifier:
     
     def __init__(self):
         self.course_id = 6
-        self.json_file_path = "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courseunits/YITP_Course6_Module1_WRAPPED_vMatching.json"
+        self.json_file_path = "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courseunits/YITP_Course6_Module1_UPDATED_with_quizzes.json"
         self.json_data = None
         self.production_data = {}
         self.analysis_results = {}
@@ -323,6 +323,260 @@ class Course6UpdateVerifier:
             print(error_msg)
             self.errors.append(error_msg)
             return False
+
+    def analyze_quiz_duplication(self):
+        """Analyze quiz content for duplication issues"""
+        try:
+            print(f"\n🔍 ANALYZING QUIZ DUPLICATION")
+            print("=" * 40)
+
+            # Analyze JSON quiz content
+            json_quiz_analysis = self.analyze_json_quiz_content()
+
+            # Analyze production quiz content
+            production_quiz_analysis = self.analyze_production_quiz_content()
+
+            # Store results
+            self.analysis_results['quiz_duplication'] = {
+                'json_analysis': json_quiz_analysis,
+                'production_analysis': production_quiz_analysis,
+                'comparison': self.compare_quiz_content(json_quiz_analysis, production_quiz_analysis)
+            }
+
+            return True
+
+        except Exception as e:
+            error_msg = f"❌ Error analyzing quiz duplication: {str(e)}"
+            print(error_msg)
+            self.errors.append(error_msg)
+            return False
+
+    def analyze_json_quiz_content(self):
+        """Analyze quiz content in JSON for duplicates"""
+        from collections import defaultdict
+
+        quiz_analysis = {
+            'total_lessons': 0,
+            'total_quizzes': 0,
+            'total_questions': 0,
+            'question_fingerprints': defaultdict(list),
+            'duplicates': {},
+            'lesson_quiz_details': []
+        }
+
+        modules = self.json_data.get('modules', [])
+
+        for module in modules:
+            lessons = module.get('lessons', [])
+
+            for lesson in lessons:
+                lesson_id = lesson.get('id', 'unknown')
+                lesson_title = lesson.get('title', 'Unknown')
+
+                quiz_analysis['total_lessons'] += 1
+
+                # Check for assessment/quiz structure
+                assessment = lesson.get('assessment', {})
+                quiz_data = assessment.get('quiz', {})
+
+                if quiz_data:
+                    quiz_analysis['total_quizzes'] += 1
+                    quiz_title = quiz_data.get('title', f'{lesson_title} Quiz')
+                    questions = quiz_data.get('questions', [])
+
+                    lesson_quiz_info = {
+                        'lesson_id': lesson_id,
+                        'lesson_title': lesson_title,
+                        'quiz_title': quiz_title,
+                        'question_count': len(questions),
+                        'questions': []
+                    }
+
+                    for question in questions:
+                        quiz_analysis['total_questions'] += 1
+
+                        # Create fingerprint for duplicate detection
+                        question_text = question.get('question_text', '')
+                        question_type = question.get('question_type', '')
+                        correct_answer = question.get('correct_answer', '')
+
+                        fingerprint = f"{question_text}|{question_type}|{correct_answer}"
+
+                        quiz_analysis['question_fingerprints'][fingerprint].append({
+                            'lesson_id': lesson_id,
+                            'lesson_title': lesson_title,
+                            'quiz_title': quiz_title
+                        })
+
+                        lesson_quiz_info['questions'].append({
+                            'question_text': question_text,
+                            'question_type': question_type,
+                            'correct_answer': correct_answer,
+                            'fingerprint': fingerprint
+                        })
+
+                    quiz_analysis['lesson_quiz_details'].append(lesson_quiz_info)
+
+        # Identify duplicates
+        quiz_analysis['duplicates'] = {
+            fp: locations for fp, locations in quiz_analysis['question_fingerprints'].items()
+            if len(locations) > 1
+        }
+
+        print(f"📊 JSON Quiz Analysis:")
+        print(f"   - Total Lessons: {quiz_analysis['total_lessons']}")
+        print(f"   - Total Quizzes: {quiz_analysis['total_quizzes']}")
+        print(f"   - Total Questions: {quiz_analysis['total_questions']}")
+        print(f"   - Unique Question Fingerprints: {len(quiz_analysis['question_fingerprints'])}")
+        print(f"   - Duplicated Questions: {len(quiz_analysis['duplicates'])}")
+
+        if quiz_analysis['duplicates']:
+            print(f"\n⚠️ FOUND {len(quiz_analysis['duplicates'])} DUPLICATED QUESTIONS IN JSON:")
+            for i, (fingerprint, locations) in enumerate(quiz_analysis['duplicates'].items(), 1):
+                question_text = fingerprint.split('|')[0][:60] + "..."
+                print(f"   {i}. '{question_text}' appears in {len(locations)} lessons")
+        else:
+            print(f"✅ NO DUPLICATE QUESTIONS FOUND IN JSON")
+
+        return quiz_analysis
+
+    def analyze_production_quiz_content(self):
+        """Analyze quiz content in production database for duplicates"""
+        from collections import defaultdict
+
+        quiz_analysis = {
+            'total_lessons': 0,
+            'total_quizzes': 0,
+            'total_questions': 0,
+            'question_fingerprints': defaultdict(list),
+            'duplicates': {},
+            'lesson_quiz_details': []
+        }
+
+        try:
+            course = Course.objects.get(id=self.course_id)
+            modules = Module.objects.filter(course=course)
+
+            for module in modules:
+                lessons = Lesson.objects.filter(module=module)
+
+                for lesson in lessons:
+                    quiz_analysis['total_lessons'] += 1
+                    quizzes = Quiz.objects.filter(lesson=lesson)
+
+                    for quiz in quizzes:
+                        quiz_analysis['total_quizzes'] += 1
+                        questions = Question.objects.filter(quiz=quiz).order_by('sort_order')
+
+                        lesson_quiz_info = {
+                            'lesson_id': lesson.id,
+                            'lesson_title': lesson.title,
+                            'quiz_id': quiz.id,
+                            'quiz_title': quiz.title,
+                            'question_count': questions.count(),
+                            'questions': []
+                        }
+
+                        for question in questions:
+                            quiz_analysis['total_questions'] += 1
+
+                            # Create fingerprint for duplicate detection
+                            fingerprint = f"{question.question_text}|{question.question_type}|{question.correct_answer}"
+
+                            quiz_analysis['question_fingerprints'][fingerprint].append({
+                                'lesson_id': lesson.id,
+                                'lesson_title': lesson.title,
+                                'quiz_id': quiz.id,
+                                'quiz_title': quiz.title,
+                                'question_id': question.id
+                            })
+
+                            lesson_quiz_info['questions'].append({
+                                'question_id': question.id,
+                                'question_text': question.question_text,
+                                'question_type': question.question_type,
+                                'correct_answer': question.correct_answer,
+                                'fingerprint': fingerprint
+                            })
+
+                        quiz_analysis['lesson_quiz_details'].append(lesson_quiz_info)
+
+            # Identify duplicates
+            quiz_analysis['duplicates'] = {
+                fp: locations for fp, locations in quiz_analysis['question_fingerprints'].items()
+                if len(locations) > 1
+            }
+
+            print(f"\n📊 Production Quiz Analysis:")
+            print(f"   - Total Lessons: {quiz_analysis['total_lessons']}")
+            print(f"   - Total Quizzes: {quiz_analysis['total_quizzes']}")
+            print(f"   - Total Questions: {quiz_analysis['total_questions']}")
+            print(f"   - Unique Question Fingerprints: {len(quiz_analysis['question_fingerprints'])}")
+            print(f"   - Duplicated Questions: {len(quiz_analysis['duplicates'])}")
+
+            if quiz_analysis['duplicates']:
+                print(f"\n⚠️ FOUND {len(quiz_analysis['duplicates'])} DUPLICATED QUESTIONS IN PRODUCTION:")
+                for i, (fingerprint, locations) in enumerate(quiz_analysis['duplicates'].items(), 1):
+                    question_text = fingerprint.split('|')[0][:60] + "..."
+                    print(f"   {i}. '{question_text}' appears in {len(locations)} lessons")
+            else:
+                print(f"✅ NO DUPLICATE QUESTIONS FOUND IN PRODUCTION")
+
+        except Exception as e:
+            print(f"⚠️ Could not analyze production quiz content: {str(e)}")
+
+        return quiz_analysis
+
+    def compare_quiz_content(self, json_analysis, production_analysis):
+        """Compare quiz content between JSON and production"""
+        comparison = {
+            'json_duplicates': len(json_analysis['duplicates']),
+            'production_duplicates': len(production_analysis['duplicates']),
+            'improvement': False,
+            'issues': [],
+            'recommendations': []
+        }
+
+        # Check if JSON improves upon production
+        if json_analysis['duplicates'] and production_analysis['duplicates']:
+            if len(json_analysis['duplicates']) < len(production_analysis['duplicates']):
+                comparison['improvement'] = True
+                comparison['recommendations'].append("✅ JSON reduces quiz duplication compared to production")
+            elif len(json_analysis['duplicates']) == len(production_analysis['duplicates']):
+                comparison['issues'].append("⚠️ JSON has same number of duplicates as production")
+            else:
+                comparison['issues'].append("❌ JSON has MORE duplicates than production")
+        elif not json_analysis['duplicates'] and production_analysis['duplicates']:
+            comparison['improvement'] = True
+            comparison['recommendations'].append("✅ JSON eliminates all quiz duplication from production")
+        elif json_analysis['duplicates'] and not production_analysis['duplicates']:
+            comparison['issues'].append("❌ JSON introduces quiz duplication not present in production")
+        else:
+            comparison['recommendations'].append("✅ Both JSON and production have no quiz duplication")
+
+        # Check question counts
+        if json_analysis['total_questions'] != production_analysis['total_questions']:
+            if json_analysis['total_questions'] > production_analysis['total_questions']:
+                comparison['recommendations'].append(f"📈 JSON adds {json_analysis['total_questions'] - production_analysis['total_questions']} new questions")
+            else:
+                comparison['issues'].append(f"📉 JSON has {production_analysis['total_questions'] - json_analysis['total_questions']} fewer questions than production")
+
+        print(f"\n🔍 Quiz Content Comparison:")
+        print(f"   - JSON Duplicates: {comparison['json_duplicates']}")
+        print(f"   - Production Duplicates: {comparison['production_duplicates']}")
+        print(f"   - Improvement: {'✅ Yes' if comparison['improvement'] else '❌ No'}")
+
+        if comparison['issues']:
+            print(f"\n⚠️ Issues Found:")
+            for issue in comparison['issues']:
+                print(f"   - {issue}")
+
+        if comparison['recommendations']:
+            print(f"\n💡 Recommendations:")
+            for rec in comparison['recommendations']:
+                print(f"   - {rec}")
+
+        return comparison
 
     def compare_json_vs_production(self):
         """Compare JSON data with production state to identify changes"""
@@ -732,11 +986,67 @@ This report analyzes the proposed update to Course 6 ("Youth Impact Training Pro
                     report_content += f"- **{conflict['type']}:** {conflict['lesson_title']} (ID: {conflict['production_id']})\n"
                     report_content += f"  - Details: {conflict['details']}\n"
 
+            # Add quiz duplication analysis
+            quiz_analysis = self.analysis_results.get('quiz_duplication', {})
+            json_quiz = quiz_analysis.get('json_analysis', {})
+            prod_quiz = quiz_analysis.get('production_analysis', {})
+            comparison = quiz_analysis.get('comparison', {})
+
+            report_content += f"""
+
+## 4. Quiz Duplication Analysis
+
+### JSON Quiz Content Analysis
+- **Total Lessons with Quizzes:** {json_quiz.get('total_lessons', 0)}
+- **Total Quizzes:** {json_quiz.get('total_quizzes', 0)}
+- **Total Questions:** {json_quiz.get('total_questions', 0)}
+- **Unique Question Fingerprints:** {len(json_quiz.get('question_fingerprints', {}))}
+- **Duplicated Questions:** {len(json_quiz.get('duplicates', {}))}
+
+### Production Quiz Content Analysis
+- **Total Lessons with Quizzes:** {prod_quiz.get('total_lessons', 0)}
+- **Total Quizzes:** {prod_quiz.get('total_quizzes', 0)}
+- **Total Questions:** {prod_quiz.get('total_questions', 0)}
+- **Unique Question Fingerprints:** {len(prod_quiz.get('question_fingerprints', {}))}
+- **Duplicated Questions:** {len(prod_quiz.get('duplicates', {}))}
+
+### Quiz Content Comparison
+- **JSON Duplicates:** {comparison.get('json_duplicates', 0)}
+- **Production Duplicates:** {comparison.get('production_duplicates', 0)}
+- **Improvement:** {'✅ YES' if comparison.get('improvement', False) else '❌ NO'}
+
+"""
+
+            # Add duplicate details if found
+            if json_quiz.get('duplicates'):
+                report_content += "#### Duplicated Questions in JSON:\n"
+                for i, (fingerprint, locations) in enumerate(json_quiz['duplicates'].items(), 1):
+                    question_text = fingerprint.split('|')[0]
+                    report_content += f"{i}. **Question:** \"{question_text}\"\n"
+                    report_content += f"   **Appears in:** {len(locations)} lessons\n"
+                    for loc in locations:
+                        report_content += f"   - {loc['lesson_id']}: {loc['lesson_title']}\n"
+                    report_content += "\n"
+            else:
+                report_content += "✅ **NO DUPLICATE QUESTIONS FOUND IN JSON**\n\n"
+
+            if comparison.get('issues'):
+                report_content += "#### Issues Identified:\n"
+                for issue in comparison['issues']:
+                    report_content += f"- {issue}\n"
+                report_content += "\n"
+
+            if comparison.get('recommendations'):
+                report_content += "#### Recommendations:\n"
+                for rec in comparison['recommendations']:
+                    report_content += f"- {rec}\n"
+                report_content += "\n"
+
             # Add validation results
             validation = self.analysis_results.get('validation', {})
             report_content += f"""
 
-## 4. Validation Results
+## 5. Validation Results
 
 - **Django Model Validation:** {'✅ PASS' if validation.get('django_model_validation', False) else '❌ FAIL'}
 - **Foreign Key Validation:** {'✅ PASS' if validation.get('foreign_key_validation', False) else '❌ FAIL'}
@@ -755,7 +1065,7 @@ This report analyzes the proposed update to Course 6 ("Youth Impact Training Pro
 
             report_content += f"""
 
-## 5. Risk Assessment
+## 6. Risk Assessment
 
 ### Impact Assessment
 - **Student Impact:** {impact.get('student_impact', 'UNKNOWN')}
@@ -866,15 +1176,19 @@ This report analyzes the proposed update to Course 6 ("Youth Impact Training Pro
             print("\n❌ VERIFICATION FAILED: Comparison analysis failed")
             return False
 
-        # Step 6: Perform validation checks
+        # Step 6: Analyze quiz duplication
+        if not self.analyze_quiz_duplication():
+            print("\n⚠️ WARNING: Quiz duplication analysis encountered issues")
+
+        # Step 7: Perform validation checks
         if not self.perform_validation_checks():
             print("\n⚠️ WARNING: Validation checks encountered issues")
 
-        # Step 7: Assess risks and impact
+        # Step 8: Assess risks and impact
         if not self.assess_risks_and_impact():
             print("\n⚠️ WARNING: Risk assessment encountered issues")
 
-        # Step 8: Generate verification report
+        # Step 9: Generate verification report
         report_file = self.generate_verification_report()
         if not report_file:
             print("\n❌ VERIFICATION FAILED: Could not generate report")
@@ -892,6 +1206,17 @@ This report analyzes the proposed update to Course 6 ("Youth Impact Training Pro
         print(f"   - Risks Identified: {len(self.analysis_results.get('risks', []))}")
         print(f"   - Errors: {len(self.errors)}")
         print(f"   - Warnings: {len(self.warnings)}")
+
+        # Quiz duplication summary
+        quiz_analysis = self.analysis_results.get('quiz_duplication', {})
+        json_duplicates = len(quiz_analysis.get('json_analysis', {}).get('duplicates', {}))
+        production_duplicates = len(quiz_analysis.get('production_analysis', {}).get('duplicates', {}))
+        improvement = quiz_analysis.get('comparison', {}).get('improvement', False)
+
+        print(f"\n🎯 Quiz Duplication Analysis:")
+        print(f"   - JSON Duplicate Questions: {json_duplicates}")
+        print(f"   - Production Duplicate Questions: {production_duplicates}")
+        print(f"   - Quiz Quality Improvement: {'✅ YES' if improvement else '❌ NO'}")
 
         # Determine overall status
         critical_errors = len(self.errors)

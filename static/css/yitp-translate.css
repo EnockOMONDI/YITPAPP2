@@ -221,9 +221,72 @@
     color: #1a2e53 !important;
 }
 
-/* Hide Google Translate banner and branding */
-.goog-te-banner-frame {
+/* COMPREHENSIVE GOOGLE TRANSLATE BANNER HIDING */
+/* Hide all possible Google Translate banner elements */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+body > .skiptranslate:not([id*="google_translate_element"]),
+.skiptranslate iframe,
+iframe.skiptranslate,
+iframe[src*="translate.google"],
+iframe[src*="translate_a"],
+[id*="goog-te-banner"],
+[class*="goog-te-banner"],
+[id*="google_translate_banner"],
+[class*="google_translate_banner"] {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    position: absolute !important;
+    left: -10000px !important;
+    top: -10000px !important;
+    z-index: -1 !important;
+    overflow: hidden !important;
+}
+
+/* Prevent Google from modifying body styles */
+body[style*="top"],
+body[style*="margin-top"],
+body[style*="padding-top"] {
+    top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Force body to stay at top */
+body {
+    top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Ensure YITP navbar stays at top and isn't affected by Google Translate */
+.header__area,
+.header__transparent,
+.header__sticky {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Prevent any element from pushing navbar down */
+.header__area * {
+    margin-top: 0 !important;
+}
+
+/* Override any Google Translate positioning on page elements */
+html[style*="top"],
+html[style*="margin-top"],
+html[style*="padding-top"] {
+    top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span:first-child {

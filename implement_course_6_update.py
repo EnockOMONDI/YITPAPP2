@@ -56,7 +56,7 @@ class Course6UpdateImplementer:
     def __init__(self):
         self.course_id = 6
         self.module_id = 14
-        self.json_file_path = "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courseunits/YITP_Course6_Module1_WRAPPED_vMatching.json"
+        self.json_file_path = "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courseunits/YITP_Course6_Module1_UPDATED_with_quizzes.json"
         self.json_data = None
         self.initial_state = {}
         self.new_lessons_created = []

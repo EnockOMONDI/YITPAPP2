@@ -90,38 +90,131 @@ function applyYITPStyling() {
     }
 }
 
-// Hide Google Translate banner (targeted approach)
+// Comprehensive Google Translate banner hiding system
 function hideGoogleTranslateBanner() {
-    console.log('🚫 Hiding Google Translate banner...');
+    console.log('🚫 Aggressively hiding Google Translate banners...');
 
-    // Only hide actual banner elements, not dropdown containers
+    // Comprehensive list of banner selectors
     const bannerSelectors = [
         '.goog-te-banner-frame',
-        '.goog-te-banner-frame.skiptranslate'
+        '.goog-te-banner-frame.skiptranslate',
+        'body > .skiptranslate:not([id*="google_translate_element"])',
+        '.skiptranslate iframe',
+        'iframe.skiptranslate',
+        'iframe[src*="translate.google"]',
+        'iframe[src*="translate_a"]',
+        '[id*="goog-te-banner"]',
+        '[class*="goog-te-banner"]',
+        '[id*="google_translate_banner"]',
+        '[class*="google_translate_banner"]'
     ];
+
+    let hiddenCount = 0;
 
     bannerSelectors.forEach(selector => {
         const elements = document.querySelectorAll(selector);
         elements.forEach(element => {
-            // Only hide if it's actually a banner (has banner-like characteristics)
-            if (element.innerHTML && (
-                element.innerHTML.includes('Google Translate') ||
-                element.innerHTML.includes('Translated by') ||
-                element.style.position === 'fixed' && element.style.top === '0px'
-            )) {
-                element.style.display = 'none';
-                element.style.visibility = 'hidden';
-                element.style.opacity = '0';
-                element.style.height = '0';
-                element.style.overflow = 'hidden';
+            // Hide all banner elements aggressively
+            element.style.display = 'none';
+            element.style.visibility = 'hidden';
+            element.style.opacity = '0';
+            element.style.height = '0';
+            element.style.width = '0';
+            element.style.position = 'absolute';
+            element.style.left = '-10000px';
+            element.style.top = '-10000px';
+            element.style.zIndex = '-1';
+            element.style.overflow = 'hidden';
+
+            // Remove from DOM if possible
+            if (element.parentNode) {
+                element.parentNode.removeChild(element);
+                hiddenCount++;
             }
         });
     });
 
-    // Reset body top margin/padding that Google might add
+    // Force reset body styles that Google modifies
     document.body.style.top = '0';
     document.body.style.marginTop = '0';
     document.body.style.paddingTop = '0';
+    document.body.style.position = '';
+
+    // Remove any style attributes Google adds to body
+    const bodyStyle = document.body.getAttribute('style');
+    if (bodyStyle && (bodyStyle.includes('top:') || bodyStyle.includes('margin-top:') || bodyStyle.includes('padding-top:'))) {
+        document.body.removeAttribute('style');
+    }
+
+    if (hiddenCount > 0) {
+        console.log(`✅ Hidden ${hiddenCount} Google Translate banner elements`);
+    }
+}
+
+// Set up continuous banner monitoring
+function setupBannerMonitoring() {
+    console.log('👁️ Setting up continuous Google Translate banner monitoring...');
+
+    // Initial banner hiding
+    hideGoogleTranslateBanner();
+
+    // Set up MutationObserver to watch for new banner elements
+    const observer = new MutationObserver(function(mutations) {
+        let shouldHideBanners = false;
+
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1) { // Element node
+                        // Check if the added node is a banner or contains banner elements
+                        if (node.className && (
+                            node.className.includes('goog-te-banner') ||
+                            node.className.includes('skiptranslate')
+                        )) {
+                            shouldHideBanners = true;
+                        }
+
+                        // Check for banner elements within the added node
+                        if (node.querySelector && (
+                            node.querySelector('.goog-te-banner-frame') ||
+                            node.querySelector('.skiptranslate iframe') ||
+                            node.querySelector('iframe[src*="translate"]')
+                        )) {
+                            shouldHideBanners = true;
+                        }
+                    }
+                });
+            }
+
+            // Check for style changes to body element
+            if (mutation.type === 'attributes' &&
+                mutation.target === document.body &&
+                mutation.attributeName === 'style') {
+                const bodyStyle = document.body.getAttribute('style');
+                if (bodyStyle && (bodyStyle.includes('top:') || bodyStyle.includes('margin'))) {
+                    shouldHideBanners = true;
+                }
+            }
+        });
+
+        if (shouldHideBanners) {
+            console.log('🔍 Detected Google Translate banner changes, hiding...');
+            hideGoogleTranslateBanner();
+        }
+    });
+
+    // Start observing
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+    });
+
+    // Also run banner hiding periodically as backup
+    setInterval(hideGoogleTranslateBanner, 1000);
+
+    console.log('✅ Banner monitoring system active');
 }
 
 // Initialize everything
@@ -145,8 +238,8 @@ function initTranslation() {
         console.log('📡 Loading Google Translate API for native dropdown...');
     }
 
-    // Set up banner hiding
-    setTimeout(hideGoogleTranslateBanner, 2000);
+    // Set up comprehensive banner monitoring system
+    setTimeout(setupBannerMonitoring, 1000);
 
     console.log('✅ YITP Native Translation initialization complete');
 }
