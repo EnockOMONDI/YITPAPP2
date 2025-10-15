@@ -6,7 +6,7 @@
 {% block extra_css %}
 <style>
 .trial-hero {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    background: linear-gradient(135deg, #ff5d15 0%, #1a2e53 100%);
     color: white;
     padding: 60px 0;
     margin-bottom: 40px;
@@ -24,10 +24,11 @@
 }
 
 .trial-cta-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, rgba(255,93,21,0.1) 0%, rgba(26,46,83,0.1) 100%);
     padding: 40px 0;
     border-radius: 15px;
     margin: 40px 0;
+    border: 2px solid #ff5d15;
 }
 
 .course-preview {
@@ -49,7 +50,8 @@
 }
 
 .lesson-preview-item.accessible {
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    background: linear-gradient(135deg, rgba(255,93,21,0.1) 0%, rgba(255,93,21,0.05) 100%);
+    border-left: 4px solid #ff5d15;
 }
 
 .lesson-preview-item.locked {
@@ -100,9 +102,9 @@
         <div class="row mb-5">
             <div class="col-lg-8">
                 <div class="course-preview">
-                    <div class="p-4 bg-primary text-white">
-                        <h3 class="mb-2">{{ course.title }}</h3>
-                        <p class="mb-0">{{ course.description|truncatewords:20|striptags }}</p>
+                    <div class="p-4 text-white" style="background: linear-gradient(135deg, #ff5d15 0%, #1a2e53 100%);">
+                        <h3 class="mb-2 text-white">{{ course.title }}</h3>
+                        <p class="mb-0 text-white">{{ course.description|truncatewords:20|striptags }}</p>
                     </div>
                     
                     <div class="lesson-preview-list">
@@ -110,7 +112,7 @@
                             <div class="lesson-preview-item {% if forloop.counter <= 2 %}accessible{% else %}locked{% endif %}">
                                 <div class="lesson-icon me-3">
                                     {% if forloop.counter <= 2 %}
-                                        <i class="fas fa-play-circle text-success fa-2x"></i>
+                                        <i class="fas fa-play-circle fa-2x" style="color: #ff5d15;"></i>
                                     {% else %}
                                         <i class="fas fa-lock text-muted fa-2x"></i>
                                     {% endif %}
@@ -121,7 +123,7 @@
                                 </div>
                                 <div class="lesson-status">
                                     {% if forloop.counter <= 2 %}
-                                        <span class="badge bg-success">Trial Access</span>
+                                        <span class="badge text-white" style="background: #ff5d15;">Trial Access</span>
                                     {% else %}
                                         <span class="badge bg-secondary">Upgrade Required</span>
                                     {% endif %}
@@ -151,13 +153,13 @@
                 <!-- Trial Benefits -->
                 <div class="card trial-feature-card mb-4">
                     <div class="card-body text-center">
-                        <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                        <i class="fas fa-star fa-3x mb-3" style="color: #ff5d15;"></i>
                         <h5>What's Included</h5>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>First 2 lessons</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Interactive quizzes</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Progress tracking</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Full learning experience</li>
+                            <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>First 2 lessons</li>
+                            <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>Interactive quizzes</li>
+                            <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>Progress tracking</li>
+                            <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>Full learning experience</li>
                         </ul>
                     </div>
                 </div>
@@ -180,7 +182,7 @@
             <div class="col-md-4">
                 <div class="card trial-feature-card">
                     <div class="card-body text-center">
-                        <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                        <i class="fas fa-clock fa-3x mb-3" style="color: #ff5d15;"></i>
                         <h5>No Time Pressure</h5>
                         <p>Take your time to explore the first 2 lessons at your own pace. No expiration on trial access.</p>
                     </div>
@@ -189,7 +191,7 @@
             <div class="col-md-4">
                 <div class="card trial-feature-card">
                     <div class="card-body text-center">
-                        <i class="fas fa-credit-card fa-3x text-success mb-3"></i>
+                        <i class="fas fa-credit-card fa-3x mb-3" style="color: #1a2e53;"></i>
                         <h5>No Payment Required</h5>
                         <p>Start learning immediately without entering any payment information. Upgrade only when you're ready.</p>
                     </div>
@@ -198,7 +200,7 @@
             <div class="col-md-4">
                 <div class="card trial-feature-card">
                     <div class="card-body text-center">
-                        <i class="fas fa-graduation-cap fa-3x text-warning mb-3"></i>
+                        <i class="fas fa-graduation-cap fa-3x mb-3" style="color: #ff5d15;"></i>
                         <h5>Full Experience</h5>
                         <p>Experience the complete learning flow including lessons, quizzes, and progress tracking.</p>
                     </div>
@@ -219,7 +221,7 @@
                         <i class="fas fa-info-circle me-2"></i>
                         You already have an active trial for {{ user_trial_status.trial_course.title }}.
                     </div>
-                    <a href="{% url 'courses:course_detail' user_trial_status.trial_course.slug %}" class="btn btn-primary btn-lg">
+                    <a href="{% url 'courses:course_detail' user_trial_status.trial_course.slug %}" class="btn btn-lg text-white" style="background: #ff5d15; border-color: #ff5d15;">
                         <i class="fas fa-arrow-right me-2"></i>Continue Your Trial
                     </a>
                 {% elif user.profile.has_any_payment_access %}
@@ -227,13 +229,13 @@
                         <i class="fas fa-check-circle me-2"></i>
                         You already have paid access to courses. No trial needed!
                     </div>
-                    <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-success btn-lg">
+                    <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-lg text-white" style="background: #1a2e53; border-color: #1a2e53;">
                         <i class="fas fa-play me-2"></i>Access Full Course
                     </a>
                 {% else %}
                     <form method="post" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-primary btn-lg">
+                        <button type="submit" class="btn btn-lg text-white" style="background: linear-gradient(135deg, #ff5d15 0%, #1a2e53 100%); border: none;">
                             <i class="fas fa-play me-2"></i>Start Free Trial Now
                         </button>
                     </form>

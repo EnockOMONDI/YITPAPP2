@@ -108,18 +108,18 @@ class TrialAccessService:
             except:
                 pass
             
-            # Check if user has regular enrollment
+            # Check if user has regular enrollment (paid or completed)
             from progress.models import Enrollment
             enrollment = Enrollment.objects.filter(
                 student=user,
                 course=lesson.module.course,
-                enrollment_type='paid'
+                status__in=['active', 'completed']
             ).first()
             
             if enrollment:
                 return {
                     'can_access': True,
-                    'reason': 'User has paid enrollment',
+                    'reason': 'User has course enrollment',
                     'is_trial_user': False,
                     'lesson_position': None
                 }
@@ -201,18 +201,18 @@ class TrialAccessService:
             except:
                 pass
             
-            # Check if user has regular enrollment
+            # Check if user has regular enrollment (paid or completed)
             from progress.models import Enrollment
             enrollment = Enrollment.objects.filter(
                 student=user,
                 course=quiz.course,
-                enrollment_type='paid'
+                status__in=['active', 'completed']
             ).first()
-            
+
             if enrollment:
                 return {
                     'can_access': True,
-                    'reason': 'User has paid enrollment',
+                    'reason': 'User has course enrollment',
                     'is_trial_user': False,
                     'associated_lesson': getattr(quiz, 'lesson', None)
                 }

@@ -18007,3 +18007,32 @@ INFO 2025-10-12 23:28:33,163 basehttp 98389 6176141312 "GET /static/assets/fonts
 INFO 2025-10-12 23:28:33,199 basehttp 98389 6176141312 "GET /static/assets/img/about/D.jpg HTTP/1.1" 200 197385
 INFO 2025-10-12 23:28:33,201 basehttp 98389 6192967680 "GET /static/assets/img/about/D2.jpg HTTP/1.1" 200 366629
 INFO 2025-10-12 23:28:39,929 basehttp 98389 6125662208 "GET / HTTP/1.1" 200 65029
+INFO 2025-10-15 04:09:07,254 autoreload 10376 8377088704 Watching for file changes with StatReloader
+INFO 2025-10-15 04:09:23,471 basehttp 10376 6196834304 "GET / HTTP/1.1" 200 60351
+INFO 2025-10-15 04:09:23,655 basehttp 10376 6196834304 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-10-15 04:09:23,667 basehttp 10376 6196834304 "GET /static/assets/img/hero/hero-1.png HTTP/1.1" 304 0
+INFO 2025-10-15 04:09:23,675 basehttp 10376 6196834304 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-10-15 04:09:23,705 basehttp 10376 6196834304 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 304 0
+INFO 2025-10-15 04:09:23,705 basehttp 10376 6213660672 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 304 0
+INFO 2025-10-15 04:09:23,723 basehttp 10376 6196834304 "GET /static/css/yitp-translate.css HTTP/1.1" 304 0
+INFO 2025-10-15 04:09:26,348 basehttp 10376 6196834304 "GET /login/ HTTP/1.1" 200 13704
+INFO 2025-10-15 04:09:29,006 basehttp 10376 6196834304 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-10-15 04:09:29,038 basehttp 10376 6196834304 "GET / HTTP/1.1" 200 65934
+INFO 2025-10-15 04:09:35,810 basehttp 10376 6196834304 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-10-15 04:09:35,855 basehttp 10376 6196834304 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 04:09:35,912 basehttp 10376 6196834304 "GET /static/img/courses/default-course-thumbnail.jpeg HTTP/1.1" 200 192434
+INFO 2025-10-15 04:09:36,494 basehttp 10376 6196834304 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-10-15 04:09:39,952 basehttp 10376 6196834304 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 90557
+INFO 2025-10-15 04:09:39,997 basehttp 10376 6196834304 "GET /static/css/yitp-course-branding.css HTTP/1.1" 200 14100
+INFO 2025-10-15 04:09:40,001 basehttp 10376 6213660672 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-10-15 04:09:45,512 basehttp 10376 6196834304 "GET /lms/courses/trial/start/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 23428
+WARNING 2025-10-15 04:09:45,555 basehttp 10376 6196834304 "GET /static/images/trial-illustration.svg HTTP/1.1" 404 1846
+INFO 2025-10-15 04:09:56,136 basehttp 10376 6196834304 "GET /lms/courses/trial/start/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 23428
+WARNING 2025-10-15 04:09:56,188 basehttp 10376 6196834304 "GET /static/images/trial-illustration.svg HTTP/1.1" 404 1846
+INFO 2025-10-15 04:11:57,246 basehttp 10376 6196834304 "POST /lms/courses/trial/start/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 302 0
+INFO 2025-10-15 04:11:57,340 basehttp 10376 6196834304 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 91487
+INFO 2025-10-15 04:12:06,253 basehttp 10376 6196834304 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/ HTTP/1.1" 200 126368
+WARNING 2025-10-15 04:12:35,805 basehttp 10376 6213660672 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-10-15 04:12:35,864 basehttp 10376 6230487040 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-10-15 04:12:35,871 log 10376 6196834304 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 04:12:35,872 basehttp 10376 6196834304 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533

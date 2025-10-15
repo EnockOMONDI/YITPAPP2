@@ -282,7 +282,7 @@ class Lesson(models.Model):
             enrollment = Enrollment.objects.get(
                 student=user,
                 course=self.module.course,
-                status='active'
+                status__in=['active', 'completed']
             )
         except Enrollment.DoesNotExist:
             return False, "You must be enrolled in this course to access lessons."
