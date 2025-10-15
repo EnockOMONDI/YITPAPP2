@@ -135,9 +135,9 @@
 <!-- Trial Benefits Showcase -->
 {% if not user.profile.has_active_trial and not user.profile.has_any_payment_access and not user.profile.trial_lessons_accessed %}
 <div class="trial-benefits-showcase mb-3">
-    <div class="card border-primary">
-        <div class="card-header bg-primary text-white">
-            <h6 class="mb-0">
+    <div class="card" style="border: 2px solid #ff5d15;">
+        <div class="card-header text-white" style="background: linear-gradient(135deg, #ff5d15 0%, #1a2e53 100%);">
+            <h6 class="mb-0 text-white">
                 <i class="fas fa-gift me-2"></i>Try Before You Buy
             </h6>
         </div>
@@ -146,18 +146,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-check text-success me-2"></i>Access first 2 lessons</li>
-                        <li><i class="fas fa-check text-success me-2"></i>Take lesson quizzes</li>
+                        <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>Access first 2 lessons</li>
+                        <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>Take lesson quizzes</li>
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-check text-success me-2"></i>Experience full learning flow</li>
-                        <li><i class="fas fa-check text-success me-2"></i>No payment required</li>
+                        <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>Experience full learning flow</li>
+                        <li><i class="fas fa-check me-2" style="color: #ff5d15;"></i>No payment required</li>
                     </ul>
                 </div>
             </div>
-            <a href="{% url 'courses:start_trial' course.slug %}" class="btn btn-primary">
+            <a href="{% url 'courses:start_trial' course.slug %}" class="btn text-white" style="background: #ff5d15; border-color: #ff5d15;">
                 <i class="fas fa-play me-1"></i>Start Free Trial
             </a>
         </div>
@@ -182,12 +182,12 @@
 }
 
 .trial-benefits-showcase .card {
-    background: linear-gradient(135deg, #f8f9ff 0%, #e6f3ff 100%);
-    border: 2px solid #007bff;
+    background: linear-gradient(135deg, rgba(255,93,21,0.05) 0%, rgba(26,46,83,0.05) 100%);
+    border: 2px solid #ff5d15;
 }
 
 .trial-benefits-showcase .card-header {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    background: linear-gradient(135deg, #ff5d15 0%, #1a2e53 100%);
 }
 
 @media (max-width: 768px) {

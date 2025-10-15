@@ -115,7 +115,7 @@ class CourseDetailView(DetailView):
                 enrollment = Enrollment.objects.get(
                     student=self.request.user,
                     course=course,
-                    status='active'
+                    status__in=['active', 'completed']
                 )
 
                 # Process each module and lesson for accessibility
@@ -153,7 +153,7 @@ class CourseDetailView(DetailView):
                 enrollment = Enrollment.objects.get(
                     student=self.request.user,
                     course=course,
-                    status='active'
+                    status__in=['active', 'completed']
                 )
                 context['enrollment'] = enrollment
                 context['is_enrolled'] = True
@@ -337,7 +337,7 @@ class ModuleDetailView(LoginRequiredMixin, DetailView):
             enrollment = Enrollment.objects.get(
                 student=self.request.user,
                 course=module.course,
-                status='active'
+                status__in=['active', 'completed']
             )
             context['enrollment'] = enrollment
         except Enrollment.DoesNotExist:
@@ -398,7 +398,7 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
             enrollment = Enrollment.objects.get(
                 student=self.request.user,
                 course=lesson.module.course,
-                status='active'
+                status__in=['active', 'completed']
             )
             context['enrollment'] = enrollment
         except Enrollment.DoesNotExist:
