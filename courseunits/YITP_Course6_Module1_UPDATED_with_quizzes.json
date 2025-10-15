@@ -1,80 +1,104 @@
 {
-  "session_id": "YITP-UPL-Module1-20251009175120",
-  "course_title": "Youth Impact Training Programme (YITP)",
-  "course_description": "<p>YITP is organized into six units designed to transform participants’ mindset, skills, and career prospects. Unit 1, Understanding Purpose in Life (UPL), focuses on discovering strengths, clarifying values, setting goals, and drafting a personal mission statement through self-discovery exercises and workshops.</p>",
-  "course_category": "Personal Development",
-  "difficulty_level": "beginner",
-  "estimated_duration": 510,
-  "price": 0.0,
-  "currency": "KES",
-  "weeks": 1,
-  "total_sessions": 8,
+  "course_info": {
+    "id": 6,
+    "title": "Youth Impact Training Programme (YITP)",
+    "description": "<p>YITP is organized into six units designed to transform participants’ mindset, skills, and career prospects. Unit 1, Understanding Purpose in Life (UPL), focuses on discovering strengths, clarifying values, setting goals, and drafting a personal mission statement through self-discovery exercises and workshops.</p>",
+    "instructor": "yitp team",
+    "price": 0.0,
+    "is_published": true,
+    "created_at": "2025-08-23T19:05:02.076998+00:00",
+    "export_timestamp": "2025-10-12T23:46:01.695456",
+    "export_note": "Exported with professional YITP styling applied to all lessons"
+  },
   "modules": [
     {
+      "id": 14,
       "title": "Module 1: Understanding Purpose in Life (UPL)",
-      "description": "Unit 1, Understanding Purpose in Life (UPL), focuses on discovering strengths, clarifying values, setting goals, and drafting a personal mission statement.",
+      "description": "An introduction to purpose, vision, values, and goal-setting for youth impact.",
+      "sort_order": 1,
       "lessons": [
         {
-          "id": "YITP-UPL-M1-L01",
+          "id": 103,
           "title": "Lesson 1 – Introduction to Life’s Purpose (1 hour)",
-          "content_type": "enhanced",
-          "estimated_duration": 60,
+          "content": "<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 1 – Introduction to Life's Purpose (1 hour)\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\">\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <i class=\"fas fa-check-circle text-success me-2\"></i>\n                                <strong>What is life's purpose?</strong> - 7 Questions for Clarity\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <i class=\"fas fa-check-circle text-success me-2\"></i>\n                                <strong>Difference between goals, vision, and purpose</strong> - Understanding the hierarchy\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <i class=\"fas fa-check-circle text-success me-2\"></i>\n                                <strong>Purpose-driven lives</strong> - Gandhi's nonviolence, Mandela's fight for justice, Mother Teresa's compassion\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">\n                            <strong>The Three Bricklayers Story:</strong> During the rebuilding of St. Paul's Cathedral after a fire burned through London in 1666, an architect visited the project site and approached three bricklayers. He asked them each individually, \"What are you doing?\"\n                        </p>\n                        \n                        <p class=\"mb-3 lead\">\n                            The first bricklayer replied, \"I'm a bricklayer. I'm working hard to lay bricks to earn money so I can feed my family.\" The man seemed tired and wasn't as far along with his work as the others.\n                        </p>\n                        \n                        <p class=\"mb-3 lead\">\n                            The second bricklayer says, \"I'm a builder. I'm building the finest, strongest wall. This wall will be a foundation for this building and will protect everyone who is inside.\"\n                        </p>\n                        \n                        <p class=\"mb-3 lead\">\n                            The third bricklayer replied with energy and a light in his eye, \"I'm a cathedral builder. I'm building a great cathedral, where people can gather, pray and celebrate the Almighty.\"\n                        </p>\n                        \n                        <p class=\"mb-3 lead\">\n                            <strong>Key Insight:</strong> This demonstrates that everything we experience is based on our understanding of purpose and depth of vision. Everything is \"an inside job.\" How we interpret what we do, or experience, is based on the purpose of the action and the actor, for the actor's mindset reflects on purpose.\n                        </p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- 7 Questions for Clarity Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>7 Questions for Clarity\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\">\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <strong>1.</strong> What makes you feel most alive?\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <strong>2.</strong> What problem in the world gets you most emotionally charged?\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <strong>3.</strong> What are you naturally good at?\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <strong>4.</strong> What is your life's most meaningful event or experience?\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <strong>5.</strong> What would you do if you had zero fear?\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <strong>6.</strong> Who is your idol, living or dead, and why?\n                            </div>\n                            <div class=\"list-group-item border-0 px-0 py-2\">\n                                <strong>7.</strong> What do you want to be your enduring legacy?\n                            </div>\n                        </div>\n                        <div class=\"alert alert-info mt-3\">\n                            <i class=\"fas fa-info-circle me-2\"></i>\n                            <strong>Reflection:</strong> Answer these questions sincerely, for therein lies the discovery of your purpose.\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Purpose vs Vision vs Goals Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\">\n                    <div class=\"card-header bg-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-tasks me-2\"></i>Purpose vs Vision vs Goals\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-white pt-3\">\n                        <div class=\"row\">\n                            <div class=\"col-md-4 mb-3\">\n                                <div class=\"card border-0 bg-light\">\n                                    <div class=\"card-body text-center\">\n                                        <h5 style=\"color: #1a2e53;\">Purpose</h5>\n                                        <p class=\"small\">The reason for which something is done or created. Your purpose is the reason for your being.</p>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 mb-3\">\n                                <div class=\"card border-0 bg-light\">\n                                    <div class=\"card-body text-center\">\n                                        <h5 style=\"color: #ff5d15;\">Vision</h5>\n                                        <p class=\"small\">An act or power of anticipating which will or may come to be – giving direction for the outcome of goals and purpose.</p>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-md-4 mb-3\">\n                                <div class=\"card border-0 bg-light\">\n                                    <div class=\"card-body text-center\">\n                                        <h5 style=\"color: #1a2e53;\">Goals</h5>\n                                        <p class=\"small\">Specific, desired outcomes that guide actions and effort towards a particular predetermined end.</p>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"alert alert-warning\">\n                            <i class=\"fas fa-arrow-right me-2\"></i>\n                            <strong>Remember:</strong> Purpose begets vision → Vision begets goals\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Activities Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\">\n                    <div class=\"card-header yitp-activity-box border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-tasks me-2\"></i>Activities\n                        </h3>\n                    </div>\n                    <div class=\"card-body yitp-activity-box pt-3\">\n                        <div class=\"alert alert-info border-0 mb-3\">\n                            <i class=\"fas fa-play-circle me-2\"></i>\n                            <strong>Reflective Journaling:</strong> \"When did I feel most alive and fulfilled?\" Take time to journal about these moments and what they reveal about your purpose.\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Examples Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Purpose-Driven Lives\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">\n                            <strong>Gandhi:</strong> Left his law practice behind and focused on liberating Asia and Africa from the yolks of colonial rule through nonviolence.\n                        </blockquote>\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">\n                            <strong>Mandela:</strong> Dedicated his life to fighting for justice and equality, transforming a nation through his unwavering commitment.\n                        </blockquote>\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">\n                            <strong>Mother Teresa:</strong> \"Help the poor while living among them, sharing their experience and treating them with kindness, compassion and empathy, but never pity.\"\n                        </blockquote>\n                        <div class=\"alert alert-success\">\n                            <i class=\"fas fa-star me-2\"></i>\n                            <strong>Napoleon Hill's Insight:</strong> Lists Definiteness of Purpose as the top attribute in ensuring achievement.\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n}\n\n.yitp-quote {\n    background: linear-gradient(45deg, #f8f9fa 0%, #ffffff 100%);\n    border-left: 4px solid #ff5d15;\n    position: relative;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>",
           "learning_objectives": "Objective: Understand the concept of purpose and why it matters.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul><li>What is life’s purpose? 7 Questions for Clarity:</li><li>What makes you feel most alive?</li><li>What problem in the world gets you most emotionally charged?</li><li>What are you naturally good at?</li><li>What is your life’s most meaningful event or experience ?</li><li>What would you do if you had zero fear?</li><li>Who is your idol, living or dead, and why?</li><li>What do you want to be your enduring legacy? Answer the foregoing questions sincerely, for therein lies the discovery of yo ur purpose.</li><li>Difference between goals, vision, and purpose.</li><li>Purpose begets vision</li><li>Vision begets goals</li><li>Purpose: The reason for which something is done or created or for which something exists. Your purpose is the reason for your being.</li><li>Vision: An act or power of anticipating which will or may come to be – giving direction for the outcome of goals and purpose</li><li>Goals: specific, desired outcomes that guide actions and effort towards a particular predetermined end</li><li>Purpose -driven lives: Gandhi’s nonviolence, Mandela’s fight for justice, Mother Teresa’s compassion. Gandhi, Mandela and Mother Teresa are shining examples of lives well lived with purpo se. Gandhi left his law practice behind and focused on liberati ng Asia and Africa from the yolks of colonial rule. He often took expeditions to South Africa to fellowship with the who were engaged in freedom struggle. His crown jewel of endeavor came in the form of relentless non -violent resistance against British rule of his nation, India. He summed it all in the following thought. “The main purpose of life is to live rightly, think rightly, act rightly. The soul must languish when we give all our thought to the body.” Mahatma Gandhi Mandela’s purposeful find for the liberation of his nation landed him in much trouble, and he was imprisoned and even labelled a terrorist among other things . It was his purpose that fueled his staying power. And he stayed the course until he birthed a rainbow nation out of Apartheid. “For to be free is not merely to cast off one’s chai ns, but to live in a way that respects and enhances the freedom of others.” – Nelson Mandela Mother Teresa’s life in Calcutta and beyond touched the world in a manner most special. Her compassion lingers on years after her demise. She did not only contribu te to the assuaging of pain, but she also took part in it due to a purpose greater than herself. “Help the poor while living among them, sharing their experience and treating them with kindness, compassion and empathy, but never pity.” – Mother Teresa Napo leon Hill’s 17 Success Principles Lists Definiteness of Purpose as the top attribute in ensuring achievement.  Activity : Reflective journaling —“When did I feel most alive and fulfilled?” journali ze</li><li>n your personal experiences that felt , and those that feel, most meaningful .</li></ul><h3>Core Lesson</h3><p>rebuilding of St. Paul’s Cathedral after a fire burned through London in 1666.</p><p>An architect was visiting the project site and loved to interact with those doing the</p><p>work and approached three bricklayers. He asked them each individually, “what</p><p>are you doing?”.</p><p>The first bricklayer replied, “I’m a bricklayer. I’m working hard to lay bricks to</p><p>earn money so I can feed my family.” The man seemed tired and wasn’t as far</p><p>along with his work as the others.</p><p>The second bricklayer says, “I’m a builder. I’m building the finest, strongest wall.</p><p>This wall will be a foundation for this building and will protect everyone who is</p><p>inside.”</p><p>The third bricklayer replied with energy and a light in his eye, “I’m a cathedral</p><p>builder. I’m building a great cathedral, where people can gather, pray and</p><p>celebrate the Almighty.”</p><p>This is a demonstration that everything we experience is based on our</p><p>we interpret what we do, or experience, is based on the purpose of the action and</p><p>the actor, for the actor’s mindset reflects on purpose.</p><p>•</p><p>o What is life’s purpose? 7 Questions for Clarity:</p><p>1. What makes you feel most alive?</p><p>2. What problem in the world gets you most emotionally charged?</p><p>3. What are you naturally good at?</p><p>4. What is your life’s most meaningful event or experience?</p><p>5. What would you do if you had zero fear?</p><p>6. Who is your idol, living or dead, and why?</p><p>7. What do you want to be your enduring legacy?</p><p>Answer the foregoing questions sincerely, for therein lies the discovery of your purpose.</p><p>o Difference between goals, vision, and purpose.</p><p>1. Purpose begets vision</p><p>2. Vision begets goals</p><p>3. Purpose: The reason for which something is done or created or for which</p><p>something exists. Your purpose is the reason for your being.</p><p>4. Vision: An act or power of anticipating which will or may come to be –</p><p>giving direction for the outcome of goals and purpose</p><p>5. Goals: specific, desired outcomes that guide actions and effort towards a</p><p>particular predetermined end</p><p>o Purpose-driven lives: Gandhi’s nonviolence, Mandela’s fight for justice,</p><p>Mother Teresa’s compassion.</p><p>Gandhi, Mandela and Mother Teresa are shining examples of lives well lived with</p><p>purpose. Gandhi left his law practice behind and focused on liberating Asia and</p><p>Africa from the yolks of colonial rule. He often took expeditions to South Africa</p><p>to fellowship with the who were engaged in freedom struggle.</p><p>His crown jewel of endeavor came in the form of relentless non-violent resistance</p><p>against British rule of his nation, India. He summed it all in the following thought.</p><p>“The main purpose of life is to live rightly, think rightly, act rightly. The soul</p><p>must languish when we give all our thought to the body.” Mahatma Gandhi</p><p>Mandela’s purposeful find for the liberation of his nation landed him in much</p><p>trouble, and he was imprisoned and even labelled a terrorist among other things. It</p><p>was his purpose that fueled his staying power. And he stayed the course until he</p><p>birthed a rainbow nation out of Apartheid.</p><p>“For to be free is not merely to cast off one’s chains, but to live in a way that</p><p>respects and enhances the freedom of others.” – Nelson Mandela</p><p>Mother Teresa’s life in Calcutta and beyond touched the world in a manner most</p><p>special. Her compassion lingers on years after her demise. She did not only</p><p>contribute to the assuaging of pain, but she also took part in it due to a purpose</p><p>greater than herself.</p><p>“Help the poor while living among them, sharing their experience and treating</p><p>them with kindness, compassion and empathy, but never pity.” – Mother Teresa</p><p>Napoleon Hill’s 17 Success Principles Lists Definiteness of Purpose as the top attribute in</p><p>ensuring achievement.</p><p>on your personal experiences that felt, and those that feel, most meaningful.</p><h3>Activities</h3><p>Activity: Reflective journaling—“When did I feel most alive and fulfilled?” journalize</p><h3>Quotes</h3><blockquote>understanding of purpose and depth of vision. Everything is “an inside job.” How</blockquote><h3>Stories</h3><p><a href=\"https://www.google.com/search?q=The%20Story%20of%20the%20Three%20Builders%3A%20The%20story%20of%20the%20three%20bricklayers%20is%20based%20on%20the\">The Story of the Three Builders: The story of the three bricklayers is based on the</a></p><h3>Proverbs</h3></div>",
+          "estimated_duration": 60,
+          "content_type": "text",
           "sort_order": 1,
-          "is_preview": true,
-          "additional_resources": [],
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-02T20:12:16.125871+00:00",
+          "updated_at": "2025-10-12T20:25:03.915149+00:00",
           "assessment": {
             "quiz": {
+              "id": 37,
               "title": "Lesson 1 – Introduction to Life’s Purpose (1 hour) Quiz",
+              "description": "",
+              "time_limit": 10,
+              "max_attempts": 15,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 164,
                   "question_text": "Purpose provides a long-term direction that informs goals and actions.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 1,
                   "explanation": "Purpose is the overarching 'why'.",
-                  "sort_order": 1
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 165,
                   "question_text": "Vision is the same as a daily to-do list.",
                   "question_type": "true_false",
-                  "correct_answer": "false",
                   "points": 1,
+                  "sort_order": 2,
                   "explanation": "Vision is a future picture.",
-                  "sort_order": 2
+                  "correct_answer": "false"
                 },
                 {
+                  "id": 166,
                   "question_text": "Which sequence is correct?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "Purpose begets vision; vision begets goals.",
                   "options": [
                     "Goals → Vision → Purpose",
                     "Vision → Goals → Purpose",
                     "Purpose → Vision → Goals",
                     "Goals → Purpose → Vision"
                   ],
-                  "correct_answer": "Purpose → Vision → Goals",
-                  "points": 1,
-                  "explanation": "Purpose begets vision; vision begets goals.",
-                  "sort_order": 3
+                  "correct_answer": "Purpose → Vision → Goals"
                 },
                 {
+                  "id": 167,
                   "question_text": "Which question is among the 7 clarity questions?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": "Part of the 7 clarity questions.",
                   "options": [
                     "What did I eat yesterday?",
                     "Who is my idol and why?",
                     "How many tasks are on my list?",
                     "Which job pays most today?"
                   ],
-                  "correct_answer": "Who is my idol and why?",
-                  "points": 1,
-                  "explanation": "Part of the 7 clarity questions.",
-                  "sort_order": 4
+                  "correct_answer": "Who is my idol and why?"
                 },
                 {
+                  "id": 168,
                   "question_text": "Match concept to definition.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "Purpose→why; Vision→future; Goals→targets.",
                   "options": [
                     "A) Purpose",
                     "B) Vision",
@@ -83,76 +107,94 @@
                     "2) Desired future state",
                     "3) Specific, time-bound targets"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "Purpose→why; Vision→future; Goals→targets.",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         },
         {
-          "id": "YITP-UPL-M1-L02",
+          "id": 111,
           "title": "Lesson 2 – The Foundations of Purpose (1.5 hours)",
-          "content_type": "enhanced",
-          "estimated_duration": 90,
+          "content": "\n<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 2 – The Foundations of Purpose (1.5 hours)\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\"><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Napoleon Hill’s Definiteness of Purpose . Definiteness of Purpose – Your True Starting Point {Intro Video Script  Get clear – Know exactly what you want. No vague wishes —paint the picture.  Get hungry – Want it so badly it pulls you out of bed in the morning.  Get moving – Build your plan and take daily action —no excuses.  Stay locked in – Focus your mind so opportunities and res ources find you. Why? Because a clear purpose gives you direction, draws the right people to you, and fuels your persistence when life gets tough. When you have it, you don’t just live life —you design it } Napoleon Hill, one of the greatest voices in perso nal development, said it clearly: “Definiteness of purpose is the starting point of all achievement.” If you want to achieve anything worthwhile, this is where it begins. Let us break it down, The Success Afrika -style:</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Know exactly what you want Don’t just say, “I want success” or “I want more money.” Those are vague wishes. Get crystal clear. Paint a vivid picture in your mind of what you want, what it looks like, feels like, and means for your life.</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Develop a burning desire for it A definite purpose is not a casual wish you think about when it’s convenient. It’s that deep, unshakable desire that keeps you awake at night and gets you out of bed in the morning ready to move.</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Create your game plan Once you know your target and you feel that burni ng desire, lay out your plan. Step by step. And keep it flexible —because life will test you, and you will need to adapt without losing sight of your goal.</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Take consistent daily action Your definite purpose should show up in your daily calendar. Every day y ou do something , big or small , that moves you closer to your goal . And you do not stop until it is done.</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Focus your mind When your mind is locked onto your purpose, something powerful happens: your subconscious starts working for you. You notice opportunit ies, people, and resources that you might have overlooked before. Why does this matter a great deal ?</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>It gives you direction – Your purpose becomes your North Star. You always know if you’re on course or drifting.</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>It attracts resources – People, ideas, and opportunities seem to “find” you because your focus is magnetic.</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>It builds persistence – When the journey gets tough, your purpose gives you the grit to keep going until you win. When you develop definiteness of purpose, you will no longer just live, you will move with intention. That is the difference between drifting through life and creating a life worth living. Zig Ziglar’s Wheel of Life . The Wheel of Life – Your Balance Check Zig Ziglar, one of the greatest motivators of our time, taught that life is like a wheel. If one part of the wheel is flat, your ride through life will be bumpy —no matter how fast you try to go. I like to think of it as your Life ’s Balance Scorecard . There are seven key spokes in this wheel:</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Career – Your Work & Calling Are you doing work that excites you, challenges you, and adds value to others? Your career isn’t just a paycheck —it’s part of your purpose.</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Financial – Your Money & Resources Money isn’t everything, but it touches everything. Are you earning, saving, investing, and giving in ways that support your goals and values?</div><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Spiritual – Your Faith & Inner Compass This is your core —what guides you when life gets messy. Whether through faith,</div></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">week-african-baobab-tree/   The baobab tree is a legendary plant with folktales to boot. It</p><p class=\"mb-3 lead\">water storage.</p><p class=\"mb-3 lead\">In an arid climate, baobabs symbolize life in a landscape where little else can thrive. Its</p><p class=\"mb-3 lead\">large whitish flowers open at night and fall within 24 hours, creating a beautiful display</p><p class=\"mb-3 lead\">at both ends of the cycle.</p><p class=\"mb-3 lead\">Here is an excerpt from One Earth:</p><p class=\"mb-3 lead\">As a succulent, the tree absorbs and stores water from the rainy season in its massive</p><p class=\"mb-3 lead\">trunk, producing a nutrient-dense fruit in the dry season, which can grow up to a foot</p><p class=\"mb-3 lead\">long. The fruit contains tartaric acid and Vitamin C, serving as a vital nutrient and food</p><p class=\"mb-3 lead\">source for many species.</p><p class=\"mb-3 lead\">They are also an essential source of water and shelter for hundreds of animals, including</p><p class=\"mb-3 lead\">birds, lizards, monkeys, and even elephants – which can eat their bark for moisture when</p><p class=\"mb-3 lead\">there is no water nearby. Bats pollinate the flowers, feeding on their nectar.</p><p class=\"mb-3 lead\">If a mere plant is created for specific value and purpose. How much more is your purpose</p><p class=\"mb-3 lead\">of our life is to serve others.</p><p class=\"mb-3 lead\">1. You have a major purpose</p><p class=\"mb-3 lead\">2. You have minor purposes</p><p class=\"mb-3 lead\">3. Your minor purposes must feed into your major purpose, not out of it.</p><p class=\"mb-3 lead\">4. You discover your purpose and you discover your true life’s meaning.</p><p class=\"mb-3 lead\">•</p><p class=\"mb-3 lead\">Definiteness of Purpose – Your True Starting Point</p><p class=\"mb-3 lead\">{Intro Video Script</p><p class=\"mb-3 lead\">Get hungry – Want it so badly it pulls you out of bed in the morning.</p><p class=\"mb-3 lead\">Stay locked in – Focus your mind so opportunities and resources find you.</p><p class=\"mb-3 lead\">Why? Because a clear purpose gives you direction, draws the right people to you, and</p><p class=\"mb-3 lead\">fuels your persistence when life gets tough.</p><p class=\"mb-3 lead\">Napoleon Hill, one of the greatest voices in personal development, said it clearly:</p><p class=\"mb-3 lead\">anything worthwhile, this is where it begins.</p><p class=\"mb-3 lead\">Let us break it down, The Success Afrika-style:</p><p class=\"mb-3 lead\">1) Know exactly what you want</p><p class=\"mb-3 lead\">crystal clear. Paint a vivid picture in your mind of what you want, what it looks like, feels</p><p class=\"mb-3 lead\">like, and means for your life.</p><p class=\"mb-3 lead\">2) Develop a burning desire for it</p><p class=\"mb-3 lead\">A definite purpose is not a casual wish you think about when it’s convenient. It’s that</p><p class=\"mb-3 lead\">deep, unshakable desire that keeps you awake at night and gets you out of bed in the</p><p class=\"mb-3 lead\">morning ready to move.</p><p class=\"mb-3 lead\">3) Create your game plan</p><p class=\"mb-3 lead\">Once you know your target and you feel that burning desire, lay out your plan. Step by</p><p class=\"mb-3 lead\">losing sight of your goal.</p><p class=\"mb-3 lead\">4) Take consistent daily action</p><p class=\"mb-3 lead\">Your definite purpose should show up in your daily calendar. Every day you do</p><p class=\"mb-3 lead\">something, big or small, that moves you closer to your goal. And you do not stop until it</p><p class=\"mb-3 lead\">is done.</p><p class=\"mb-3 lead\">5) Focus your mind</p><p class=\"mb-3 lead\">When your mind is locked onto your purpose, something powerful happens: your</p><p class=\"mb-3 lead\">subconscious starts working for you. You notice opportunities, people, and resources that</p><p class=\"mb-3 lead\">you might have overlooked before.</p><p class=\"mb-3 lead\">Why does this matter a great deal?</p><p class=\"mb-3 lead\">1) It gives you direction – Your purpose becomes your North Star. You always know if</p><p class=\"mb-3 lead\">you’re on course or drifting.</p><p class=\"mb-3 lead\">focus is magnetic.</p><p class=\"mb-3 lead\">3) It builds persistence – When the journey gets tough, your purpose gives you the grit to</p><p class=\"mb-3 lead\">keep going until you win.</p><p class=\"mb-3 lead\">When you develop definiteness of purpose, you will no longer just live, you will move</p><p class=\"mb-3 lead\">with intention. That is the difference between drifting through life and creating a life</p><p class=\"mb-3 lead\">worth living.</p><p class=\"mb-3 lead\">Zig Ziglar’s Wheel of Life.</p><p class=\"mb-3 lead\">The Wheel of Life – Your Balance Check</p><p class=\"mb-3 lead\">Zig Ziglar, one of the greatest motivators of our time, taught that life is like a wheel. If one</p><p class=\"mb-3 lead\">I like to think of it as your Life’s Balance Scorecard. There are seven key spokes in this wheel:</p><p class=\"mb-3 lead\">1. Career – Your Work & Calling</p><p class=\"mb-3 lead\">Are you doing work that excites you, challenges you, and adds value to others? Your</p><p class=\"mb-3 lead\">2. Financial – Your Money & Resources</p><p class=\"mb-3 lead\">Money isn’t everything, but it touches everything. Are you earning, saving, investing,</p><p class=\"mb-3 lead\">and giving in ways that support your goals and values?</p><p class=\"mb-3 lead\">3. Spiritual – Your Faith & Inner Compass</p><p class=\"mb-3 lead\">4. Physical – Your Health & Energy</p><p class=\"mb-3 lead\">Your body is the vehicle that drives you through life. Are you giving it the fuel, rest, and</p><p class=\"mb-3 lead\">movement it needs to perform at its best?</p><p class=\"mb-3 lead\">5. Intellectual – Your Growth & Learning</p><p class=\"mb-3 lead\">If you are not growing, you are dying. Are you reading, studying, and stretching your</p><p class=\"mb-3 lead\">mind so you can keep adding value to the world?</p><p class=\"mb-3 lead\">6. Family – Your Relationships at Home</p><p class=\"mb-3 lead\">These are the people who know the real you. Are you investing time, love, and presence</p><p class=\"mb-3 lead\">into your family relationships?</p><p class=\"mb-3 lead\">7. Social – Your Friends & Community</p><p class=\"mb-3 lead\">No one wins alone. Are you building healthy friendships, networks, and connections that</p><p class=\"mb-3 lead\">inspire you and keep you accountable?</p><p class=\"mb-3 lead\">Know this:</p><p class=\"mb-3 lead\">If any one of the spokes is weak, the whole wheel wobbles. If several are weak,</p><p class=\"mb-3 lead\">time, but it does mean you are aware and working on them consistently.</p><p class=\"mb-3 lead\">When your Wheel of Life is round and strong, you do not only survive, but you</p><p class=\"mb-3 lead\">roll smoothly toward your goals – You thrive!</p><p class=\"mb-3 lead\">Habits for a Meaningful Life – Og Mandino</p><p class=\"mb-3 lead\">Og Mandino, one of the most inspiring authors ever, taught that a meaningful life is not built</p><p class=\"mb-3 lead\">overnight, it is shaped by the habits you practice every single day.</p><p class=\"mb-3 lead\">Here’s how I break down his wisdom for you:</p><p class=\"mb-3 lead\">1. Start Each Day with Gratitude</p><p class=\"mb-3 lead\">Gratitude sharpens your perspective and keeps you grounded.</p><p class=\"mb-3 lead\">2. Greet Each Day with Love in Your Heart</p><p class=\"mb-3 lead\">kindness and respect. Love opens doors that force cannot.</p><p class=\"mb-3 lead\">3. Persist Until You Succeed</p><p class=\"mb-3 lead\">4. Live Each Day as if It is Your Last</p><p class=\"mb-3 lead\">5. Master Your Emotions</p><p class=\"mb-3 lead\">You cannot always control what happens, but you can control your response. Stay steady when</p><p class=\"mb-3 lead\">others panic and stay humble when you win.</p><p class=\"mb-3 lead\">6. Multiply Your Value Every Day</p><p class=\"mb-3 lead\">is the fuel of a meaningful life.</p><p class=\"mb-3 lead\">7. Take Action Now: Tomorrow is not promised.</p><p class=\"mb-3 lead\">Do not wait for perfect conditions. You will never have all the answers before you start. Move,</p><p class=\"mb-3 lead\">and clarity will meet you along the way.</p><p class=\"mb-3 lead\">The Big Picture:</p><p class=\"mb-3 lead\">be the one shaping it.</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Activities Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header yitp-activity-box border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-tasks me-2\"></i>Activities\n                        </h3>\n                    </div>\n                    <div class=\"card-body yitp-activity-box pt-3\">\n                        <div class=\"alert alert-info border-0 mb-3\"><i class=\"fas fa-play-circle me-2\"></i>Activity: Use Zig Ziglar’s Wheel of Life to rate and reflect on different life domains.</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Quotes Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Inspirational Quotes\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">is known as the “tree of life” because it sustains communities through fruit, shelter, and</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Get clear – Know exactly what you want. No vague wishes—paint the picture.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Get moving – Build your plan and take daily action—no excuses.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">When you have it, you don’t just live life—you design it}</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">“Definiteness of purpose is the starting point of all achievement.” If you want to achieve</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Don’t just say, “I want success” or “I want more money.” Those are vague wishes. Get</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">step. And keep it flexible—because life will test you, and you will need to adapt without</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">2) It attracts resources – People, ideas, and opportunities seem to “find” you because your</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">part of the wheel is flat, your ride through life will be bumpy—no matter how fast you try to go.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">career isn’t just a paycheck—it’s part of your purpose.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">This is your core—what guides you when life gets messy. Whether through faith,</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">meditation, or reflection, are you staying connected to your deeper “why”?</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">your journey slows—or stops. Balance does not mean every area is perfect all the</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Before you rush into your to-do list, pause. Name the blessings in your life—big or small.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">People are your greatest resource. Approach everyone—family, colleagues, even strangers—with</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Do not postpone joy, impact, or purpose. Do the thing today—make the call, take the walk, say</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">“I love you.” Life is too short for “someday.”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Get a little better daily—learn a skill, solve a problem, or serve someone in a new way. Growth</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Og Mandino believed—and I agree—that meaningful living is not about chasing things; it is</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">about becoming more. Practice these habits daily, and life will not just happen to you—you will</blockquote>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Stories & Examples Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-book me-2\"></i>Stories & Examples\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-white pt-3\">\n                        <p class=\"mb-3\"><a href=\"https://www.google.com/search?q=The%20Story%20of%20the%20Baobab%20Tree%3A%20According%20to%20https%3A//www.oneearth.org/species-of-the-\" class=\"btn btn-outline-primary btn-sm me-2 mb-2\" target=\"_blank\"><i class=\"fas fa-external-link-alt me-1\"></i>The Story of the Baobab Tree: According to https://www.oneearth.org/species-of-the-</a></p><p class=\"mb-3\"><a href=\"https://www.google.com/search?q=and%20how%20much%20life%20can%20you%20sustain%20and%20support.%20This%20story%20edifies%20us%20that%20the%20true%20purpose\" class=\"btn btn-outline-primary btn-sm me-2 mb-2\" target=\"_blank\"><i class=\"fas fa-external-link-alt me-1\"></i>and how much life can you sustain and support. This story edifies us that the true purpose</a></p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Wisdom & Proverbs Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>Wisdom & Proverbs\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;\n}\n\n.yitp-quote {\n    position: relative;\n    font-style: italic;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>\n",
           "learning_objectives": "Objective: Explore foundational principles for finding purpose.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul><li>Napoleon Hill’s Definiteness of Purpose . Definiteness of Purpose – Your True Starting Point {Intro Video Script  Get clear – Know exactly what you want. No vague wishes —paint the picture.  Get hungry – Want it so badly it pulls you out of bed in the morning.  Get moving – Build your plan and take daily action —no excuses.  Stay locked in – Focus your mind so opportunities and res ources find you. Why? Because a clear purpose gives you direction, draws the right people to you, and fuels your persistence when life gets tough. When you have it, you don’t just live life —you design it } Napoleon Hill, one of the greatest voices in perso nal development, said it clearly: “Definiteness of purpose is the starting point of all achievement.” If you want to achieve anything worthwhile, this is where it begins. Let us break it down, The Success Afrika -style:</li><li>Know exactly what you want Don’t just say, “I want success” or “I want more money.” Those are vague wishes. Get crystal clear. Paint a vivid picture in your mind of what you want, what it looks like, feels like, and means for your life.</li><li>Develop a burning desire for it A definite purpose is not a casual wish you think about when it’s convenient. It’s that deep, unshakable desire that keeps you awake at night and gets you out of bed in the morning ready to move.</li><li>Create your game plan Once you know your target and you feel that burni ng desire, lay out your plan. Step by step. And keep it flexible —because life will test you, and you will need to adapt without losing sight of your goal.</li><li>Take consistent daily action Your definite purpose should show up in your daily calendar. Every day y ou do something , big or small , that moves you closer to your goal . And you do not stop until it is done.</li><li>Focus your mind When your mind is locked onto your purpose, something powerful happens: your subconscious starts working for you. You notice opportunit ies, people, and resources that you might have overlooked before. Why does this matter a great deal ?</li><li>It gives you direction – Your purpose becomes your North Star. You always know if you’re on course or drifting.</li><li>It attracts resources – People, ideas, and opportunities seem to “find” you because your focus is magnetic.</li><li>It builds persistence – When the journey gets tough, your purpose gives you the grit to keep going until you win. When you develop definiteness of purpose, you will no longer just live, you will move with intention. That is the difference between drifting through life and creating a life worth living. Zig Ziglar’s Wheel of Life . The Wheel of Life – Your Balance Check Zig Ziglar, one of the greatest motivators of our time, taught that life is like a wheel. If one part of the wheel is flat, your ride through life will be bumpy —no matter how fast you try to go. I like to think of it as your Life ’s Balance Scorecard . There are seven key spokes in this wheel:</li><li>Career – Your Work & Calling Are you doing work that excites you, challenges you, and adds value to others? Your career isn’t just a paycheck —it’s part of your purpose.</li><li>Financial – Your Money & Resources Money isn’t everything, but it touches everything. Are you earning, saving, investing, and giving in ways that support your goals and values?</li><li>Spiritual – Your Faith & Inner Compass This is your core —what guides you when life gets messy. Whether through faith,</li></ul><h3>Core Lesson</h3><p>week-african-baobab-tree/   The baobab tree is a legendary plant with folktales to boot. It</p><p>water storage.</p><p>In an arid climate, baobabs symbolize life in a landscape where little else can thrive. Its</p><p>large whitish flowers open at night and fall within 24 hours, creating a beautiful display</p><p>at both ends of the cycle.</p><p>Here is an excerpt from One Earth:</p><p>As a succulent, the tree absorbs and stores water from the rainy season in its massive</p><p>trunk, producing a nutrient-dense fruit in the dry season, which can grow up to a foot</p><p>long. The fruit contains tartaric acid and Vitamin C, serving as a vital nutrient and food</p><p>source for many species.</p><p>They are also an essential source of water and shelter for hundreds of animals, including</p><p>birds, lizards, monkeys, and even elephants – which can eat their bark for moisture when</p><p>there is no water nearby. Bats pollinate the flowers, feeding on their nectar.</p><p>If a mere plant is created for specific value and purpose. How much more is your purpose</p><p>of our life is to serve others.</p><p>1. You have a major purpose</p><p>2. You have minor purposes</p><p>3. Your minor purposes must feed into your major purpose, not out of it.</p><p>4. You discover your purpose and you discover your true life’s meaning.</p><p>•</p><p>Definiteness of Purpose – Your True Starting Point</p><p>{Intro Video Script</p><p>Get hungry – Want it so badly it pulls you out of bed in the morning.</p><p>Stay locked in – Focus your mind so opportunities and resources find you.</p><p>Why? Because a clear purpose gives you direction, draws the right people to you, and</p><p>fuels your persistence when life gets tough.</p><p>Napoleon Hill, one of the greatest voices in personal development, said it clearly:</p><p>anything worthwhile, this is where it begins.</p><p>Let us break it down, The Success Afrika-style:</p><p>1) Know exactly what you want</p><p>crystal clear. Paint a vivid picture in your mind of what you want, what it looks like, feels</p><p>like, and means for your life.</p><p>2) Develop a burning desire for it</p><p>A definite purpose is not a casual wish you think about when it’s convenient. It’s that</p><p>deep, unshakable desire that keeps you awake at night and gets you out of bed in the</p><p>morning ready to move.</p><p>3) Create your game plan</p><p>Once you know your target and you feel that burning desire, lay out your plan. Step by</p><p>losing sight of your goal.</p><p>4) Take consistent daily action</p><p>Your definite purpose should show up in your daily calendar. Every day you do</p><p>something, big or small, that moves you closer to your goal. And you do not stop until it</p><p>is done.</p><p>5) Focus your mind</p><p>When your mind is locked onto your purpose, something powerful happens: your</p><p>subconscious starts working for you. You notice opportunities, people, and resources that</p><p>you might have overlooked before.</p><p>Why does this matter a great deal?</p><p>1) It gives you direction – Your purpose becomes your North Star. You always know if</p><p>you’re on course or drifting.</p><p>focus is magnetic.</p><p>3) It builds persistence – When the journey gets tough, your purpose gives you the grit to</p><p>keep going until you win.</p><p>When you develop definiteness of purpose, you will no longer just live, you will move</p><p>with intention. That is the difference between drifting through life and creating a life</p><p>worth living.</p><p>Zig Ziglar’s Wheel of Life.</p><p>The Wheel of Life – Your Balance Check</p><p>Zig Ziglar, one of the greatest motivators of our time, taught that life is like a wheel. If one</p><p>I like to think of it as your Life’s Balance Scorecard. There are seven key spokes in this wheel:</p><p>1. Career – Your Work & Calling</p><p>Are you doing work that excites you, challenges you, and adds value to others? Your</p><p>2. Financial – Your Money & Resources</p><p>Money isn’t everything, but it touches everything. Are you earning, saving, investing,</p><p>and giving in ways that support your goals and values?</p><p>3. Spiritual – Your Faith & Inner Compass</p><p>4. Physical – Your Health & Energy</p><p>Your body is the vehicle that drives you through life. Are you giving it the fuel, rest, and</p><p>movement it needs to perform at its best?</p><p>5. Intellectual – Your Growth & Learning</p><p>If you are not growing, you are dying. Are you reading, studying, and stretching your</p><p>mind so you can keep adding value to the world?</p><p>6. Family – Your Relationships at Home</p><p>These are the people who know the real you. Are you investing time, love, and presence</p><p>into your family relationships?</p><p>7. Social – Your Friends & Community</p><p>No one wins alone. Are you building healthy friendships, networks, and connections that</p><p>inspire you and keep you accountable?</p><p>Know this:</p><p>If any one of the spokes is weak, the whole wheel wobbles. If several are weak,</p><p>time, but it does mean you are aware and working on them consistently.</p><p>When your Wheel of Life is round and strong, you do not only survive, but you</p><p>roll smoothly toward your goals – You thrive!</p><p>Habits for a Meaningful Life – Og Mandino</p><p>Og Mandino, one of the most inspiring authors ever, taught that a meaningful life is not built</p><p>overnight, it is shaped by the habits you practice every single day.</p><p>Here’s how I break down his wisdom for you:</p><p>1. Start Each Day with Gratitude</p><p>Gratitude sharpens your perspective and keeps you grounded.</p><p>2. Greet Each Day with Love in Your Heart</p><p>kindness and respect. Love opens doors that force cannot.</p><p>3. Persist Until You Succeed</p><p>4. Live Each Day as if It is Your Last</p><p>5. Master Your Emotions</p><p>You cannot always control what happens, but you can control your response. Stay steady when</p><p>others panic and stay humble when you win.</p><p>6. Multiply Your Value Every Day</p><p>is the fuel of a meaningful life.</p><p>7. Take Action Now: Tomorrow is not promised.</p><p>Do not wait for perfect conditions. You will never have all the answers before you start. Move,</p><p>and clarity will meet you along the way.</p><p>The Big Picture:</p><p>be the one shaping it.</p><h3>Activities</h3><p>Activity: Use Zig Ziglar’s Wheel of Life to rate and reflect on different life domains.</p><h3>Quotes</h3><blockquote>is known as the “tree of life” because it sustains communities through fruit, shelter, and</blockquote><blockquote>Get clear – Know exactly what you want. No vague wishes—paint the picture.</blockquote><blockquote>Get moving – Build your plan and take daily action—no excuses.</blockquote><blockquote>When you have it, you don’t just live life—you design it}</blockquote><blockquote>“Definiteness of purpose is the starting point of all achievement.” If you want to achieve</blockquote><blockquote>Don’t just say, “I want success” or “I want more money.” Those are vague wishes. Get</blockquote><blockquote>step. And keep it flexible—because life will test you, and you will need to adapt without</blockquote><blockquote>2) It attracts resources – People, ideas, and opportunities seem to “find” you because your</blockquote><blockquote>part of the wheel is flat, your ride through life will be bumpy—no matter how fast you try to go.</blockquote><blockquote>career isn’t just a paycheck—it’s part of your purpose.</blockquote><blockquote>This is your core—what guides you when life gets messy. Whether through faith,</blockquote><blockquote>meditation, or reflection, are you staying connected to your deeper “why”?</blockquote><blockquote>your journey slows—or stops. Balance does not mean every area is perfect all the</blockquote><blockquote>Before you rush into your to-do list, pause. Name the blessings in your life—big or small.</blockquote><blockquote>People are your greatest resource. Approach everyone—family, colleagues, even strangers—with</blockquote><blockquote>Do not postpone joy, impact, or purpose. Do the thing today—make the call, take the walk, say</blockquote><blockquote>“I love you.” Life is too short for “someday.”</blockquote><blockquote>Get a little better daily—learn a skill, solve a problem, or serve someone in a new way. Growth</blockquote><blockquote>Og Mandino believed—and I agree—that meaningful living is not about chasing things; it is</blockquote><blockquote>about becoming more. Practice these habits daily, and life will not just happen to you—you will</blockquote><h3>Stories</h3><p><a href=\"https://www.google.com/search?q=The%20Story%20of%20the%20Baobab%20Tree%3A%20According%20to%20https%3A//www.oneearth.org/species-of-the-\">The Story of the Baobab Tree: According to https://www.oneearth.org/species-of-the-</a></p><p><a href=\"https://www.google.com/search?q=and%20how%20much%20life%20can%20you%20sustain%20and%20support.%20This%20story%20edifies%20us%20that%20the%20true%20purpose\">and how much life can you sustain and support. This story edifies us that the true purpose</a></p><h3>Proverbs</h3></div>",
-          "sort_order": 2,
-          "is_preview": false,
-          "additional_resources": [],
+          "estimated_duration": 90,
+          "content_type": "text",
+          "sort_order": 9,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-12T19:04:03.256793+00:00",
+          "updated_at": "2025-10-12T19:04:03.263614+00:00",
           "assessment": {
             "quiz": {
+              "id": 30,
               "title": "Lesson 2 – Foundations of Purpose (1.5 hours) Quiz",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 129,
                   "question_text": "Which is NOT one of Hill’s action prompts in 'Definiteness of Purpose'?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": "The four are get clear, hungry, moving, locked in.",
                   "options": [
                     "Get clear",
                     "Get hungry",
                     "Get moving",
                     "Get distracted"
                   ],
-                  "correct_answer": "Get distracted",
-                  "points": 1,
-                  "explanation": "The four are get clear, hungry, moving, locked in.",
-                  "sort_order": 1
+                  "correct_answer": "Get distracted"
                 },
                 {
+                  "id": 130,
                   "question_text": "Ziglar’s Wheel of Life includes seven spokes such as Career and Spiritual.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 2,
                   "explanation": "",
-                  "sort_order": 2
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 131,
                   "question_text": "Og Mandino’s habits include all EXCEPT:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "He says take action now.",
                   "options": [
                     "Persist until you succeed",
                     "Start each day with gratitude",
                     "Master your emotions",
                     "Avoid taking action until perfect"
                   ],
-                  "correct_answer": "Avoid taking action until perfect",
-                  "points": 1,
-                  "explanation": "He says take action now.",
-                  "sort_order": 3
+                  "correct_answer": "Avoid taking action until perfect"
                 },
                 {
+                  "id": 132,
                   "question_text": "The Baobab story emphasizes purpose that serves others.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 4,
                   "explanation": "",
-                  "sort_order": 4
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 133,
                   "question_text": "Match spoke to a brief focus.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "Each spoke represents a life domain.",
                   "options": [
                     "A) Career",
                     "B) Financial",
@@ -161,76 +203,94 @@
                     "2) Money & resources",
                     "3) Health & energy"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "Each spoke represents a life domain.",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         },
         {
-          "id": "YITP-UPL-M1-L03",
+          "id": 112,
           "title": "Lesson 3 – Purpose and Service (1 hour)",
-          "content_type": "enhanced",
-          "estimated_duration": 60,
+          "content": "\n<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 3 – Purpose and Service (1 hour)\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\"><div class=\"list-group-item border-0 px-0 py-2\"><i class=\"fas fa-check-circle text-success me-2\"></i>Key Topics:</div></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">about helping others climb.</p><p class=\"mb-3 lead\">Let’s break it down.</p><p class=\"mb-3 lead\">1. The Elevator Up – Your Success Journey</p><p class=\"mb-3 lead\">your mentors, your hard work. You have moved up in life, whether in career, finances,</p><p class=\"mb-3 lead\">influence, or personal growth.</p><p class=\"mb-3 lead\">2. Sending It Back Down – Creating Pathways for Others</p><p class=\"mb-3 lead\">Once you are on a higher floor, do not just enjoy the view alone. Make it easier for others</p><p class=\"mb-3 lead\">they could not open on their own.</p><p class=\"mb-3 lead\">3. Why This Matters</p><p class=\"mb-3 lead\">Because someone did it for you – Even if you worked hard, you also benefited from</p><p class=\"mb-3 lead\">someone else’s guidance, time, or belief in you.</p><p class=\"mb-3 lead\">Because success is sweeter when shared – True leadership is not measured by how far</p><p class=\"mb-3 lead\">you go, but by how many you take with you.</p><p class=\"mb-3 lead\">Because it multiplies impact – When you help one person rise, they can help others in</p><p class=\"mb-3 lead\">return.</p><p class=\"mb-3 lead\">My Take:</p><p class=\"mb-3 lead\">Success without significance is empty. If your climb only benefits you, it is a small</p><p class=\"mb-3 lead\">legacy. That is how you create an impact that outlives you. I am not a mentor until I</p><p class=\"mb-3 lead\">create other mentors.</p><p class=\"mb-3 lead\">Wangari Maathai planted trees not for herself but for future generations.</p><p class=\"mb-3 lead\">•</p><p class=\"mb-3 lead\">Mother Teresa was not famous because she held a position of power or held major bank</p><p class=\"mb-3 lead\">smallest acts, when done with love, can transform lives and change the world.</p><p class=\"mb-3 lead\">Here is how we can bring her wisdom into our own daily lives:</p><p class=\"mb-3 lead\">1. Start Where You Are</p><p class=\"mb-3 lead\">worry about numbers. Help one person at a time and always start with the person nearest you.”</p><p class=\"mb-3 lead\">2. See People, Not Problems</p><p class=\"mb-3 lead\">She did not just see poverty, she saw people. She looked into their eyes, called them by name,</p><p class=\"mb-3 lead\">and treated them with dignity. In your world, slow down enough to truly notice people.</p><p class=\"mb-3 lead\">3. Love Through Action</p><p class=\"mb-3 lead\">extended. Do not underestimate the power of these moments.</p><p class=\"mb-3 lead\">4. Do Small Things Well</p><p class=\"mb-3 lead\">Mother Teresa believed that greatness is found in the quality of small acts. Fold the blanket</p><p class=\"mb-3 lead\">neatly. Write the note thoughtfully. Show up on time. Excellence in small things builds trust and</p><p class=\"mb-3 lead\">influence.</p><p class=\"mb-3 lead\">5. Keep Your Heart Soft</p><p class=\"mb-3 lead\">The world can harden you if you let it. She chose compassion over cynicism, even in the</p><p class=\"mb-3 lead\">toughest environments. Guard your heart so you can keep giving without bitterness.</p><p class=\"mb-3 lead\">Big impact does not require big titles or big money. It starts with doing small things with great</p><p class=\"mb-3 lead\">will ever see.</p><p class=\"mb-3 lead\">Nelson Mandela’s life teaches us that real leadership is not about power over people, it is about</p><p class=\"mb-3 lead\">bringing people together and standing for what is right, even when it costs you everything.</p><p class=\"mb-3 lead\">Here is how we can live out his example:</p><p class=\"mb-3 lead\">1. Choose Unity Over Division</p><p class=\"mb-3 lead\">Mandela understood that a divided nation cannot thrive. He worked to unite people across race,</p><p class=\"mb-3 lead\">class, and politics. In your life, ask yourself: Am I building bridges or walls?</p><p class=\"mb-3 lead\">2. Stand Firm for Justice</p><p class=\"mb-3 lead\">He spent 27 years in prison because he refused to compromise on equality. Justice sometimes</p><p class=\"mb-3 lead\">unpopular.</p><p class=\"mb-3 lead\">Mandela forgave his oppressors, not to erase the past, but to create a future. Forgiveness is not</p><p class=\"mb-3 lead\">4. Lead With Example, Not Just Words</p><p class=\"mb-3 lead\">He did not just preach unity, but he embodied it. His humility, discipline, and servant leadership</p><p class=\"mb-3 lead\">made people follow him willingly. Your actions will always speak louder than your speeches.</p><p class=\"mb-3 lead\">5. See the Bigger Picture</p><p class=\"mb-3 lead\">Mandela thought beyond his own comfort and lifetime. He worked for the freedom and dignity</p><p class=\"mb-3 lead\">of generations yet unborn. That is the mindset of a true leader, and it brings boundless rewards.</p><p class=\"mb-3 lead\">Thought to Carry Forward:</p><p class=\"mb-3 lead\">family, workplace, or community, you can be the one who refuses to divide, stands for what is</p><p class=\"mb-3 lead\">right, and leads with integrity. When you do this, the rewards in peace of mind and material</p><p class=\"mb-3 lead\">riches will always follow you.</p><p class=\"mb-3 lead\">o Humility and selflessness as a foundation of service.</p><p class=\"mb-3 lead\">Humility & Selflessness – The True Foundation of Service</p><p class=\"mb-3 lead\">Real service is not about recognition or applause, it is about meeting needs, lifting others, and</p><p class=\"mb-3 lead\">making a difference without demanding the spotlight. Humility and selflessness are the bedrock</p><p class=\"mb-3 lead\">of that kind of service.</p><p class=\"mb-3 lead\">1. Put the Mission Above Your Ego</p><p class=\"mb-3 lead\">When your goal is to serve, it is not about who gets the credit; it is about whether the need gets</p><p class=\"mb-3 lead\">met. Focus on the mission, not on your image.</p><p class=\"mb-3 lead\">2. Listen More Than You Speak</p><p class=\"mb-3 lead\">Humility starts with listening. You cannot truly serve people if you do not understand their</p><p class=\"mb-3 lead\">needs. Listen with an open mind, without rushing to give answers.</p><p class=\"mb-3 lead\">3. Share the Stage</p><p class=\"mb-3 lead\">Selflessness means creating space for others to shine. Give people credit for their contributions,</p><p class=\"mb-3 lead\">celebrate their wins, and never be afraid to lift someone higher than yourself.</p><p class=\"mb-3 lead\">4. Serve Without Expecting Return</p><p class=\"mb-3 lead\">Service is most powerful when it is unconditional. Do not keep the score or wait for favors in</p><p class=\"mb-3 lead\">return. The reward is in knowing you made an impact.</p><p class=\"mb-3 lead\">5. Stay Grounded, No Matter How High You Rise</p><p class=\"mb-3 lead\">Titles, positions, or wealth should never make you forget your roots. Stay approachable,</p><p class=\"mb-3 lead\">relatable, and connected to the people you serve.</p><p class=\"mb-3 lead\">Major Take:</p><p class=\"mb-3 lead\">Humility keeps you grounded. Selflessness keeps you focused on others. Together, they make</p><p class=\"mb-3 lead\">the service pure, powerful, and transformational. When you serve this way, you do not just help</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Quotes Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Inspirational Quotes\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">When you succeed—when you reach higher levels in life—it is not just about you. It is also</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">The “elevator” is whatever took you to the next level—your skills, your opportunities,</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">to rise—through mentoring, sharing knowledge, creating opportunities, or opening doors</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">victory. But when you “send the elevator back down,” you turn your success into a</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">accounts. She is remembered because she lived a life of deep compassion—proving that even the</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">You do not need to wait for the “right time” or have a perfect plan. Mother Teresa said, “Never</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Love is not just a feeling—it is a verb. A kind word, a listening ear, a meal shared, a hand</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">love—and doing them consistently. That is how you create ripples that reach farther than you</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">demands patience, endurance, and the courage to speak truth to power—even when it is</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">weakness—it is the strength to release bitterness so progress can begin.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">people—you inspire them to serve too.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Reflection: Personal Introspection: “Who are you serving today and how?”</blockquote>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Stories & Examples Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-book me-2\"></i>Stories & Examples\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-white pt-3\">\n                        <p class=\"mb-3\"><a href=\"https://www.google.com/search?q=Unity%20and%20justice%20are%20not%20lofty%20ideals%20for%20history%20books%E2%80%94they%20are%20daily%20choices.%20Whether%20in%20your\" class=\"btn btn-outline-primary btn-sm me-2 mb-2\" target=\"_blank\"><i class=\"fas fa-external-link-alt me-1\"></i>Unity and justice are not lofty ideals for history books—they are daily choices. Whether in your</a></p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Wisdom & Proverbs Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>Wisdom & Proverbs\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"alert alert-warning border-0 mb-3\">{'text': 'The Proverb: “When You Take the Elevator Up, Send It Back Down for Others.”', 'link': 'https://www.google.com/search?q=The%20Proverb%3A%20%E2%80%9CWhen%20You%20Take%20the%20Elevator%20Up%2C%20Send%20It%20Back%20Down%20for%20Others.%E2%80%9D'}</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;\n}\n\n.yitp-quote {\n    position: relative;\n    font-style: italic;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>\n",
           "learning_objectives": "Objective: See how purpose is linked to serving others.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul><li>Key Topics:</li></ul><h3>Core Lesson</h3><p>about helping others climb.</p><p>Let’s break it down.</p><p>1. The Elevator Up – Your Success Journey</p><p>your mentors, your hard work. You have moved up in life, whether in career, finances,</p><p>influence, or personal growth.</p><p>2. Sending It Back Down – Creating Pathways for Others</p><p>Once you are on a higher floor, do not just enjoy the view alone. Make it easier for others</p><p>they could not open on their own.</p><p>3. Why This Matters</p><p>Because someone did it for you – Even if you worked hard, you also benefited from</p><p>someone else’s guidance, time, or belief in you.</p><p>Because success is sweeter when shared – True leadership is not measured by how far</p><p>you go, but by how many you take with you.</p><p>Because it multiplies impact – When you help one person rise, they can help others in</p><p>return.</p><p>My Take:</p><p>Success without significance is empty. If your climb only benefits you, it is a small</p><p>legacy. That is how you create an impact that outlives you. I am not a mentor until I</p><p>create other mentors.</p><p>Wangari Maathai planted trees not for herself but for future generations.</p><p>•</p><p>Mother Teresa was not famous because she held a position of power or held major bank</p><p>smallest acts, when done with love, can transform lives and change the world.</p><p>Here is how we can bring her wisdom into our own daily lives:</p><p>1. Start Where You Are</p><p>worry about numbers. Help one person at a time and always start with the person nearest you.”</p><p>2. See People, Not Problems</p><p>She did not just see poverty, she saw people. She looked into their eyes, called them by name,</p><p>and treated them with dignity. In your world, slow down enough to truly notice people.</p><p>3. Love Through Action</p><p>extended. Do not underestimate the power of these moments.</p><p>4. Do Small Things Well</p><p>Mother Teresa believed that greatness is found in the quality of small acts. Fold the blanket</p><p>neatly. Write the note thoughtfully. Show up on time. Excellence in small things builds trust and</p><p>influence.</p><p>5. Keep Your Heart Soft</p><p>The world can harden you if you let it. She chose compassion over cynicism, even in the</p><p>toughest environments. Guard your heart so you can keep giving without bitterness.</p><p>Big impact does not require big titles or big money. It starts with doing small things with great</p><p>will ever see.</p><p>Nelson Mandela’s life teaches us that real leadership is not about power over people, it is about</p><p>bringing people together and standing for what is right, even when it costs you everything.</p><p>Here is how we can live out his example:</p><p>1. Choose Unity Over Division</p><p>Mandela understood that a divided nation cannot thrive. He worked to unite people across race,</p><p>class, and politics. In your life, ask yourself: Am I building bridges or walls?</p><p>2. Stand Firm for Justice</p><p>He spent 27 years in prison because he refused to compromise on equality. Justice sometimes</p><p>unpopular.</p><p>Mandela forgave his oppressors, not to erase the past, but to create a future. Forgiveness is not</p><p>4. Lead With Example, Not Just Words</p><p>He did not just preach unity, but he embodied it. His humility, discipline, and servant leadership</p><p>made people follow him willingly. Your actions will always speak louder than your speeches.</p><p>5. See the Bigger Picture</p><p>Mandela thought beyond his own comfort and lifetime. He worked for the freedom and dignity</p><p>of generations yet unborn. That is the mindset of a true leader, and it brings boundless rewards.</p><p>Thought to Carry Forward:</p><p>family, workplace, or community, you can be the one who refuses to divide, stands for what is</p><p>right, and leads with integrity. When you do this, the rewards in peace of mind and material</p><p>riches will always follow you.</p><p>o Humility and selflessness as a foundation of service.</p><p>Humility & Selflessness – The True Foundation of Service</p><p>Real service is not about recognition or applause, it is about meeting needs, lifting others, and</p><p>making a difference without demanding the spotlight. Humility and selflessness are the bedrock</p><p>of that kind of service.</p><p>1. Put the Mission Above Your Ego</p><p>When your goal is to serve, it is not about who gets the credit; it is about whether the need gets</p><p>met. Focus on the mission, not on your image.</p><p>2. Listen More Than You Speak</p><p>Humility starts with listening. You cannot truly serve people if you do not understand their</p><p>needs. Listen with an open mind, without rushing to give answers.</p><p>3. Share the Stage</p><p>Selflessness means creating space for others to shine. Give people credit for their contributions,</p><p>celebrate their wins, and never be afraid to lift someone higher than yourself.</p><p>4. Serve Without Expecting Return</p><p>Service is most powerful when it is unconditional. Do not keep the score or wait for favors in</p><p>return. The reward is in knowing you made an impact.</p><p>5. Stay Grounded, No Matter How High You Rise</p><p>Titles, positions, or wealth should never make you forget your roots. Stay approachable,</p><p>relatable, and connected to the people you serve.</p><p>Major Take:</p><p>Humility keeps you grounded. Selflessness keeps you focused on others. Together, they make</p><p>the service pure, powerful, and transformational. When you serve this way, you do not just help</p><h3>Activities</h3><h3>Quotes</h3><blockquote>When you succeed—when you reach higher levels in life—it is not just about you. It is also</blockquote><blockquote>The “elevator” is whatever took you to the next level—your skills, your opportunities,</blockquote><blockquote>to rise—through mentoring, sharing knowledge, creating opportunities, or opening doors</blockquote><blockquote>victory. But when you “send the elevator back down,” you turn your success into a</blockquote><blockquote>accounts. She is remembered because she lived a life of deep compassion—proving that even the</blockquote><blockquote>You do not need to wait for the “right time” or have a perfect plan. Mother Teresa said, “Never</blockquote><blockquote>Love is not just a feeling—it is a verb. A kind word, a listening ear, a meal shared, a hand</blockquote><blockquote>love—and doing them consistently. That is how you create ripples that reach farther than you</blockquote><blockquote>demands patience, endurance, and the courage to speak truth to power—even when it is</blockquote><blockquote>weakness—it is the strength to release bitterness so progress can begin.</blockquote><blockquote>people—you inspire them to serve too.</blockquote><blockquote>Reflection: Personal Introspection: “Who are you serving today and how?”</blockquote><h3>Stories</h3><p><a href=\"https://www.google.com/search?q=Unity%20and%20justice%20are%20not%20lofty%20ideals%20for%20history%20books%E2%80%94they%20are%20daily%20choices.%20Whether%20in%20your\">Unity and justice are not lofty ideals for history books—they are daily choices. Whether in your</a></p><h3>Proverbs</h3><blockquote>{'text': 'The Proverb: “When You Take the Elevator Up, Send It Back Down for Others.”', 'link': 'https://www.google.com/search?q=The%20Proverb%3A%20%E2%80%9CWhen%20You%20Take%20the%20Elevator%20Up%2C%20Send%20It%20Back%20Down%20for%20Others.%E2%80%9D'}</blockquote></div>",
-          "sort_order": 3,
-          "is_preview": false,
-          "additional_resources": [],
+          "estimated_duration": 60,
+          "content_type": "text",
+          "sort_order": 10,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-12T19:04:06.279210+00:00",
+          "updated_at": "2025-10-12T19:04:06.286220+00:00",
           "assessment": {
             "quiz": {
+              "id": 31,
               "title": "Lesson 3 – Purpose and Service (1 hour) Quiz",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 134,
                   "question_text": "“Send the elevator back down” suggests mentoring and opening doors for others.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 1,
                   "explanation": "",
-                  "sort_order": 1
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 135,
                   "question_text": "Which best captures Mother Teresa’s lesson?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": "",
                   "options": [
                     "Power first, compassion later",
                     "Small acts done with love",
                     "Numbers over names",
                     "Title equals impact"
                   ],
-                  "correct_answer": "Small acts done with love",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 2
+                  "correct_answer": "Small acts done with love"
                 },
                 {
+                  "id": 136,
                   "question_text": "Which Mandela principle is highlighted?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "",
                   "options": [
                     "Division over unity",
                     "Forgiveness is weakness",
                     "Lead with example",
                     "Forget the past entirely"
                   ],
-                  "correct_answer": "Lead with example",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 3
+                  "correct_answer": "Lead with example"
                 },
                 {
+                  "id": 137,
                   "question_text": "Humility and selflessness shift focus from ego to mission.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 4,
                   "explanation": "",
-                  "sort_order": 4
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 138,
                   "question_text": "Match figure to theme.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "",
                   "options": [
                     "A) Mother Teresa",
                     "B) Nelson Mandela",
@@ -239,82 +299,100 @@
                     "2) Unity & justice",
                     "3) Planting hope"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         },
         {
-          "id": "YITP-UPL-M1-L04",
+          "id": 113,
           "title": "Lesson 4 – Overcoming Obstacles to Purpose.",
-          "content_type": "enhanced",
-          "estimated_duration": 60,
+          "content": "\n<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 4 – Overcoming Obstacles to Purpose.\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">Folktale: The Tortoise and the Heavy Load</p><p class=\"mb-3 lead\">On a dusty African road, a tortoise carried a heavy load. The young hares mocked him, laughing</p><p class=\"mb-3 lead\">at his slow pace. Yet, step by step, the tortoise whispered, “Each step, no matter how small,</p><p class=\"mb-3 lead\">brings me closer to home.” By dusk, he reached his hut. His persistence turned ridicule into</p><p class=\"mb-3 lead\">respect.</p><p class=\"mb-3 lead\">closer to destiny.</p><p class=\"mb-3 lead\">1. Understanding Obstacles</p><p class=\"mb-3 lead\">journey, they often expect a smooth path. Instead, they encounter resistance: critics, failures,</p><p class=\"mb-3 lead\">fatigue, financial struggles, and self-doubt. These are not signs of failure; they are signs of</p><p class=\"mb-3 lead\">growth.</p><p class=\"mb-3 lead\">The tree that grows in gentle weather develops shallow roots, but the tree battered by storms</p><p class=\"mb-3 lead\">grows deeper roots. Similarly, our obstacles create depth, resilience, and clarity.</p><p class=\"mb-3 lead\">2. Fear vs. Faith (Napoleon Hill)</p><p class=\"mb-3 lead\">Napoleon Hill, in Think and Grow Rich, named six major fears that imprison people:</p><p class=\"mb-3 lead\">Fear of poverty</p><p class=\"mb-3 lead\">Fear of criticism</p><p class=\"mb-3 lead\">Fear of ill health</p><p class=\"mb-3 lead\">Fear of loss of love</p><p class=\"mb-3 lead\">Fear of old age</p><p class=\"mb-3 lead\">Fear of death</p><p class=\"mb-3 lead\">Most people never act on purpose because these fears whisper loudly. Fear of poverty makes us</p><p class=\"mb-3 lead\">settle for jobs we hate. Fear of criticism silences our voice. Fear of ill health convinces us to live</p><p class=\"mb-3 lead\">small.</p><p class=\"mb-3 lead\">But Hill offered a counterforce: faith. Faith is not blind optimism. It is belief in a greater order,</p><p class=\"mb-3 lead\">belief in your ability to grow, belief that adversity carries within it the seed of benefit.</p><p class=\"mb-3 lead\">Fear builds walls. Faith builds bridges.</p><p class=\"mb-3 lead\">Fear paralyzes. Faith mobilizes.</p><p class=\"mb-3 lead\">Reflection: Which of Hill’s six fears has the strongest hold on you? Write it down. Then rewrite</p><p class=\"mb-3 lead\">makes me sharper.”</p><p class=\"mb-3 lead\">3. Courage in Action (Gandhi)</p><p class=\"mb-3 lead\">Gandhi was imprisoned multiple times. He was insulted, beaten, ridiculed. Yet, his purpose gave</p><p class=\"mb-3 lead\">him courage. He transformed every obstacle into an opportunity. Prison became a podium,</p><p class=\"mb-3 lead\">silence became strategy, ridicule became resilience.</p><p class=\"mb-3 lead\">Courage is not the absence of fear. As Mandela said, “Courage is not the absence of fear, it’s</p><p class=\"mb-3 lead\">inspiring others to move beyond it.”</p><p class=\"mb-3 lead\">Courage grows when:</p><p class=\"mb-3 lead\">Your vision is bigger than your fear.</p><p class=\"mb-3 lead\">You see suffering not as punishment but as preparation.</p><p class=\"mb-3 lead\">You act despite trembling.</p><p class=\"mb-3 lead\">4. Building Inner Clarity</p><p class=\"mb-3 lead\">When you lack clarity, obstacles overwhelm you. When you have clarity, obstacles refine you.</p><p class=\"mb-3 lead\">Imagine a sculptor with a rough stone. Each strike looks destructive, but slowly, the form of a</p><p class=\"mb-3 lead\">masterpiece emerges.</p><p class=\"mb-3 lead\">Tips to build inner clarity:</p><p class=\"mb-3 lead\">Anchor in values. Money may disappear, applause may fade, but values endure.</p><p class=\"mb-3 lead\">5. Modern Anecdotes</p><p class=\"mb-3 lead\">purpose transformed pain into power.</p><p class=\"mb-3 lead\">Malala Yousafzai, shot for seeking education, turned her wounds into a global movement.</p><p class=\"mb-3 lead\">Obstacles often become the birthplace of the deepest callings.</p><p class=\"mb-3 lead\">6. Additional Folktale: The Lion and the Clever Hare</p><p class=\"mb-3 lead\">A lion once terrorized the animals. The hare, too small to fight, used wisdom instead. He led the</p><p class=\"mb-3 lead\">lion to a well, claiming another lion lived inside. The lion, seeing his own reflection, leaped in</p><p class=\"mb-3 lead\">and drowned.</p><p class=\"mb-3 lead\">patience turn giants into shadows.</p><p class=\"mb-3 lead\">Step 1: Write your greatest obstacle right now.</p><p class=\"mb-3 lead\">Step 2: Write the fear attached to it.</p><p class=\"mb-3 lead\">Step 3: Reframe it into a faith statement.</p><p class=\"mb-3 lead\">Step 4: Identify one action step you can take today.</p><p class=\"mb-3 lead\">you thank it for?</p><p class=\"mb-3 lead\">Takeaway: Obstacles are not enemies of purpose: they are laboratories for transformation.</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Activities Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header yitp-activity-box border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-tasks me-2\"></i>Activities\n                        </h3>\n                    </div>\n                    <div class=\"card-body yitp-activity-box pt-3\">\n                        <div class=\"alert alert-info border-0 mb-3\"><i class=\"fas fa-play-circle me-2\"></i>7. Activity: Resilience Journaling</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Quotes Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Inspirational Quotes\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Obstacles are not interruptions of life - they are part of life. When people set out on a purposeful</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Fear says: “what if I fail?” Faith says: “what if I learn?”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">it as a faith statement. For example: “I fear criticism” becomes “I welcome feedback because it</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Write your “why” daily. It becomes your anchor.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Reframe obstacles. Instead of asking, “Why me?” ask, “What is this teaching me?”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Oprah Winfrey overcame poverty and abuse. She said: “Turn your wounds into wisdom.” Her</blockquote>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Wisdom & Proverbs Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>Wisdom & Proverbs\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;\n}\n\n.yitp-quote {\n    position: relative;\n    font-style: italic;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>\n",
           "learning_objectives": "Objective: Learn how to push through internal and external challenges.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul></ul><h3>Core Lesson</h3><p>Folktale: The Tortoise and the Heavy Load</p><p>On a dusty African road, a tortoise carried a heavy load. The young hares mocked him, laughing</p><p>at his slow pace. Yet, step by step, the tortoise whispered, “Each step, no matter how small,</p><p>brings me closer to home.” By dusk, he reached his hut. His persistence turned ridicule into</p><p>respect.</p><p>closer to destiny.</p><p>1. Understanding Obstacles</p><p>journey, they often expect a smooth path. Instead, they encounter resistance: critics, failures,</p><p>fatigue, financial struggles, and self-doubt. These are not signs of failure; they are signs of</p><p>growth.</p><p>The tree that grows in gentle weather develops shallow roots, but the tree battered by storms</p><p>grows deeper roots. Similarly, our obstacles create depth, resilience, and clarity.</p><p>2. Fear vs. Faith (Napoleon Hill)</p><p>Napoleon Hill, in Think and Grow Rich, named six major fears that imprison people:</p><p>Fear of poverty</p><p>Fear of criticism</p><p>Fear of ill health</p><p>Fear of loss of love</p><p>Fear of old age</p><p>Fear of death</p><p>Most people never act on purpose because these fears whisper loudly. Fear of poverty makes us</p><p>settle for jobs we hate. Fear of criticism silences our voice. Fear of ill health convinces us to live</p><p>small.</p><p>But Hill offered a counterforce: faith. Faith is not blind optimism. It is belief in a greater order,</p><p>belief in your ability to grow, belief that adversity carries within it the seed of benefit.</p><p>Fear builds walls. Faith builds bridges.</p><p>Fear paralyzes. Faith mobilizes.</p><p>Reflection: Which of Hill’s six fears has the strongest hold on you? Write it down. Then rewrite</p><p>makes me sharper.”</p><p>3. Courage in Action (Gandhi)</p><p>Gandhi was imprisoned multiple times. He was insulted, beaten, ridiculed. Yet, his purpose gave</p><p>him courage. He transformed every obstacle into an opportunity. Prison became a podium,</p><p>silence became strategy, ridicule became resilience.</p><p>Courage is not the absence of fear. As Mandela said, “Courage is not the absence of fear, it’s</p><p>inspiring others to move beyond it.”</p><p>Courage grows when:</p><p>Your vision is bigger than your fear.</p><p>You see suffering not as punishment but as preparation.</p><p>You act despite trembling.</p><p>4. Building Inner Clarity</p><p>When you lack clarity, obstacles overwhelm you. When you have clarity, obstacles refine you.</p><p>Imagine a sculptor with a rough stone. Each strike looks destructive, but slowly, the form of a</p><p>masterpiece emerges.</p><p>Tips to build inner clarity:</p><p>Anchor in values. Money may disappear, applause may fade, but values endure.</p><p>5. Modern Anecdotes</p><p>purpose transformed pain into power.</p><p>Malala Yousafzai, shot for seeking education, turned her wounds into a global movement.</p><p>Obstacles often become the birthplace of the deepest callings.</p><p>6. Additional Folktale: The Lion and the Clever Hare</p><p>A lion once terrorized the animals. The hare, too small to fight, used wisdom instead. He led the</p><p>lion to a well, claiming another lion lived inside. The lion, seeing his own reflection, leaped in</p><p>and drowned.</p><p>patience turn giants into shadows.</p><p>Step 1: Write your greatest obstacle right now.</p><p>Step 2: Write the fear attached to it.</p><p>Step 3: Reframe it into a faith statement.</p><p>Step 4: Identify one action step you can take today.</p><p>you thank it for?</p><p>Takeaway: Obstacles are not enemies of purpose: they are laboratories for transformation.</p><h3>Activities</h3><p>7. Activity: Resilience Journaling</p><h3>Quotes</h3><blockquote>Obstacles are not interruptions of life - they are part of life. When people set out on a purposeful</blockquote><blockquote>Fear says: “what if I fail?” Faith says: “what if I learn?”</blockquote><blockquote>it as a faith statement. For example: “I fear criticism” becomes “I welcome feedback because it</blockquote><blockquote>Write your “why” daily. It becomes your anchor.</blockquote><blockquote>Reframe obstacles. Instead of asking, “Why me?” ask, “What is this teaching me?”</blockquote><blockquote>Oprah Winfrey overcame poverty and abuse. She said: “Turn your wounds into wisdom.” Her</blockquote><h3>Stories</h3><h3>Proverbs</h3></div>",
-          "sort_order": 4,
-          "is_preview": false,
-          "additional_resources": [],
+          "estimated_duration": 60,
+          "content_type": "text",
+          "sort_order": 11,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-12T19:04:09.971762+00:00",
+          "updated_at": "2025-10-12T19:04:09.973997+00:00",
           "assessment": {
             "quiz": {
+              "id": 32,
               "title": "Lesson 4 – Overcoming Obstacles (1 hour) Quiz",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 139,
                   "question_text": "Which is NOT one of Hill’s six basic fears?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": "The six include poverty, criticism, ill health, loss of love, old age, death.",
                   "options": [
                     "Fear of poverty",
                     "Fear of criticism",
                     "Fear of old age",
                     "Fear of public speaking"
                   ],
-                  "correct_answer": "Fear of public speaking",
-                  "points": 1,
-                  "explanation": "The six include poverty, criticism, ill health, loss of love, old age, death.",
-                  "sort_order": 1
+                  "correct_answer": "Fear of public speaking"
                 },
                 {
+                  "id": 140,
                   "question_text": "Faith reframes adversity and mobilizes action.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 2,
                   "explanation": "",
-                  "sort_order": 2
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 141,
                   "question_text": "The tortoise folktale teaches:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "",
                   "options": [
                     "Speed over persistence",
                     "Ridicule is final",
                     "Steady steps lead home",
                     "Avoid heavy loads always"
                   ],
-                  "correct_answer": "Steady steps lead home",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 3
+                  "correct_answer": "Steady steps lead home"
                 },
                 {
+                  "id": 142,
                   "question_text": "Courage in action means:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": "",
                   "options": [
                     "Acting only when fear is gone",
                     "Acting despite fear",
                     "Waiting for perfect conditions",
                     "Ignoring values"
                   ],
-                  "correct_answer": "Acting despite fear",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 4
+                  "correct_answer": "Acting despite fear"
                 },
                 {
+                  "id": 143,
                   "question_text": "Match item to idea.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "",
                   "options": [
                     "A) Oprah Winfrey",
                     "B) Malala Yousafzai",
@@ -323,76 +401,94 @@
                     "2) Adversity to movement",
                     "3) Strategy over strength"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         },
         {
-          "id": "YITP-UPL-M1-L05",
+          "id": 114,
           "title": "Lesson 5 – Practical Tools for Defining Your Purpose",
-          "content_type": "enhanced",
-          "estimated_duration": 60,
+          "content": "\n<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 5 – Practical Tools for Defining Your Purpose\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">Anecdote: The Fisherman and the Merchant</p><p class=\"mb-3 lead\">A wealthy merchant once urged a fisherman to work harder, buy more boats, and get rich. The</p><p class=\"mb-3 lead\">1. The Science of Purpose</p><p class=\"mb-3 lead\">People with purpose live longer, healthier, happier lives. Purpose reduces depression, increases</p><p class=\"mb-3 lead\">resilience, and boosts performance.</p><p class=\"mb-3 lead\">2. Success Afrika Techniques</p><p class=\"mb-3 lead\">To uncover purpose, ask:</p><p class=\"mb-3 lead\">What makes me feel most alive?</p><p class=\"mb-3 lead\">What am I naturally good at?</p><p class=\"mb-3 lead\">What problem makes me angry enough to act?</p><p class=\"mb-3 lead\">What do others thank me for?</p><p class=\"mb-3 lead\">What legacy do I want to leave?</p><p class=\"mb-3 lead\">point to your core purpose.</p><p class=\"mb-3 lead\">3. Identifying Passions & Strengths</p><p class=\"mb-3 lead\">Purpose is not always obvious. Some discover it early; others stumble into it after decades. But</p><p class=\"mb-3 lead\">you can speed the process by identifying patterns:</p><p class=\"mb-3 lead\">Passion: The things that energize you.</p><p class=\"mb-3 lead\">Strengths: The things you are skilled at.</p><p class=\"mb-3 lead\">Needs: The problems your community faces.</p><p class=\"mb-3 lead\">Rewards: What people will support and value in you.</p><p class=\"mb-3 lead\">Where these four meet lies the sweet spot of purpose.</p><p class=\"mb-3 lead\">4. Aligning with Values</p><p class=\"mb-3 lead\">Values are the guardrails of purpose. Without values, purpose becomes corrupted. Consider:</p><p class=\"mb-3 lead\">A gifted leader without integrity becomes a tyrant.</p><p class=\"mb-3 lead\">A wealthy businessperson without compassion becomes exploitative.</p><p class=\"mb-3 lead\">Purpose must serve the self and others to remain sustainable.</p><p class=\"mb-3 lead\">5. Folktale: The Hunter Who Chased Two Antelopes</p><p class=\"mb-3 lead\">A hunter saw two antelopes running in opposite directions. He tried to catch both but ended with</p><p class=\"mb-3 lead\">none.</p><p class=\"mb-3 lead\">6. Drafting Your Purpose Statement</p><p class=\"mb-3 lead\">Examples:</p><p class=\"mb-3 lead\">7. Case Studies</p><p class=\"mb-3 lead\">Nelson Mandela: His purpose: freedom and unity for South Africa.</p><p class=\"mb-3 lead\">Mother Teresa: Her purpose: to serve the poorest of the poor.</p><p class=\"mb-3 lead\">Wangari Maathai: Her purpose: restoring the environment and empowering women.</p><p class=\"mb-3 lead\">Each purpose statement was clear, value-driven, and action-oriented.</p><p class=\"mb-3 lead\">Draft your purpose statement.</p><p class=\"mb-3 lead\">Share in LMS discussion forum.</p><p class=\"mb-3 lead\">Receive feedback: Is it clear? Is it inspiring? Is it actionable?</p><p class=\"mb-3 lead\">Refine it into one memorable sentence.</p><p class=\"mb-3 lead\">Takeaway: Purpose is not found; it is defined. You do not stumble on it; you craft it.</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Activities Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header yitp-activity-box border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-tasks me-2\"></i>Activities\n                        </h3>\n                    </div>\n                    <div class=\"card-body yitp-activity-box pt-3\">\n                        <div class=\"alert alert-info border-0 mb-3\"><i class=\"fas fa-play-circle me-2\"></i>Activity: Peer Refinement</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Quotes Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Inspirational Quotes\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">fisherman asked, “And then what?”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">The merchant replied, “Then you can retire and sit by the sea.”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">The fisherman smiled: “But I already sit by the sea.”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Psychologists call purpose a “self-organizing life aim.” It integrates goals, values, and identity.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Exercise: Write answers to each question. Discuss with peers. Look for recurring themes—they</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Framework: “The purpose of my life is to [action] so that [impact].”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">“The purpose of my life is to heal broken families so that communities can thrive.”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">“The purpose of my life is to educate girls so that nations can rise.”</blockquote>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Wisdom & Proverbs Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>Wisdom & Proverbs\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;\n}\n\n.yitp-quote {\n    position: relative;\n    font-style: italic;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>\n",
           "learning_objectives": "Objective: Craft a personal purpose statement.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul></ul><h3>Core Lesson</h3><p>Anecdote: The Fisherman and the Merchant</p><p>A wealthy merchant once urged a fisherman to work harder, buy more boats, and get rich. The</p><p>1. The Science of Purpose</p><p>People with purpose live longer, healthier, happier lives. Purpose reduces depression, increases</p><p>resilience, and boosts performance.</p><p>2. Success Afrika Techniques</p><p>To uncover purpose, ask:</p><p>What makes me feel most alive?</p><p>What am I naturally good at?</p><p>What problem makes me angry enough to act?</p><p>What do others thank me for?</p><p>What legacy do I want to leave?</p><p>point to your core purpose.</p><p>3. Identifying Passions & Strengths</p><p>Purpose is not always obvious. Some discover it early; others stumble into it after decades. But</p><p>you can speed the process by identifying patterns:</p><p>Passion: The things that energize you.</p><p>Strengths: The things you are skilled at.</p><p>Needs: The problems your community faces.</p><p>Rewards: What people will support and value in you.</p><p>Where these four meet lies the sweet spot of purpose.</p><p>4. Aligning with Values</p><p>Values are the guardrails of purpose. Without values, purpose becomes corrupted. Consider:</p><p>A gifted leader without integrity becomes a tyrant.</p><p>A wealthy businessperson without compassion becomes exploitative.</p><p>Purpose must serve the self and others to remain sustainable.</p><p>5. Folktale: The Hunter Who Chased Two Antelopes</p><p>A hunter saw two antelopes running in opposite directions. He tried to catch both but ended with</p><p>none.</p><p>6. Drafting Your Purpose Statement</p><p>Examples:</p><p>7. Case Studies</p><p>Nelson Mandela: His purpose: freedom and unity for South Africa.</p><p>Mother Teresa: Her purpose: to serve the poorest of the poor.</p><p>Wangari Maathai: Her purpose: restoring the environment and empowering women.</p><p>Each purpose statement was clear, value-driven, and action-oriented.</p><p>Draft your purpose statement.</p><p>Share in LMS discussion forum.</p><p>Receive feedback: Is it clear? Is it inspiring? Is it actionable?</p><p>Refine it into one memorable sentence.</p><p>Takeaway: Purpose is not found; it is defined. You do not stumble on it; you craft it.</p><h3>Activities</h3><p>Activity: Peer Refinement</p><h3>Quotes</h3><blockquote>fisherman asked, “And then what?”</blockquote><blockquote>The merchant replied, “Then you can retire and sit by the sea.”</blockquote><blockquote>The fisherman smiled: “But I already sit by the sea.”</blockquote><blockquote>Psychologists call purpose a “self-organizing life aim.” It integrates goals, values, and identity.</blockquote><blockquote>Exercise: Write answers to each question. Discuss with peers. Look for recurring themes—they</blockquote><blockquote>Framework: “The purpose of my life is to [action] so that [impact].”</blockquote><blockquote>“The purpose of my life is to heal broken families so that communities can thrive.”</blockquote><blockquote>“The purpose of my life is to educate girls so that nations can rise.”</blockquote><h3>Stories</h3><h3>Proverbs</h3></div>",
-          "sort_order": 5,
-          "is_preview": false,
-          "additional_resources": [],
+          "estimated_duration": 60,
+          "content_type": "text",
+          "sort_order": 12,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-12T19:04:13.045381+00:00",
+          "updated_at": "2025-10-12T19:04:13.046582+00:00",
           "assessment": {
             "quiz": {
+              "id": 33,
               "title": "Lesson 5 – Defining Your Purpose (1 hour) Quiz",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 144,
                   "question_text": "The fisherman & merchant anecdote emphasizes:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": "",
                   "options": [
                     "Endless accumulation",
                     "Joy and values alignment",
                     "Retiring early only",
                     "Competition over meaning"
                   ],
-                  "correct_answer": "Joy and values alignment",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 1
+                  "correct_answer": "Joy and values alignment"
                 },
                 {
+                  "id": 145,
                   "question_text": "Purpose is described as a self-organizing life aim integrating goals, values, identity.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 2,
                   "explanation": "",
-                  "sort_order": 2
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 146,
                   "question_text": "Which combo outlines the 'sweet spot'?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "",
                   "options": [
                     "Passion + Strengths + Needs + Rewards",
                     "Luck + Timing + Money",
                     "Talent + Fame + Followers",
                     "Goals + Tasks + Metrics"
                   ],
-                  "correct_answer": "Passion + Strengths + Needs + Rewards",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 3
+                  "correct_answer": "Passion + Strengths + Needs + Rewards"
                 },
                 {
+                  "id": 147,
                   "question_text": "Values are guardrails that prevent purpose from drifting.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 4,
                   "explanation": "",
-                  "sort_order": 4
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 148,
                   "question_text": "Match step to action.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "",
                   "options": [
                     "A) Draft",
                     "B) Share",
@@ -401,76 +497,94 @@
                     "2) Get feedback in forum",
                     "3) Condense into one sentence"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         },
         {
-          "id": "YITP-UPL-M1-L06",
+          "id": 115,
           "title": "Lesson 6 – Purpose in Action",
-          "content_type": "enhanced",
-          "estimated_duration": 60,
+          "content": "\n<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 6 – Purpose in Action\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">noticed.</p><p class=\"mb-3 lead\">1. Purpose in Daily Habits (Og Mandino)</p><p class=\"mb-3 lead\">Og Mandino’s Greatest Salesman in the World outlines daily disciplines:</p><p class=\"mb-3 lead\">Start each day with gratitude.</p><p class=\"mb-3 lead\">Start every interaction with love.</p><p class=\"mb-3 lead\">Persist until you succeed.</p><p class=\"mb-3 lead\">Master your emotions.</p><p class=\"mb-3 lead\">Multiply your value daily.</p><p class=\"mb-3 lead\">These are not just habits; they are expressions of purpose.</p><p class=\"mb-3 lead\">2. Time Management for Purpose</p><p class=\"mb-3 lead\">Purpose requires prioritizing what matters, not filling time with busyness.</p><p class=\"mb-3 lead\">Tips:</p><p class=\"mb-3 lead\">Block time for purpose-driven work.</p><p class=\"mb-3 lead\">Say no to distractions that do not serve your vision.</p><p class=\"mb-3 lead\">End each day with this question: Did my actions align with my purpose today?</p><p class=\"mb-3 lead\">3. Examples of Purpose in Action</p><p class=\"mb-3 lead\">Wangari Maathai: She planted trees, but her deeper mission was planting hope.</p><p class=\"mb-3 lead\">Strive Masiyiwa: Built Econet Wireless, but greater purpose is education.</p><p class=\"mb-3 lead\">Elon Musk: Pursues space exploration, but his eyeball is on humanity’s survival.</p><p class=\"mb-3 lead\">4. African Wisdom: Ubuntu</p><p class=\"mb-3 lead\">success is incomplete unless it uplifts your community.</p><p class=\"mb-3 lead\">Draw a 7-day calendar.</p><p class=\"mb-3 lead\">Write your top 3 purpose-driven tasks for the week.</p><p class=\"mb-3 lead\">At the end of the week, review: Did I honor my purpose?</p><p class=\"mb-3 lead\">Takeaway: Purpose is not an idea to admire; it is a discipline to embody.</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Activities Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header yitp-activity-box border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-tasks me-2\"></i>Activities\n                        </h3>\n                    </div>\n                    <div class=\"card-body yitp-activity-box pt-3\">\n                        <div class=\"alert alert-info border-0 mb-3\"><i class=\"fas fa-play-circle me-2\"></i>5. Activity: Weekly Purpose Map</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Quotes Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Inspirational Quotes\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Productivity experts like Cal Newport argue that “deep work” produces the highest value.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Ubuntu means “I am because we are.” It teaches that purpose cannot be lived selfishly. Your</blockquote>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Wisdom & Proverbs Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>Wisdom & Proverbs\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"alert alert-warning border-0 mb-3\">{'text': 'Proverb: “The child who is not embraced by the village will burn it down to feel its warmth.”', 'link': 'https://www.google.com/search?q=Proverb%3A%20%E2%80%9CThe%20child%20who%20is%20not%20embraced%20by%20the%20village%20will%20burn%20it%20down%20to%20feel%20its%20warmth.%E2%80%9D'}</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;\n}\n\n.yitp-quote {\n    position: relative;\n    font-style: italic;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>\n",
           "learning_objectives": "Objective: Integrate purpose into everyday life.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul></ul><h3>Core Lesson</h3><p>noticed.</p><p>1. Purpose in Daily Habits (Og Mandino)</p><p>Og Mandino’s Greatest Salesman in the World outlines daily disciplines:</p><p>Start each day with gratitude.</p><p>Start every interaction with love.</p><p>Persist until you succeed.</p><p>Master your emotions.</p><p>Multiply your value daily.</p><p>These are not just habits; they are expressions of purpose.</p><p>2. Time Management for Purpose</p><p>Purpose requires prioritizing what matters, not filling time with busyness.</p><p>Tips:</p><p>Block time for purpose-driven work.</p><p>Say no to distractions that do not serve your vision.</p><p>End each day with this question: Did my actions align with my purpose today?</p><p>3. Examples of Purpose in Action</p><p>Wangari Maathai: She planted trees, but her deeper mission was planting hope.</p><p>Strive Masiyiwa: Built Econet Wireless, but greater purpose is education.</p><p>Elon Musk: Pursues space exploration, but his eyeball is on humanity’s survival.</p><p>4. African Wisdom: Ubuntu</p><p>success is incomplete unless it uplifts your community.</p><p>Draw a 7-day calendar.</p><p>Write your top 3 purpose-driven tasks for the week.</p><p>At the end of the week, review: Did I honor my purpose?</p><p>Takeaway: Purpose is not an idea to admire; it is a discipline to embody.</p><h3>Activities</h3><p>5. Activity: Weekly Purpose Map</p><h3>Quotes</h3><blockquote>Productivity experts like Cal Newport argue that “deep work” produces the highest value.</blockquote><blockquote>Ubuntu means “I am because we are.” It teaches that purpose cannot be lived selfishly. Your</blockquote><h3>Stories</h3><h3>Proverbs</h3><blockquote>{'text': 'Proverb: “The child who is not embraced by the village will burn it down to feel its warmth.”', 'link': 'https://www.google.com/search?q=Proverb%3A%20%E2%80%9CThe%20child%20who%20is%20not%20embraced%20by%20the%20village%20will%20burn%20it%20down%20to%20feel%20its%20warmth.%E2%80%9D'}</blockquote></div>",
-          "sort_order": 6,
-          "is_preview": false,
-          "additional_resources": [],
+          "estimated_duration": 60,
+          "content_type": "text",
+          "sort_order": 13,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-12T19:04:16.237934+00:00",
+          "updated_at": "2025-10-12T19:04:16.239700+00:00",
           "assessment": {
             "quiz": {
+              "id": 34,
               "title": "Lesson 6 – Purpose in Action (1 hour) Quiz",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 149,
                   "question_text": "Og Mandino’s habits include multiplying your value daily.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 1,
                   "explanation": "",
-                  "sort_order": 1
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 150,
                   "question_text": "Time management for purpose prioritizes:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": "",
                   "options": [
                     "Busyness over depth",
                     "Deep work over distractions",
                     "Saying yes to everything",
                     "Endless multitasking"
                   ],
-                  "correct_answer": "Deep work over distractions",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 2
+                  "correct_answer": "Deep work over distractions"
                 },
                 {
+                  "id": 151,
                   "question_text": "Ubuntu teaches:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "",
                   "options": [
                     "Individual above community",
                     "I am because we are",
                     "Avoid helping others",
                     "Privacy over connection"
                   ],
-                  "correct_answer": "I am because we are",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 3
+                  "correct_answer": "I am because we are"
                 },
                 {
+                  "id": 152,
                   "question_text": "The proverb about the child and the village highlights the need for belonging.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 4,
                   "explanation": "",
-                  "sort_order": 4
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 153,
                   "question_text": "Match example to insight.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "",
                   "options": [
                     "A) Wangari Maathai",
                     "B) Strive Masiyiwa",
@@ -479,76 +593,94 @@
                     "2) Education focus",
                     "3) Long-term human survival"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         },
         {
-          "id": "YITP-UPL-M1-L07",
+          "id": 116,
           "title": "Lesson 7 – Sharing & Sustaining Your Purpose",
-          "content_type": "enhanced",
-          "estimated_duration": 60,
+          "content": "\n<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 7 – Sharing & Sustaining Your Purpose\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">Anecdote: The Clay Lamp</p><p class=\"mb-3 lead\">In a dark village, a clay lamp lit one, then another, until the whole village glowed. Yet the clay</p><p class=\"mb-3 lead\">lamp never lost its flame.</p><p class=\"mb-3 lead\">1. Zig Ziglar’s Principle</p><p class=\"mb-3 lead\">multiply your purpose, share it.</p><p class=\"mb-3 lead\">2. Servant Leadership Theory</p><p class=\"mb-3 lead\">Robert Greenleaf’s model: True leaders serve first. They ask, “Do those I serve grow as a</p><p class=\"mb-3 lead\">people?”</p><p class=\"mb-3 lead\">3. Gandhi’s Enduring Flame</p><p class=\"mb-3 lead\">4. Folktale: The Palm Tree That Shared Its Shade</p><p class=\"mb-3 lead\">A palm tree grew tall but spread its leaves wide to shade villagers. Its fruit nourish, its bark</p><p class=\"mb-3 lead\">shelters, and its leaves build roofs.</p><p class=\"mb-3 lead\">Design a small project reflecting your purpose (mentorship, charity, teaching).</p><p class=\"mb-3 lead\">Share in LMS forum.</p><p class=\"mb-3 lead\">Takeaway: Legacy is not what you achieve alone but what you ignite in others.</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Activities Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header yitp-activity-box border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-tasks me-2\"></i>Activities\n                        </h3>\n                    </div>\n                    <div class=\"card-body yitp-activity-box pt-3\">\n                        <div class=\"alert alert-info border-0 mb-3\"><i class=\"fas fa-play-circle me-2\"></i>5. Activity: Community Impact Project</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Quotes Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Inspirational Quotes\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">“You can have everything you want if you help enough other people get what they want.” To</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Gandhi’s purpose outlived him because he lit other torches—activists, movements, nations.</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Reflect: “Whose lamp did I light?”</blockquote>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Wisdom & Proverbs Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>Wisdom & Proverbs\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;\n}\n\n.yitp-quote {\n    position: relative;\n    font-style: italic;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>\n",
           "learning_objectives": "Objective: Learn how to inspire others.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul></ul><h3>Core Lesson</h3><p>Anecdote: The Clay Lamp</p><p>In a dark village, a clay lamp lit one, then another, until the whole village glowed. Yet the clay</p><p>lamp never lost its flame.</p><p>1. Zig Ziglar’s Principle</p><p>multiply your purpose, share it.</p><p>2. Servant Leadership Theory</p><p>Robert Greenleaf’s model: True leaders serve first. They ask, “Do those I serve grow as a</p><p>people?”</p><p>3. Gandhi’s Enduring Flame</p><p>4. Folktale: The Palm Tree That Shared Its Shade</p><p>A palm tree grew tall but spread its leaves wide to shade villagers. Its fruit nourish, its bark</p><p>shelters, and its leaves build roofs.</p><p>Design a small project reflecting your purpose (mentorship, charity, teaching).</p><p>Share in LMS forum.</p><p>Takeaway: Legacy is not what you achieve alone but what you ignite in others.</p><h3>Activities</h3><p>5. Activity: Community Impact Project</p><h3>Quotes</h3><blockquote>“You can have everything you want if you help enough other people get what they want.” To</blockquote><blockquote>Gandhi’s purpose outlived him because he lit other torches—activists, movements, nations.</blockquote><blockquote>Reflect: “Whose lamp did I light?”</blockquote><h3>Stories</h3><h3>Proverbs</h3></div>",
-          "sort_order": 7,
-          "is_preview": false,
-          "additional_resources": [],
+          "estimated_duration": 60,
+          "content_type": "text",
+          "sort_order": 14,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-12T19:04:21.134244+00:00",
+          "updated_at": "2025-10-12T19:04:21.135099+00:00",
           "assessment": {
             "quiz": {
+              "id": 35,
               "title": "Lesson 7 – Sharing & Sustaining Purpose (1 hour) Quiz",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 154,
                   "question_text": "The clay lamp anecdote shows that sharing purpose does not diminish your own.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 1,
                   "explanation": "",
-                  "sort_order": 1
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 155,
                   "question_text": "Zig Ziglar’s principle says:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": "",
                   "options": [
                     "Focus on yourself first",
                     "Help others get what they want",
                     "Compete at all costs",
                     "Avoid collaboration"
                   ],
-                  "correct_answer": "Help others get what they want",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 2
+                  "correct_answer": "Help others get what they want"
                 },
                 {
+                  "id": 156,
                   "question_text": "Servant leadership asks:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "",
                   "options": [
                     "Do I get the credit?",
                     "Do those I serve grow as people?",
                     "Did I speak the longest?",
                     "Who follows orders fastest?"
                   ],
-                  "correct_answer": "Do those I serve grow as people?",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 3
+                  "correct_answer": "Do those I serve grow as people?"
                 },
                 {
+                  "id": 157,
                   "question_text": "The palm tree folktale measures greatness by how many rest in your shade.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 4,
                   "explanation": "",
-                  "sort_order": 4
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 158,
                   "question_text": "Match action to project type.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "",
                   "options": [
                     "A) Mentorship",
                     "B) Teaching",
@@ -557,76 +689,94 @@
                     "2) Share a skill session",
                     "3) Contribute to a cause"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         },
         {
-          "id": "YITP-UPL-M1-L08",
+          "id": 117,
           "title": "Lesson 8 – Reflection & Forward Planning",
-          "content_type": "enhanced",
-          "estimated_duration": 60,
+          "content": "\n<div class=\"yitp-lesson-content\">\n    <div class=\"container-fluid px-0\">\n        <!-- Lesson Header -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-body text-white py-4\">\n                        <h1 class=\"display-6 fw-bold mb-0 text-center\">\n                            <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 8 – Reflection & Forward Planning\n                        </h1>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Key Topics Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n                            <i class=\"fas fa-key me-2\"></i>Key Topics\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"list-group list-group-flush\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Core Lesson Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n                    <div class=\"card-header text-white border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: white;\">\n                            <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n                        </h3>\n                    </div>\n                    <div class=\"card-body text-white pt-3\">\n                        <p class=\"mb-3 lead\">Allegory: The River and the Stone</p><p class=\"mb-3 lead\">A river flowed over a stone for centuries. The stone mocked the river’s weakness. One day, the</p><p class=\"mb-3 lead\">1. Review & Refine Purpose</p><p class=\"mb-3 lead\">Ask:</p><p class=\"mb-3 lead\">Does my statement still resonate?</p><p class=\"mb-3 lead\">Would I live this way even if no one applauded?</p><p class=\"mb-3 lead\">Does it serve both me and others?</p><p class=\"mb-3 lead\">2. Strategies for Resilience</p><p class=\"mb-3 lead\">Expect setbacks.</p><p class=\"mb-3 lead\">Build systems: mentors, accountability, habits.</p><p class=\"mb-3 lead\">Practice renewal through prayer, meditation, and rest.</p><p class=\"mb-3 lead\">3. Philosophical Insights</p><p class=\"mb-3 lead\">Stoicism: External events cannot control us; only our response.</p><p class=\"mb-3 lead\">4. Activities</p><p class=\"mb-3 lead\">One-Year Roadmap: Write 3 goals for 30 days, 6 months, 12 months.</p><p class=\"mb-3 lead\">Letter to Your Future Self: Write a letter dated one year from now. Describe how you lived your</p><p class=\"mb-3 lead\">purpose.</p><p class=\"mb-3 lead\">Accountability Partner: Choose one person to share your roadmap with.</p><p class=\"mb-3 lead\">Takeaway: Purpose does not end with discovery. It begins there.</p><p class=\"mb-3 lead\">Reflection ensures your vision becomes a lived reality.</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Inspirational Quotes Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-quote-left me-2\"></i>Inspirational Quotes\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">stone was smooth. The river whispered: “Persistence triumphs over resistance.”</blockquote><blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Viktor Frankl: “Those who have a ‘why’ to live can bear almost any ‘how.’”</blockquote>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- Wisdom & Proverbs Section -->\n        <div class=\"row mb-4\">\n            <div class=\"col-12\">\n                <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"\">\n                    <div class=\"card-header bg-light border-0 py-3\">\n                        <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n                            <i class=\"fas fa-lightbulb me-2\"></i>Wisdom & Proverbs\n                        </h3>\n                    </div>\n                    <div class=\"card-body bg-light pt-3\">\n                        <div class=\"alert alert-warning border-0 mb-3\">{'text': 'African Proverbs: “When the music changes, so does the dance.” Adaptation is resilience.', 'link': 'https://www.google.com/search?q=African%20Proverbs%3A%20%E2%80%9CWhen%20the%20music%20changes%2C%20so%20does%20the%20dance.%E2%80%9D%20Adaptation%20is%20resilience.'}</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n\n<style>\n.yitp-lesson-content {\n    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n    line-height: 1.6;\n}\n\n.yitp-section-card {\n    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n}\n\n.yitp-section-card:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;\n}\n\n.yitp-quote {\n    position: relative;\n    font-style: italic;\n    padding-left: 1.5rem;\n}\n\n.yitp-quote::before {\n    content: '\"';\n    position: absolute;\n    left: 0;\n    top: -0.5rem;\n    font-size: 3rem;\n    color: #ff5d15;\n    font-weight: bold;\n}\n\n.yitp-activity-box {\n    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);\n    border-left: 4px solid #ff5d15;\n}\n\n@media (max-width: 768px) {\n    .yitp-lesson-content .display-6 {\n        font-size: 1.5rem;\n    }\n    \n    .yitp-lesson-content .card-body {\n        padding: 1.5rem 1rem;\n    }\n}\n</style>\n",
           "learning_objectives": "Objective: Consolidate learning and set a clear future path.",
-          "primary_content": "<div style=\"yitp-default\"><h3>Key Topics</h3><ul></ul><h3>Core Lesson</h3><p>Allegory: The River and the Stone</p><p>A river flowed over a stone for centuries. The stone mocked the river’s weakness. One day, the</p><p>1. Review & Refine Purpose</p><p>Ask:</p><p>Does my statement still resonate?</p><p>Would I live this way even if no one applauded?</p><p>Does it serve both me and others?</p><p>2. Strategies for Resilience</p><p>Expect setbacks.</p><p>Build systems: mentors, accountability, habits.</p><p>Practice renewal through prayer, meditation, and rest.</p><p>3. Philosophical Insights</p><p>Stoicism: External events cannot control us; only our response.</p><p>4. Activities</p><p>One-Year Roadmap: Write 3 goals for 30 days, 6 months, 12 months.</p><p>Letter to Your Future Self: Write a letter dated one year from now. Describe how you lived your</p><p>purpose.</p><p>Accountability Partner: Choose one person to share your roadmap with.</p><p>Takeaway: Purpose does not end with discovery. It begins there.</p><p>Reflection ensures your vision becomes a lived reality.</p><h3>Activities</h3><h3>Quotes</h3><blockquote>stone was smooth. The river whispered: “Persistence triumphs over resistance.”</blockquote><blockquote>Viktor Frankl: “Those who have a ‘why’ to live can bear almost any ‘how.’”</blockquote><h3>Stories</h3><h3>Proverbs</h3><blockquote>{'text': 'African Proverbs: “When the music changes, so does the dance.” Adaptation is resilience.', 'link': 'https://www.google.com/search?q=African%20Proverbs%3A%20%E2%80%9CWhen%20the%20music%20changes%2C%20so%20does%20the%20dance.%E2%80%9D%20Adaptation%20is%20resilience.'}</blockquote></div>",
-          "sort_order": 8,
-          "is_preview": false,
-          "additional_resources": [],
+          "estimated_duration": 60,
+          "content_type": "text",
+          "sort_order": 15,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "created_at": "2025-10-12T19:04:24.046051+00:00",
+          "updated_at": "2025-10-12T19:04:24.046815+00:00",
           "assessment": {
             "quiz": {
+              "id": 36,
               "title": "Lesson 8 – Reflection & Forward Planning (1 hour) Quiz",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
               "questions": [
                 {
+                  "id": 159,
                   "question_text": "Frankl’s insight highlights:",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": "",
                   "options": [
                     "Why gives strength to bear any how",
                     "How determines why",
                     "External events control us",
                     "Suffering has no meaning"
                   ],
-                  "correct_answer": "Why gives strength to bear any how",
-                  "points": 1,
-                  "explanation": "",
-                  "sort_order": 1
+                  "correct_answer": "Why gives strength to bear any how"
                 },
                 {
+                  "id": 160,
                   "question_text": "Stoicism teaches that we control our responses, not events.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 2,
                   "explanation": "",
-                  "sort_order": 2
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 161,
                   "question_text": "Which is NOT part of the capstone activities?",
                   "question_type": "multiple_choice",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": "The exercise is a letter to your future self.",
                   "options": [
                     "One-Year Roadmap",
                     "Letter to your past self",
                     "Accountability partner",
                     "30/180/365 goals"
                   ],
-                  "correct_answer": "Letter to your past self",
-                  "points": 1,
-                  "explanation": "The exercise is a letter to your future self.",
-                  "sort_order": 3
+                  "correct_answer": "Letter to your past self"
                 },
                 {
+                  "id": 162,
                   "question_text": "Persistence shapes outcomes over time, like the river smoothing stone.",
                   "question_type": "true_false",
-                  "correct_answer": "true",
                   "points": 1,
+                  "sort_order": 4,
                   "explanation": "",
-                  "sort_order": 4
+                  "correct_answer": "true"
                 },
                 {
+                  "id": 163,
                   "question_text": "Match task to horizon.",
                   "question_type": "matching",
+                  "points": 3,
+                  "sort_order": 5,
+                  "explanation": "",
                   "options": [
                     "A) 30 days",
                     "B) 6 months",
@@ -635,29 +785,13 @@
                     "2) Medium milestones",
                     "3) Longer-term outcomes"
                   ],
-                  "correct_answer": "A-1,B-2,C-3",
-                  "points": 3,
-                  "explanation": "",
-                  "sort_order": 5
+                  "correct_answer": "A-1,B-2,C-3"
                 }
               ]
             }
           }
         }
-      ],
-      "week": 1,
-      "sort_order": 1,
-      "unlock_criteria": {
-        "requires_payment": false,
-        "requires_module_completion": 0
-      },
-      "estimated_duration": 510
+      ]
     }
-  ],
-  "created_at": "2025-08-23T19:05:02.076998+00:00",
-  "status": "published",
-  "prerequisites": "",
-  "learning_outcomes": "<p>• Practice structured self-discovery and values clarification • Set goals aligned to purpose and career direction • Draft a personal mission/ purpose statement</p>",
-  "instructor": "yitp team",
-  "thumbnail_url": ""
+  ]
 }

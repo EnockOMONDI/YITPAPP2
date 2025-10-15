@@ -17987,3 +17987,23 @@ INFO 2025-10-12 23:00:22,402 basehttp 96861 6166638592 "GET /lms/courses/introdu
 INFO 2025-10-12 23:00:24,625 basehttp 96861 6166638592 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/ HTTP/1.1" 200 126331
 INFO 2025-10-12 23:00:27,268 basehttp 96861 6166638592 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/ HTTP/1.1" 200 126331
 INFO 2025-10-12 23:00:27,999 basehttp 96861 6166638592 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/ HTTP/1.1" 200 126331
+INFO 2025-10-12 23:28:29,656 autoreload 98389 8377088704 Watching for file changes with StatReloader
+INFO 2025-10-12 23:28:32,272 basehttp 98389 6125662208 "GET / HTTP/1.1" 200 65029
+INFO 2025-10-12 23:28:32,378 basehttp 98389 6125662208 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2025-10-12 23:28:32,875 basehttp 98389 6142488576 "GET /static/assets/img/hero/1.jpg HTTP/1.1" 200 213442
+INFO 2025-10-12 23:28:32,876 basehttp 98389 6125662208 "GET /static/assets/img/hero/hero-1.png HTTP/1.1" 200 366296
+INFO 2025-10-12 23:28:32,904 basehttp 98389 6159314944 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-10-12 23:28:32,914 basehttp 98389 6159314944 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-10-12 23:28:32,915 basehttp 98389 6192967680 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-10-12 23:28:32,916 basehttp 98389 6209794048 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-10-12 23:28:32,918 basehttp 98389 6176141312 "GET /static/assets/img/hero/3.jpg HTTP/1.1" 200 182047
+INFO 2025-10-12 23:28:32,921 basehttp 98389 6125662208 "GET /static/assets/img/hero/hero-sm-1.jpg HTTP/1.1" 200 183439
+INFO 2025-10-12 23:28:32,988 basehttp 98389 6192967680 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-10-12 23:28:32,995 basehttp 98389 6142488576 "GET /static/assets/img/hero/4.jpg HTTP/1.1" 200 215809
+INFO 2025-10-12 23:28:32,996 basehttp 98389 6192967680 "GET /static/css/yitp-translate.css HTTP/1.1" 200 12049
+INFO 2025-10-12 23:28:32,997 basehttp 98389 6176141312 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 9890
+INFO 2025-10-12 23:28:33,163 basehttp 98389 6192967680 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2025-10-12 23:28:33,163 basehttp 98389 6176141312 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-10-12 23:28:33,199 basehttp 98389 6176141312 "GET /static/assets/img/about/D.jpg HTTP/1.1" 200 197385
+INFO 2025-10-12 23:28:33,201 basehttp 98389 6192967680 "GET /static/assets/img/about/D2.jpg HTTP/1.1" 200 366629
+INFO 2025-10-12 23:28:39,929 basehttp 98389 6125662208 "GET / HTTP/1.1" 200 65029

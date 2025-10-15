@@ -1,0 +1,994 @@
+{
+  "course_info": {
+    "id": 6,
+    "export_note": "Append Module 2: Personal Initiative (verbatim-preserving scaffolding).",
+    "export_timestamp": "2025-10-12T21:45:23"
+  },
+  "modules": [
+    {
+      "title": "Module 2: Personal Initiative (PI)",
+      "description": "This unit develops a proactive, future-oriented mindset, turning ideas into action through resourcefulness, creative problem solving, and disciplined execution. All content is preserved verbatim inside each lesson's Verbatim section.",
+      "sort_order": 2,
+      "lessons": [
+        {
+          "title": "Lesson 1 – Personal Initiative Fundamentals",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 16,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 1 – Personal Initiative Fundamentals\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 3–12</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 3–12}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 3–12\"</code> · <code>content_sha256=\"f96c9b72ed1b95546f67a9020f4bfcac09eac2a3ddfd7b536461b0375b0411d8\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 1 – Personal Initiative Fundamentals – Knowledge Check",
+              "description": "Questions copied verbatim from source assessments/exercises/questionnaires.",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "Training 6IS PROFIT THE POINT OF WORK?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "−Can you serve two masters?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 2 – Future Orientation (If A → then B)",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 17,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 2 – Future Orientation (If A → then B)\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 13–22</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 13–22}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 13–22\"</code> · <code>content_sha256=\"0b23861a3bfe6a7cea2300f604dcc58780ee1a4c30240b785a98615aed1f220d\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 2 – Future Orientation (If A → then B) – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "BEHAVIOUR ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "-What went wrong ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "have you been Laid Back ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "you have used instead ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 3 – Opportunity Scanning",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 18,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 3 – Opportunity Scanning\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 23–32</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 23–32}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 23–32\"</code> · <code>content_sha256=\"f9279f4443319d32dc7e64299bb222c621b289af9fd260ce568a09bee87317ed\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 3 – Opportunity Scanning – Knowledge Check",
+              "description": "Questions copied verbatim from source assessments/exercises/questionnaires.",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "What did Karobia do wrong?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "from this change?  List at least 3 opportunities .",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "this change?  List at least 3 barriers.",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 4 – SMART-PI Goals",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 19,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 4 – SMART-PI Goals\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 33–42</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 33–42}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 33–42\"</code> · <code>content_sha256=\"3faf3543db3bc57ccfc19d7d3e03705a849ecd715e35389c8eff157947009d5e\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 4 – SMART-PI Goals – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "Answer all the questions: What, when / how often? Where? Who?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "2.How can he overcome the obstacle using problem solving techniques?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 5 – Internal Barriers I",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 20,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 5 – Internal Barriers I\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 43–52</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 43–52}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 43–52\"</code> · <code>content_sha256=\"a05afd3d10f7d6ccab66de9c960a142289e57e7b250189b49752ed1e4bc5d034\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 5 – Internal Barriers I – Knowledge Check",
+              "description": "Questions copied verbatim from source assessments/exercises/questionnaires.",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "desert floor. When the Israelites saw it, they said to each other, “What is it?” For they did not",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 6 – Internal Barriers II",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 21,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 6 – Internal Barriers II\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 53–62</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 53–62}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 53–62\"</code> · <code>content_sha256=\"b06ea3586f72fdee4dd84633e9c8bd720e1966683ad4ba4cd0a1621fc3ae9711\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 6 – Internal Barriers II – Knowledge Check",
+              "description": "Questions copied verbatim from source assessments/exercises/questionnaires.",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "RearrangeCan you replace part of the product/service?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "another?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "product/service?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "product/service?Can you find other areas where the product/service",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "has an alternative use?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 5,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 7 – External Barriers I",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 22,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 7 – External Barriers I\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 63–72</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 63–72}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 63–72\"</code> · <code>content_sha256=\"605d80a5f9c43d892cac6dbecc38860a171297fe3a05835d8b40640711a789ae\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 7 – External Barriers I – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "you use them to get innovative ideas for your business?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oToo expensive -Could I offer something cheaper ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oNot easy to use -Could I offer a more user -friendly version?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oThe quality isvery poor -Could I offer a better made product ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "3.How many ofthese solutions are entrepreneurial ideas?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 5,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Do I believe the idea genuinely feasible?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 6,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Is this a new idea (given my target market)?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 7,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Can I make a profit by implementing the idea -even in the long term?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 8,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Ask others what theythink about yourideaand how they would rate it?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 9,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 8 – External Barriers II",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 23,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 8 – External Barriers II\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 73–82</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 73–82}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 73–82\"</code> · <code>content_sha256=\"17a4d47b9fe2e31b20412d01879afc4589f11f1f9f043309beb6b36185b76334\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 8 – External Barriers II – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "How can Denise test her idea?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oWhat problems might happen during the experiment?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oIs the idea original?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oIs the idea profitable?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oWhat is the biggest obstacle in realising the idea ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 5,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oWhich feedback elements are the same?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 6,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oWhat are the differences between the two feedbacks?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 7,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oWhat have you learnt from this exercise?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 8,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 9 – Bootstrapping & Resourcefulness",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 24,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 9 – Bootstrapping & Resourcefulness\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 83–92</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 83–92}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 83–92\"</code> · <code>content_sha256=\"e2f524d9fcb89312ceebf20d3631a5b024cb778983b47027fde29aaa2c6634b1\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 9 – Bootstrapping & Resourcefulness – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "1. What criteria (SMART -PI) does Frank’s objective meet ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "2. Does Frank’s objective show enough personal initiative?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "criteria ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "negative feedback)?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oWhen will you assess whether you have reached your goal (exact date) ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 5,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oIs its purpose \"SMART -PI\"?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 6,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "oIs its purpose really new in its context?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 7,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 10 – Time, Systems & Cadence",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 25,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 10 – Time, Systems & Cadence\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 93–102</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 93–102}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 93–102\"</code> · <code>content_sha256=\"28fc02b6701978c7eaacbc7775760e1ca17c2f32bf5202f37a1105e41219baf5\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 10 – Time, Systems & Cadence – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "complete it?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "•Ask yourself : does Sophie really need all the items you have listed or could she use bootstrapping to reduce costs ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "•Have you identified any potential obstacles that could occur as Sophie pursues her goal?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 11 – Creative Problem Solving (SCAMPER)",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 26,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 11 – Creative Problem Solving (SCAMPER)\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 103–112</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 103–112}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 103–112\"</code> · <code>content_sha256=\"b693fcd899f97d701a8e03a3f06bdc227b4036d6fff2f615e7e43e29a091309b\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 11 – Creative Problem Solving (SCAMPER) – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "•Are these sources really new and not just a copy of what others are already doing?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "•Do you think these sources will work in the future?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "•Do these sources really help me to overcome the financial challenges of my business?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Go and ask other entrepreneurs how they acquired their starting capital?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 12 – Case Studies & Scenarios",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 27,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 12 – Case Studies & Scenarios\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 113–122</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 113–122}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 113–122\"</code> · <code>content_sha256=\"1066c08c50aa867238b9a007989f9ad4fc5caa5a5830430e7821702338d68b9f\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 12 – Case Studies & Scenarios – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "BEHAVIOUR ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "WHAT IS PAULINE 'S REACTIVE BEHAVIOUR ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Look at your daily plan: What went wrong? Where were you passive and reactive?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 13 – Diagnostics & Questionnaires",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 28,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 13 – Diagnostics & Questionnaires\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 123–132</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 123–132}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 123–132\"</code> · <code>content_sha256=\"28596e143f7dae38119d4da2a9c54a5ec9c6a2d0da8731443bf341fab429ec64\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 13 – Diagnostics & Questionnaires – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "Answer all questions: What? When / how often? Where? Who?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "What?  Solution(s)?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "When / How often?  Solution(s)?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Where?  Solution(s)?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Who is it?  Solution(s)?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 5,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Why?  Solution(s)?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 6,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "service?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 7,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 14 – Practicals & Field Activities",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 29,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 14 – Practicals & Field Activities\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 133–142</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 133–142}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 133–142\"</code> · <code>content_sha256=\"351b6c90ce97eb983bc9f7b301f630e793bbd9a07d8bc3639f8cbd328bae83cb\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 14 – Practicals & Field Activities – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "o What do you notice?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "Information sources  Useful for you?  How can you use this source to get innovative ideas for your business?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "entrepreneurial ideas ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "POTENTIAL SOLUTIONS : 03 | ENTREPRENEURIAL IDEA ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "1. How can Denise test her idea?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 5,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "experiment?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 6,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "mistakes?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 7,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "WHAT IS GOOD ABOUT FRANK’S GOALS ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 8,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "WHAT IS WRONG WITH FRANK'S GOALS ? WHAT WOULD MAKE THEM BETTER ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 9,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 15 – Capstone Design (30/60/90)",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 30,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 15 – Capstone Design (30/60/90)\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 143–152</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 143–152}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 143–152\"</code> · <code>content_sha256=\"9a78e6e756c55809d68ca9664f71225bbd32167901af3114684b774de47bbc06\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 15 – Capstone Design (30/60/90) – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "Is your goal formulated according to the principles of \"good goal setting\"?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "SMART -PI\"?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "to offer a delivery service?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "How much money does she need?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Lesson 16 – Capstone Commit & Support",
+          "content_type": "text",
+          "learning_objectives": "Captured from source; preserved verbatim in the Verbatim block.",
+          "estimated_duration": 60,
+          "sort_order": 31,
+          "is_published": true,
+          "is_mandatory": true,
+          "video_url": "",
+          "document_url": "",
+          "audio_url": "",
+          "resources": [],
+          "content": "<div class=\"yitp-lesson-content\">\n  <div class=\"container-fluid px-0\">\n\n    <!-- Lesson Header -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-body text-white py-4\">\n            <h1 class=\"display-6 fw-bold mb-0 text-center\">\n              <i class=\"fas fa-graduation-cap me-3\"></i>Lesson 16 – Capstone Commit & Support\n            </h1>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Key Topics -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-key me-2\"></i>Key Topics\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <ul class=\"list-group list-group-flush\">\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 1 <span class=\"badge text-bg-secondary ms-2\">PI</span></li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 2</li>\n              <li class=\"list-group-item border-0 px-0 py-2\">Topic 3</li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Core Lesson -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\" style=\"background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);\">\n          <div class=\"card-header text-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: white;\">\n              <i class=\"fas fa-book-open me-2\"></i>Core Lesson\n            </h3>\n          </div>\n          <div class=\"card-body text-white pt-3\">\n            <p class=\"mb-3 lead\">This section organizes the original content for easier reading without changing wording or intent.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Activities -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header yitp-activity-box border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #ff5d15;\">\n              <i class=\"fas fa-tasks me-2\"></i>Activities\n            </h3>\n          </div>\n          <div class=\"card-body yitp-activity-box pt-3\">\n            <div class=\"alert alert-info border-0 mb-3\">\n              <i class=\"fas fa-play-circle me-2\"></i>\n              <strong>Activity:</strong> Follow the prompts exactly as provided in the Verbatim section.\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Quotes / Proverbs -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-light border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-quote-left me-2\"></i>Quotes & Proverbs\n            </h3>\n          </div>\n          <div class=\"card-body bg-light pt-3\">\n            <blockquote class=\"yitp-quote border-0 mb-3 p-3 rounded\">Preserved as in source (see Verbatim).</blockquote>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- VERBATIM (unaltered) -->\n    <div class=\"row mb-4\">\n      <div class=\"col-12\">\n        <div class=\"card yitp-section-card border-0 shadow-sm\">\n          <div class=\"card-header bg-white border-0 py-3\">\n            <h3 class=\"card-title mb-0\" style=\"color: #1a2e53;\">\n              <i class=\"fas fa-file-alt me-2\"></i>Verbatim (unaltered)\n            </h3>\n          </div>\n          <div class=\"card-body bg-white pt-3\">\n            <details open>\n              <summary><strong>Original Text & Page Range</strong> — pp. 153–162</summary>\n              <div class=\"mt-3\">\n                <pre class=\"mb-0\" style=\"white-space: pre-wrap;\">{VERBATIM_PLACEHOLDER_pp. 153–162}</pre>\n              </div>\n            </details>\n            <div class=\"small text-muted mt-2\">\n              Integrity: <code>source_pages=\"pp. 153–162\"</code> · <code>content_sha256=\"27037a63c03def7685e96fdb59a299ae0497d7ef468ff56187e594ee3717eccd\"</code>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n</div>\n\n<style>\n.yitp-lesson-content { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }\n.yitp-section-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }\n.yitp-section-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; }\n.yitp-quote { position: relative; font-style: italic; padding-left: 1.5rem; }\n.yitp-quote::before { content: '\"'; position: absolute; left: 0; top: -0.5rem; font-size: 3rem; color: #ff5d15; font-weight: bold; }\n.yitp-activity-box { background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #ff5d15; }\n@media (max-width: 768px) {\n  .yitp-lesson-content .display-6 { font-size: 1.5rem; }\n  .yitp-lesson-content .card-body { padding: 1.5rem 1rem; }\n}\n</style>",
+          "assessment": {
+            "quiz": {
+              "title": "Lesson 16 – Capstone Commit & Support – Formal Assessment",
+              "description": "",
+              "time_limit": null,
+              "max_attempts": 3,
+              "passing_score": 70,
+              "is_randomized": false,
+              "show_results": true,
+              "questions": [
+                {
+                  "question_text": "WHAT INFORMATION DO YOU WANT TO COLLECT ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 1,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "??",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 2,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "WHAT DOES CAROLINE  NEED TO ACHIEVE HER  GOAL ?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 3,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "products or services?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 4,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "or services?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 5,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "experiments?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 6,
+                  "explanation": ""
+                },
+                {
+                  "question_text": "mistakes?",
+                  "question_type": "short_answer",
+                  "points": 1,
+                  "sort_order": 7,
+                  "explanation": ""
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
