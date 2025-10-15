@@ -74,21 +74,70 @@
 }
 
 /* ========================================
+   YITP Text Visibility Fix - Global Rule
+   ======================================== */
+/* Ensure all text on YITP colored backgrounds is white */
+[style*="#ff5d15"],
+[style*="#1a2e53"],
+.bg-primary,
+.btn-primary,
+.badge-primary,
+.badge.bg-primary,
+.progress-bar.bg-primary,
+[class*="yitp"][class*="bg"],
+.avatar-title.bg-primary {
+    color: white !important;
+}
+
+/* Specific YITP gradient backgrounds */
+[style*="linear-gradient"][style*="#ff5d15"],
+[style*="linear-gradient"][style*="#1a2e53"] {
+    color: white !important;
+}
+
+/* YITP button text visibility */
+.btn-primary-yitp,
+.btn-secondary-yitp,
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+    color: white !important;
+}
+
+/* YITP card headers and badges */
+.yitp-card-header,
+.yitp-badge,
+.yitp-alert,
+.badge.bg-primary,
+.badge-primary {
+    color: white !important;
+}
+
+/* YITP custom button classes */
+.btn-primary-custom,
+.yitp-btn-primary,
+.btn-auth.btn-primary {
+    color: white !important;
+}
+
+/* ========================================
    YITP Button Styling
    ======================================== */
 .btn-primary {
     background-color: var(--yitp-primary);
     border-color: var(--yitp-primary);
-    color: var(--yitp-white);
+    color: var(--yitp-white) !important;
     font-weight: 600;
     transition: var(--yitp-transition);
 }
 
-.btn-primary:hover, 
+.btn-primary:hover,
 .btn-primary:focus {
     background-color: var(--yitp-primary-hover);
     border-color: var(--yitp-primary-hover);
-    color: var(--yitp-white);
+    color: var(--yitp-white) !important;
     transform: translateY(-1px);
     box-shadow: var(--yitp-shadow-primary);
 }
@@ -96,7 +145,7 @@
 .btn-secondary {
     background-color: var(--yitp-secondary);
     border-color: var(--yitp-secondary);
-    color: var(--yitp-white);
+    color: var(--yitp-white) !important;
     font-weight: 600;
     transition: var(--yitp-transition);
 }

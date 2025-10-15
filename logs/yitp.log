@@ -18036,3 +18036,528 @@ WARNING 2025-10-15 04:12:35,805 basehttp 10376 6213660672 "GET /static/assets/js
 WARNING 2025-10-15 04:12:35,864 basehttp 10376 6230487040 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
 WARNING 2025-10-15 04:12:35,871 log 10376 6196834304 Not Found: /.well-known/appspecific/com.chrome.devtools.json
 WARNING 2025-10-15 04:12:35,872 basehttp 10376 6196834304 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+INFO 2025-10-15 05:11:10,072 autoreload 12969 8377088704 Watching for file changes with StatReloader
+ERROR 2025-10-15 05:11:12,822 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:12,841 log 12969 6165295104 Bad Request: /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/
+WARNING 2025-10-15 05:11:12,842 basehttp 12969 6165295104 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/ HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:12,988 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:13,002 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:13,003 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:13,744 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:13,746 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:13,747 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:15,848 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:15,849 log 12969 6165295104 Bad Request: /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/
+WARNING 2025-10-15 05:11:15,850 basehttp 12969 6165295104 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/ HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:15,871 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:15,872 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:15,872 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:15,935 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:15,936 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:15,937 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:19,792 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:19,794 log 12969 6165295104 Bad Request: /lms/courses/introduction-to-yitp-your-learning-journey-begins/
+WARNING 2025-10-15 05:11:19,795 basehttp 12969 6165295104 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:19,831 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:19,833 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:19,835 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:19,894 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:19,897 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:19,898 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:21,618 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:21,619 log 12969 6165295104 Bad Request: /lms/courses/trial/start/introduction-to-yitp-your-learning-journey-begins/
+WARNING 2025-10-15 05:11:21,620 basehttp 12969 6165295104 "GET /lms/courses/trial/start/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:21,654 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:21,654 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:21,655 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:21,724 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:21,726 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:21,726 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:22,742 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:22,743 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:22,743 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:22,796 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:22,796 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:22,797 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:23,423 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:23,424 log 12969 6165295104 Bad Request: /lms/courses/
+WARNING 2025-10-15 05:11:23,425 basehttp 12969 6165295104 "GET /lms/courses/ HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:23,439 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:23,440 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:23,441 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:23,495 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:23,496 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:23,496 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:24,091 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:24,094 log 12969 6165295104 Bad Request: /
+WARNING 2025-10-15 05:11:24,098 basehttp 12969 6165295104 "GET / HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:24,114 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:24,115 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:24,115 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:24,168 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:24,169 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:24,169 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:25,534 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:25,535 log 12969 6165295104 Bad Request: /
+WARNING 2025-10-15 05:11:25,535 basehttp 12969 6165295104 "GET / HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:25,546 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:25,547 log 12969 6165295104 Bad Request: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:11:25,547 basehttp 12969 6165295104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 400 8971
+ERROR 2025-10-15 05:11:25,584 exception 12969 6165295104 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-10-15 05:11:25,585 log 12969 6165295104 Bad Request: /favicon.ico
+WARNING 2025-10-15 05:11:25,585 basehttp 12969 6165295104 "GET /favicon.ico HTTP/1.1" 400 8971
+INFO 2025-10-15 05:12:00,885 autoreload 13016 8377088704 Watching for file changes with StatReloader
+INFO 2025-10-15 05:12:01,863 basehttp 13016 6156824576 "GET / HTTP/1.1" 200 65066
+INFO 2025-10-15 05:12:01,915 basehttp 13016 6173650944 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-10-15 05:12:01,923 basehttp 13016 6190477312 - Broken pipe from ('127.0.0.1', 58961)
+INFO 2025-10-15 05:12:01,925 basehttp 13016 6207303680 - Broken pipe from ('127.0.0.1', 58962)
+INFO 2025-10-15 05:12:01,925 basehttp 13016 6224130048 - Broken pipe from ('127.0.0.1', 58963)
+INFO 2025-10-15 05:12:01,926 basehttp 13016 6173650944 - Broken pipe from ('127.0.0.1', 58960)
+INFO 2025-10-15 05:12:01,929 basehttp 13016 6240956416 - Broken pipe from ('127.0.0.1', 58964)
+INFO 2025-10-15 05:12:01,930 basehttp 13016 6190477312 - Broken pipe from ('127.0.0.1', 58965)
+INFO 2025-10-15 05:12:01,931 basehttp 13016 6173650944 - Broken pipe from ('127.0.0.1', 58968)
+INFO 2025-10-15 05:12:01,931 basehttp 13016 6257782784 - Broken pipe from ('127.0.0.1', 58966)
+INFO 2025-10-15 05:12:01,931 basehttp 13016 6207303680 - Broken pipe from ('127.0.0.1', 58967)
+INFO 2025-10-15 05:12:01,932 basehttp 13016 6224130048 - Broken pipe from ('127.0.0.1', 58969)
+WARNING 2025-10-15 05:12:01,939 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:01,939 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+WARNING 2025-10-15 05:12:04,308 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:04,309 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+INFO 2025-10-15 05:12:04,373 basehttp 13016 6156824576 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-10-15 05:12:04,376 basehttp 13016 6156824576 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+WARNING 2025-10-15 05:12:04,547 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:04,548 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+WARNING 2025-10-15 05:12:04,758 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:04,758 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+WARNING 2025-10-15 05:12:04,941 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:04,942 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+WARNING 2025-10-15 05:12:05,132 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:05,132 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+INFO 2025-10-15 05:12:07,035 basehttp 13016 6156824576 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/lessons/2/ HTTP/1.1" 200 126368
+INFO 2025-10-15 05:12:07,055 basehttp 13016 6190477312 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-10-15 05:12:07,057 basehttp 13016 6173650944 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7078
+INFO 2025-10-15 05:12:07,063 basehttp 13016 6224130048 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-10-15 05:12:07,065 basehttp 13016 6173650944 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-10-15 05:12:07,065 basehttp 13016 6190477312 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-10-15 05:12:07,065 basehttp 13016 6240956416 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-10-15 05:12:07,072 basehttp 13016 6207303680 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+WARNING 2025-10-15 05:12:07,075 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:07,076 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+INFO 2025-10-15 05:12:07,079 basehttp 13016 6240956416 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-10-15 05:12:07,080 basehttp 13016 6173650944 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-10-15 05:12:07,082 basehttp 13016 6207303680 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-10-15 05:12:07,086 basehttp 13016 6240956416 "GET /static/css/yitp-course-branding.css HTTP/1.1" 200 15187
+INFO 2025-10-15 05:12:07,087 basehttp 13016 6156824576 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-10-15 05:12:07,090 basehttp 13016 6173650944 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-10-15 05:12:07,091 basehttp 13016 6224130048 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-10-15 05:12:07,093 basehttp 13016 6190477312 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-10-15 05:12:07,094 basehttp 13016 6207303680 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-10-15 05:12:07,099 basehttp 13016 6207303680 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-10-15 05:12:07,102 basehttp 13016 6190477312 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-10-15 05:12:07,104 basehttp 13016 6207303680 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-10-15 05:12:07,106 basehttp 13016 6190477312 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-10-15 05:12:07,110 basehttp 13016 6207303680 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-10-15 05:12:07,111 basehttp 13016 6190477312 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-10-15 05:12:07,112 basehttp 13016 6207303680 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-10-15 05:12:07,144 basehttp 13016 6207303680 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-10-15 05:12:07,145 basehttp 13016 6190477312 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-10-15 05:12:07,149 basehttp 13016 6190477312 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+WARNING 2025-10-15 05:12:08,084 basehttp 13016 6190477312 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-10-15 05:12:08,145 basehttp 13016 6156824576 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+WARNING 2025-10-15 05:12:08,149 basehttp 13016 6224130048 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-10-15 05:12:08,151 basehttp 13016 6173650944 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-10-15 05:12:08,153 basehttp 13016 6207303680 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-10-15 05:12:16,955 basehttp 13016 6156824576 "GET / HTTP/1.1" 200 65066
+INFO 2025-10-15 05:12:16,993 basehttp 13016 6190477312 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-10-15 05:12:16,994 basehttp 13016 6173650944 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+WARNING 2025-10-15 05:12:17,026 log 13016 6156824576 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-15 05:12:17,034 basehttp 13016 6156824576 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10533
+INFO 2025-10-15 05:12:17,048 basehttp 13016 6207303680 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-10-15 05:12:17,051 basehttp 13016 6240956416 "GET /static/assets/img/hero/hero-sm-1.jpg HTTP/1.1" 200 183439
+INFO 2025-10-15 05:12:17,052 basehttp 13016 6224130048 "GET /static/assets/img/hero/3.jpg HTTP/1.1" 200 182047
+INFO 2025-10-15 05:12:17,056 basehttp 13016 6190477312 "GET /static/assets/img/hero/1.jpg HTTP/1.1" 200 213442
+INFO 2025-10-15 05:12:17,062 basehttp 13016 6173650944 "GET /static/assets/img/hero/hero-1.png HTTP/1.1" 200 366296
+INFO 2025-10-15 05:12:17,076 basehttp 13016 6224130048 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-10-15 05:12:17,078 basehttp 13016 6173650944 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-10-15 05:12:17,078 basehttp 13016 6156824576 "GET /static/assets/img/hero/4.jpg HTTP/1.1" 200 215809
+INFO 2025-10-15 05:12:17,079 basehttp 13016 6190477312 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-10-15 05:12:17,080 basehttp 13016 6240956416 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2025-10-15 05:12:17,080 basehttp 13016 6207303680 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-10-15 05:12:17,083 basehttp 13016 6224130048 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 9890
+INFO 2025-10-15 05:12:17,089 basehttp 13016 6240956416 "GET /static/css/yitp-translate.css HTTP/1.1" 200 12049
+INFO 2025-10-15 05:12:17,116 basehttp 13016 6240956416 "GET /static/assets/img/about/D.jpg HTTP/1.1" 200 197385
+INFO 2025-10-15 05:12:17,138 basehttp 13016 6224130048 "GET /static/assets/img/about/D2.jpg HTTP/1.1" 200 366629
+WARNING 2025-10-15 05:12:17,139 basehttp 13016 6240956416 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-10-15 05:12:17,148 basehttp 13016 6224130048 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-10-15 05:12:17,273 basehttp 13016 6207303680 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-10-15 05:12:17,276 basehttp 13016 6190477312 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-10-15 05:12:17,277 basehttp 13016 6156824576 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2025-10-15 05:12:35,939 basehttp 13016 6156824576 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-10-15 05:12:35,958 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:12:35,995 basehttp 13016 6156824576 "GET /static/img/courses/default-course-thumbnail.jpeg HTTP/1.1" 200 192434
+INFO 2025-10-15 05:12:53,307 basehttp 13016 6156824576 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 91480
+INFO 2025-10-15 05:12:53,340 basehttp 13016 6224130048 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-10-15 05:12:53,341 basehttp 13016 6190477312 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-10-15 05:12:53,342 basehttp 13016 6156824576 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7078
+INFO 2025-10-15 05:12:53,342 basehttp 13016 6240956416 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-10-15 05:12:53,347 basehttp 13016 6224130048 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-10-15 05:12:53,348 basehttp 13016 6156824576 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-10-15 05:12:53,348 basehttp 13016 6207303680 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-10-15 05:12:53,352 basehttp 13016 6240956416 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-10-15 05:12:53,354 basehttp 13016 6224130048 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-10-15 05:12:53,355 basehttp 13016 6156824576 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-10-15 05:12:53,356 basehttp 13016 6240956416 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-10-15 05:12:53,361 basehttp 13016 6173650944 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-10-15 05:12:53,365 basehttp 13016 6224130048 "GET /static/css/yitp-course-branding.css HTTP/1.1" 200 15187
+INFO 2025-10-15 05:12:53,368 basehttp 13016 6190477312 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-10-15 05:12:53,370 basehttp 13016 6240956416 "GET /static/img/courses/default-course-thumbnail.jpeg HTTP/1.1" 200 192434
+INFO 2025-10-15 05:12:53,371 basehttp 13016 6156824576 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-10-15 05:12:53,373 basehttp 13016 6207303680 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-10-15 05:12:53,378 basehttp 13016 6156824576 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-10-15 05:12:53,380 basehttp 13016 6207303680 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-10-15 05:12:53,385 basehttp 13016 6207303680 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-10-15 05:12:53,392 basehttp 13016 6207303680 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-10-15 05:12:53,397 basehttp 13016 6207303680 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-10-15 05:12:53,402 basehttp 13016 6207303680 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-10-15 05:12:53,406 basehttp 13016 6207303680 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-10-15 05:12:53,409 basehttp 13016 6207303680 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-10-15 05:12:53,412 basehttp 13016 6207303680 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-10-15 05:12:53,414 basehttp 13016 6207303680 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-10-15 05:12:53,418 basehttp 13016 6207303680 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2025-10-15 05:12:54,089 basehttp 13016 6190477312 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-10-15 05:12:54,094 basehttp 13016 6156824576 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-10-15 05:12:54,101 basehttp 13016 6173650944 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-10-15 05:12:54,363 basehttp 13016 6173650944 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-10-15 05:12:55,542 basehttp 13016 6173650944 "GET / HTTP/1.1" 200 65066
+INFO 2025-10-15 05:12:55,581 basehttp 13016 6173650944 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2025-10-15 05:12:55,582 basehttp 13016 6156824576 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-10-15 05:12:55,596 basehttp 13016 6207303680 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-10-15 05:12:55,597 basehttp 13016 6224130048 "GET /static/assets/img/hero/3.jpg HTTP/1.1" 200 182047
+INFO 2025-10-15 05:12:55,598 basehttp 13016 6190477312 "GET /static/assets/img/hero/hero-1.png HTTP/1.1" 200 366296
+INFO 2025-10-15 05:12:55,598 basehttp 13016 6173650944 "GET /static/assets/img/hero/1.jpg HTTP/1.1" 200 213442
+INFO 2025-10-15 05:12:55,603 basehttp 13016 6240956416 "GET /static/assets/img/hero/hero-sm-1.jpg HTTP/1.1" 200 183439
+INFO 2025-10-15 05:12:55,603 basehttp 13016 6156824576 "GET /static/assets/img/hero/4.jpg HTTP/1.1" 200 215809
+INFO 2025-10-15 05:12:55,607 basehttp 13016 6207303680 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-10-15 05:12:55,607 basehttp 13016 6240956416 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-10-15 05:12:55,609 basehttp 13016 6173650944 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-10-15 05:12:55,619 basehttp 13016 6224130048 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-10-15 05:12:55,629 basehttp 13016 6156824576 "GET /static/css/yitp-translate.css HTTP/1.1" 200 12049
+INFO 2025-10-15 05:12:55,630 basehttp 13016 6190477312 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2025-10-15 05:12:55,631 basehttp 13016 6240956416 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 9890
+INFO 2025-10-15 05:12:55,685 basehttp 13016 6156824576 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2025-10-15 05:12:55,691 basehttp 13016 6224130048 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-10-15 05:12:55,693 basehttp 13016 6240956416 "GET /static/assets/img/about/D.jpg HTTP/1.1" 200 197385
+INFO 2025-10-15 05:12:55,704 basehttp 13016 6190477312 "GET /static/assets/img/about/D2.jpg HTTP/1.1" 200 366629
+INFO 2025-10-15 05:12:57,592 basehttp 13016 6190477312 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-10-15 05:12:57,615 basehttp 13016 6190477312 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:13:03,545 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:13:06,839 basehttp 13016 6156824576 "GET /lms/courses/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 91480
+INFO 2025-10-15 05:13:09,745 basehttp 13016 6156824576 "GET /lms/courses/trial/start/introduction-to-yitp-your-learning-journey-begins/ HTTP/1.1" 200 23512
+WARNING 2025-10-15 05:13:09,781 basehttp 13016 6156824576 "GET /static/images/trial-illustration.svg HTTP/1.1" 404 1846
+INFO 2025-10-15 05:13:24,650 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:13:25,541 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:13:28,285 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:13:53,735 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:13:54,805 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:14:06,823 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:14:07,676 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306
+INFO 2025-10-15 05:14:25,891 basehttp 13016 6156824576 "GET /lms/courses/ HTTP/1.1" 200 24306

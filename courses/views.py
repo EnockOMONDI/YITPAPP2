@@ -81,7 +81,7 @@ class CourseListView(ListView):
         if search:
             queryset = queryset.filter(title__icontains=search)
         
-        return queryset.order_by('-created_at')
+        return queryset.order_by('created_at')  # Oldest first
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

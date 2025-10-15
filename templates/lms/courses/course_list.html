@@ -8,106 +8,465 @@
 <link rel="stylesheet" href="{% static 'css/yitp-course-branding.css' %}">
 
 <style>
-/* Mobile-First Design - Course List */
-/* Fix for navbar overlap - add top margin to account for fixed navbar */
+/* ========================================
+   YITP COURSE CATALOG - MODERN DESIGN
+   ======================================== */
+:root {
+    --yitp-primary: #ff5d15;
+    --yitp-secondary: #1a2e53;
+    --yitp-gradient: linear-gradient(135deg, #ff5d15 0%, #1a2e53 100%);
+    --yitp-gradient-reverse: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);
+    --yitp-light: #f8f9fa;
+    --yitp-white: #ffffff;
+    --yitp-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --yitp-shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+    --yitp-border-radius: 20px;
+    --yitp-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hero Section with Animated Background */
+.course-catalog-hero {
+    background: var(--yitp-gradient);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.course-catalog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>') no-repeat center center;
+    background-size: cover;
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    animation: slideInUp 1s ease-out;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    animation: slideInUp 1s ease-out 0.2s both;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    animation: slideInUp 1s ease-out 0.4s both;
+}
+
+.stat-item {
+    text-align: center;
+    color: white;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modern Content Wrapper */
 .course-list-content-wrapper {
-    margin-top: 80px; /* Start with mobile margin */
-    padding: 0 15px;
+    margin-top: 0;
+    padding: 0;
+    background: linear-gradient(180deg, var(--yitp-light) 0%, white 100%);
+    min-height: 100vh;
 }
 
-/* Progressive enhancement for larger screens */
-@media (min-width: 576px) {
-    .course-list-content-wrapper {
-        margin-top: 90px;
-        padding: 0 20px;
-    }
+/* Revolutionary Course Grid Design */
+.courses-section {
+    padding: 4rem 0;
+    position: relative;
 }
 
-@media (min-width: 992px) {
-    .course-list-content-wrapper {
-        margin-top: 100px;
-        padding: 0 30px;
-    }
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
 }
 
-/* Mobile-first responsive grid */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--yitp-secondary);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--yitp-gradient);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Masonry-style Grid */
 .courses-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 1rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 768px) {
     .courses-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on small tablets */
-        gap: 1.25rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .courses-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
         gap: 1.5rem;
     }
 }
 
-@media (min-width: 992px) {
-    .courses-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
-        gap: 1.75rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .courses-grid {
-        grid-template-columns: repeat(4, 1fr); /* 4 columns on large desktop */
-        gap: 2rem;
-    }
-}
-
-/* Mobile-first course cards */
+/* Next-Generation Course Cards */
 .course-card {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    border-radius: var(--yitp-border-radius);
     overflow: hidden;
-    border: none;
     position: relative;
+    transition: var(--yitp-transition);
+    box-shadow: var(--yitp-shadow);
+    border: 1px solid rgba(255, 93, 21, 0.1);
+    cursor: pointer;
+}
+
+.course-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--yitp-gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover::before {
+    transform: scaleX(1);
 }
 
 .course-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--yitp-shadow-hover);
+    border-color: var(--yitp-primary);
 }
 
-/* Mobile-first card content */
-.course-card .card-body {
-    padding: 1rem;
+/* Floating Card Animation */
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
 }
 
-@media (min-width: 576px) {
-    .course-card .card-body {
-        padding: 1.25rem;
-    }
+.course-card:nth-child(odd) {
+    animation: cardFloat 6s ease-in-out infinite;
 }
 
-/* Mobile-first card images */
-.course-card .card-img-top {
-    height: 160px;
+.course-card:nth-child(even) {
+    animation: cardFloat 6s ease-in-out infinite 3s;
+}
+
+/* Revolutionary Card Image Design */
+.card-image-container {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: var(--yitp-gradient);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    transition: var(--yitp-transition);
+    filter: brightness(0.9);
 }
 
-@media (min-width: 576px) {
-    .course-card .card-img-top {
-        height: 180px;
+.course-card:hover .card-img-top {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* Floating Course Badge */
+.course-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--yitp-primary);
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 93, 21, 0.2);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Gradient Overlay */
+.card-image-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    pointer-events: none;
+}
+
+/* Modern Card Body */
+.course-card .card-body {
+    padding: 2rem;
+    position: relative;
+    background: white;
+}
+
+/* Floating Price Tag */
+.price-tag {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    background: var(--yitp-gradient);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(255, 93, 21, 0.3);
+    transform: rotate(-5deg);
+    transition: var(--yitp-transition);
+}
+
+.course-card:hover .price-tag {
+    transform: rotate(0deg) scale(1.1);
+}
+
+/* Modern Course Meta */
+.course-meta-modern {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.meta-item i {
+    font-size: 0.8rem;
+}
+
+/* Modern Course Title */
+.course-title-modern {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--yitp-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    transition: var(--yitp-transition);
+}
+
+.course-card:hover .course-title-modern {
+    color: var(--yitp-primary);
+}
+
+/* Prerequisite Alert */
+.prerequisite-alert {
+    background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1));
+    border-left: 4px solid var(--yitp-primary);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--yitp-secondary);
+    font-weight: 600;
+}
+
+/* Course Description */
+.course-description {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* Instructor Info */
+.instructor-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(255,93,21,0.05), rgba(26,46,83,0.05));
+    border-radius: 12px;
+    border: 1px solid rgba(255,93,21,0.1);
+}
+
+.instructor-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--yitp-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.instructor-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.instructor-name {
+    font-weight: 600;
+    color: var(--yitp-secondary);
+    font-size: 0.9rem;
+}
+
+.instructor-title {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Action Button */
+.btn-course-action {
+    width: 100%;
+    background: var(--yitp-gradient);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--yitp-transition);
+    cursor: pointer;
+}
+
+.btn-course-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 93, 21, 0.3);
+}
+
+.btn-course-action i {
+    transition: transform 0.3s ease;
+}
+
+.btn-course-action:hover i {
+    transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
     }
-}
 
-@media (min-width: 768px) {
-    .course-card .card-img-top {
-        height: 200px;
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .course-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .price-tag {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+        align-self: flex-start;
     }
 }
 
@@ -376,12 +735,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="course-list-content-wrapper">
-    <!-- Header Section -->
-    <div class="page-header">
-        <h1>Explore Courses</h1>
-        <p>Discover comprehensive entrepreneurship courses designed to help you succeed.</p>
+<!-- Revolutionary Hero Section -->
+<section class="course-catalog-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Transform Your Future</h1>
+            <p class="hero-subtitle">Discover world-class entrepreneurship courses designed to unlock your potential and accelerate your success</p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">{{ courses|length }}+</span>
+                    <span class="stat-label">Expert Courses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Students Enrolled</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+
+<div class="course-list-content-wrapper">
 
     <!-- Filters Section -->
     <div class="filters-section">
@@ -445,80 +824,98 @@
         </div>
     </div>
 
-    <!-- Courses Grid -->
-    {% if courses %}
-    <div class="courses-grid">
-        {% for course in courses %}
-        <div class="course-card">
-            <div class="position-relative">
-                {% if course.thumbnail %}
-                <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
-                {% else %}
-                <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" class="card-img-top" alt="{{ course.title }}">
-                {% endif %}
-
-                <!-- Prerequisite Course Badge -->
-                {% if 'Introduction to YITP' in course.title %}
-                <div class="course-badge">
-                    <i class="fas fa-star me-1"></i>START HERE
-                </div>
-                <div class="position-absolute top-0 end-0 m-2">
-                    <span class="badge bg-warning text-dark" style="font-size: 0.75rem; padding: 4px 8px; border-radius: 12px; font-weight: 600;">
-                        <i class="fas fa-exclamation-circle me-1"></i>MANDATORY
-                    </span>
-                </div>
-                {% endif %}
+    <!-- Revolutionary Courses Section -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Courses</h2>
+                <p class="section-subtitle">Handpicked courses designed to accelerate your entrepreneurial journey</p>
             </div>
 
-            <div class="card-body d-flex flex-column">
-                <div class="course-info mb-2">
-                    <span class="badge bg-primary">{{ course.get_difficulty_level_display }}</span>
-                    <small class="text-muted">
-                        <i class="fas fa-clock me-1"></i>{{ course.estimated_duration }}h
-                    </small>
-                </div>
+            {% if courses %}
+            <div class="courses-grid">
+                {% for course in courses %}
+                <article class="course-card" data-course-url="{% url 'courses:course_detail' course.slug %}"
+                    <!-- Revolutionary Image Container -->
+                    <div class="card-image-container">
+                        {% if course.thumbnail %}
+                        <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                        {% else %}
+                        <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" class="card-img-top" alt="{{ course.title }}">
+                        {% endif %}
 
-                <h5 class="card-title mb-2">{{ course.title }}</h5>
-
-                <!-- Prerequisite Course Message -->
-                {% if 'Introduction to YITP' in course.title %}
-                <div class="alert alert-info border-0 mb-3" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border-left: 4px solid #ff5d15 !important; padding: 0.75rem;">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-info-circle text-primary me-2"></i>
-                        <small class="mb-0" style="color: #1a2e53; font-weight: 600;">
-                            Complete this course to unlock all other courses
-                        </small>
+                        <!-- Floating Badge -->
+                        {% if 'Introduction to YITP' in course.title %}
+                        <div class="course-badge">
+                            <i class="fas fa-star me-1"></i>START HERE
+                        </div>
+                        {% else %}
+                        <div class="course-badge">
+                            {{ course.get_difficulty_level_display }}
+                        </div>
+                        {% endif %}
                     </div>
-                </div>
-                {% endif %}
 
-                <p class="card-text text-muted flex-grow-1 mb-3">
-                    {{ course.description|truncatewords:20 }}
-                </p>
+                    <!-- Modern Card Body -->
+                    <div class="card-body">
+                        <!-- Floating Price Tag -->
+                        {% if course.price > 0 %}
+                        <div class="price-tag">${{ course.price }}</div>
+                        {% else %}
+                        <div class="price-tag" style="background: linear-gradient(135deg, #10B981, #059669);">FREE</div>
+                        {% endif %}
 
-                <div class="course-meta">
-                    <small class="text-muted">
-                        <i class="fas fa-user me-1"></i>{{ course.instructor.get_full_name }}
-                    </small>
-                    <small class="text-muted">
-                        <i class="fas fa-users me-1"></i>{{ course.enrolled_students_count }} students
-                    </small>
-                </div>
+                        <!-- Course Meta Info -->
+                        <div class="course-meta-modern mb-3">
+                            <div class="meta-item">
+                                <i class="fas fa-clock text-primary"></i>
+                                <span>{{ course.estimated_duration }}h</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users text-primary"></i>
+                                <span>{{ course.enrolled_students_count }} students</span>
+                            </div>
+                        </div>
 
-                <div class="d-flex justify-content-between align-items-center mt-3">
-                    {% if course.price > 0 %}
-                    <span class="h5 mb-0 text-primary fw-bold">${{ course.price }}</span>
-                    {% else %}
-                    <span class="h5 mb-0 text-success fw-bold">Free</span>
-                    {% endif %}
-                    <a href="{% url 'courses:course_detail' course.slug %}" class="btn-mobile-primary">
-                        View Course
-                    </a>
-                </div>
+                        <!-- Course Title -->
+                        <h3 class="course-title-modern">{{ course.title }}</h3>
+
+                        <!-- Prerequisite Message -->
+                        {% if 'Introduction to YITP' in course.title %}
+                        <div class="prerequisite-alert">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Complete this course to unlock all others</span>
+                        </div>
+                        {% endif %}
+
+                        <!-- Course Description -->
+                        <p class="course-description">{{ course.description|truncatewords:15 }}</p>
+
+                        <!-- Instructor Info -->
+                        <div class="instructor-info">
+                            <div class="instructor-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="instructor-details">
+                                <span class="instructor-name">{{ course.instructor.get_full_name }}</span>
+                                <span class="instructor-title">Expert Instructor</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Button -->
+                        <div class="card-action">
+                            <button class="btn-course-action">
+                                <span>Explore Course</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
-        {% endfor %}
-    </div>
+    </section>
 
     <!-- Pagination -->
     {% if is_paginated %}
@@ -659,6 +1056,26 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter' && e.target.matches('#search')) {
             filterForm.submit();
         }
+    });
+
+    // Modern Course Card Click Handler
+    const clickableCourseCards = document.querySelectorAll('.course-card[data-course-url]');
+
+    clickableCourseCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't navigate if clicking on a button or link
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.closest('button') || e.target.closest('a')) {
+                return;
+            }
+
+            const url = this.getAttribute('data-course-url');
+            if (url) {
+                window.location.href = url;
+            }
+        });
+
+        // Add hover effect cursor
+        card.style.cursor = 'pointer';
     });
 });
 </script>
