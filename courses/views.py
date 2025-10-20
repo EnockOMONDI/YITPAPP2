@@ -372,12 +372,24 @@ class ModuleDetailView(LoginRequiredMixin, DetailView):
 
 class LessonDetailView(LoginRequiredMixin, DetailView):
     """
-    Lesson detail view
+    Lesson detail view with Module 2 template detection
     """
     model = Lesson
-    template_name = 'lms/courses/lesson_detail.html'
     context_object_name = 'lesson'
     pk_url_kwarg = 'lesson_id'
+
+    def get_template_names(self):
+        """
+        Determine which template to use based on lesson module
+        """
+        lesson = self.get_object()
+
+        # Check if this is Module 2 (Personal Initiative)
+        if lesson.module and 'Personal Initiative' in lesson.module.title:
+            return ['lms/courses/lesson_detail_module2.html']
+
+        # Default template for all other modules
+        return ['lms/courses/lesson_detail.html']
     
     def get_object(self):
         course_slug = self.kwargs['course_slug']
