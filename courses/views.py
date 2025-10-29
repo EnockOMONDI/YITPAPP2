@@ -104,12 +104,23 @@ class CourseDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         course = self.object
 
-        # Get course modules and lessons with progress
-        modules = course.modules.filter(is_published=True).prefetch_related(
-            'lessons__student_progress'
+        # Optimized query: Get all modules with lessons (excluding heavy content fields)
+        from django.db.models import Prefetch
+
+        # Create optimized lesson queryset that excludes heavy content fields
+        lesson_queryset = Lesson.objects.filter(is_published=True).defer(
+            'content',  # Exclude heavy HTML content
+            'learning_objectives',  # Exclude large text fields
+            'resources'  # Exclude JSON field
         ).order_by('sort_order')
 
-        # Add lesson accessibility information if user is enrolled
+        modules = course.modules.filter(is_published=True).prefetch_related(
+            Prefetch('lessons', queryset=lesson_queryset)
+        ).order_by('sort_order')
+
+        # Get all lesson progress for this enrollment in one query (if enrolled)
+        all_lesson_progress = {}
+        enrollment = None
         if self.request.user.is_authenticated:
             try:
                 enrollment = Enrollment.objects.get(
@@ -118,114 +129,84 @@ class CourseDetailView(DetailView):
                     status__in=['active', 'completed']
                 )
 
-                # Process each module and lesson for accessibility
-                for module in modules:
-                    lessons = module.lessons.filter(is_published=True).order_by('sort_order')
-                    lesson_data = []
-                    for lesson in lessons:
-                        try:
-                            progress = LessonProgress.objects.get(
-                                enrollment=enrollment,
-                                lesson=lesson
-                            )
-                        except LessonProgress.DoesNotExist:
-                            progress = None
-
-                        is_accessible, _ = lesson.is_accessible_for_user(self.request.user)
-                        lesson_data.append({
-                            'lesson': lesson,
-                            'progress': progress,
-                            'is_accessible': is_accessible
-                        })
-
-                    module.lesson_data = lesson_data
+                # Pre-fetch ALL lesson progress in a single query
+                progress_queryset = LessonProgress.objects.filter(
+                    enrollment=enrollment
+                ).select_related('lesson')
+                for progress in progress_queryset:
+                    all_lesson_progress[progress.lesson_id] = progress
 
             except Enrollment.DoesNotExist:
                 pass
 
-        context['modules'] = modules
+        # Pre-compute lesson sequence to avoid N+1 queries in accessibility checks
+        all_lessons_ordered = []
+        for module in modules:
+            module_lessons = [lesson for lesson in module.lessons.all() if lesson.is_published]
+            all_lessons_ordered.extend(module_lessons)
 
-        # Check if user is enrolled and get progress
-        enrollment = None
-        user_progress = {}
-        if self.request.user.is_authenticated:
-            try:
-                enrollment = Enrollment.objects.get(
-                    student=self.request.user,
-                    course=course,
-                    status__in=['active', 'completed']
+        # Create lesson sequence mapping for efficient lookups
+        lesson_sequence = {lesson.id: i for i, lesson in enumerate(all_lessons_ordered)}
+
+        # Process modules and lessons with pre-fetched data
+        for module in modules:
+            lessons = [lesson for lesson in module.lessons.all() if lesson.is_published]
+            lesson_data = []
+
+            for lesson in lessons:
+                # Get progress from pre-fetched data
+                progress = all_lesson_progress.get(lesson.id)
+
+                # Check accessibility efficiently without additional queries
+                is_accessible = self._check_lesson_accessibility_optimized(
+                    lesson, enrollment, all_lesson_progress, all_lessons_ordered, lesson_sequence
                 )
-                context['enrollment'] = enrollment
-                context['is_enrolled'] = True
 
-                # Get user's lesson progress
-                lesson_progress = LessonProgress.objects.filter(
-                    enrollment=enrollment
-                ).select_related('lesson')
+                lesson_data.append({
+                    'lesson': lesson,
+                    'progress': progress,
+                    'is_accessible': is_accessible
+                })
 
-                for progress in lesson_progress:
-                    user_progress[progress.lesson.id] = progress
+            module.lesson_data = lesson_data
 
-                # Add next lesson information for better navigation
-                next_lesson = None
-                if enrollment.progress_percentage > 0:
-                    # Find the next incomplete lesson
-                    completed_lessons = [p.lesson.id for p in lesson_progress if p.status == 'completed']
-                    all_lessons = course.get_ordered_lessons()
-                    for lesson in all_lessons:
-                        if lesson.id not in completed_lessons:
-                            next_lesson = lesson
-                            break
-                else:
-                    # If no progress, start with first lesson
-                    all_lessons = course.get_ordered_lessons()
-                    next_lesson = all_lessons[0] if all_lessons else None
-
-                context['next_lesson'] = next_lesson
-
-            except Enrollment.DoesNotExist:
-                context['is_enrolled'] = False
-        else:
-            context['is_enrolled'] = False
-
-        context['user_progress'] = user_progress
-
-        # Determine trial access eligibility
-        context['trial_available'] = self._should_offer_trial_access(course)
-        context['trial_unavailable_reason'] = self._get_trial_unavailable_reason(course)
-
-        # Get course reviews and calculate average rating
-        reviews = course.reviews.filter(is_published=True).select_related('student')
-        context['reviews'] = reviews[:5]  # Show first 5 reviews
-        context['all_reviews'] = reviews  # For rating calculation
-
-        # Calculate average rating
-        if reviews.exists():
-            total_rating = sum(review.rating for review in reviews)
-            context['average_rating'] = round(total_rating / reviews.count(), 1)
-            context['rating_count'] = reviews.count()
-        else:
-            context['average_rating'] = 0
-            context['rating_count'] = 0
-
-        # Get instructor profile
-        try:
-            context['instructor_profile'] = course.instructor.profile
-        except:
-            context['instructor_profile'] = None
-
-        # Calculate course statistics
-        context['total_lessons'] = course.total_lessons
-        context['total_modules'] = course.total_modules
-        context['enrolled_count'] = course.enrolled_students_count
-
-        # Get related courses (same category)
-        context['related_courses'] = Course.objects.filter(
-            category=course.category,
-            is_published=True
-        ).exclude(id=course.id)[:3]
+        context['modules'] = modules
+        context['enrollment'] = enrollment
+        context['is_enrolled'] = enrollment is not None
 
         return context
+
+    def _check_lesson_accessibility_optimized(self, lesson, enrollment, all_lesson_progress, all_lessons_ordered, lesson_sequence):
+        """
+        Efficiently check lesson accessibility using pre-computed lesson sequence
+        """
+        if not enrollment:
+            return False
+
+        # Check trial access boundaries first
+        from .trial_service import TrialAccessService
+        try:
+            trial_access = TrialAccessService.can_access_lesson(self.request.user, lesson)
+            if trial_access['is_trial_user']:
+                if not trial_access['can_access']:
+                    return False
+        except Exception:
+            # If trial service fails, continue with normal checks
+            pass
+
+        # First lesson is always accessible (if within trial boundaries)
+        lesson_index = lesson_sequence.get(lesson.id)
+        if lesson_index == 0:
+            return True
+
+        # Check if previous lesson is completed using pre-fetched data
+        if lesson_index and lesson_index > 0:
+            previous_lesson = all_lessons_ordered[lesson_index - 1]
+            prev_progress = all_lesson_progress.get(previous_lesson.id)
+            if not prev_progress or prev_progress.status != 'completed':
+                return False
+
+        return True
 
     def _should_offer_trial_access(self, course):
         """
