@@ -15,6 +15,11 @@ def get_slide_ids_for_lesson(lesson_number):
         3: range(21, 32),   # Slides 21-31
         4: range(32, 40),   # Slides 32-39
         5: range(40, 56),   # Slides 40-55
+        6: range(56, 72),   # Slides 56-71
+        7: range(72, 83),   # Slides 72-82
+        8: range(83, 92),   # Slides 83-91
+        9: range(92, 109),  # Slides 92-108
+        10: range(109, 122), # Slides 109-121
     }
     
     slide_ids = []
@@ -31,7 +36,7 @@ def extract_lesson_slides(lesson_number):
     """Extract slides for a specific lesson and create HTML file with complete CSS context"""
     try:
         # Read the main HTML file
-        with open('2. PERSONAL INITIATIVE FULL Module HTML (MERGED)/2. PERSONAL INITIATIVE FULL UNIT (MERGED) (1).html', 'r', encoding='utf-8') as f:
+        with open('static/module2/2. PERSONAL INITIATIVE FULL UNIT (MERGED) (1).html', 'r', encoding='utf-8') as f:
             content = f.read()
         
         # Parse with BeautifulSoup
@@ -164,8 +169,8 @@ def main():
     # Ensure output directory exists
     os.makedirs('static/module2', exist_ok=True)
     
-    # Extract all 5 lessons
-    for lesson_num in range(1, 6):
+    # Extract lessons 6-10 (lessons 1-5 already exist)
+    for lesson_num in range(6, 11):
         extract_lesson_slides(lesson_num)
     
     print("\n🎉 Module 2 lesson extraction complete!")
