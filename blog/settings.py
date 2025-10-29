@@ -515,8 +515,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 # CKEditor 5 file upload settings
-from django.core.files.storage import default_storage
-CKEDITOR_5_FILE_STORAGE = default_storage
+CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.default_storage"
 CKEDITOR_5_UPLOAD_PATH = "uploads/"
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
