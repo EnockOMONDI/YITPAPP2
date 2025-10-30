@@ -42,7 +42,7 @@ def update_victor_progress():
                 course=course,
                 status__in=['active', 'completed']
             )
-            print(f"Found enrollment: {enrollment.status} (enrolled on {enrollment.enrolled_at})")
+            print(f"Found enrollment: {enrollment.status} (enrolled on {enrollment.enrollment_date})")
         except Enrollment.DoesNotExist:
             print("ERROR: Victor is not enrolled in the YITP course!")
             return False
