@@ -1,0 +1,407 @@
+{% extends 'unified/base.html' %}
+{% load static %}
+
+{% block title %}Certificate Verification - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Certificate Verification Styles */
+.verification-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 80vh;
+    padding: 60px 0;
+}
+
+.verification-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.verification-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.verification-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.3;
+}
+
+.verification-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.verification-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+.verification-content {
+    padding: 50px 40px;
+}
+
+.status-indicator {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.status-valid {
+    color: #28a745;
+}
+
+.status-invalid {
+    color: #dc3545;
+}
+
+.status-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.status-message {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.status-description {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.certificate-details {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #495057;
+    flex: 1;
+}
+
+.detail-value {
+    font-weight: 500;
+    color: #212529;
+    flex: 2;
+    text-align: right;
+}
+
+.verification-code-display {
+    background: #fff;
+    border: 2px dashed #ff5d15;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.verification-code-display code {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ff5d15;
+    background: none;
+    padding: 0;
+}
+
+.qr-code-section {
+    text-align: center;
+    margin: 40px 0;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 93, 21, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-secondary-custom {
+    background: white;
+    border: 2px solid #ff5d15;
+    color: #ff5d15;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+    background: #ff5d15;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.authenticity-badge {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.invalid-badge {
+    background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+/* Print Styles */
+@media print {
+    .verification-container {
+        background: white;
+        padding: 20px;
+    }
+    
+    .verification-card {
+        box-shadow: none;
+        border: 2px solid #ff5d15;
+    }
+    
+    .action-buttons {
+        display: none;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .verification-header {
+        padding: 30px 20px;
+    }
+    
+    .verification-header h1 {
+        font-size: 2rem;
+    }
+    
+    .verification-content {
+        padding: 30px 20px;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .detail-value {
+        text-align: left;
+        margin-top: 5px;
+    }
+    
+    .btn-primary-custom,
+    .btn-secondary-custom {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="verification-container">
+    <div class="container">
+        <div class="verification-card">
+            <!-- Header -->
+            <div class="verification-header">
+                <h1><i class="fas fa-certificate me-3"></i>Certificate Verification</h1>
+                <p>Youth Impact Training Programme (YITP) Official Certificate Verification Portal</p>
+            </div>
+            
+            <!-- Content -->
+            <div class="verification-content">
+                {% if is_valid %}
+                    <!-- Valid Certificate -->
+                    <div class="status-indicator status-valid">
+                        <i class="fas fa-check-circle status-icon"></i>
+                        <div class="status-message">Certificate Verified Successfully</div>
+                        <div class="status-description">This certificate is authentic and valid</div>
+                        <div class="authenticity-badge">
+                            <i class="fas fa-shield-alt me-2"></i>Verified Authentic
+                        </div>
+                    </div>
+                    
+                    <!-- Certificate Details -->
+                    <div class="certificate-details">
+                        <h3 class="mb-4"><i class="fas fa-info-circle me-2"></i>Certificate Details</h3>
+                        
+                        <div class="detail-row">
+                            <div class="detail-label">Student Name:</div>
+                            <div class="detail-value">{{ student_name }}</div>
+                        </div>
+                        
+                        <div class="detail-row">
+                            <div class="detail-label">Course Title:</div>
+                            <div class="detail-value">{{ course_title }}</div>
+                        </div>
+                        
+                        <div class="detail-row">
+                            <div class="detail-label">Certificate ID:</div>
+                            <div class="detail-value">{{ certificate_id }}</div>
+                        </div>
+                        
+                        <div class="detail-row">
+                            <div class="detail-label">Completion Date:</div>
+                            <div class="detail-value">{{ completion_date|date:"F d, Y" }}</div>
+                        </div>
+                        
+                        {% if final_score %}
+                        <div class="detail-row">
+                            <div class="detail-label">Final Score:</div>
+                            <div class="detail-value">{{ final_score }}%</div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="detail-row">
+                            <div class="detail-label">Issued By:</div>
+                            <div class="detail-value">Youth Impact Global</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verification Code Display -->
+                    <div class="verification-code-display">
+                        <h5 class="mb-3">Verification Code</h5>
+                        <code>{{ verification_code }}</code>
+                        <p class="mt-3 mb-0 text-muted">Use this code to verify the certificate authenticity</p>
+                    </div>
+                    
+                    <!-- QR Code Section -->
+                    <div class="qr-code-section">
+                        <h5 class="mb-3"><i class="fas fa-qrcode me-2"></i>Mobile Verification</h5>
+                        <p class="text-muted">Scan this QR code with your mobile device for quick verification</p>
+                        <div id="qrcode" class="mt-3"></div>
+                    </div>
+                    
+                {% else %}
+                    <!-- Invalid Certificate -->
+                    <div class="status-indicator status-invalid">
+                        <i class="fas fa-times-circle status-icon"></i>
+                        <div class="status-message">Certificate Not Found</div>
+                        <div class="status-description">{{ message }}</div>
+                        <div class="invalid-badge">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Invalid Certificate
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-details">
+                        <h5 class="text-center">Verification Failed</h5>
+                        <p class="text-center text-muted">
+                            The verification code <code>{{ verification_code }}</code> does not match any valid certificate in our system.
+                        </p>
+                        <p class="text-center text-muted">
+                            Please check the verification code and try again, or contact our support team if you believe this is an error.
+                        </p>
+                    </div>
+                {% endif %}
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    {% if is_valid %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'certificates:download' verification_code %}" class="btn-primary-custom">
+                                <i class="fas fa-download me-2"></i>Download Certificate
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'certificates:verify' verification_code %}" class="btn-secondary-custom" onclick="window.print(); return false;">
+                            <i class="fas fa-print me-2"></i>Print Verification
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'yitp:home' %}" class="btn-secondary-custom">
+                        <i class="fas fa-home me-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QR Code Generation -->
+{% if is_valid %}
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const qrCodeElement = document.getElementById('qrcode');
+    if (qrCodeElement) {
+        QRCode.toCanvas(qrCodeElement, '{{ verification_url }}', {
+            width: 200,
+            height: 200,
+            colorDark: '#ff5d15',
+            colorLight: '#ffffff',
+            margin: 2
+        }, function (error) {
+            if (error) {
+                console.error('QR Code generation failed:', error);
+                qrCodeElement.innerHTML = '<p class="text-muted">QR Code generation failed</p>';
+            }
+        });
+    }
+});
+</script>
+{% endif %}
+{% endblock %}

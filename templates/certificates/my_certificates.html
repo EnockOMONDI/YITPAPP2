@@ -1,0 +1,429 @@
+{% extends 'unified/base.html' %}
+{% load static %}
+
+{% block title %}My Certificates - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+/* My Certificates Dashboard Styles */
+.certificates-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 80vh;
+    padding: 60px 0;
+}
+
+.dashboard-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.3;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ff5d15;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.certificate-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.certificate-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.certificate-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+    padding: 25px;
+    position: relative;
+}
+
+.certificate-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.3;
+}
+
+.certificate-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.certificate-id {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+}
+
+.certificate-body {
+    padding: 25px;
+}
+
+.certificate-details {
+    margin-bottom: 25px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: #212529;
+    font-size: 0.9rem;
+}
+
+.score-badge {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.certificate-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-certificate {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-download {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+    border: none;
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 93, 21, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-verify {
+    background: white;
+    color: #ff5d15;
+    border: 2px solid #ff5d15;
+}
+
+.btn-verify:hover {
+    background: #ff5d15;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-detail {
+    background: #f8f9fa;
+    color: #495057;
+    border: 2px solid #e9ecef;
+}
+
+.btn-detail:hover {
+    background: #e9ecef;
+    color: #495057;
+    text-decoration: none;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: #dee2e6;
+    margin-bottom: 30px;
+}
+
+.empty-state h3 {
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    color: #adb5bd;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 93, 21, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-header {
+        padding: 30px 20px;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .certificates-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .certificate-actions {
+        flex-direction: column;
+    }
+    
+    .btn-certificate {
+        margin-bottom: 10px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="certificates-container">
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1><i class="fas fa-certificate me-3"></i>My Certificates</h1>
+                    <p>Welcome back, {{ user_full_name }}! Here are your earned certificates and achievements.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-trophy" style="font-size: 4rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="stat-number">{{ total_certificates }}</div>
+                <div class="stat-label">Total Certificates</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="stat-number">{{ total_courses_completed }}</div>
+                <div class="stat-label">Courses Completed</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-number">{{ average_score }}%</div>
+                <div class="stat-label">Average Score</div>
+            </div>
+        </div>
+        
+        {% if certificates %}
+            <!-- Certificates Grid -->
+            <div class="certificates-grid">
+                {% for certificate in certificates %}
+                <div class="certificate-card">
+                    <div class="certificate-header">
+                        <div class="certificate-title">{{ certificate.enrollment.course.title }}</div>
+                        <div class="certificate-id">Certificate ID: {{ certificate.certificate_id }}</div>
+                    </div>
+                    
+                    <div class="certificate-body">
+                        <div class="certificate-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Completion Date:</span>
+                                <span class="detail-value">{{ certificate.issued_date|date:"M d, Y" }}</span>
+                            </div>
+                            
+                            <div class="detail-item">
+                                <span class="detail-label">Certificate Type:</span>
+                                <span class="detail-value">{{ certificate.get_certificate_type_display }}</span>
+                            </div>
+                            
+                            {% if certificate.final_score %}
+                            <div class="detail-item">
+                                <span class="detail-label">Final Score:</span>
+                                <span class="detail-value">
+                                    <span class="score-badge">{{ certificate.final_score }}%</span>
+                                </span>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="detail-item">
+                                <span class="detail-label">Verification Code:</span>
+                                <span class="detail-value">
+                                    <code style="font-size: 0.8rem;">{{ certificate.verification_code|truncatechars:16 }}...</code>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-actions">
+                            <a href="{% url 'certificates:download' certificate.verification_code %}" class="btn-certificate btn-download">
+                                <i class="fas fa-download me-2"></i>Download
+                            </a>
+                            <a href="{% url 'certificates:verify' certificate.verification_code %}" class="btn-certificate btn-verify" target="_blank">
+                                <i class="fas fa-check-circle me-2"></i>Verify
+                            </a>
+                            <a href="{% url 'certificates:detail' certificate.verification_code %}" class="btn-certificate btn-detail">
+                                <i class="fas fa-eye me-2"></i>Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Empty State -->
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h3>No Certificates Yet</h3>
+                <p>Complete courses to earn your first certificate and showcase your achievements!</p>
+                <a href="{% url 'courses:course_list' %}" class="btn-primary-custom">
+                    <i class="fas fa-graduation-cap me-2"></i>Browse Courses
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

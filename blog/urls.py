@@ -113,6 +113,9 @@ urlpatterns = [
     # Course Builder
     path('course-builder/', include('course_builder.urls')),
 
+    # Certificate System
+    path('certificates/', include('certificates.urls')),
+
     # Favicon redirect
     path('favicon.ico', RedirectView.as_view(url='/static/assets/img/favicon.png', permanent=True)),
 

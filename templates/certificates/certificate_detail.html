@@ -1,0 +1,481 @@
+{% extends 'unified/base.html' %}
+{% load static %}
+
+{% block title %}Certificate Details - {{ certificate.enrollment.course.title }} - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Certificate Detail Styles */
+.certificate-detail-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 80vh;
+    padding: 60px 0;
+}
+
+.certificate-display {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.certificate-header {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+    padding: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.certificate-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.3;
+}
+
+.certificate-badge {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.certificate-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.certificate-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.student-name {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.certificate-body {
+    padding: 50px;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.achievement-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    border-left: 5px solid #ff5d15;
+    transition: all 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    color: #ff5d15;
+    margin-bottom: 15px;
+}
+
+.achievement-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #212529;
+}
+
+.achievement-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ff5d15;
+    margin-bottom: 5px;
+}
+
+.achievement-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.progress-bar-custom {
+    height: 8px;
+    border-radius: 4px;
+    background: #e9ecef;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.skills-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #e9ecef;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.skill-badge {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.verification-section {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.verification-code {
+    background: white;
+    border: 2px dashed #ff5d15;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.verification-code code {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ff5d15;
+    background: none;
+    padding: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.btn-action {
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary-action {
+    background: linear-gradient(135deg, #ff5d15 0%, #ff7a3d 100%);
+    color: white;
+}
+
+.btn-primary-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 93, 21, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-secondary-action {
+    background: white;
+    color: #ff5d15;
+    border: 2px solid #ff5d15;
+}
+
+.btn-secondary-action:hover {
+    background: #ff5d15;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-social {
+    background: #0077b5;
+    color: white;
+}
+
+.btn-social:hover {
+    background: #005885;
+    color: white;
+    text-decoration: none;
+}
+
+.lesson-progress-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #e9ecef;
+}
+
+.progress-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.progress-item:last-child {
+    border-bottom: none;
+}
+
+.progress-item-title {
+    font-weight: 500;
+    color: #212529;
+}
+
+.progress-item-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-passed {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Print Styles */
+@media print {
+    .certificate-detail-container {
+        background: white;
+        padding: 20px;
+    }
+    
+    .certificate-display {
+        box-shadow: none;
+        border: 2px solid #ff5d15;
+    }
+    
+    .action-buttons {
+        display: none;
+    }
+    
+    .achievement-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .certificate-header {
+        padding: 30px 20px;
+    }
+    
+    .certificate-title {
+        font-size: 2rem;
+    }
+    
+    .student-name {
+        font-size: 1.5rem;
+    }
+    
+    .certificate-body {
+        padding: 30px 20px;
+    }
+    
+    .achievement-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-action {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="certificate-detail-container">
+    <div class="container">
+        <!-- Certificate Display -->
+        <div class="certificate-display">
+            <!-- Certificate Header -->
+            <div class="certificate-header">
+                <div class="certificate-badge">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="certificate-title">Certificate of Completion</div>
+                <div class="certificate-subtitle">{{ course_title }}</div>
+                <div class="student-name">{{ student_name }}</div>
+                <p style="opacity: 0.8; margin: 0; position: relative; z-index: 1;">
+                    has successfully completed the Youth Impact Training Programme
+                </p>
+            </div>
+            
+            <!-- Certificate Body -->
+            <div class="certificate-body">
+                <!-- Achievement Grid -->
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="achievement-title">Course Completion</div>
+                        <div class="achievement-value">{{ completion_rate }}%</div>
+                        <div class="achievement-description">{{ completed_lessons }} of {{ total_lessons }} lessons completed</div>
+                        <div class="progress-bar-custom">
+                            <div class="progress-fill" style="width: {{ completion_rate }}%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="achievement-title">Final Score</div>
+                        <div class="achievement-value">{{ final_score|default:"N/A" }}{% if final_score %}%{% endif %}</div>
+                        <div class="achievement-description">Overall course performance</div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="achievement-title">Quiz Success</div>
+                        <div class="achievement-value">{{ quiz_success_rate }}%</div>
+                        <div class="achievement-description">{{ passed_quizzes }} of {{ total_quizzes }} quizzes passed</div>
+                        <div class="progress-bar-custom">
+                            <div class="progress-fill" style="width: {{ quiz_success_rate }}%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="achievement-title">Completion Date</div>
+                        <div class="achievement-value" style="font-size: 1.2rem;">{{ completion_date|date:"M d" }}</div>
+                        <div class="achievement-description">{{ completion_date|date:"Y" }}</div>
+                    </div>
+                </div>
+                
+                <!-- Skills Section -->
+                {% if skills_acquired %}
+                <div class="skills-section">
+                    <h3><i class="fas fa-lightbulb me-2"></i>Skills Acquired</h3>
+                    <div class="skills-grid">
+                        {% for skill in skills_acquired %}
+                        <div class="skill-badge">{{ skill|title }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Verification Section -->
+                <div class="verification-section">
+                    <h3><i class="fas fa-shield-alt me-2"></i>Certificate Verification</h3>
+                    <p class="text-muted">This certificate can be verified using the code below:</p>
+                    <div class="verification-code">
+                        <code>{{ verification_code }}</code>
+                    </div>
+                    <p class="text-muted mb-0">
+                        Verify at: <a href="{{ verification_url }}" target="_blank">{{ verification_url }}</a>
+                    </p>
+                </div>
+                
+                <!-- Lesson Progress Section -->
+                {% if lesson_progress %}
+                <div class="lesson-progress-section">
+                    <h3><i class="fas fa-list-check me-2"></i>Course Progress Details</h3>
+                    {% for progress in lesson_progress %}
+                    <div class="progress-item">
+                        <div class="progress-item-title">{{ progress.lesson.title }}</div>
+                        <div class="progress-item-status">
+                            <span class="status-badge status-completed">
+                                <i class="fas fa-check me-1"></i>Completed
+                            </span>
+                            <small class="text-muted">{{ progress.completed_at|date:"M d, Y" }}</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="{% url 'certificates:download' verification_code %}" class="btn-action btn-primary-action">
+                        <i class="fas fa-download me-2"></i>Download PDF
+                    </a>
+                    
+                    <a href="{% url 'certificates:verify' verification_code %}" class="btn-action btn-secondary-action" target="_blank">
+                        <i class="fas fa-check-circle me-2"></i>Verify Certificate
+                    </a>
+                    
+                    <button onclick="window.print()" class="btn-action btn-secondary-action">
+                        <i class="fas fa-print me-2"></i>Print Certificate
+                    </button>
+                    
+                    <a href="https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name={{ course_title|urlencode }}&organizationName=Youth%20Impact%20Global&issueYear={{ completion_date.year }}&issueMonth={{ completion_date.month }}&certUrl={{ verification_url|urlencode }}&certId={{ certificate_id|urlencode }}" 
+                       target="_blank" class="btn-action btn-social">
+                        <i class="fab fa-linkedin me-2"></i>Add to LinkedIn
+                    </a>
+                    
+                    <a href="{% url 'certificates:my_certificates' %}" class="btn-action btn-secondary-action">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Certificates
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

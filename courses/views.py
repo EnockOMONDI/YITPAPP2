@@ -34,23 +34,34 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        
+
         # Get user enrollments
         enrollments = Enrollment.objects.filter(student=user, status='active').select_related('course')
         context['enrollments'] = enrollments
-        
+
         # Get recent activity
         recent_progress = LessonProgress.objects.filter(
             enrollment__student=user
         ).order_by('-completed_at')[:5]
         context['recent_progress'] = recent_progress
-        
+
         # Get user profile
         try:
             context['user_profile'] = user.profile
         except:
             context['user_profile'] = None
-        
+
+        # Get user certificates
+        try:
+            from certificates.certificate_service import CertificateService
+            user_certificates = CertificateService.get_user_certificates(user)
+            context['user_certificates'] = user_certificates
+        except ImportError:
+            # Fallback if certificate service is not available
+            from progress.models import Certificate
+            user_certificates = Certificate.objects.filter(enrollment__student=user)
+            context['user_certificates'] = user_certificates
+
         return context
 
 
