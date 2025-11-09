@@ -17,6 +17,9 @@
     opacity: 1 !important;
     position: relative !important;
     z-index: 10001 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    user-select: none !important;
 }
 
 /* Native Google Translate Dropdown Container */
@@ -25,6 +28,13 @@
     align-items: center;
     margin-left: 10px;
     margin-right: 15px;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Ensure language container doesn't block interactions */
+.header__language * {
+    pointer-events: auto !important;
 }
 
 /* Google Translate Widget Container - Native Dropdown */
@@ -34,6 +44,44 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     position: relative !important;
     z-index: 1000 !important;
+    pointer-events: auto !important;
+}
+
+/* Ensure all child elements are interactive */
+#google_translate_element * {
+    pointer-events: auto !important;
+}
+
+/* Specific styling for the dropdown select element */
+#google_translate_element select.goog-te-combo {
+    background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%) !important;
+    color: white !important;
+    border: 2px solid #ff5d15 !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    min-width: 150px !important;
+    box-shadow: 0 2px 8px rgba(255, 93, 21, 0.2) !important;
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 1001 !important;
+    outline: none !important;
+}
+
+/* Hover effect for dropdown */
+#google_translate_element select.goog-te-combo:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.3) !important;
+    background: linear-gradient(135deg, #e04a0f 0%, #cc3e0a 100%) !important;
+}
+
+/* Focus effect for dropdown */
+#google_translate_element select.goog-te-combo:focus {
+    outline: 2px solid rgba(255, 93, 21, 0.5) !important;
+    outline-offset: 2px !important;
 }
 
 /* Google Translate Gadget Container */
