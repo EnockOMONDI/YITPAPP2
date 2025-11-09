@@ -4,12 +4,14 @@ Handles sending email notifications for payment verification and user confirmati
 """
 
 import logging
-from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.urls import reverse
 from django.contrib.sites.models import Site
 from django.utils.html import strip_tags
+
+# Import Mailtrap service for email sending
+from users.mailtrap_service import mailtrap_service
 
 logger = logging.getLogger(__name__)
 
@@ -82,21 +84,22 @@ class PaymentEmailService:
             payment_method = payment.get_payment_method_display()
             subject = f"🔔 YITP: {payment_method} Payment Verification Required - {payment.reference_number}"
             
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[PaymentEmailService.ADMIN_EMAIL],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[PaymentEmailService.ADMIN_EMAIL],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
-            
-            # Send email
-            email.send()
-            
-            logger.info(f"Admin verification notification sent for payment {payment.reference_number}")
-            return True
+
+            if success:
+                logger.info(f"Admin verification notification sent for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send admin verification notification for payment {payment.reference_number}")
+                return False
             
         except Exception as e:
             logger.error(f"Failed to send admin verification notification for payment {payment.reference_number}: {str(e)}")
@@ -138,21 +141,22 @@ class PaymentEmailService:
             # Email subject
             subject = f"🔔 YITP: M-Pesa Payment Verification Required - {payment.reference_number}"
 
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[PaymentEmailService.ADMIN_EMAIL],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[PaymentEmailService.ADMIN_EMAIL],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
 
-            # Send email
-            email.send()
-
-            logger.info(f"Admin M-Pesa verification notification sent for payment {payment.reference_number}")
-            return True
+            if success:
+                logger.info(f"Admin M-Pesa verification notification sent for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send admin M-Pesa verification notification for payment {payment.reference_number}")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to send admin M-Pesa verification notification for payment {payment.reference_number}: {str(e)}")
@@ -194,21 +198,22 @@ class PaymentEmailService:
             payment_method = payment.get_payment_method_display()
             subject = f"✅ YITP: {payment_method} Payment Submitted Successfully - {payment.course.title}"
             
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[payment.user.email],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[payment.user.email],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
             
-            # Send email
-            email.send()
-            
-            logger.info(f"User payment confirmation sent to {payment.user.email} for payment {payment.reference_number}")
-            return True
+            if success:
+                logger.info(f"User payment confirmation sent to {payment.user.email} for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send user payment confirmation to {payment.user.email} for payment {payment.reference_number}")
+                return False
             
         except Exception as e:
             logger.error(f"Failed to send user payment confirmation for payment {payment.reference_number}: {str(e)}")
@@ -250,21 +255,22 @@ class PaymentEmailService:
             # Email subject
             subject = f"✅ YITP: M-Pesa Payment Submitted Successfully - {payment.course.title}"
 
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[payment.user.email],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[payment.user.email],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
 
-            # Send email
-            email.send()
-
-            logger.info(f"User M-Pesa confirmation sent to {payment.user.email} for payment {payment.reference_number}")
-            return True
+            if success:
+                logger.info(f"User M-Pesa confirmation sent to {payment.user.email} for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send user M-Pesa confirmation to {payment.user.email} for payment {payment.reference_number}")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to send user M-Pesa confirmation for payment {payment.reference_number}: {str(e)}")
@@ -297,18 +303,22 @@ class PaymentEmailService:
 
             subject = f"✅ YITP: M-Pesa Payment Submitted Successfully - {payment.course.title}"
 
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[payment.user.email],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[payment.user.email],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
-            email.send()
 
-            logger.info(f"User M-Pesa confirmation sent to {payment.user.email} for payment {payment.reference_number}")
-            return True
+            if success:
+                logger.info(f"User M-Pesa confirmation sent to {payment.user.email} for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send user M-Pesa confirmation to {payment.user.email} for payment {payment.reference_number}")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to send user M-Pesa confirmation for payment {payment.reference_number}: {str(e)}")
@@ -354,21 +364,22 @@ class PaymentEmailService:
             # Email subject
             subject = f"🎉 YITP: Payment Verified - Welcome to {payment.course.title}!"
 
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[payment.user.email],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[payment.user.email],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
 
-            # Send email
-            email.send()
-            
-            logger.info(f"Payment verification notification sent to {payment.user.email} for payment {payment.reference_number}")
-            return True
+            if success:
+                logger.info(f"Payment verification notification sent to {payment.user.email} for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send payment verification notification to {payment.user.email} for payment {payment.reference_number}")
+                return False
             
         except Exception as e:
             logger.error(f"Failed to send payment verification notification for payment {payment.reference_number}: {str(e)}")
@@ -413,21 +424,22 @@ class PaymentEmailService:
             # Email subject
             subject = f"❌ YITP: Payment Verification Issue - {payment.reference_number}"
 
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[payment.user.email],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[payment.user.email],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
 
-            # Send email
-            email.send()
-            
-            logger.info(f"Payment rejection notification sent to {payment.user.email} for payment {payment.reference_number}")
-            return True
+            if success:
+                logger.info(f"Payment rejection notification sent to {payment.user.email} for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send payment rejection notification to {payment.user.email} for payment {payment.reference_number}")
+                return False
             
         except Exception as e:
             logger.error(f"Failed to send payment rejection notification for payment {payment.reference_number}: {str(e)}")
@@ -474,16 +486,21 @@ Best regards,
 YITP Team
             """.strip()
             
-            send_mail(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                message=message,
-                from_email=PaymentEmailService.FROM_EMAIL,
+                html_content=f"<pre>{message}</pre>",  # Convert plain text to HTML
                 recipient_list=[payment.user.email],
-                fail_silently=False
+                from_email=PaymentEmailService.FROM_EMAIL,
+                plain_text_content=message
             )
             
-            logger.info(f"Installment reminder sent to {payment.user.email} for payment {payment.reference_number}")
-            return True
+            if success:
+                logger.info(f"Installment reminder sent to {payment.user.email} for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send installment reminder to {payment.user.email} for payment {payment.reference_number}")
+                return False
             
         except Exception as e:
             logger.error(f"Failed to send installment reminder for payment {payment.reference_number}: {str(e)}")
@@ -544,21 +561,22 @@ YITP Team
             # Email subject
             subject = f"⏰ YITP: Second Installment Reminder - KES {remaining_amount:,.0f} Due"
 
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[profile.user.email],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[profile.user.email],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
 
-            # Send email
-            email.send()
-
-            logger.info(f"Enhanced installment reminder sent to {profile.user.email} - {days_since_payment} days since payment")
-            return True
+            if success:
+                logger.info(f"Enhanced installment reminder sent to {profile.user.email} - {days_since_payment} days since payment")
+                return True
+            else:
+                logger.error(f"Failed to send enhanced installment reminder to {profile.user.email}")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to send enhanced installment reminder to {profile.user.email}: {str(e)}")
@@ -619,21 +637,22 @@ YITP Team
             urgency = "🚨 URGENT" if days_remaining == 1 else "⚠️ WARNING"
             subject = f"{urgency}: YITP Course Access Expires in {days_remaining} Day{'s' if days_remaining > 1 else ''}"
 
-            # Create email message
-            email = EmailMultiAlternatives(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                body=text_content,
+                html_content=html_content,
+                recipient_list=[profile.user.email],
                 from_email=PaymentEmailService.FROM_EMAIL,
-                to=[profile.user.email],
-                reply_to=[PaymentEmailService.FROM_EMAIL]
+                plain_text_content=text_content,
+                reply_to=PaymentEmailService.FROM_EMAIL
             )
-            email.attach_alternative(html_content, "text/html")
 
-            # Send email
-            email.send()
-
-            logger.info(f"Expiry warning sent to {profile.user.email} - {days_remaining} days remaining")
-            return True
+            if success:
+                logger.info(f"Expiry warning sent to {profile.user.email} - {days_remaining} days remaining")
+                return True
+            else:
+                logger.error(f"Failed to send expiry warning to {profile.user.email}")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to send expiry warning to {profile.user.email}: {str(e)}")
@@ -700,17 +719,21 @@ Best regards,
 YITP Team
             """.strip()
 
-            # Send email
-            send_mail(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=subject,
-                message=message,
-                from_email=PaymentEmailService.FROM_EMAIL,
+                html_content=f"<pre>{message}</pre>",  # Convert plain text to HTML
                 recipient_list=[profile.user.email],
-                fail_silently=False
+                from_email=PaymentEmailService.FROM_EMAIL,
+                plain_text_content=message
             )
 
-            logger.info(f"Renewal reminder sent to {profile.user.email} - {days_since_expiry} days since expiry")
-            return True
+            if success:
+                logger.info(f"Renewal reminder sent to {profile.user.email} - {days_since_expiry} days since expiry")
+                return True
+            else:
+                logger.error(f"Failed to send renewal reminder to {profile.user.email}")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to send renewal reminder to {profile.user.email}: {str(e)}")
@@ -862,21 +885,23 @@ YITP Team
             html_message = render_to_string('emails/paypal_payment_failed.html', context)
             plain_message = strip_tags(html_message)
 
-            # Send email
-            send_mail(
+            # Send email via Mailtrap API
+            success = mailtrap_service.send_email(
                 subject=f'PayPal Payment Failed - {payment.course.title}',
-                message=plain_message,
-                html_message=html_message,
-                from_email=PaymentEmailService.FROM_EMAIL,
+                html_content=html_message,
                 recipient_list=[payment.user.email],
-                fail_silently=False
+                from_email=PaymentEmailService.FROM_EMAIL,
+                plain_text_content=plain_message
             )
 
-            # Send admin alert
-            PaymentEmailService.send_paypal_admin_failure_notification(payment, error_message)
-
-            logger.info(f"PayPal payment failed notification sent to {payment.user.email} for payment {payment.reference_number}")
-            return True
+            if success:
+                # Send admin alert
+                PaymentEmailService.send_paypal_admin_failure_notification(payment, error_message)
+                logger.info(f"PayPal payment failed notification sent to {payment.user.email} for payment {payment.reference_number}")
+                return True
+            else:
+                logger.error(f"Failed to send PayPal payment failed notification to {payment.user.email}")
+                return False
 
         except Exception as e:
             logger.error(f"Failed to send PayPal payment failed notification: {str(e)}")

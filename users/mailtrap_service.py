@@ -12,7 +12,7 @@ from django.utils.html import strip_tags
 logger = logging.getLogger(__name__)
 
 try:
-    from mailtrap import MailtrapClient
+    from mailtrap import MailtrapClient, Mail, Address
     MAILTRAP_AVAILABLE = True
 except ImportError:
     MAILTRAP_AVAILABLE = False
@@ -82,39 +82,40 @@ class MailtrapEmailService:
         try:
             # Use provided from_email or default
             sender_email = from_email or self.from_email
-            
+
             # Generate plain text if not provided
             if not plain_text_content:
                 plain_text_content = strip_tags(html_content)
-            
-            # Prepare recipients list
-            recipients = [{"email": email} for email in recipient_list]
-            
-            # Prepare email data
-            email_data = {
-                "from": {"email": sender_email, "name": "Youth Impact Global"},
-                "to": recipients,
-                "subject": subject,
-                "html": html_content,
-                "text": plain_text_content,
-            }
-            
-            # Add reply-to if provided
-            if reply_to:
-                email_data["reply_to"] = {"email": reply_to}
-            
-            # Send email via Mailtrap API
-            response = self.client.send(email_data)
-            
-            if response.get('success', False):
-                logger.info(f"✅ Email sent successfully via Mailtrap to {recipient_list}")
-                return True
+
+            # Parse from_email to extract name and email address (following working system pattern)
+            if '<' in sender_email and '>' in sender_email:
+                from_name = sender_email.split('<')[0].strip()
+                from_email_addr = sender_email.split('<')[1].split('>')[0].strip()
             else:
-                logger.error(f"❌ Mailtrap API returned error: {response}")
-                return False
-                
+                from_name = "Youth Impact Global"
+                from_email_addr = sender_email.strip()
+
+            # Create mail object using proper SDK pattern
+            mail = Mail(
+                sender=Address(email=from_email_addr, name=from_name),
+                to=[Address(email=email.strip()) for email in recipient_list],
+                subject=subject,
+                html=html_content,
+            )
+
+            # Add plain text content if provided
+            if plain_text_content:
+                mail.text = plain_text_content
+
+            # Send email via Mailtrap HTTP API
+            logger.info(f"Sending email via Mailtrap API: subject='{subject}', recipients={recipient_list}")
+            response = self.client.send(mail)
+
+            logger.info(f"✅ Email sent successfully via Mailtrap API: {response}")
+            return True
+
         except Exception as e:
-            logger.error(f"❌ Failed to send email via Mailtrap: {str(e)}")
+            logger.error(f"❌ Failed to send email via Mailtrap API: {str(e)}")
             return False
     
     def send_template_email(

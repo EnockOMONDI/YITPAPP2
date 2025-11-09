@@ -107,3 +107,13 @@ ERROR 2025-08-14 16:42:52,319 email_service 70089 8645491392 Failed to send PayP
 INFO 2025-08-14 17:22:33,109 payment_service 71709 8645491392 Payment record created: YITP-20250814-937EF9E3 for webhook@test.com - Method: paypal
 ERROR 2025-08-14 17:22:49,026 email_service 71709 8645491392 Failed to send PayPal payment success notification: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
 ERROR 2025-08-14 17:22:49,832 email_service 71709 8645491392 Failed to send PayPal admin success notification: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+ERROR 2025-11-09 18:51:07,592 email_service 22347 8549530304 Failed to send payment verification notification to djseanizellkenya@gmail.com for payment TEST_MAILTRAP_20251109_185103
+ERROR 2025-11-09 19:10:39,435 email_service 24876 8549530304 Failed to send user payment confirmation to djseanizellkenya@gmail.com for payment TEST_MAILTRAP_20251109_185103
+ERROR 2025-11-09 19:10:40,329 email_service 24876 8549530304 Failed to send user M-Pesa confirmation to djseanizellkenya@gmail.com for payment MPESA_TEST_20251109_185104
+ERROR 2025-11-09 19:10:41,534 email_service 24876 8549530304 Failed to send payment verification notification to djseanizellkenya@gmail.com for payment TEST_MAILTRAP_20251109_185103
+ERROR 2025-11-09 20:57:43,962 email_service 37046 8549530304 Failed to send user payment confirmation to djseanizellkenya@gmail.com for payment TEST_MAILTRAP_20251109_185103
+ERROR 2025-11-09 20:57:45,188 email_service 37046 8549530304 Failed to send user M-Pesa confirmation to djseanizellkenya@gmail.com for payment MPESA_TEST_20251109_185104
+ERROR 2025-11-09 20:57:46,727 email_service 37046 8549530304 Failed to send payment verification notification to djseanizellkenya@gmail.com for payment TEST_MAILTRAP_20251109_185103
+INFO 2025-11-09 21:20:47,138 email_service 39102 8549530304 User payment confirmation sent to djseanizellkenya@gmail.com for payment TEST_MAILTRAP_20251109_185103
+INFO 2025-11-09 21:20:49,687 email_service 39102 8549530304 User M-Pesa confirmation sent to djseanizellkenya@gmail.com for payment MPESA_TEST_20251109_185104
+INFO 2025-11-09 21:20:52,029 email_service 39102 8549530304 Payment verification notification sent to djseanizellkenya@gmail.com for payment TEST_MAILTRAP_20251109_185103

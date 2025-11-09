@@ -19,7 +19,7 @@ graphene-django==3.2.2
 # Static Files & Media
 whitenoise==6.8.2
 Pillow==11.2.1
-pyuploadcare==4.1.0
+pyuploadcare==6.2.1
 
 # Environment Configuration
 python-decouple==3.8
@@ -44,6 +44,9 @@ django-cors-headers==4.6.0
 # HTTP Requests (for M-Pesa and PayPal APIs)
 requests==2.32.3
 paypalrestsdk==1.13.3
+
+# Email Service
+mailtrap>=1.0.0
 
 # Timezone Support
 pytz==2022.7.1

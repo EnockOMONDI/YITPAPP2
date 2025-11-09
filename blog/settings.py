@@ -686,34 +686,44 @@ MESSAGE_TAGS = {
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # =============================================================================
-# EMAIL CONFIGURATION - ENVIRONMENT AWARE
+# EMAIL CONFIGURATION - MAILTRAP API INTEGRATION
 # =============================================================================
 
 if IS_PRODUCTION:
-    # Production: Gmail SMTP Backend
-    print("📧 Using Gmail SMTP for production email")
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = config('EMAIL_HOST')
-    EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-    EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-    EMAIL_USE_SSL = False
-    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    # Production: Mailtrap API Configuration
+    print("📧 Using Mailtrap API for production email")
+
+    # Mailtrap API Configuration
+    MAILTRAP_API_TOKEN = config('MAILTRAP_API_TOKEN')
+    if not MAILTRAP_API_TOKEN:
+        raise ValueError("MAILTRAP_API_TOKEN environment variable is required for production")
+
+    # Default from email for Mailtrap
+    DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='admin@youthimpactglobal.com')
+
+    # Django email backend not used for Mailtrap API, but set for compatibility
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_TIMEOUT = 30
 
-    # SSL certificate handling for production
-    import ssl
-    if os.getenv('DJANGO_DEVELOPMENT'):
-        ssl._create_default_https_context = ssl._create_unverified_context
+    print(f"✅ Mailtrap API configured with from email: {DEFAULT_FROM_EMAIL}")
+
+    # Legacy Gmail SMTP settings (commented out for reference)
+    # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    # EMAIL_HOST = config('EMAIL_HOST')
+    # EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+    # EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+    # EMAIL_USE_SSL = False
+    # EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    # EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 else:
     # Development: Console Email Backend
     print("📧 Using console email backend for development")
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    EMAIL_HOST_USER = 'development@yitp.local'
-    EMAIL_HOST_PASSWORD = 'development-password'
+    DEFAULT_FROM_EMAIL = 'development@yitp.local'
     EMAIL_TIMEOUT = 10
 
-DEFAULT_FROM_EMAIL = f'YOUTH IMPACT GLOBAL <{EMAIL_HOST_USER}>'
+# Maintain backward compatibility for templates that reference EMAIL_HOST_USER
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL.split('<')[-1].split('>')[0] if '<' in DEFAULT_FROM_EMAIL else DEFAULT_FROM_EMAIL
 
 # Admin email for notifications
 ADMIN_EMAIL = config('ADMIN_EMAIL')

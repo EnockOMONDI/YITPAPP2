@@ -17,6 +17,10 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db import models
 import logging
+
+# Import Mailtrap service for email sending
+from users.mailtrap_service import mailtrap_service
+
 #updates#updates#updates
 logger = logging.getLogger(__name__)
 
@@ -271,107 +275,71 @@ def test_email_configuration():
 
 def send_html_email_direct(subject, html_content, recipient_list, from_email=None, plain_text_content=None):
     """
-    Send HTML email directly using smtplib with SSL context handling
-    This bypasses Django's email backend SSL issues
+    Send HTML email using Mailtrap API
+    Replaces the old Gmail SMTP direct method
     """
-    import smtplib
-    import ssl
-    from email.mime.text import MIMEText
-    from email.mime.multipart import MIMEMultipart
+    logger.info(f"📧 Sending email via Mailtrap API to {recipient_list}")
+    logger.info(f"Subject: {subject}")
 
-    try:
-        if from_email is None:
-            from_email = settings.DEFAULT_FROM_EMAIL
-
-        if plain_text_content is None:
-            plain_text_content = strip_tags(html_content)
-
-        logger.info(f"Attempting to send email directly to {recipient_list}")
-        logger.info(f"Subject: {subject}")
-        logger.info(f"From: {from_email}")
-
-        # Create unverified SSL context to handle certificate issues
-        context = ssl.create_default_context()
-        context.check_hostname = False
-        context.verify_mode = ssl.CERT_NONE
-
-        # Connect to Gmail SMTP with timeout
-        server = smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT, timeout=10)
-        server.starttls(context=context)
-        server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
-
-        # Create multipart message
-        msg = MIMEMultipart('alternative')
-        msg['From'] = from_email
-        msg['Subject'] = subject
-
-        # Add plain text and HTML parts
-        part1 = MIMEText(plain_text_content, 'plain')
-        part2 = MIMEText(html_content, 'html')
-
-        msg.attach(part1)
-        msg.attach(part2)
-
-        # Send to each recipient
-        for recipient in recipient_list:
-            msg['To'] = recipient
-            server.send_message(msg)
-            del msg['To']  # Remove To header for next recipient
-
-        server.quit()
-
-        logger.info(f"✅ Email sent successfully to {recipient_list}")
-        return True
-
-    except Exception as e:
-        logger.error(f"❌ Failed to send email to {recipient_list}: {str(e)}")
-        return False
+    # Use Mailtrap service for email sending
+    return mailtrap_service.send_email(
+        subject=subject,
+        html_content=html_content,
+        recipient_list=recipient_list,
+        from_email=from_email,
+        plain_text_content=plain_text_content
+    )
 
 def send_html_email(subject, html_content, recipient_list, from_email=None, plain_text_content=None):
     """
-    Send HTML email with fallback to plain text
-    Uses direct SMTP method as primary, Django backend as fallback
+    Send HTML email using Mailtrap API
+    Maintains compatibility with existing function signature
     """
-    # Check if we're in test environment - use Django backend directly for tests
+    # Check if we're in test environment - use Django backend for tests
     if hasattr(settings, 'EMAIL_BACKEND') and 'locmem' in settings.EMAIL_BACKEND:
         logger.info("Test environment detected, using Django email backend directly")
-    elif 'test' in sys.argv or os.environ.get('DJANGO_TESTING'):
-        logger.info("Test environment detected via command line or environment")
-    else:
-        # Try direct method first (more reliable) in production
-        if send_html_email_direct(subject, html_content, recipient_list, from_email, plain_text_content):
-            return True
 
-        # Fallback to Django's email backend
-        logger.warning("Direct email failed, trying Django backend...")
+        try:
+            if from_email is None:
+                from_email = settings.DEFAULT_FROM_EMAIL
 
-    try:
-        if from_email is None:
-            from_email = settings.DEFAULT_FROM_EMAIL
+            if plain_text_content is None:
+                plain_text_content = strip_tags(html_content)
 
-        if plain_text_content is None:
-            plain_text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=plain_text_content,
+                from_email=from_email,
+                to=recipient_list
+            )
+            email.attach_alternative(html_content, "text/html")
+            result = email.send()
 
-        email = EmailMultiAlternatives(
-            subject=subject,
-            body=plain_text_content,
-            from_email=from_email,
-            to=recipient_list
-        )
-        email.attach_alternative(html_content, "text/html")
+            if result:
+                logger.info(f"✅ Test email sent via Django backend to {recipient_list}")
+                return True
+            else:
+                logger.warning(f"⚠️ Django backend returned 0 for {recipient_list}")
+                return False
 
-        result = email.send()
-
-        if result:
-            logger.info(f"✅ Email sent via Django backend to {recipient_list}")
-            return True
-        else:
-            logger.warning(f"⚠️ Django backend returned 0 for {recipient_list}")
+        except Exception as e:
+            logger.error(f"❌ Django backend failed for {recipient_list}: {str(e)}")
             return False
 
-    except Exception as e:
-        logger.error(f"❌ Django backend also failed for {recipient_list}: {str(e)}")
-        return False
+    elif 'test' in sys.argv or os.environ.get('DJANGO_TESTING'):
+        logger.info("Test environment detected via command line or environment")
+        return True  # Skip actual sending in test environment
+
+    else:
+        # Production: Use Mailtrap API
+        logger.info(f"📧 Sending email via Mailtrap API to {recipient_list}")
+        return mailtrap_service.send_email(
+            subject=subject,
+            html_content=html_content,
+            recipient_list=recipient_list,
+            from_email=from_email,
+            plain_text_content=plain_text_content
+        )
 
 def test_email_configuration_simple():
     """
