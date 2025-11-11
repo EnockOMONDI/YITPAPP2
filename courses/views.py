@@ -185,6 +185,26 @@ class CourseDetailView(DetailView):
         context['enrollment'] = enrollment
         context['is_enrolled'] = enrollment is not None
 
+        # Calculate course statistics efficiently using already-fetched data
+        context['total_modules'] = len(modules)
+        context['total_lessons'] = sum(len(module.lessons.all()) for module in modules)
+
+        # Single optimized query for enrollment count
+        context['enrolled_count'] = course.enrollments.filter(
+            status__in=['active', 'completed']
+        ).count()
+
+        # Calculate average rating from course reviews
+        from django.db.models import Avg
+        reviews = course.reviews.filter(is_published=True)
+        if reviews.exists():
+            avg_rating = reviews.aggregate(avg_rating=Avg('rating'))['avg_rating']
+            context['average_rating'] = round(avg_rating, 1) if avg_rating else 0
+            context['rating_count'] = reviews.count()
+        else:
+            context['average_rating'] = 0
+            context['rating_count'] = 0
+
         return context
 
     def _check_lesson_accessibility_optimized(self, lesson, enrollment, all_lesson_progress, all_lessons_ordered, lesson_sequence):
