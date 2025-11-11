@@ -2,7 +2,7 @@ services:
   - type: web
     name: yitp-lms
     env: python
-    branch: courseupdate5
+    branch: 2026b
     buildCommand: ./build.sh
     startCommand: gunicorn blog.wsgi:application
     envVars:
@@ -26,13 +26,11 @@ services:
       - key: DB_PORT
         value: 6543
 
-      # Email Configuration (Gmail SMTP)
-      - key: EMAIL_HOST
-        value: "smtp.gmail.com"
-      - key: EMAIL_HOST_USER
-        value: "dedeexpeditions@gmail.com"
-      - key: EMAIL_HOST_PASSWORD
-        value: "roqu frlt wvof rqxk"
+      # Email Configuration (Mailtrap API - MIGRATED FROM GMAIL SMTP)
+      - key: MAILTRAP_API_TOKEN
+        value: "8d7b07aba3b511ad40cd57c48ad773e1"
+      - key: DEFAULT_FROM_EMAIL
+        value: "admin@youthimpactglobal.com"
 
       # M-Pesa API Configuration
       - key: MPESA_CONSUMER_KEY
