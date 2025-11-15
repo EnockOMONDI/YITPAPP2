@@ -26,7 +26,7 @@
                             </span>
                             {% endif %}
                         </div>
-                        <h1 class="section__title mb-30" style="color: #0e1133;">{{ event.title }}</h1>
+                        <h1 class="section__title mb-30" style="color: #341C67;">{{ event.title }}</h1>
                         <div class="event__detail-info" style="color: #6d6e75; font-size: 16px;">
                             <span style="margin-right: 30px;">
                                 <i class="far fa-calendar-alt" style="color: #ff5d15; margin-right: 8px;"></i>
@@ -70,7 +70,7 @@
                 <div class="col-xxl-4 col-xl-4 col-lg-4">
                     <div class="event__sidebar">
                         <div class="event__widget white-bg p-30 mb-30" >
-                            <h4 class="event__widget-title mb-25" style="color: #0e1133; font-size: 20px; font-weight: 600;">
+                            <h4 class="event__widget-title mb-25" style="color: #341C67; font-size: 20px; font-weight: 600;">
                                 Comments ({{ comments.count }})
                             </h4>
 
@@ -78,7 +78,7 @@
                                 {% for comment in comments %}
                                 <div class="event__comment-item mb-25" style="padding-bottom: 20px; border-bottom: 1px solid #eef0f6;">
                                     <div class="event__comment-meta mb-10">
-                                        <h6 style="color: #0e1133; font-size: 16px; font-weight: 600; margin-bottom: 5px;">{{ comment.name }}</h6>
+                                        <h6 style="color: #341C67; font-size: 16px; font-weight: 600; margin-bottom: 5px;">{{ comment.name }}</h6>
                                         <span style="color: #6d6e75; font-size: 14px;">
                                             <i class="far fa-calendar-alt" style="margin-right: 5px;"></i>
                                             {{ comment.created_at|date:"M d, Y" }}
@@ -94,7 +94,7 @@
                             </div>
 
                             <div class="event__comment-form">
-                                <h5 class="mb-20" style="color: #0e1133; font-size: 18px; font-weight: 600;">Leave a Comment</h5>
+                                <h5 class="mb-20" style="color: #341C67; font-size: 18px; font-weight: 600;">Leave a Comment</h5>
                                 <form method="post">
                                     {% csrf_token %}
                                     <div class="row">
@@ -134,7 +134,7 @@
             <div class="row mt-60">
                 <div class="col-12">
                     <div class="section__title-wrapper text-center mb-50">
-                        <h3 class="section__title" style="color: #0e1133; font-size: 32px;">Related <span class="yellow-bg-big">Events <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span></h3>
+                        <h3 class="section__title" style="color: #341C67; font-size: 32px;">Related <span class="yellow-bg-big">Events <img src="{% static 'assets/img/shape/yellow-bg-2.png' %}" alt=""></span></h3>
                         <p style="color: #6d6e75;">Discover more exciting events that might interest you</p>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                             </div>
                             {% endif %}
                             <h3 class="course__title mb-20">
-                                <a href="{% url 'events:event_detail' related_event.id %}" style="color: #0e1133; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ related_event.title }}</a>
+                                <a href="{% url 'events:event_detail' related_event.id %}" style="color: #341C67; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ related_event.title }}</a>
                             </h3>
                             <div class="course__meta d-flex align-items-center justify-content-between mb-20">
                                 <div class="course__lesson">

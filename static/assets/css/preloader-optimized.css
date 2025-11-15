@@ -6,7 +6,7 @@ High-performance preloader with YITP branding
 - Lightweight and fast
 - Auto-timeout mechanism
 - Mobile-optimized
-- YITP brand colors: #ff5d15 (orange), #1a2e53 (dark blue)
+- YITP brand colors: #ff5d15 (orange), #341C67 (dark blue)
 */
 
 /* Preloader Container */
@@ -16,7 +16,7 @@ High-performance preloader with YITP branding
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);
+    background: linear-gradient(135deg, #341C67 0%, #ff5d15 100%);
     z-index: 999999;
     display: flex;
     align-items: center;
@@ -250,7 +250,7 @@ High-performance preloader with YITP branding
 
 /* Legacy browser fallback */
 .no-css-animations #loading {
-    background: #1a2e53;
+    background: #341C67;
 }
 
 .no-css-animations .loading-logo,
@@ -341,7 +341,7 @@ High-performance preloader with YITP branding
     display: block !important;
     width: 20px !important;
     height: 2px !important;
-    background: #1a2e53 !important;
+    background: #341C67 !important;
     margin: 4px 0 !important;
     transition: all 0.3s ease !important;
 }

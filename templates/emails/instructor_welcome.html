@@ -19,12 +19,12 @@
 <!-- Magic Link Section -->
 {% if magic_link_url %}
 <div class="success-box" style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); border: 2px solid #ff5d15; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
-    <strong style="color: #1a2e53; font-size: 18px;">🚀 Quick Access - Magic Link</strong><br>
+    <strong style="color: #341C67; font-size: 18px;">🚀 Quick Access - Magic Link</strong><br>
     <p style="margin: 10px 0; color: #666;">Click the button below to automatically log in to your instructor dashboard - no password required!</p>
 
     <div style="text-align: center; margin: 20px 0;">
         <a href="{{ magic_link_url }}" style="
-            background: linear-gradient(135deg, #ff5d15, #1a2e53);
+            background: linear-gradient(135deg, #ff5d15, #341C67);
             color: white;
             padding: 15px 30px;
             border-radius: 50px;
@@ -51,7 +51,7 @@
     <strong>🔐 Your Login Credentials:</strong><br>
     <strong>Username:</strong> {{ user.username }}<br>
     <strong>Email:</strong> {{ user.email }}<br>
-    {% if temporary_password %}<strong>Temporary Password:</strong> <code style="background: #f8f9fa; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 14px; color: #1a2e53; border: 1px solid #ff5d15;">{{ temporary_password }}</code><br>{% endif %}
+    {% if temporary_password %}<strong>Temporary Password:</strong> <code style="background: #f8f9fa; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 14px; color: #341C67; border: 1px solid #ff5d15;">{{ temporary_password }}</code><br>{% endif %}
     <strong>Login URL:</strong> <a href="{{ login_url }}" style="color: #ff5d15; text-decoration: none;">{{ login_url }}</a>
 </div>
 
@@ -231,7 +231,7 @@
 
     .cta-button {
         display: inline-block;
-        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        background: linear-gradient(135deg, #ff5d15, #341C67);
         color: white;
         text-decoration: none;
         padding: 15px 30px;

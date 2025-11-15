@@ -7,7 +7,7 @@ The YITP Learning Management System features a modern, secure admin interface po
 ## Key Features
 
 ### 🎨 **YITP-Branded Design**
-- **Custom Colors**: YITP orange (#ff5d15) and dark blue (#1a2e53) throughout the interface
+- **Custom Colors**: YITP orange (#ff5d15) and dark blue (#341C67) throughout the interface
 - **Professional Logo**: YITP branding prominently displayed
 - **Consistent Styling**: Unified design language across all admin pages
 

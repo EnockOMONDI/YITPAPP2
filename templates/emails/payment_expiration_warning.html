@@ -20,25 +20,25 @@
 
 <!-- Payment Status -->
 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #e9ecef;">
-    <h4 style="color: #1a2e53; margin-top: 0;">📋 Payment Summary</h4>
+    <h4 style="color: #341C67; margin-top: 0;">📋 Payment Summary</h4>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">Course:</span>
+        <span style="font-weight: 600; color: #341C67;">Course:</span>
         <span>{{ course.title }}</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">First Payment:</span>
+        <span style="font-weight: 600; color: #341C67;">First Payment:</span>
         <span>✅ ${{ first_payment_amount|floatformat:2 }} USD (Paid)</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">Remaining Balance:</span>
+        <span style="font-weight: 600; color: #341C67;">Remaining Balance:</span>
         <span style="color: #dc3545; font-weight: bold;">${{ remaining_amount|floatformat:2 }} USD</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">Access Expires:</span>
+        <span style="font-weight: 600; color: #341C67;">Access Expires:</span>
         <span style="color: #dc3545; font-weight: bold;">{{ expiration_date|date:"F d, Y" }}</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-        <span style="font-weight: 600; color: #1a2e53;">Days Remaining:</span>
+        <span style="font-weight: 600; color: #341C67;">Days Remaining:</span>
         <span style="color: #dc3545; font-weight: bold; font-size: 18px;">{{ days_remaining }}</span>
     </div>
 </div>
@@ -67,7 +67,7 @@
 
 <!-- Payment Methods -->
 <div class="info-box">
-    <h4 style="margin-top: 0; color: #1a2e53;">💳 Quick Payment Options</h4>
+    <h4 style="margin-top: 0; color: #341C67;">💳 Quick Payment Options</h4>
     <p><strong>M-Pesa (Fastest):</strong> Pay Bill 4132847, Account: {{ user.profile.phone_number|default:user.username }}</p>
     <p><strong>PayPal:</strong> <a href="{{ paypal_payment_url }}" style="color: #ff5d15;">Pay Online Instantly</a></p>
     <p><strong>Bank Transfer:</strong> Contact support for immediate bank details</p>

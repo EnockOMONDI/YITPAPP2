@@ -43,7 +43,7 @@ function createLanguageSelector() {
     // Create simple button that shows Google Translate
     const selectorHTML = `
         <button class="btn yitp-translate-btn" onclick="toggleGoogleTranslate()"
-                style="background: none; border: none; color: #1a2e53; padding: 8px 12px; border-radius: 6px; transition: all 0.3s ease;">
+                style="background: none; border: none; color: #341C67; padding: 8px 12px; border-radius: 6px; transition: all 0.3s ease;">
             <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px; font-size: 16px;"></i>
             <span style="font-weight: 500;">Translate</span>
         </button>

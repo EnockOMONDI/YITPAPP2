@@ -90,7 +90,7 @@ class QuizAdmin(admin.ModelAdmin):
         lesson_url = reverse('admin:courses_lesson_change', args=[obj.lesson.pk])
 
         return format_html(
-            '<a href="{}" style="color: #1a2e53;">{}</a><br>'
+            '<a href="{}" style="color: #341C67;">{}</a><br>'
             '<small><a href="{}" style="color: #6c757d;">{}</a></small>',
             course_url, obj.lesson.module.course.title,
             lesson_url, obj.lesson.title

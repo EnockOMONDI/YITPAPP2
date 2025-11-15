@@ -24,7 +24,7 @@
                             <!-- Event Type Filter -->
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 mb-20">
                                 <div class="events__filter-buttons">
-                                    <h6 class="mb-15" style="color: #0e1133; font-weight: 600;">Event Type:</h6>
+                                    <h6 class="mb-15" style="color: #341C67; font-weight: 600;">Event Type:</h6>
                                     <div class="filter-btn-group">
                                         <a href="?type=all" class="e-btn e-btn-border {% if selected_type == 'all' %}active{% endif %}" style="margin-right: 10px; margin-bottom: 10px;">All Events</a>
                                         <a href="?type=physical" class="e-btn e-btn-border {% if selected_type == 'physical' %}active{% endif %}" style="margin-right: 10px; margin-bottom: 10px;">Physical</a>
@@ -36,7 +36,7 @@
                             <!-- Search Form -->
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 mb-20">
                                 <div class="events__search">
-                                    <h6 class="mb-15" style="color: #0e1133; font-weight: 600;">Search Events:</h6>
+                                    <h6 class="mb-15" style="color: #341C67; font-weight: 600;">Search Events:</h6>
                                     <form method="get" class="search-form">
                                         <div class="input-group">
                                             <input type="text" name="q" placeholder="Search events..." value="{{ query }}" class="form-control" style="border: 2px solid #d7d9e3; border-radius: 4px 0 0 4px;">
@@ -51,7 +51,7 @@
                             <!-- Category Filter -->
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mb-20">
                                 <div class="events__category-filter">
-                                    <h6 class="mb-15" style="color: #0e1133; font-weight: 600;">Category:</h6>
+                                    <h6 class="mb-15" style="color: #341C67; font-weight: 600;">Category:</h6>
                                     <select class="form-select" onchange="window.location.href=this.value" style="border: 2px solid #d7d9e3; border-radius: 4px; height: 50px;">
                                         <option value="?category=">All Categories</option>
                                         {% for cat in categories %}
@@ -71,7 +71,7 @@
             {% if featured_events %}
             <div class="row mb-60">
                 <div class="col-12">
-                    <h3 class="section__subtitle mb-40" style="color: #0e1133; font-size: 24px; font-weight: 600;">Featured Events</h3>
+                    <h3 class="section__subtitle mb-40" style="color: #341C67; font-size: 24px; font-weight: 600;">Featured Events</h3>
                 </div>
                 {% for event in featured_events %}
                 <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
@@ -100,7 +100,7 @@
                             </div>
                             {% endif %}
                             <h3 class="course__title mb-20">
-                                <a href="{% url 'events:event_detail' event.id %}" style="color: #0e1133; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ event.title }}</a>
+                                <a href="{% url 'events:event_detail' event.id %}" style="color: #341C67; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ event.title }}</a>
                             </h3>
                             <div class="course__meta d-flex align-items-center justify-content-between mb-20">
                                 <div class="course__lesson">
@@ -136,7 +136,7 @@
             <!-- All Events -->
             <div class="row">
                 <div class="col-12">
-                    <h3 class="section__subtitle mb-40" style="color: #0e1133; font-size: 24px; font-weight: 600;">
+                    <h3 class="section__subtitle mb-40" style="color: #341C67; font-size: 24px; font-weight: 600;">
                         {% if query %}Search Results{% else %}All Events{% endif %}
                         {% if events %}
                             <span style="color: #6d6e75; font-size: 16px; font-weight: 400;">({{ events.paginator.count }} event{{ events.paginator.count|pluralize }})</span>
@@ -173,7 +173,7 @@
                             </div>
                             {% endif %}
                             <h3 class="course__title mb-20">
-                                <a href="{% url 'events:event_detail' event.id %}" style="color: #0e1133; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ event.title }}</a>
+                                <a href="{% url 'events:event_detail' event.id %}" style="color: #341C67; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ event.title }}</a>
                             </h3>
                             <div class="course__meta d-flex align-items-center justify-content-between mb-20">
                                 <div class="course__lesson">
@@ -205,7 +205,7 @@
                 {% empty %}
                 <div class="col-12">
                     <div class="text-center" style="padding: 60px 0;">
-                        <h4 style="color: #0e1133; margin-bottom: 20px;">No upcoming events found</h4>
+                        <h4 style="color: #341C67; margin-bottom: 20px;">No upcoming events found</h4>
                         <p style="color: #6d6e75; margin-bottom: 30px;">
                             {% if query %}
                                 Try searching with different keywords or check our featured events above.

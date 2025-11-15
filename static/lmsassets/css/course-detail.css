@@ -2,7 +2,7 @@
 
 /* Course Header */
 .course-header {
-    background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%);
+    background: linear-gradient(135deg, #341C67 0%, #ff5d15 100%);
     color: white;
     padding: 2rem 0;
     margin-bottom: 2rem;
@@ -51,7 +51,7 @@
 .module-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1a2e53;
+    color: #341C67;
     margin-bottom: 0.5rem;
 }
 
@@ -113,7 +113,7 @@
 }
 
 .lesson-icon.text {
-    background: #1a2e53;
+    background: #341C67;
     color: white;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .progress-bar {
-    background: linear-gradient(90deg, #ff5d15 0%, #1a2e53 100%);
+    background: linear-gradient(90deg, #ff5d15 0%, #341C67 100%);
     height: 100%;
     transition: width 0.3s ease;
 }
@@ -233,8 +233,8 @@
 }
 
 .btn-secondary-yitp {
-    background: #1a2e53;
-    border-color: #1a2e53;
+    background: #341C67;
+    border-color: #341C67;
     color: white;
     font-weight: 600;
     padding: 0.75rem 2rem;
@@ -243,8 +243,8 @@
 }
 
 .btn-secondary-yitp:hover {
-    background: #152340;
-    border-color: #152340;
+    background: #341C67;
+    border-color: #341C67;
     transform: translateY(-1px);
 }
 

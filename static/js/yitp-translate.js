@@ -106,7 +106,7 @@ const YITPTranslate = {
         languageSelector.innerHTML = `
             <a class="dropdown-toggle d-flex align-items-center" href="#" id="languageDropdown"
                role="button" data-bs-toggle="dropdown" aria-expanded="false"
-               style="color: #1a2e53; text-decoration: none; padding: 8px 12px; border-radius: 6px; transition: all 0.3s ease;">
+               style="color: #341C67; text-decoration: none; padding: 8px 12px; border-radius: 6px; transition: all 0.3s ease;">
                 <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px; font-size: 16px;"></i>
                 <span id="currentLanguageFlag" style="font-size: 16px; margin-right: 5px;">${this.languages[this.currentLanguage].flag}</span>
                 <span id="currentLanguageName" class="d-none d-lg-inline" style="font-weight: 500; margin-right: 5px;">${this.languages[this.currentLanguage].name}</span>
@@ -148,7 +148,7 @@ const YITPTranslate = {
             <div class="mobile__language-option ${code === this.currentLanguage ? 'active' : ''}" data-lang="${code}">
                 <div class="language__item d-flex align-items-center p-10" style="border-radius: 6px; cursor: pointer; transition: all 0.3s ease;">
                     <span class="language-flag" style="font-size: 18px; margin-right: 10px;">${lang.flag}</span>
-                    <span class="language-name" style="font-weight: 500; color: #1a2e53;">${lang.name}</span>
+                    <span class="language-name" style="font-weight: 500; color: #341C67;">${lang.name}</span>
                     ${code === this.currentLanguage ? '<i class="fas fa-check text-success ms-auto"></i>' : ''}
                 </div>
             </div>

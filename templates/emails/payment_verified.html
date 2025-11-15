@@ -20,21 +20,21 @@
 
 <!-- Payment Details -->
 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #e9ecef;">
-    <h4 style="color: #1a2e53; margin-top: 0;">📋 Verified Payment Details</h4>
+    <h4 style="color: #341C67; margin-top: 0;">📋 Verified Payment Details</h4>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">Reference Number:</span>
+        <span style="font-weight: 600; color: #341C67;">Reference Number:</span>
         <span><strong>{{ payment.reference_number }}</strong></span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">Course:</span>
+        <span style="font-weight: 600; color: #341C67;">Course:</span>
         <span>{{ payment.course.title }}</span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">Amount Paid:</span>
+        <span style="font-weight: 600; color: #341C67;">Amount Paid:</span>
         <span><strong>${{ payment.amount|floatformat:2 }} USD</strong></span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef;">
-        <span style="font-weight: 600; color: #1a2e53;">Payment Type:</span>
+        <span style="font-weight: 600; color: #341C67;">Payment Type:</span>
         <span>
             {% if payment.is_installment %}
                 Installment {{ payment.installment_sequence }} of 2
@@ -44,7 +44,7 @@
         </span>
     </div>
     <div style="display: flex; justify-content: space-between; padding: 8px 0;">
-        <span style="font-weight: 600; color: #1a2e53;">Verified On:</span>
+        <span style="font-weight: 600; color: #341C67;">Verified On:</span>
         <span>{{ payment.confirmed_at|date:"F d, Y H:i" }}</span>
     </div>
 </div>
@@ -52,7 +52,7 @@
 <!-- Access Information -->
 {% if payment.is_installment and payment.installment_sequence == 1 %}
 <div class="info-box">
-    <h4 style="margin-top: 0; color: #1a2e53;">📅 Installment Payment Access</h4>
+    <h4 style="margin-top: 0; color: #341C67;">📅 Installment Payment Access</h4>
     <p><strong>First Installment Verified:</strong> You now have 30 days of course access.</p>
     <p><strong>Access Expires:</strong> {{ user.profile.payment_expiration_date|date:"F d, Y" }}</p>
     <p><strong>Second Payment Due:</strong> Complete your remaining payment of ${{ user.profile.remaining_installment_amount|floatformat:2 }} USD before the expiry date for unlimited access.</p>
@@ -86,14 +86,14 @@
     <a href="{{ course_url }}" class="btn" style="background-color: #ff5d15; color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; margin: 0 10px;">
         🎓 Start Learning Now
     </a>
-    <a href="{{ dashboard_url }}" class="btn" style="background-color: #1a2e53; color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; margin: 0 10px;">
+    <a href="{{ dashboard_url }}" class="btn" style="background-color: #341C67; color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; margin: 0 10px;">
         📊 View Dashboard
     </a>
 </div>
 
 <!-- Course Information -->
 <div style="background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2196f3;">
-    <h4 style="color: #1a2e53; margin-top: 0;">📚 About Your Course</h4>
+    <h4 style="color: #341C67; margin-top: 0;">📚 About Your Course</h4>
     <p><strong>{{ payment.course.title }}</strong></p>
     <p>{{ payment.course.description|truncatewords:30 }}</p>
     {% if payment.course.duration %}
@@ -106,7 +106,7 @@
 
 <!-- Support Information -->
 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ff5d15;">
-    <h4 style="color: #1a2e53; margin-top: 0;">💬 Learning Support</h4>
+    <h4 style="color: #341C67; margin-top: 0;">💬 Learning Support</h4>
     <p style="margin-bottom: 10px;">Need help with your course? Our support team is here for you:</p>
     <ul style="margin: 0; padding-left: 20px;">
         <li>Email: <a href="mailto:support@yitp.org" style="color: #ff5d15;">support@yitp.org</a></li>

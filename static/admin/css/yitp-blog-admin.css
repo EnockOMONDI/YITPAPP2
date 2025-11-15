@@ -3,7 +3,7 @@
 
 :root {
     --yitp-orange: #ff5d15;
-    --yitp-dark-blue: #1a2e53;
+    --yitp-dark-blue: #341C67;
     --yitp-light-gray: #f8f9fa;
     --yitp-border: #dee2e6;
     --yitp-success: #28a745;
@@ -76,7 +76,7 @@
 }
 
 .yitp-admin-btn-secondary:hover {
-    background: #0f1a35;
+    background: #341C67;
     color: white;
 }
 

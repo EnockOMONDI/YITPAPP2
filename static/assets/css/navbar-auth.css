@@ -68,7 +68,7 @@
 /* User Info Styling with High Specificity */
 .header__area .user__dropdown .user__info-full .user__fullname,
 .user__dropdown .dropdown-header .user__info-full .user__fullname {
-    color: #0e1133 !important;
+    color: #341C67 !important;
     font-size: 16px !important;
     font-weight: 600 !important;
     display: block !important;
@@ -189,7 +189,7 @@
 }
 
 .user__name-mobile {
-    color: #0e1133;
+    color: #341C67;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 2px;
@@ -272,7 +272,7 @@
 
 .header__transparent .e-btn-border:hover {
     background: white;
-    color: #0e1133;
+    color: #341C67;
 }
 
 .header__transparent .e-btn-outline {
@@ -282,13 +282,13 @@
 
 .header__transparent .e-btn-outline:hover {
     background: white;
-    color: #0e1133;
+    color: #341C67;
 }
 
 /* Sticky state (white header) */
 .header__area.sticky .user__name,
 .header__area.sticky .user__toggle {
-    color: #0e1133;
+    color: #341C67;
 }
 
 .header__area.sticky .e-btn-border {
@@ -302,12 +302,12 @@
 }
 
 .header__area.sticky .e-btn-outline {
-    border-color: #0e1133;
-    color: #0e1133;
+    border-color: #341C67;
+    color: #341C67;
 }
 
 .header__area.sticky .e-btn-outline:hover {
-    background: #0e1133;
+    background: #341C67;
     color: white;
 }
 

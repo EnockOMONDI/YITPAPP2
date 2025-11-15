@@ -268,7 +268,7 @@ class SponsorshipRequestAdmin(admin.ModelAdmin):
         """Display a prominent 'View Full Request' button"""
         view_url = reverse('admin:sponsorship_request_detail_view', args=[obj.pk])
         return format_html(
-            '<a href="{}" target="_blank" style="background: linear-gradient(135deg, #0e1133 0%, #ff5d15 100%); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">'
+            '<a href="{}" target="_blank" style="background: linear-gradient(135deg, #341C67 0%, #ff5d15 100%); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">'
             '📄 View Full Request</a>',
             view_url
         )
@@ -1395,7 +1395,7 @@ class CourseInstructorAdmin(admin.ModelAdmin):
         instructor_url = reverse('admin:users_instructorprofile_change',
                                args=[obj.instructor.instructor_profile.pk])
         return format_html(
-            '<a href="{}" style="color: #1a2e53; font-weight: bold;">{}</a>',
+            '<a href="{}" style="color: #341C67; font-weight: bold;">{}</a>',
             instructor_url,
             obj.instructor.get_full_name() or obj.instructor.username
         )

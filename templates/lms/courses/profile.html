@@ -25,7 +25,7 @@
     }
 
     .profile-header {
-        background: linear-gradient(135deg, #ff5d15, #1a2e53);
+        background: linear-gradient(135deg, #ff5d15, #341C67);
         color: white;
         padding: 3rem 0;
         margin-bottom: 2rem;
@@ -181,7 +181,7 @@
     }
     
     .info-value {
-        color: #1e293b;
+        color: #341C67;
         font-weight: 500;
     }
     
@@ -232,7 +232,7 @@
 
     /* Enhanced Profile Styles */
     .nav-pills .nav-link {
-        color: #1a2e53;
+        color: #341C67;
         border-radius: 25px;
         padding: 12px 24px;
         margin: 0 5px;
@@ -278,7 +278,7 @@
 
     .course-placeholder {
         height: 100%;
-        background: linear-gradient(135deg, #1a2e53, #ff5d15);
+        background: linear-gradient(135deg, #341C67, #ff5d15);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -296,7 +296,7 @@
     }
 
     .course-title {
-        color: #1a2e53;
+        color: #341C67;
         font-weight: 600;
         margin-bottom: 10px;
     }
@@ -376,7 +376,7 @@
     .activity-title, .achievement-title {
         margin: 0 0 5px 0;
         font-weight: 600;
-        color: #1a2e53;
+        color: #341C67;
     }
 
     .activity-course, .achievement-description {
@@ -454,7 +454,7 @@
     .nav-card-content h6 {
         margin: 0 0 0.25rem 0;
         font-weight: 600;
-        color: #1a2e53;
+        color: #341C67;
         font-size: 0.95rem;
     }
 
@@ -469,7 +469,7 @@
         font-size: 1.1rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: #1a2e53;
+        color: #341C67;
     }
 
     .section-title i {
@@ -528,7 +528,7 @@
         border-radius: 8px;
         padding: 0.5rem 1rem;
         font-weight: 500;
-        color: #1a2e53;
+        color: #341C67;
         transition: all 0.3s ease;
     }
 
@@ -536,7 +536,7 @@
         background: linear-gradient(135deg, #e0a800 0%, #e6b800 100%);
         transform: translateY(-1px);
         box-shadow: 0 0.25rem 0.5rem rgba(255, 193, 7, 0.3);
-        color: #1a2e53;
+        color: #341C67;
     }
 
     /* Responsive adjustments for navigation cards */
@@ -921,7 +921,7 @@
                     {% if profile.payment_status == 'partially_paid' %}
                     <div class="col-12 mb-4">
                         <div class="profile-card" style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); border-left: 5px solid #ff5d15;">
-                            <h4 class="section-title" style="color: #1a2e53;">
+                            <h4 class="section-title" style="color: #341C67;">
                                 <i class="fas fa-clock me-2"></i>Installment Payment Tracking
                             </h4>
 
@@ -951,7 +951,7 @@
                                 <div class="col-md-6">
                                     <div class="countdown-timer text-center">
                                         {% if profile.payment_expiration_date %}
-                                            <h5 style="color: #1a2e53;">Time Remaining</h5>
+                                            <h5 style="color: #341C67;">Time Remaining</h5>
                                             <div id="installment-countdown" class="countdown-display"
                                                  data-expiry="{{ profile.payment_expiration_date|date:'c' }}">
                                                 <div class="countdown-item">

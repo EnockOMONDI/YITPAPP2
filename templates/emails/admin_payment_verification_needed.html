@@ -75,7 +75,7 @@
         
         .detail-label {
             font-weight: 600;
-            color: #1a2e53;
+            color: #341C67;
             min-width: 140px;
         }
         
@@ -114,7 +114,7 @@
         }
         
         .btn-secondary {
-            background: #1a2e53;
+            background: #341C67;
             color: white;
         }
         
@@ -124,7 +124,7 @@
         }
         
         .footer {
-            background: #1a2e53;
+            background: #341C67;
             color: white;
             padding: 20px;
             text-align: center;
@@ -190,7 +190,7 @@
             
             <!-- Payment Details -->
             <div class="payment-details">
-                <h3 style="color: #1a2e53; margin-top: 0;">
+                <h3 style="color: #341C67; margin-top: 0;">
                     {% if payment.payment_method == 'paypal' %}
                         <span class="method-icon">💳</span>PayPal Payment Details
                     {% elif payment.payment_method == 'bank_transfer' %}
@@ -245,7 +245,7 @@
             <!-- Transaction Information -->
             {% if payment.paypal_payment_id or payment.transaction_id %}
             <div class="transaction-info">
-                <h4 style="color: #1a2e53; margin-top: 0;">📋 Transaction Information</h4>
+                <h4 style="color: #341C67; margin-top: 0;">📋 Transaction Information</h4>
                 
                 {% if payment.paypal_payment_id %}
                 <div class="detail-row">
@@ -282,7 +282,7 @@
             
             <!-- Instructions -->
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 20px;">
-                <h4 style="color: #1a2e53; margin-top: 0;">📝 Verification Instructions</h4>
+                <h4 style="color: #341C67; margin-top: 0;">📝 Verification Instructions</h4>
                 <ol style="margin: 0; padding-left: 20px;">
                     <li>Click "Verify Payment in Admin" to access the Django admin interface</li>
                     <li>Verify the transaction details against your payment processor records</li>

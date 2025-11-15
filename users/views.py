@@ -736,7 +736,7 @@ def test_email_delivery(request):
                     <p>This is a test email to verify that the YITP email delivery system is working correctly.</p>
 
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="color: #1a2e53; margin-top: 0;">Test Details:</h3>
+                        <h3 style="color: #341C67; margin-top: 0;">Test Details:</h3>
                         <ul>
                             <li><strong>Sent by:</strong> {request.user.username} ({request.user.email})</li>
                             <li><strong>Test email:</strong> {test_email}</li>

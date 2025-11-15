@@ -86,7 +86,7 @@ class MessageAdmin(admin.ModelAdmin):
         # Check if recipient is instructor
         try:
             instructor_profile = obj.recipient.instructor_profile
-            role_badge = f'<span style="background: #1a2e53; color: white; padding: 1px 4px; border-radius: 3px; font-size: 10px; margin-left: 5px;">{instructor_profile.get_instructor_role_display()}</span>'
+            role_badge = f'<span style="background: #341C67; color: white; padding: 1px 4px; border-radius: 3px; font-size: 10px; margin-left: 5px;">{instructor_profile.get_instructor_role_display()}</span>'
             return format_html('{} {}', name, role_badge)
         except:
             return name

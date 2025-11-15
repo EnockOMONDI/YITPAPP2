@@ -6,7 +6,7 @@
 /* YITP Brand Colors */
 :root {
     --yitp-orange: #ff5d15;
-    --yitp-dark-blue: #1a2e53;
+    --yitp-dark-blue: #341C67;
     --yitp-light-blue: #e7f3ff;
     --yitp-success: #28a745;
     --yitp-warning: #ffc107;
@@ -140,8 +140,8 @@
 }
 
 .btn-yitp-secondary:hover {
-    background-color: #152340 !important;
-    border-color: #152340 !important;
+    background-color: #341C67 !important;
+    border-color: #341C67 !important;
 }
 
 /* Table Enhancements */

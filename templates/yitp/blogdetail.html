@@ -65,7 +65,7 @@
                                 </div>
                                 {% endif %}
 
-                                <h3 class="blog__title" style="color: #0e1133; font-size: 32px; font-weight: 600; margin: 20px 0; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ post.title }}</h3>
+                                <h3 class="blog__title" style="color: #341C67; font-size: 32px; font-weight: 600; margin: 20px 0; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ post.title }}</h3>
 
                                 <div class="blog__meta" style="margin-bottom: 30px; color: #6d6e75; font-size: 14px;">
                                     <span style="margin-right: 20px;"><i class="far fa-calendar-alt" style="color: #ff5d15; margin-right: 8px;"></i> {{ post.date|date:"M d, Y" }}</span>
@@ -81,7 +81,7 @@
                                 <!-- Tags Section -->
                                 {% if post.tags.all %}
                                 <div class="blog__tags" style="margin: 40px 0; padding: 20px 0; border-top: 1px solid #eef0f6;">
-                                    <h6 style="color: #0e1133; margin-bottom: 15px; font-weight: 600;">Tags:</h6>
+                                    <h6 style="color: #341C67; margin-bottom: 15px; font-weight: 600;">Tags:</h6>
                                     <div class="tag-list">
                                         {% for tag in post.tags.all %}
                                         <span style="background: #f8f9fa; color: #6d6e75; padding: 5px 12px; border-radius: 15px; font-size: 12px; margin-right: 10px; margin-bottom: 10px; display: inline-block;">#{{ tag.name }}</span>
@@ -92,7 +92,7 @@
 
                                 <!-- Call to Action -->
                                 <div class="blog__share" style="margin: 40px 0; padding: 30px; background: #f8f9fa; border-radius: 6px; text-align: center;">
-                                    <h4 style="color: #0e1133; margin-bottom: 20px; font-size: 20px; font-weight: 600;">Ready to Make an Impact?</h4>
+                                    <h4 style="color: #341C67; margin-bottom: 20px; font-size: 20px; font-weight: 600;">Ready to Make an Impact?</h4>
                                     <p style="color: #6d6e75; margin-bottom: 25px;">Join thousands of young leaders who are already transforming their communities through our training programs.</p>
                                     <a href="{% url 'yitp:registration' %}" class="e-btn e-btn-3" style="display: inline-block;">
                                         Join the Youth Impact Training Program
@@ -102,12 +102,12 @@
 
                                 <!-- Comments Section -->
                                 <div class="blog__comments" style="margin-top: 60px;">
-                                    <h4 style="color: #0e1133; margin-bottom: 30px; font-size: 24px; font-weight: 600;">Comments ({{ comment.count }})</h4>
+                                    <h4 style="color: #341C67; margin-bottom: 30px; font-size: 24px; font-weight: 600;">Comments ({{ comment.count }})</h4>
 
                                     {% for c in comment %}
                                     <div class="blog__comment-item" style="margin-bottom: 30px; padding: 25px; background: white; border-radius: 6px; box-shadow: 0px 10px 30px 0px rgba(1, 11, 60, 0.06);">
                                         <div class="comment__meta" style="margin-bottom: 15px;">
-                                            <h6 style="color: #0e1133; font-size: 16px; font-weight: 600; margin-bottom: 5px;">{{ c.full_name }}</h6>
+                                            <h6 style="color: #341C67; font-size: 16px; font-weight: 600; margin-bottom: 5px;">{{ c.full_name }}</h6>
                                             <span style="color: #6d6e75; font-size: 14px;">
                                                 <i class="far fa-calendar-alt" style="margin-right: 5px;"></i>
                                                 {{ c.date|date:"M d, Y H:i" }}
@@ -123,7 +123,7 @@
 
                                     <!-- Comment Form -->
                                     <div class="blog__comment-form" style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 6px;">
-                                        <h5 style="color: #0e1133; margin-bottom: 25px; font-size: 20px; font-weight: 600;">Leave a Comment</h5>
+                                        <h5 style="color: #341C67; margin-bottom: 25px; font-size: 20px; font-weight: 600;">Leave a Comment</h5>
                                         <form method="post">
                                             {% csrf_token %}
                                             <div class="row">
@@ -175,7 +175,7 @@
                         <!-- Categories Widget -->
                         {% if categories %}
                         <div class="sidebar__widget mb-60">
-                            <h3 class="sidebar__widget-title" style="color: #0e1133; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Categories</h3>
+                            <h3 class="sidebar__widget-title" style="color: #341C67; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Categories</h3>
                             <div class="sidebar__widget-content">
                                 <div class="category__list">
                                     {% for category in categories %}
@@ -194,7 +194,7 @@
                         <!-- Recent Posts Widget -->
                         {% if blogs %}
                         <div class="sidebar__widget mb-60">
-                            <h3 class="sidebar__widget-title" style="color: #0e1133; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Recent Posts</h3>
+                            <h3 class="sidebar__widget-title" style="color: #341C67; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Recent Posts</h3>
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">
                                     {% for blog in blogs|slice:":5" %}
@@ -210,7 +210,7 @@
                                         </div>
                                         <div class="rc__content">
                                             <h6 style="margin-bottom: 8px;">
-                                                <a href="{% url 'blogapp:blog-detail' blog.pid %}" style="color: #0e1133; font-size: 14px; font-weight: 600; text-decoration: none; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word;">{{ blog.title|truncatechars:50 }}</a>
+                                                <a href="{% url 'blogapp:blog-detail' blog.pid %}" style="color: #341C67; font-size: 14px; font-weight: 600; text-decoration: none; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word;">{{ blog.title|truncatechars:50 }}</a>
                                             </h6>
                                             <div class="rc__meta">
                                                 <span style="color: #6d6e75; font-size: 12px;">
@@ -229,7 +229,7 @@
                         <!-- Related Posts Widget -->
                         {% if related_blogs %}
                         <div class="sidebar__widget mb-60">
-                            <h3 class="sidebar__widget-title" style="color: #0e1133; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Related Posts</h3>
+                            <h3 class="sidebar__widget-title" style="color: #341C67; font-size: 20px; font-weight: 600; margin-bottom: 25px;">Related Posts</h3>
                             <div class="sidebar__widget-content">
                                 <div class="rc__post-wrapper">
                                     {% for related_blog in related_blogs|slice:":4" %}
@@ -246,7 +246,7 @@
                                         </div>
                                         <div class="rc__content">
                                             <h6 style="margin-bottom: 8px;">
-                                                <a href="{% url 'blogapp:blog-detail' related_blog.pid %}" style="color: #0e1133; font-size: 14px; font-weight: 600; text-decoration: none; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word;">{{ related_blog.title|truncatechars:50 }}</a>
+                                                <a href="{% url 'blogapp:blog-detail' related_blog.pid %}" style="color: #341C67; font-size: 14px; font-weight: 600; text-decoration: none; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word;">{{ related_blog.title|truncatechars:50 }}</a>
                                             </h6>
                                             <div class="rc__meta">
                                                 <span style="color: #6d6e75; font-size: 12px;">

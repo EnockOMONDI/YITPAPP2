@@ -100,13 +100,13 @@ This is a mandatory first course for all new students and takes approximately 25
     # Lesson content with YITP branding
     lesson_content = """
     <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
-        <div style="background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%); color: white; padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
+        <div style="background: linear-gradient(135deg, #341C67 0%, #ff5d15 100%); color: white; padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
             <h1 style="margin: 0; font-size: 2.5em;">Welcome to YITP! 🎓</h1>
             <p style="margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.9;">Your Learning Journey Begins Here</p>
         </div>
 
         <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #ff5d15;">
-            <h2 style="color: #1a2e53; margin-top: 0;">🌟 What is YITP?</h2>
+            <h2 style="color: #341C67; margin-top: 0;">🌟 What is YITP?</h2>
             <p style="line-height: 1.6; color: #333;">
                 The <strong>Youth Impact Training Programme (YITP)</strong> is a transformational educational initiative designed to empower young people with the skills, knowledge, and confidence they need to create positive change in their communities and beyond.
             </p>
@@ -116,14 +116,14 @@ This is a mandatory first course for all new students and takes approximately 25
         </div>
 
         <div style="background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <h2 style="color: #1a2e53; margin-top: 0;">🎯 Our Core Values</h2>
+            <h2 style="color: #341C67; margin-top: 0;">🎯 Our Core Values</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                 <div style="padding: 15px; background: #fff5f0; border-radius: 6px; border: 1px solid #ff5d15;">
                     <h3 style="color: #ff5d15; margin-top: 0;">💡 Innovation</h3>
                     <p style="margin-bottom: 0; color: #666;">Embracing new ideas and creative solutions to drive positive change.</p>
                 </div>
-                <div style="padding: 15px; background: #f0f4ff; border-radius: 6px; border: 1px solid #1a2e53;">
-                    <h3 style="color: #1a2e53; margin-top: 0;">🤝 Collaboration</h3>
+                <div style="padding: 15px; background: #f0f4ff; border-radius: 6px; border: 1px solid #341C67;">
+                    <h3 style="color: #341C67; margin-top: 0;">🤝 Collaboration</h3>
                     <p style="margin-bottom: 0; color: #666;">Working together to achieve greater impact than we could alone.</p>
                 </div>
                 <div style="padding: 15px; background: #f0fff0; border-radius: 6px; border: 1px solid #28a745;">
@@ -134,7 +134,7 @@ This is a mandatory first course for all new students and takes approximately 25
         </div>
 
         <div style="background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <h2 style="color: #1a2e53; margin-top: 0;">🧭 Navigating Your YITP Learning Platform</h2>
+            <h2 style="color: #341C67; margin-top: 0;">🧭 Navigating Your YITP Learning Platform</h2>
             <p style="line-height: 1.6; color: #333;">
                 Our learning platform is designed to be intuitive and user-friendly. Here's how to make the most of your learning experience:
             </p>
@@ -155,7 +155,7 @@ This is a mandatory first course for all new students and takes approximately 25
         </div>
 
         <div style="background: #fff5f0; padding: 25px; border-radius: 8px; margin-bottom: 25px; border: 2px solid #ff5d15;">
-            <h2 style="color: #1a2e53; margin-top: 0;">📋 How to Complete Assignments & Track Progress</h2>
+            <h2 style="color: #341C67; margin-top: 0;">📋 How to Complete Assignments & Track Progress</h2>
             <ol style="line-height: 1.8; color: #333;">
                 <li><strong>Read Each Lesson Carefully:</strong> Take your time to understand the content before moving forward.</li>
                 <li><strong>Complete Knowledge Checks:</strong> Each lesson includes quizzes to test your understanding (70% passing score required).</li>
@@ -165,8 +165,8 @@ This is a mandatory first course for all new students and takes approximately 25
             </ol>
         </div>
 
-        <div style="background: #f0f4ff; padding: 25px; border-radius: 8px; margin-bottom: 25px; border: 2px solid #1a2e53;">
-            <h2 style="color: #1a2e53; margin-top: 0;">🆘 Support Resources & Contact Information</h2>
+        <div style="background: #f0f4ff; padding: 25px; border-radius: 8px; margin-bottom: 25px; border: 2px solid #341C67;">
+            <h2 style="color: #341C67; margin-top: 0;">🆘 Support Resources & Contact Information</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                 <div>
                     <h3 style="color: #ff5d15;">📧 Email Support</h3>

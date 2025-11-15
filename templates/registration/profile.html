@@ -71,7 +71,7 @@
 }
 
 .form-section h6 {
-    color: #0e1133 !important;
+    color: #341C67 !important;
     font-weight: 600 !important;
     margin-bottom: 20px !important;
     font-size: 16px;
@@ -111,7 +111,7 @@
 
 /* Form Label Styling */
 #sponsorshipModal .form-label {
-    color: #0e1133;
+    color: #341C67;
     font-weight: 600;
     margin-bottom: 8px;
     font-size: 14px;
@@ -155,7 +155,7 @@
     background: linear-gradient(135deg, #e8f4fd 0%, #f0f8ff 100%);
     border: 1px solid #b8daff;
     border-left: 4px solid #ff5d15 !important;
-    color: #0e1133;
+    color: #341C67;
     border-radius: 8px;
     padding: 15px 20px;
     margin-bottom: 25px;
@@ -243,7 +243,7 @@
 }
 
 .info__value {
-    color: #0e1133;
+    color: #341C67;
     font-weight: 500;
 }
 
@@ -381,7 +381,7 @@
     .lms-stat-number {
         font-size: 2rem;
         font-weight: 700;
-        color: #1a2e53;
+        color: #341C67;
         margin-bottom: 5px;
     }
 
@@ -451,7 +451,7 @@
                         <div class="profile__avatar">
                             {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
                         </div>
-                        <h2 style="color: #0e1133; font-size: 28px; font-weight: 700; margin-bottom: 10px;">
+                        <h2 style="color: #341C67; font-size: 28px; font-weight: 700; margin-bottom: 10px;">
                             {% if user.first_name %}
                                 {{ user.first_name }} {{ user.last_name }}
                             {% else %}
@@ -462,7 +462,7 @@
                     </div>
 
                     <div class="profile__info">
-                        <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Account Information</h4>
+                        <h4 style="color: #341C67; margin-bottom: 25px; font-weight: 600;">Account Information</h4>
                         
                         <div class="info__item">
                             <span class="info__label">Username:</span>
@@ -493,7 +493,7 @@
 
                     <!-- Payment Status Section -->
                     <div class="profile__info">
-                        <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Payment Status</h4>
+                        <h4 style="color: #341C67; margin-bottom: 25px; font-weight: 600;">Payment Status</h4>
 
                         <div class="info__item">
                             <span class="info__label">Payment Status:</span>
@@ -554,7 +554,7 @@
                     <!-- LMS Learning Overview -->
                     {% if lms_stats %}
                     <div class="profile__info">
-                        <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Learning Overview</h4>
+                        <h4 style="color: #341C67; margin-bottom: 25px; font-weight: 600;">Learning Overview</h4>
 
                         <div class="lms-stats-grid">
                             <div class="lms-stat-card">
@@ -651,7 +651,7 @@
 
                 <!-- Sponsorship Requests Section -->
                 <div class="profile__wrapper">
-                    <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">
+                    <h4 style="color: #341C67; margin-bottom: 25px; font-weight: 600;">
                         <i class="fas fa-hand-holding-usd" style="color: #ff5d15; margin-right: 10px;"></i>
                         Sponsorship Requests
                     </h4>
@@ -670,12 +670,12 @@
                     <!-- Existing Sponsorship Requests -->
                     {% if sponsorship_requests %}
                         <div class="sponsorship__requests">
-                            <h5 style="color: #0e1133; margin-bottom: 20px;">Your Sponsorship Requests</h5>
+                            <h5 style="color: #341C67; margin-bottom: 20px;">Your Sponsorship Requests</h5>
                             {% for request in sponsorship_requests %}
                                 <div class="request__item" style="background: #f8f9fa; padding: 20px; border-radius: 6px; margin-bottom: 15px; border-left: 4px solid {% if request.status == 'approved' %}#28a745{% elif request.status == 'rejected' %}#dc3545{% elif request.status == 'under_review' %}#ffc107{% else %}#6c757d{% endif %};">
                                     <div class="request__header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
                                         <div>
-                                            <h6 style="color: #0e1133; margin-bottom: 5px;">{{ request.get_program_name }}</h6>
+                                            <h6 style="color: #341C67; margin-bottom: 5px;">{{ request.get_program_name }}</h6>
                                             <p style="color: #6d6e75; margin: 0; font-size: 14px;">Request #{{ request.id }} • ${{ request.amount_needed }}</p>
                                         </div>
                                         <div style="text-align: right;">
@@ -701,16 +701,16 @@
                                     <div class="request__details" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
                                         <div>
                                             <small style="color: #6d6e75; font-weight: 600;">Submitted:</small><br>
-                                            <span style="color: #0e1133;">{{ request.created_at|date:"M d, Y" }}</span>
+                                            <span style="color: #341C67;">{{ request.created_at|date:"M d, Y" }}</span>
                                         </div>
                                         <div>
                                             <small style="color: #6d6e75; font-weight: 600;">Financial Situation:</small><br>
-                                            <span style="color: #0e1133;">{{ request.get_financial_situation_name }}</span>
+                                            <span style="color: #341C67;">{{ request.get_financial_situation_name }}</span>
                                         </div>
                                         {% if request.reviewed_at %}
                                         <div>
                                             <small style="color: #6d6e75; font-weight: 600;">Reviewed:</small><br>
-                                            <span style="color: #0e1133;">{{ request.reviewed_at|date:"M d, Y" }}</span>
+                                            <span style="color: #341C67;">{{ request.reviewed_at|date:"M d, Y" }}</span>
                                         </div>
                                         {% endif %}
                                     </div>
@@ -722,7 +722,7 @@
                                                     {% if request.status == 'approved' %}Approval Message:{% elif request.status == 'rejected' %}Feedback:{% else %}Update from Review Team:{% endif %}
                                                 </small>
                                             </div>
-                                            <div style="color: #0e1133; line-height: 1.5;">{{ request.admin_notes|linebreaks }}</div>
+                                            <div style="color: #341C67; line-height: 1.5;">{{ request.admin_notes|linebreaks }}</div>
                                             {% if request.reviewed_by %}
                                                 <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; font-size: 11px; color: #6d6e75;">
                                                     <i class="fas fa-user" style="margin-right: 5px;"></i>
@@ -746,33 +746,33 @@
 
                 <!-- Quick Links -->
                 <div class="profile__wrapper">
-                    <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Quick Links</h4>
+                    <h4 style="color: #341C67; margin-bottom: 25px; font-weight: 600;">Quick Links</h4>
                     <div class="row">
                         <div class="col-md-6 mb-20">
                             <a href="{% url 'yitp:home' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
                                 <i class="fas fa-home" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
-                                <h6 style="color: #0e1133; margin-bottom: 5px;">Homepage</h6>
+                                <h6 style="color: #341C67; margin-bottom: 5px;">Homepage</h6>
                                 <p style="color: #6d6e75; font-size: 14px; margin: 0;">Return to the main page</p>
                             </a>
                         </div>
                         <div class="col-md-6 mb-20">
                             <a href="{% url 'blogapp:blog-list' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
                                 <i class="fas fa-blog" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
-                                <h6 style="color: #0e1133; margin-bottom: 5px;">Blog Posts</h6>
+                                <h6 style="color: #341C67; margin-bottom: 5px;">Blog Posts</h6>
                                 <p style="color: #6d6e75; font-size: 14px; margin: 0;">Read our latest articles</p>
                             </a>
                         </div>
                         <div class="col-md-6 mb-20">
                             <a href="{% url 'yitp:events' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
                                 <i class="fas fa-calendar" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
-                                <h6 style="color: #0e1133; margin-bottom: 5px;">Events</h6>
+                                <h6 style="color: #341C67; margin-bottom: 5px;">Events</h6>
                                 <p style="color: #6d6e75; font-size: 14px; margin: 0;">View upcoming events</p>
                             </a>
                         </div>
                         <div class="col-md-6 mb-20">
                             <a href="{% url 'yitp:faqs' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
                                 <i class="fas fa-question-circle" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
-                                <h6 style="color: #0e1133; margin-bottom: 5px;">FAQs</h6>
+                                <h6 style="color: #341C67; margin-bottom: 5px;">FAQs</h6>
                                 <p style="color: #6d6e75; font-size: 14px; margin: 0;">Get answers to common questions</p>
                             </a>
                         </div>

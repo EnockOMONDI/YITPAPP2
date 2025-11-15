@@ -104,7 +104,7 @@ class CourseAdmin(admin.ModelAdmin):
             instructor_url = reverse('admin:users_instructorprofile_change',
                                    args=[obj.instructor.instructor_profile.pk])
             return format_html(
-                '<a href="{}" style="color: #1a2e53; font-weight: bold;">{}</a>',
+                '<a href="{}" style="color: #341C67; font-weight: bold;">{}</a>',
                 instructor_url,
                 obj.instructor.get_full_name() or obj.instructor.username
             )
@@ -294,7 +294,7 @@ class ModuleAdmin(admin.ModelAdmin):
         """Display course title with link"""
         course_url = reverse('admin:courses_course_change', args=[obj.course.pk])
         return format_html(
-            '<a href="{}" style="color: #1a2e53;">{}</a>',
+            '<a href="{}" style="color: #341C67;">{}</a>',
             course_url,
             obj.course.title
         )

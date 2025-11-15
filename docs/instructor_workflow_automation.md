@@ -20,7 +20,7 @@ The YITP Learning Management System now features a fully automated instructor us
 - **Audit Logging**: Complete audit trail of account creation and email delivery
 
 ### 🎨 Modern Django Unfold Admin Interface
-- **YITP-Branded Design**: Custom admin interface with YITP orange (#ff5d15) and dark blue (#1a2e53) colors
+- **YITP-Branded Design**: Custom admin interface with YITP orange (#ff5d15) and dark blue (#341C67) colors
 - **Visual Role Indicators**: Color-coded role badges and status indicators
 - **Enhanced Navigation**: Organized sidebar with Blog Management, LMS Management, and User Management sections
 - **Responsive Design**: Mobile-friendly admin interface with modern UI components
@@ -156,7 +156,7 @@ The YITP Learning Management System now features a fully automated instructor us
 When an instructor account is created through the admin interface, the system automatically sends a comprehensive welcome email containing:
 
 #### 📧 Email Content
-- **Professional YITP branding** with orange (#ff5d15) and dark blue (#1a2e53) color scheme
+- **Professional YITP branding** with orange (#ff5d15) and dark blue (#341C67) color scheme
 - **Personalized greeting** using the instructor's name
 - **Complete login credentials** including username, email, and temporary password (if applicable)
 - **Role-specific permissions summary** explaining what the instructor can do

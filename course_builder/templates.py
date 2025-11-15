@@ -197,8 +197,8 @@ LESSON_TEMPLATES = {
 <h3>The Solution</h3>
 <p>[Explain the approach taken and solutions implemented]</p>
 
-<div style="background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-    <h4 style="color: #1a2e53; margin-top: 0;">🎯 Analysis Questions</h4>
+<div style="background: #f0f8ff; border: 2px solid #341C67; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <h4 style="color: #341C67; margin-top: 0;">🎯 Analysis Questions</h4>
     <ol>
         <li>What were the key factors that led to success?</li>
         <li>What challenges were encountered and how were they overcome?</li>
@@ -241,8 +241,8 @@ LESSON_TEMPLATES = {
     <li>[Material 2]</li>
 </ul>
 
-<div style="background: #f0f8ff; border: 2px solid #1a2e53; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-    <h4 style="color: #1a2e53; margin-top: 0;">📋 Step-by-Step Instructions</h4>
+<div style="background: #f0f8ff; border: 2px solid #341C67; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+    <h4 style="color: #341C67; margin-top: 0;">📋 Step-by-Step Instructions</h4>
     <ol>
         <li><strong>Step 1:</strong> [Detailed instruction]</li>
         <li><strong>Step 2:</strong> [Detailed instruction]</li>

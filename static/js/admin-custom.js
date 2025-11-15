@@ -23,7 +23,7 @@
         // Add YITP colors to admin header
         if ($('#header').length) {
             $('#header').css({
-                'background-color': '#1a2e53',
+                'background-color': '#341C67',
                 'border-bottom': '3px solid #ff5d15'
             });
         }
@@ -91,7 +91,7 @@
         // Add quick action buttons for payment management
         var quickActions = $('<div class="yitp-quick-actions" style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;"></div>');
         
-        quickActions.append('<h4 style="margin: 0 0 10px 0; color: #1a2e53;">Quick Actions</h4>');
+        quickActions.append('<h4 style="margin: 0 0 10px 0; color: #341C67;">Quick Actions</h4>');
         
         // Add buttons based on payment status
         var confirmBtn = $('<button type="button" class="btn btn-success btn-sm" style="margin-right: 5px;">Confirm Payment</button>');
@@ -108,7 +108,7 @@
         // Add quick enrollment information
         var enrollmentInfo = $('<div class="yitp-enrollment-info" style="margin: 10px 0; padding: 10px; background: #e7f3ff; border-radius: 5px;"></div>');
         
-        enrollmentInfo.append('<h4 style="margin: 0 0 10px 0; color: #1a2e53;">Enrollment Overview</h4>');
+        enrollmentInfo.append('<h4 style="margin: 0 0 10px 0; color: #341C67;">Enrollment Overview</h4>');
         enrollmentInfo.append('<p style="margin: 0;">Quick enrollment status and progress information will be displayed here.</p>');
         
         $('.form-row').first().before(enrollmentInfo);

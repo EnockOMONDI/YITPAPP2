@@ -116,7 +116,7 @@
 
 .yitp-language-menu .dropdown-item {
     padding: 10px 16px;
-    color: #1a2e53;
+    color: #341C67;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -256,7 +256,7 @@
 #google_translate_element .goog-te-gadget {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-size: 14px !important;
-    color: #1a2e53 !important;
+    color: #341C67 !important;
 }
 
 #google_translate_element .goog-te-gadget-simple {
@@ -266,7 +266,7 @@
     display: inline-block !important;
     padding: 0 !important;
     margin: 0 !important;
-    color: #1a2e53 !important;
+    color: #341C67 !important;
 }
 
 /* COMPREHENSIVE GOOGLE TRANSLATE BANNER HIDING */
@@ -371,7 +371,7 @@ html[style*="padding-top"] {
 /* Style the dropdown options */
 .goog-te-combo option {
     background: white !important;
-    color: #1a2e53 !important;
+    color: #341C67 !important;
     padding: 8px !important;
     font-weight: 500 !important;
 }
@@ -398,7 +398,7 @@ html[style*="padding-top"] {
 
 .goog-te-menu2-item {
     padding: 10px 16px !important;
-    color: #1a2e53 !important;
+    color: #341C67 !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-weight: 500 !important;
     border-bottom: 1px solid rgba(26, 46, 83, 0.1) !important;
@@ -508,11 +508,11 @@ body.translated {
 /* High Contrast Mode Support */
 @media (prefers-contrast: high) {
     .yitp-language-selector .nav-link {
-        border: 1px solid #1a2e53;
+        border: 1px solid #341C67;
     }
     
     .yitp-language-menu {
-        border: 2px solid #1a2e53;
+        border: 2px solid #341C67;
     }
     
     .yitp-language-menu .dropdown-item:hover {

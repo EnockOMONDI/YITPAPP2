@@ -1,929 +1,718 @@
-{% extends 'yitp/base.html' %}
+{% extends 'unified/base.html' %}
 {% load static %}
 
 {% block title %}Youth Impact Training Programme - Empowering Youth Through Skills Development & Entrepreneurship{% endblock %}
-
 {% block description %}Transform your future with Youth Impact Training Programme (YITP). Access comprehensive skills development courses, entrepreneurship training, mentorship programs, and career advancement opportunities. Join thousands of successful graduates building impactful careers.{% endblock %}
-
 {% block keywords %}youth training, skills development, entrepreneurship training, career advancement, online courses, mentorship programs, youth empowerment, professional development, YITP, business skills, leadership training, digital skills{% endblock %}
-
-{% block og_title %}Youth Impact Training Programme - Transform Your Future Today{% endblock %}
-{% block og_description %}Join YITP for world-class skills development, entrepreneurship training, and mentorship. Start your journey to success with our expert-led programs designed for ambitious youth.{% endblock %}
-
-{% block breadcrumb_schema %}
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "{{ request.build_absolute_uri }}"
-    }]
-}
-</script>
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Youth Impact Training Programme",
-    "alternateName": "YITP",
-    "url": "{{ request.build_absolute_uri }}",
-    "logo": "{% static 'assets/img/logo/youthImpact.png' %}",
-    "description": "Empowering youth through comprehensive skills development, entrepreneurship training, and career advancement programs.",
-    "foundingDate": "2020",
-    "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "name": "YITP Certificate",
-        "description": "Professional development certificate awarded upon course completion"
-    },
-    "offers": {
-        "@type": "Offer",
-        "category": "Education",
-        "name": "Skills Development Courses",
-        "description": "Comprehensive training programs for youth empowerment"
-    }
-}
-</script>
-{% endblock %}
 
 {% block extra_css %}
 <style>
-/* Modern YITP Homepage Enhancements */
 :root {
     --yitp-orange: #ff5d15;
-    --yitp-black-text: #0c0c0c;
-    --yitp-dark-blue: #1a2e53;
-    --yitp-light-gray: #f8f9fa;
-    --yitp-text-gray: #6c757d;
+    --yitp-light-orange: #fe8636;
+    --yitp-dark-blue: #341C67;
+    --yitp-navy: #341C67;
+    --yitp-slate: #4a5973;
+    --yitp-gray: #6b7280;
+    --yitp-soft-gray: #f5f7fb;
     --yitp-white: #ffffff;
-    --shadow-light: 0 2px 10px rgba(0,0,0,0.1);
-    --shadow-medium: 0 4px 20px rgba(0,0,0,0.15);
-    --border-radius: 12px;
-    --transition: all 0.3s ease;
+    --gradient-primary: linear-gradient(135deg, var(--yitp-orange), var(--yitp-light-orange));
+    --gradient-secondary: linear-gradient(135deg, #341C67, #341C67 75%);
+    --shadow-soft: 0 15px 40px rgba(15, 26, 53, 0.12);
+    --shadow-medium: 0 25px 60px rgba(15, 26, 53, 0.18);
+    --radius-lg: 26px;
+    --radius-md: 18px;
+    --transition-default: all 0.3s ease;
 }
 
-/* Hero Section Enhancements - Modern Flat Design */
 .yitp-hero {
-    padding: var(--spacing-xl) 0 var(--spacing-lg);
     position: relative;
-    overflow: hidden;
-    background: var(--yitp-white);
-}
-
-.yitp-hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.yitp-hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--yitp-dark-blue);
-    line-height: 1.2;
-    margin-bottom: var(--spacing-md);
-    letter-spacing: -0.02em;
-}
-
-.yitp-hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--yitp-orange);
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: inline-block;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(255, 93, 21, 0.1);
-    border-radius: var(--border-radius-small);
-}
-
-.yitp-hero-description {
-    font-size: 1.1rem;
-    color: var(--yitp-text-gray) !important;
-    line-height: 1.7;
-    margin-bottom: var(--spacing-xl);
-    font-weight: 400;
-}
-
-.yitp-cta-buttons {
-    display: flex;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.yitp-btn-primary {
-    background: var(--yitp-orange);
+    background: var(--gradient-secondary);
     color: var(--yitp-white);
-    padding: 16px 32px;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
-    border: 2px solid var(--yitp-orange);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    box-shadow: var(--shadow-subtle);
-    position: relative;
+    padding: 150px 0 110px;
+    margin-top: 80px;
     overflow: hidden;
 }
 
-.yitp-btn-primary:hover {
-    background: var(--yitp-orange-dark);
-    border-color: var(--yitp-orange-dark);
-    color: var(--yitp-white);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
-    text-decoration: none;
-}
-
-.yitp-btn-secondary {
-    background: transparent;
-    color: var(--yitp-dark-blue);
-    padding: 16px 32px;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
-    border: 2px solid var(--yitp-dark-blue);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    box-shadow: var(--shadow-subtle);
-}
-
-.yitp-btn-secondary:hover {
-    background: var(--yitp-dark-blue);
-    color: var(--yitp-white);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
-    text-decoration: none;
-}
-
-.yitp-hero-image {
-    position: relative;
-    z-index: 2;
-    margin-top: var(--spacing-lg);
-}
-
-.yitp-hero-image img {
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-card);
-    width: 100%;
-    height: auto;
-    transition: var(--transition);
-}
-
-.yitp-hero-image img:hover {
-    transform: scale(1.02);
-    box-shadow: var(--shadow-hover);
-}
-
-/* Section Styles */
-.yitp-about {
-    background: var(--yitp-light-gray);
-    position: relative;
-    padding: var(--spacing-xl) 0;
-}
-
-.yitp-section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--yitp-dark-blue);
-    line-height: 1.3;
-    margin-bottom: var(--spacing-md);
-    letter-spacing: -0.01em;
-}
-
-.yitp-section-description {
-    font-size: 1.1rem;
-    color: var(--yitp-text-gray);
-    line-height: 1.7;
-    margin-bottom: var(--spacing-lg);
-}
-
-.yitp-feature-item {
-    transition: var(--transition);
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius-small);
-    margin-bottom: var(--spacing-sm);
-}
-
-.yitp-feature-item:hover {
-    background: var(--yitp-white);
-    transform: translateX(8px);
-    box-shadow: var(--shadow-subtle);
-}
-
-/* Reusable Card System */
-.yitp-card {
-    background: var(--yitp-white);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow-card);
-    transition: var(--transition);
-    border: 1px solid transparent;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.yitp-card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(255, 93, 21, 0.2);
-    border-color: rgba(255, 93, 21, 0.3);
-}
-
-/* Service Cards */
-.yitp-service-card {
-    text-align: center;
-}
-
-.yitp-service-icon {
-    width: 80px;
-    height: 80px;
-    background: var(--yitp-orange);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--spacing-md);
-    transition: var(--transition);
-}
-
-.yitp-service-card:hover .yitp-service-icon {
-    background: var(--yitp-orange-dark);
-    transform: scale(1.05);
-}
-
-.yitp-service-icon i {
-    font-size: 2rem;
-    color: var(--yitp-white);
-}
-
-.yitp-service-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--yitp-dark-blue);
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.4;
-}
-
-.yitp-service-description {
-    color: var(--yitp-text-gray);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.6;
-    font-size: 0.95rem;
-    flex-grow: 1;
-}
-
-.yitp-service-link {
-    color: var(--yitp-orange);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    margin-top: auto;
-}
-
-.yitp-service-link:hover {
-    color: var(--yitp-dark-blue);
-    text-decoration: none;
-    transform: translateX(4px);
-}
-
-.yitp-service-link::after {
-    content: '→';
-    transition: var(--transition);
-}
-
-.yitp-service-link:hover::after {
-    transform: translateX(4px);
-}
-
-/* Course Structure Styles - Modern Cards */
-.yitp-course-structure {
-    background: var(--yitp-white);
-    padding: var(--spacing-xl) 0;
-}
-
-.yitp-course-module {
-    background: var(--yitp-white);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow-subtle);
-    transition: var(--transition);
-    height: 100%;
-    border: 1px solid var(--yitp-medium-gray);
-    position: relative;
-    overflow: hidden;
-}
-
-.yitp-course-module::before {
+.yitp-hero::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--yitp-dark-blue);
-    transform: scaleX(0);
-    transition: var(--transition);
+    inset: 0;
+    background-image: radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 45%),
+                      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 35%);
+    opacity: 0.8;
 }
 
-.yitp-course-module:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--yitp-dark-blue);
+.yitp-hero .container,
+.yitp-hero .row,
+.yitp-hero .col-lg-6 {
+    position: relative;
+    z-index: 2;
 }
 
-.yitp-course-module:hover::before {
-    transform: scaleX(1);
-}
-
-.yitp-module-header {
-    display: flex;
+.hero-badge {
+    display: inline-flex;
     align-items: center;
-    margin-bottom: var(--spacing-md);
-}
-
-.yitp-module-number {
-    background: var(--yitp-orange);
-    color: var(--yitp-white);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    margin-right: var(--spacing-sm);
-    font-size: 1.1rem;
-    transition: var(--transition);
-}
-
-.yitp-course-module:hover .yitp-module-number {
-    background: var(--yitp-dark-blue);
-    transform: scale(1.1);
-}
-
-.yitp-module-title {
-    color: var(--yitp-dark-blue);
+    gap: 8px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    margin-bottom: 18px;
     font-weight: 600;
-    margin: 0;
-    font-size: 1.1rem;
-    line-height: 1.4;
 }
 
-.yitp-module-topics {
+.hero-title {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-title span {
+    color: var(--yitp-orange);
+}
+.hero-title2 span {
+    font-size: clamp(1.2rem, 4vw, 2.3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--yitp-light-orange);
+}
+.hero-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 40px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 30px;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    padding: 16px 34px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition-default);
+    text-decoration: none;
+}
+
+.hero-btn-primary {
+    background: var(--gradient-primary);
+    color: var(--yitp-white);
+    box-shadow: var(--shadow-soft);
+}
+
+.hero-btn-primary:hover {
+    transform: translateY(-3px);
+    color: var(--yitp-white);
+    box-shadow: var(--shadow-medium);
+}
+
+.hero-btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--yitp-white);
+}
+
+.hero-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--yitp-white);
+}
+
+.hero-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-metrics div {
+    min-width: 120px;
+}
+
+.hero-metrics strong {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--yitp-white);
+}
+
+.hero-panel {
+    background: var(--yitp-white);
+    border-radius: var(--radius-lg);
+    padding: 35px;
+    box-shadow: var(--shadow-soft);
+}
+
+.hero-panel h5 {
+    color: var(--yitp-navy);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-panel ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.yitp-module-topics li {
-    padding: var(--spacing-xs) 0;
-    border-bottom: 1px solid var(--yitp-medium-gray);
-    color: var(--yitp-text-gray);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    transition: var(--transition);
+.hero-panel li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(15, 26, 53, 0.08);
+    color: var(--yitp-gray);
+    font-weight: 500;
 }
 
-.yitp-module-topics li:last-child {
+.hero-panel li:last-child {
     border-bottom: none;
 }
 
-.yitp-module-topics li:hover {
-    color: var(--yitp-dark-blue);
-    padding-left: var(--spacing-xs);
-}
-
-.yitp-module-topics li::before {
-    content: '✓';
+.hero-panel i {
     color: var(--yitp-orange);
-    font-weight: bold;
-    margin-right: var(--spacing-xs);
-    font-size: 1rem;
+    font-size: 1.1rem;
     flex-shrink: 0;
 }
 
-/* Enrollment Steps Styles - Modern Process Flow */
-.yitp-enrollment-steps {
-    background: var(--yitp-light-gray);
-    padding: var(--spacing-xl) 0;
+.yitp-stats {
+    background: var(--yitp-white);
+    padding: 60px 0;
+    margin-top: -60px;
+    box-shadow: var(--shadow-medium);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
-.yitp-enrollment-step {
-    padding: var(--spacing-lg) var(--spacing-sm);
+.stat-card {
     text-align: center;
-    position: relative;
+    padding: 20px;
 }
 
-.yitp-enrollment-step::after {
-    content: '';
-    position: absolute;
-    top: 40px;
-    right: -50%;
-    width: 100%;
-    height: 2px;
-    background: var(--yitp-medium-gray);
-    z-index: 1;
+.stat-number {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--yitp-orange);
 }
 
-.yitp-enrollment-step:last-child::after {
-    display: none;
+.stat-label {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    color: var(--yitp-slate);
 }
 
-.yitp-step-icon {
-    width: 80px;
-    height: 80px;
-    background: var(--yitp-orange);
-    border-radius: 50%;
+.yitp-section {
+    padding: 90px 0;
+}
+
+.yitp-section-title {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 800;
+    color: var(--yitp-navy);
+}
+
+.yitp-section-desc {
+    color: var(--yitp-gray);
+    max-width: 620px;
+    margin: 18px auto 0;
+    line-height: 1.7;
+}
+
+.story-card {
+    background: var(--yitp-white);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-soft);
+    height: 100%;
+}
+
+.story-card h5 {
+    color: var(--yitp-navy);
+    font-weight: 600;
+}
+
+.story-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.story-card li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: var(--yitp-gray);
+}
+
+.story-card li i {
+    color: var(--yitp-orange);
+    margin-top: 5px;
+}
+
+.yitp-feature-card {
+    background: var(--yitp-white);
+    border-radius: var(--radius-md);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-soft);
+    height: 100%;
+    transition: var(--transition-default);
+    border: 1px solid transparent;
+}
+
+.yitp-feature-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 93, 21, 0.25);
+}
+
+.yitp-feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    background: var(--gradient-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--spacing-md);
-    transition: var(--transition);
-    position: relative;
-    z-index: 2;
-    box-shadow: var(--shadow-subtle);
-}
-
-.yitp-enrollment-step:hover .yitp-step-icon {
-    background: var(--yitp-dark-blue);
-    transform: scale(1.1);
-    box-shadow: var(--shadow-card);
-}
-
-.yitp-step-number {
-    font-size: 2rem;
-    font-weight: 700;
     color: var(--yitp-white);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
 }
 
-.yitp-step-title {
-    color: var(--yitp-dark-blue);
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-    font-size: 1.1rem;
-    line-height: 1.4;
+.yitp-feature-card h5 {
+    font-weight: 700;
+    color: var(--yitp-navy);
 }
 
-.yitp-step-description {
-    color: var(--yitp-text-gray);
+.yitp-feature-card p {
+    color: var(--yitp-gray);
     line-height: 1.6;
-    font-size: 0.95rem;
 }
 
-/* Additional Section Styles */
-.yitp-stats {
-    background: var(--yitp-dark-blue);
+.yitp-program {
+    background: var(--yitp-soft-gray);
+}
+
+.yitp-module-card {
+    background: var(--yitp-white);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    height: 100%;
+    border: 1px solid rgba(26, 46, 83, 0.08);
+    box-shadow: 0 15px 30px rgba(26, 46, 83, 0.1);
+    transition: var(--transition-default);
+}
+
+.yitp-module-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--yitp-orange);
+}
+
+.module-number {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
     color: var(--yitp-white);
-    padding: var(--spacing-xl) 0;
-}
-
-.yitp-stat-item {
-    text-align: center;
-    padding: var(--spacing-md);
-}
-
-.yitp-stat-number {
-    font-size: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.yitp-module-card h5 {
+    font-weight: 700;
+    color: var(--yitp-navy);
+}
+
+.yitp-module-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.yitp-module-card li {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    color: var(--yitp-gray);
+}
+
+.yitp-module-card li i {
     color: var(--yitp-orange);
-    display: block;
-    line-height: 1;
+    margin-top: 3px;
 }
 
-.yitp-stat-label {
+.yitp-enrollment {
+    background: var(--yitp-soft-gray);
+}
+
+.yitp-step-card {
+    background: var(--yitp-white);
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
+    text-align: center;
+    height: 100%;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+}
+
+.step-number {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    background: rgba(255, 93, 21, 0.15);
+    color: var(--yitp-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.yitp-step-card p {
+    color: var(--yitp-gray);
+}
+
+.yitp-cta-section {
+    background: var(--gradient-primary);
+    color: var(--yitp-white);
+    border-radius: var(--radius-lg);
+    padding: 70px;
+    box-shadow: var(--shadow-medium);
+}
+
+.yitp-cta-section h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.yitp-cta-section p {
     font-size: 1.1rem;
-    margin-top: var(--spacing-xs);
-    opacity: 0.9;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .yitp-hero-title {
-        font-size: 3rem;
-    }
-
-    .yitp-section-title {
-        font-size: 2.2rem;
-    }
-}
-
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .yitp-hero {
-        padding: var(--spacing-xl) 0 var(--spacing-lg);
+        margin-top: 40px;
+        padding: 120px 0 80px;
     }
 
-    .yitp-hero-image {
-        margin-top: var(--spacing-xl);
-    }
-
-    .yitp-enrollment-step::after {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .yitp-hero {
-        padding: 120px 0 var(--spacing-lg);
-        text-align: center;
-    }
-
-    .yitp-hero-title {
-        font-size: 2.5rem;
-        margin-bottom: var(--spacing-sm);
-    }
-
-    .yitp-hero-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: var(--spacing-sm);
-    }
-
-    .yitp-hero-description {
-        margin-bottom: var(--spacing-lg);
-    }
-
-    .yitp-cta-buttons {
-        flex-direction: column;
-        align-items: stretch;
-        gap: var(--spacing-sm);
-    }
-
-    .yitp-btn-primary,
-    .yitp-btn-secondary {
-        text-align: center;
-        justify-content: center;
-        padding: 14px 24px;
-    }
-
-    .yitp-section-title {
-        font-size: 2rem;
-        text-align: center;
-        margin-bottom: var(--spacing-md);
-    }
-
-    .yitp-service-card,
-    .yitp-course-module {
-        margin-bottom: var(--spacing-md);
-    }
-
-    .yitp-hero-image {
-        margin-top: var(--spacing-lg);
-    }
-}
-
-@media (max-width: 576px) {
-    .yitp-hero-title {
-        font-size: 2rem;
-    }
-
-    .yitp-section-title {
-        font-size: 1.75rem;
-    }
-
-    .yitp-service-card,
-    .yitp-course-module {
-        padding: var(--spacing-md);
-    }
-
-    .yitp-enrollment-step {
-        padding: var(--spacing-md) var(--spacing-xs);
+    .yitp-cta-section {
+        padding: 50px 30px;
     }
 }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- Enhanced Hero Section -->
 <section class="yitp-hero">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-12">
-                <div class="yitp-hero-content">
-                    <div class="yitp-hero-subtitle">
-                        Master 21st Century Skills • Access Global Opportunities
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i>
+                    9-Week Virtual Accelerator
+                </div>
+                <h1 class="hero-title">
+                    Youth Impact Training Programme 
+                </h1>
+                <h3  class="hero-title2"> <span>Master 21st Century Skills • Access Global Opportunities</span> </h3>
+                <p class="hero-text">
+                    Build in-demand professional, digital, and entrepreneurial skills through expert-led learning,
+                    live mentorship, and a supportive community committed to your career success.
+                </p>
+                <div class="hero-actions">
+                    <a href="{% url 'register' %}" class="hero-btn hero-btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Start Application
+                    </a>
+                    <a href="{% url 'yitp:web_courses_list' %}" class="hero-btn hero-btn-secondary">
+                        <i class="fas fa-layer-group"></i>
+                        Explore Curriculum
+                    </a>
+                </div>
+                <div class="hero-metrics">
+                    <div>
+                        <strong>1,000+</strong>
+                        <span>Graduates across Africa</span>
                     </div>
-                    <h1 class="yitp-hero-title">
-                        Youth Impact Training Programme
-                        <span style="color: var(--yitp-orange);" >(YITP)</span>
-                    </h1>
-                    <p class="yitp-hero-description  " style="color: var(--yitp-black-text);" >
-                       The Youth Impact Training Programme (YITP) is a comprehensive 9-week virtual training program designed to equip young Africans with essential skills, transformative mindset, and real-world opportunities to succeed in business, career, and life.
-                    </p>
-                    <div class="yitp-cta-buttons">
-                        <a href="{% url 'register' %}" class="yitp-btn-primary">
-                            <i class="fas fa-rocket"></i>
-                            Start Your Journey
-                        </a>
-                        <a href="{% url 'yitp:web_courses_list' %}" class="yitp-btn-secondary">
-                            <i class="fas fa-book-open"></i>
-                            Explore Courses
-                        </a>
+                    <div>
+                        <strong>1-Year</strong>
+                        <span>Mentorship & coaching</span>
+                    </div>
+                    <div>
+                        <strong>97%</strong>
+                        <span>Career confidence boost</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="yitp-hero-image mt-4 mt-lg-0">
-                    <img src="{% static 'assets/img/hero/hero-1.png' %}"
-                         alt="YITP Students Learning"
-                         class="img-fluid"
-                         loading="eager"
-                         decoding="async">
+            <div class="col-lg-6">
+                <div class="hero-panel">
+                    <h5>Programme Snapshot</h5>
+                    <ul>
+                        <li>
+                            <i class="fas fa-calendar-alt"></i>
+                            Intensive 9-week learning sprint blending live sessions, on-demand content, and peer projects.
+                        </li>
+                        <li>
+                            <i class="fas fa-certificate"></i>
+                            Recognized certification plus portfolio coaching to showcase your new skills.
+                        </li>
+                        <li>
+                            <i class="fas fa-users"></i>
+                            Dedicated mentors, industry experts, and accountability pods guiding you every step.
+                        </li>
+                        <li>
+                            <i class="fas fa-rocket"></i>
+                            One full year of career support, internship matching, and entrepreneurship clinics.
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Enhanced About Section -->
 
-<!-- Enhanced Services Section -->
-<section class="yitp-services py-5" style="background: var(--yitp-light-gray);">
+<section class="yitp-stats">
     <div class="container">
-        <!-- Section Header -->
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center mb-5">
-                    <h2 class="yitp-section-title mb-4">
-                        Elevate Your Future <span style="color: var(--yitp-orange);">Today!</span>
-                    </h2>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <p class="yitp-section-description mb-4">
-                                YITP is more than just a course—it's a comprehensive launchpad for success!
-                                Our program combines cutting-edge skills training with real-world opportunities
-                                and recognized certification.
-                            </p>
-                            <div class="yitp-program-highlights">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <div class="yitp-highlight-item text-center p-3 bg-white rounded-3 shadow-sm">
-                                            <i class="fas fa-calendar-alt mb-2" style="color: var(--yitp-orange); font-size: 1.5rem;"></i>
-                                            <h6 class="mb-1" style="color: var(--yitp-dark-blue);">9-Week Program</h6>
-                                            <small class="text-muted">Intensive virtual training</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="yitp-highlight-item text-center p-3 bg-white rounded-3 shadow-sm">
-                                            <i class="fas fa-certificate mb-2" style="color: var(--yitp-orange); font-size: 1.5rem;"></i>
-                                            <h6 class="mb-1" style="color: var(--yitp-dark-blue);">Certification</h6>
-                                            <small class="text-muted">Recognized credentials</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="yitp-highlight-item text-center p-3 bg-white rounded-3 shadow-sm">
-                                            <i class="fas fa-users mb-2" style="color: var(--yitp-orange); font-size: 1.5rem;"></i>
-                                            <h6 class="mb-1" style="color: var(--yitp-dark-blue);">1-Year Support</h6>
-                                            <small class="text-muted">Mentorship & coaching</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row g-4">
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Completion Rate</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Industry Mentors</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">African Countries</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-number">9 Weeks</div>
+                    <div class="stat-label">Live + Virtual</div>
                 </div>
             </div>
         </div>
-<br>
-        <!-- Service Cards -->
+    </div>
+</section>
+
+<section class="yitp-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <p class="text-uppercase fw-semibold text-warning mb-3">Why YITP</p>
+                <h2 class="yitp-section-title">We deliver the structure, accountability, and expert coaching ambitious youth need.</h2>
+                <p class="yitp-section-desc ms-0">
+                    Youth Impact Training Programme is built for young Africans who are ready to lead. We combine
+                    modern curriculum design with live coaching, mentorship, and community to unlock confidence,
+                    entrepreneurial thinking, and job-ready capability.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <div class="story-card">
+                    <h5>What you experience</h5>
+                    <ul>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Weekly learning sprints covering leadership, innovation, and digital fluency.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Business mentorship that translates big ideas into practical ventures.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Peer community, accountability pods, and networking events hosted by global partners.
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Dedicated career success team helping with interviews, portfolio updates, and funding readiness.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="yitp-section" style="background: var(--yitp-soft-gray);">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="text-uppercase fw-semibold text-warning mb-2">What you'll access</p>
+            <h2 class="yitp-section-title">Training pillars trusted by future-ready youth</h2>
+            <p class="yitp-section-desc">
+                Learn from battle-tested coaches, expand your network, and master modern professional skills through
+                modular content and personalized guidance.
+            </p>
+        </div>
         <div class="row g-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="yitp-service-card h-100">
-                    <div class="yitp-service-icon">
+            <div class="col-md-6 col-lg-3">
+                <div class="yitp-feature-card">
+                    <div class="yitp-feature-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
-                    <div class="yitp-service-content">
-                        <h5 class="yitp-service-title">Learn from Industry Experts</h5>
-                        <p class="yitp-service-description">
-                            Get insights from experienced professionals and industry leaders who understand the current market demands.
-                        </p>
-                        <a href="{% url 'yitp:web_courses_list' %}" class="yitp-service-link">
-                            Explore Courses <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
+                    <h5>Industry Faculty</h5>
+                    <p>Live masterclasses led by professionals building Africa's top ventures and organizations.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="yitp-service-card h-100">
-                    <div class="yitp-service-icon">
+            <div class="col-md-6 col-lg-3">
+                <div class="yitp-feature-card">
+                    <div class="yitp-feature-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <div class="yitp-service-content">
-                        <h5 class="yitp-service-title">Business Mentorship</h5>
-                        <p class="yitp-service-description">
-                            Connect with successful entrepreneurs and business leaders for personalized guidance and support.
-                        </p>
-                        <a href="{% url 'register' %}" class="yitp-service-link">
-                            Get Started <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
+                    <h5>Business Mentorship</h5>
+                    <p>One-on-one strategy sessions to refine ideas, validate markets, and design winning offers.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="yitp-service-card h-100">
-                    <div class="yitp-service-icon">
+            <div class="col-md-6 col-lg-3">
+                <div class="yitp-feature-card">
+                    <div class="yitp-feature-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
-                    <div class="yitp-service-content">
-                        <h5 class="yitp-service-title">Career Development</h5>
-                        <p class="yitp-service-description">
-                            Build essential soft skills and professional competencies for career advancement and success.
-                        </p>
-                        <a href="{% url 'yitp:web_courses_list' %}" class="yitp-service-link">
-                            Learn More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
+                    <h5>Career Development</h5>
+                    <p>Master soft skills, storytelling, and interview readiness so you stand out to employers.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="yitp-service-card h-100">
-                    <div class="yitp-service-icon">
+            <div class="col-md-6 col-lg-3">
+                <div class="yitp-feature-card">
+                    <div class="yitp-feature-icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
-                    <div class="yitp-service-content">
-                        <h5 class="yitp-service-title">Networking Opportunities</h5>
-                        <p class="yitp-service-description">
-                            Connect with like-minded peers and build valuable professional relationships for future success.
-                        </p>
-                        <a href="{% url 'register' %}" class="yitp-service-link">
-                            Join Network <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
+                    <h5>Powerful Network</h5>
+                    <p>Connect with peers, alumni, and partners through curated events and virtual communities.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Enhanced Course Structure Section -->
-<section class="yitp-course-structure py-5">
+<section class="yitp-section yitp-program">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center mb-5">
-                    <h2 class="yitp-section-title mb-4">
-                        Our <span style="color: var(--yitp-orange);">9-Week</span> Program Structure
-                    </h2>
-                    <p class="yitp-section-description">
-                        A comprehensive curriculum designed to transform your skills and mindset
-                    </p>
-                </div>
-            </div>
+        <div class="text-center mb-5">
+            <p class="text-uppercase fw-semibold text-warning mb-2">Program structure</p>
+            <h2 class="yitp-section-title">A 9-week journey from potential to performance</h2>
+            <p class="yitp-section-desc">
+                Each track blends real assignments, coaching, and community reflections so you can apply what you learn
+                immediately.
+            </p>
         </div>
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="yitp-course-module">
-                    <div class="yitp-module-header">
-                        <span class="yitp-module-number">01</span>
-                        <h5 class="yitp-module-title">Foundation Skills</h5>
-                    </div>
-                    <div class="yitp-module-content">
-                        <p>Build essential communication, critical thinking, and problem-solving abilities.</p>
-                        <ul class="yitp-module-topics">
-                            <li>Effective Communication</li>
-                            <li>Critical Thinking</li>
-                            <li>Problem Solving</li>
-                        </ul>
-                    </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="yitp-module-card">
+                    <div class="module-number">01</div>
+                    <h5>Foundation Skills</h5>
+                    <p>Anchor your confidence with essential communication and leadership habits.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Effective storytelling & presentation</li>
+                        <li><i class="fas fa-check"></i>Critical thinking & decision frameworks</li>
+                        <li><i class="fas fa-check"></i>Problem solving with real community briefs</li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="yitp-course-module">
-                    <div class="yitp-module-header">
-                        <span class="yitp-module-number">02</span>
-                        <h5 class="yitp-module-title">Digital Literacy</h5>
-                    </div>
-                    <div class="yitp-module-content">
-                        <p>Master modern digital tools and technologies for the 21st century workplace.</p>
-                        <ul class="yitp-module-topics">
-                            <li>Digital Tools Mastery</li>
-                            <li>Online Collaboration</li>
-                            <li>Digital Marketing Basics</li>
-                        </ul>
-                    </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="yitp-module-card">
+                    <div class="module-number">02</div>
+                    <h5>Digital Fluency</h5>
+                    <p>Leverage modern tools to collaborate, market, and deliver value online.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Productivity stacks & remote collaboration</li>
+                        <li><i class="fas fa-check"></i>Digital marketing fundamentals</li>
+                        <li><i class="fas fa-check"></i>Data-informed storytelling</li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="yitp-course-module">
-                    <div class="yitp-module-header">
-                        <span class="yitp-module-number">03</span>
-                        <h5 class="yitp-module-title">Entrepreneurship</h5>
-                    </div>
-                    <div class="yitp-module-content">
-                        <p>Develop business acumen and entrepreneurial mindset for future success.</p>
-                        <ul class="yitp-module-topics">
-                            <li>Business Planning</li>
-                            <li>Financial Literacy</li>
-                            <li>Innovation & Creativity</li>
-                        </ul>
-                    </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="yitp-module-card">
+                    <div class="module-number">03</div>
+                    <h5>Entrepreneurship</h5>
+                    <p>Translate ideas into sustainable ventures supported by mentors and capital partners.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>Business model & financial literacy</li>
+                        <li><i class="fas fa-check"></i>Innovation design sprints</li>
+                        <li><i class="fas fa-check"></i>Pitch reviews with industry judges</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Enhanced Enrollment Process Section -->
-<section class="yitp-enrollment py-5" style="background: var(--yitp-light-gray);">
+<section class="yitp-section yitp-enrollment">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center mb-5">
-                    <h2 class="yitp-section-title mb-4">
-                        Simple <span style="color: var(--yitp-orange);">Enrollment</span> Process
-                    </h2>
-                    <p class="yitp-section-description">
-                        Get started in just 3 easy steps
-                    </p>
-                </div>
-            </div>
+        <div class="text-center mb-5">
+            <p class="text-uppercase fw-semibold text-warning mb-2">Enrollment journey</p>
+            <h2 class="yitp-section-title">Launch your transformation in three simple moves</h2>
         </div>
         <div class="row g-4">
-            <div class="col-lg-4 col-md-12">
-                <div class="yitp-enrollment-step text-center">
-                    <div class="yitp-step-icon">
-                        <span class="yitp-step-number">1</span>
-                    </div>
-                    <h5 class="yitp-step-title">Register Online</h5>
-                    <p class="yitp-step-description">
-                        Complete our simple online registration form with your basic information and goals.
-                    </p>
+            <div class="col-md-4">
+                <div class="yitp-step-card">
+                    <div class="step-number">1</div>
+                    <h5>Register Online</h5>
+                    <p>Share your goals and background so we can tailor your experience.</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="yitp-enrollment-step text-center">
-                    <div class="yitp-step-icon">
-                        <span class="yitp-step-number">2</span>
-                    </div>
-                    <h5 class="yitp-step-title">Verify & Confirm</h5>
-                    <p class="yitp-step-description">
-                        Verify your phone number and email, then confirm your enrollment in the program.
-                    </p>
+            <div class="col-md-4">
+                <div class="yitp-step-card">
+                    <div class="step-number">2</div>
+                    <h5>Verification & onboarding</h5>
+                    <p>Confirm your spot, join the community hub, and meet your mentor pod.</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="yitp-enrollment-step text-center">
-                    <div class="yitp-step-icon">
-                        <span class="yitp-step-number">3</span>
-                    </div>
-                    <h5 class="yitp-step-title">Start Learning</h5>
-                    <p class="yitp-step-description">
-                        Access your course materials and begin your transformative 9-week journey.
-                    </p>
+            <div class="col-md-4">
+                <div class="yitp-step-card">
+                    <div class="step-number">3</div>
+                    <h5>Start learning</h5>
+                    <p>Kick off the 9-week sprint and access one full year of hands-on support.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Enhanced Call-to-Action Section -->
-<section class="yitp-cta py-5" style="background: linear-gradient(135deg, var(--yitp-dark-blue) 0%, #2a4a73 100%);">
+<section class="yitp-section">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
-                <div class="text-center text-white">
-                    <h2 class="mb-4" style="font-size: 2.5rem; font-weight: 700;">
-                        Ready to Transform Your Future?
-                    </h2>
-                    <p class="mb-4" style="font-size: 1.2rem; opacity: 0.9;">
-                        Join over 1000+ young people who have already started their journey to success.
-                        Don't wait—your future starts today!
-                    </p>
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="{% url 'register' %}" class="btn btn-lg px-4 py-3" style="background: var(--yitp-orange); color: white; border: none; border-radius: var(--border-radius); font-weight: 600; transition: var(--transition);">
-                            <i class="fas fa-user-plus me-2"></i>
-                            Register Now - It's Free!
-                        </a>
-                        <a href="{% url 'yitp:web_courses_list' %}" class="btn btn-lg btn-outline-light px-4 py-3" style="border-radius: var(--border-radius); font-weight: 600;">
-                            <i class="fas fa-info-circle me-2"></i>
-                            Learn More
-                        </a>
-                    </div>
-                    <div class="mt-4">
-                        <small style="opacity: 0.8;">
-                            <i class="fas fa-shield-alt me-1"></i>
-                            100% Free Program • No Hidden Costs • Recognized Certification
-                        </small>
-                    </div>
-                </div>
+        <div class="yitp-cta-section text-center">
+            <h2>Ready to transform your future?</h2>
+            <p>Join thousands of young leaders unlocking opportunity with Youth Impact Training Programme. No hidden fees,
+                lifetime community access, and a support team cheering you on.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="{% url 'register' %}" class="hero-btn hero-btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Apply for Free
+                </a>
+                <a href="{% url 'yitp:web_courses_list' %}" class="hero-btn hero-btn-secondary" style="border-color: rgba(255,255,255,0.6);">
+                    <i class="fas fa-info-circle"></i>
+                    View Course Details
+                </a>
             </div>
+            <small class="d-block mt-4" style="color: rgba(255,255,255,0.8);">
+                <i class="fas fa-shield-alt me-1"></i>
+                Recognized certification • 100% virtual • Scholarships available
+            </small>
         </div>
     </div>
 </section>
-
-<!-- Include Footer -->
-{% include 'yitp/footer.html' %}
 {% endblock %}

@@ -107,7 +107,7 @@ const YITPTranslate = {
 
 ```css
 .yitp-language-selector .nav-link {
-    color: #1a2e53 !important;
+    color: #341C67 !important;
     font-weight: 500;
     transition: all 0.3s ease;
 }

@@ -881,7 +881,7 @@ CERTIFICATE_BRANDING = {
     'organization_name': 'Youth Impact Training Programme',
     'logo_path': 'images/yitp-logo.png',
     'signature_path': 'images/director-signature.png',
-    'primary_color': '#1a2e53',  # YITP dark blue
+    'primary_color': '#341C67',  # YITP dark blue
     'secondary_color': '#ff5d15',  # YITP orange
     'font_family': 'Arial, sans-serif',
 }

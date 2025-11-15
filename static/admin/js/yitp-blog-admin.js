@@ -208,7 +208,7 @@
         tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
         tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
         tooltip.style.zIndex = '1000';
-        tooltip.style.background = '#1a2e53';
+        tooltip.style.background = '#341C67';
         tooltip.style.color = 'white';
         tooltip.style.padding = '8px 12px';
         tooltip.style.borderRadius = '6px';

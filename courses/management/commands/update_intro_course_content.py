@@ -24,7 +24,7 @@ class Command(BaseCommand):
             enhanced_content = """
             <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
                 <!-- Enhanced Header with Prerequisite Notice -->
-                <div style="background: linear-gradient(135deg, #1a2e53 0%, #ff5d15 100%); color: white; padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
+                <div style="background: linear-gradient(135deg, #341C67 0%, #ff5d15 100%); color: white; padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
                     <h1 style="margin: 0; font-size: 2.5em;">Welcome to YITP! 🎓</h1>
                     <p style="margin: 10px 0 0 0; font-size: 1.2em; opacity: 0.9;">Your Learning Journey Begins Here</p>
                 </div>
@@ -32,12 +32,12 @@ class Command(BaseCommand):
                 <!-- Prerequisite Course Notice -->
                 <div style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 2px solid #ff5d15;">
                     <div style="text-align: center; margin-bottom: 20px;">
-                        <h2 style="color: #1a2e53; margin: 0; font-size: 1.8em;">
+                        <h2 style="color: #341C67; margin: 0; font-size: 1.8em;">
                             <i style="color: #ff5d15;">⭐</i> PREREQUISITE COURSE <i style="color: #ff5d15;">⭐</i>
                         </h2>
                     </div>
                     <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                        <h3 style="color: #1a2e53; margin-top: 0;">
+                        <h3 style="color: #341C67; margin-top: 0;">
                             <i style="color: #ff5d15;">🚀</i> This is an introductory course designed to set you up on the YITP platform
                         </h3>
                         <p style="line-height: 1.6; color: #333; font-size: 1.1em;">
@@ -48,7 +48,7 @@ class Command(BaseCommand):
                             <span style="background: #ff5d15; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
                                 <i>⏱️</i> 25 minutes
                             </span>
-                            <span style="background: #1a2e53; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
+                            <span style="background: #341C67; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
                                 <i>🎓</i> Beginner Level
                             </span>
                             <span style="background: #28a745; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
@@ -59,7 +59,7 @@ class Command(BaseCommand):
                 </div>
 
                 <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #ff5d15;">
-                    <h2 style="color: #1a2e53; margin-top: 0;">🌟 What is YITP?</h2>
+                    <h2 style="color: #341C67; margin-top: 0;">🌟 What is YITP?</h2>
                     <p style="line-height: 1.6; color: #333;">
                         The <strong>Youth Impact Training Programme (YITP)</strong> is a transformational educational initiative designed to empower young people with the skills, knowledge, and confidence they need to create positive change in their communities and beyond.
                     </p>
@@ -69,14 +69,14 @@ class Command(BaseCommand):
                 </div>
 
                 <div style="background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <h2 style="color: #1a2e53; margin-top: 0;">🎯 Our Core Values</h2>
+                    <h2 style="color: #341C67; margin-top: 0;">🎯 Our Core Values</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                         <div style="padding: 15px; background: #fff5f0; border-radius: 6px; border: 1px solid #ff5d15;">
                             <h3 style="color: #ff5d15; margin-top: 0;">💡 Innovation</h3>
                             <p style="margin-bottom: 0; color: #666;">Embracing new ideas and creative solutions to drive positive change.</p>
                         </div>
-                        <div style="padding: 15px; background: #f0f4ff; border-radius: 6px; border: 1px solid #1a2e53;">
-                            <h3 style="color: #1a2e53; margin-top: 0;">🤝 Collaboration</h3>
+                        <div style="padding: 15px; background: #f0f4ff; border-radius: 6px; border: 1px solid #341C67;">
+                            <h3 style="color: #341C67; margin-top: 0;">🤝 Collaboration</h3>
                             <p style="margin-bottom: 0; color: #666;">Working together to achieve greater impact than we could alone.</p>
                         </div>
                         <div style="padding: 15px; background: #f0fff0; border-radius: 6px; border: 1px solid #28a745;">
@@ -87,7 +87,7 @@ class Command(BaseCommand):
                 </div>
 
                 <div style="background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <h2 style="color: #1a2e53; margin-top: 0;">🧭 Navigating Your YITP Learning Platform</h2>
+                    <h2 style="color: #341C67; margin-top: 0;">🧭 Navigating Your YITP Learning Platform</h2>
                     <p style="line-height: 1.6; color: #333;">
                         Our learning platform is designed to be intuitive and user-friendly. Here's how to make the most of your learning experience:
                     </p>
@@ -108,7 +108,7 @@ class Command(BaseCommand):
                 </div>
 
                 <div style="background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <h2 style="color: #1a2e53; margin-top: 0;">📋 How YITP Courses Work</h2>
+                    <h2 style="color: #341C67; margin-top: 0;">📋 How YITP Courses Work</h2>
                     
                     <div style="margin: 20px 0;">
                         <h3 style="color: #ff5d15;">📖 Course Structure</h3>
@@ -126,7 +126,7 @@ class Command(BaseCommand):
                 </div>
 
                 <div style="background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                    <h2 style="color: #1a2e53; margin-top: 0;">🎓 Getting Support</h2>
+                    <h2 style="color: #341C67; margin-top: 0;">🎓 Getting Support</h2>
                     <p style="line-height: 1.6; color: #333;">
                         We're here to support you every step of the way! Here's how to get help when you need it:
                     </p>
@@ -147,8 +147,8 @@ class Command(BaseCommand):
                 </div>
 
                 <!-- Next Steps Section -->
-                <div style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 2px solid #1a2e53;">
-                    <h2 style="color: #1a2e53; margin-top: 0; text-align: center;">🚀 Ready to Begin Your Journey?</h2>
+                <div style="background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1)); padding: 25px; border-radius: 10px; margin-bottom: 30px; border: 2px solid #341C67;">
+                    <h2 style="color: #341C67; margin-top: 0; text-align: center;">🚀 Ready to Begin Your Journey?</h2>
                     <p style="line-height: 1.6; color: #333; text-align: center; font-size: 1.1em;">
                         Complete this introductory course and take the quiz to unlock access to our full range of courses.
                         Your transformational learning experience starts now!

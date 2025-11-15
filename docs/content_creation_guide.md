@@ -12,7 +12,7 @@ The YITP Learning Management System now features **CKEditor 5**, a modern, secur
 - **XSS Protection**: Built-in protection against cross-site scripting attacks
 
 ### 🎨 **YITP-Branded Interface**
-- **Custom Styling**: Editor interface matches YITP brand colors (#ff5d15 orange, #1a2e53 dark blue)
+- **Custom Styling**: Editor interface matches YITP brand colors (#ff5d15 orange, #341C67 dark blue)
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 - **Accessibility**: Enhanced keyboard navigation and screen reader support
 
