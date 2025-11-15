@@ -22528,3 +22528,253 @@ INFO 2025-11-15 22:21:39,103 basehttp 40428 6192934912 "GET /static/assets/css/s
 INFO 2025-11-15 22:21:40,954 basehttp 40428 6192934912 "GET /about/ HTTP/1.1" 200 69589
 INFO 2025-11-15 22:21:42,514 basehttp 40428 6125629440 "GET /web_courses_list/ HTTP/1.1" 200 109484
 INFO 2025-11-15 22:21:42,557 basehttp 40428 6125629440 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2025-11-15 22:35:58,644 autoreload 74460 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-15 22:39:23,462 basehttp 74460 6132838400 "GET /welcome HTTP/1.1" 301 0
+INFO 2025-11-15 22:39:23,515 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 302 0
+INFO 2025-11-15 22:39:23,529 basehttp 74460 6132838400 "GET /login/?next=/welcome/ HTTP/1.1" 200 13704
+INFO 2025-11-15 22:39:23,606 basehttp 74460 6132838400 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7078
+INFO 2025-11-15 22:39:23,607 basehttp 74460 6166491136 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-11-15 22:39:23,608 basehttp 74460 6200143872 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-11-15 22:39:23,609 basehttp 74460 6216970240 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-11-15 22:39:23,612 basehttp 74460 6132838400 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-11-15 22:39:23,613 basehttp 74460 6166491136 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-11-15 22:39:23,615 basehttp 74460 6216970240 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-11-15 22:39:23,616 basehttp 74460 6183317504 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-11-15 22:39:23,617 basehttp 74460 6132838400 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-11-15 22:39:23,619 basehttp 74460 6149664768 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-11-15 22:39:23,620 basehttp 74460 6183317504 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-11-15 22:39:23,621 basehttp 74460 6216970240 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-11-15 22:39:23,623 basehttp 74460 6200143872 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-11-15 22:39:23,624 basehttp 74460 6166491136 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-11-15 22:39:23,627 basehttp 74460 6200143872 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-11-15 22:39:23,628 basehttp 74460 6216970240 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-11-15 22:39:23,636 basehttp 74460 6216970240 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-11-15 22:39:23,641 basehttp 74460 6216970240 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-11-15 22:39:23,643 basehttp 74460 6200143872 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-11-15 22:39:23,646 basehttp 74460 6200143872 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-11-15 22:39:23,647 basehttp 74460 6216970240 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-11-15 22:39:23,651 basehttp 74460 6200143872 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-11-15 22:39:23,652 basehttp 74460 6216970240 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-11-15 22:39:23,654 basehttp 74460 6200143872 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-11-15 22:39:23,655 basehttp 74460 6216970240 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-11-15 22:39:23,657 basehttp 74460 6216970240 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-11-15 22:39:23,657 basehttp 74460 6200143872 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-11-15 22:39:23,659 basehttp 74460 6216970240 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-11-15 22:39:23,659 basehttp 74460 6200143872 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-11-15 22:39:23,661 basehttp 74460 6200143872 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2025-11-15 22:39:24,410 basehttp 74460 6200143872 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2025-11-15 22:39:25,063 basehttp 74460 6216970240 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-11-15 22:39:25,064 basehttp 74460 6200143872 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-11-15 22:39:35,853 basehttp 74460 6200143872 "POST /login/?next=/welcome/ HTTP/1.1" 302 0
+ERROR 2025-11-15 22:39:39,914 log 74460 6200143872 Internal Server Error: /welcome/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 129, in welcome
+    return render(request, 'yitp/welcome.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: yitp/welcome.html
+ERROR 2025-11-15 22:39:39,919 basehttp 74460 6200143872 "GET /welcome/ HTTP/1.1" 500 129434
+INFO 2025-11-15 22:39:41,970 basehttp 74460 6200143872 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-11-15 22:39:41,972 basehttp 74460 6200143872 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+ERROR 2025-11-15 22:39:52,964 log 74460 6200143872 Internal Server Error: /welcome/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 129, in welcome
+    return render(request, 'yitp/welcome.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: yitp/welcome.html
+ERROR 2025-11-15 22:39:52,979 basehttp 74460 6200143872 "GET /welcome/ HTTP/1.1" 500 129434
+INFO 2025-11-15 22:40:54,735 basehttp 74460 6149664768 "GET /login/ HTTP/1.1" 200 13704
+INFO 2025-11-15 22:40:54,826 basehttp 74460 6149664768 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:40:54,828 basehttp 74460 6166491136 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:40:54,828 basehttp 74460 6149664768 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:40:54,839 basehttp 74460 6149664768 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:40:54,841 basehttp 74460 6166491136 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:40:54,842 basehttp 74460 6149664768 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:40:54,846 basehttp 74460 6149664768 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+ERROR 2025-11-15 22:41:22,049 log 74460 6132838400 Internal Server Error: /welcome/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 129, in welcome
+    return render(request, 'yitp/welcome.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: yitp/welcome.html
+ERROR 2025-11-15 22:41:22,052 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 500 129434
+INFO 2025-11-15 22:42:02,135 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 69904
+INFO 2025-11-15 22:42:02,257 basehttp 74460 6132838400 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-11-15 22:42:02,280 basehttp 74460 6132838400 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-11-15 22:42:03,206 basehttp 74460 6149664768 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-11-15 22:42:03,209 basehttp 74460 6132838400 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-11-15 22:42:18,533 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 69930
+INFO 2025-11-15 22:42:27,106 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 25159
+INFO 2025-11-15 22:42:27,163 basehttp 74460 6149664768 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:42:27,165 basehttp 74460 6166491136 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:42:27,165 basehttp 74460 6132838400 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:42:27,167 basehttp 74460 6149664768 "GET /static/img/courses/default-course-thumbnail.jpeg HTTP/1.1" 200 192434
+INFO 2025-11-15 22:43:12,242 basehttp 74460 6149664768 "GET /welcome/ HTTP/1.1" 200 69862
+INFO 2025-11-15 22:43:12,295 basehttp 74460 6149664768 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:43:12,296 basehttp 74460 6166491136 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:43:12,298 basehttp 74460 6149664768 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:43:12,299 basehttp 74460 6183317504 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+WARNING 2025-11-15 22:43:28,733 basehttp 74460 6166491136 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-15 22:43:28,785 basehttp 74460 6166491136 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-15 22:43:30,390 log 74460 6149664768 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-15 22:43:30,391 basehttp 74460 6149664768 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 10646
+INFO 2025-11-15 22:43:30,616 basehttp 74460 6132838400 "GET /profile/ HTTP/1.1" 200 100763
+INFO 2025-11-15 22:43:30,616 basehttp 74460 6132838400 - Broken pipe from ('127.0.0.1', 64422)
+INFO 2025-11-15 22:43:41,483 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 69862
+INFO 2025-11-15 22:44:02,160 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 69862
+INFO 2025-11-15 22:44:02,226 basehttp 74460 6132838400 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7078
+INFO 2025-11-15 22:44:02,226 basehttp 74460 6166491136 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-11-15 22:44:02,228 basehttp 74460 6200143872 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-11-15 22:44:02,229 basehttp 74460 6216970240 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-11-15 22:44:02,232 basehttp 74460 6166491136 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-11-15 22:44:02,233 basehttp 74460 6132838400 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-11-15 22:44:02,234 basehttp 74460 6216970240 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-11-15 22:44:02,236 basehttp 74460 6183317504 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-11-15 22:44:02,238 basehttp 74460 6166491136 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-11-15 22:44:02,239 basehttp 74460 6216970240 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-11-15 22:44:02,241 basehttp 74460 6183317504 "GET /static/assets/css/messages.css HTTP/1.1" 200 8659
+INFO 2025-11-15 22:44:02,248 basehttp 74460 6132838400 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-11-15 22:44:02,250 basehttp 74460 6149664768 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-11-15 22:44:02,251 basehttp 74460 6200143872 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-11-15 22:44:02,254 basehttp 74460 6216970240 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-11-15 22:44:02,255 basehttp 74460 6166491136 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-11-15 22:44:02,266 basehttp 74460 6166491136 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-11-15 22:44:02,268 basehttp 74460 6166491136 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-11-15 22:44:02,270 basehttp 74460 6166491136 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-11-15 22:44:02,275 basehttp 74460 6166491136 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-11-15 22:44:02,278 basehttp 74460 6166491136 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-11-15 22:44:02,281 basehttp 74460 6166491136 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-11-15 22:44:02,282 basehttp 74460 6166491136 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-11-15 22:44:02,284 basehttp 74460 6166491136 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-11-15 22:44:02,286 basehttp 74460 6166491136 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-11-15 22:44:02,287 basehttp 74460 6166491136 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-11-15 22:44:02,289 basehttp 74460 6166491136 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-11-15 22:44:02,290 basehttp 74460 6166491136 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-11-15 22:44:02,292 basehttp 74460 6166491136 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-11-15 22:44:02,293 basehttp 74460 6166491136 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2025-11-15 22:44:02,996 basehttp 74460 6166491136 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-11-15 22:44:02,997 basehttp 74460 6200143872 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-11-15 22:44:02,998 basehttp 74460 6216970240 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-11-15 22:44:03,011 basehttp 74460 6216970240 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-11-15 22:44:04,236 basehttp 74460 6216970240 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-11-15 22:45:26,033 basehttp 74460 6216970240 "GET /profile/ HTTP/1.1" 200 100763
+INFO 2025-11-15 22:45:26,157 basehttp 74460 6149664768 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-11-15 22:45:26,159 basehttp 74460 6132838400 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2025-11-15 22:45:26,178 basehttp 74460 6149664768 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-11-15 22:45:26,191 basehttp 74460 6149664768 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 0
+INFO 2025-11-15 22:45:26,194 basehttp 74460 6132838400 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2025-11-15 22:45:26,197 basehttp 74460 6166491136 "GET /static/css/yitp-translate.css HTTP/1.1" 200 13650
+INFO 2025-11-15 22:45:45,460 basehttp 74460 6132838400 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-11-15 22:45:49,022 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 25159
+INFO 2025-11-15 22:45:49,092 basehttp 74460 6132838400 "GET /static/img/courses/default-course-thumbnail.jpeg HTTP/1.1" 200 192434
+INFO 2025-11-15 22:46:35,698 basehttp 74460 6149664768 "GET /login/?next=/welcome/ HTTP/1.1" 302 0
+INFO 2025-11-15 22:46:37,474 basehttp 74460 6149664768 - Broken pipe from ('127.0.0.1', 64755)
+INFO 2025-11-15 22:46:42,029 basehttp 74460 6149664768 "GET /welcome/ HTTP/1.1" 200 69862
+INFO 2025-11-15 22:46:48,766 basehttp 74460 6132838400 "GET /profile/ HTTP/1.1" 200 100763
+INFO 2025-11-15 22:46:48,768 basehttp 74460 6132838400 - Broken pipe from ('127.0.0.1', 64734)
+INFO 2025-11-15 22:46:56,924 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 69862
+INFO 2025-11-15 22:51:11,474 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70020
+INFO 2025-11-15 22:51:11,540 basehttp 74460 6166491136 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:51:11,540 basehttp 74460 6132838400 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:51:11,540 basehttp 74460 6149664768 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:51:11,544 basehttp 74460 6166491136 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:51:11,546 basehttp 74460 6149664768 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:51:11,546 basehttp 74460 6166491136 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:51:11,547 basehttp 74460 6132838400 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:52:16,903 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70020
+INFO 2025-11-15 22:54:53,718 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70025
+INFO 2025-11-15 22:56:01,451 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70044
+INFO 2025-11-15 22:56:01,520 basehttp 74460 6166491136 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:56:01,520 basehttp 74460 6132838400 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:56:01,522 basehttp 74460 6183317504 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:56:01,522 basehttp 74460 6149664768 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:56:01,524 basehttp 74460 6183317504 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:56:01,524 basehttp 74460 6132838400 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:56:01,525 basehttp 74460 6149664768 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-15 22:56:20,894 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70026
+INFO 2025-11-15 22:57:11,812 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70053
+INFO 2025-11-15 22:57:16,462 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70053
+INFO 2025-11-15 22:58:03,785 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70062
+INFO 2025-11-15 22:58:41,024 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70020
+INFO 2025-11-15 23:00:17,125 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70020
+INFO 2025-11-15 23:02:55,630 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70039
+INFO 2025-11-15 23:02:55,676 basehttp 74460 6132838400 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:02:55,679 basehttp 74460 6149664768 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:02:55,679 basehttp 74460 6166491136 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:02:55,680 basehttp 74460 6132838400 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:02:55,681 basehttp 74460 6166491136 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:02:55,682 basehttp 74460 6132838400 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:02:55,684 basehttp 74460 6132838400 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:03:26,378 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70038
+INFO 2025-11-15 23:03:47,691 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70038
+INFO 2025-11-15 23:04:25,478 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70038
+INFO 2025-11-15 23:04:35,746 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70038
+INFO 2025-11-15 23:04:49,186 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70037
+INFO 2025-11-15 23:06:17,487 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70038
+INFO 2025-11-15 23:06:33,366 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70038
+INFO 2025-11-15 23:06:48,233 basehttp 74460 6132838400 "GET /welcome/ HTTP/1.1" 200 70038
+INFO 2025-11-15 23:07:09,841 basehttp 74460 6132838400 "GET /web_courses_list/ HTTP/1.1" 302 0
+INFO 2025-11-15 23:07:14,993 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 25159
+INFO 2025-11-15 23:09:44,459 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 25159
+INFO 2025-11-15 23:09:44,569 basehttp 74460 6132838400 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:09:44,573 basehttp 74460 6166491136 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:09:44,575 basehttp 74460 6149664768 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:12:38,067 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 22281
+INFO 2025-11-15 23:12:58,794 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 22281
+INFO 2025-11-15 23:13:41,109 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 20944
+INFO 2025-11-15 23:16:10,214 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 20903
+INFO 2025-11-15 23:16:10,245 basehttp 74460 6132838400 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:16:10,246 basehttp 74460 6149664768 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:16:10,249 basehttp 74460 6149664768 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-15 23:17:07,336 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 20782
+INFO 2025-11-15 23:18:45,849 basehttp 74460 6132838400 "GET /lms/courses/ HTTP/1.1" 200 20860
