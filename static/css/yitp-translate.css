@@ -1,546 +1,108 @@
 /**
- * YITP Translation System Styles
- * Maintains YITP branding while providing clean translation UI
+ * Minimal styles for the YITP navbar language selector and helper elements.
+ * Google-specific overrides were removed in favor of a small hidden container.
  */
 
-/* CRITICAL: Ensure Google Translate Dropdown Functionality */
-/* Make sure essential dropdown elements are visible and functional */
-.goog-te-combo,
-.goog-te-gadget,
-.goog-te-gadget-simple,
-.goog-te-menu-value,
-#google_translate_element .goog-te-gadget,
-#google_translate_element .goog-te-gadget-simple,
-#google_translate_element .goog-te-combo {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative !important;
-    z-index: 10001 !important;
-    pointer-events: auto !important;
-    cursor: pointer !important;
-    user-select: none !important;
-}
-
-/* Native Google Translate Dropdown Container */
-.header__language {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    margin-right: 15px;
-    position: relative;
-    z-index: 1000;
-}
-
-/* Ensure language container doesn't block interactions */
-.header__language * {
-    pointer-events: auto !important;
-}
-
-/* Google Translate Widget Container - Native Dropdown */
-#google_translate_element {
-    display: block !important;
-    visibility: visible !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    position: relative !important;
-    z-index: 1000 !important;
-    pointer-events: auto !important;
-}
-
-/* Ensure all child elements are interactive */
-#google_translate_element * {
-    pointer-events: auto !important;
-}
-
-/* Specific styling for the dropdown select element */
-#google_translate_element select.goog-te-combo {
-    background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%) !important;
-    color: white !important;
-    border: 2px solid #ff5d15 !important;
-    border-radius: 6px !important;
-    padding: 8px 12px !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-weight: 500 !important;
-    font-size: 14px !important;
-    cursor: pointer !important;
-    min-width: 150px !important;
-    box-shadow: 0 2px 8px rgba(255, 93, 21, 0.2) !important;
-    pointer-events: auto !important;
-    position: relative !important;
-    z-index: 1001 !important;
-    outline: none !important;
-}
-
-/* Hover effect for dropdown */
-#google_translate_element select.goog-te-combo:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.3) !important;
-    background: linear-gradient(135deg, #e04a0f 0%, #cc3e0a 100%) !important;
-}
-
-/* Focus effect for dropdown */
-#google_translate_element select.goog-te-combo:focus {
-    outline: 2px solid rgba(255, 93, 21, 0.5) !important;
-    outline-offset: 2px !important;
-}
-
-/* Google Translate Gadget Container */
-.goog-te-gadget {
-    display: block !important;
-    visibility: visible !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-}
-
-.goog-te-gadget-simple {
-    display: block !important;
-    visibility: visible !important;
-    background: none !important;
-    border: none !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-}
-
-/* Remove custom translate button styles (no longer needed) */
-.yitp-translate-btn {
-    display: none !important;
-}
-
-/* Language Dropdown Menu */
-.yitp-language-menu {
-    min-width: 200px;
-    border: 1px solid rgba(26, 46, 83, 0.1);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 8px 0;
-    margin-top: 8px;
-}
-
-.yitp-language-menu .dropdown-item {
-    padding: 10px 16px;
+.yitp-language-selector .dropdown-toggle {
     color: #341C67;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    transition: all 0.2s ease;
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.yitp-language-selector .dropdown-toggle:hover {
+    background-color: rgba(255, 93, 21, 0.08);
+    color: #ff5d15;
+}
+
+.yitp-language-menu {
+    min-width: 220px;
+    border: 1px solid rgba(26, 46, 83, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+}
+
+.yitp-language-option {
+    width: 100%;
     border: none;
     background: none;
-}
-
-.yitp-language-menu .dropdown-item:hover {
-    background-color: rgba(255, 93, 21, 0.1);
-    color: #ff5d15;
-}
-
-.yitp-language-menu .dropdown-item:active {
-    background-color: rgba(255, 93, 21, 0.2);
-    color: #ff5d15;
-}
-
-/* Language Option Elements */
-.language-flag {
-    font-size: 18px;
-    margin-right: 10px;
-    width: 24px;
-    text-align: center;
-}
-
-.language-name {
-    flex: 1;
-    font-size: 14px;
-}
-
-/* Current Language Indicator */
-#currentLanguageFlag {
-    font-size: 16px;
-    margin-right: 5px;
-}
-
-#currentLanguageName {
-    font-size: 14px;
-    margin-left: 2px;
-}
-
-/* Mobile Language Selector Styles */
-.mobile__language {
-    border-bottom: 1px solid rgba(26, 46, 83, 0.1);
-    padding-bottom: 20px;
-}
-
-.mobile__menu-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 15px;
     display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #341C67;
+    font-weight: 500;
+    padding: 10px 18px;
+    cursor: pointer;
+}
+
+.yitp-language-option:hover {
+    background-color: rgba(255, 93, 21, 0.08);
+    color: #ff5d15;
+}
+
+.yitp-language-option .language-check {
+    margin-left: auto;
+    color: #2fb344;
+    display: none;
     align-items: center;
 }
 
-.mobile__language-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
+.yitp-language-option.active {
+    background-color: rgba(255, 93, 21, 0.08);
+    color: #ff5d15;
+}
+
+.yitp-language-option.active .language-check {
+    display: inline-flex;
 }
 
 .mobile__language-option {
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    border: 1px solid rgba(26, 46, 83, 0.1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 8px 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.mobile__language-option:hover .language__item {
-    background-color: rgba(255, 93, 21, 0.1);
+.mobile__language-option:focus {
+    outline: none;
+    border-color: #ff5d15;
+    box-shadow: 0 0 0 3px rgba(255, 93, 21, 0.2);
 }
 
-.mobile__language-option.active .language__item {
-    background-color: rgba(255, 93, 21, 0.15);
-    border: 1px solid rgba(255, 93, 21, 0.3);
+.mobile__language-option.active {
+    border-color: #ff5d15;
+    box-shadow: 0 8px 20px rgba(255, 93, 21, 0.12);
 }
 
-.mobile__language-option .language__item {
-    padding: 12px;
-    border: 1px solid transparent;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
+.mobile__language-option .language-check {
+    display: none;
 }
 
-/* Mobile Responsive Styles */
-@media (max-width: 768px) {
-    .yitp-language-selector {
-        margin-left: 5px;
-    }
-
-    .yitp-language-selector .dropdown-toggle {
-        padding: 6px 8px;
-    }
-
-    .yitp-language-menu {
-        min-width: 180px;
-        right: 0;
-        left: auto;
-    }
-
-    .language-name {
-        font-size: 13px;
-    }
-
-    #currentLanguageName {
-        display: none !important;
-    }
+.mobile__language-option.active .language-check {
+    display: inline-flex;
 }
 
-@media (max-width: 576px) {
-    .yitp-language-menu {
-        min-width: 160px;
-    }
-    
-    .yitp-language-menu .dropdown-item {
-        padding: 8px 12px;
-    }
-    
-    .language-flag {
-        font-size: 16px;
-        margin-right: 8px;
-        width: 20px;
-    }
-}
-
-/* YITP-Branded Google Translate Widget Styling */
-#google_translate_element {
-    border: 1px solid rgba(255, 93, 21, 0.2) !important;
-    border-radius: 8px !important;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-    box-shadow: 0 4px 12px rgba(255, 93, 21, 0.15) !important;
-    padding: 8px !important;
-    margin-top: 8px !important;
-}
-
-#google_translate_element .goog-te-gadget {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-size: 14px !important;
-    color: #341C67 !important;
-}
-
-#google_translate_element .goog-te-gadget-simple {
-    background-color: transparent !important;
-    border: none !important;
-    font-size: 14px !important;
-    display: inline-block !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    color: #341C67 !important;
-}
-
-/* COMPREHENSIVE GOOGLE TRANSLATE BANNER HIDING */
-/* Hide all possible Google Translate banner elements */
-.goog-te-banner-frame,
-.goog-te-banner-frame.skiptranslate,
-body > .skiptranslate:not([id*="google_translate_element"]),
-.skiptranslate iframe,
-iframe.skiptranslate,
-iframe[src*="translate.google"],
-iframe[src*="translate_a"],
-[id*="goog-te-banner"],
-[class*="goog-te-banner"],
-[id*="google_translate_banner"],
-[class*="google_translate_banner"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    width: 0 !important;
-    position: absolute !important;
-    left: -10000px !important;
-    top: -10000px !important;
-    z-index: -1 !important;
-    overflow: hidden !important;
-}
-
-/* Prevent Google from modifying body styles */
-body[style*="top"],
-body[style*="margin-top"],
-body[style*="padding-top"] {
-    top: 0 !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-/* Force body to stay at top */
-body {
-    top: 0 !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-/* Ensure YITP navbar stays at top and isn't affected by Google Translate */
-.header__area,
-.header__transparent,
-.header__sticky {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 9999 !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-/* Prevent any element from pushing navbar down */
-.header__area * {
-    margin-top: 0 !important;
-}
-
-/* Override any Google Translate positioning on page elements */
-html[style*="top"],
-html[style*="margin-top"],
-html[style*="padding-top"] {
-    top: 0 !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-.goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span:first-child {
-    display: none !important; /* Hide "Select Language" text */
-}
-
-/* YITP-Branded Language Selector Dropdown */
-.goog-te-combo {
-    margin: 5px 0 !important;
-    padding: 8px 12px !important;
-    border: 2px solid #ff5d15 !important;
-    border-radius: 6px !important;
-    font-size: 14px !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%) !important;
-    color: white !important;
-    font-weight: 500 !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    min-width: 150px !important;
-}
-
-.goog-te-combo:hover {
-    background: linear-gradient(135deg, #e04a0f 0%, #cc4209 100%) !important;
-    box-shadow: 0 2px 8px rgba(255, 93, 21, 0.3) !important;
-    transform: translateY(-1px) !important;
-}
-
-.goog-te-combo:focus {
-    outline: none !important;
-    box-shadow: 0 0 0 3px rgba(255, 93, 21, 0.25) !important;
-}
-
-/* Style the dropdown options */
-.goog-te-combo option {
-    background: white !important;
-    color: #341C67 !important;
-    padding: 8px !important;
-    font-weight: 500 !important;
-}
-
-.goog-te-combo option:hover {
-    background: rgba(255, 93, 21, 0.1) !important;
-}
-
-/* YITP-Branded Google Translate Menu Frame */
-.goog-te-menu-frame {
-    border: 2px solid #ff5d15 !important;
-    border-radius: 8px !important;
-    box-shadow: 0 8px 24px rgba(255, 93, 21, 0.2) !important;
-    background: white !important;
-}
-
-.goog-te-menu2 {
-    background: white !important;
-    border: none !important;
-    border-radius: 6px !important;
-    max-height: 300px !important;
-    overflow-y: auto !important;
-}
-
-.goog-te-menu2-item {
-    padding: 10px 16px !important;
-    color: #341C67 !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    font-weight: 500 !important;
-    border-bottom: 1px solid rgba(26, 46, 83, 0.1) !important;
-    transition: all 0.2s ease !important;
-}
-
-.goog-te-menu2-item:hover {
-    background: linear-gradient(135deg, rgba(255, 93, 21, 0.1) 0%, rgba(255, 93, 21, 0.05) 100%) !important;
-    color: #ff5d15 !important;
-}
-
-.goog-te-menu2-item-selected {
-    background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%) !important;
-    color: white !important;
-    font-weight: 600 !important;
-}
-
-/* Hide Google branding in menu */
-.goog-te-menu2-item .goog-te-menu2-item-selected .goog-te-menu2-item-text {
-    color: inherit !important;
-}
-
-/* Responsive Google Translate Widget */
-@media (max-width: 768px) {
-    #google_translate_element {
-        margin-top: 12px !important;
-        padding: 10px !important;
-    }
-
-    .goog-te-combo {
-        min-width: 120px !important;
-        font-size: 13px !important;
-        padding: 6px 10px !important;
-    }
-
-    .goog-te-menu-frame {
-        max-width: 90vw !important;
-    }
-}
-
-/* Ensure translated content maintains YITP styling */
-body.translated {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-}
-
-.translated .navbar-brand,
-.translated .btn,
-.translated .card,
-.translated .form-control {
-    font-family: inherit !important;
-}
-
-/* Loading State */
-.yitp-language-selector.loading .nav-link {
-    opacity: 0.6;
+#yitp-google-translate {
+    position: fixed;
+    left: -9999px;
+    top: 0;
+    width: auto;
+    height: auto;
+    opacity: 0;
     pointer-events: none;
 }
 
-.yitp-language-selector.loading .nav-link::after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border: 2px solid #ff5d15;
-    border-top: 2px solid transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-left: 8px;
+.goog-te-banner-frame,
+body > .skiptranslate {
+    display: none !important;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Translation Status Indicator */
-.translation-status {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 93, 21, 0.9);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    z-index: 9999;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
-}
-
-.translation-status.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Accessibility Improvements */
-.yitp-language-selector [role="button"] {
-    cursor: pointer;
-}
-
-.yitp-language-selector .dropdown-item:focus {
-    outline: 2px solid #ff5d15;
-    outline-offset: -2px;
-}
-
-/* High Contrast Mode Support */
-@media (prefers-contrast: high) {
-    .yitp-language-selector .nav-link {
-        border: 1px solid #341C67;
-    }
-    
-    .yitp-language-menu {
-        border: 2px solid #341C67;
-    }
-    
-    .yitp-language-menu .dropdown-item:hover {
-        background-color: #ff5d15;
-        color: white;
-    }
-}
-
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-    .yitp-language-selector .nav-link,
-    .yitp-language-menu .dropdown-item,
-    .translation-status {
-        transition: none;
-    }
-    
-    .yitp-language-selector.loading .nav-link::after {
-        animation: none;
-    }
-}
-
-/* Print Styles */
-@media print {
-    .yitp-language-selector {
-        display: none !important;
-    }
-    
-    .translation-status {
-        display: none !important;
-    }
+body {
+    top: 0 !important;
 }

@@ -137,9 +137,55 @@
 
                         <!-- Language Selector - Desktop -->
                         <div class="header__language d-none d-lg-block" style="margin-right: 15px;">
-                            <!-- Language selector will be dynamically inserted here by JavaScript -->
-                            <!-- Fallback: Direct Google Translate Widget -->
-                            <div id="google_translate_element_navbar" style="display: none;"></div>
+                            <div class="dropdown yitp-language-selector">
+                                <button class="dropdown-toggle d-flex align-items-center" id="yitpLanguageDropdown"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="color: #341C67; text-decoration: none; padding: 8px 12px; border-radius: 6px;">
+                                    <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px; font-size: 16px;"></i>
+                                    <span id="currentLanguageFlag" style="font-size: 16px; margin-right: 5px;">🇬🇧</span>
+                                    <span id="currentLanguageName" class="d-none d-lg-inline" style="font-weight: 500; margin-right: 5px;">
+                                        English
+                                    </span>
+                                    <i class="fas fa-chevron-down" style="font-size: 12px; color: #ff5d15;"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end yitp-language-menu" aria-labelledby="yitpLanguageDropdown">
+                                    <li>
+                                    <button type="button" class="dropdown-item yitp-language-option active" data-lang="en" aria-checked="true">
+                                            <span class="language-flag">🇬🇧</span>
+                                            <span class="language-name">English</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="sw" aria-checked="false">
+                                            <span class="language-flag">🇰🇪</span>
+                                            <span class="language-name">Swahili (Kiswahili)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="ar" aria-checked="false">
+                                            <span class="language-flag">🇸🇦</span>
+                                            <span class="language-name">Arabic (العربية)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="af" aria-checked="false">
+                                            <span class="language-flag">🇿🇦</span>
+                                            <span class="language-name">Africana (Afrikaans)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="fr" aria-checked="false">
+                                            <span class="language-flag">🇫🇷</span>
+                                            <span class="language-name">French (Français)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <!-- Authentication Section -->
@@ -268,7 +314,66 @@
                         Choose Language
                     </h6>
                     <div id="mobile-language-options" class="mobile__language-grid">
-                        <!-- Mobile language options will be dynamically inserted here -->
+                        <button type="button" class="mobile__language-option active" data-lang="en" aria-checked="true">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇬🇧</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">English</span>
+                                    <small class="text-muted">Default language</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="sw" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇰🇪</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Swahili (Kiswahili)</span>
+                                    <small class="text-muted">Popular in East Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="ar" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇸🇦</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Arabic (العربية)</span>
+                                    <small class="text-muted">Spoken across North Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="af" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇿🇦</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Africana (Afrikaans)</span>
+                                    <small class="text-muted">Southern Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="fr" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇫🇷</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">French (Français)</span>
+                                    <small class="text-muted">Spoken widely across Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
