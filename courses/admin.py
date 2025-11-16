@@ -41,7 +41,19 @@ class CourseAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Course Information', {
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+            'fields': ('title', 'slug', 'thumbnail', 'thumbnail_cdn', 'description', 'learning_objectives')
+=======
+            'fields': ('title', 'slug', 'description', 'learning_objectives')
+>>>>>>> theirs
+=======
             'fields': ('title', 'slug', 'thumbnail', 'description', 'learning_objectives')
+>>>>>>> theirs
+=======
+            'fields': ('title', 'slug', 'thumbnail', 'description', 'learning_objectives')
+>>>>>>> theirs
         }),
         ('Course Details', {
             'fields': ('category', 'instructor', 'difficulty_level', 'estimated_duration')
