@@ -283,17 +283,15 @@
                 <div class="version-badge">{{ current_version.name }}</div>
                 <h1 class="health-score">{{ system_health.overall_score }}%</h1>
                 <p class="health-status">{{ system_health.status_text }}</p>
-                <p class="mb-0">Last Updated: {{ last_updated }}</p>
+                <p class="mb-0">Last updated {{ last_updated }}</p>
             </div>
         </div>
 
         <!-- Executive Summary for Stakeholders -->
         <div class="executive-summary">
-            <h4><i class="fas fa-info-circle text-primary"></i> What is this page?</h4>
+            <h4><i class="fas fa-info-circle text-primary"></i> At a glance</h4>
             <p>
-                This <span class="highlight">System Status Dashboard</span> provides real-time transparency into the health and performance of the YITP Learning Management System.
-                It displays current user engagement metrics, feature implementation progress, and system reliability indicators to help stakeholders monitor platform performance and growth.
-                This information is automatically updated from our live production database to ensure accuracy and build trust through transparency.
+                This dashboard highlights the live status of the YITP platform—current release, health score, and operating environment—so leadership can see how the learning experience, payments, and support systems are performing in production.
             </p>
         </div>
 
@@ -551,7 +549,7 @@
                         </div>
                         <div class="feature-item">
                             <span>Allowed Hosts</span>
-                            <small class="text-muted">{{ deployment_info.allowed_hosts|truncatechars:50 }}</small>
+                                <small class="text-muted">{{ deployment_info.allowed_hosts|truncatechars:60 }}</small>
                         </div>
                     </div>
                 </div>
@@ -574,13 +572,7 @@
                                         <h6 class="mb-1">{{ update.title }}</h6>
                                         <p class="text-muted mb-1">{{ update.description }}</p>
                                         <small class="text-muted">
-                                            <i class="fas fa-calendar"></i>
-                                            <span class="timeline-date"
-                                                  data-utc-time="{{ update.date_utc|default:'' }}"
-                                                  data-format="timeline"
-                                                  title="Click to see in your timezone">
-                                                {{ update.date }}
-                                            </span>
+                                            <i class="fas fa-calendar"></i> {{ update.date }}
                                             {% if update.author %}
                                                 <span class="mx-2">•</span>
                                                 <i class="fas fa-user"></i> {{ update.author }}
@@ -589,6 +581,8 @@
                                     </div>
                                 </div>
                             </div>
+                            {% empty %}
+                            <p class="text-muted mb-0">No deployment updates recorded yet.</p>
                             {% endfor %}
                         </div>
                     </div>
@@ -608,7 +602,7 @@
                             <div class="col-md-4 text-center">
                                 <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
                                 <h6>Email Support</h6>
-                                <p class="text-muted">youthimpactglobal3@gmail.com</p>
+                                <p class="text-muted">admin@youthimpactglobal.com</p>
                             </div>
                             <div class="col-md-4 text-center">
                                 <i class="fas fa-globe fa-2x text-success mb-3"></i>

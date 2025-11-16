@@ -23681,3 +23681,14 @@ INFO 2025-11-16 20:11:41,703 autoreload 59605 8600124096 /Users/djsean/Desktop/A
 INFO 2025-11-16 20:11:45,282 autoreload 61610 8600124096 Watching for file changes with StatReloader
 INFO 2025-11-16 20:11:55,178 autoreload 61610 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/admin.py changed, reloading.
 INFO 2025-11-16 20:11:56,634 autoreload 61994 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-16 20:52:51,149 autoreload 67284 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-16 20:53:10,101 basehttp 67284 6204010496 "GET / HTTP/1.1" 200 84897
+INFO 2025-11-16 21:00:13,004 basehttp 67284 6204010496 "GET /status HTTP/1.1" 301 0
+INFO 2025-11-16 21:00:19,666 basehttp 67284 6220836864 "GET /status/ HTTP/1.1" 200 82364
+INFO 2025-11-16 21:00:22,038 basehttp 67284 6220836864 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 8712
+INFO 2025-11-16 21:00:22,098 basehttp 67284 6220836864 "GET /static/css/yitp-translate.css HTTP/1.1" 200 2241
+INFO 2025-11-16 21:00:22,158 basehttp 67284 6220836864 "GET /static/js/timezone-handler.js HTTP/1.1" 200 9262
+INFO 2025-11-16 21:02:45,936 basehttp 67284 6204010496 "GET /status/ HTTP/1.1" 200 82364
+INFO 2025-11-16 21:04:05,521 basehttp 67284 6204010496 "GET / HTTP/1.1" 200 84897
+INFO 2025-11-16 21:04:09,915 basehttp 67284 6204010496 "GET /documentation HTTP/1.1" 301 0
+INFO 2025-11-16 21:04:11,940 basehttp 67284 6204010496 "GET /documentation/ HTTP/1.1" 200 164954

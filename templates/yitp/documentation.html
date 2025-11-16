@@ -462,7 +462,7 @@
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Implementation Status:</strong>
-                        The registration journey has been thoroughly tested and optimized with robust validation, email failure handling, and seamless user experience. All core functionality is production-ready with comprehensive error handling and fallback mechanisms.
+                        This funnel is live in production with Mailtrap-delivered OTP emails, branded messaging, and automated fallbacks so every prospective learner reaches the welcome experience without manual intervention.
                     </div>
                 </div>
             </div>
@@ -515,7 +515,7 @@
                             <span class="step-number">4</span>
                             <div>
                                 <h5>OTP Generation & Email Delivery</h5>
-                                <p class="mb-0">6-digit OTP generated with 200-minute expiry and sent via YITP-branded email using Gmail SMTP. Includes robust email failure handling with fallback mechanisms.</p>
+                                <p class="mb-0">6-digit OTP generated with a 200-minute expiry and sent through the Mailtrap transactional API using <code>admin@youthimpactglobal.com</code>. Delivery logs surface in the Mailtrap dashboard for live monitoring.</p>
                             </div>
                         </div>
                     </div>
@@ -555,7 +555,7 @@
                             <span class="step-number">8</span>
                             <div>
                                 <h5>Admin Notification & Welcome Email</h5>
-                                <p class="mb-0">Admin notification sent to youthimpactglobal3@gmail.com about new user registration, followed by branded welcome email to user</p>
+                                <p class="mb-0">Admin notification sent to <code>admin@youthimpactglobal.com</code> about new user registration, followed by a branded welcome email to the learner</p>
                             </div>
                         </div>
                     </div>
@@ -616,7 +616,7 @@
                                 Q --> R[Resend OTP Option]
                                 R --> H
                                 O --> S[Auto-Login User<br/>Set Session Flag]
-                                S --> T[Send Admin Notification<br/>to youthimpactglobal3@gmail.com]
+                                S --> T[Send Admin Notification<br/>to admin@youthimpactglobal.com]
                                 T --> U[Send Welcome Email]
                                 U --> V[Set Session: just_completed_otp_verification]
                                 V --> W[Redirect to Welcome Page]
@@ -659,7 +659,7 @@
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Email System Status:</strong>
-                        The email delivery system includes comprehensive error handling with fallback mechanisms. Uses Gmail SMTP (dedeexpeditions@gmail.com) with robust failure detection and user-friendly error recovery.
+                        The email delivery system uses the Mailtrap transactional API with branded templates, delivery monitoring, and the same fallback logic to keep new users informed even if an email delay occurs.
                     </div>
 
                     <h4><i class="fas fa-envelope-open-text"></i> OTP Verification Email</h4>
@@ -701,7 +701,7 @@
                             <span class="step-number">1</span>
                             <div>
                                 <h5>Automatic Admin Alert</h5>
-                                <p class="mb-0">Sent to youthimpactglobal3@gmail.com immediately after successful OTP verification to notify administrators of new user registrations</p>
+                                <p class="mb-0">Sent to admin@youthimpactglobal.com immediately after successful OTP verification to notify the operations team of new registrations</p>
                             </div>
                         </div>
                     </div>
@@ -838,7 +838,7 @@
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
-                        The complete user course enrollment journey has been successfully implemented with unified enrollment services, automated payment processing via M-Pesa integration, real-time progress tracking, and automated certificate generation upon course completion.
+                        Enrollment is fully automated end-to-end with PayPal, bank, and M-Pesa options, Mailtrap confirmations, and immediate LMS access once funds settle.
                     </div>
                 </div>
             </div>
@@ -852,7 +852,7 @@
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Authentication Status:</strong>
-                        The login system is fully secure and working reliably with proper session management and user verification.
+                        Secure login with OTP fallback, session protection, and personalized dashboards keeps learners on-brand from the first click.
                     </div>
 
                     <div class="step-card">
@@ -1425,7 +1425,7 @@
 
                     <div class="success-box">
                         <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
-                        The complete learning journey system has been successfully implemented and tested, providing students with a seamless experience from first lesson access through course completion and certificate issuance.
+                        Learners now experience multi-format lesson tabs (video, reading, podcast), structured progress prompts, and automated certificates—all live on the production LMS.
                     </div>
 
                     <div class="tech-detail">
@@ -1473,7 +1473,7 @@
                             <span class="step-number">3</span>
                             <div>
                                 <h5>Interactive Content Engagement</h5>
-                                <p class="mb-0">Students engage with rich multimedia content including text, images, videos, and interactive elements, all presented with YITP's professional branding</p>
+                                <p class="mb-0">Students engage with multi-format lesson tabs (Reading, Video, Podcast) and Downloadable Notes, all wrapped in the YITP brand and available in their preferred translation.</p>
                             </div>
                         </div>
                     </div>
@@ -1511,6 +1511,16 @@
                     <div class="step-card">
                         <div class="d-flex align-items-center">
                             <span class="step-number">7</span>
+                            <div>
+                                <h5>Lesson Discussions & Support</h5>
+                                <p class="mb-0">Learners can share insights inside the lesson discussion tab, raise questions, and receive guided responses from facilitators without leaving the learning experience.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">8</span>
                             <div>
                                 <h5>Course Completion & Certification</h5>
                                 <p class="mb-0">Upon completing all course requirements, students automatically receive their completion certificate and can access advanced courses or additional learning opportunities</p>
