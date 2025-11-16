@@ -420,45 +420,6 @@
     {% include 'unified/footer.html' %}
     {% endblock %}
 
-    <!-- WhatsApp Integration -->
-    <script>
-        var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?80028';
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = url;
-        var options = {
-            "enabled":true,
-            "chatButtonSetting":{
-                "backgroundColor":"#ff5d15",
-                "ctaText":"Chat with us",
-                "borderRadius":"25",
-                "marginLeft": "0",
-                "marginRight": "20",
-                "marginBottom": "20",
-                "ctaIconWATI":false,
-                "position":"right"
-            },
-            "brandSetting":{
-                "brandName":"YITP Support",
-                "brandSubTitle":"We're here to help!",
-                "brandImg":"{% static 'assets/img/logo/youthImpact.png' %}",
-                "welcomeText":"Hi there!\nHow can we help you today?",
-                "messageText":"Hello, I have a question about YITP courses.",
-                "backgroundColor":"#ff5d15",
-                "ctaText":"Start Chat",
-                "borderRadius":"25",
-                "autoShow":false,
-                "phoneNumber":"1234567890"
-            }
-        };
-        s.onload = function() {
-            CreateWhatsappChatWidget(options);
-        };
-        var x = document.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    </script>
-
     <!-- Core JavaScript -->
     <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'assets/js/vendor/waypoints.min.js' %}"></script>

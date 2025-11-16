@@ -23471,3 +23471,19 @@ INFO 2025-11-16 15:18:56,745 basehttp 98990 6225850368 "GET /static/assets/css/s
 INFO 2025-11-16 15:18:56,746 basehttp 98990 6242676736 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
 INFO 2025-11-16 15:18:56,747 basehttp 98990 6225850368 "GET /static/assets/js/main.js HTTP/1.1" 304 0
 INFO 2025-11-16 15:18:56,750 basehttp 98990 6225850368 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 304 0
+INFO 2025-11-16 16:01:49,144 autoreload 6460 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-16 16:05:43,441 basehttp 6460 6206337024 - Broken pipe from ('127.0.0.1', 57216)
+INFO 2025-11-16 16:05:58,446 basehttp 6460 6223163392 - Broken pipe from ('127.0.0.1', 57223)
+INFO 2025-11-16 16:22:18,694 basehttp 6460 6223163392 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 177394
+INFO 2025-11-16 16:22:25,974 basehttp 6460 6206337024 - Broken pipe from ('127.0.0.1', 57892)
+INFO 2025-11-16 16:24:05,157 basehttp 6460 6206337024 "GET /logout/ HTTP/1.1" 200 13733
+INFO 2025-11-16 16:24:36,448 basehttp 6460 6206337024 - Broken pipe from ('127.0.0.1', 58166)
+INFO 2025-11-16 16:25:24,224 basehttp 6460 6206337024 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/112/ HTTP/1.1" 200 151136
+INFO 2025-11-16 16:25:24,513 basehttp 6460 6223163392 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-16 16:25:24,519 basehttp 6460 6206337024 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-11-16 16:25:24,520 basehttp 6460 6239989760 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-16 16:25:24,525 basehttp 6460 6223163392 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-16 16:25:24,529 basehttp 6460 6256816128 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-11-16 16:25:24,529 basehttp 6460 6273642496 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-16 16:25:24,531 basehttp 6460 6290468864 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-16 16:26:17,140 basehttp 6460 6206337024 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/112/ HTTP/1.1" 200 151136
