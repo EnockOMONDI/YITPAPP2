@@ -2448,6 +2448,10 @@ function addDiscussionMessage(author, body, timestamp = new Date(), persist = tr
 
     if (persist) {
         const existing = JSON.parse(localStorage.getItem(discussionStorageKey) || '[]');
+        if (body.length > 500) { // Truncate to 500 characters
+            console.warn('Message exceeds max length; truncating.');
+            body = body.substring(0, 500);
+        }
         existing.push({
             author,
             body,
