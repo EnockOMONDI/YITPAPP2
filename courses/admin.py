@@ -335,7 +335,7 @@ class LessonAdmin(admin.ModelAdmin):
             'fields': ('module', 'title', 'content_type', 'sort_order')
         }),
         ('Content', {
-            'fields': ('content', 'video_url', 'audio_url', 'presentation_file')
+            'fields': ('content', 'video_url', 'audio_url', 'document_url', 'presentation_file')
         }),
         ('Settings', {
             'fields': ('is_published', 'is_mandatory', 'estimated_duration')

@@ -201,7 +201,7 @@
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 {% if session.course.thumbnail %}
-                                                    <img src="{{ session.course.thumbnail.url }}" alt="{{ session.course.title }}" 
+                                                    <img src="{{ session.course.thumbnail_src }}" alt="{{ session.course.title }}" 
                                                          class="rounded me-2" width="30" height="30">
                                                 {% else %}
                                                     <div class="bg-primary rounded me-2 d-flex align-items-center justify-content-center" 

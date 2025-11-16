@@ -315,7 +315,7 @@
                     <div class="course-card">
                         <div class="position-relative">
                             {% if enrollment.course.thumbnail %}
-                                <img src="{{ enrollment.course.thumbnail.url }}" alt="{{ enrollment.course.title }}" class="course-thumbnail">
+                                <img src="{{ enrollment.course.thumbnail_src }}" alt="{{ enrollment.course.title }}" class="course-thumbnail">
                             {% else %}
                                 <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" alt="{{ enrollment.course.title }}" class="course-thumbnail">
                             {% endif %}

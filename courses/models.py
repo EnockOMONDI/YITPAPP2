@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
+from pyuploadcare.dj.models import ImageField as UploadcareImageField
 
 User = get_user_model()
 
@@ -70,7 +71,7 @@ class Course(models.Model):
     prerequisites = models.TextField(blank=True, help_text="Required knowledge or skills")
     difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_LEVELS, default='beginner')
     estimated_duration = models.IntegerField(help_text="Estimated duration in hours")
-    thumbnail = models.ImageField(upload_to='course_thumbnails/', blank=True, null=True)
+    thumbnail = UploadcareImageField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     is_published = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
@@ -188,6 +189,13 @@ class Course(models.Model):
             return Quiz.objects.filter(lesson_id__in=lesson_ids)
         except ImportError:
             return Quiz.objects.none()
+
+    @property
+    def thumbnail_src(self):
+        """Return best available thumbnail URL (Uploadcare CDN or fallback)"""
+        if not self.thumbnail:
+            return ''
+        return getattr(self.thumbnail, 'cdn_url', None) or getattr(self.thumbnail, 'url', None) or str(self.thumbnail)
 
     def get_ordered_lessons(self):
         """Get all lessons in the course ordered by module and lesson sort_order"""
@@ -370,6 +378,13 @@ class Lesson(models.Model):
         verbose_name_plural = "Lessons"
         ordering = ['module', 'sort_order']
 
+    @property
+    def document_src(self):
+        """Return stored URL for lesson documents"""
+        if not self.document_url:
+            return ''
+        return self.document_url
+
 
 class CourseTag(models.Model):
     """
@@ -427,4 +442,3 @@ class CourseReview(models.Model):
         verbose_name = "Course Review"
         verbose_name_plural = "Course Reviews"
         ordering = ['-created_at']
-

@@ -140,8 +140,8 @@ class Command(BaseCommand):
         ]
         if lesson.video_url:
             metadata.append(["Video URL", lesson.video_url])
-        if lesson.document_url:
-            metadata.append(["Document URL", lesson.document_url])
+        if lesson.document_src:
+            metadata.append(["Document URL", lesson.document_src])
         if lesson.audio_url:
             metadata.append(["Audio URL", lesson.audio_url])
         if lesson.presentation_file:

@@ -110,7 +110,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
                                             {% if enrollment.course.thumbnail %}
-                                                <img src="{{ enrollment.course.thumbnail.url }}" alt="{{ enrollment.course.title }}" 
+                                                <img src="{{ enrollment.course.thumbnail_src }}" alt="{{ enrollment.course.title }}" 
                                                      class="rounded" width="80" height="80">
                                             {% else %}
                                                 <div class="bg-primary rounded d-flex align-items-center justify-content-center" 

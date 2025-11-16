@@ -839,7 +839,7 @@
                     <!-- Revolutionary Image Container -->
                     <div class="card-image-container">
                         {% if course.thumbnail %}
-                        <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                        <img src="{{ course.thumbnail_src }}" class="card-img-top" alt="{{ course.title }}">
                         {% else %}
                         <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" class="card-img-top" alt="{{ course.title }}">
                         {% endif %}
@@ -1080,4 +1080,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
-
