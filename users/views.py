@@ -1446,7 +1446,7 @@ def get_deployment_info():
         database_info = 'Unknown Database'
 
     # Determine current branch from environment or default
-    current_branch = os.getenv('RENDER_GIT_BRANCH', 'beta8')  # Default to beta8
+    current_branch = os.getenv('RENDER_GIT_BRANCH', '2026ftesting')
 
     deployment_info = {
         'platform': 'Render.com' if is_production else 'Local Development',
@@ -1482,7 +1482,7 @@ def system_status(request):
         'version_code': 'beta-2025.11',
         'release_date': now.strftime('%Y-%m-%d'),
         'status': 'Live',
-        'branch': 'main'
+        'branch': '2026ftesting'
     }
 
     version_history = [
