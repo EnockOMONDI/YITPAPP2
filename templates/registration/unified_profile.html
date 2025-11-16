@@ -1,4 +1,4 @@
-{% extends 'yitp/base.html' %}
+{% extends 'yitp/baseprofile.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -642,50 +642,7 @@
 {% block content %}
 <div class="profile-content-wrapper">
 <!-- Profile Header -->
-<section class="profile-header">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-3 text-center">
-                {% if profile.image and profile.image.url != '/media/default.jpg' %}
-                    <img src="{{ profile.image.url }}" alt="{{ user.get_full_name }}" class="profile-avatar">
-                {% else %}
-                    <div class="profile-avatar mx-auto">
-                        {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="col-md-9">
-                <h1 class="display-5 fw-bold mb-2">
-                    {% if user.first_name %}
-                        {{ user.first_name }} {{ user.last_name }}
-                    {% else %}
-                        {{ user.username }}
-                    {% endif %}
-                </h1>
-                <p class="lead mb-3">
-                    {% if profile.bio and profile.bio != 'Edit your Bio!' %}
-                        {{ profile.bio }}
-                    {% else %}
-                        Youth Impact Training Programme Member
-                    {% endif %}
-                </p>
-                <div class="d-flex flex-wrap gap-2">
-                    <span class="badge bg-light text-dark">
-                        <i class="fas fa-envelope me-1"></i>{{ user.email }}
-                    </span>
-                    {% if profile.phone_number %}
-                        <span class="badge bg-light text-dark">
-                            <i class="fas fa-phone me-1"></i>{{ profile.phone_number }}
-                        </span>
-                    {% endif %}
-                    <span class="badge bg-light text-dark">
-                        <i class="fas fa-calendar me-1"></i>Joined {{ user.date_joined|date:"M Y" }}
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<br>
 
 <!-- Profile Navigation Tabs -->
 <div class="container">

@@ -132,6 +132,79 @@
         line-height: 1.5;
     }
 
+    /* Lesson Engagement Tabs */
+    .lesson-experience-tabs {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(26, 46, 83, 0.08);
+        margin-bottom: 2rem;
+    }
+
+    .lesson-tabs {
+        border-bottom: 2px solid rgba(26, 46, 83, 0.08);
+        gap: 0.25rem;
+    }
+
+    .lesson-tabs .nav-link {
+        border: none;
+        color: #6b7280;
+        font-weight: 500;
+        padding: 0.85rem 1.25rem;
+        border-bottom: 3px solid transparent;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .lesson-tabs .nav-link.active {
+        color: #341C67;
+        border-bottom-color: #ff5d15;
+        background: transparent;
+    }
+
+    .lesson-tab-cta {
+        text-align: right;
+    }
+
+    .lesson-tab-cta small {
+        display: block;
+        margin-top: 0.25rem;
+        color: #6b7280;
+    }
+
+    .lesson-media-panel,
+    .lesson-podcast-panel,
+    .lesson-ai-panel,
+    .lesson-resources-panel {
+        background: #f8fafc;
+        border: 1px solid rgba(26, 46, 83, 0.08);
+        border-radius: 14px;
+        padding: 1.5rem;
+        min-height: 220px;
+    }
+
+    .lesson-media-panel video,
+    .lesson-podcast-panel audio {
+        width: 100%;
+        border-radius: 12px;
+        outline: none;
+    }
+
+    .lesson-ai-panel {
+        background: linear-gradient(135deg, rgba(52,28,103,0.07), rgba(255,93,21,0.08));
+        border: 1px dashed rgba(52,28,103,0.3);
+        text-align: center;
+        color: #341C67;
+    }
+
+    .lesson-resources-panel .list-group-item {
+        border: none;
+        border-radius: 10px;
+        margin-bottom: 0.75rem;
+        background: white;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
     /* Lesson Navigation - Mobile stack */
     .lesson-navigation {
         background: white;
@@ -605,7 +678,89 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         margin-bottom: 2rem;
     }
-    
+
+    /* Refreshed sidebar cards */
+    .lesson-progress-panel {
+        border: 1px solid rgba(26, 46, 83, 0.08);
+        box-shadow: 0 10px 30px rgba(26, 46, 83, 0.08);
+        padding: 1.5rem;
+    }
+
+    .lesson-progress-panel .primary-action {
+        border: 1px dashed rgba(255, 93, 21, 0.3);
+        border-radius: 12px;
+        padding: 1rem;
+        background: rgba(255, 93, 21, 0.05);
+        margin-bottom: 1.25rem;
+    }
+
+    .lesson-progress-panel .primary-action .btn {
+        width: 100%;
+    }
+
+    .lesson-progress-panel .status-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        background: rgba(52, 28, 103, 0.08);
+        color: #341C67;
+    }
+
+    .lesson-progress-panel .quiz-pill {
+        background: rgba(52, 28, 103, 0.05);
+        border: 1px solid rgba(52, 28, 103, 0.1);
+        border-radius: 12px;
+        padding: 0.85rem 1rem;
+        font-size: 0.9rem;
+        color: #4a4a4a;
+    }
+
+    .lesson-discussion-card {
+        border: 1px solid rgba(26, 46, 83, 0.08);
+        box-shadow: 0 8px 24px rgba(26, 46, 83, 0.08);
+        padding: 1.5rem;
+    }
+
+    .lesson-discussion-feed {
+        max-height: 240px;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+    }
+
+    .lesson-discussion-message {
+        background: #f8f9fb;
+        border-radius: 12px;
+        padding: 0.85rem 1rem;
+        margin-bottom: 0.75rem;
+        border: 1px solid rgba(26, 46, 83, 0.05);
+    }
+
+    .lesson-discussion-message .author {
+        font-weight: 600;
+        color: #341C67;
+        font-size: 0.9rem;
+    }
+
+    .lesson-discussion-message .timestamp {
+        font-size: 0.78rem;
+        color: #9ca3af;
+    }
+
+    .lesson-discussion-card textarea {
+        resize: none;
+        border-radius: 10px;
+        border: 1px solid rgba(26, 46, 83, 0.15);
+    }
+
+    .lesson-discussion-card textarea:focus {
+        border-color: #ff5d15;
+        box-shadow: 0 0 0 0.15rem rgba(255, 93, 21, 0.15);
+    }
+
     .lesson-video {
         width: 100%;
         height: 400px;
@@ -1220,143 +1375,331 @@
                     {% endif %}
                 </div>
                 {% else %}
-                <!-- Lesson Progress Card - Top of Page -->
-                <div class="lesson-progress-card mb-4">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-4">
-                                    <h5 class="card-title mb-2">
-                                        <i class="fas fa-chart-line me-2" style="color: var(--yitp-primary);"></i>
-                                        Lesson Progress
-                                    </h5>
-                                    <div class="progress-status">
-                                        {% if progress.status == 'completed' %}
-                                            <span class="badge bg-success">
-                                                <i class="fas fa-check-circle me-1"></i>Completed
-                                            </span>
-                                        {% elif progress.status == 'in_progress' %}
-                                            <span class="badge bg-warning">
-                                                <i class="fas fa-clock me-1"></i>In Progress
-                                            </span>
-                                        {% else %}
-                                            <span class="badge bg-secondary">
-                                                <i class="fas fa-play me-1"></i>Not Started
-                                            </span>
-                                        {% endif %}
+                <!-- Lesson Experience Tabs -->
+                <div class="lesson-experience-tabs mb-4">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                        <ul class="nav nav-tabs lesson-tabs flex-wrap" id="lessonExperienceTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="lesson-video-tab" data-bs-toggle="tab" data-bs-target="#lesson-video-pane"
+                                        type="button" role="tab" aria-controls="lesson-video-pane" aria-selected="true">
+                                    <i class="fas fa-play-circle me-2"></i>Video
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="lesson-reading-tab" data-bs-toggle="tab" data-bs-target="#lesson-reading-pane"
+                                        type="button" role="tab" aria-controls="lesson-reading-pane" aria-selected="false">
+                                    <i class="fas fa-book-open me-2"></i>Reading
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="lesson-podcast-tab" data-bs-toggle="tab" data-bs-target="#lesson-podcast-pane"
+                                        type="button" role="tab" aria-controls="lesson-podcast-pane" aria-selected="false">
+                                    <i class="fas fa-headphones-alt me-2"></i>Podcast
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="lesson-ai-tab" data-bs-toggle="tab" data-bs-target="#lesson-ai-pane"
+                                        type="button" role="tab" aria-controls="lesson-ai-pane" aria-selected="false">
+                                    <i class="fas fa-robot me-2"></i>AI Chat
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="lesson-discussion-tab" data-bs-toggle="tab" data-bs-target="#lesson-discussion-pane"
+                                        type="button" role="tab" aria-controls="lesson-discussion-pane" aria-selected="false">
+                                    <i class="fas fa-comments me-2"></i>Discussion
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="lesson-progress-tab" data-bs-toggle="tab" data-bs-target="#lesson-progress-pane"
+                                        type="button" role="tab" aria-controls="lesson-progress-pane" aria-selected="false">
+                                    <i class="fas fa-chart-line me-2"></i>Lesson Progress
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="lesson-resources-tab" data-bs-toggle="tab" data-bs-target="#lesson-resources-pane"
+                                        type="button" role="tab" aria-controls="lesson-resources-pane" aria-selected="false">
+                                    <i class="fas fa-folder-open me-2"></i>Resources
+                                </button>
+                            </li>
+                        </ul>
+                   
+                    </div>
+
+                    <div class="tab-content mt-4" id="lessonTabContent">
+                        <div class="tab-pane fade show active" id="lesson-video-pane" role="tabpanel" aria-labelledby="lesson-video-tab">
+                            <div class="lesson-media-panel">
+                                {% if lesson.video_url %}
+                                    <video controls playsinline>
+                                        <source src="{{ lesson.video_url }}" type="video/mp4">
+                                        Your browser does not support HTML5 video. <a href="{{ lesson.video_url }}" target="_blank">Watch directly</a>.
+                                    </video>
+                                    <p class="text-muted mt-3 mb-0">
+                                        Streaming securely via YITP media CDN. Use the Podcast tab if you prefer audio-only.
+                                    </p>
+                                {% else %}
+                                    <div class="text-center text-muted py-4">
+                                        <i class="fas fa-video-slash fa-3x mb-3"></i>
+                                        <p class="mb-0">Video for this lesson will be published soon. Please use the Reading tab meanwhile.</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="lesson-reading-pane" role="tabpanel" aria-labelledby="lesson-reading-tab">
+                            <div class="lesson-content">
+                                {% if lesson.learning_objectives %}
+                                <div class="lesson-objectives">
+                                    <h4><i class="fas fa-bullseye me-2"></i>Learning Objectives</h4>
+                                    <div>{{ lesson.learning_objectives|linebreaks }}</div>
+                                </div>
+                                {% endif %}
+                                
+                                <div class="mb-4">
+                                    <h3 class="mb-3">Lesson Overview</h3>
+                                    <div class="lesson-description">
+                                        {{ lesson.description|linebreaks }}
                                     </div>
                                 </div>
-
-                                <div class="col-md-8">
-                                    <div class="d-flex flex-wrap gap-2 justify-content-md-end">
-                                        <!-- Quiz Button -->
-                                        {% if quiz_status.has_quiz %}
-                                            {% if progress.status != 'completed' and not quiz_status.has_passed %}
-                                                <a href="{{ quiz_status.quiz_url }}" class="btn btn-primary-yitp">
-                                                    <i class="fas fa-quiz me-2"></i>
-                                                    {% if quiz_status.attempts_count > 0 %}Retake Quiz{% else %}Take Quiz{% endif %}
-                                                </a>
-                                                <small class="text-muted align-self-center">
-                                                    Complete the quiz ({{ quiz_status.passing_score }}% required) to mark lesson as complete
-                                                </small>
-                                            {% elif quiz_status.has_passed %}
-                                                <button class="btn btn-success" disabled>
-                                                    <i class="fas fa-trophy me-2"></i>Quiz Passed ({{ quiz_status.best_score|floatformat:1 }}%)
-                                                </button>
-                                            {% endif %}
-                                        {% else %}
-                                            <!-- Complete Lesson Button (No Quiz) -->
-                                            {% if progress.status != 'completed' %}
-                                                <button class="btn btn-primary-yitp" onclick="attemptLessonCompletion()">
-                                                    <i class="fas fa-check me-2"></i>Complete Lesson
-                                                </button>
-                                                <small class="text-muted align-self-center">
-                                                    Click to mark this lesson as complete
-                                                </small>
-                                            {% endif %}
-                                        {% endif %}
-
-                                        <!-- Next Lesson Button -->
-                                        {% if next_lesson %}
-                                            {% if progress.status == 'completed' and next_lesson_accessible %}
-                                                <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}"
-                                                   class="btn btn-secondary-yitp">
-                                                    <i class="fas fa-arrow-right me-2"></i>Next Lesson
-                                                </a>
-                                            {% else %}
-                                                <button class="btn btn-outline-secondary" disabled title="Complete current lesson to unlock">
-                                                    <i class="fas fa-lock me-2"></i>Next Lesson (Locked)
-                                                </button>
-                                            {% endif %}
-                                        {% endif %}
+                                
+                                {% if lesson.content %}
+                                <div class="mb-4">
+                                    <h3 class="mb-3">Content</h3>
+                                    <div class="lesson-text-content">
+                                        {{ lesson.content|safe }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+                                <div class="lesson-resources">
+                                    <h3 class="mb-3">Additional Resources</h3>
+                                    <div class="resource-item">
+                                        <div class="d-flex align-items-center">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-1">Lesson Notes</h6>
+                                                <small class="text-muted">Download PDF notes for this lesson</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="d-flex align-items-center">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-link"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-1">External Resources</h6>
+                                                <small class="text-muted">Helpful links and references</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Main Lesson Content -->
-                <div class="lesson-content">
-                    <!-- Video/Media Section - COMMENTED OUT FOR NOW -->
-                    <!--
-                    <div class="lesson-video">
-                        <div class="text-center">
-                            <i class="fas fa-play-circle fa-4x text-muted mb-3"></i>
-                            <h5 class="text-muted">Video Content</h5>
-                            <p class="text-muted">Video player will be integrated here</p>
+                        <div class="tab-pane fade" id="lesson-podcast-pane" role="tabpanel" aria-labelledby="lesson-podcast-tab">
+                            <div class="lesson-podcast-panel">
+                                {% with audio_source=lesson.audio_url|default:lesson.video_url %}
+                                    {% if audio_source %}
+                                        <audio controls>
+                                            <source src="{{ audio_source }}" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+                                            <small class="text-muted mb-0">
+                                                Listen to this lesson offline or while multitasking.
+                                            </small>
+                                            <a href="{{ audio_source }}" target="_blank" download class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-download me-1"></i>Download Audio
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        <div class="text-center text-muted py-4">
+                                            <i class="fas fa-headphones-alt fa-3x mb-3"></i>
+                                            <p class="mb-0">Audio companion will be available soon.</p>
+                                        </div>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
                         </div>
-                    </div>
-                    -->
-                    
-                    <!-- Lesson Objectives -->
-                    {% if lesson.learning_objectives %}
-                    <div class="lesson-objectives">
-                        <h4><i class="fas fa-bullseye me-2"></i>Learning Objectives</h4>
-                        <div>{{ lesson.learning_objectives|linebreaks }}</div>
-                    </div>
-                    {% endif %}
-                    
-                    <!-- Lesson Description -->
-                    <div class="mb-4">
-                        <h3 class="mb-3">Lesson Overview</h3>
-                        <div class="lesson-description">
-                            {{ lesson.description|linebreaks }}
+
+                        <div class="tab-pane fade" id="lesson-ai-pane" role="tabpanel" aria-labelledby="lesson-ai-tab">
+                            <div class="lesson-ai-panel">
+                                <i class="fas fa-robot mb-3" style="font-size: 3rem;"></i>
+                                <h4>AI Chat Companion</h4>
+                                <p class="mb-3">Soon you'll be able to brainstorm ideas, ask clarifying questions, and practice discussions with an AI mentor tailored to this lesson.</p>
+                                <span class="badge bg-warning text-dark px-3 py-2">Coming Soon</span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <!-- Lesson Content -->
-                    {% if lesson.content %}
-                    <div class="mb-4">
-                        <h3 class="mb-3">Content</h3>
-                        <div class="lesson-text-content">
-                            {{ lesson.content|safe }}
-                        </div>
-                    </div>
-                    {% endif %}
-                    
-                    <!-- Resources -->
-                    <div class="lesson-resources">
-                        <h3 class="mb-3">Additional Resources</h3>
-                        <div class="resource-item">
-                            <div class="d-flex align-items-center">
-                                <div class="resource-icon">
-                                    <i class="fas fa-file-pdf"></i>
+
+                        <div class="tab-pane fade" id="lesson-discussion-pane" role="tabpanel" aria-labelledby="lesson-discussion-tab">
+                            <div class="lesson-discussion-card mb-4"
+                                 id="lessonDiscussionCard"
+                                 data-send-url="{% url 'communication:send_lesson_message' %}"
+                                 data-lesson-id="{{ lesson.id }}">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h4 class="mb-1">Lesson Discussion</h4>
+                                        <small class="text-muted">Share your reflections with classmates</small>
+                                    </div>
+                                    <span class="badge bg-primary bg-opacity-10 text-primary fw-semibold">
+                                        <i class="fas fa-users me-1"></i>Live
+                                    </span>
                                 </div>
-                                <div>
-                                    <h6 class="mb-1">Lesson Notes</h6>
-                                    <small class="text-muted">Download PDF notes for this lesson</small>
+
+                                <div class="lesson-discussion-feed" id="lessonDiscussionFeed"></div>
+
+                                <div class="mb-2">
+                                    <textarea id="lessonDiscussionInput" rows="3" class="form-control" placeholder="Add to the conversation..."></textarea>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap">
+                                    <small class="text-muted">
+                                        Visible to everyone enrolled in {{ lesson.module.course.title }}
+                                    </small>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-outline-secondary btn-sm" onclick="initializeLessonDiscussion()">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" onclick="submitLessonDiscussion()">
+                                            <i class="fas fa-paper-plane me-1"></i>Post
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="text-success small mt-2 d-none" id="lessonDiscussionSuccess">
+                                    <i class="fas fa-check-circle me-1"></i>Shared with the teaching team.
+                                </div>
+                                <div class="text-danger small mt-2 d-none" id="lessonDiscussionError">
+                                    <i class="fas fa-exclamation-triangle me-1"></i>Unable to post message. Try again.
                                 </div>
                             </div>
                         </div>
-                        <div class="resource-item">
-                            <div class="d-flex align-items-center">
-                                <div class="resource-icon">
-                                    <i class="fas fa-link"></i>
+
+                        <div class="tab-pane fade" id="lesson-progress-pane" role="tabpanel" aria-labelledby="lesson-progress-tab">
+                            <div class="lesson-progress-card mb-4">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-4">
+                                                <h5 class="card-title mb-2">
+                                                    <i class="fas fa-chart-line me-2" style="color: var(--yitp-primary);"></i>
+                                                    Lesson Progress
+                                                </h5>
+                                                <div class="progress-status">
+                                                    {% if progress.status == 'completed' %}
+                                                        <span class="badge bg-success">
+                                                            <i class="fas fa-check-circle me-1"></i>Completed
+                                                        </span>
+                                                    {% elif progress.status == 'in_progress' %}
+                                                        <span class="badge bg-warning">
+                                                            <i class="fas fa-clock me-1"></i>In Progress
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="badge bg-secondary">
+                                                            <i class="fas fa-play me-1"></i>Not Started
+                                                        </span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                                                    {% if quiz_status.has_quiz %}
+                                                        {% if progress.status != 'completed' and not quiz_status.has_passed %}
+                                                            <a href="{{ quiz_status.quiz_url }}" class="btn btn-primary-yitp">
+                                                                <i class="fas fa-clipboard-check me-2"></i>
+                                                                {% if quiz_status.attempts_count > 0 %}Retake Quiz{% else %}Take Quiz{% endif %}
+                                                            </a>
+                                                            <small class="text-muted align-self-center">
+                                                                Complete the quiz ({{ quiz_status.passing_score }}% required) to mark lesson as complete
+                                                            </small>
+                                                        {% elif quiz_status.has_passed %}
+                                                            <button class="btn btn-success" disabled>
+                                                                <i class="fas fa-trophy me-2"></i>Quiz Passed ({{ quiz_status.best_score|floatformat:1 }}%)
+                                                            </button>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {% if progress.status != 'completed' %}
+                                                            <button class="btn btn-primary-yitp" onclick="attemptLessonCompletion()">
+                                                                <i class="fas fa-check me-2"></i>Complete Lesson
+                                                            </button>
+                                                            <small class="text-muted align-self-center">
+                                                                Click to mark this lesson as complete
+                                                            </small>
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                                    {% if next_lesson %}
+                                                        {% if progress.status == 'completed' and next_lesson_accessible %}
+                                                            <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}"
+                                                               class="btn btn-secondary-yitp">
+                                                                <i class="fas fa-arrow-right me-2"></i>Next Lesson
+                                                            </a>
+                                                        {% else %}
+                                                            <button class="btn btn-outline-secondary" disabled title="Complete current lesson to unlock">
+                                                                <i class="fas fa-lock me-2"></i>Next Lesson (Locked)
+                                                            </button>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h6 class="mb-1">External Resources</h6>
-                                    <small class="text-muted">Helpful links and references</small>
+                            </div>
+
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="mb-3"><i class="fas fa-list-check me-2 text-primary"></i>Objectives Checklist</h5>
+                                    {% if lesson.learning_objectives %}
+                                        <div class="lesson-objectives mb-0">
+                                            <div>{{ lesson.learning_objectives|linebreaks }}</div>
+                                        </div>
+                                    {% else %}
+                                        <p class="text-muted mb-0">Objectives will appear here once defined for this lesson.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="lesson-resources-pane" role="tabpanel" aria-labelledby="lesson-resources-tab">
+                            <div class="lesson-resources-panel">
+                                {% if lesson.resources %}
+                                    <ul class="list-group list-group-flush">
+                                        {% for resource in lesson.resources %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                                <div>
+                                                    <strong>{{ resource.label|default:resource.title|default:resource.name|default:resource }}</strong>
+                                                    {% if resource.description %}
+                                                        <p class="mb-1 text-muted small">{{ resource.description }}</p>
+                                                    {% endif %}
+                                                    {% if resource.details %}
+                                                        <small class="text-muted d-block">{{ resource.details }}</small>
+                                                    {% endif %}
+                                                </div>
+                                                {% if resource.url %}
+                                                    <a href="{{ resource.url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                                        <i class="fas fa-external-link-alt me-1"></i>Open
+                                                    </a>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p class="text-muted mb-0">All downloadable notes and helpful links remain inside the Reading tab for now.</p>
+                                {% endif %}
+
+                                <div class="mt-3 d-flex flex-wrap gap-2">
+                                    {% if lesson.document_url %}
+                                        <a href="{{ lesson.document_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-file-download me-1"></i>Download Lesson Notes
+                                        </a>
+                                    {% endif %}
+                                    {% if lesson.presentation_file %}
+                                        <a href="{{ lesson.presentation_file.url }}" target="_blank" class="btn btn-outline-secondary btn-sm">
+                                            <i class="fas fa-file-powerpoint me-1"></i>View Slides
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -1437,12 +1780,42 @@
             
             <div class="col-lg-4 lesson-sidebar-container">
                 {% if is_accessible %}
-                <!-- Lesson Progress - Mobile Optimized -->
-                <div class="lesson-sidebar">
-                    <h4 class="mb-3">Lesson Progress</h4>
-                    <div class="lesson-progress">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span class="fw-bold">Progress</span>
+                <!-- Momentum / Completion Card -->
+                <div class="lesson-sidebar lesson-progress-panel lesson-progress-card">
+                    <div class="primary-action">
+                        {% if progress.status != 'completed' %}
+                            <button class="btn btn-primary-yitp completion-button" onclick="attemptLessonCompletion()">
+                                <i class="fas fa-check-circle me-2"></i>
+                                {% if quiz_status.has_quiz %}Complete Lesson{% else %}Mark Lesson as Complete{% endif %}
+                            </button>
+                            <small class="text-muted d-block mt-2">
+                                {% if progress.status == 'in_progress' %}
+                                    You’re mid-way through this lesson—wrap up the activities, then confirm.
+                                {% else %}
+                                    You’re just getting started—work through the content, then click above.
+                                {% endif %}
+                            </small>
+                        {% else %}
+                            <button class="btn btn-success w-100 completion-button completed" disabled>
+                                <i class="fas fa-check-double me-2"></i>Lesson Completed
+                            </button>
+                            <small class="text-success d-block mt-2">
+                                <i class="fas fa-trophy me-1"></i>Great job! Keep your streak going.
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="status-chip">
+                                {% if progress.status == 'completed' %}
+                                    <i class="fas fa-check-circle text-success"></i>Completed
+                                {% elif progress.status == 'in_progress' %}
+                                    <i class="fas fa-bolt text-warning"></i>In Progress
+                                {% else %}
+                                    <i class="fas fa-play text-muted"></i>Not Started
+                                {% endif %}
+                            </span>
                             <span class="fw-bold text-primary">
                                 {% if progress.status == 'completed' %}100%
                                 {% elif progress.status == 'in_progress' %}50%
@@ -1452,70 +1825,31 @@
                         <div class="progress-bar-custom">
                             <div class="progress-fill" style="width: {% if progress.status == 'completed' %}100%{% elif progress.status == 'in_progress' %}50%{% else %}0%{% endif %}%"></div>
                         </div>
-                        <small class="text-muted mt-2 d-block">
-                            {% if progress.status == 'completed' %}
-                                <i class="fas fa-check-circle text-success me-1"></i>Lesson completed!
-                            {% else %}
-                                <i class="fas fa-clock text-muted me-1"></i>Mark as complete when finished
-                            {% endif %}
-                        </small>
                     </div>
 
-                    {% if progress.status != 'completed' %}
-                        {% if quiz_status.has_quiz and not quiz_status.has_passed %}
-                        <!-- Quiz Required Notice -->
-                        <div class="quiz-requirement-notice mb-3">
-                            <div class="alert alert-info border-0" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb);">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-quiz text-primary me-3" style="font-size: 1.5rem;"></i>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1 text-primary">Quiz Required</h6>
-                                        <p class="mb-2 text-muted">Complete the lesson quiz (minimum {{ quiz_status.passing_score }}%) to unlock the next lesson.</p>
-                                        <div class="quiz-stats">
-                                            <small class="text-muted">
-                                                Attempts: {{ quiz_status.attempts_count }}/{{ quiz_status.max_attempts|default:"∞" }}
-                                                {% if quiz_status.latest_score %}
-                                                | Latest Score: {{ quiz_status.latest_score|floatformat:1 }}%
-                                                {% endif %}
-                                                {% if quiz_status.time_limit %}
-                                                | Time Limit: {{ quiz_status.time_limit }} minutes
-                                                {% endif %}
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        {% if quiz_status.can_attempt %}
-                                        <a href="{{ quiz_status.quiz_url }}" class="btn btn-primary">
-                                            <i class="fas fa-play me-2"></i>
-                                            {% if quiz_status.attempts_count > 0 %}Retake Quiz{% else %}Take Quiz{% endif %}
-                                        </a>
-                                        {% else %}
-                                        <button class="btn btn-secondary" disabled>
-                                            <i class="fas fa-ban me-2"></i>Max Attempts Reached
-                                        </button>
-                                        {% endif %}
+                    {% if quiz_status.has_quiz %}
+                        <div class="quiz-pill mb-3">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <div>
+                                    <strong>Quiz Required</strong>
+                                    <div class="text-muted small">
+                                        Min Score: {{ quiz_status.passing_score }}% · Attempts {{ quiz_status.attempts_count }}/{{ quiz_status.max_attempts|default:"∞" }}
                                     </div>
                                 </div>
+                                {% if progress.status != 'completed' %}
+                                    {% if quiz_status.can_attempt %}
+                                    <a href="{{ quiz_status.quiz_url }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-play me-1"></i>
+                                        {% if quiz_status.attempts_count > 0 %}Retake Quiz{% else %}Take Quiz{% endif %}
+                                    </a>
+                                    {% else %}
+                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                        <i class="fas fa-ban me-1"></i>Locked
+                                    </button>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </div>
-                        {% endif %}
-
-                        <button class="completion-button" onclick="attemptLessonCompletion()">
-                            <i class="fas fa-check me-2"></i>
-                            {% if quiz_status.has_quiz %}Complete Lesson{% else %}Mark as Complete{% endif %}
-                        </button>
-                    {% else %}
-                        <button class="completion-button completed" disabled>
-                            <i class="fas fa-check-circle me-2"></i>Completed
-                        </button>
-                        {% if quiz_status.has_quiz and quiz_status.has_passed %}
-                        <div class="quiz-completion-badge mt-2">
-                            <span class="badge bg-success">
-                                <i class="fas fa-trophy me-1"></i>
-                                Quiz Passed: {{ quiz_status.best_score|floatformat:1 }}%
-                            </span>
-                        </div>
-                        {% endif %}
                     {% endif %}
                 </div>
                 {% endif %}
@@ -1563,6 +1897,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -2051,6 +2386,133 @@ document.addEventListener('click', function(event) {
     if (chatPanel.style.display === 'block' && !chatWidget.contains(event.target)) {
         chatPanel.style.display = 'none';
     }
+});
+
+// ---------------------------
+// Lesson Discussion Card Logic
+// ---------------------------
+const discussionStorageKey = 'lesson_discussion_{{ lesson.id }}';
+
+function initializeLessonDiscussion() {
+    const feed = document.getElementById('lessonDiscussionFeed');
+    if (!feed) {
+        return;
+    }
+
+    const stored = JSON.parse(localStorage.getItem(discussionStorageKey) || '[]');
+    if (!stored.length) {
+        const welcomeMessage = {
+            author: 'Community Coach',
+            body: 'Kickstart the conversation! Share how today’s lesson applies to your context.',
+            timestamp: new Date().toISOString(),
+            highlight: true
+        };
+        stored.push(welcomeMessage);
+        localStorage.setItem(discussionStorageKey, JSON.stringify(stored));
+    }
+    feed.innerHTML = '';
+    stored.forEach(message => addDiscussionMessage(message.author, message.body, new Date(message.timestamp), false));
+}
+
+function addDiscussionMessage(author, body, timestamp = new Date(), persist = true) {
+    const feed = document.getElementById('lessonDiscussionFeed');
+    if (!feed) {
+        return;
+    }
+
+    const messageEl = document.createElement('div');
+    messageEl.className = 'lesson-discussion-message';
+
+    const header = document.createElement('div');
+    header.className = 'd-flex justify-content-between align-items-center mb-1';
+
+    const authorEl = document.createElement('span');
+    authorEl.className = 'author';
+    authorEl.textContent = author;
+
+    const timeEl = document.createElement('span');
+    timeEl.className = 'timestamp';
+    timeEl.textContent = timestamp.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
+
+    header.appendChild(authorEl);
+    header.appendChild(timeEl);
+
+    const bodyEl = document.createElement('p');
+    bodyEl.className = 'mb-0 text-muted';
+    bodyEl.textContent = body;
+
+    messageEl.appendChild(header);
+    messageEl.appendChild(bodyEl);
+    feed.appendChild(messageEl);
+    feed.scrollTop = feed.scrollHeight;
+
+    if (persist) {
+        const existing = JSON.parse(localStorage.getItem(discussionStorageKey) || '[]');
+        existing.push({
+            author,
+            body,
+            timestamp: timestamp.toISOString()
+        });
+        localStorage.setItem(discussionStorageKey, JSON.stringify(existing));
+    }
+}
+
+function submitLessonDiscussion() {
+    const input = document.getElementById('lessonDiscussionInput');
+    const successBanner = document.getElementById('lessonDiscussionSuccess');
+    const errorBanner = document.getElementById('lessonDiscussionError');
+    const card = document.getElementById('lessonDiscussionCard');
+
+    if (!input || !card) {
+        return;
+    }
+
+    const message = input.value.trim();
+    if (!message) {
+        return;
+    }
+
+    const timestamp = new Date();
+    addDiscussionMessage('You', message, timestamp);
+    input.value = '';
+    successBanner?.classList.add('d-none');
+    errorBanner?.classList.add('d-none');
+
+    const endpoint = card.dataset.sendUrl;
+    const lessonId = card.dataset.lessonId;
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+            lesson_id: lessonId,
+            message,
+            context: 'lesson_discussion'
+        })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                successBanner?.classList.remove('d-none');
+                setTimeout(() => successBanner?.classList.add('d-none'), 4000);
+            } else {
+                throw new Error(data.error || 'Unable to send');
+            }
+        })
+        .catch(() => {
+            errorBanner?.classList.remove('d-none');
+            setTimeout(() => errorBanner?.classList.add('d-none'), 5000);
+        });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializeLessonDiscussion();
 });
 </script>
 

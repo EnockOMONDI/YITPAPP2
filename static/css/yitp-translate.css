@@ -89,13 +89,13 @@
 }
 
 #yitp-google-translate {
-    position: fixed;
+    position: absolute;
     left: -9999px;
-    top: 0;
-    width: auto;
-    height: auto;
-    opacity: 0;
-    pointer-events: none;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    visibility: hidden;
 }
 
 .goog-te-banner-frame,

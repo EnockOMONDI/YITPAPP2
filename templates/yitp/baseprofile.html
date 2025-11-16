@@ -1,0 +1,376 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}Youth Impact Training Programme - Empowering Youth Through Skills Development{% endblock %}</title>
+    <meta name="description" content="{% block description %}Join Youth Impact Training Programme (YITP) for comprehensive skills development, entrepreneurship training, and career advancement. Transform your future with our expert-led courses and mentorship programs.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}youth training, skills development, entrepreneurship, career advancement, online courses, mentorship, youth empowerment, professional development, YITP{% endblock %}">
+    <meta name="author" content="Youth Impact Global">
+    <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}Youth Impact Training Programme - Empowering Youth Through Skills Development{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Join Youth Impact Training Programme (YITP) for comprehensive skills development, entrepreneurship training, and career advancement. Transform your future with our expert-led courses and mentorship programs.{% endblock %}"
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'assets/img/logo/youthImpact.png' %}{% endblock %}">
+    <meta property="og:site_name" content="Youth Impact Training Programme">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Youth Impact Training Programme - Empowering Youth Through Skills Development{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Join Youth Impact Training Programme (YITP) for comprehensive skills development, entrepreneurship training, and career advancement. Transform your future with our expert-led courses and mentorship programs.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% static 'assets/img/logo/youthImpact.png' %}{% endblock %}">
+    <meta name="twitter:site" content="@YouthImpactGlobal">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#ff5d15">
+    <meta name="msapplication-TileColor" content="#ff5d15">
+    <meta name="application-name" content="YITP">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Youth Impact Training Programme",
+        "alternateName": "YITP",
+        "url": "{{ request.build_absolute_uri }}",
+        "logo": "{% static 'assets/img/logo/youthImpact.png' %}",
+        "description": "Empowering youth through comprehensive skills development, entrepreneurship training, and career advancement programs.",
+        "foundingDate": "2020",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+254-700-000-000",
+            "contactType": "customer service",
+            "email": "youthimpactglobal3@gmail.com"
+        },
+        "sameAs": [
+            "https://www.facebook.com/youthimpactglobal",
+            "https://www.twitter.com/youthimpactglobal",
+            "https://www.linkedin.com/company/youth-impact-global"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Kenya",
+            "addressRegion": "Nairobi"
+        }
+    }
+    </script>
+    
+    <!-- Favicon and Icons -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/favicon.png' %}">
+
+    <!-- Critical CSS (Above-the-fold) -->
+    <style>
+        /* Critical CSS for immediate rendering */
+        :root {
+            --yitp-orange: #ff5d15;
+            --yitp-dark-blue: #341C67;
+            --yitp-light-gray: #f8f9fa;
+            --yitp-white: #ffffff;
+        }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 0; }
+        .navbar { background: var(--yitp-white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .btn-primary-custom { background: var(--yitp-orange); border: none; color: white; padding: 12px 24px; border-radius: 8px; }
+        .hero-section { background: linear-gradient(135deg, var(--yitp-light-gray) 0%, #ffffff 100%); padding: 120px 0 80px; }
+    </style>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="{% static 'assets/css/bootstrap.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'assets/css/style.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'assets/fonts/inter/Inter-Regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+
+    <!-- Non-Critical CSS (Deferred Loading) -->
+    <noscript>
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    </noscript>
+
+    <!-- Critical CSS (Load Immediately) -->
+    <link rel="stylesheet" href="{% static 'assets/css/preloader-optimized.css' %}">
+
+    <!-- Progressive CSS Loading -->
+    <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/backToTop.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/jquery.fancybox.min.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/fontAwesome5Pro.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/elegantFont.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/default.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/navbar-auth.css' %}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{% static 'assets/css/messages.css' %}" media="print" onload="this.media='all'">
+
+    <!-- YITP Translation System CSS -->
+    <link rel="stylesheet" href="{% static 'css/yitp-translate.css' %}" media="print" onload="this.media='all'">
+    <!-- Google Analytics 4 -->
+    {% if not debug %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            page_title: '{{ request.resolver_match.url_name|default:"home" }}',
+            custom_map: {'custom_parameter_1': 'page_type'}
+        });
+    </script>
+    {% endif %}
+
+    <!-- Uploadcare Configuration -->
+    <script>
+        UPLOADCARE_PUBLIC_KEY = "f914008525312051b54c";
+    </script>
+    <script charset="utf-8" src="https://ucarecdn.com/libs/widget/3.6.0/uploadcare.full.min.js" defer></script>
+
+    <!-- Performance Monitoring -->
+    <script>
+        // Core Web Vitals monitoring
+        function sendToAnalytics(metric) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', metric.name, {
+                    event_category: 'Web Vitals',
+                    event_label: metric.id,
+                    value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+                    non_interaction: true,
+                });
+            }
+        }
+
+        // Load Web Vitals library
+        if ('loading' in HTMLImageElement.prototype) {
+            import('https://unpkg.com/web-vitals@3/dist/web-vitals.js').then(({getCLS, getFID, getFCP, getLCP, getTTFB}) => {
+                getCLS(sendToAnalytics);
+                getFID(sendToAnalytics);
+                getFCP(sendToAnalytics);
+                getLCP(sendToAnalytics);
+                getTTFB(sendToAnalytics);
+            });
+        }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    {% block breadcrumb_schema %}{% endblock %}
+
+    {% block extra_css %}{% endblock %}
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- YITP Optimized Preloader -->
+    <div id="loading">
+        <div class="loading-content">
+            <img class="loading-logo" src="{% static 'img/logo/logo.png' %}" alt="YITP Logo">
+            <div class="loading-text">Youth Impact Training Programme</div>
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- back to top start -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- back to top end -->
+
+    {% include 'yitp/navbarprofile.html' %}
+
+    <!-- Django Messages Display -->
+    <div class="messages-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show message-alert" role="alert" data-auto-dismiss="5000">
+                    <div class="container">
+                        <div class="message-content d-flex align-items-center">
+                            <div class="message-icon">
+                                {% if message.tags == 'success' %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% elif message.tags == 'error' %}
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% elif message.tags == 'warning' %}
+                                    <i class="fas fa-exclamation-circle"></i>
+                                {% elif message.tags == 'info' %}
+                                    <i class="fas fa-info-circle"></i>
+                                {% else %}
+                                    <i class="fas fa-bell"></i>
+                                {% endif %}
+                            </div>
+                            <div class="message-text">
+                                {{ message }}
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- WhatsApp Integration -->
+    <script>
+        var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?80028';
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        var options = {
+            "enabled":true,
+            "chatButtonSetting":{
+                "backgroundColor":"#ff5d15",
+                "ctaText":"Chat with us",
+                "borderRadius":"25",
+                "marginLeft": "0",
+                "marginRight": "20",
+                "marginBottom": "20",
+                "ctaIconWATI":false,
+                "position":"right"
+            },
+            "brandSetting":{
+                "brandName":"Youth Impact Global",
+                "brandSubTitle":"undefined",
+                "brandImg":"https://youthimpactglobal.com/assets/img/logo/youthimpact.png",
+                "welcomeText":"Hi there!\nHow can I help you?",
+                "messageText":"Hi, Im just from your website, requesting a call back",
+                "backgroundColor":"#ff5d15",
+                "ctaText":"Chat with us",
+                "borderRadius":"25",
+                "autoShow":false,
+                "phoneNumber":"254722646958"
+            }
+        };
+        s.onload = function() {
+            CreateWhatsappChatWidget(options);
+        };
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    </script>
+    <!-- Critical JavaScript (Load Immediately) -->
+    <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Non-Critical JavaScript (Load Asynchronously) -->
+    <script src="{% static 'assets/js/vendor/waypoints.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/jquery.meanmenu.js' %}" defer></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/jquery.fancybox.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/parallax.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/backToTop.js' %}" defer></script>
+    <script src="{% static 'assets/js/purecounter.js' %}" defer></script>
+    <script src="{% static 'assets/js/ajax-form.js' %}" defer></script>
+    <script src="{% static 'assets/js/wow.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}" defer></script>
+    <!-- YITP Optimized Preloader (Load Early) -->
+    <script src="{% static 'assets/js/preloader-optimized.js' %}" async></script>
+
+    <!-- YITP Performance Monitor (Development/Testing) -->
+    {% if debug %}
+    <script src="{% static 'assets/js/performance-monitor.js' %}" defer></script>
+    {% endif %}
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+    <!-- Django Messages JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-dismiss messages after specified time
+            const messages = document.querySelectorAll('.message-alert[data-auto-dismiss]');
+
+            messages.forEach(function(message) {
+                const dismissTime = parseInt(message.getAttribute('data-auto-dismiss')) || 5000;
+
+                setTimeout(function() {
+                    // Add fade-out animation
+                    message.classList.add('fade-out');
+
+                    // Remove element after animation completes
+                    setTimeout(function() {
+                        if (message.parentNode) {
+                            message.parentNode.removeChild(message);
+                        }
+                    }, 400); // Match CSS animation duration
+                }, dismissTime);
+            });
+
+            // Handle manual close buttons
+            const closeButtons = document.querySelectorAll('.message-alert .btn-close');
+            closeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const message = button.closest('.message-alert');
+                    message.classList.add('fade-out');
+
+                    setTimeout(function() {
+                        if (message.parentNode) {
+                            message.parentNode.removeChild(message);
+                        }
+                    }, 400);
+                });
+            });
+
+            // Keyboard accessibility - ESC to close messages
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const visibleMessages = document.querySelectorAll('.message-alert:not(.fade-out)');
+                    visibleMessages.forEach(function(message) {
+                        message.classList.add('fade-out');
+                        setTimeout(function() {
+                            if (message.parentNode) {
+                                message.parentNode.removeChild(message);
+                            }
+                        }, 400);
+                    });
+                }
+            });
+
+            // Focus management for accessibility
+            const firstMessage = document.querySelector('.message-alert');
+            if (firstMessage) {
+                // Announce to screen readers
+                firstMessage.setAttribute('aria-live', 'polite');
+                firstMessage.setAttribute('aria-atomic', 'true');
+            }
+        });
+    </script>
+
+    <!-- YITP Translation System JavaScript - Basic Version -->
+    <script src="{% static 'js/yitp-translate-basic.js' %}" defer></script>
+
+    <!-- Translation Status Indicator -->
+    <div id="translation-status" class="translation-status" style="display: none;">
+        <i class="fas fa-globe"></i> <span id="translation-status-text">Translating...</span>
+    </div>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -115,8 +115,8 @@ function runDebugCheck() {
     document.getElementById('visibility-status').className = isVisible ? 'text-success' : 'text-danger';
 
     // Run global debug if available
-    if (window.debugYITPTranslate) {
-        console.log('YITP Translate snapshot:', window.debugYITPTranslate());
+    if (window.debugYITPTranslation) {
+        window.debugYITPTranslation();
     }
 }
 

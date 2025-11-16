@@ -17,7 +17,7 @@
     const SCRIPT_URL =
         'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     const CONTAINER_ID = 'yitp-google-translate';
-    const WAIT_LIMIT = 80;
+    const WAIT_LIMIT = 40;
     const WAIT_DELAY = 200;
 
     let currentLanguage = 'en';
@@ -47,11 +47,6 @@
 
         updateLanguageSummary();
         bindLanguageEvents();
-        loadGoogleScript()
-            .then(() => console.info('YITP Translate: Google script loaded'))
-            .catch((error) => {
-                console.warn('YITP Translate preload warning:', error);
-            });
 
         if (currentLanguage !== 'en') {
             translateTo(currentLanguage);
@@ -167,7 +162,6 @@
 
     function loadGoogleScript() {
         if (window.google && window.google.translate) {
-            console.info('YITP Translate: Google library already present');
             createTranslateElement();
             return Promise.resolve();
         }
@@ -178,7 +172,6 @@
 
         scriptPromise = new Promise((resolve, reject) => {
             window.googleTranslateElementInit = () => {
-                console.info('YITP Translate: googleTranslateElementInit fired');
                 try {
                     createTranslateElement();
                     resolve();
@@ -191,12 +184,10 @@
             script.src = SCRIPT_URL;
             script.async = true;
             script.onerror = () => {
-                console.error('YITP Translate: failed to load Google script');
                 scriptPromise = null;
                 reject(new Error('Failed to load Google Translate'));
             };
             document.head.appendChild(script);
-            console.info('YITP Translate: loading Google script');
         });
 
         return scriptPromise;
@@ -211,7 +202,6 @@
             return;
         }
 
-        console.info('YITP Translate: creating TranslateElement');
         new window.google.translate.TranslateElement(
             {
                 pageLanguage: 'en',
@@ -222,13 +212,11 @@
             CONTAINER_ID
         );
         translateElementReady = true;
-        console.info('YITP Translate: TranslateElement ready');
     }
 
     function waitForCombo(targetLanguage, attempt = 0) {
         const combo = document.querySelector('.goog-te-combo');
         if (combo && (!targetLanguage || hasOption(combo, targetLanguage))) {
-            console.info('YITP Translate: combo ready', combo.options.length);
             return Promise.resolve(combo);
         }
 
@@ -240,11 +228,7 @@
     }
 
     function hasOption(combo, langCode) {
-        const hasOptionValue = Array.from(combo.options).some((option) => option.value === langCode);
-        if (!hasOptionValue) {
-            console.warn(`YITP Translate: option ${langCode} not yet available`);
-        }
-        return hasOptionValue;
+        return Array.from(combo.options).some((option) => option.value === langCode);
     }
 
     function applyLanguage(combo, langCode) {
@@ -297,13 +281,4 @@
         setLanguage: (code) => setLanguage(code),
         reset: () => setLanguage('en')
     };
-
-    window.debugYITPTranslate = () => ({
-        initialized,
-        currentLanguage,
-        translateElementReady,
-        scriptPromiseActive: Boolean(scriptPromise),
-        comboPresent: Boolean(document.querySelector('.goog-te-combo')),
-        storedPreference: getStoredLanguage()
-    });
 })();
