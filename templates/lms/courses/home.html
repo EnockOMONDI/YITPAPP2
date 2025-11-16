@@ -52,7 +52,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card course-card h-100">
                     <div class="position-relative">
-                        {% if course.thumbnail %}
+                        {% if course.thumbnail_url %}
                         <img src="{{ course.thumbnail_src }}" class="card-img-top" alt="{{ course.title }}" style="height: 200px; object-fit: cover;">
                         {% else %}
                         <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" class="card-img-top" alt="{{ course.title }}" style="height: 200px; object-fit: cover;">

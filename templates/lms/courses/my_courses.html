@@ -314,7 +314,7 @@
                 <div class="col-lg-4 col-md-6 course-item" data-status="{{ enrollment.status }}">
                     <div class="course-card">
                         <div class="position-relative">
-                            {% if enrollment.course.thumbnail %}
+                            {% if enrollment.course.thumbnail_url %}
                                 <img src="{{ enrollment.course.thumbnail_src }}" alt="{{ enrollment.course.title }}" class="course-thumbnail">
                             {% else %}
                                 <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" alt="{{ enrollment.course.title }}" class="course-thumbnail">

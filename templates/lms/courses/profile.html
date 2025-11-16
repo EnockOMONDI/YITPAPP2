@@ -752,7 +752,7 @@
                         <div class="col-lg-6 col-xl-4 mb-4 course-item" data-course-title="{{ progress_data.course.title|lower }}">
                             <div class="course-card">
                                 <div class="course-thumbnail">
-                                    {% if progress_data.course.thumbnail %}
+                                    {% if progress_data.course.thumbnail_url %}
                                         <img src="{{ progress_data.course.thumbnail_src }}" alt="{{ progress_data.course.title }}" class="img-fluid">
                                     {% else %}
                                         <div class="course-placeholder">

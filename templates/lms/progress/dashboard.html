@@ -143,7 +143,7 @@
                         {% for enrollment in current_enrollments %}
                         <div class="d-flex align-items-center mb-3 pb-3 {% if not forloop.last %}border-bottom{% endif %}">
                             <div class="flex-shrink-0 me-3">
-                                {% if enrollment.course.thumbnail %}
+                                {% if enrollment.course.thumbnail_url %}
                                     <img src="{{ enrollment.course.thumbnail_src }}" alt="{{ enrollment.course.title }}" 
                                          class="rounded" width="60" height="60">
                                 {% else %}

@@ -3,7 +3,6 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
-from pyuploadcare.dj.models import ImageField as UploadcareImageField
 
 User = get_user_model()
 
@@ -71,7 +70,7 @@ class Course(models.Model):
     prerequisites = models.TextField(blank=True, help_text="Required knowledge or skills")
     difficulty_level = models.CharField(max_length=20, choices=DIFFICULTY_LEVELS, default='beginner')
     estimated_duration = models.IntegerField(help_text="Estimated duration in hours")
-    thumbnail = UploadcareImageField(blank=True, null=True)
+    thumbnail_url = models.URLField(blank=True, help_text="Uploadcare CDN URL for the course image")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     is_published = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
@@ -192,10 +191,8 @@ class Course(models.Model):
 
     @property
     def thumbnail_src(self):
-        """Return best available thumbnail URL (Uploadcare CDN or fallback)"""
-        if not self.thumbnail:
-            return ''
-        return getattr(self.thumbnail, 'cdn_url', None) or getattr(self.thumbnail, 'url', None) or str(self.thumbnail)
+        """Return Uploadcare thumbnail URL if provided"""
+        return self.thumbnail_url or ''
 
     def get_ordered_lessons(self):
         """Get all lessons in the course ordered by module and lesson sort_order"""

@@ -1,3 +1,5 @@
+from django import forms
+from django.conf import settings
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
@@ -7,6 +9,19 @@ from .models import (
     Category, Course, Module, Lesson, CourseTag,
     CourseTagging, CourseReview
 )
+from pyuploadcare import Uploadcare
+from pyuploadcare.dj.forms import FileWidget
+
+
+UPLOADCARE_CONFIG = getattr(settings, 'UPLOADCARE', {})
+UPLOADCARE_PUBLIC_KEY = UPLOADCARE_CONFIG.get('pub_key')
+UPLOADCARE_SECRET_KEY = UPLOADCARE_CONFIG.get('secret')
+uploadcare_client = None
+if UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY:
+    uploadcare_client = Uploadcare(
+        public_key=UPLOADCARE_PUBLIC_KEY,
+        secret_key=UPLOADCARE_SECRET_KEY
+    )
 
 
 @admin.register(Category)
@@ -26,6 +41,33 @@ class CourseAdmin(admin.ModelAdmin):
     """
     Enhanced course admin interface with role-based filtering
     """
+    class CourseAdminForm(forms.ModelForm):
+        thumbnail_url = forms.CharField(
+            required=False,
+            widget=FileWidget(attrs={
+                'data-images-only': 'true',
+                'data-public-key': UPLOADCARE_PUBLIC_KEY or ''
+            })
+        )
+
+        class Meta:
+            model = Course
+            fields = '__all__'
+
+        def clean_thumbnail_url(self):
+            value = self.cleaned_data.get('thumbnail_url', '')
+            if not value:
+                return ''
+            if value.startswith('http'):
+                return value
+            if uploadcare_client:
+                try:
+                    return uploadcare_client.file(value).cdn_url
+                except Exception as exc:
+                    raise forms.ValidationError(f"Invalid Uploadcare file: {exc}")
+            return value
+
+    form = CourseAdminForm
     list_display = [
         'title_with_link', 'instructor_name', 'category', 'difficulty_level',
         'status_display', 'enrollment_count', 'is_published', 'is_featured', 'created_at'
@@ -41,19 +83,7 @@ class CourseAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Course Information', {
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-            'fields': ('title', 'slug', 'thumbnail', 'thumbnail_cdn', 'description', 'learning_objectives')
-=======
-            'fields': ('title', 'slug', 'description', 'learning_objectives')
->>>>>>> theirs
-=======
-            'fields': ('title', 'slug', 'thumbnail', 'description', 'learning_objectives')
->>>>>>> theirs
-=======
-            'fields': ('title', 'slug', 'thumbnail', 'description', 'learning_objectives')
->>>>>>> theirs
+            'fields': ('title', 'slug', 'thumbnail_url', 'description', 'learning_objectives')
         }),
         ('Course Details', {
             'fields': ('category', 'instructor', 'difficulty_level', 'estimated_duration')

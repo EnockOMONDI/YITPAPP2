@@ -838,7 +838,7 @@
                 <article class="course-card" data-course-url="{% url 'courses:course_detail' course.slug %}"
                     <!-- Revolutionary Image Container -->
                     <div class="card-image-container">
-                        {% if course.thumbnail %}
+                        {% if course.thumbnail_url %}
                         <img src="{{ course.thumbnail_src }}" class="card-img-top" alt="{{ course.title }}">
                         {% else %}
                         <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" class="card-img-top" alt="{{ course.title }}">

@@ -779,7 +779,7 @@
             </div>
             
             <div class="col-lg-4">
-                {% if course.thumbnail %}
+                {% if course.thumbnail_url %}
                 <img src="{{ course.thumbnail_src }}" alt="{{ course.title }}"
                      class="img-fluid course-thumbnail">
                 {% else %}
@@ -1142,7 +1142,7 @@
                 <div class="card-body">
                     {% for related_course in related_courses %}
                     <div class="d-flex mb-3 {% if not forloop.last %}border-bottom pb-3{% endif %}">
-                        {% if related_course.thumbnail %}
+                        {% if related_course.thumbnail_url %}
                         <img src="{{ related_course.thumbnail_src }}" alt="{{ related_course.title }}"
                              class="rounded me-3" width="60" height="45" style="object-fit: cover;">
                         {% else %}
