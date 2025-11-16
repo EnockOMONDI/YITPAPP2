@@ -1,5 +1,4 @@
 from django import forms
-from django.conf import settings
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
@@ -9,19 +8,6 @@ from .models import (
     Category, Course, Module, Lesson, CourseTag,
     CourseTagging, CourseReview
 )
-from pyuploadcare import Uploadcare
-from pyuploadcare.dj.forms import FileWidget
-
-
-UPLOADCARE_CONFIG = getattr(settings, 'UPLOADCARE', {})
-UPLOADCARE_PUBLIC_KEY = UPLOADCARE_CONFIG.get('pub_key')
-UPLOADCARE_SECRET_KEY = UPLOADCARE_CONFIG.get('secret')
-uploadcare_client = None
-if UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY:
-    uploadcare_client = Uploadcare(
-        public_key=UPLOADCARE_PUBLIC_KEY,
-        secret_key=UPLOADCARE_SECRET_KEY
-    )
 
 
 @admin.register(Category)
@@ -44,10 +30,10 @@ class CourseAdmin(admin.ModelAdmin):
     class CourseAdminForm(forms.ModelForm):
         thumbnail_url = forms.CharField(
             required=False,
-            widget=FileWidget(attrs={
-                'data-images-only': 'true',
-                'data-public-key': UPLOADCARE_PUBLIC_KEY or ''
-            })
+            widget=forms.URLInput(attrs={
+                'placeholder': 'https://ucarecdn.com/...'
+            }),
+            help_text="Paste the Uploadcare CDN URL for this course image."
         )
 
         class Meta:
@@ -60,11 +46,6 @@ class CourseAdmin(admin.ModelAdmin):
                 return ''
             if value.startswith('http'):
                 return value
-            if uploadcare_client:
-                try:
-                    return uploadcare_client.file(value).cdn_url
-                except Exception as exc:
-                    raise forms.ValidationError(f"Invalid Uploadcare file: {exc}")
             return value
 
     form = CourseAdminForm
