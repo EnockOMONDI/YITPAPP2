@@ -335,7 +335,7 @@ class LessonAdmin(admin.ModelAdmin):
             'fields': ('module', 'title', 'content_type', 'sort_order')
         }),
         ('Content', {
-            'fields': ('content', 'video_url', 'presentation_file')
+            'fields': ('content', 'video_url', 'audio_url', 'presentation_file')
         }),
         ('Settings', {
             'fields': ('is_published', 'is_mandatory', 'estimated_duration')
@@ -379,4 +379,3 @@ class CourseReviewAdmin(admin.ModelAdmin):
     list_filter = ('rating', 'is_published', 'created_at')
     search_fields = ('course__title', 'student__email', 'review_text')
     readonly_fields = ('created_at', 'updated_at')
-
