@@ -5,38 +5,11 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4 text-white ">
-                    Master Entrepreneurship Skills
-                </h1>
-                <p class="lead mb-4 text-white">
-                    Transform your business ideas into reality with our comprehensive entrepreneurship training program. 
-                    Learn from industry experts and develop the skills needed to succeed in today's competitive market.
-                </p>
-                <div class="d-flex gap-3">
-                    <a href="{% url 'courses:course_list' %}" class="btn btn-light btn-lg">
-                        <i class="fas fa-play me-2"></i>Start Learning
-                    </a>
-                    {% if not user.is_authenticated %}
-                    <a href="{% url 'yitp:registration' %}" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-user-plus me-2"></i>Join Now
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="col-lg-6 text-center">
-                <i class="fas fa-lightbulb" style="font-size: 12rem; opacity: 0.3;"></i>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Features Section -->
 
-
+<br><br>
 <!-- Featured Courses Section -->
 {% if featured_courses %}
 <section class="py-5 bg-light">
@@ -168,6 +141,34 @@
             <div class="col-md-4 col-6 mb-4">
                 <div class="h2 fw-bold">95%</div>
                 <p class="mb-0">Success Rate</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4 text-white ">
+                    Master Entrepreneurship Skills
+                </h1>
+                <p class="lead mb-4 text-white">
+                    Transform your business ideas into reality with our comprehensive entrepreneurship training program. 
+                    Learn from industry experts and develop the skills needed to succeed in today's competitive market.
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="{% url 'courses:course_list' %}" class="btn btn-light btn-lg">
+                        <i class="fas fa-play me-2"></i>Start Learning
+                    </a>
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'yitp:registration' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-user-plus me-2"></i>Join Now
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-lightbulb" style="font-size: 12rem; opacity: 0.3;"></i>
             </div>
         </div>
     </div>
