@@ -45,7 +45,22 @@ class Enrollment(models.Model):
     privacy_settings = models.JSONField(default=dict, help_text="Privacy settings for analytics and progress sharing")
     
     def __str__(self):
-        return f"{self.student.get_full_name()} - {self.course.title}"
+        student_name = "Unknown student"
+        course_title = "Unknown course"
+
+        try:
+            if self.student_id:
+                student_name = self.student.get_full_name() or self.student.username
+        except (User.DoesNotExist, AttributeError):
+            student_name = "Deleted student"
+
+        try:
+            if self.course_id:
+                course_title = self.course.title
+        except (Course.DoesNotExist, AttributeError):
+            course_title = "Deleted course"
+
+        return f"{student_name} - {course_title}"
     
     def update_progress(self):
         """Calculate and update progress percentage"""
@@ -321,7 +336,17 @@ class QuizAttempt(models.Model):
     is_passed = models.BooleanField(default=False)
     
     def __str__(self):
-        return f"{self.student.get_full_name()} - {self.quiz.title} (Attempt {self.attempt_number})"
+        try:
+            student_name = self.student.get_full_name() or self.student.username
+        except (User.DoesNotExist, AttributeError):
+            student_name = "Deleted student"
+
+        try:
+            quiz_title = self.quiz.title
+        except (Quiz.DoesNotExist, AttributeError):
+            quiz_title = "Deleted quiz"
+
+        return f"{student_name} - {quiz_title} (Attempt {self.attempt_number})"
     
     def calculate_score(self):
         """Calculate quiz score based on answers"""
@@ -622,4 +647,3 @@ class StudySession(models.Model):
         verbose_name = "Study Session"
         verbose_name_plural = "Study Sessions"
         ordering = ['-started_at']
-
