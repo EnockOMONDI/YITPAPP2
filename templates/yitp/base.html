@@ -198,11 +198,7 @@
     </div>
     <!-- back to top end -->
 
-    {% if request.user.is_authenticated %}
-        {% include 'yitp/navbarprofile.html' %}
-    {% else %}
-        {% include 'yitp/navbar.html' %}
-    {% endif %}
+    {% include 'yitp/navbar.html' %}
 
     <!-- Django Messages Display -->
     <div class="messages-container">

@@ -86,8 +86,8 @@ class QuizDetailView(LoginRequiredMixin, DetailView):
         context['attempts'] = attempts
         context['attempts_count'] = attempts.count()
         context['can_retake'] = (
-            not attempts.filter(score__gte=quiz.passing_score).exists() and
-            (quiz.max_attempts == 0 or attempts.count() < quiz.max_attempts)
+            quiz.max_attempts == 0 or
+            attempts.count() < quiz.max_attempts
         )
 
         # Get best score
@@ -287,46 +287,23 @@ class QuizResultsView(LoginRequiredMixin, DetailView):
         ).count()
 
         context['can_retake'] = (
-            score_percentage < quiz.passing_score and (
-                quiz.max_attempts == 0 or user_attempts < quiz.max_attempts
-            )
+            quiz.max_attempts == 0 or  # Unlimited attempts
+            user_attempts < quiz.max_attempts
         )
         context['attempts_used'] = user_attempts
         context['is_intro_course'] = 'Introduction to YITP' in course.title
 
         # Add question results for detailed review
         question_results = []
-        answer_map = attempt.answers or {}
-
-        def _normalize_option(option):
-            if isinstance(option, dict):
-                return option.get('text') or option.get('label') or option.get('value') or ''
-            return str(option)
-
-        for question in questions:
-            user_answer = answer_map.get(str(question.id))
-            normalized_correct = (question.correct_answer or '').strip().lower()
-            normalized_user = (user_answer or '').strip().lower()
-            is_correct = normalized_user == normalized_correct if user_answer else False
-
-            choice_entries = []
-            if question.question_type == 'multiple_choice':
-                for option in question.options or []:
-                    text = _normalize_option(option)
-                    normalized_text = text.strip().lower()
-                    choice_entries.append({
-                        'text': text,
-                        'is_correct': normalized_text == normalized_correct,
-                        'is_selected': normalized_text == normalized_user
-                    })
-
+        if hasattr(attempt, 'answers') and attempt.answers:
+            for question in questions:
+                user_answer = attempt.answers.get(str(question.id))
+                is_correct = user_answer == question.correct_answer if user_answer else False
                 question_results.append({
                     'question': question,
                     'user_answer': user_answer,
                     'is_correct': is_correct,
-                    'choices': choice_entries,
-                    'correct_answer_normalized': normalized_correct,
-                    'user_answer_normalized': normalized_user,
+                    'user_answer_id': user_answer
                 })
 
         context['question_results'] = question_results

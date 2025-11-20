@@ -96,8 +96,6 @@ class QuizValidationService:
         
         best_attempt = attempts.filter(is_passed=True).order_by('-score').first()
         latest_attempt = attempts.first()
-        last_attempt_id = latest_attempt.id if latest_attempt else None
-        review_url = reverse('assessments:quiz_results', kwargs={'attempt_id': last_attempt_id}) if last_attempt_id else None
         
         return {
             'has_quiz': True,
@@ -111,9 +109,7 @@ class QuizValidationService:
             'best_score': float(best_attempt.score) if best_attempt else None,
             'latest_score': float(latest_attempt.score) if latest_attempt and latest_attempt.score else None,
             'passing_score': quiz.passing_score,
-            'time_limit': quiz.time_limit,
-            'last_attempt_id': last_attempt_id,
-            'review_url': review_url,
+            'time_limit': quiz.time_limit
         }
     
     @staticmethod
