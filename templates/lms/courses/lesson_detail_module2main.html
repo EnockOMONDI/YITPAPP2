@@ -838,6 +838,12 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         margin-bottom: 2rem;
     }
+
+    /* Module 2 tweaks */
+    .lesson-header { margin-bottom: 1.25rem; }
+    .lesson-header h1 { color: #fff; }
+    .lesson-navigation { padding: 1.25rem; margin-bottom: 1.5rem; }
+    .lesson-navigation .btn { min-width: 130px; }
     
     .lesson-progress {
         background: #f8fafc;
@@ -1446,54 +1452,18 @@
                         </div>
 
                         <div class="tab-pane fade" id="lesson-reading-pane" role="tabpanel" aria-labelledby="lesson-reading-tab">
-                            <div class="lesson-content">
-                                {% if lesson.learning_objectives %}
-                                <div class="lesson-objectives">
-                                    <h4><i class="fas fa-bullseye me-2"></i>Learning Objectives</h4>
-                                    <div>{{ lesson.learning_objectives|linebreaks }}</div>
-                                </div>
-                                {% endif %}
-                                
-                                <div class="mb-4">
-                                    <h3 class="mb-3">Lesson Overview</h3>
-                                    <div class="lesson-description">
-                                        {{ lesson.description|linebreaks }}
-                                    </div>
-                                </div>
-                                
-                                {% if lesson.content %}
-                                <div class="mb-4">
-                                    <h3 class="mb-3">Content</h3>
-                                    <div class="lesson-text-content">
-                                        {{ lesson.content|safe }}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                
-                                <div class="lesson-resources">
-                                    <h3 class="mb-3">Additional Resources</h3>
-                                    <div class="resource-item">
-                                        <div class="d-flex align-items-center">
-                                            <div class="resource-icon">
-                                                <i class="fas fa-file-pdf"></i>
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-1">Lesson Notes</h6>
-                                                <small class="text-muted">Download PDF notes for this lesson</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="resource-item">
-                                        <div class="d-flex align-items-center">
-                                            <div class="resource-icon">
-                                                <i class="fas fa-link"></i>
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-1">External Resources</h6>
-                                                <small class="text-muted">Helpful links and references</small>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="lesson-media-panel">
+                                <div class="lesson-content-iframe-container">
+                                    <div class="iframe-loading">Loading lesson content...</div>
+                                    <iframe
+                                        id="module2-reading-iframe"
+                                        src="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html"
+                                        title="Module 2 Lesson {{ lesson.sort_order }} Content"
+                                        loading="lazy"
+                                        onload="resizeModule2Iframe(this); injectModule2ResponsiveCSS(this);"
+                                        onerror="this.previousElementSibling.innerHTML='Error loading content. Please refresh the page.';">
+                                        <p>Your browser does not support iframes. Please <a href="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html" target="_blank">click here to view the lesson content</a>.</p>
+                                    </iframe>
                                 </div>
                             </div>
                         </div>
@@ -2515,6 +2485,52 @@ function submitLessonDiscussion() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeLessonDiscussion();
+});
+</script>
+
+<!-- Module 2 iframe helpers -->
+<script>
+function resizeModule2Iframe(iframe) {
+    if (!iframe || !iframe.contentWindow) return;
+    const doc = iframe.contentWindow.document;
+    iframe.style.width = '100%';
+    iframe.style.border = 'none';
+    iframe.style.minHeight = '80vh';
+    try {
+        const body = doc.body;
+        const html = doc.documentElement;
+        const height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        iframe.style.height = height + 'px';
+    } catch (e) {
+        // If cross-origin or other issues, fall back to default height
+    }
+    const loader = iframe.previousElementSibling;
+    if (loader) loader.style.display = 'none';
+}
+
+function injectModule2ResponsiveCSS(iframe) {
+    if (!iframe || !iframe.contentDocument) return;
+    try {
+        const doc = iframe.contentDocument;
+        const style = doc.createElement('style');
+        style.innerHTML = `
+            html, body { max-width: 100%; overflow-x: hidden; }
+            body { margin: 0 auto; padding: 0 12px; box-sizing: border-box; }
+            img, video, table, iframe { max-width: 100%; height: auto; }
+            *, *::before, *::after { box-sizing: border-box; }
+        `;
+        doc.head.appendChild(style);
+    } catch (e) {
+        // Skip injection on error
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const iframe = document.getElementById('module2-reading-iframe');
+    if (iframe && iframe.complete) {
+        resizeModule2Iframe(iframe);
+        injectModule2ResponsiveCSS(iframe);
+    }
 });
 </script>
 
