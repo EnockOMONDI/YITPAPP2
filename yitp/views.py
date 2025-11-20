@@ -73,30 +73,11 @@ def _get_resume_destination(user):
     if not enrollments.exists():
         return reverse('profile')
 
-    last_progress = (
-        LessonProgress.objects
-        .filter(enrollment__student=user)
-        .annotate(last_activity=Coalesce('completed_at', 'started_at'))
-        .filter(last_activity__isnull=False)
-        .select_related('enrollment__course', 'lesson')
-        .order_by('-last_activity')
-        .first()
-    )
-
-    if last_progress:
-        try:
-            return reverse(
-                'courses:lesson_detail',
-                kwargs={
-                    'course_slug': last_progress.enrollment.course.slug,
-                    'lesson_id': last_progress.lesson.id
-                }
-            )
-        except Exception:
-            # If reverse fails for any reason, default to dashboard
-            pass
-
-    return reverse('profile')
+    # Learners should land on the My Courses tab instead of loading a heavy lesson detail view.
+    try:
+        return reverse('profile_courses')
+    except Exception:
+        return reverse('profile')
 
 
 def home(request):
@@ -104,7 +85,8 @@ def home(request):
     Smart home view with intelligent routing based on user authentication status.
     Authenticated users see personalized content, unauthenticated users see marketing content.
     """
-    if request.user.is_authenticated:
+    # Redirect only immediately after login; otherwise let authenticated users browse marketing pages.
+    if request.user.is_authenticated and request.session.pop('redirect_after_login', False):
         resume_url = _get_resume_destination(request.user)
         if resume_url:
             return redirect(resume_url)

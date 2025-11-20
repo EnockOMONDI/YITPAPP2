@@ -98,9 +98,6 @@ class CourseDiscoveryRedirectMiddleware(MiddlewareMixin):
         path = request.path
         user = request.user
 
-        if path == '/web_courses_list/' and user.is_authenticated:
-            return redirect('courses:course_list')
-
         if path in ['/registration/', '/registration2/', '/join/']:
             return redirect('register')
 

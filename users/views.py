@@ -949,7 +949,8 @@ def format_commit_date(date_string, user_timezone=None):
     Format commit date to human-readable format with timezone awareness
     Converts '2025-08-04' to 'Aug 4, 2025 at 2:30 PM' in user's timezone
     """
-    from datetime import datetime
+    from datetime import timedelta
+    from django.utils import timezone
     import random
 
     try:
@@ -1453,7 +1454,7 @@ def get_deployment_info():
         'database': database_info,
         'server': 'Gunicorn' if is_production else 'Django Dev Server',
         'branch': current_branch,
-        'last_deployment': datetime.now().strftime('%Y-%m-%d'),
+        'last_deployment': timezone.now().strftime('%Y-%m-%d'),
         'uptime_target': '99.9%' if is_production else 'Development',
         'backup_frequency': 'Daily' if is_production else 'Not Applicable',
         'environment': 'Production' if is_production else 'Development',
@@ -1472,7 +1473,7 @@ def system_status(request):
     from django.contrib.auth.models import User
     from courses.models import Course
     from progress.models import Enrollment
-    from datetime import datetime, timedelta
+    from datetime import timedelta
     import os
 
     now = timezone.now()
@@ -1655,7 +1656,7 @@ def system_status(request):
         'system_stats': system_stats,
         'deployment_info': deployment_info,
         'page_title': 'System Status & Release Information',
-        'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC'),
+        'last_updated': timezone.now().astimezone(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC'),
         **timezone_context,  # Add timezone context
     }
 

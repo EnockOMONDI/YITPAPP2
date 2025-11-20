@@ -26592,3 +26592,129 @@ INFO 2025-11-20 20:11:20,896 basehttp 12281 6192754688 "GET /privacy-policy/ HTT
 INFO 2025-11-20 20:11:27,918 basehttp 12281 6192754688 "GET /contact/ HTTP/1.1" 200 76539
 INFO 2025-11-20 20:15:28,755 autoreload 12281 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
 INFO 2025-11-20 20:15:30,460 autoreload 16598 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:20:12,352 autoreload 19249 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:20:24,263 basehttp 19249 6131970048 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:20:46,073 basehttp 19249 6131970048 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147022
+INFO 2025-11-20 20:21:02,852 basehttp 19249 6131970048 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/112/ HTTP/1.1" 200 119865
+INFO 2025-11-20 20:21:56,825 basehttp 19249 6131970048 "GET /logout/ HTTP/1.1" 200 14632
+INFO 2025-11-20 20:21:58,932 basehttp 19249 6131970048 "GET /login/ HTTP/1.1" 200 13704
+INFO 2025-11-20 20:22:11,141 basehttp 19249 6131970048 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-20 20:22:15,757 basehttp 19249 6131970048 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:22:36,550 basehttp 19249 6131970048 "GET /users/superuser/profile/ HTTP/1.1" 200 113940
+INFO 2025-11-20 20:22:38,577 basehttp 19249 6131970048 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-11-20 20:23:19,176 basehttp 19249 6131970048 "GET /admin/progress/enrollment/30/change/ HTTP/1.1" 200 79944
+INFO 2025-11-20 20:23:19,275 basehttp 19249 6148796416 "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+INFO 2025-11-20 20:23:19,279 basehttp 19249 6165622784 "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+WARNING 2025-11-20 20:23:19,301 basehttp 19249 6148796416 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-11-20 20:23:22,740 basehttp 19249 6131970048 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-11-20 20:23:22,769 basehttp 19249 6131970048 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-11-20 20:23:32,161 basehttp 19249 6165622784 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:23:47,304 basehttp 19249 6131970048 "GET /lms/courses/ HTTP/1.1" 200 36866
+INFO 2025-11-20 20:23:53,896 basehttp 19249 6165622784 - Broken pipe from ('127.0.0.1', 64679)
+INFO 2025-11-20 20:25:36,946 autoreload 20565 8600124096 Watching for file changes with StatReloader
+ERROR 2025-11-20 20:25:40,864 exception 20565 6164475904 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-11-20 20:25:40,868 log 20565 6164475904 Bad Request: /lms/courses/youth-impact-training-programme-yitp/
+WARNING 2025-11-20 20:25:40,869 basehttp 20565 6164475904 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 400 8971
+INFO 2025-11-20 20:26:03,349 autoreload 21077 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:30:18,611 basehttp 21077 6199701504 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 175145
+INFO 2025-11-20 20:44:31,817 autoreload 21077 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-20 20:44:32,921 autoreload 23155 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:44:57,586 autoreload 23155 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/apps.py changed, reloading.
+INFO 2025-11-20 20:44:59,391 autoreload 23956 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:45:27,957 autoreload 23956 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2025-11-20 20:45:28,938 autoreload 24935 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:47:44,744 autoreload 24935 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/middleware.py changed, reloading.
+INFO 2025-11-20 20:47:45,844 autoreload 27048 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:49:47,827 basehttp 27048 6151778304 "GET / HTTP/1.1" 200 84167
+INFO 2025-11-20 20:50:29,558 basehttp 27048 6151778304 - Broken pipe from ('127.0.0.1', 65085)
+INFO 2025-11-20 20:50:41,711 basehttp 27048 6168604672 "GET /logout/ HTTP/1.1" 200 14629
+INFO 2025-11-20 20:50:47,342 basehttp 27048 6168604672 "GET /login/ HTTP/1.1" 200 13704
+INFO 2025-11-20 20:51:04,769 basehttp 27048 6168604672 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-20 20:51:12,975 basehttp 27048 6168604672 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:51:25,516 basehttp 27048 6168604672 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147925
+INFO 2025-11-20 20:52:05,597 basehttp 27048 6168604672 "GET / HTTP/1.1" 200 84623
+ERROR 2025-11-20 20:57:57,601 log 27048 6134951936 Internal Server Error: /lms/courses/youth-impact-training-programme-yitp/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/detail.py", line 109, in get
+    context = self.get_context_data(object=self.object)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/views.py", line 193, in get_context_data
+    for progress in progress_queryset:
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: SSL SYSCALL error: EOF detected
+
+INFO 2025-11-20 20:57:57,605 basehttp 27048 6134951936 - Broken pipe from ('127.0.0.1', 65084)
+INFO 2025-11-20 20:59:10,004 basehttp 27048 6134951936 "GET /login/ HTTP/1.1" 302 0
+INFO 2025-11-20 20:59:34,177 basehttp 27048 6151778304 "GET /logout/ HTTP/1.1" 200 14632
+INFO 2025-11-20 20:59:37,572 basehttp 27048 6134951936 - Broken pipe from ('127.0.0.1', 65207)
+INFO 2025-11-20 20:59:44,330 basehttp 27048 6151778304 "GET /login/ HTTP/1.1" 200 13704
+INFO 2025-11-20 21:00:00,461 basehttp 27048 6151778304 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-20 21:00:12,086 basehttp 27048 6151778304 - Broken pipe from ('127.0.0.1', 65208)
+INFO 2025-11-20 21:04:36,722 autoreload 27048 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-20 21:04:37,912 autoreload 31719 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 21:04:55,170 basehttp 31719 6198521856 "GET /login/ HTTP/1.1" 302 0
+INFO 2025-11-20 21:05:03,678 basehttp 31719 6198521856 "GET /profile/ HTTP/1.1" 200 103781
+INFO 2025-11-20 21:05:23,330 basehttp 31719 6198521856 "GET /logout/ HTTP/1.1" 200 14632
+INFO 2025-11-20 21:05:24,824 basehttp 31719 6198521856 "GET /login/ HTTP/1.1" 200 13704
+INFO 2025-11-20 21:05:47,227 basehttp 31719 6198521856 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-20 21:05:51,078 basehttp 31719 6198521856 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 21:06:02,956 basehttp 31719 6198521856 "GET /profile/courses/ HTTP/1.1" 200 88291
