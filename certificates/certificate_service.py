@@ -65,11 +65,14 @@ class CertificateService:
             # Check if certificate already exists
             existing_certificate = Certificate.objects.filter(enrollment=enrollment).first()
             if existing_certificate:
+                existing_path = ''
+                if existing_certificate.certificate_data:
+                    existing_path = existing_certificate.certificate_data.get('file_path', '')
                 return {
                     'success': True,
                     'certificate': existing_certificate,
                     'message': 'Certificate already exists',
-                    'file_path': existing_certificate.certificate_file.path if existing_certificate.certificate_file else None
+                    'file_path': existing_path
                 }
             
             # Generate certificate

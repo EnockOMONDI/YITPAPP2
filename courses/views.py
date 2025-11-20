@@ -444,7 +444,7 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
 
         # Check if this is Module 2 (Personal Initiative)
         if lesson.module and 'Personal Initiative' in lesson.module.title:
-            return ['lms/courses/lesson_detail_module2.html']
+            return ['lms/courses/lesson_detail_module2main.html']
 
         # Default template for all other modules
         return ['lms/courses/lesson_detail.html']

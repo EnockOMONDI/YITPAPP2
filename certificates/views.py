@@ -9,6 +9,7 @@ import os
 import mimetypes
 
 from progress.models import Certificate
+from courses.models import Lesson
 from .certificate_service import CertificateService
 
 
@@ -67,24 +68,33 @@ class CertificateDownloadView(LoginRequiredMixin, TemplateView):
                 messages.error(request, "You don't have permission to download this certificate.")
                 return redirect('certificates:my_certificates')
             
-            # Try to serve existing certificate file
-            if hasattr(certificate, 'certificate_file') and certificate.certificate_file:
+            # Try to serve existing certificate file stored in certificate_data (file_path)
+            file_path = None
+            if certificate.certificate_data:
+                file_path = certificate.certificate_data.get('file_path')
+
+            if file_path and os.path.exists(file_path):
                 try:
-                    response = FileResponse(
-                        certificate.certificate_file.open('rb'),
+                    return FileResponse(
+                        open(file_path, 'rb'),
                         as_attachment=True,
                         filename=f"certificate_{certificate.certificate_id}.pdf"
                     )
-                    return response
-                except:
+                except Exception:
                     pass
             
             # Generate certificate on-the-fly if no file exists
             generation_result = CertificateService.generate_certificate(certificate.enrollment)
             
             if generation_result.get('success'):
-                # For now, redirect to verification page with download message
-                messages.success(request, "Certificate generated successfully. Download functionality will be available soon.")
+                messages.success(request, "Certificate generated successfully. Download is now available.")
+                new_path = generation_result.get('file_path')
+                if new_path and os.path.exists(new_path):
+                    return FileResponse(
+                        open(new_path, 'rb'),
+                        as_attachment=True,
+                        filename=f"certificate_{certificate.certificate_id}.pdf"
+                    )
                 return redirect('certificates:verify', verification_code=verification_code)
             else:
                 messages.error(request, f"Error generating certificate: {generation_result.get('message', 'Unknown error')}")
@@ -166,10 +176,11 @@ class CertificateDetailView(LoginRequiredMixin, DetailView):
             is_passed=True
         ).select_related('quiz')
         
-        # Calculate achievements
-        total_lessons = course.lessons.filter(is_published=True).count()
+        # Calculate achievements using Lesson objects (course has modules)
+        published_lessons = Lesson.objects.filter(module__course=course, is_published=True)
+        total_lessons = published_lessons.count()
         completed_lessons = lesson_progress.count()
-        total_quizzes = sum(lesson.quizzes.filter(is_published=True).count() for lesson in course.lessons.filter(is_published=True))
+        total_quizzes = sum(lesson.quizzes.filter(is_published=True).count() for lesson in published_lessons)
         passed_quizzes = quiz_attempts.count()
         
         # Get skills from course (if available)
