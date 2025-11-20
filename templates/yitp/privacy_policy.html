@@ -1,0 +1,85 @@
+{% extends 'unified/base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - Youth Impact Training Programme{% endblock %}
+
+{% block content %}
+<section class="hero hero--subpage pt-140 pb-80 bg-light">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <p class="section__subtitle text-uppercase text-muted mb-3">Privacy &amp; Data Protection</p>
+                <h1 class="display-5 fw-bold mb-3">Our promise to protect your data</h1>
+                <p class="lead text-muted">
+                    We collect only what we need to operate the Youth Impact Training Programme, and we keep it safe using industry best practices.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="policy-section py-80">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="policy-card shadow-sm p-4 h-100">
+                    <h3>What we collect</h3>
+                    <p class="text-muted">
+                        When you create a YITP account we store your name, email, phone number, and course choices so we can deliver learning experiences, certificates, and support.
+                    </p>
+                    <ul class="list-unstyled text-muted">
+                        <li><i class="fas fa-check text-success me-2"></i>Learning activity such as lessons completed</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Payment references and sponsorship requests</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Support conversations and survey feedback</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="policy-card shadow-sm p-4 h-100">
+                    <h3>How we use your information</h3>
+                    <p class="text-muted">
+                        Your information is used to personalize your dashboard, recommend content, process billing, and keep you informed about programme opportunities.
+                    </p>
+                    <p class="text-muted">
+                        We never sell learner data. Third-party providers (payments, analytics, email) only access the minimum required to provide their service.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-lg-6">
+                <div class="policy-card shadow-sm p-4 h-100">
+                    <h3>Your controls</h3>
+                    <ul class="list-unstyled text-muted">
+                        <li><strong>Update profile:</strong> Edit your data anytime inside <a href="{% url 'profile' %}">Profile &gt; Settings</a>.</li>
+                        <li><strong>Export records:</strong> Request a machine-readable copy of your data by emailing <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a>.</li>
+                        <li><strong>Delete account:</strong> Contact our team if you would like your profile removed from our systems.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="policy-card shadow-sm p-4 h-100">
+                    <h3>Data retention</h3>
+                    <p class="text-muted">
+                        We retain learner records for as long as you have an active profile so certificates and progress remain available. Financial records are held for at least seven years to satisfy compliance requirements.
+                    </p>
+                    <p class="text-muted">
+                        If you pause or graduate, you can ask us to anonymize your data while still keeping completion proof.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8 text-center">
+                <div class="alert alert-info border-0 shadow-sm">
+                    <h4 class="mb-2">Questions about privacy?</h4>
+                    <p class="mb-3 text-muted">Email <a href="mailto:info@youthimpactglobal.com" class="fw-semibold">info@youthimpactglobal.com</a> or WhatsApp <a href="https://wa.me/254722646959" class="fw-semibold">+254 722 646 959</a> and our compliance team will help you right away.</p>
+                    <a href="{% url 'yitp:support' %}" class="btn btn-primary-yitp">Visit Support Centre</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

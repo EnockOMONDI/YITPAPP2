@@ -713,7 +713,7 @@ PAYMENT METHODS AVAILABLE:
 
 Don't let your goals wait! Renew today and continue building your future.
 
-Questions? Contact support@yitp.org or call +254722646958
+Questions? Contact support@yitp.org or call +254722646959
 
 Best regards,
 YITP Team

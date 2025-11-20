@@ -1,0 +1,87 @@
+{% extends 'unified/base.html' %}
+{% load static %}
+
+{% block title %}Terms of Service - Youth Impact Training Programme{% endblock %}
+
+{% block content %}
+<section class="hero hero--subpage pt-140 pb-80 bg-white">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+                <p class="section__subtitle text-uppercase text-muted mb-3">Terms &amp; Conditions</p>
+                <h1 class="display-5 fw-bold mb-3">The rules that keep our community safe and focused</h1>
+                <p class="lead text-muted">By enrolling in YITP you agree to the expectations below so that every learner enjoys a respectful, secure, and productive experience.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="terms-section py-80 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="term-card shadow-sm p-4 h-100">
+                    <h3>Eligibility &amp; accounts</h3>
+                    <ul class="list-unstyled text-muted">
+                        <li>Provide accurate profile information and keep your login credentials private.</li>
+                        <li>Only one active learner account is permitted per person.</li>
+                        <li>Notify our team immediately if you suspect unauthorized access.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="term-card shadow-sm p-4 h-100">
+                    <h3>Learning conduct</h3>
+                    <ul class="list-unstyled text-muted">
+                        <li>Respect facilitators, classmates, and mentors in all spaces.</li>
+                        <li>Do not share paid course materials outside the platform.</li>
+                        <li>Any plagiarism or cheating results in suspension of course access.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="term-card shadow-sm p-4 h-100">
+                    <h3>Payments &amp; refunds</h3>
+                    <p class="text-muted">
+                        Tuition, sponsorship, or financing plans follow the billing schedule agreed during enrollment. Refunds are handled according to the programme policy shared in your welcome pack. Write to <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a> for help.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-lg-6">
+                <div class="term-card shadow-sm p-4 h-100">
+                    <h3>Intellectual property</h3>
+                    <p class="text-muted">
+                        All course videos, assessments, and learning assets are owned by Youth Impact Global and its partners. You may use them for personal learning but cannot redistribute or resell them without written consent.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="term-card shadow-sm p-4 h-100">
+                    <h3>Updates to these terms</h3>
+                    <p class="text-muted">
+                        We may update these terms to reflect new features or legal requirements. If the changes are material we will email you or show an in-app notice. Continuing to use YITP after the change means you accept the updated terms.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8 text-center">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h4 class="mb-2">Need clarification?</h4>
+                        <p class="text-muted mb-3">Reach our support desk at <a href="mailto:info@youthimpactglobal.com">info@youthimpactglobal.com</a> or WhatsApp <a href="https://wa.me/254722646959">+254 722 646 959</a>.</p>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <a href="{% url 'yitp:privacy_policy' %}" class="btn btn-outline-secondary">View Privacy Policy</a>
+                            <a href="{% url 'yitp:support' %}" class="btn btn-primary-yitp">Visit Support Centre</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

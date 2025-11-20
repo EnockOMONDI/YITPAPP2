@@ -70,7 +70,7 @@ class EnrollmentService:
                         f'Payment verification required for "{course.title}". '
                         f'This course costs KES {course.price:,.2f}. Please complete your payment '
                         f'and wait for confirmation before enrolling. '
-                        f'Contact support at +254722646958 for payment verification.'
+                        f'Contact support at +254722646959 for payment verification.'
                     )
                 }
 
@@ -81,7 +81,7 @@ class EnrollmentService:
                     'error_message': (
                         f'Your partial payment access for "{course.title}" has expired. '
                         f'Please complete your second installment payment or contact support '
-                        f'at +254722646958 for assistance.'
+                        f'at +254722646959 for assistance.'
                     )
                 }
 

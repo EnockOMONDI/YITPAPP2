@@ -10,6 +10,41 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_http_methods
 
 
+SUPPORT_FAQS = [
+    {
+        "question": "How long does the Youth Impact Training Programme take?",
+        "answer": (
+            "The core programme runs for 10 weeks with a mix of live"
+            " sessions, self-paced coursework, and mentorship. Learners can"
+            " continue exploring optional mastery sprints even after they finish."
+        ),
+    },
+    {
+        "question": "Where can I see my course progress and certificates?",
+        "answer": (
+            "Log into your profile at /profile/ and open the My Courses or"
+            " Analytics tabs. From there you can download certificates, track"
+            " progress, and jump back into the last lesson you viewed."
+        ),
+    },
+    {
+        "question": "How do I get help with payments or sponsorship applications?",
+        "answer": (
+            "Send us an email at info@youthimpactglobal.com or WhatsApp"
+            " +254722646959 with your payment reference. Our finance desk"
+            " typically replies within one business day."
+        ),
+    },
+    {
+        "question": "Can instructors or partners access a dedicated dashboard?",
+        "answer": (
+            "Yes. Approved instructors and project partners receive their own"
+            " dashboards with course management tools. Reach out to our team"
+            " if you need your instructor profile activated."
+        ),
+    },
+]
+
 def _get_resume_destination(user):
     """
     Determine the best resume destination for a returning learner.
@@ -200,7 +235,55 @@ def contact(request):
     if request.method == 'GET':
         messages.info(request, 'Welcome to our contact page! Feel free to reach out to us.')
 
-    return render(request, 'yitp/contact.html')
+    context = {
+        'support_faqs': SUPPORT_FAQS,
+    }
+
+    return render(request, 'yitp/contact.html', context)
+
+
+def support(request):
+    support_channels = [
+        {
+            "label": "WhatsApp & Phone",
+            "value": "+254 722 646 959",
+            "href": "https://wa.me/254722646959",
+            "icon": "fas fa-mobile-alt",
+            "subtext": "Weekdays 9:00am - 6:00pm EAT",
+            "new_tab": True,
+        },
+        {
+            "label": "Email",
+            "value": "info@youthimpactglobal.com",
+            "href": "mailto:info@youthimpactglobal.com",
+            "icon": "fas fa-envelope-open-text",
+            "subtext": "We respond within 1 business day",
+            "new_tab": True,
+        },
+        {
+            "label": "Support Desk",
+            "value": "Submit a ticket",
+            "href": reverse('yitp:contact'),
+            "icon": "fas fa-headset",
+            "subtext": "Use the contact form for escalations",
+            "new_tab": False,
+        },
+    ]
+
+    context = {
+        'support_channels': support_channels,
+        'support_faqs': SUPPORT_FAQS,
+    }
+
+    return render(request, 'yitp/support.html', context)
+
+
+def privacy_policy(request):
+    return render(request, 'yitp/privacy_policy.html')
+
+
+def terms_of_service(request):
+    return render(request, 'yitp/terms_of_service.html')
 
 
 def translation_demo(request):

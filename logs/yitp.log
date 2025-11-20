@@ -26542,3 +26542,53 @@ INFO 2025-11-20 18:46:19,925 basehttp 93878 6182350848 "GET /profile/billing/ HT
 INFO 2025-11-20 18:49:20,131 basehttp 93878 6182350848 - Broken pipe from ('127.0.0.1', 63188)
 INFO 2025-11-20 18:49:27,379 basehttp 93878 6165524480 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147720
 INFO 2025-11-20 18:59:39,462 basehttp 93878 6165524480 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 19:52:57,020 autoreload 1481 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 19:53:14,772 basehttp 1481 6172291072 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 19:53:23,627 basehttp 1481 6172291072 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 19:59:27,956 autoreload 1481 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2025-11-20 19:59:40,728 autoreload 2576 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:01:04,422 basehttp 2576 6137278464 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:01:13,802 basehttp 2576 6137278464 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 20:01:22,673 basehttp 2576 6137278464 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:01:26,670 basehttp 2576 6154104832 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:01:32,521 basehttp 2576 6137278464 - Broken pipe from ('127.0.0.1', 64018)
+INFO 2025-11-20 20:01:39,206 basehttp 2576 6154104832 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 20:02:00,279 basehttp 2576 6154104832 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:02:12,752 basehttp 2576 6154104832 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 20:02:43,299 autoreload 4317 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:02:57,425 basehttp 4317 6167097344 - Broken pipe from ('127.0.0.1', 64101)
+INFO 2025-11-20 20:02:59,076 basehttp 4317 6183923712 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:03:17,019 basehttp 4317 6183923712 - Broken pipe from ('127.0.0.1', 64102)
+INFO 2025-11-20 20:03:17,898 basehttp 4317 6200750080 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:03:34,836 basehttp 4317 6200750080 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 20:03:35,253 basehttp 4317 6200750080 - Broken pipe from ('127.0.0.1', 64105)
+INFO 2025-11-20 20:03:43,946 basehttp 4317 6167097344 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:03:45,048 autoreload 4317 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-20 20:03:46,749 autoreload 4834 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:04:00,724 autoreload 4834 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-20 20:04:01,968 autoreload 5218 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:04:13,672 basehttp 5218 6194442240 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:04:15,637 autoreload 5218 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/urls.py changed, reloading.
+INFO 2025-11-20 20:04:17,080 autoreload 5634 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:04:37,701 basehttp 5634 6223491072 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:04:39,801 basehttp 5634 6206664704 - Broken pipe from ('127.0.0.1', 64200)
+INFO 2025-11-20 20:04:54,430 basehttp 5634 6223491072 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 20:05:06,530 basehttp 5634 6223491072 "GET / HTTP/1.1" 302 0
+INFO 2025-11-20 20:05:29,347 basehttp 5634 6223491072 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146931
+INFO 2025-11-20 20:05:43,592 basehttp 5634 6223491072 "GET /faqs/ HTTP/1.1" 200 71705
+INFO 2025-11-20 20:05:43,626 basehttp 5634 6223491072 "GET /static/assets/img/shape/yellow-bg-2.png HTTP/1.1" 200 2116
+INFO 2025-11-20 20:06:32,831 basehttp 5634 6223491072 "GET /faqs/ HTTP/1.1" 200 71705
+INFO 2025-11-20 20:07:44,443 basehttp 5634 6223491072 "GET /faqs/ HTTP/1.1" 200 71796
+INFO 2025-11-20 20:07:48,192 autoreload 5634 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-20 20:07:49,662 autoreload 12281 8600124096 Watching for file changes with StatReloader
+INFO 2025-11-20 20:07:56,823 basehttp 12281 6192754688 - Broken pipe from ('127.0.0.1', 64296)
+INFO 2025-11-20 20:07:58,662 basehttp 12281 6209581056 "GET /faqs/ HTTP/1.1" 200 71796
+INFO 2025-11-20 20:08:17,322 basehttp 12281 6209581056 "GET /profile/ HTTP/1.1" 200 102913
+INFO 2025-11-20 20:09:29,332 basehttp 12281 6209581056 "GET /faqs/ HTTP/1.1" 200 71796
+INFO 2025-11-20 20:09:50,769 basehttp 12281 6209581056 - Broken pipe from ('127.0.0.1', 64297)
+INFO 2025-11-20 20:09:59,456 basehttp 12281 6192754688 "GET /privacy-policy/ HTTP/1.1" 200 67084
+INFO 2025-11-20 20:10:44,555 basehttp 12281 6192754688 "GET /terms-of-service/ HTTP/1.1" 200 67007
+INFO 2025-11-20 20:11:20,896 basehttp 12281 6192754688 "GET /privacy-policy/ HTTP/1.1" 200 67084
+INFO 2025-11-20 20:11:27,918 basehttp 12281 6192754688 "GET /contact/ HTTP/1.1" 200 76539
+INFO 2025-11-20 20:15:28,755 autoreload 12281 8600124096 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-20 20:15:30,460 autoreload 16598 8600124096 Watching for file changes with StatReloader

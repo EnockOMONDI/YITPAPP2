@@ -777,7 +777,7 @@ BANK_TRANSFER_DETAILS = {
     'paybill_number': '303030',
     'branch_code': 'ABSAKENAXXX',
     'swift_code': 'ABSAKENAXXX',
-    'verification_phone': '+254722646958',  # WhatsApp number for payment verification
+    'verification_phone': '+254722646959',  # WhatsApp number for payment verification
 }
 
 # Payment Method Configuration

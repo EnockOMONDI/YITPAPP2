@@ -1,0 +1,41 @@
+{% load static %}
+<section class="support-faqs pt-80 pb-80 bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-40">
+            <div class="col-lg-8 text-center">
+                <p class="section__subtitle">Need fast answers?</p>
+                <h2 class="section__title">Most asked questions</h2>
+                <p class="text-muted">We picked the questions our learners ask the most so you can get an instant answer before reaching out.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                {% with accordion_key=accordion_id|default:'supportFaqs' %}
+                <div class="accordion" id="{{ accordion_key }}">
+                    {% for faq in support_faqs %}
+                        <div class="accordion-item mb-3 shadow-sm border-0">
+                            <h3 class="accordion-header" id="{{ accordion_key }}_item_{{ forloop.counter }}_header">
+                                <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ accordion_key }}_item_{{ forloop.counter }}"
+                                        aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                                        aria-controls="{{ accordion_key }}_item_{{ forloop.counter }}">
+                                    {{ faq.question }}
+                                </button>
+                            </h3>
+                            <div id="{{ accordion_key }}_item_{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                                 aria-labelledby="{{ accordion_key }}_item_{{ forloop.counter }}_header" data-bs-parent="#{{ accordion_key }}">
+                                <div class="accordion-body">
+                                    <p class="mb-0">{{ faq.answer }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p class="text-center text-muted mb-0">We will keep this space updated as new questions come in.</p>
+                    {% endfor %}
+                </div>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</section>

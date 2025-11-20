@@ -1,0 +1,85 @@
+{% extends 'unified/base.html' %}
+{% load static %}
+
+{% block title %}Support Centre - Youth Impact Training Programme{% endblock %}
+
+{% block content %}
+<section class="support-hero pt-140 pb-80 bg-gradient" style="background: linear-gradient(135deg, #341C67 0%, #ff5d15 100%); color: #fff;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <p class="section__subtitle text-uppercase text-muted mb-3">We're here to help</p>
+                <h1 class="display-5 fw-bold mb-3 text-white">Support that keeps you learning without interruption</h1>
+                <p class="lead text-white-50 mb-4">Need help with onboarding, billing, or coursework? Reach our learner success desk via the channels below.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="https://wa.me/254722646959" target="_blank" class="btn btn-primary-yitp">
+                        <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+                    </a>
+                    <a href="mailto:info@youthimpactglobal.com" class="btn btn-outline-light">
+                        <i class="fas fa-envelope me-2"></i>Email Support
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 mt-4 mt-lg-0">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <h4 class="mb-3">Response times</h4>
+                        <ul class="list-unstyled text-muted mb-0">
+                            <li><i class="fas fa-clock text-success me-2"></i>WhatsApp &amp; phone: under 2 hours (Weekdays)</li>
+                            <li><i class="fas fa-clock text-success me-2"></i>Email: within 1 business day</li>
+                            <li><i class="fas fa-clock text-success me-2"></i>Escalations: 24 – 48 hours</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="support-channels py-80">
+    <div class="container">
+        <div class="row g-4">
+            {% for channel in support_channels %}
+            <div class="col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
+                             style="width: 56px; height: 56px; background: rgba(255, 93, 21, 0.12);">
+                            <i class="{{ channel.icon }}" style="color:#ff5d15; font-size: 1.2rem;"></i>
+                        </div>
+                        <p class="text-uppercase text-muted small mb-1">{{ channel.label }}</p>
+                        <h4>
+                            {% if channel.href %}
+                                <a href="{{ channel.href }}" {% if channel.new_tab %}target="_blank" rel="noopener"{% endif %}>
+                                    {{ channel.value }}
+                                </a>
+                            {% else %}
+                                {{ channel.value }}
+                            {% endif %}
+                        </h4>
+                        <p class="text-muted mb-0">{{ channel.subtext }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% include 'yitp/includes/support_faqs.html' with support_faqs=support_faqs accordion_id='supportCentreFaqs' %}
+
+<section class="contact-cta py-80 bg-dark text-white">
+    <div class="container text-center">
+        <h2 class="mb-3">Still need help?</h2>
+        <p class="mb-4 text-white-50">Share as much detail as you can and a YITP success champion will walk with you step-by-step.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="{% url 'yitp:contact' %}" class="btn btn-primary-yitp">
+                <i class="fas fa-headset me-2"></i>Contact Support
+            </a>
+            <a href="{% url 'yitp:faqs' %}" class="btn btn-outline-light">
+                <i class="fas fa-book me-2"></i>Full FAQ Library
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
