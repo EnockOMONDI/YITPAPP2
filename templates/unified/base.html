@@ -373,7 +373,11 @@
 </head>
 <body>
     <!-- YITP Main Navigation -->
-    {% include 'yitp/navbar.html' %}
+    {% if request.user.is_authenticated %}
+        {% include 'yitp/navbarprofile.html' %}
+    {% else %}
+        {% include 'yitp/navbar.html' %}
+    {% endif %}
     
     <!-- Django Messages -->
     <div class="messages-container">

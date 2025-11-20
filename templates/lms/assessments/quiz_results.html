@@ -239,10 +239,10 @@
                         </div>
                         <div class="mb-3">{{ result.question.question_text|linebreaks }}</div>
                         {% if result.question.question_type == 'multiple_choice' %}
-                            {% for choice in result.question.choices.all %}
-                            <div class="choice-pill {% if choice.is_correct %}correct{% elif choice.id == result.user_answer_id %}incorrect{% endif %}">
-                                <i class="fas {% if choice.is_correct %}fa-check text-success{% elif choice.id == result.user_answer_id %}fa-times text-danger{% else %}fa-circle{% endif %}"></i>
-                                <span>{{ choice.choice_text }}</span>
+                            {% for choice in result.choices %}
+                            <div class="choice-pill {% if choice.is_correct %}correct{% elif choice.is_selected %}incorrect{% endif %}">
+                                <i class="fas {% if choice.is_correct %}fa-check text-success{% elif choice.is_selected %}fa-times text-danger{% else %}fa-circle{% endif %}"></i>
+                                <span>{{ choice.text }}</span>
                             </div>
                             {% endfor %}
                         {% elif result.question.question_type == 'true_false' %}
