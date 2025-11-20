@@ -43,7 +43,7 @@
                                     <li><a href="{% url 'yitp:team' %}" style="color: #ffffff; opacity: 0.8;">Our Team</a></li>
                                     {% if user.is_authenticated %}
                                         <li><a href="{% url 'courses:course_list' %}" style="color: #ffffff; opacity: 0.8;">Courses</a></li>
-                                        <li><a href="{% url 'courses:dashboard' %}" style="color: #ffffff; opacity: 0.8;">Dashboard</a></li>
+                                        <li><a href="{% url 'profile' %}" style="color: #ffffff; opacity: 0.8;">Dashboard</a></li>
                                     {% else %}
                                         <li><a href="{% url 'yitp:web_courses_list' %}" style="color: #ffffff; opacity: 0.8;">Courses</a></li>
                                         <li><a href="{% url 'register' %}" style="color: #ffffff; opacity: 0.8;">Join Now</a></li>

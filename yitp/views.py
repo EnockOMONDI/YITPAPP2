@@ -10,11 +10,70 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_http_methods
 
 
+def _get_resume_destination(user):
+    """
+    Determine the best resume destination for a returning learner.
+    Returns the last active lesson URL when available, otherwise dashboard.
+    """
+    # Role-specific destinations first
+    if getattr(user, 'is_superuser', False):
+        return reverse('users:superuser_dashboard')
+
+    if hasattr(user, 'instructor_profile'):
+        try:
+            profile = user.instructor_profile
+            if profile and profile.is_active:
+                return reverse('users:instructor_profile')
+        except Exception:
+            pass
+
+    try:
+        from django.db.models.functions import Coalesce
+        from progress.models import Enrollment, LessonProgress
+    except Exception:
+        # If related apps are unavailable, skip smart routing
+        return None
+
+    enrollments = Enrollment.objects.filter(student=user)
+    if not enrollments.exists():
+        return reverse('profile')
+
+    last_progress = (
+        LessonProgress.objects
+        .filter(enrollment__student=user)
+        .annotate(last_activity=Coalesce('completed_at', 'started_at'))
+        .filter(last_activity__isnull=False)
+        .select_related('enrollment__course', 'lesson')
+        .order_by('-last_activity')
+        .first()
+    )
+
+    if last_progress:
+        try:
+            return reverse(
+                'courses:lesson_detail',
+                kwargs={
+                    'course_slug': last_progress.enrollment.course.slug,
+                    'lesson_id': last_progress.lesson.id
+                }
+            )
+        except Exception:
+            # If reverse fails for any reason, default to dashboard
+            pass
+
+    return reverse('profile')
+
+
 def home(request):
     """
     Smart home view with intelligent routing based on user authentication status.
     Authenticated users see personalized content, unauthenticated users see marketing content.
     """
+    if request.user.is_authenticated:
+        resume_url = _get_resume_destination(request.user)
+        if resume_url:
+            return redirect(resume_url)
+
     context = {}
 
     if request.user.is_authenticated:

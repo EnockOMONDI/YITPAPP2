@@ -44,19 +44,24 @@ class SmartRedirectMiddleware(MiddlewareMixin):
         
         # Redirect authenticated users away from registration/login pages
         if user.is_authenticated:
-            if path in ['/registration/', '/registration2/', '/login/', '/signup/', '/register/']:
-                # Check if user has course enrollments
+            # Role-specific destinations
+            if getattr(user, 'is_superuser', False):
+                role_destination = 'users:superuser_dashboard'
+            elif hasattr(user, 'instructor_profile'):
                 try:
-                    from courses.models import Enrollment
-                    has_enrollments = Enrollment.objects.filter(student=user).exists()
-                    
-                    if has_enrollments:
-                        return redirect('courses:dashboard')
-                    else:
-                        return redirect('courses:course_list')
+                    profile = user.instructor_profile
+                    role_destination = 'users:instructor_profile' if profile and profile.is_active else 'profile'
+                except Exception:
+                    role_destination = 'profile'
+            else:
+                role_destination = 'profile'
+
+            if path in ['/registration/', '/registration2/', '/login/', '/signup/', '/register/']:
+                try:
+                    return redirect(role_destination)
                 except:
                     # Fallback if courses app is not available
-                    return redirect('yitp:home')
+                    return redirect(role_destination)
         
         # Redirect unauthenticated users from LMS-specific pages to appropriate alternatives
         elif not user.is_authenticated:
@@ -141,7 +146,17 @@ class WelcomePageRedirectMiddleware(MiddlewareMixin):
 
                 # If user has recent enrollments, redirect to dashboard
                 if recent_enrollments.exists():
-                    return redirect('courses:dashboard')
+                    # Honor role destinations for returning users
+                    if getattr(user, 'is_superuser', False):
+                        return redirect('users:superuser_dashboard')
+                    if hasattr(user, 'instructor_profile'):
+                        try:
+                            profile = user.instructor_profile
+                            if profile and profile.is_active:
+                                return redirect('users:instructor_profile')
+                        except Exception:
+                            pass
+                    return redirect('profile')
 
             except:
                 # Fallback - continue to welcome page

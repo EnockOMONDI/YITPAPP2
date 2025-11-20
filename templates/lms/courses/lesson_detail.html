@@ -1,4 +1,4 @@
-{% extends 'unified/base.html' %}{% load static %}
+{% extends 'unified/base.html' %}{% load static course_extras %}
 
 {% block title %}{{ lesson.title }} - {{ lesson.module.course.title }} - Entrepreneurship LMS{% endblock %}
 
@@ -1629,17 +1629,15 @@
                                                         {% endif %}
                                                     {% endif %}
 
-                                                    {% if next_lesson %}
-                                                        {% if progress.status == 'completed' and next_lesson_accessible %}
-                                                            <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}"
-                                                               class="btn btn-secondary-yitp">
-                                                                <i class="fas fa-arrow-right me-2"></i>Next Lesson
-                                                            </a>
-                                                        {% else %}
-                                                            <button class="btn btn-outline-secondary" disabled title="Complete current lesson to unlock">
-                                                                <i class="fas fa-lock me-2"></i>Next Lesson (Locked)
-                                                            </button>
-                                                        {% endif %}
+                                                    {% if quiz_status.has_quiz and quiz_status.quiz_url %}
+                                                        <a href="{{ quiz_status.quiz_url }}" class="btn btn-secondary-yitp">
+                                                            <i class="fas fa-arrow-right me-2"></i>Go to Lesson Quiz
+                                                        </a>
+                                                    {% elif next_lesson %}
+                                                        <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}"
+                                                           class="btn btn-secondary-yitp">
+                                                            <i class="fas fa-arrow-right me-2"></i>Next Lesson
+                                                        </a>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -1664,12 +1662,12 @@
 
                         <div class="tab-pane fade" id="lesson-resources-pane" role="tabpanel" aria-labelledby="lesson-resources-tab">
                             <div class="lesson-resources-panel">
-                                {% if lesson.resources %}
+                                {% if normalized_resources %}
                                     <ul class="list-group list-group-flush">
-                                        {% for resource in lesson.resources %}
+                                        {% for resource in normalized_resources %}
                                             <li class="list-group-item d-flex justify-content-between align-items-start flex-wrap gap-2">
                                                 <div>
-                                                    <strong>{{ resource.label|default:resource.title|default:resource.name|default:resource }}</strong>
+                                                    <strong>{{ resource.label }}</strong>
                                                     {% if resource.description %}
                                                         <p class="mb-1 text-muted small">{{ resource.description }}</p>
                                                     {% endif %}
@@ -1748,29 +1746,14 @@
                                 <i class="fas fa-chevron-left me-2"></i>Previous
                             </button>
                             {% endif %}
-                            {% if next_lesson %}
-                                {% if next_lesson_accessible %}
+                            {% if quiz_status.has_quiz and quiz_status.quiz_url %}
+                                <a href="{{ quiz_status.quiz_url }}" class="nav-button" >
+                                    <i class="fas fa-clipboard-check me-2"></i>Go to Lesson Quiz
+                                </a>
+                            {% elif next_lesson %}
                                 <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}" class="nav-button">
                                     Next<i class="fas fa-chevron-right ms-2"></i>
                                 </a>
-                                {% else %}
-                                <button class="nav-button locked" disabled title="Complete current lesson to unlock">
-                                    <i class="fas fa-lock me-2"></i>Next (Locked)
-                                </button>
-                                {% endif %}
-                            {% else %}
-                                <!-- Single-lesson course: Show Take Quiz button instead of Next -->
-                                {% if lesson.quizzes.exists %}
-                                    {% with quiz=lesson.quizzes.first %}
-                                    <a href="{% url 'assessments:take_quiz' quiz.id %}" class="nav-button" style="background: linear-gradient(135deg, #ff5d15, #341C67); color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; box-shadow: 0 4px 12px rgba(255,93,21,0.3);">
-                                        <i class="fas fa-quiz me-2"></i>Take Quiz
-                                    </a>
-                                    {% endwith %}
-                                {% else %}
-                                <button class="nav-button secondary" disabled>
-                                    Next<i class="fas fa-chevron-right ms-2"></i>
-                                </button>
-                                {% endif %}
                             {% endif %}
                         </div>
                     </div>
@@ -1892,7 +1875,7 @@
                         <a href="{% url 'courses:my_courses' %}" class="btn btn-outline-secondary btn-sm">
                             <i class="fas fa-list me-2"></i>My Courses
                         </a>
-                        <a href="{% url 'courses:dashboard' %}" class="btn btn-outline-secondary btn-sm">
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary btn-sm">
                             <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                         </a>
                     </div>
@@ -2031,35 +2014,25 @@ function attemptLessonCompletion() {
             }
 
             // Check if next lesson is now accessible
-            if (data.next_lesson_accessible && data.next_lesson_url) {
-                message += `\n\nNext lesson "${data.next_lesson_title}" is now unlocked!`;
+                    if (data.next_lesson_url && data.quiz_url) {
+                        // Update next button to point to quiz, not locked
+                        if (nextLessonButton) {
+                            nextLessonButton.disabled = false;
+                            nextLessonButton.className = 'btn btn-secondary-yitp';
+                            nextLessonButton.innerHTML = '<i class="fas fa-arrow-right me-2"></i>Go to Lesson Quiz';
+                            nextLessonButton.onclick = () => window.location.href = data.quiz_url;
+                            nextLessonButton.style.cursor = 'pointer';
+                            nextLessonButton.removeAttribute('title');
+                        }
 
-                // Update next button in progress card
-                if (nextLessonButton) {
-                    nextLessonButton.disabled = false;
-                    nextLessonButton.className = 'btn btn-secondary-yitp';
-                    nextLessonButton.innerHTML = '<i class="fas fa-arrow-right me-2"></i>Next Lesson';
-                    nextLessonButton.onclick = () => window.location.href = data.next_lesson_url;
-                    nextLessonButton.style.cursor = 'pointer';
-                    nextLessonButton.removeAttribute('title');
-                }
-
-                // Update next button in sidebar if it exists
-                if (nextButton && nextButton.classList.contains('locked')) {
-                    nextButton.classList.remove('locked');
-                    nextButton.disabled = false;
-                    nextButton.innerHTML = 'Next<i class="fas fa-chevron-right ms-2"></i>';
-                    nextButton.onclick = () => window.location.href = data.next_lesson_url;
-                    nextButton.style.cursor = 'pointer';
-                }
-
-                // Show option to continue to next lesson
-                setTimeout(() => {
-                    if (confirm(`Great job! Would you like to continue to the next lesson: "${data.next_lesson_title}"?`)) {
-                        window.location.href = data.next_lesson_url;
+                        if (nextButton) {
+                            nextButton.disabled = false;
+                            nextButton.classList.remove('locked');
+                            nextButton.innerHTML = 'Next<i class="fas fa-chevron-right ms-2"></i>';
+                            nextButton.onclick = () => window.location.href = data.quiz_url;
+                            nextButton.style.cursor = 'pointer';
+                        }
                     }
-                }, 2000); // Increased delay to allow gamification notifications
-            }
 
             // Show success notification
             showNotification(message, 'success');

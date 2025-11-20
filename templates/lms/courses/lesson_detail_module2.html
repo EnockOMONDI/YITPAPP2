@@ -372,15 +372,15 @@
             
             <!-- Next Lesson -->
             <div>
-                {% if next_lesson and next_lesson_accessible %}
+                {% if quiz_status.has_quiz and quiz_status.quiz_url %}
+                    <a href="{{ quiz_status.quiz_url }}" class="btn-simple primary">
+                        Go to Lesson Quiz<i class="fas fa-chevron-right ms-2"></i>
+                    </a>
+                {% elif next_lesson %}
                     <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}" 
                        class="btn-simple primary">
                         Next Lesson<i class="fas fa-chevron-right ms-2"></i>
                     </a>
-                {% elif next_lesson %}
-                    <button class="btn-simple" disabled title="Complete this lesson first">
-                        Next Lesson<i class="fas fa-lock ms-2"></i>
-                    </button>
                 {% endif %}
             </div>
         </div>

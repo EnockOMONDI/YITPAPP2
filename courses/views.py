@@ -12,6 +12,52 @@ from users.email_utils import send_enrollment_confirmation_email, send_enrollmen
 User = get_user_model()
 
 
+def normalize_lesson_resources(resource_items):
+    """Flatten and normalize lesson resource entries for safe rendering"""
+    normalized = []
+
+    def build_entry(entry):
+        if entry is None:
+            return
+        label = ''
+        description = ''
+        details = ''
+        url = ''
+
+        if isinstance(entry, dict):
+            label = entry.get('label') or entry.get('title') or entry.get('name') or entry.get('text')
+            description = entry.get('description') or entry.get('summary')
+            details = entry.get('details') or entry.get('notes')
+            url = entry.get('url') or entry.get('link') or entry.get('href') or entry.get('src')
+        else:
+            label = str(entry)
+            if isinstance(entry, str) and entry.startswith(('http://', 'https://')):
+                url = entry
+
+        if not label and url:
+            label = url
+
+        if label or url or description:
+            normalized.append({
+                'label': label or 'Additional Resource',
+                'description': description,
+                'details': details,
+                'url': url,
+            })
+
+    if not resource_items:
+        return normalized
+
+    for item in resource_items:
+        if isinstance(item, dict) and isinstance(item.get('external_links'), list):
+            for nested in item['external_links']:
+                build_entry(nested)
+        else:
+            build_entry(item)
+
+    return normalized
+
+
 class HomeView(TemplateView):
     """
     Homepage view
@@ -472,6 +518,8 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
         quiz_status = QuizValidationService.get_user_quiz_status(self.request.user, lesson)
         context['quiz_status'] = quiz_status
 
+        context['normalized_resources'] = normalize_lesson_resources(lesson.resources)
+
         return context
     
     def post(self, request, course_slug, lesson_id):
@@ -846,4 +894,3 @@ class AdminSupportView(TemplateView):
         context['sample_categories'] = Category.objects.filter(is_active=True)[:8]
 
         return context
-

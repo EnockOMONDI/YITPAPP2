@@ -4,9 +4,12 @@ register = template.Library()
 
 @register.filter
 def get_item(dictionary, key):
-    """Get an item from a dictionary using a key"""
-    if dictionary and key is not None:
-        return dictionary.get(key)
+    """Get an item from a dictionary-like object using a key"""
+    if dictionary and key is not None and hasattr(dictionary, 'get'):
+        try:
+            return dictionary.get(key)
+        except Exception:
+            return None
     return None
 
 @register.filter
@@ -50,3 +53,25 @@ def quiz_accessible_for_user(quiz, user):
         except Exception:
             return False, "Unable to check accessibility"
     return False, "Invalid quiz or user"
+
+
+@register.filter
+def resource_label(resource):
+    """Return a human-friendly label for a resource entry"""
+    if isinstance(resource, dict):
+        for key in ('label', 'title', 'name'):
+            value = resource.get(key)
+            if value:
+                return value
+    return str(resource) if resource is not None else ''
+
+
+@register.filter
+def resource_link(resource):
+    """Return the best URL for a resource entry"""
+    if isinstance(resource, dict):
+        for key in ('url', 'link', 'href', 'src'):
+            value = resource.get(key)
+            if value:
+                return value
+    return ''

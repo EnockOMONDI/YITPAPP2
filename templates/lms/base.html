@@ -183,7 +183,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'courses:dashboard' %}">Dashboard</a>
+                                <a class="nav-link" href="{% url 'profile' %}">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'courses:my_courses' %}">My Courses</a>
@@ -284,4 +284,3 @@
     {% block extra_js %}{% endblock %}
 </body>
 </html>
-

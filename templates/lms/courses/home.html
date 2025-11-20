@@ -9,7 +9,7 @@
 
 <!-- Features Section -->
 
-<br><br>
+
 <!-- Featured Courses Section -->
 {% if featured_courses %}
 <section class="py-5 bg-light">
@@ -60,9 +60,7 @@
                                 <small class="text-muted">
                                     <i class="fas fa-user me-1"></i>{{ course.instructor.get_full_name }}
                                 </small>
-                                <small class="text-muted">
-                                    <i class="fas fa-users me-1"></i>{{ course.enrolled_students_count }} students
-                                </small>
+            
                             </div>
                             
                             <div class="d-flex justify-content-between align-items-center">
