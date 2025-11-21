@@ -61,6 +61,24 @@ def normalize_lesson_resources(resource_items):
     return normalized
 
 
+def get_module2_pdf_path(sort_order):
+    """Return relative static path to Module 2 PDF matching the sort order."""
+    pdf_dir = Path(settings.BASE_DIR) / 'static' / 'module2' / 'pdf'
+    if not pdf_dir.exists():
+        return None
+
+    pattern = f"*Lesson {sort_order}_*.pdf"
+    match = next(pdf_dir.glob(pattern), None)
+    if not match:
+        return None
+
+    try:
+        rel_path = match.relative_to(Path(settings.BASE_DIR) / 'static')
+    except ValueError:
+        rel_path = match.name
+    return str(rel_path).replace('\\', '/')
+
+
 class HomeView(TemplateView):
     """
     Homepage view
@@ -133,12 +151,12 @@ class Module2DownloadView(LoginRequiredMixin, TemplateView):
             for html_file in sorted(module_dir.glob('lesson_*.html'), key=sort_key):
                 stem = html_file.stem
                 number = stem.split('_')[-1]
-                pdf_file = module_dir / 'pdf' / f'{stem}.pdf'
+                pdf_rel = get_module2_pdf_path(number)
                 lessons.append({
                     'number': number,
                     'title': f'Lesson {number}',
                     'html_path': f'module2/{html_file.name}',
-                    'pdf_path': f'module2/pdf/{stem}.pdf' if pdf_file.exists() else None,
+                    'pdf_path': pdf_rel,
                 })
 
         context['module2_lessons'] = lessons
@@ -553,6 +571,13 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
         context['quiz_status'] = quiz_status
 
         context['normalized_resources'] = normalize_lesson_resources(lesson.resources)
+        if lesson.module and 'Personal Initiative' in lesson.module.title:
+            pdf_rel = get_module2_pdf_path(lesson.sort_order)
+            context['module2_pdf_path'] = pdf_rel
+            context['module2_pdf_available'] = bool(pdf_rel)
+        else:
+            context['module2_pdf_available'] = False
+            context['module2_pdf_path'] = None
 
         return context
     
