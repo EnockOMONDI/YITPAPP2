@@ -2622,7 +2622,9 @@ function handleModule2IframeLoad() {
 
 function enhanceModule2Document(doc) {
     try {
+        if (doc.getElementById('module2-reader-style')) return;
         const style = doc.createElement('style');
+        style.id = 'module2-reader-style';
         style.textContent = `
             html, body { overflow-x: hidden !important; background: #fff; }
             #page-container { margin: 0 auto; }

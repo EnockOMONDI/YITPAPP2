@@ -1,3 +1,6 @@
+from pathlib import Path
+
+from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -108,6 +111,37 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             user_certificates = Certificate.objects.filter(enrollment__student=user)
             context['user_certificates'] = user_certificates
 
+        return context
+
+
+class Module2DownloadView(LoginRequiredMixin, TemplateView):
+    """Temporary hub to open Module 2 lessons directly (no iframe)."""
+    template_name = 'lms/courses/module2fordownload.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        module_dir = Path(settings.BASE_DIR) / 'static' / 'module2'
+        lessons = []
+
+        def sort_key(path_obj):
+            try:
+                return int(path_obj.stem.split('_')[-1])
+            except Exception:
+                return path_obj.stem
+
+        if module_dir.exists():
+            for html_file in sorted(module_dir.glob('lesson_*.html'), key=sort_key):
+                stem = html_file.stem
+                number = stem.split('_')[-1]
+                pdf_file = module_dir / 'pdf' / f'{stem}.pdf'
+                lessons.append({
+                    'number': number,
+                    'title': f'Lesson {number}',
+                    'html_path': f'module2/{html_file.name}',
+                    'pdf_path': f'module2/pdf/{stem}.pdf' if pdf_file.exists() else None,
+                })
+
+        context['module2_lessons'] = lessons
         return context
 
 
