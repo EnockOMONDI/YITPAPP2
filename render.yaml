@@ -2,7 +2,7 @@ services:
   - type: web
     name: yitp-lms
     env: python
-    branch: 2026ftesting
+    branch: 2026mtesting
     buildCommand: ./build.sh
     startCommand: gunicorn blog.wsgi:application
     envVars:
