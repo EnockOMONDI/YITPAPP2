@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
@@ -268,14 +270,88 @@ def terms_of_service(request):
     return render(request, 'yitp/terms_of_service.html')
 
 
+URL_CATEGORY_RULES = [
+    {
+        'label': 'Admin Pages',
+        'description': 'Django admin and staff management routes.',
+        'matcher': lambda path, name: path.startswith('/admin')
+    },
+    {
+        'label': 'Registration & Authentication',
+        'description': 'Login, logout, OTP, and registration flows.',
+        'matcher': lambda path, name: any(seg in path for seg in ['/login', '/logout', '/register', '/signup', '/accounts', '/otp'])
+    },
+    {
+        'label': 'Course Pages',
+        'description': 'Course catalog, detail, enrollment, and LMS entry points.',
+        'matcher': lambda path, name: path.startswith('/lms/courses') and '/lessons/' not in path and '/modules/' not in path
+    },
+    {
+        'label': 'Lesson & Module Pages',
+        'description': 'Lesson content, module detail, and content studio pages.',
+        'matcher': lambda path, name: '/lessons/' in path or '/modules/' in path or path.startswith('/lms/content')
+    },
+    {
+        'label': 'User Dashboards & Profiles',
+        'description': 'Learner profile, instructor dashboards, and superuser portals.',
+        'matcher': lambda path, name: path.startswith('/profile') or path.startswith('/users/') or 'dashboard' in path
+    },
+    {
+        'label': 'Progress & Analytics',
+        'description': 'Progress tracking, achievements, analytics, and enrollments.',
+        'matcher': lambda path, name: path.startswith('/lms/progress') or '/analytics' in path
+    },
+    {
+        'label': 'Payments & Sponsorship',
+        'description': 'Payment methods, billing, and sponsorship workflows.',
+        'matcher': lambda path, name: path.startswith('/payments') or 'sponsorship' in path or 'billing' in path
+    },
+    {
+        'label': 'Marketing & Support Pages',
+        'description': 'Marketing site, welcome, documentation, and support pages.',
+        'matcher': lambda path, name: path.startswith('/yitp') or path in ['/', '/welcome/', '/support/', '/privacy-policy/', '/terms-of-service/']
+    },
+]
+
+
+def _categorize_url(path, name):
+    for rule in URL_CATEGORY_RULES:
+        if rule['matcher'](path, name):
+            return rule['label'], rule['description']
+    return 'Other Pages', 'Miscellaneous routes not covered above.'
+
+
+def _describe_url(path, name):
+    purpose_map = [
+        (lambda p, n: 'course_detail' in n, 'Detailed view for a specific course'),
+        (lambda p, n: '/lms/courses/' in p and '/lessons/' in p, 'Lesson detail inside the LMS'),
+        (lambda p, n: '/modules/' in p, 'Module overview with lesson list'),
+        (lambda p, n: p.startswith('/profile') or 'profile' in n, 'Learner profile or unified dashboard'),
+        (lambda p, n: p.startswith('/users/superuser') or 'superuser' in n, 'Superuser administration dashboard'),
+        (lambda p, n: p.startswith('/users/instructor') or 'instructor' in n, 'Instructor portal and tools'),
+        (lambda p, n: p.startswith('/payments'), 'Payments, billing, or sponsorship entry point'),
+        (lambda p, n: p.startswith('/admin'), 'Django admin site'),
+        (lambda p, n: any(seg in p for seg in ['/login', '/logout', '/register']), 'Authentication or registration page'),
+        (lambda p, n: p.startswith('/yitp'), 'Marketing/support/landing page'),
+    ]
+    for matcher, description in purpose_map:
+        if matcher(path, name):
+            return description
+    return 'General site page'
+
+
 def url_testing(request):
     """
-    Simple URL hub to help QA test project routes.
-    Shows all named URL patterns that can be reversed without parameters.
+    URL hub grouped by purpose to help map the user flow visually.
+    Shows all named URL patterns reversible without parameters.
     """
     resolver = get_resolver()
-    url_entries = []
+    categories = OrderedDict()
+    for rule in URL_CATEGORY_RULES:
+        categories[rule['label']] = {'description': rule['description'], 'entries': []}
+    categories['Other Pages'] = {'description': 'Miscellaneous routes not covered above.', 'entries': []}
 
+    total_urls = 0
     for name in resolver.reverse_dict.keys():
         if not isinstance(name, str):
             continue
@@ -283,13 +359,29 @@ def url_testing(request):
             url = reverse(name)
         except NoReverseMatch:
             continue
-        url_entries.append({'name': name, 'url': url})
+        label, desc = _categorize_url(url, name)
+        purpose = _describe_url(url, name)
+        categories[label]['description'] = desc
+        categories[label]['entries'].append({
+            'name': name,
+            'url': url,
+            'purpose': purpose,
+        })
+        total_urls += 1
 
-    url_entries.sort(key=lambda entry: entry['name'])
+    grouped_entries = [
+        {
+            'label': label,
+            'description': data['description'],
+            'entries': sorted(data['entries'], key=lambda e: e['name'])
+        }
+        for label, data in categories.items()
+        if data['entries']
+    ]
 
     return render(request, 'urltesting.html', {
-        'url_entries': url_entries,
-        'total_urls': len(url_entries),
+        'grouped_entries': grouped_entries,
+        'total_urls': total_urls,
     })
 
 

@@ -29018,3 +29018,13 @@ django.db.utils.OperationalError: could not translate host name "aws-0-eu-west-1
 
 ERROR 2025-11-21 19:26:10,933 basehttp 35975 6196604928 "GET /favicon.ico HTTP/1.1" 500 251622
 INFO 2025-11-21 19:30:50,347 basehttp 35975 6196604928 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 144232
+INFO 2025-11-22 00:46:19,044 autoreload 45885 8701196992 Watching for file changes with StatReloader
+WARNING 2025-11-22 00:46:22,621 log 45885 6126546944 Not Found: /urlstesting
+WARNING 2025-11-22 00:46:22,622 basehttp 45885 6126546944 "GET /urlstesting HTTP/1.1" 404 11258
+INFO 2025-11-22 00:46:25,218 basehttp 45885 6126546944 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-11-22 01:03:48,750 autoreload 45885 8701196992 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-22 01:03:50,940 autoreload 48491 8701196992 Watching for file changes with StatReloader
+INFO 2025-11-22 01:04:19,902 autoreload 48491 8701196992 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-22 01:04:22,045 autoreload 48721 8701196992 Watching for file changes with StatReloader
+INFO 2025-11-22 01:06:18,152 basehttp 48721 6195195904 "GET /urltesting HTTP/1.1" 301 0
+INFO 2025-11-22 01:06:19,772 basehttp 48721 6212022272 "GET /urltesting/ HTTP/1.1" 200 74921
