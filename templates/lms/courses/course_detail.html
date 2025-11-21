@@ -616,21 +616,18 @@
                             {% if course.price > 0 %}
                                 <!-- Paid Course Enrollment -->
                                 {% if user.profile.has_any_payment_access %}
-                                    <form method="post" action="{% url 'courses:enroll' course.slug %}" class="d-inline">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-primary btn-lg">
-                                            <i class="fas fa-user-plus me-2"></i>
-                                            {% if user.profile.has_confirmed_payment %}
-                                                Enroll Now - ${{ course.price }} USD
-                                            {% elif user.profile.has_partial_payment %}
-                                                Enroll Now - Partial Payment Active
-                                            {% elif user.profile.has_sponsorship_access %}
-                                                Enroll Now - Sponsored Access
-                                            {% else %}
-                                                Enroll Now - ${{ course.price }} USD
-                                            {% endif %}
-                                        </button>
-                                    </form>
+                                    <a href="{% url 'courses:course_quick_start' course.slug %}" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-user-plus me-2"></i>
+                                        {% if user.profile.has_confirmed_payment %}
+                                            Enroll Now - ${{ course.price }} USD
+                                        {% elif user.profile.has_partial_payment %}
+                                            Enroll Now - Partial Payment Active
+                                        {% elif user.profile.has_sponsorship_access %}
+                                            Enroll Now - Sponsored Access
+                                        {% else %}
+                                            Enroll Now - ${{ course.price }} USD
+                                        {% endif %}
+                                    </a>
                                 {% else %}
                                     <!-- Trial and Payment Options -->
                                     <div class="d-flex gap-2 flex-wrap">
@@ -667,12 +664,9 @@
                             {% else %}
                                 <!-- Free Course Enrollment -->
                                 <div class="d-flex gap-2 flex-wrap">
-                                    <form method="post" action="{% url 'courses:enroll' course.slug %}" class="d-inline">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-primary btn-lg">
-                                            <i class="fas fa-user-plus me-2"></i>Enroll Now - Free
-                                        </button>
-                                    </form>
+                                    <a href="{% url 'courses:course_quick_start' course.slug %}" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-user-plus me-2"></i>Enroll Now - Free
+                                    </a>
 
                                     <!-- Trial option for free courses (if available) -->
                                     {% if trial_available and not user.profile.has_active_trial %}

@@ -11,6 +11,7 @@ urlpatterns = [
     path('how-it-works/', views.HowItWorksView.as_view(), name='how_it_works'),
     path('admin-support/', views.AdminSupportView.as_view(), name='admin_support'),
     path('module-2/downloads/', views.Module2DownloadView.as_view(), name='module2_downloads'),
+    path('<slug:course_slug>/start/', views.CourseQuickStartView.as_view(), name='course_quick_start'),
     path('', views.CourseListView.as_view(), name='course_list'),
     path('<slug:slug>/', views.CourseDetailView.as_view(), name='course_detail'),
     path('<slug:course_slug>/enroll/', views.EnrollView.as_view(), name='enroll'),

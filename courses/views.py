@@ -15,6 +15,27 @@ from users.email_utils import send_enrollment_confirmation_email, send_enrollmen
 User = get_user_model()
 
 
+def get_first_published_lesson(course):
+    """Return the first published lesson for the course."""
+    for module in course.modules.filter(is_published=True).order_by('sort_order'):
+        lesson = module.lessons.filter(is_published=True).order_by('sort_order').first()
+        if lesson:
+            return lesson
+    return None
+
+
+def get_user_last_lesson(user, course=None):
+    """Return the most recent lesson the user interacted with."""
+    qs = LessonProgress.objects.filter(
+        enrollment__student=user,
+        enrollment__status__in=['active', 'completed']
+    )
+    if course:
+        qs = qs.filter(enrollment__course=course)
+    progress = qs.order_by('-completed_at', '-started_at', '-pk').first()
+    return progress.lesson if progress else None
+
+
 def normalize_lesson_resources(resource_items):
     """Flatten and normalize lesson resource entries for safe rendering"""
     normalized = []
@@ -417,6 +438,33 @@ class EnrollView(LoginRequiredMixin, View):
                 messages.error(request, result['message'])
 
         return redirect('courses:course_detail', slug=course_slug)
+
+
+class CourseQuickStartView(LoginRequiredMixin, View):
+    """Enroll the student (if allowed) and jump into the appropriate lesson."""
+
+    def get(self, request, course_slug):
+        from .enrollment_service import EnrollmentService
+
+        try:
+            course = EnrollmentService.get_course_by_slug_or_id(course_slug)
+        except Exception:
+            messages.error(request, 'Course not found or not available for enrollment.')
+            return redirect('courses:course_list')
+
+        result = EnrollmentService.enroll_user_in_course(request.user, course)
+        if not result['success']:
+            message = result.get('message', 'Unable to enroll at this time.')
+            if 'already enrolled' not in message.lower():
+                messages.error(request, message)
+                return redirect('courses:course_detail', slug=course.slug)
+
+        target_lesson = get_user_last_lesson(request.user, course) or get_first_published_lesson(course)
+        if not target_lesson:
+            messages.info(request, 'This course does not have any published lessons yet.')
+            return redirect('courses:course_detail', slug=course.slug)
+
+        return redirect('courses:lesson_detail', course_slug=course.slug, lesson_id=target_lesson.id)
 
 
 class ModuleDetailView(LoginRequiredMixin, DetailView):

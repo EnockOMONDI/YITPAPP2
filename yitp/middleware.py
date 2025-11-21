@@ -6,6 +6,7 @@ Provides intelligent routing based on user authentication status and context
 import logging
 
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
@@ -79,8 +80,27 @@ class SmartRedirectMiddleware(MiddlewareMixin):
         instructor_profile = getattr(user, 'instructor_profile', None)
         if instructor_profile and getattr(instructor_profile, 'is_active', False):
             return 'users:instructor_profile'
+        lesson_url = self._get_last_lesson_url(user)
+        return lesson_url or 'profile'
 
-        return 'profile'
+    def _get_last_lesson_url(self, user):
+        try:
+            from progress.models import LessonProgress
+            last_progress = LessonProgress.objects.filter(
+                enrollment__student=user,
+                enrollment__status__in=['active', 'completed']
+            ).order_by('-completed_at', '-started_at', '-pk').first()
+            if last_progress and last_progress.lesson_id:
+                return reverse(
+                    'courses:lesson_detail',
+                    kwargs={
+                        'course_slug': last_progress.lesson.module.course.slug,
+                        'lesson_id': last_progress.lesson.id
+                    }
+                )
+        except Exception as exc:  # pragma: no cover
+            logger.warning("Failed to find last lesson for user %s: %s", getattr(user, 'id', 'unknown'), exc)
+        return None
 
 
 class CourseDiscoveryRedirectMiddleware(MiddlewareMixin):

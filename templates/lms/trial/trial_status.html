@@ -133,7 +133,7 @@
 {% endif %}
 
 <!-- Trial Benefits Showcase -->
-{% if not user.profile.has_active_trial and not user.profile.has_any_payment_access and not user.profile.trial_lessons_accessed %}
+{% if course.price and course.price > 0 and not user.profile.has_active_trial and not user.profile.has_any_payment_access and not user.profile.trial_lessons_accessed %}
 <div class="trial-benefits-showcase mb-3">
     <div class="card" style="border: 2px solid #ff5d15;">
         <div class="card-header text-white" style="background: linear-gradient(135deg, #ff5d15 0%, #341C67 100%);">

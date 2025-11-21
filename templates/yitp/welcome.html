@@ -25,84 +25,6 @@
         </div>
     </section>
 
-    <section class="welcome-grid">
-        <div class="grid-card">
-            <div class="card-header">
-                <h4>Profile status</h4>
-                <span class="badge">Step 1</span>
-            </div>
-            {% if user.profile %}
-            {% with completion=user.profile.get_completion_status %}
-            <p>Keep your profile complete so mentors can tailor guidance.</p>
-            <div class="progress-wrap">
-                <div class="progress-label">
-                    <span>Completion</span>
-                    <strong>{{ user.profile.profile_completion_percentage|floatformat:0 }}%</strong>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar" style="width: {{ user.profile.profile_completion_percentage }}%"></div>
-                </div>
-            </div>
-            {% if completion.recommendations %}
-            <ul class="checklist">
-                {% for task in completion.recommendations %}
-                <li><i class="fas fa-circle-notch"></i>{{ task }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
-            {% else %}
-            <p>Tell us about your goals so we can personalize your learning plan.</p>
-            <div class="placeholder-progress">
-                <span>0%</span>
-            </div>
-            {% endif %}
-            <a href="{% url 'profile' %}" class="btn-tertiary">
-                Update profile
-            </a>
-        </div>
-
-        <div class="grid-card">
-            <div class="card-header">
-                <h4>Programme snapshot</h4>
-                <span class="badge muted">At a glance</span>
-            </div>
-            <ul class="snapshot-list">
-                <li>
-                    <i class="fas fa-clock"></i>
-                    9-week guided sprint with weekly live sessions
-                </li>
-                <li>
-                    <i class="fas fa-laptop"></i>
-                    100% virtual, mobile-friendly learning
-                </li>
-                <li>
-                    <i class="fas fa-user-friends"></i>
-                    1-year mentorship and accountability pods
-                </li>
-            </ul>
-            <a href="{% url 'yitp:web_courses_list' %}" class="btn-tertiary">
-                View curriculum
-            </a>
-        </div>
-
-        <div class="grid-card">
-            <div class="card-header">
-                <h4>Community commitments</h4>
-                <span class="badge muted">Culture</span>
-            </div>
-            <p>We value purposeful work, respectful collaboration, and outcomes that uplift communities.</p>
-            <ul class="pill-list">
-                <li><i class="fas fa-hands-helping"></i>Support peers</li>
-                <li><i class="fas fa-chart-line"></i>Track growth</li>
-                <li><i class="fas fa-bullhorn"></i>Share wins</li>
-            </ul>
-            <a href="{% url 'yitp:faqs' %}" class="btn-tertiary">
-                Read guidelines
-            </a>
-        </div>
-    </section>
-
     <section class="tour-section">
         <div class="tour-header">
             <div>
@@ -187,7 +109,6 @@ body.welcome-page .progress-wrap {
 }
 
 #yitp-welcome-page .welcome-hero,
-#yitp-welcome-page .grid-card,
 #yitp-welcome-page .tour-slide,
 #yitp-welcome-page .support-card {
     background: #ffffff;
@@ -215,13 +136,11 @@ body.welcome-page .progress-wrap {
     font-size: clamp(2.2rem, 4vw, 3rem);
     font-weight: 800;
     margin-bottom: 15px;
-    color: #1f2235;
 }
 
 .welcome-hero .lead {
     max-width: 640px;
     margin: 0 auto 30px;
-    color: #4b5563;
 }
 
 .hero-actions {
@@ -247,15 +166,6 @@ body.welcome-page .progress-wrap {
     transition: all 0.25s ease;
 }
 
-.btn-primary {
-    background: #341C67;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    color: #fff;
-}
 
 .btn-secondary {
     background: #eef1fb;
