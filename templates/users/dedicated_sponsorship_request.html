@@ -12,19 +12,19 @@
 
 /* Fix for navbar overlap - add top margin to account for fixed navbar */
 .sponsorship-content-wrapper {
-    margin-top: 100px; /* Account for fixed navbar height */
+    margin-top: 130px; /* Account for fixed navbar height */
 }
 
 /* Responsive navbar spacing adjustments */
 @media (max-width: 991px) {
     .sponsorship-content-wrapper {
-        margin-top: 90px;
+        margin-top: 110px;
     }
 }
 
 @media (max-width: 575px) {
     .sponsorship-content-wrapper {
-        margin-top: 80px;
+        margin-top: 100px;
     }
 }
 
@@ -39,7 +39,7 @@
 /* Page Header */
 .sponsorship-header {
     background: linear-gradient(135deg, var(--yitp-dark-blue) 0%, #341C67 100%);
-    color: white;
+    color: white !important;
     padding: 60px 0;
     margin-bottom: 40px;
 }
@@ -249,7 +249,7 @@
     <section class="sponsorship-header">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
+                <div class="col-lg-8 text-center text-white">
                     <h1>{{ page_title }}</h1>
                     <p>{{ page_description }}</p>
                 </div>

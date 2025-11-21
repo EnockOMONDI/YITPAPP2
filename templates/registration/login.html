@@ -5,183 +5,181 @@
 
 {% block extra_head %}
 <style>
-/* Login form styling */
 .login__area {
-    background: linear-gradient(135deg, #341C67 0%, #341C67 100%);
+    background: linear-gradient(135deg, #2b1857, #4b2b8a);
     min-height: 100vh;
+    padding: 100px 0 60px 0;
+}
+
+.login-panel {
+    background: rgba(13, 18, 40, 0.9);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(10, 10, 20, 0.8);
+}
+
+.login-showcase {
+    background: #fff;
+    color: #341C67;
+    padding: 4rem 3rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    padding: 0;
-    position: relative;
+}
+
+.login-showcase h1 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #341C67;
+}
+
+.login-showcase p {
+    opacity: 0.95;
+    color: #4b2b8a;
 }
 
 .login__wrapper {
-    background: white;
-    border-radius: 10px;
-    padding: 60px 40px;
-    box-shadow: 0px 30px 60px 0px rgba(1, 11, 60, 0.15);
-    max-width: 500px;
-    width: 100%;
-    margin: 20px;
-    position: relative;
-    z-index: 1;
+    padding: 3rem;
+    color: #f8fafc;
+}
+
+.login__header h2,
+.login__header p,
+.login__options label,
+.register-link p,
+.register-link a {
+    color: white !important;
+}
+.register-link a {
+    color: white !important;
 }
 
 .login__form-input {
     position: relative;
-    margin-bottom: 25px;
+    color: white !important;
+
 }
 
 .login__form-input input {
     width: 100%;
-    padding: 15px 20px 15px 50px;
-    border: 2px solid #eef0f6;
-    border-radius: 6px;
-    font-size: 16px;
-    color: #6d6e75;
-    background: #f8f9fa;
-    transition: all 0.3s ease;
+    padding: 15px 15px 15px 3rem;
+    border: 2px solid rgba(99, 102, 241, 0.35);
+    border-radius: 12px;
+    color: #341C67 !important;
+    margin: 5px;
 }
 
 .login__form-input input:focus {
-    border-color: #ff5d15;
-    background: white;
-    outline: none;
+    border-color: ;
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.2);
 }
 
 .login__form-input i {
     position: absolute;
-    left: 18px;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #6d6e75;
-    font-size: 16px;
-}
-
-.login__form-input input:focus + i {
-    color: #ff5d15;
-}
-
-.error-message {
-    background: #f8d7da;
-    color: #721c24;
-    padding: 12px 20px;
-    border-radius: 6px;
-    margin-bottom: 25px;
-    border: 1px solid #f5c6cb;
-}
-
-.success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 12px 20px;
-    border-radius: 6px;
-    margin-bottom: 25px;
-    border: 1px solid #c3e6cb;
-}
-
-.login__options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.remember-me input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #ff5d15;
-}
-
-.forgot-password {
-    color: #ff5d15;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 5px 8px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-}
-
-.forgot-password:hover {
     color: #341C67;
-    background-color: rgba(255, 93, 21, 0.1);
-    text-decoration: none;
-    transform: translateY(-1px);
+    pointer-events: none;
 }
 
-.register-link {
+.primary-btn {
+   background-color :#ff5d15 ;
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 1rem;
+}
+
+.social-divider {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin: 1.5rem 0;
+}
+
+.google-btn {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: transparent;
+    color: #fff;
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.google-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: #ff6b08;
+}
+
+.google-btn.disabled {
+    opacity: 0.45;
+    filter: blur(0.3px);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.social-note {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 30px;
-    border-top: 1px solid #eef0f6;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
 }
 
+.login__options .forgot-password,
 .register-link a {
-    color: #ff5d15;
-    text-decoration: none;
-    font-weight: 600;
+    color: #f8fafc;
 }
-
+.login__options .forgot-password:hover,
 .register-link a:hover {
-    color: #e04a0f;
+    color: #ff6600;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .login__area {
-        padding: 20px 0;
-    }
+.auth-quote-author {
+    margin-top: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #341C67;
+}
 
-    .login__wrapper {
-        padding: 40px 30px;
-        margin: 15px;
-        max-width: 90%;
-    }
+@media (max-width: 992px) {
+    .login-panel { border-radius: 18px; }
+    .login-showcase { padding: 3rem 2rem; }
 }
 
 @media (max-width: 576px) {
-    .login__wrapper {
-        padding: 30px 20px;
-        margin: 10px;
-        max-width: 95%;
-    }
-
-    .login__options {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
+    .login__wrapper { padding: 2.5rem; }
 }
-
-/* Ensure proper centering on very small screens */
-@media (max-width: 320px) {
-    .login__wrapper {
-        padding: 25px 15px;
-        margin: 5px;
-        max-width: 98%;
-    }
-}
+</style>
 </style>
 {% endblock %}
 
 {% block content %}
 <section class="login__area">
-    <div class="login__wrapper">
+    <div class="container">
+        <div class="row login-panel align-items-stretch">
+            <div class="col-lg-6 login-showcase">
+                <div class="mb-4">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="YITP" style="height: 48px;">
+                </div>
+                <h1>“Education is the most powerful weapon which you can use to change the world.”</h1>
+                <div class="auth-quote-author">— Nelson Mandela</div>
+            </div>
+            <div class="col-lg-6 p-0">
+                <div class="login__wrapper">
                     <div class="login__header text-center mb-40">
-                        <h2 style="color: #341C67; font-size: 32px; font-weight: 700; margin-bottom: 15px;">Welcome Back</h2>
-                        <p style="color: #6d6e75; margin: 0;">Sign in to your Youth Impact Training Programme account</p>
+                        <h2 style="color: #ffffff; font-size: 32px; font-weight: 700; margin-bottom: 15px;">Welcome Back</h2>
+                        <p style="color: #ffffff; margin: 0;">Sign in to your Youth Impact Training Programme account</p>
                     </div>
 
                     <!-- Display Form Errors -->
@@ -219,32 +217,47 @@
                                 </div>
                             {% endif %}
                         </div>
+<br>
+                      
 
+                        <button type="submit" class="e-btn e-btn-3 primary-btn">
+                            <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                            Sign In
+                        </button>
+
+                        <div class="social-divider"></div>
+
+                        <button type="button" class="google-btn disabled" tabindex="-1">
+                            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="height: 20px;opacity:0.75;">
+                            <div class="text-start">
+                                <strong>Continue with Google</strong>
+                                <small style="display:block;color:rgba(255,255,255,0.7);font-size:0.8rem;">Coming soon</small>
+                            </div>
+                        </button>
+                        <div class="social-note">Our Google login option will return shortly.</div>
+
+                        {% if next %}
+                            <input type="hidden" name="next" value="{{ next }}">
+                        {% endif %}
                         <div class="login__options">
                             <div class="remember-me">
                                 <input type="checkbox" id="remember" name="remember">
-                                <label for="remember" style="color: #6d6e75; font-size: 14px;">Remember me</label>
+                                <label for="remember" style="color: #ffffff; font-size: 14px;">Remember me</label>
                             </div>
                             <a href="{% url 'password_reset' %}" class="forgot-password">
                                 <i class="fas fa-key" style="margin-right: 5px;"></i>
                                 Forgot Password?
                             </a>
                         </div>
-
-                        <button type="submit" class="e-btn e-btn-3" style="width: 100%; padding: 15px; font-size: 16px; font-weight: 600;">
-                            <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
-                            Sign In
-                        </button>
-
-                        {% if next %}
-                            <input type="hidden" name="next" value="{{ next }}">
-                        {% endif %}
                     </form>
 
-                    <div class="register-link">
-                        <p style="color: #6d6e75; margin-bottom: 10px;">Don't have an account?</p>
-                        <a href="{% url 'register' %}">Create your account here</a>
+                    <div class=" forgot-password">
+
+                        <a   href="{% url 'register' %}"> Don't have an account? Create your account here.</a>
                     </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

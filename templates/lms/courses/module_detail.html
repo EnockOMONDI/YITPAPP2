@@ -1,4 +1,4 @@
-{% extends 'lms/base.html' %}
+{% extends 'unified/base.html' %}
 {% load static %}
 
 {% block title %}{{ module.title }} - {{ module.course.title }} - Entrepreneurship LMS{% endblock %}
@@ -15,20 +15,23 @@
         margin-bottom: 2rem;
     }
     
-    .breadcrumb-custom {
+    .module-header .breadcrumb-custom {
         background: rgba(255,255,255,0.1);
         border-radius: 10px;
         padding: 0.75rem 1rem;
         margin-bottom: 1rem;
     }
     
-    .breadcrumb-custom a {
-        color: rgba(255,255,255,0.8);
-        text-decoration: none;
+    .module-header .breadcrumb-custom,
+    .module-header .breadcrumb-custom a,
+    .module-header .breadcrumb-custom span,
+    .module-header h1,
+    .module-header p {
+        color: rgba(255,255,255,0.9);
     }
     
-    .breadcrumb-custom a:hover {
-        color: white;
+    .module-header .breadcrumb-custom a:hover {
+        color: #fff;
     }
     
     .lesson-card {

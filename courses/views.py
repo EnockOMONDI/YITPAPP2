@@ -704,6 +704,34 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     """
     template_name = 'lms/courses/profile.html'
 
+    def post(self, request, *args, **kwargs):
+        """
+        Handle account settings actions (e.g., delete account request)
+        """
+        action = request.POST.get('action')
+        if action == 'request_delete':
+            reason = request.POST.get('reason', '').strip()
+            try:
+                from django.core.mail import send_mail
+                from django.conf import settings
+
+                admin_email = getattr(settings, 'ADMIN_EMAIL', None) or getattr(settings, 'DEFAULT_FROM_EMAIL', None)
+                if not admin_email:
+                    admin_email = 'info@youthimpactglobal.com'
+
+                subject = f"Account deletion request from {request.user.email}"
+                message = (
+                    f"User: {request.user.get_full_name() or request.user.username}\n"
+                    f"Email: {request.user.email}\n"
+                    f"Reason: {reason or 'No reason provided'}\n"
+                )
+                send_mail(subject, message, admin_email, [admin_email], fail_silently=True)
+                messages.success(request, "Your account deletion request has been sent to admin. We'll reach out shortly.")
+            except Exception:
+                messages.error(request, "Could not send the deletion request. Please contact support.")
+
+        return redirect('profile')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user

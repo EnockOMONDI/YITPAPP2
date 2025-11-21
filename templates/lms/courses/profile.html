@@ -640,6 +640,11 @@
                     <i class="fas fa-compass me-2"></i>LMS Navigation
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="account-tab" data-bs-toggle="pill" data-bs-target="#account" type="button" role="tab">
+                    <i class="fas fa-user-cog me-2"></i>Account Settings
+                </button>
+            </li>
         </ul>
 
         <!-- Tab Content -->
@@ -1533,6 +1538,35 @@
                                     <i class="fas fa-file-alt me-2"></i>Resources
                                 </a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Settings Tab -->
+            <div class="tab-pane fade" id="account" role="tabpanel">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="profile-card">
+                            <h4 class="section-title">Account Actions</h4>
+                            <p class="text-muted">Submit a request to delete your account. Our admin team will review and reach out before finalizing.</p>
+                            <form method="post" action="{% url 'profile' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="request_delete">
+                                <div class="mb-3">
+                                    <label class="form-label">Reason for deletion (optional)</label>
+                                    <textarea name="reason" class="form-control" rows="4" placeholder="Tell us why you want to delete your account (optional)"></textarea>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" value="1" id="confirmDeleteCheck" required>
+                                    <label class="form-check-label" for="confirmDeleteCheck">
+                                        I understand that my account and related data may be removed after admin review.
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt me-2"></i>Submit Deletion Request
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

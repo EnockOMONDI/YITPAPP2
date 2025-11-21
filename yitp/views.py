@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from django.urls import reverse
+from django.urls import reverse, get_resolver, NoReverseMatch
 from django.utils import timezone
 from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_http_methods
@@ -266,6 +266,31 @@ def privacy_policy(request):
 
 def terms_of_service(request):
     return render(request, 'yitp/terms_of_service.html')
+
+
+def url_testing(request):
+    """
+    Simple URL hub to help QA test project routes.
+    Shows all named URL patterns that can be reversed without parameters.
+    """
+    resolver = get_resolver()
+    url_entries = []
+
+    for name in resolver.reverse_dict.keys():
+        if not isinstance(name, str):
+            continue
+        try:
+            url = reverse(name)
+        except NoReverseMatch:
+            continue
+        url_entries.append({'name': name, 'url': url})
+
+    url_entries.sort(key=lambda entry: entry['name'])
+
+    return render(request, 'urltesting.html', {
+        'url_entries': url_entries,
+        'total_urls': len(url_entries),
+    })
 
 
 def translation_demo(request):

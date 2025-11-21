@@ -7,99 +7,133 @@
 
 {% block extra_css %}
 <style>
-    .auth-container {
-        min-height: calc(100vh - 200px);
-        display: flex;
-        align-items: center;
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    .auth-wrapper {
+        min-height: calc(100vh - 80px);
+        background: linear-gradient(135deg, #2b1857, #4b2b8a);
+        padding-top: 100px;
+        padding-bottom: 40px;
     }
-    
-    .auth-card {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    .auth-panel {
+        min-height: 70vh;
+        border-radius: 24px;
         overflow: hidden;
-        max-width: 450px;
-        width: 100%;
+        box-shadow: 0 30px 60px rgba(15, 23, 42, 0.6);
+        background: rgba(13, 18, 40, 0.85);
     }
-    
-    .auth-header {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        color: white;
-        padding: 2rem;
-        text-align: center;
+    .auth-showcase {
+        background: #fff;
+        color: #341C67;
+        padding: 4rem 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 420px;
     }
-    
-    .auth-header h1 {
-        margin: 0;
-        font-size: 1.75rem;
+    .auth-showcase h1 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: #341C67;
+    }
+    .auth-showcase p {
+        font-size: 1.1rem;
+        color: #4b2b8a;
+        opacity: 0.95;
+    }
+    .auth-quote-author {
+        margin-top: 2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #341C67;
+    }
+    .auth-card {
+        background: rgba(15, 18, 34, 0.95);
+        border-radius: 0;
+        padding: 3rem;
+        height: 100%;
+        color: #ffffff;
+    }
+    .auth-card h2 {
+        color: #ffb98a;
         font-weight: 600;
+        margin-bottom: 0.75rem;
     }
-    
-    .auth-header p {
-        margin: 0.5rem 0 0 0;
-        opacity: 0.9;
+    .auth-subtitle {
+        color: rgba(255,255,255,0.85);
+        margin-bottom: 1.5rem;
     }
-    
     .auth-body {
-        padding: 2rem;
+        padding-top: 1rem;
     }
     
     .form-floating {
         margin-bottom: 1rem;
     }
-    
+
     .form-floating .form-control {
-        border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 1rem 0.75rem;
-        height: auto;
-        transition: all 0.3s ease;
+        border: 2px solid rgba(99, 102, 241, 0.3);
+        border-radius: 12px;
+        background: transparent;
+        color: #ffffff;
+        height: calc(3.5rem + 2px);
+        padding-left: 3rem;
     }
     
     .form-floating .form-control:focus {
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        border-color: #ff5d15;
+        box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.2);
     }
     
     .form-floating label {
-        color: #64748b;
-        font-weight: 500;
+        color: rgba(255,255,255,0.85);
     }
     
+    .input-icon {
+        position: relative;
+    }
+    .input-icon .icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255,255,255,0.65);
+        font-size: 1rem;
+        pointer-events: none;
+    }
     .btn-auth {
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        background: linear-gradient(135deg, #ff7a3d, #ff5d15);
         border: none;
-        border-radius: 10px;
+        border-radius: 999px;
         padding: 0.75rem 2rem;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
         transition: all 0.3s ease;
         width: 100%;
+        color: #fff;
     }
     
     .btn-auth:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        box-shadow: 0 10px 25px rgba(255, 93, 21, 0.35);
     }
     
     .auth-links {
         text-align: center;
         margin-top: 1.5rem;
         padding-top: 1.5rem;
-        border-top: 1px solid #e2e8f0;
+        border-top: 1px solid rgba(255,255,255,0.2);
+        color: #fff;
     }
     
     .auth-links a {
-        color: var(--primary-color);
+        color: #fff;
         text-decoration: none;
         font-weight: 500;
         transition: color 0.3s ease;
     }
-    
+
     .auth-links a:hover {
-        color: var(--secondary-color);
+        color: #ffb98a;
     }
     
     .social-login {
@@ -118,6 +152,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 1rem;
+        color: #fff;
     }
     
     .remember-me input[type="checkbox"] {
@@ -125,25 +160,41 @@
     }
     
     .alert {
-        border-radius: 10px;
+        border-radius: 12px;
         border: none;
         margin-bottom: 1rem;
+        background: rgba(239, 68, 68, 0.15);
+        color: #fecdd3;
+    }
+
+    @media (max-width: 991.98px) {
+        .auth-panel {
+            border-radius: 18px;
+        }
+        .auth-showcase {
+            padding: 3rem 2rem;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="auth-card">
-                    <div class="auth-header">
-                        <i class="fas fa-sign-in-alt fa-2x mb-3"></i>
-                        <h1>Welcome Back</h1>
-                        <p>Sign in to your account to continue learning</p>
+<div class="auth-wrapper">
+    <div class="container-fluid">
+        <div class="row auth-panel g-0">
+            <div class="col-lg-6 auth-showcase">
+                <div class="mb-4">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="YITP" style="height: 48px;">
+                </div>
+                <h1>“Education is the most powerful weapon which you can use to change the world.”</h1>
+                <div class="auth-quote-author">— Nelson Mandela</div>
+            </div>
+            <div class="col-lg-6">
+                <div class="auth-card h-100 d-flex flex-column justify-content-center">
+                    <div>
+                        <h2>Welcome Back</h2>
+                        <p class="auth-subtitle">Sign in to your Youth Impact Training Programme account</p>
                     </div>
-                    
                     <div class="auth-body">
                         {% if not SOCIALACCOUNT_ONLY %}
                             {% if form.non_field_errors %}
@@ -156,7 +207,8 @@
                             <form method="post" action="{{ login_url }}">
                                 {% csrf_token %}
                                 
-                                <div class="form-floating">
+                                <div class="form-floating input-icon">
+                                    <i class="fas fa-user icon"></i>
                                     <input type="email" 
                                            class="form-control{% if form.login.errors %} is-invalid{% endif %}" 
                                            id="id_login" 
@@ -172,7 +224,8 @@
                                     {% endif %}
                                 </div>
                                 
-                                <div class="form-floating">
+                                <div class="form-floating input-icon">
+                                    <i class="fas fa-lock icon"></i>
                                     <input type="password" 
                                            class="form-control{% if form.password.errors %} is-invalid{% endif %}" 
                                            id="id_password" 

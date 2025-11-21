@@ -36,17 +36,20 @@
         font-size: 0.875rem;
     }
 
-    .breadcrumb-custom a {
-        color: rgba(255,255,255,0.8);
-        text-decoration: none;
+    .lesson-header .breadcrumb-custom,
+    .lesson-header .breadcrumb-custom a,
+    .lesson-header .breadcrumb-custom span {
+        color: rgba(255,255,255,0.9);
     }
 
-    .breadcrumb-custom a:hover {
-        color: white;
+    .lesson-header .breadcrumb-custom a:hover {
+        color: #fff;
     }
 
-    .breadcrumb-custom span {
-        color: white;
+    .lesson-header .lesson-meta span,
+    .lesson-header .lesson-meta i,
+    .lesson-header h1 {
+        color: #fff;
     }
 
     /* Lesson Title - Mobile optimized */
@@ -844,6 +847,61 @@
     .lesson-header h1 { color: #fff; }
     .lesson-navigation { padding: 1.25rem; margin-bottom: 1.5rem; }
     .lesson-navigation .btn { min-width: 130px; }
+
+    /* Modal reader */
+    .module2-reader-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+    }
+    .module2-reader-modal.show { display: flex; }
+    .module2-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        backdrop-filter: blur(4px);
+    }
+    .module2-reader-content {
+        position: relative;
+        background: #fff;
+        width: min(1200px, 95vw);
+        height: 90vh;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .module2-reader-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .module2-reader-body {
+        position: relative;
+        flex: 1;
+        padding: 0;
+        overflow: hidden;
+    }
+    .module2-reader-body iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    .module2-reader-body .iframe-loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        background: rgba(255,255,255,0.9);
+        padding: 10px 16px;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
     
     .lesson-progress {
         background: #f8fafc;
@@ -1353,6 +1411,20 @@
                         {{ lesson.module.course.instructor.get_full_name|default:lesson.module.course.instructor.username }}
                     </span>
                 </div>
+                <!-- Module Overview card -->
+                <div class="lesson-sidebar">
+                    <h4 class="mb-3">Module Overview</h4>
+                    <p class="text-muted mb-3">
+                        Jump back to the module overview to review all lessons and objectives.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a href="{% if lesson.module %}{% url 'courses:module_detail' course_slug=lesson.module.course.slug module_id=lesson.module.id %}{% else %}{% url 'courses:course_list' %}{% endif %}"
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-list me-2"></i>View Module Overview
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -1452,18 +1524,12 @@
                         </div>
 
                         <div class="tab-pane fade" id="lesson-reading-pane" role="tabpanel" aria-labelledby="lesson-reading-tab">
-                            <div class="lesson-media-panel">
-                                <div class="lesson-content-iframe-container">
-                                    <div class="iframe-loading">Loading lesson content...</div>
-                                    <iframe
-                                        id="module2-reading-iframe"
-                                        src="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html"
-                                        title="Module 2 Lesson {{ lesson.sort_order }} Content"
-                                        loading="lazy"
-                                        onload="resizeModule2Iframe(this); injectModule2ResponsiveCSS(this);"
-                                        onerror="this.previousElementSibling.innerHTML='Error loading content. Please refresh the page.';">
-                                        <p>Your browser does not support iframes. Please <a href="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html" target="_blank">click here to view the lesson content</a>.</p>
-                                    </iframe>
+                            <div class="lesson-media-panel module2-reading-trigger" onclick="openModule2Reader()">
+                                <div class="d-flex flex-column align-items-center justify-content-center text-center py-4">
+                                    <i class="fas fa-file-pdf fa-3x mb-3 text-muted"></i>
+                                    <h5 class="mb-2">Open Lesson</h5>
+                                    <p class="text-muted mb-0">Tap or click to view the lesson in a full-screen reader.</p>
+                                    <button class="btn btn-primary-yitp mt-3" type="button">Open Lesson</button>
                                 </div>
                             </div>
                         </div>
@@ -1574,41 +1640,9 @@
 
                                             <div class="col-md-8">
                                                 <div class="d-flex flex-wrap gap-2 justify-content-md-end">
-                                                    {% if quiz_status.has_quiz %}
-                                                        {% if progress.status != 'completed' and not quiz_status.has_passed %}
-                                                            <a href="{{ quiz_status.quiz_url }}" class="btn btn-primary-yitp">
-                                                                <i class="fas fa-clipboard-check me-2"></i>
-                                                                {% if quiz_status.attempts_count > 0 %}Retake Quiz{% else %}Take Quiz{% endif %}
-                                                            </a>
-                                                            <small class="text-muted align-self-center">
-                                                                Complete the quiz ({{ quiz_status.passing_score }}% required) to mark lesson as complete
-                                                            </small>
-                                                        {% elif quiz_status.has_passed %}
-                                                            <button class="btn btn-success" disabled>
-                                                                <i class="fas fa-trophy me-2"></i>Quiz Passed ({{ quiz_status.best_score|floatformat:1 }}%)
-                                                            </button>
-                                                        {% endif %}
-                                                    {% else %}
-                                                        {% if progress.status != 'completed' %}
-                                                            <button class="btn btn-primary-yitp" onclick="attemptLessonCompletion()">
-                                                                <i class="fas fa-check me-2"></i>Complete Lesson
-                                                            </button>
-                                                            <small class="text-muted align-self-center">
-                                                                Click to mark this lesson as complete
-                                                            </small>
-                                                        {% endif %}
-                                                    {% endif %}
-
-                                                    {% if quiz_status.has_quiz and quiz_status.quiz_url %}
-                                                        <a href="{{ quiz_status.quiz_url }}" class="btn btn-secondary-yitp">
-                                                            <i class="fas fa-arrow-right me-2"></i>Go to Lesson Quiz
-                                                        </a>
-                                                    {% elif next_lesson %}
-                                                        <a href="{% url 'courses:lesson_detail' course_slug=lesson.module.course.slug lesson_id=next_lesson.id %}"
-                                                           class="btn btn-secondary-yitp">
-                                                            <i class="fas fa-arrow-right me-2"></i>Next Lesson
-                                                        </a>
-                                                    {% endif %}
+                                                    <a href="{% if lesson.module %}{% url 'courses:module_detail' course_slug=lesson.module.course.slug module_id=lesson.module.id %}{% else %}#{% endif %}" class="btn btn-primary-yitp">
+                                                        <i class="fas fa-list me-2"></i>Module Overview
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1868,23 +1902,6 @@
                     </div>
                 </div>
                 
-                <!-- Quick Actions - Mobile Optimized -->
-                <div class="lesson-sidebar">
-                    <h4 class="mb-3">Quick Actions</h4>
-
-                    <div class="d-grid gap-2">
-                        <a href="{% if lesson.module.course %}{% url 'courses:course_detail' slug=lesson.module.course.slug %}{% else %}#{% endif %}" class="btn btn-outline-primary btn-sm">
-                            <i class="fas fa-book me-2"></i>Course Overview
-                        </a>
-                        <a href="{% url 'courses:my_courses' %}" class="btn btn-outline-secondary btn-sm">
-                            <i class="fas fa-list me-2"></i>My Courses
-                        </a>
-                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary btn-sm">
-                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                        </a>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -2490,6 +2507,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Module 2 iframe helpers -->
 <script>
+function openModule2Reader() {
+    const modal = document.getElementById('module2-reader-modal');
+    if (modal) modal.classList.add('show');
+}
+function closeModule2Reader() {
+    const modal = document.getElementById('module2-reader-modal');
+    if (modal) modal.classList.remove('show');
+}
 function resizeModule2Iframe(iframe) {
     if (!iframe || !iframe.contentWindow) return;
     const doc = iframe.contentWindow.document;
@@ -2532,7 +2557,45 @@ document.addEventListener('DOMContentLoaded', () => {
         injectModule2ResponsiveCSS(iframe);
     }
 });
+
+function printModule2Reader() {
+    const iframe = document.getElementById('module2-reading-iframe');
+    if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+    }
+}
 </script>
+
+<!-- Module 2 Reader Modal -->
+<div id="module2-reader-modal" class="module2-reader-modal" role="dialog" aria-modal="true">
+    <div class="module2-backdrop" onclick="closeModule2Reader()"></div>
+    <div class="module2-reader-content">
+        <div class="module2-reader-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Lesson Reader</h5>
+            <div class="d-flex gap-2 align-items-center">
+                <button class="btn btn-sm btn-outline-secondary" type="button" onclick="closeModule2Reader()">
+                    <i class="fas fa-times me-1"></i>Close
+                </button>
+                <button class="btn btn-sm btn-primary" type="button" onclick="printModule2Reader()">
+                    <i class="fas fa-print me-1"></i>Print / Save as PDF
+                </button>
+            </div>
+        </div>
+        <div class="module2-reader-body">
+            <div class="iframe-loading">Loading lesson content...</div>
+            <iframe
+                id="module2-reading-iframe"
+                src="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html"
+                title="Module 2 Lesson {{ lesson.sort_order }} Content"
+                loading="lazy"
+                onload="resizeModule2Iframe(this); injectModule2ResponsiveCSS(this);"
+                onerror="this.previousElementSibling.innerHTML='Error loading content. Please refresh the page.';">
+                <p>Your browser does not support iframes. Please <a href="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html" target="_blank">click here to view the lesson content</a>.</p>
+            </iframe>
+        </div>
+    </div>
+</div>
 
 <!-- Add CSRF token for AJAX requests -->
 {% csrf_token %}

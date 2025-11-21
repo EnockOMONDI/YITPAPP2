@@ -5,157 +5,153 @@
 
 {% block extra_head %}
 <style>
-/* Logout page styling */
-.logout__area {
-    background: linear-gradient(135deg, #341C67 0%, #341C67 100%);
+.auth-area {
+    background: linear-gradient(135deg, #2b1857, #4b2b8a);
     min-height: 100vh;
+    padding: 100px 0 60px;
+}
+
+.auth-panel {
+    background: rgba(13, 18, 40, 0.9);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(10, 10, 20, 0.8);
+}
+
+.auth-showcase {
+    background: #fff;
+    color: #341C67;
+    padding: 4rem 3rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    padding: 0;
-    position: relative;
 }
 
-.logout__wrapper {
-    background: white;
-    border-radius: 10px;
-    padding: 60px 40px;
-    box-shadow: 0px 30px 60px 0px rgba(1, 11, 60, 0.15);
-    max-width: 500px;
-    width: 100%;
-    margin: 20px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
+.auth-showcase h1 {
+    font-size: clamp(2.1rem, 4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #341C67;
 }
 
-.logout__icon {
-    width: 80px;
-    height: 80px;
-    background: #f8f9fa;
-    border-radius: 50%;
+.auth-quote-author {
+    margin-top: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #341C67;
+}
+
+.logout-wrapper {
+    padding: 3rem;
+    color: #f8fafc;
+}
+
+.logout-wrapper h2,
+.logout-wrapper p,
+.logout-wrapper li,
+.logout-wrapper a {
+    color: #ffffff !important;
+}
+
+.next-steps {
+    background: rgba(255,255,255,0.05);
+    border-radius: 14px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.logout-actions {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 30px auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
-.logout__icon i {
-    font-size: 32px;
+.logout-actions .e-btn {
+    flex: 1 1 180px;
+    justify-content: center;
+}
+
+.logout-actions .outline-btn {
+    background: transparent;
+    border: 2px solid #ff5d15;
     color: #ff5d15;
 }
 
-.logout__actions {
+.support-links {
+    margin-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 1.5rem;
     display: flex;
-    gap: 15px;
-    justify-content: center;
     flex-wrap: wrap;
-    margin-top: 40px;
+    gap: 1rem;
 }
 
-.logout__actions .e-btn {
-    min-width: 140px;
+.support-links a {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .logout__area {
-        padding: 20px 0;
-    }
-
-    .logout__wrapper {
-        padding: 40px 30px;
-        margin: 15px;
-        max-width: 90%;
-    }
+@media (max-width: 992px) {
+    .auth-panel { border-radius: 18px; }
+    .auth-showcase { padding: 3rem 2rem; }
 }
 
 @media (max-width: 576px) {
-    .logout__wrapper {
-        padding: 30px 20px;
-        margin: 10px;
-        max-width: 95%;
-    }
-
-    .logout__actions {
-        flex-direction: column;
-    }
-
-    .logout__actions .e-btn {
-        width: 100%;
-    }
-}
-
-/* Ensure proper centering on very small screens */
-@media (max-width: 320px) {
-    .logout__wrapper {
-        padding: 25px 15px;
-        margin: 5px;
-        max-width: 98%;
-    }
+    .logout-wrapper { padding: 2.25rem; }
+    .logout-actions { flex-direction: column; }
 }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="logout__area">
-    <div class="logout__wrapper">
-                    <div class="logout__icon">
-                        <i class="fas fa-sign-out-alt"></i>
+<section class="auth-area">
+    <div class="container">
+        <div class="row auth-panel align-items-stretch">
+            <div class="col-lg-6 auth-showcase">
+                <div class="mb-4">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="YITP" style="height: 48px;">
+                </div>
+                <h1>“Rest is part of the journey—return ready to build even bolder impact.”</h1>
+                <p>Personal Initiative Module reminder</p>
+                <div class="auth-quote-author">See you back soon</div>
+            </div>
+            <div class="col-lg-6 p-0">
+                <div class="logout-wrapper">
+                    <div class="logout__icon mb-4" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;">
+                        <i class="fas fa-sign-out-alt" style="font-size:32px;color:#ff5d15;"></i>
                     </div>
-                    
-                    <h2 style="color: #341C67; font-size: 32px; font-weight: 700; margin-bottom: 20px;">Successfully Logged Out</h2>
-                    
-                    <p style="color: #6d6e75; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
-                        Thank you for using the Youth Impact Training Programme platform. You have been safely logged out of your account.
-                    </p>
-                    
-                    <div style="background: #f8f9fa; padding: 25px; border-radius: 6px; margin-bottom: 30px; border-left: 4px solid #ff5d15;">
-                        <h6 style="color: #341C67; margin-bottom: 15px; font-weight: 600;">What's Next?</h6>
-                        <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-                            <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px; padding-left: 20px; position: relative;">
-                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
-                                Continue browsing our programs and courses
-                            </li>
-                            <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px; padding-left: 20px; position: relative;">
-                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
-                                Read our latest blog posts and success stories
-                            </li>
-                            <li style="color: #6d6e75; font-size: 14px; margin-bottom: 8px; padding-left: 20px; position: relative;">
-                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
-                                Sign in again to access your account
-                            </li>
-                            <li style="color: #6d6e75; font-size: 14px; padding-left: 20px; position: relative;">
-                                <i class="fas fa-check" style="position: absolute; left: 0; color: #28a745; margin-top: 2px;"></i>
-                                Contact us if you need any assistance
-                            </li>
+                    <h2>Successfully Logged Out</h2>
+                    <p>You left the platform securely. Your progress is saved and waiting for you.</p>
+
+                    <div class="next-steps mt-4">
+                        <h6 style="color:#ffb98a;">Next steps when you return:</h6>
+                        <ul style="list-style:none;padding:0;margin:0;">
+                            <li>Pick up your last lesson exactly where you paused.</li>
+                            <li>Review achievements or track progress from the profile hub.</li>
+                            <li>Explore new curriculum updates and opportunities.</li>
                         </ul>
                     </div>
-                    
-                    <div class="logout__actions">
+
+                    <div class="logout-actions">
                         <a href="{% url 'login' %}" class="e-btn e-btn-3">
-                            <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
-                            Sign In Again
+                            <i class="fas fa-sign-in-alt me-2"></i>Sign In Again
                         </a>
-                        <a href="{% url 'yitp:home' %}" class="e-btn" style="background: transparent; border: 2px solid #ff5d15; color: #ff5d15;">
-                            <i class="fas fa-home" style="margin-right: 8px;"></i>
-                            Go to Homepage
+                        <a href="{% url 'yitp:home' %}" class="e-btn outline-btn">
+                            <i class="fas fa-home me-2"></i>Go to Homepage
                         </a>
                     </div>
-                    
-                    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #eef0f6;">
-                        <p style="color: #6d6e75; font-size: 14px; margin-bottom: 15px;">Need help or have questions?</p>
-                        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                            <a href="{% url 'yitp:contact' %}" style="color: #ff5d15; text-decoration: none; font-size: 14px;">
-                                <i class="fas fa-envelope" style="margin-right: 5px;"></i>
-                                Contact Support
-                            </a>
-                            <a href="{% url 'yitp:faqs' %}" style="color: #ff5d15; text-decoration: none; font-size: 14px;">
-                                <i class="fas fa-question-circle" style="margin-right: 5px;"></i>
-                                View FAQs
-                            </a>
-                        </div>
+
+                    <div class="support-links">
+                        <a href="{% url 'yitp:contact' %}"><i class="fas fa-envelope"></i>Contact Support</a>
+                        <a href="{% url 'yitp:faqs' %}"><i class="fas fa-question-circle"></i>View FAQs</a>
                     </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

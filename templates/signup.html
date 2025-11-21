@@ -5,210 +5,196 @@
 
 {% block extra_head %}
 <style>
-/* Signup form styling */
-.signup__area {
-    background: linear-gradient(135deg, #341C67 0%, #341C67 100%);
+.auth-area {
+    background: linear-gradient(135deg, #2b1857, #4b2b8a);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    position: relative;
+    padding: 100px 0 60px;
 }
 
-.signup__wrapper {
-    background: white;
-    border-radius: 10px;
-    padding: 60px 40px;
-    box-shadow: 0px 30px 60px 0px rgba(1, 11, 60, 0.15);
-    max-width: 600px;
-    width: 100%;
-    margin: 20px;
-    position: relative;
-    z-index: 1;
+.auth-panel {
+    background: rgba(13, 18, 40, 0.9);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(10, 10, 20, 0.8);
+}
+
+.auth-showcase {
+    background: #fff;
+    color: #341C67;
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-showcase h1 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #341C67;
+}
+
+.auth-quote-author {
+    margin-top: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #341C67;
+}
+
+.auth-wrapper {
+    padding: 3rem;
+    color: #f8fafc;
+}
+
+.auth-wrapper h2,
+.auth-wrapper p,
+.auth-wrapper label,
+.login-link p,
+.login-link a,
+.terms-checkbox label {
+    color: #ffffff !important;
 }
 
 .signup__form-input {
     position: relative;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .signup__form-input input {
     width: 100%;
-    padding: 15px 20px 15px 50px;
-    border: 2px solid #eef0f6;
-    border-radius: 6px;
-    font-size: 16px;
-    color: #6d6e75;
-    background: #f8f9fa;
-    transition: all 0.3s ease;
+    padding: 15px 15px 15px 3rem;
+    border: 2px solid rgba(99, 102, 241, 0.35);
+    border-radius: 12px;
+    background: transparent;
+    color: #ffffff;
+}
+
+.signup__form-input input::placeholder {
+    color: rgba(255,255,255,0.7);
 }
 
 .signup__form-input input:focus {
     border-color: #ff5d15;
-    background: white;
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.2);
     outline: none;
 }
 
 .signup__form-input i {
     position: absolute;
-    left: 18px;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #6d6e75;
-    font-size: 16px;
+    color: rgb(255, 255, 255);
+    pointer-events: none;
 }
 
-.signup__form-input input:focus + i {
-    color: #ff5d15;
-}
-
-.error-message {
-    background: #f8d7da;
-    color: #721c24;
-    padding: 8px 15px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    border: 1px solid #f5c6cb;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 8px 15px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    line-height: 1.4;
-    border: 1px solid #c3e6cb;
-}
-
-.password-requirements {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 25px;
-    border-left: 4px solid #ff5d15;
-}
-
-.password-requirements h6 {
-    color: #341C67;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.password-requirements ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.password-requirements,
+.terms-checkbox {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
 .password-requirements li {
-    color: #6d6e75;
-    font-size: 14px;
-    margin-bottom: 8px;
-    padding-left: 20px;
-    position: relative;
-}
-
-.password-requirements li:before {
-    content: "•";
-    color: #ff5d15;
-    position: absolute;
-    left: 0;
-    font-weight: bold;
+    color: rgba(255,255,255,0.8);
 }
 
 .terms-checkbox {
     display: flex;
-    align-items: flex-start;
     gap: 12px;
-    margin-bottom: 30px;
+    align-items: flex-start;
 }
 
 .terms-checkbox input[type="checkbox"] {
     width: 18px;
     height: 18px;
+    margin-top: 4px;
     accent-color: #ff5d15;
-    margin-top: 2px;
-    flex-shrink: 0;
 }
 
-.terms-checkbox label {
-    color: #6d6e75;
-    font-size: 14px;
-    line-height: 1.5;
+.primary-btn {
+    width: 70%;
+    margin: 1rem auto;
+    display: block;
+    border-radius: 999px;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
 }
 
-.terms-checkbox a {
-    color: #ff5d15;
-    text-decoration: none;
+.social-divider {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin: 2rem 0 1.5rem;
 }
 
-.terms-checkbox a:hover {
-    color: #e04a0f;
+.google-btn {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: transparent;
+    color: #fff;
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.google-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: #ffb98a;
+}
+
+.google-btn.disabled {
+    opacity: 0.45;
+    filter: blur(0.3px);
+    pointer-events: none;
+}
+
+.social-note {
+    text-align: center;
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
 }
 
 .login-link {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 30px;
-    border-top: 1px solid #eef0f6;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 1.5rem;
 }
 
-.login-link a {
-    color: #ff5d15;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.login-link a:hover {
-    color: #e04a0f;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .signup__area {
-        padding: 20px 0;
-    }
-
-    .signup__wrapper {
-        padding: 40px 30px;
-        margin: 15px;
-        max-width: 90%;
-    }
+@media (max-width: 992px) {
+    .auth-panel { border-radius: 18px; }
+    .auth-showcase { padding: 3rem 2rem; }
 }
 
 @media (max-width: 576px) {
-    .signup__wrapper {
-        padding: 30px 20px;
-        margin: 10px;
-        max-width: 95%;
-    }
-}
-
-/* Ensure proper centering on very small screens */
-@media (max-width: 320px) {
-    .signup__wrapper {
-        padding: 25px 15px;
-        margin: 5px;
-        max-width: 98%;
-    }
+    .auth-wrapper { padding: 2.25rem; }
 }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="signup__area">
-    <div class="signup__wrapper">
-                    <div class="signup__header text-center mb-40">
-                        <h2 style="color: #341C67; font-size: 32px; font-weight: 700; margin-bottom: 15px;">Create Your Account</h2>
-                        <p style="color: #6d6e75; margin: 0;">Join the Youth Impact Training Programme community</p>
+<section class="auth-area">
+    <div class="container">
+        <div class="row auth-panel align-items-stretch">
+            <div class="col-lg-6 auth-showcase">
+                <div class="mb-4">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="YITP" style="height: 48px;">
+                </div>
+                <h1>“Every impact journey begins with the courage to take the first step.”</h1>
+                <div class="auth-quote-author">- YITP Team</div>
+            </div>
+            <div class="col-lg-6 p-0">
+                <div class="auth-wrapper">
+                    <div class="text-center mb-4">
+                        <h2>Start Your YITP Journey</h2>
+                        <p>Sign up to unlock personalised entrepreneurship training</p>
                     </div>
-
-
 
                     <form method="post" class="signup__form">
                         {% csrf_token %}
@@ -259,7 +245,7 @@
                         </div>
 
                         <div class="password-requirements">
-                            <h6>Password Requirements:</h6>
+                            <h6 style="color:#fff;">Password Requirements:</h6>
                             <ul>
                                 <li>At least 8 characters long</li>
                                 <li>Must contain both letters and numbers</li>
@@ -276,16 +262,26 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="e-btn e-btn-3" style="width: 100%; padding: 15px; font-size: 16px; font-weight: 600;">
+                        <button type="submit" class="e-btn e-btn-3 primary-btn">
                             <i class="fas fa-user-plus" style="margin-right: 8px;"></i>
                             Create Account
                         </button>
+
+                        <div class="social-divider"></div>
+                        <button type="button" class="google-btn disabled">
+                            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="height: 20px;">
+                            Continue with Google
+                        </button>
+                        <div class="social-note">Google signup coming soon</div>
                     </form>
 
                     <div class="login-link">
-                        <p style="color: #6d6e75; margin-bottom: 10px;">Already have an account?</p>
+                        <p>Already have an account?</p>
                         <a href="{% url 'login' %}">Sign in here</a>
                     </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}
