@@ -902,6 +902,19 @@
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+    .module2-reader-controls {
+        border-top: 1px solid #e5e7eb;
+        background: #f8fafc;
+    }
+    .module2-reader-controls input[type="range"] {
+        width: 100%;
+    }
+    .module2-page-indicator {
+        min-width: 140px;
+        font-weight: 600;
+        text-align: center;
+        color: #341C67;
+    }
     
     .lesson-progress {
         background: #f8fafc;
@@ -2507,71 +2520,224 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Module 2 iframe helpers -->
 <script>
+const module2ReaderState = {
+    initialized: false,
+    iframe: null,
+    slider: null,
+    indicator: null,
+    pages: [],
+    scrollHandler: null,
+    resizeHandler: null,
+    sliderBound: false,
+    doc: null,
+    win: null
+};
+
+function throttle(fn, delay = 150) {
+    let timeout = null;
+    return function (...args) {
+        if (timeout) return;
+        timeout = setTimeout(() => {
+            timeout = null;
+            fn.apply(this, args);
+        }, delay);
+    };
+}
+
 function openModule2Reader() {
     const modal = document.getElementById('module2-reader-modal');
-    if (modal) modal.classList.add('show');
+    if (!modal) return;
+    modal.classList.add('show');
+    if (!document.body.dataset.module2ScrollLock) {
+        document.body.dataset.module2ScrollLock = document.body.style.overflow || '';
+    }
+    document.body.style.overflow = 'hidden';
+    initializeModule2Reader();
 }
+
 function closeModule2Reader() {
     const modal = document.getElementById('module2-reader-modal');
     if (modal) modal.classList.remove('show');
-}
-function resizeModule2Iframe(iframe) {
-    if (!iframe || !iframe.contentWindow) return;
-    const doc = iframe.contentWindow.document;
-    iframe.style.width = '100%';
-    iframe.style.border = 'none';
-    iframe.style.minHeight = '80vh';
-    try {
-        const body = doc.body;
-        const html = doc.documentElement;
-        const height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        iframe.style.height = height + 'px';
-    } catch (e) {
-        // If cross-origin or other issues, fall back to default height
+    if (module2ReaderState.scrollHandler && module2ReaderState.win) {
+        module2ReaderState.win.removeEventListener('scroll', module2ReaderState.scrollHandler);
+        module2ReaderState.scrollHandler = null;
     }
+    if (module2ReaderState.resizeHandler) {
+        window.removeEventListener('resize', module2ReaderState.resizeHandler);
+        module2ReaderState.resizeHandler = null;
+    }
+    if (document.body.dataset.module2ScrollLock !== undefined) {
+        document.body.style.overflow = document.body.dataset.module2ScrollLock;
+        delete document.body.dataset.module2ScrollLock;
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
+function initializeModule2Reader() {
+    if (module2ReaderState.initialized) {
+        applyModule2Scaling();
+        return;
+    }
+    const iframe = document.getElementById('module2-reading-iframe');
+    if (!iframe) return;
+    module2ReaderState.iframe = iframe;
+    module2ReaderState.slider = document.getElementById('module2-page-slider');
+    module2ReaderState.indicator = document.getElementById('module2-page-indicator');
+
+    iframe.addEventListener('load', handleModule2IframeLoad);
+    if (iframe.complete) {
+        handleModule2IframeLoad();
+    }
+    module2ReaderState.initialized = true;
+}
+
+function handleModule2IframeLoad() {
+    const iframe = module2ReaderState.iframe;
+    if (!iframe) return;
+    const doc = iframe.contentDocument || iframe.contentWindow?.document;
+    if (!doc) return;
+
+    module2ReaderState.doc = doc;
+    module2ReaderState.win = iframe.contentWindow;
+    enhanceModule2Document(doc);
+    setupModule2Pages();
+    applyModule2Scaling();
+
+    if (module2ReaderState.scrollHandler) {
+        module2ReaderState.win.removeEventListener('scroll', module2ReaderState.scrollHandler);
+    }
+    module2ReaderState.scrollHandler = throttle(updateModule2PageFromScroll, 120);
+    module2ReaderState.win.addEventListener('scroll', module2ReaderState.scrollHandler);
+
+    if (module2ReaderState.resizeHandler) {
+        window.removeEventListener('resize', module2ReaderState.resizeHandler);
+    }
+    module2ReaderState.resizeHandler = throttle(applyModule2Scaling, 200);
+    window.addEventListener('resize', module2ReaderState.resizeHandler);
+
     const loader = iframe.previousElementSibling;
     if (loader) loader.style.display = 'none';
 }
 
-function injectModule2ResponsiveCSS(iframe) {
-    if (!iframe || !iframe.contentDocument) return;
+function enhanceModule2Document(doc) {
     try {
-        const doc = iframe.contentDocument;
         const style = doc.createElement('style');
-        style.innerHTML = `
-            html, body { max-width: 100%; overflow-x: hidden; }
-            body { margin: 0 auto; padding: 0 12px; box-sizing: border-box; }
-            img, video, table, iframe { max-width: 100%; height: auto; }
-            *, *::before, *::after { box-sizing: border-box; }
+        style.textContent = `
+            html, body { overflow-x: hidden !important; background: #fff; }
+            #page-container { margin: 0 auto; }
+            .pf { margin: 24px auto !important; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
         `;
         doc.head.appendChild(style);
     } catch (e) {
-        // Skip injection on error
+        // ignore injection errors
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const iframe = document.getElementById('module2-reading-iframe');
-    if (iframe && iframe.complete) {
-        resizeModule2Iframe(iframe);
-        injectModule2ResponsiveCSS(iframe);
+function applyModule2Scaling() {
+    const iframe = module2ReaderState.iframe;
+    const doc = module2ReaderState.doc;
+    if (!iframe || !doc) return;
+    const container = doc.getElementById('page-container');
+    const firstPage = container?.querySelector('.pf');
+    if (!container || !firstPage) return;
+
+    const baseWidth = firstPage.getBoundingClientRect().width || parseFloat(firstPage.style.width) || 1200;
+    const availableWidth = Math.max(iframe.clientWidth - 40, 320);
+    const scale = Math.min(1, availableWidth / baseWidth);
+
+    container.style.transformOrigin = 'top center';
+    container.style.transform = `scale(${scale})`;
+    doc.body.style.padding = '0 16px 40px';
+    doc.body.style.margin = '0 auto';
+    doc.body.style.maxWidth = baseWidth + 'px';
+    doc.documentElement.style.background = '#fff';
+    doc.body.style.background = '#fff';
+
+    const scaledHeight = container.getBoundingClientRect().height + 60;
+    iframe.style.height = `${Math.max(scaledHeight, 600)}px`;
+}
+
+function setupModule2Pages() {
+    const doc = module2ReaderState.doc;
+    if (!doc) return;
+    const pages = Array.from(doc.querySelectorAll('.pf'));
+    module2ReaderState.pages = pages;
+    const slider = module2ReaderState.slider;
+    const indicator = module2ReaderState.indicator;
+
+    if (!slider || !indicator) return;
+
+    if (!pages.length) {
+        slider.disabled = true;
+        indicator.textContent = 'Page 1 / 1';
+        return;
     }
-});
+
+    slider.disabled = false;
+    slider.max = pages.length;
+    slider.value = 1;
+    indicator.textContent = `Page 1 / ${pages.length}`;
+
+    if (!module2ReaderState.sliderBound) {
+        slider.addEventListener('input', (event) => {
+            const value = parseInt(event.target.value, 10) || 1;
+            const idx = Math.max(0, Math.min(module2ReaderState.pages.length - 1, value - 1));
+            const targetPage = module2ReaderState.pages[idx];
+            if (targetPage) {
+                targetPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            updateModule2Indicator(value, module2ReaderState.pages.length);
+        });
+        module2ReaderState.sliderBound = true;
+    }
+}
+
+function updateModule2PageFromScroll() {
+    const pages = module2ReaderState.pages;
+    const slider = module2ReaderState.slider;
+    if (!pages.length || !module2ReaderState.win) return;
+
+    let currentIndex = 0;
+    for (let i = 0; i < pages.length; i += 1) {
+        const rect = pages[i].getBoundingClientRect();
+        if (rect.top <= 80) {
+            currentIndex = i;
+        } else {
+            break;
+        }
+    }
+
+    const pageNumber = currentIndex + 1;
+    if (slider && parseInt(slider.value, 10) !== pageNumber) {
+        slider.value = pageNumber;
+    }
+    updateModule2Indicator(pageNumber, pages.length);
+}
+
+function updateModule2Indicator(current, total) {
+    const indicator = module2ReaderState.indicator;
+    if (indicator) {
+        indicator.textContent = `Page ${current} / ${total}`;
+    }
+}
 
 function printModule2Reader() {
-    const iframe = document.getElementById('module2-reading-iframe');
+    const iframe = module2ReaderState.iframe || document.getElementById('module2-reading-iframe');
     if (iframe && iframe.contentWindow) {
         iframe.contentWindow.focus();
         iframe.contentWindow.print();
     }
 }
+
+document.addEventListener('DOMContentLoaded', initializeModule2Reader);
 </script>
 
 <!-- Module 2 Reader Modal -->
 <div id="module2-reader-modal" class="module2-reader-modal" role="dialog" aria-modal="true">
     <div class="module2-backdrop" onclick="closeModule2Reader()"></div>
     <div class="module2-reader-content">
-        <div class="module2-reader-header d-flex justify-content-between align-items-center">
+        <div class="module2-reader-header d-flex justify-content-between align-items-center flex-wrap gap-2">
             <h5 class="mb-0">Lesson Reader</h5>
             <div class="d-flex gap-2 align-items-center">
                 <button class="btn btn-sm btn-outline-secondary" type="button" onclick="closeModule2Reader()">
@@ -2582,6 +2748,12 @@ function printModule2Reader() {
                 </button>
             </div>
         </div>
+        <div class="module2-reader-controls d-flex flex-column flex-md-row align-items-md-center gap-3 px-3 py-2">
+            <div class="flex-grow-1">
+                <input type="range" id="module2-page-slider" min="1" max="1" value="1" step="1" disabled>
+            </div>
+            <div class="module2-page-indicator" id="module2-page-indicator">Page 1 / 1</div>
+        </div>
         <div class="module2-reader-body">
             <div class="iframe-loading">Loading lesson content...</div>
             <iframe
@@ -2589,7 +2761,6 @@ function printModule2Reader() {
                 src="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html"
                 title="Module 2 Lesson {{ lesson.sort_order }} Content"
                 loading="lazy"
-                onload="resizeModule2Iframe(this); injectModule2ResponsiveCSS(this);"
                 onerror="this.previousElementSibling.innerHTML='Error loading content. Please refresh the page.';">
                 <p>Your browser does not support iframes. Please <a href="{% static 'module2/lesson_' %}{{ lesson.sort_order }}.html" target="_blank">click here to view the lesson content</a>.</p>
             </iframe>
