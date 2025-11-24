@@ -261,28 +261,13 @@ if IS_PRODUCTION:
         }
     }
 else:
-    # Development: SQLite Database
-    # print("📊 Using SQLite database for development")
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / 'db_development.sqlite3',
-    #     }
-    # }
-    # Production: PostgreSQL (Supabase) Database
-    print("📊 Using PostgreSQL database for production")
+    # Development: SQLite Database populated from production snapshots
+    SQLITE_DEV_PATH = BASE_DIR / 'db.dev.sqlite3'
+    print(f"📊 Using SQLite database for development at {SQLITE_DEV_PATH}")
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
-            'OPTIONS': {
-                'sslmode': 'require',
-                'connect_timeout': 30,
-            },
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': SQLITE_DEV_PATH,
         }
     }
 

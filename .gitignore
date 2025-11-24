@@ -26,6 +26,7 @@ db_development.sqlite3
 db_production.sqlite3
 *.sql
 *.dump
+tmp/
 
 # =============================================================================
 # PYTHON CACHE & COMPILED FILES
@@ -82,6 +83,7 @@ Thumbs.db
 *.md
 !README.md
 !CHANGELOG.md
+!docs/dev-db-sync.md
 dashboard_audit_script.py
 fix_yitp_course_issues.py
 resolve_static_conflicts.py

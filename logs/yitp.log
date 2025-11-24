@@ -29212,3 +29212,7 @@ INFO 2025-11-25 00:30:37,243 basehttp 32480 6246150144 - Broken pipe from ('127.
 INFO 2025-11-25 00:30:46,186 basehttp 32480 6229323776 "GET /course-builder/ HTTP/1.1" 200 48807
 INFO 2025-11-25 00:31:21,377 basehttp 32480 6229323776 "GET /course-builder/wizard/?course=6 HTTP/1.1" 200 119952
 INFO 2025-11-25 00:31:21,596 basehttp 32480 6229323776 "GET /static/js/course-builder.js HTTP/1.1" 200 28184
+INFO 2025-11-25 02:20:27,348 autoreload 53735 8497986240 Watching for file changes with StatReloader
+INFO 2025-11-25 02:20:34,490 basehttp 53735 6198226944 "GET /users/instructor/ HTTP/1.1" 200 55376
+INFO 2025-11-25 02:21:06,604 basehttp 53735 6198226944 "GET /users/instructor/ HTTP/1.1" 200 55376
+INFO 2025-11-25 02:21:10,283 basehttp 53735 6198226944 "GET /users/instructor/ HTTP/1.1" 200 55376

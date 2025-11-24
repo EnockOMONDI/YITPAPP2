@@ -2,6 +2,7 @@
 
 from django.db import migrations
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 
 
@@ -31,7 +32,10 @@ def create_intro_course(apps, schema_editor):
     )
     
     if created:
-        instructor.set_password('sLXSxmMg3tVeV64')
+        if hasattr(instructor, 'set_password'):
+            instructor.set_password('sLXSxmMg3tVeV64')
+        else:
+            instructor.password = make_password('sLXSxmMg3tVeV64')
         instructor.save()
     
     # Create instructor profile
