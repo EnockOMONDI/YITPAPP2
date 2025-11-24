@@ -444,6 +444,18 @@
                     <a href="#course-completion" class="child-nav" tabindex="-1"><i class="fas fa-certificate"></i> Course Completion & Certificates</a>
                 </div>
 
+                <button type="button" class="parent-nav" data-target="#communication-workflow" aria-expanded="false" aria-controls="communication-nav-items" tabindex="0">
+                    <span><i class="fas fa-comments"></i> Communications Journey</span>
+                    <i class="fas fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                </button>
+                <div class="child-nav-items" id="communication-nav-items" aria-labelledby="communication-workflow">
+                    <a href="#communications-overview" class="child-nav" tabindex="-1"><i class="fas fa-info-circle"></i> Communications Overview</a>
+                    <a href="#communications-flowchart" class="child-nav" tabindex="-1"><i class="fas fa-project-diagram"></i> Interactive Flowchart</a>
+                    <a href="#messaging-workflow" class="child-nav" tabindex="-1"><i class="fas fa-envelope"></i> Messaging & Lesson Help</a>
+                    <a href="#forum-workflow" class="child-nav" tabindex="-1"><i class="fas fa-comments"></i> Forums & Topics</a>
+                    <a href="#notifications-workflow" class="child-nav" tabindex="-1"><i class="fas fa-bell"></i> Notifications & Announcements</a>
+                </div>
+
 
 
 
@@ -464,190 +476,8 @@
                         <strong><i class="fas fa-check-circle"></i> Implementation Status:</strong>
                         This funnel is live in production with Mailtrap-delivered OTP emails, branded messaging, and automated fallbacks so every prospective learner reaches the welcome experience without manual intervention.
                     </div>
-                </div>
             </div>
-
-            <!-- Registration Process Steps Section -->
-            <div id="registration-overview" class="section-card">
-                <div class="section-header">
-                    <h3><i class="fas fa-list-ol"></i> Registration Process Steps</h3>
-                </div>
-                <div class="section-content">
-                    <p class="lead">Step-by-step breakdown of the YITP user registration journey, from initial form submission through complete account activation and welcome experience.</p>
-
-                    <div class="success-box">
-                        <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
-                        The registration journey is fully functional and production-ready with comprehensive validation, robust email failure handling, OTP verification system, automatic login, session management, and personalized welcome experience.
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">1</span>
-                            <div>
-                                <h5>Form Submission & Validation</h5>
-                                <p class="mb-0">User fills out registration form with personal details. System validates for duplicate usernames/emails with message "Username already taken. Please choose a different username." and ensures all required fields are completed.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">2</span>
-                            <div>
-                                <h5>Account Creation (Inactive)</h5>
-                                <p class="mb-0">Django User object created with <code>is_active=False</code> to ensure email verification before platform access</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">3</span>
-                            <div>
-                                <h5>Profile Creation & Data Storage</h5>
-                                <p class="mb-0">User Profile created via Django signals with phone number, personal details, and initial profile completion tracking</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">4</span>
-                            <div>
-                                <h5>OTP Generation & Email Delivery</h5>
-                                <p class="mb-0">6-digit OTP generated with a 200-minute expiry and sent through the Mailtrap transactional API using <code>admin@youthimpactglobal.com</code>. Delivery logs surface in the Mailtrap dashboard for live monitoring.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">5</span>
-                            <div>
-                                <h5>Email Failure Handling</h5>
-                                <p class="mb-0">If email delivery fails, system automatically activates user account and provides warning message, ensuring users can still access the platform while maintaining security.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">6</span>
-                            <div>
-                                <h5>OTP Verification & Validation</h5>
-                                <p class="mb-0">User enters OTP code with validation for correct format, expiry time, and code accuracy. Includes resend functionality for expired codes.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">7</span>
-                            <div>
-                                <h5>Account Activation & Auto-Login</h5>
-                                <p class="mb-0">User account activated (<code>is_active=True</code>) upon successful OTP verification with automatic login and session establishment</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">8</span>
-                            <div>
-                                <h5>Admin Notification & Welcome Email</h5>
-                                <p class="mb-0">Admin notification sent to <code>admin@youthimpactglobal.com</code> about new user registration, followed by a branded welcome email to the learner</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">9</span>
-                            <div>
-                                <h5>Session Management & Welcome Redirect</h5>
-                                <p class="mb-0">Session flag <code>just_completed_otp_verification</code> set for welcome page access control, user redirected to personalized welcome experience</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="d-flex align-items-center">
-                            <span class="step-number">10</span>
-                            <div>
-                                <h5>Welcome Page & Profile Completion</h5>
-                                <p class="mb-0">User sees welcome page with next steps, course enrollment options, profile completion tracking, and guided onboarding flow</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visual Flowchart Section -->
-            <div id="visual-flowchart" class="section-card">
-                <div class="section-header">
-                    <h3><i class="fas fa-project-diagram"></i> Interactive Visual Flowchart</h3>
-                </div>
-                <div class="section-content">
-                    <p>The following interactive flowchart illustrates the complete user registration journey:</p>
-
-                    <div class="mermaid-container">
-                        <div class="mermaid">
-                            graph TD
-                                A[User Visits Registration Page] --> B[Fills Registration Form]
-                                B --> C{Form Validation<br/>Username/Email Check}
-                                C -->|Valid| D[Create User Account<br/>is_active=False]
-                                C -->|Duplicate Username| E[Show Error: Username already taken]
-                                C -->|Other Validation Error| F[Show Validation Errors]
-                                E --> B
-                                F --> B
-                                D --> G[Create User Profile<br/>Store Personal Data]
-                                G --> H[Generate 6-digit OTP<br/>200min expiry]
-                                H --> I{Email Delivery}
-                                I -->|Success| J[Send OTP Email<br/>YITP Branded]
-                                I -->|Failure| K[Activate Account<br/>Show Warning Message]
-                                J --> L[Redirect to OTP Page]
-                                K --> L
-                                L --> M[User Enters OTP]
-                                M --> N{OTP Valid?}
-                                N -->|Valid| O[Activate User Account<br/>is_active=True]
-                                N -->|Invalid| P[Show Error Message]
-                                N -->|Expired| Q[Show Expired Message]
-                                P --> M
-                                Q --> R[Resend OTP Option]
-                                R --> H
-                                O --> S[Auto-Login User<br/>Set Session Flag]
-                                S --> T[Send Admin Notification<br/>to admin@youthimpactglobal.com]
-                                T --> U[Send Welcome Email]
-                                U --> V[Set Session: just_completed_otp_verification]
-                                V --> W[Redirect to Welcome Page]
-                                W --> X[Welcome Page Experience<br/>Profile Completion & Next Steps]
-                                X --> Y[Registration Journey Complete<br/>User Can Access Platform]
-
-                                style A fill:#e3f2fd
-                                style D fill:#fff3cd
-                                style G fill:#d4edda
-                                style H fill:#f3e5f5
-                                style J fill:#e8f5e8
-                                style K fill:#ffebcd
-                                style O fill:#d4edda
-                                style S fill:#e8f5e8
-                                style T fill:#f0e68c
-                                style U fill:#e8f5e8
-                                style V fill:#dda0dd
-                                style W fill:#fff3cd
-                                style X fill:#e3f2fd
-                                style Y fill:#c8e6c9
-                        </div>
-                    </div>
-
-                    <div class="tech-detail">
-                        <strong><i class="fas fa-info-circle"></i> Technical Note:</strong>
-                        This flowchart is interactive and can be zoomed/panned. Each step represents a specific function or process in the YITP codebase.
-                    </div>
-                </div>
-            </div>
-
-
+        </div>
 
             <!-- Email Workflows Section -->
             <div id="email-workflows" class="section-card">
@@ -1829,6 +1659,190 @@
             </div>
 
             <!-- Course Completion & Certificates Section -->
+            
+
+            <!-- Registration Process Steps Section -->
+            <div id="registration-overview" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-list-ol"></i> Registration Process Steps</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Step-by-step breakdown of the YITP user registration journey, from initial form submission through complete account activation and welcome experience.</p>
+
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
+                        The registration journey is fully functional and production-ready with comprehensive validation, robust email failure handling, OTP verification system, automatic login, session management, and personalized welcome experience.
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Form Submission & Validation</h5>
+                                <p class="mb-0">User fills out registration form with personal details. System validates for duplicate usernames/emails with message "Username already taken. Please choose a different username." and ensures all required fields are completed.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Account Creation (Inactive)</h5>
+                                <p class="mb-0">Django User object created with <code>is_active=False</code> to ensure email verification before platform access</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Profile Creation & Data Storage</h5>
+                                <p class="mb-0">User Profile created via Django signals with phone number, personal details, and initial profile completion tracking</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>OTP Generation & Email Delivery</h5>
+                                <p class="mb-0">6-digit OTP generated with a 200-minute expiry and sent through the Mailtrap transactional API using <code>admin@youthimpactglobal.com</code>. Delivery logs surface in the Mailtrap dashboard for live monitoring.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">5</span>
+                            <div>
+                                <h5>Email Failure Handling</h5>
+                                <p class="mb-0">If email delivery fails, system automatically activates user account and provides warning message, ensuring users can still access the platform while maintaining security.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">6</span>
+                            <div>
+                                <h5>OTP Verification & Validation</h5>
+                                <p class="mb-0">User enters OTP code with validation for correct format, expiry time, and code accuracy. Includes resend functionality for expired codes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">7</span>
+                            <div>
+                                <h5>Account Activation & Auto-Login</h5>
+                                <p class="mb-0">User account activated (<code>is_active=True</code>) upon successful OTP verification with automatic login and session establishment</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">8</span>
+                            <div>
+                                <h5>Admin Notification & Welcome Email</h5>
+                                <p class="mb-0">Admin notification sent to <code>admin@youthimpactglobal.com</code> about new user registration, followed by a branded welcome email to the learner</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">9</span>
+                            <div>
+                                <h5>Session Management & Welcome Redirect</h5>
+                                <p class="mb-0">Session flag <code>just_completed_otp_verification</code> set for welcome page access control, user redirected to personalized welcome experience</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">10</span>
+                            <div>
+                                <h5>Welcome Page & Profile Completion</h5>
+                                <p class="mb-0">User sees welcome page with next steps, course enrollment options, profile completion tracking, and guided onboarding flow</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Flowchart Section -->
+            <div id="visual-flowchart" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-project-diagram"></i> Interactive Visual Flowchart</h3>
+                </div>
+                <div class="section-content">
+                    <p>The following interactive flowchart illustrates the complete user registration journey:</p>
+
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                            graph TD
+                                A[User Visits Registration Page] --> B[Fills Registration Form]
+                                B --> C{Form Validation<br/>Username/Email Check}
+                                C -->|Valid| D[Create User Account<br/>is_active=False]
+                                C -->|Duplicate Username| E[Show Error: Username already taken]
+                                C -->|Other Validation Error| F[Show Validation Errors]
+                                E --> B
+                                F --> B
+                                D --> G[Create User Profile<br/>Store Personal Data]
+                                G --> H[Generate 6-digit OTP<br/>200min expiry]
+                                H --> I{Email Delivery}
+                                I -->|Success| J[Send OTP Email<br/>YITP Branded]
+                                I -->|Failure| K[Activate Account<br/>Show Warning Message]
+                                J --> L[Redirect to OTP Page]
+                                K --> L
+                                L --> M[User Enters OTP]
+                                M --> N{OTP Valid?}
+                                N -->|Valid| O[Activate User Account<br/>is_active=True]
+                                N -->|Invalid| P[Show Error Message]
+                                N -->|Expired| Q[Show Expired Message]
+                                P --> M
+                                Q --> R[Resend OTP Option]
+                                R --> H
+                                O --> S[Auto-Login User<br/>Set Session Flag]
+                                S --> T[Send Admin Notification<br/>to admin@youthimpactglobal.com]
+                                T --> U[Send Welcome Email]
+                                U --> V[Set Session: just_completed_otp_verification]
+                                V --> W[Redirect to Welcome Page]
+                                W --> X[Welcome Page Experience<br/>Profile Completion & Next Steps]
+                                X --> Y[Registration Journey Complete<br/>User Can Access Platform]
+
+                                style A fill:#e3f2fd
+                                style D fill:#fff3cd
+                                style G fill:#d4edda
+                                style H fill:#f3e5f5
+                                style J fill:#e8f5e8
+                                style K fill:#ffebcd
+                                style O fill:#d4edda
+                                style S fill:#e8f5e8
+                                style T fill:#f0e68c
+                                style U fill:#e8f5e8
+                                style V fill:#dda0dd
+                                style W fill:#fff3cd
+                                style X fill:#e3f2fd
+                                style Y fill:#c8e6c9
+                        </div>
+                    </div>
+
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-info-circle"></i> Technical Note:</strong>
+                        This flowchart is interactive and can be zoomed/panned. Each step represents a specific function or process in the YITP codebase.
+                    </div>
+                </div>
+            </div>
+
+
+
             <div id="course-completion" class="section-card">
                 <div class="section-header">
                     <h3><i class="fas fa-certificate"></i> Course Completion & Certificates</h3>
@@ -1892,6 +1906,252 @@
                     </div>
                 </div>
             </div>
+
+<!-- Communications Overview -->
+            <div id="communication-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-comments"></i> Communications Journey</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">This section covers the complete communications stack—direct messaging, forum discussions, lesson-based help, notifications, and announcement delivery—powering collaboration inside YITP.</p>
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Current Status:</strong>
+                        Messaging, forums, and notifications are live with unread counters, instructor alerts, and mobile-ready templates. Conversation data is persisted through the <code>Message</code>, <code>Topic</code>, <code>Reply</code>, <code>Notification</code>, and <code>Announcement</code> models to provide a unified communications experience.
+                    </div>
+                    <ul class="list-unstyled">
+                        <li><span class="icon-badge"><i class="fas fa-inbox"></i></span><strong>Messaging Hub:</strong> Inbox, Sent, Compose, and message detail screens powered by <code>MessageDashboardView</code>, <code>InboxView</code>, and <code>MessageDetailView</code>.</li>
+                        <li><span class="icon-badge"><i class="fas fa-comments"></i></span><strong>Discussion Forums:</strong> Category-based forums, pinned topics, and threaded replies managed by <code>ForumListView</code>, <code>TopicDetailView</code>, and <code>ReplyTopicView</code>.</li>
+                        <li><span class="icon-badge"><i class="fas fa-bell"></i></span><strong>Notifications & Announcements:</strong> Real-time unread counters, bulk-mark-as-read actions, and announcement feeds driven by <code>NotificationListView</code> and <code>AnnouncementListView</code>.</li>
+                        <li><span class="icon-badge"><i class="fas fa-chalkboard-teacher"></i></span><strong>Lesson Help:</strong> Lesson-specific questions escalate to instructors with automatic notifications via <code>SendLessonMessageView</code>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Communications Detailed Overview -->
+            <div id="communications-overview" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-info-circle"></i> Communications Overview</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Every interaction starts from the communications dashboard which summarizes unread messages, notifications, and announcements. From there, learners can move into personal inboxes, forum discussions, or lesson-specific questions.</p>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Dashboard Snapshot</h5>
+                                <p class="mb-0"><code>MessageDashboardView</code> aggregates unread counts, recent conversations, announcements, and shortcuts to compose new messages or open the forum list.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Messaging Surfaces</h5>
+                                <p class="mb-0">Learners navigate between Inbox, Sent, Compose, and Message Detail views. Every message supports read receipts (<code>is_read</code>, <code>read_at</code>) and threaded replies using <code>parent_message</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Forums & Topics</h5>
+                                <p class="mb-0">Forums host long-lived conversations with pinned topics, last-activity tracking, and paginated replies. Learners can create topics, respond, and subscribe for updates.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Notifications & Announcements</h5>
+                                <p class="mb-0">Each critical action triggers a notification entry with optional <code>action_url</code>. Announcements surface platform-wide updates and support detail pages for long-form content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Communications Flowchart -->
+            <div id="communications-flowchart" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-project-diagram"></i> Communications Flowchart</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">The diagram below shows how direct messages, lesson questions, notifications, and forum replies travel through the system.</p>
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                            graph LR
+                                A[Communication Dashboard] --> B[Compose Message]
+                                A --> C[Inbox / Sent]
+                                A --> D[Forums]
+                                A --> E[Notifications Center]
+                                B --> F{Recipient Type}
+                                F -->|Learner| G[Message -> InboxView]
+                                F -->|Instructor / Staff| H[Message + Notification]
+                                H --> I[NotificationListView<br/>action_url => message detail]
+                                G --> J[MessageDetailView<br/>mark as read]
+                                J --> K[ReplyMessageView]
+                                K --> G
+                                D --> L[TopicDetailView]
+                                L --> M[ReplyTopicView]
+                                M --> L
+                                D --> N[CreateTopicView]
+                                C --> I
+                                A --> O[Lesson Screen Help Widget]
+                                O --> P[SendLessonMessageView]
+                                P --> H
+                                A --> Q[Announcements Feed]
+                                Q --> R[AnnouncementDetailView]
+                                E --> I
+
+                                style A fill:#fef3c7
+                                style B fill:#e0f2fe
+                                style C fill:#e0f7fa
+                                style D fill:#ede9fe
+                                style E fill:#ffe4e6
+                                style H fill:#d1fae5
+                                style I fill:#fbcfe8
+                                style Q fill:#ffedd5
+                        </div>
+                    </div>
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-lightbulb"></i> Flowchart Notes:</strong> Lesson help requests are validated against active enrollments before routing to instructors. Notifications and unread counters are recalculated through <code>GetUnreadCountAPIView</code>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messaging Workflow -->
+            <div id="messaging-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messaging Workflow & APIs</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Direct messaging is a threaded system with real-time unread badges and instructor escalation for lesson-specific help.</p>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Compose & Send</h5>
+                                <p class="mb-0"><code>ComposeMessageView</code> and <code>SendMessageAPIView</code> validate recipients, persist messages, and display success toasts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Inbox & Sent Views</h5>
+                                <p class="mb-0"><code>InboxView</code> and <code>SentMessagesView</code> paginate 20 messages per page, ordered by <code>sent_at</code>, with empty states and quick actions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Message Detail & Threading</h5>
+                                <p class="mb-0"><code>MessageDetailView</code> marks messages as read, supports inline replies via <code>ReplyMessageView</code>, and links back to parent threads.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">4</span>
+                            <div>
+                                <h5>Lesson Help Widget</h5>
+                                <p class="mb-0"><code>SendLessonMessageView</code> receives JSON payloads from lesson screens, validates enrollment, and routes the question to staff while creating instructor notifications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="warning-box">
+                        <strong><i class="fas fa-exclamation-triangle"></i> Security & Access:</strong> Every view enforces <code>LoginRequiredMixin</code>, ensuring only message participants can access their threads. JSON endpoints also validate enrollment and staff roles before sending messages.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forum Workflow -->
+            <div id="forum-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-comments"></i> Discussion Forums & Topics</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Forums extend conversations beyond one-to-one messaging by offering categories, pinned topics, and reply threading.</p>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Forum Discovery</h5>
+                                <p class="mb-0"><code>ForumListView</code> groups forums by <code>order</code> and <code>is_active</code>, giving learners an overview of active communities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Topic Management</h5>
+                                <p class="mb-0">Topics can be created via <code>CreateTopicView</code>, pinned, and sorted by <code>last_activity</code>. Each topic tracks author metadata and publish status.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Replies & Moderation</h5>
+                                <p class="mb-0"><code>ReplyTopicView</code> persists replies, updates topic <code>last_activity</code>, and supports moderation hooks for future spam control.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tech-detail">
+                        <strong><i class="fas fa-lightbulb"></i> Integration Tip:</strong> Forum data feeds into the analytics dashboards through the <code>communication</code> app models, enabling future sentiment or participation insights.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications & Announcements -->
+            <div id="notifications-workflow" class="section-card">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications & Announcements</h3>
+                </div>
+                <div class="section-content">
+                    <p class="lead">Notifications keep learners aware of new messages, replies, and announcements with badge counters and quick actions.</p>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h5>Unread Counters</h5>
+                                <p class="mb-0"><code>GetUnreadCountAPIView</code> aggregates unread messages and notifications for the navbar badge.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h5>Notifications Center</h5>
+                                <p class="mb-0"><code>NotificationListView</code> paginates user notifications with action URLs. Users can mark individual entries read or call <code>MarkAllNotificationsReadView</code> for bulk updates.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="d-flex align-items-center">
+                            <span class="step-number">3</span>
+                            <div>
+                                <h5>Announcements</h5>
+                                <p class="mb-0"><code>AnnouncementListView</code> and <code>AnnouncementDetailView</code> publish platform-wide updates. Each announcement respects <code>is_published</code> and can be scheduled via the admin.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-box">
+                        <strong><i class="fas fa-check-circle"></i> Best Practices:</strong>
+                        Notifications are lightweight (<code>JSONResponse</code> for AJAX read states) and accessible—buttons include clear labels and focus states to keep the experience inclusive.
+                    </div>
+                </div>
+            </div>
+
 
 
 
@@ -1961,6 +2221,7 @@
                 const childNavItems = document.getElementById(targetId);
                 const chevron = parentNav.querySelector('.chevron-icon');
                 const childLinks = childNavItems ? childNavItems.querySelectorAll('.child-nav') : [];
+                const scrollTarget = parentNav.getAttribute('data-target');
 
                 // Validate required elements
                 if (!childNavItems || !chevron) {
@@ -1972,6 +2233,7 @@
                     e.preventDefault();
                     e.stopPropagation();
                     toggleDropdown(parentNav, childNavItems, chevron, childLinks);
+                    scrollToSection(scrollTarget);
                 });
 
                 // Keyboard event handler
@@ -1980,9 +2242,26 @@
                         e.preventDefault();
                         e.stopPropagation();
                         toggleDropdown(parentNav, childNavItems, chevron, childLinks);
+                        scrollToSection(scrollTarget);
                     }
                 });
             });
+        }
+
+        function scrollToSection(selector) {
+            if (!selector) return;
+            const targetSection = document.querySelector(selector);
+            if (!targetSection) return;
+
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            setTimeout(() => {
+                targetSection.setAttribute('tabindex', '-1');
+                targetSection.focus({ preventScroll: true });
+            }, 500);
         }
 
         function toggleDropdown(parentNav, childNavItems, chevron, childLinks) {
