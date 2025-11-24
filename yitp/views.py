@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse, get_resolver, NoReverseMatch
+from django.urls.resolvers import URLPattern, URLResolver
 from django.utils import timezone
 from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_http_methods
@@ -340,44 +341,69 @@ def _describe_url(path, name):
     return 'General site page'
 
 
+def _clean_route(route):
+    if not route:
+        return ''
+    route = route.replace('^', '').replace('$', '')
+    return route
+
+
+def _combine_paths(prefix, route):
+    if not prefix:
+        return route
+    if not route:
+        return prefix
+    return f"{prefix.rstrip('/')}/{route.lstrip('/')}"
+
+
+def _collect_patterns(resolver, prefix=''):
+    entries = []
+    for pattern in resolver.url_patterns:
+        if isinstance(pattern, URLPattern):
+            route = getattr(pattern.pattern, '_route', None) or _clean_route(getattr(pattern.pattern, 'regex', ''))
+            full_path = '/' + _combine_paths(prefix, route)
+            name = pattern.name or '(unnamed)'
+            entries.append({'name': name, 'path': full_path})
+        elif isinstance(pattern, URLResolver):
+            route = getattr(pattern.pattern, '_route', None) or _clean_route(getattr(pattern.pattern, 'regex', ''))
+            nested_prefix = _combine_paths(prefix, route)
+            entries.extend(_collect_patterns(pattern, nested_prefix))
+    return entries
+
+
 def url_testing(request):
-    """
-    URL hub grouped by purpose to help map the user flow visually.
-    Shows all named URL patterns reversible without parameters.
-    """
+    """Catalog all project URLs (including parameterised ones) grouped by purpose."""
     resolver = get_resolver()
+    raw_entries = _collect_patterns(resolver)
+
     categories = OrderedDict()
     for rule in URL_CATEGORY_RULES:
         categories[rule['label']] = {'description': rule['description'], 'entries': []}
     categories['Other Pages'] = {'description': 'Miscellaneous routes not covered above.', 'entries': []}
 
-    total_urls = 0
-    for name in resolver.reverse_dict.keys():
-        if not isinstance(name, str):
-            continue
-        try:
-            url = reverse(name)
-        except NoReverseMatch:
-            continue
-        label, desc = _categorize_url(url, name)
-        purpose = _describe_url(url, name)
+    for entry in raw_entries:
+        name = entry['name']
+        path = entry['path']
+        label, desc = _categorize_url(path, name)
+        purpose = _describe_url(path, name)
         categories[label]['description'] = desc
         categories[label]['entries'].append({
             'name': name,
-            'url': url,
+            'url': path,
             'purpose': purpose,
         })
-        total_urls += 1
 
     grouped_entries = [
         {
             'label': label,
             'description': data['description'],
-            'entries': sorted(data['entries'], key=lambda e: e['name'])
+            'entries': sorted(data['entries'], key=lambda e: e['path'])
         }
         for label, data in categories.items()
         if data['entries']
     ]
+
+    total_urls = sum(len(group['entries']) for group in grouped_entries)
 
     return render(request, 'urltesting.html', {
         'grouped_entries': grouped_entries,

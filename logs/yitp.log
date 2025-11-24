@@ -29028,3 +29028,24 @@ INFO 2025-11-22 01:04:19,902 autoreload 48491 8701196992 /Users/djsean/Desktop/A
 INFO 2025-11-22 01:04:22,045 autoreload 48721 8701196992 Watching for file changes with StatReloader
 INFO 2025-11-22 01:06:18,152 basehttp 48721 6195195904 "GET /urltesting HTTP/1.1" 301 0
 INFO 2025-11-22 01:06:19,772 basehttp 48721 6212022272 "GET /urltesting/ HTTP/1.1" 200 74921
+INFO 2025-11-24 23:54:26,523 autoreload 31026 8497986240 Watching for file changes with StatReloader
+INFO 2025-11-24 23:54:45,621 basehttp 31026 6194982912 "GET / HTTP/1.1" 200 80102
+INFO 2025-11-24 23:54:46,325 basehttp 31026 6228635648 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-11-24 23:54:46,370 basehttp 31026 6279114752 "GET /static/assets/css/style.css HTTP/1.1" 304 0
+INFO 2025-11-24 23:54:46,371 basehttp 31026 6245462016 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-11-24 23:54:46,385 basehttp 31026 6211809280 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-11-24 23:54:46,395 basehttp 31026 6228635648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-24 23:54:46,404 basehttp 31026 6262288384 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-11-24 23:54:46,404 basehttp 31026 6245462016 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+WARNING 2025-11-24 23:54:46,415 log 31026 6194982912 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-24 23:54:46,415 basehttp 31026 6194982912 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11369
+INFO 2025-11-24 23:54:46,512 basehttp 31026 6194982912 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+WARNING 2025-11-24 23:54:46,855 basehttp 31026 6194982912 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-24 23:54:47,062 basehttp 31026 6245462016 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-24 23:56:04,743 basehttp 31026 6262288384 "GET /web_courses_list/ HTTP/1.1" 200 118721
+INFO 2025-11-24 23:56:04,815 basehttp 31026 6262288384 "GET /static/assets/img/hero/sylvester.jpeg HTTP/1.1" 200 68707
+INFO 2025-11-24 23:56:04,821 basehttp 31026 6228635648 "GET /static/assets/img/hero/ruth.jpeg HTTP/1.1" 200 97374
+INFO 2025-11-24 23:56:04,823 basehttp 31026 6262288384 "GET /static/assets/img/hero/meshack.jpeg HTTP/1.1" 200 188051
+INFO 2025-11-24 23:56:04,908 basehttp 31026 6262288384 "GET /static/assets/img/hero/levin.jpeg HTTP/1.1" 200 61761
+INFO 2025-11-24 23:56:04,911 basehttp 31026 6228635648 "GET /static/assets/img/hero/lilian.jpeg HTTP/1.1" 200 63171
+INFO 2025-11-24 23:56:04,926 basehttp 31026 6228635648 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
