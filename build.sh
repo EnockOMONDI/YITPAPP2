@@ -247,9 +247,6 @@ else:
 echo "📁 Collecting static files..."
 python manage.py collectstatic --noinput --clear
 
-# Create and apply database migrations
-echo "🗄️  Preparing database migrations..."
-python manage.py makemigrations --noinput
 
 echo "🗄️  Applying database migrations..."
 python manage.py migrate --noinput

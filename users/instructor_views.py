@@ -271,7 +271,8 @@ def instructor_course_detail(request, course_id):
     # Check if user has permission to view this course
     try:
         instructor_profile = request.user.instructor_profile
-        if instructor_profile.instructor_role != 'system_admin' and course.instructor != request.user:
+        has_access = course.user_has_module_access(request.user)
+        if instructor_profile.instructor_role != 'system_admin' and not has_access:
             messages.error(request, "You don't have permission to view this course.")
             return redirect('users:instructor_dashboard')
     except:

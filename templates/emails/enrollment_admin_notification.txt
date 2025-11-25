@@ -13,7 +13,7 @@ Date Joined: {{ user.date_joined|date:"F d, Y" }}
 
 COURSE INFORMATION:
 Course: {{ course.title }}
-Instructor: {{ course.instructor.get_full_name|default:course.instructor.username }}
+Instructor: {{ course.instructor_display_name }}
 Category: {{ course.category.name|default:"Uncategorized" }}
 Difficulty: {{ course.get_difficulty_level_display }}
 Duration: {{ course.estimated_duration }} hours

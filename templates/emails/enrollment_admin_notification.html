@@ -22,7 +22,7 @@
 <div class="info-box">
     <strong>📚 Course Information:</strong><br>
     <strong>Course:</strong> {{ course.title }}<br>
-    <strong>Instructor:</strong> {{ course.instructor.get_full_name|default:course.instructor.username }}<br>
+    <strong>Instructor:</strong> {{ course.instructor_display_name }}<br>
     <strong>Category:</strong> {{ course.category.name|default:"Uncategorized" }}<br>
     <strong>Difficulty:</strong> {{ course.get_difficulty_level_display }}<br>
     <strong>Duration:</strong> {{ course.estimated_duration }} hours<br>

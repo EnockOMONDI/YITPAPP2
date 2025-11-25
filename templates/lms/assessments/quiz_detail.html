@@ -160,7 +160,7 @@
 
                                         <div class="row g-2">
                                             <div class="col-md-6">
-                                                <a href="mailto:{{ quiz.lesson.module.course.instructor.email }}?subject=Quiz Help Request - {{ quiz.title }}&body=Hi {{ quiz.lesson.module.course.instructor.get_full_name|default:quiz.lesson.module.course.instructor.username }},
+                                                <a href="mailto:{{ quiz.lesson.module.course.instructor.email }}?subject=Quiz Help Request - {{ quiz.title }}&body=Hi {{ quiz.lesson.module.course.instructor_display_name }},
 
 I need help with the quiz '{{ quiz.title }}' in the course '{{ quiz.lesson.module.course.title }}'. I've reached the maximum number of attempts ({{ quiz.max_attempts }}) and would appreciate some guidance.
 

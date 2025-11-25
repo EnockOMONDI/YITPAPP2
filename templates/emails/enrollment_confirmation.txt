@@ -7,7 +7,7 @@ Congratulations! You have successfully enrolled in "{{ course.title }}" through 
 
 COURSE DETAILS:
 Course: {{ course.title }}
-Instructor: {{ course.instructor.get_full_name|default:course.instructor.username }}
+Instructor: {{ course.instructor_display_name }}
 Difficulty: {{ course.get_difficulty_level_display }}
 Duration: {{ course.estimated_duration }} hours
 Enrollment Date: {{ enrollment_date|date:"F d, Y" }} at {{ enrollment_date|time:"g:i A" }}

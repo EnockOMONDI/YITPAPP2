@@ -1201,9 +1201,10 @@ class InstructorProfile(models.Model):
         ordering = ['-created_at']
 
 
-class CourseInstructor(models.Model):
+class ModuleInstructor(models.Model):
     """
-    Course-specific instructor assignments with granular permissions
+    Module-specific instructor assignments with granular permissions
+    so instructors can own/manage individual modules rather than entire courses.
     """
     ASSIGNMENT_ROLES = [
         ('primary_instructor', 'Primary Instructor'),
@@ -1213,15 +1214,15 @@ class CourseInstructor(models.Model):
         ('guest_lecturer', 'Guest Lecturer'),
     ]
 
-    course = models.ForeignKey(
-        'courses.Course',
+    module = models.ForeignKey(
+        'courses.Module',
         on_delete=models.CASCADE,
-        related_name='instructor_assignments'
+        related_name='module_instructors'
     )
     instructor = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='course_assignments'
+        related_name='module_assignments'
     )
     assignment_role = models.CharField(
         max_length=30,
@@ -1243,18 +1244,19 @@ class CourseInstructor(models.Model):
         User,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='instructor_assignments_made'
+        related_name='module_instructor_assignments_made'
     )
     is_active = models.BooleanField(default=True)
     notes = models.TextField(blank=True, help_text="Assignment notes or special instructions")
 
     def __str__(self):
-        return f"{self.instructor.get_full_name()} - {self.course.title} ({self.get_assignment_role_display()})"
+        course_title = self.module.course.title if self.module and self.module.course else "Unknown Course"
+        return f"{self.instructor.get_full_name()} - {course_title} / {self.module.title} ({self.get_assignment_role_display()})"
 
     class Meta:
-        verbose_name = "Course Instructor Assignment"
-        verbose_name_plural = "Course Instructor Assignments"
-        unique_together = ['course', 'instructor']
+        verbose_name = "Module Instructor Assignment"
+        verbose_name_plural = "Module Instructor Assignments"
+        unique_together = ['module', 'instructor']
         ordering = ['-assigned_at']
 
 

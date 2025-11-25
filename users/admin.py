@@ -879,7 +879,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from .models import InstructorProfile, Specialization, CourseInstructor
+from .models import InstructorProfile, Specialization, ModuleInstructor
 
 
 # ============================================================================
@@ -1356,26 +1356,27 @@ class InstructorProfileAdmin(admin.ModelAdmin):
     activate_instructors.short_description = "Activate selected instructors"
 
 
-@admin.register(CourseInstructor)
-class CourseInstructorAdmin(admin.ModelAdmin):
-    """Admin interface for course instructor assignments"""
+@admin.register(ModuleInstructor)
+class ModuleInstructorAdmin(admin.ModelAdmin):
+    """Admin interface for module instructor assignments"""
     list_display = [
-        'instructor_name', 'course_title', 'assignment_role',
+        'instructor_name', 'course_title', 'module_title', 'assignment_role',
         'permissions_summary', 'is_active', 'assigned_at'
     ]
     list_filter = [
         'assignment_role', 'is_active', 'assigned_at',
-        'can_edit_content', 'can_manage_enrollments', 'can_grade_assessments'
+        'can_edit_content', 'can_manage_enrollments', 'can_grade_assessments',
+        'module__course'
     ]
     search_fields = [
         'instructor__username', 'instructor__first_name', 'instructor__last_name',
-        'course__title', 'course__slug'
+        'module__course__title', 'module__title'
     ]
     readonly_fields = ['assigned_at']
 
     fieldsets = (
         ('Assignment Details', {
-            'fields': ('course', 'instructor', 'assignment_role', 'is_active')
+            'fields': ('module', 'instructor', 'assignment_role', 'is_active')
         }),
         ('Permissions', {
             'fields': (
@@ -1404,14 +1405,24 @@ class CourseInstructorAdmin(admin.ModelAdmin):
 
     def course_title(self, obj):
         """Display course title with link"""
-        course_url = reverse('admin:courses_course_change', args=[obj.course.pk])
+        course = obj.module.course if obj.module else None
+        if not course:
+            return "—"
+        course_url = reverse('admin:courses_course_change', args=[course.pk])
         return format_html(
             '<a href="{}" style="color: #ff5d15; font-weight: bold;">{}</a>',
             course_url,
-            obj.course.title
+            course.title
         )
     course_title.short_description = 'Course'
-    course_title.admin_order_field = 'course__title'
+    course_title.admin_order_field = 'module__course__title'
+
+    def module_title(self, obj):
+        if not obj.module:
+            return "—"
+        return obj.module.title
+    module_title.short_description = 'Module'
+    module_title.admin_order_field = 'module__title'
 
     def permissions_summary(self, obj):
         """Display permissions summary"""

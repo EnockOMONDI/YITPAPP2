@@ -787,7 +787,7 @@
                                     <h5 class="course-title">{{ progress_data.course.title }}</h5>
                                     <p class="course-instructor">
                                         <i class="fas fa-user me-1"></i>
-                                        {{ progress_data.course.instructor.get_full_name|default:progress_data.course.instructor.username }}
+                                        {{ progress_data.course.instructor_display_name }}
                                     </p>
 
                                     <!-- Enrollment Date -->

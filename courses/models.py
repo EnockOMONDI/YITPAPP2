@@ -1,4 +1,5 @@
 from django.db import models
+from django.apps import apps
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
@@ -179,6 +180,69 @@ class Course(models.Model):
         from progress.models import Enrollment
         return Enrollment.objects.filter(course=self, status='active').count()
 
+    def _get_primary_instructor_name(self):
+        """
+        Resolve the instructor's display name, falling back to username
+        when full name is unavailable.
+        """
+        if not self.instructor:
+            return "Course Instructor"
+
+        full_name = ""
+        if hasattr(self.instructor, 'get_full_name'):
+            full_name = (self.instructor.get_full_name() or '').strip()
+
+        if full_name:
+            return full_name
+
+        return getattr(self.instructor, 'username', str(self.instructor))
+
+    def _get_module_instructor_ids(self):
+        """
+        Helper to gather distinct instructor IDs assigned across this course's modules.
+        """
+        if not hasattr(self, '_module_instructor_cache'):
+            ids = self.modules.values_list('module_instructors__instructor_id', flat=True)
+            self._module_instructor_cache = {pk for pk in ids if pk}
+        return self._module_instructor_cache
+
+    @property
+    def has_collaborators(self):
+        """
+        Determine if the course has additional active instructor assignments
+        besides the primary instructor.
+        """
+        instructor_ids = self._get_module_instructor_ids()
+        if not instructor_ids:
+            return False
+        if not self.instructor_id:
+            return len(instructor_ids) > 1
+        return any(pk != self.instructor_id for pk in instructor_ids)
+
+    @property
+    def instructor_display_name(self):
+        """
+        Display name for UI surfaces. Adds '(+ collaborators)' when there are
+        additional instructors collaborating on the course.
+        """
+        name = self._get_primary_instructor_name()
+        if self.has_collaborators:
+            return f"{name} (+ collaborators)"
+        return name
+
+    def user_has_module_access(self, user):
+        """
+        Determine whether the given user can manage this course via module ownership.
+        """
+        if not user or not getattr(user, 'is_authenticated', False):
+            return False
+        if self.instructor_id and user.id == self.instructor_id:
+            return True
+        return self.modules.filter(
+            module_instructors__instructor=user,
+            module_instructors__is_active=True
+        ).exists()
+
     @property
     def quiz_set(self):
         """Get all quizzes for this course through its lessons"""
@@ -222,12 +286,57 @@ class Module(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        super().save(*args, **kwargs)
+        if is_new:
+            self.ensure_primary_instructor_assignment()
+
     def __str__(self):
         return f"{self.course.title} - {self.title}"
     
     @property
     def total_lessons(self):
         return self.lessons.count()
+
+    @property
+    def active_instructors(self):
+        """Return a queryset of instructors actively assigned to this module."""
+        return User.objects.filter(
+            module_assignments__module=self,
+            module_assignments__is_active=True
+        ).distinct()
+
+    def get_primary_instructor(self):
+        """Return the primary instructor for this module, if set."""
+        assignment = self.module_instructors.filter(
+            assignment_role='primary_instructor',
+            is_active=True
+        ).select_related('instructor').first()
+        if assignment:
+            return assignment.instructor
+        return self.course.instructor
+
+    def ensure_primary_instructor_assignment(self):
+        """Ensure the course's designated instructor owns this module."""
+        if not self.course_id or not self.course.instructor_id:
+            return
+        ModuleInstructor = apps.get_model('users', 'ModuleInstructor')
+        ModuleInstructor.objects.get_or_create(
+            module=self,
+            instructor=self.course.instructor,
+            defaults={
+                'assignment_role': 'primary_instructor',
+                'assigned_by': self.course.instructor,
+                'can_edit_content': True,
+                'can_manage_enrollments': True,
+                'can_grade_assessments': True,
+                'can_view_analytics': True,
+                'can_communicate_students': True,
+                'can_publish_course': True,
+                'is_active': True,
+            }
+        )
     
     class Meta:
         verbose_name = "Module"

@@ -1038,14 +1038,14 @@
             <div class="instructor-card mb-4">
                 <div class="text-center mb-3">
                     {% if course.instructor.profile_picture %}
-                    <img src="{{ course.instructor.profile_picture.url }}" alt="{{ course.instructor.get_full_name }}"
+                    <img src="{{ course.instructor.profile_picture.url }}" alt="{{ course.instructor_display_name }}"
                          class="instructor-avatar">
                     {% else %}
                     <div class="instructor-avatar">
                         <i class="fas fa-user fa-2x text-white"></i>
                     </div>
                     {% endif %}
-                    <h5 class="mb-1">{{ course.instructor.get_full_name }}</h5>
+                    <h5 class="mb-1">{{ course.instructor_display_name }}</h5>
                     {% if instructor_profile %}
                     <p class="text-muted mb-0">{{ instructor_profile.job_title|default:"Course Instructor" }}</p>
                     {% endif %}

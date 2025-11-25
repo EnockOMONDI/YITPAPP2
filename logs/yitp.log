@@ -29216,3 +29216,4 @@ INFO 2025-11-25 02:20:27,348 autoreload 53735 8497986240 Watching for file chang
 INFO 2025-11-25 02:20:34,490 basehttp 53735 6198226944 "GET /users/instructor/ HTTP/1.1" 200 55376
 INFO 2025-11-25 02:21:06,604 basehttp 53735 6198226944 "GET /users/instructor/ HTTP/1.1" 200 55376
 INFO 2025-11-25 02:21:10,283 basehttp 53735 6198226944 "GET /users/instructor/ HTTP/1.1" 200 55376
+INFO 2025-11-25 03:10:06,832 autoreload 64898 8497986240 Watching for file changes with StatReloader
