@@ -32,10 +32,11 @@ def create_intro_course(apps, schema_editor):
     )
     
     if created:
-        if hasattr(instructor, 'set_password'):
-            instructor.set_password('sLXSxmMg3tVeV64')
-        else:
-            instructor.password = make_password('sLXSxmMg3tVeV64')
+        # Generate a secure random password
+        random_password = ''.join(secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(20))
+        instructor.password = make_password(random_password)
+        # Log the password securely or send to admin (not in code)
+        print(f"Generated password for yitpteam user (save this securely): {random_password}")
         instructor.save()
     
     # Create instructor profile

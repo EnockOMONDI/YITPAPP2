@@ -201,12 +201,8 @@ class Course(models.Model):
         """
         Helper to gather distinct instructor IDs assigned across this course's modules.
         """
-        if not hasattr(self, '_module_instructor_cache'):
-            ids = self.modules.values_list('module_instructors__instructor_id', flat=True)
-            self._module_instructor_cache = {pk for pk in ids if pk}
-        return self._module_instructor_cache
-
-    @property
+        ids = self.modules.values_list('module_instructors__instructor_id', flat=True)
+        return {pk for pk in ids if pk}
     def has_collaborators(self):
         """
         Determine if the course has additional active instructor assignments
@@ -303,8 +299,8 @@ class Module(models.Model):
     def active_instructors(self):
         """Return a queryset of instructors actively assigned to this module."""
         return User.objects.filter(
-            module_assignments__module=self,
-            module_assignments__is_active=True
+            module_instructors__module=self,
+            module_instructors__is_active=True
         ).distinct()
 
     def get_primary_instructor(self):
