@@ -85,6 +85,7 @@ def noop_reverse(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
+    atomic = False
     dependencies = [
         ('courses', '0006_course_thumbnail_uploadcare'),
         ('users', '0005_add_trial_system_fields'),
