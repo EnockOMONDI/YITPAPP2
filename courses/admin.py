@@ -8,6 +8,7 @@ from .models import (
     Category, Course, Module, Lesson, CourseTag,
     CourseTagging, CourseReview
 )
+from users.models import ModuleInstructor
 
 
 @admin.register(Category)
@@ -251,6 +252,30 @@ class LessonInline(admin.TabularInline):
     ordering = ('sort_order',)
 
 
+class ModuleInstructorInline(admin.TabularInline):
+    """
+    Manage module-level instructor assignments directly from the module admin.
+    """
+    model = ModuleInstructor
+    fk_name = 'module'
+    extra = 1
+    autocomplete_fields = ('instructor',)
+    fields = (
+        'instructor',
+        'assignment_role',
+        'is_active',
+        'can_edit_content',
+        'can_manage_enrollments',
+        'can_grade_assessments',
+        'can_view_analytics',
+        'can_communicate_students',
+        'can_publish_course',
+        'assigned_by',
+    )
+    verbose_name = "Module Instructor"
+    verbose_name_plural = "Module Instructors"
+
+
 @admin.register(Module)
 class ModuleAdmin(admin.ModelAdmin):
     """
@@ -263,7 +288,7 @@ class ModuleAdmin(admin.ModelAdmin):
     list_filter = ['is_published', 'course', 'course__instructor', 'created_at']
     search_fields = ['title', 'description', 'course__title', 'course__instructor__first_name']
     readonly_fields = ['created_at', 'updated_at', 'lesson_count_display']
-    inlines = [LessonInline]
+    inlines = [LessonInline, ModuleInstructorInline]
     ordering = ['course', 'sort_order']
 
     fieldsets = (

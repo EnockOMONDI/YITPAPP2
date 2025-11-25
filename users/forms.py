@@ -1,7 +1,8 @@
 from django import forms
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
-from .models import SponsorshipRequest
+from django.contrib.auth.models import User
+from .models import SponsorshipRequest, Profile
 import re
 
 
@@ -220,3 +221,83 @@ class SponsorshipRequestForm(forms.ModelForm):
             instance.save()
         
         return instance
+
+
+class UserProfileForm(forms.ModelForm):
+    """Form for updating Django auth user fields"""
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+        labels = {
+            'first_name': 'First name',
+            'last_name': 'Last name',
+            'email': 'Email address',
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g., Amina'
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g., Ndlovu'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'you@example.com'
+            }),
+        }
+
+
+class ProfileDetailsForm(forms.ModelForm):
+    """Form for updating extended YITP profile attributes"""
+
+    class Meta:
+        model = Profile
+        fields = ['bio', 'phone_number', 'country', 'city', 'timezone_name', 'image']
+        labels = {
+            'bio': 'About you',
+            'phone_number': 'Phone number',
+            'country': 'Country',
+            'city': 'City',
+            'timezone_name': 'Timezone',
+            'image': 'Profile photo',
+        }
+        widgets = {
+            'bio': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Tell us about your goals inside YITP...'
+            }),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '+254700000000'
+            }),
+            'country': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Country of residence'
+            }),
+            'city': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'City or region'
+            }),
+            'timezone_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g., Africa/Nairobi'
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control'
+            }),
+        }
+
+    def clean_phone_number(self):
+        """Basic normalization + validation for phone numbers"""
+        phone = self.cleaned_data.get('phone_number')
+        if phone:
+            cleaned_phone = re.sub(r'[^\d+\s()-]', '', phone)
+            digits_only = re.sub(r'\D', '', cleaned_phone)
+            if digits_only and (len(digits_only) < 7 or len(digits_only) > 15):
+                raise ValidationError('Phone number must be between 7 and 15 digits.')
+            return cleaned_phone
+        return phone

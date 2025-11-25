@@ -4,7 +4,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.dispatch import receiver
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-from . models import Profile, InstructorProfile
+from . models import Profile, InstructorProfile, SponsorshipRequest
+from payments.models import Payment
+from blogapp.models import Post, Category
 import logging
 
 # Set up logger
@@ -31,7 +33,7 @@ def setup_instructor_permissions(sender, instance, created, **kwargs):
     user = instance.user
 
     # Always ensure instructor users have staff status for admin access
-    if instance.instructor_role in ['system_admin', 'course_instructor', 'content_creator', 'teaching_assistant']:
+    if instance.instructor_role in ['system_admin', 'course_instructor', 'content_manager', 'accountant', 'teaching_assistant']:
         if not user.is_staff:
             user.is_staff = True
             user.save(update_fields=['is_staff'])
@@ -49,6 +51,10 @@ def setup_instructor_permissions(sender, instance, created, **kwargs):
         enrollment_ct = ContentType.objects.get_for_model(Enrollment)
         quiz_ct = ContentType.objects.get_for_model(Quiz)
         question_ct = ContentType.objects.get_for_model(Question)
+        payment_ct = ContentType.objects.get_for_model(Payment)
+        sponsorship_ct = ContentType.objects.get_for_model(SponsorshipRequest)
+        post_ct = ContentType.objects.get_for_model(Post)
+        category_ct = ContentType.objects.get_for_model(Category)
 
         # Clear existing permissions to avoid duplicates
         user.user_permissions.clear()
@@ -85,7 +91,7 @@ def setup_instructor_permissions(sender, instance, created, **kwargs):
                     (question_ct, ['view']),
                 ]
             },
-            'content_creator': {
+            'content_manager': {
                 'is_superuser': False,
                 'permissions': [
                     # Content creation focus
@@ -96,6 +102,18 @@ def setup_instructor_permissions(sender, instance, created, **kwargs):
                     # Assessment creation
                     (quiz_ct, ['view', 'add', 'change']),
                     (question_ct, ['view', 'add', 'change']),
+                    # Blog management
+                    (post_ct, ['view', 'add', 'change']),
+                    (category_ct, ['view', 'add', 'change']),
+                ]
+            },
+            'accountant': {
+                'is_superuser': False,
+                'permissions': [
+                    (payment_ct, ['view', 'change']),
+                    (sponsorship_ct, ['view', 'change']),
+                    (course_ct, ['view']),
+                    (enrollment_ct, ['view']),
                 ]
             },
             'grader': {

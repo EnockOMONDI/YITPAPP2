@@ -56,6 +56,9 @@ urlpatterns = [
 
     # Unified profile system with section-based navigation
     path('profile/', user_views.unified_profile, name='profile'),
+    path('profile/edit/', user_views.edit_profile, name='profile_edit'),
+    path('profile/request-data/', user_views.request_data_export, name='profile_request_data'),
+    path('profile/request-deletion/', user_views.request_account_deletion, name='profile_request_deletion'),
     path('profile/lms/', user_views.unified_profile, {'section': 'lms'}, name='profile_lms'),
     path('profile/courses/', user_views.unified_profile, {'section': 'courses'}, name='profile_courses'),
     path('profile/analytics/', user_views.unified_profile, {'section': 'analytics'}, name='profile_analytics'),
@@ -128,4 +131,3 @@ handler404 = custom_404_view
 handler500 = custom_500_view
 handler403 = custom_403_view
 handler400 = custom_400_view
-

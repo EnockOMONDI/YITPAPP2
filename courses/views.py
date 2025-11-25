@@ -26,13 +26,27 @@ def get_first_published_lesson(course):
 
 def get_user_last_lesson(user, course=None):
     """Return the most recent lesson the user interacted with."""
-    qs = LessonProgress.objects.filter(
+    enrollment_qs = Enrollment.objects.filter(
+        student=user,
+        status__in=['active', 'completed'],
+        last_active_lesson__isnull=False,
+    ).select_related('last_active_lesson', 'last_active_lesson__module__course')
+
+    if course:
+        enrollment_qs = enrollment_qs.filter(course=course)
+
+    enrollment_pointer = enrollment_qs.order_by('-last_accessed', '-pk').first()
+    if enrollment_pointer and enrollment_pointer.last_active_lesson:
+        return enrollment_pointer.last_active_lesson
+
+    # Fallback to lesson progress ordering if no pointer is available
+    progress_qs = LessonProgress.objects.filter(
         enrollment__student=user,
         enrollment__status__in=['active', 'completed']
     )
     if course:
-        qs = qs.filter(enrollment__course=course)
-    progress = qs.order_by('-completed_at', '-started_at', '-pk').first()
+        progress_qs = progress_qs.filter(enrollment__course=course)
+    progress = progress_qs.order_by('-completed_at', '-started_at', '-pk').first()
     return progress.lesson if progress else None
 
 
@@ -596,8 +610,8 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
         if progress.status == 'not_started':
             progress.mark_started()
 
-        # Update last accessed
-        enrollment.mark_as_accessed()
+        # Update last accessed pointers
+        enrollment.mark_as_accessed(lesson)
 
         context['progress'] = progress
 

@@ -926,7 +926,8 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
             'system_admin': '#dc3545',  # Red
             'course_instructor': '#ff5d15',  # YITP Orange
             'teaching_assistant': '#28a745',  # Green
-            'content_creator': '#17a2b8',  # Cyan
+            'content_manager': '#17a2b8',  # Cyan
+            'accountant': '#6f42c1',  # Purple
             'grader': '#6c757d',  # Gray
         }
 
@@ -955,13 +956,20 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
                 "Manage student enrollments and progress",
                 "Limited admin interface access"
             ]
-        elif instructor_profile.instructor_role == 'content_creator':
+        elif instructor_profile.instructor_role == 'content_manager':
             permissions_summary = [
                 "Create and manage course content",
                 "Create and manage course modules and lessons",
                 "Create and manage quizzes and assessments",
                 "View student enrollment information",
                 "Access to content management admin interface"
+            ]
+        elif instructor_profile.instructor_role == 'accountant':
+            permissions_summary = [
+                "Full visibility into payment records",
+                "Review and verify sponsorship applications",
+                "Export finance and billing reports",
+                "Access to finance-specific dashboards"
             ]
         elif instructor_profile.instructor_role == 'grader':
             permissions_summary = [

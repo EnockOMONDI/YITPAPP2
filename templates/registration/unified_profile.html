@@ -1219,9 +1219,9 @@
                         <div class="account-item">
                             <h5 class="mb-2">Profile Information</h5>
                             <p class="text-muted mb-3">Update your personal information and preferences</p>
-                            <button class="btn btn-outline-primary" onclick="editProfile()">
+                            <a class="btn btn-outline-primary" href="{% url 'profile_edit' %}?next={{ request.get_full_path|urlencode }}">
                                 <i class="fas fa-edit me-2"></i>Edit Profile
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -1249,17 +1249,23 @@
                         <div class="privacy-item">
                             <h5 class="mb-2">Download Your Data</h5>
                             <p class="text-muted mb-3">Get a copy of your learning progress, achievements, and account data</p>
-                            <button class="btn btn-outline-info">
-                                <i class="fas fa-download me-2"></i>Request Data Export
-                            </button>
+                            <form method="post" action="{% url 'profile_request_data' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-info">
+                                    <i class="fas fa-download me-2"></i>Request Data Export
+                                </button>
+                            </form>
                         </div>
 
                         <div class="privacy-item">
                             <h5 class="mb-2">Account Deletion</h5>
                             <p class="text-muted mb-3">Permanently delete your account and all associated data</p>
-                            <button class="btn btn-outline-danger" onclick="confirmAccountDeletion()">
-                                <i class="fas fa-trash me-2"></i>Delete Account
-                            </button>
+                            <form method="post" id="accountDeletionForm" action="{% url 'profile_request_deletion' %}">
+                                {% csrf_token %}
+                                <button type="button" class="btn btn-outline-danger" onclick="confirmAccountDeletion()">
+                                    <i class="fas fa-trash me-2"></i>Delete Account
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -1623,10 +1629,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Settings Tab Functions
-    window.editProfile = function() {
-        // Show edit profile modal or redirect to edit page
-        alert('Profile editing functionality will be implemented soon!');
-    };
+    const accountDeletionForm = document.getElementById('accountDeletionForm');
 
     window.manageNotifications = function() {
         // Show notification preferences modal
@@ -1634,9 +1637,10 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     window.confirmAccountDeletion = function() {
+        if (!accountDeletionForm) return;
         if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
             if (confirm('This will permanently delete all your learning progress, achievements, and account data. Are you absolutely sure?')) {
-                alert('Account deletion functionality will be implemented with proper security measures.');
+                accountDeletionForm.submit();
             }
         }
     };

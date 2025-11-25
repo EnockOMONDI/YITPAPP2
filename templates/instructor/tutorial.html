@@ -13,14 +13,14 @@
 
 {% block page_subtitle %}
 <p class="page-subtitle text-muted mb-0">
-    Complete step-by-step walkthrough for creating and managing courses in YITP LMS
+    Complete step-by-step walkthrough for creating and managing module content in YITP LMS
 </p>
 {% endblock %}
 
 {% block quick_actions %}
-<a href="{% url 'admin:courses_course_add' %}" class="quick-action-btn primary">
-    <i class="fas fa-plus"></i>
-    New Course
+<a href="{% url 'admin:courses_module_add' %}" class="quick-action-btn primary">
+    <i class="fas fa-layer-group"></i>
+    New Module
 </a>
 <a href="{% url 'users:instructor_dashboard' %}" class="quick-action-btn">
     <i class="fas fa-tachometer-alt"></i>
@@ -31,8 +31,8 @@
     Content Management
 </a>
 <a href="{% url 'users:instructor_courses' %}" class="quick-action-btn">
-    <i class="fas fa-book"></i>
-    My Courses
+    <i class="fas fa-layer-group"></i>
+    My Modules
 </a>
 {% endblock %}
 

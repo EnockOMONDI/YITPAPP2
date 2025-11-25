@@ -123,9 +123,13 @@
             <div class="quick-actions">
                 {% block quick_actions %}
                 <!-- Default Quick Actions -->
-                <a href="{% url 'admin:courses_course_add' %}" class="quick-action-btn primary">
-                    <i class="fas fa-plus"></i>
-                    New Course
+                <a href="{% url 'admin:courses_module_add' %}" class="quick-action-btn primary">
+                    <i class="fas fa-layer-group"></i>
+                    New Module
+                </a>
+                <a href="{% url 'admin:users_moduleinstructor_add' %}" class="quick-action-btn">
+                    <i class="fas fa-user-plus"></i>
+                    Assign Module
                 </a>
                 <a href="{% url 'admin:assessments_quiz_add' %}" class="quick-action-btn">
                     <i class="fas fa-question-circle"></i>
@@ -167,7 +171,7 @@
                 </h1>
                 {% block page_subtitle %}
                 <p class="page-subtitle text-muted mb-0">
-                    Manage your courses, track student progress, and create engaging content
+                    Manage your modules, track student progress, and create engaging content
                 </p>
                 {% endblock %}
             </div>

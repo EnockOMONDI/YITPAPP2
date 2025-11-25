@@ -127,7 +127,7 @@
                     <div class="header__left d-flex align-items-center">
                         <div class="logo" style="flex-shrink: 0; margin-right: 15px;">
                             <a href="{% url 'yitp:home' %}">
-                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 200%; max-width: 280px;" alt="logo">
+                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -200,17 +200,30 @@
                                                             <li><a href="{% url 'users:dashboard_api_data' %}"><i class="fas fa-chart-area me-2"></i>Live Metrics</a></li>
                                                             <li><a href="{% url 'progress:achievements' %}"><i class="fas fa-award me-2"></i>Achievements</a></li>
                                                         {% elif instructor_profile and instructor_profile.is_active %}
-                                                            <li><a href="{% url 'users:instructor_dashboard' %}"><i class="fas fa-chalkboard-teacher me-2"></i>Instructor Dashboard</a></li>
-                                                            <li><a href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group me-2"></i>Manage Courses</a></li>
-                                                            <li><a href="{% url 'users:instructor_messages' %}"><i class="fas fa-envelope-open me-2"></i>Messages</a></li>
-                                                            <li><a href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-line me-2"></i>Analytics</a></li>
-                                                            <li><a href="{% url 'users:content_management' %}"><i class="fas fa-file-code me-2"></i>Content Studio</a></li>
-                                                            <li><a href="{% url 'users:instructor_profile' %}"><i class="fas fa-id-badge me-2"></i>My Profile</a></li>
+                                                            {% if instructor_profile.instructor_role == 'accountant' %}
+                                                                <li><a href="{% url 'users:accountant_dashboard' %}"><i class="fas fa-coins me-2"></i>Finance Dashboard</a></li>
+                                                                <li><a href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet me-2"></i>Billing Overview</a></li>
+                                                                <li><a href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line me-2"></i>Payment Analytics</a></li>
+                                                                <li><a href="{% url 'profile' %}?section=settings"><i class="fas fa-cog me-2"></i>Account Settings</a></li>
+                                                            {% elif instructor_profile.instructor_role == 'content_manager' %}
+                                                                <li><a href="{% url 'users:content_manager_dashboard' %}"><i class="fas fa-project-diagram me-2"></i>Content Dashboard</a></li>
+                                                                <li><a href="{% url 'users:content_management' %}"><i class="fas fa-file-code me-2"></i>Content Studio</a></li>
+                                                                <li><a href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group me-2"></i>Modules & Lessons</a></li>
+                                                                <li><a href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-bar me-2"></i>Content Analytics</a></li>
+                                                                <li><a href="{% url 'profile' %}?section=settings"><i class="fas fa-cog me-2"></i>Account Settings</a></li>
+                                                            {% else %}
+                                                                <li><a href="{% url 'users:instructor_dashboard' %}"><i class="fas fa-chalkboard-teacher me-2"></i>Instructor Dashboard</a></li>
+                                                                <li><a href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group me-2"></i>Manage Courses</a></li>
+                                                                <li><a href="{% url 'users:instructor_messages' %}"><i class="fas fa-envelope-open me-2"></i>Messages</a></li>
+                                                                <li><a href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-line me-2"></i>Analytics</a></li>
+                                                                <li><a href="{% url 'users:content_management' %}"><i class="fas fa-file-code me-2"></i>Content Studio</a></li>
+                                                                <li><a href="{% url 'users:instructor_profile' %}"><i class="fas fa-id-badge me-2"></i>My Profile</a></li>
+                                                            {% endif %}
                                                         {% else %}
                                                             <li><a href="{% url 'profile' %}"><i class="fas fa-id-badge me-2"></i>Profile Overview</a></li>
-                                                            <li><a href="{% url 'profile_courses' %}"><i class="fas fa-book me-2"></i>My Courses</a></li>
-                                                            <li><a href="{% url 'profile_analytics' %}"><i class="fas fa-chart-line me-2"></i>Analytics</a></li>
-                                                            <li><a href="{% url 'profile_billing' %}"><i class="fas fa-wallet me-2"></i>Billing</a></li>
+                                                            <li><a href="{% url 'profile' %}?section=courses"><i class="fas fa-book me-2"></i>My Courses</a></li>
+                                                            <li><a href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line me-2"></i>Analytics</a></li>
+                                                            <li><a href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet me-2"></i>Billing</a></li>
                                                             <li><a href="{% url 'profile' %}?section=settings"><i class="fas fa-cog me-2"></i>Account Settings</a></li>
                                                             <li><a href="{% url 'progress:achievements' %}"><i class="fas fa-award me-2"></i>Achievements</a></li>
                                                         {% endif %}
@@ -254,7 +267,7 @@
         <div class="sidebar__content">
             <div class="logo mb-40">
                 <a href="{% url 'yitp:home' %}">
-                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 75%;" alt="logo">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="logo">
                 </a>
             </div>
             <div class="mobile__menu">
@@ -268,6 +281,78 @@
                         <li><a href="{% url 'yitp:documentation' %}">Documentation</a></li>
                     </ul>
                 </nav>
+            </div>
+
+            <!-- Mobile Language Selector -->
+            <div class="mobile__language mb-20">
+                <div class="language__selector-mobile">
+                    <h6 class="mobile__menu-title" style="color: #341C67; margin-bottom: 15px;">
+                        <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px;"></i>
+                        Choose Language
+                    </h6>
+                    <div id="mobile-language-options" class="mobile__language-grid">
+                        <button type="button" class="mobile__language-option active" data-lang="en" aria-checked="true">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇬🇧</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">English</span>
+                                    <small class="text-muted">Default language</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="sw" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇰🇪</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Swahili (Kiswahili)</span>
+                                    <small class="text-muted">Popular in East Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="ar" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇸🇦</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Arabic (العربية)</span>
+                                    <small class="text-muted">Spoken across North Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="af" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇿🇦</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Africana (Afrikaans)</span>
+                                    <small class="text-muted">Southern Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="fr" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇫🇷</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">French (Français)</span>
+                                    <small class="text-muted">Spoken widely across Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="sidebar__contact mt-30">

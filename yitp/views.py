@@ -60,27 +60,46 @@ def _get_resume_destination(user):
     if hasattr(user, 'instructor_profile'):
         try:
             profile = user.instructor_profile
-            if profile and profile.is_active:
-                return reverse('users:instructor_profile')
+            if profile and profile.is_active and profile.is_verified:
+                role = profile.instructor_role
+                if role == 'accountant':
+                    return reverse('users:accountant_dashboard')
+                if role == 'content_manager':
+                    return reverse('users:content_manager_dashboard')
+                if role in ['system_admin', 'course_instructor', 'teaching_assistant', 'grader']:
+                    return reverse('users:instructor_dashboard')
         except Exception:
             pass
 
     try:
-        from django.db.models.functions import Coalesce
-        from progress.models import Enrollment, LessonProgress
+        from progress.models import Enrollment
     except Exception:
         # If related apps are unavailable, skip smart routing
         return None
 
-    enrollments = Enrollment.objects.filter(student=user)
+    enrollments = Enrollment.objects.filter(
+        student=user,
+        status__in=['active', 'completed']
+    ).select_related('last_active_lesson', 'last_active_lesson__module__course')
     if not enrollments.exists():
         return reverse('profile')
 
-    # Learners should land on the My Courses tab instead of loading a heavy lesson detail view.
-    try:
-        return reverse('profile_courses')
-    except Exception:
-        return reverse('profile')
+    pointer = enrollments.exclude(last_active_lesson__isnull=True).order_by('-last_accessed', '-pk').first()
+    if pointer and pointer.last_active_lesson:
+        lesson = pointer.last_active_lesson
+        module = getattr(lesson, 'module', None)
+        course = getattr(module, 'course', None)
+        if course and getattr(course, 'slug', None):
+            try:
+                return reverse('courses:lesson_detail', kwargs={
+                    'course_slug': course.slug,
+                    'lesson_id': lesson.id
+                })
+            except NoReverseMatch:
+                pass
+
+    courses_url = f"{reverse('profile')}?section=courses"
+    return courses_url
 
 
 def home(request):

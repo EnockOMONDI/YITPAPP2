@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
@@ -6,19 +7,20 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, url_has_allowed_host_and_scheme
 from django.utils.encoding import force_bytes
 from django.db.models import Count, Sum, Q, Avg
 from django.http import HttpResponse
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile
-from .forms import SponsorshipRequestForm
+from .forms import SponsorshipRequestForm, UserProfileForm, ProfileDetailsForm
 from .otp_views import send_otp_for_registration
 from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification, test_email_configuration, send_html_email
 
@@ -30,6 +32,8 @@ import pytz
 import json
 import csv
 from datetime import datetime, timedelta
+
+ADMIN_NOTIFICATIONS_EMAIL = 'admin@youthimpactglobal.com'
 
 # Import timezone utilities #updates
 try:
@@ -368,6 +372,14 @@ def unified_profile(request, section='overview'):
     except:
         profile, created = Profile.objects.get_or_create(user=user)
 
+    section_override = request.GET.get('section')
+    if section_override:
+        section = section_override
+
+    allowed_sections = {'overview', 'lms', 'courses', 'analytics', 'billing', 'settings'}
+    if section not in allowed_sections:
+        section = 'overview'
+
     # Base context
     context = {
         'user': user,
@@ -586,6 +598,148 @@ def get_recent_activity(user):
 def profile(request):
     """Legacy profile view - redirects to unified profile"""
     return unified_profile(request, section='overview')
+
+
+@login_required
+def edit_profile(request):
+    """Allow learners to update their core account + YITP profile details"""
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    next_url = request.GET.get('next') or request.POST.get('next')
+    if not url_has_allowed_host_and_scheme(
+        next_url or '',
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure()
+    ):
+        next_url = resolve_url('profile')
+
+    if request.method == 'POST':
+        user_form = UserProfileForm(request.POST, instance=request.user)
+        profile_form = ProfileDetailsForm(request.POST, request.FILES, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            if hasattr(profile, 'update_profile_completion'):
+                profile.update_profile_completion()
+            messages.success(request, 'Your profile has been updated successfully.')
+            return redirect(next_url)
+        messages.error(request, 'Please fix the errors below to finish updating your profile.')
+    else:
+        user_form = UserProfileForm(instance=request.user)
+        profile_form = ProfileDetailsForm(instance=profile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'profile': profile,
+        'next_url': next_url,
+        'page_title': 'Edit Profile',
+    }
+    return render(request, 'registration/edit_profile.html', context)
+
+
+def _settings_redirect():
+    return f"{reverse('profile')}?section=settings"
+
+
+def _profile_snapshot_rows(user, profile):
+    return [
+        {'label': 'User ID', 'value': user.id},
+        {'label': 'Username', 'value': user.username},
+        {'label': 'Full name', 'value': user.get_full_name() or 'Not provided'},
+        {'label': 'Email', 'value': user.email},
+        {'label': 'Phone', 'value': profile.phone_number or 'Not provided'},
+        {'label': 'Country', 'value': profile.country or 'Not provided'},
+        {'label': 'Payment status', 'value': profile.get_payment_status_display()},
+        {'label': 'Profile completion', 'value': f"{profile.profile_completion_percentage}%"},
+        {'label': 'Requested at', 'value': timezone.now().strftime('%Y-%m-%d %H:%M:%S %Z')},
+    ]
+
+
+def _send_html_email(subject, template_name, recipient, context):
+    html_body = render_to_string(template_name, context)
+    text_body = strip_tags(html_body)
+    email = EmailMultiAlternatives(
+        subject=subject,
+        body=text_body,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[recipient],
+    )
+    email.attach_alternative(html_body, "text/html")
+    email.send()
+
+
+def _send_profile_request_emails(request, profile, request_type, reason=None):
+    snapshot_rows = _profile_snapshot_rows(request.user, profile)
+    base_context = {
+        'user': request.user,
+        'profile': profile,
+        'request_type': request_type,
+        'reason': reason,
+        'snapshot_rows': snapshot_rows,
+        'dashboard_url': request.build_absolute_uri(reverse('profile')),
+        'support_email': ADMIN_NOTIFICATIONS_EMAIL,
+        'current_year': timezone.now().year,
+    }
+
+    admin_context = {
+        **base_context,
+        'greeting': 'Hello YITP Admin Team,',
+        'audience': 'admin',
+    }
+    user_context = {
+        **base_context,
+        'greeting': f"Hi {request.user.first_name or request.user.username},",
+        'audience': 'user',
+    }
+
+    _send_html_email(
+        f"[YITP] {request_type} Request - {request.user.get_full_name() or request.user.username}",
+        'emails/profile_request_admin.html',
+        ADMIN_NOTIFICATIONS_EMAIL,
+        admin_context
+    )
+
+    _send_html_email(
+        f"YITP {request_type} Request Received",
+        'emails/profile_request_user.html',
+        request.user.email,
+        user_context
+    )
+
+
+@login_required
+def request_data_export(request):
+    redirect_url = _settings_redirect()
+    if request.method != 'POST':
+        return redirect(redirect_url)
+
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+
+    try:
+        _send_profile_request_emails(request, profile, 'Data Export')
+        messages.success(request, "We've notified the YITP team. Expect your data export shortly.")
+    except Exception:
+        messages.error(request, "We couldn't send your request. Please try again or email admin@youthimpactglobal.com.")
+
+    return redirect(redirect_url)
+
+
+@login_required
+def request_account_deletion(request):
+    redirect_url = _settings_redirect()
+    if request.method != 'POST':
+        return redirect(redirect_url)
+
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    reason = request.POST.get('reason', '').strip()
+
+    try:
+        _send_profile_request_emails(request, profile, 'Account Deletion', reason or None)
+        messages.success(request, "Your deletion request has been sent. Our team will contact you to confirm next steps.")
+    except Exception:
+        messages.error(request, "We couldn't send your deletion request. Please try again or email admin@youthimpactglobal.com.")
+
+    return redirect(redirect_url)
 
 
 def send_sponsorship_emails(sponsorship_request):

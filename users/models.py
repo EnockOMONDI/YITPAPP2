@@ -1069,7 +1069,8 @@ class InstructorProfile(models.Model):
         ('system_admin', 'System Administrator'),
         ('course_instructor', 'Course Instructor'),
         ('teaching_assistant', 'Teaching Assistant'),
-        ('content_creator', 'Content Creator'),
+        ('content_manager', 'Content Manager'),
+        ('accountant', 'Accountant'),
         ('grader', 'Grader'),
     ]
 
@@ -1173,7 +1174,7 @@ class InstructorProfile(models.Model):
     def can_access_admin(self):
         """Check if instructor can access admin interface"""
         return self.is_verified and self.instructor_role in [
-            'system_admin', 'course_instructor', 'content_creator'
+            'system_admin', 'course_instructor', 'content_manager', 'accountant'
         ]
 
     def get_assigned_courses(self):

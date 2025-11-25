@@ -20,6 +20,17 @@
                     }
                 }
 
+                .logo img {
+                    max-height: 60px;
+                    width: auto;
+                }
+
+                @media (max-width: 575px) {
+                    .logo img {
+                        max-height: 48px;
+                    }
+                }
+
                 @media (min-width: 992px) {
                     .header__left {
                         min-height: 60px;
@@ -30,11 +41,16 @@
                         align-items: center;
                     }
 
-                    .logo img {
-                        transition: all 0.3s ease;
-                        height: auto;
-                        object-fit: contain;
-                    }
+                .logo img {
+                    transition: all 0.3s ease;
+                    height: auto;
+                    object-fit: contain;
+                }
+
+                .sidebar__content .logo img {
+                    max-height: 50px;
+                    width: auto;
+                }
 
                     .header__category {
                         display: flex;
@@ -116,7 +132,7 @@
                     <div class="header__left d-flex align-items-center">
                         <div class="logo" style="flex-shrink: 0; margin-right: 15px;">
                             <a href="{% url 'yitp:home' %}">
-                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 200%; max-width: 280px;" alt="logo">
+                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -235,17 +251,30 @@
                                                     <li><a class="dropdown-item" href="{% url 'users:dashboard_api_data' %}"><i class="fas fa-broadcast-tower mr-10"></i>Live Metrics</a></li>
                                                     <li><a class="dropdown-item" href="{% url 'progress:achievements' %}"><i class="fas fa-award mr-10"></i>Achievements</a></li>
                                                 {% elif instructor_profile and instructor_profile.is_active %}
-                                                    <li><a class="dropdown-item" href="{% url 'users:instructor_dashboard' %}"><i class="fas fa-chalkboard-teacher mr-10"></i>Instructor Dashboard</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group mr-10"></i>Manage Courses</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'users:instructor_messages' %}"><i class="fas fa-envelope-open mr-10"></i>Messages</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-line mr-10"></i>Analytics</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'users:content_management' %}"><i class="fas fa-file-code mr-10"></i>Content Studio</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'users:instructor_profile' %}"><i class="fas fa-id-badge mr-10"></i>My Profile</a></li>
+                                                    {% if instructor_profile.instructor_role == 'accountant' %}
+                                                        <li><a class="dropdown-item" href="{% url 'users:accountant_dashboard' %}"><i class="fas fa-coins mr-10"></i>Finance Dashboard</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet mr-10"></i>Billing Overview</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line mr-10"></i>Payment Analytics</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=settings"><i class="fas fa-cog mr-10"></i>Account Settings</a></li>
+                                                    {% elif instructor_profile.instructor_role == 'content_manager' %}
+                                                        <li><a class="dropdown-item" href="{% url 'users:content_manager_dashboard' %}"><i class="fas fa-project-diagram mr-10"></i>Content Dashboard</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:content_management' %}"><i class="fas fa-file-code mr-10"></i>Content Studio</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group mr-10"></i>Modules & Lessons</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-bar mr-10"></i>Content Analytics</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=settings"><i class="fas fa-cog mr-10"></i>Account Settings</a></li>
+                                                    {% else %}
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_dashboard' %}"><i class="fas fa-chalkboard-teacher mr-10"></i>Instructor Dashboard</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group mr-10"></i>Manage Courses</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_messages' %}"><i class="fas fa-envelope-open mr-10"></i>Messages</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-line mr-10"></i>Analytics</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:content_management' %}"><i class="fas fa-file-code mr-10"></i>Content Studio</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_profile' %}"><i class="fas fa-id-badge mr-10"></i>My Profile</a></li>
+                                                    {% endif %}
                                                 {% else %}
                                                     <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-id-badge mr-10"></i>Profile Overview</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'profile_courses' %}"><i class="fas fa-book mr-10"></i>My Courses</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'profile_analytics' %}"><i class="fas fa-chart-line mr-10"></i>Analytics</a></li>
-                                                    <li><a class="dropdown-item" href="{% url 'profile_billing' %}"><i class="fas fa-wallet mr-10"></i>Billing</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}?section=courses"><i class="fas fa-book mr-10"></i>My Courses</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line mr-10"></i>Analytics</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet mr-10"></i>Billing</a></li>
                                                     <li><a class="dropdown-item" href="{% url 'profile' %}?section=settings"><i class="fas fa-cog mr-10"></i>Account Settings</a></li>
                                                     <li><a class="dropdown-item" href="{% url 'progress:achievements' %}"><i class="fas fa-award mr-10"></i>Achievements</a></li>
                                                 {% endif %}
@@ -294,7 +323,7 @@
         <div class="sidebar__content">
             <div class="logo mb-40">
                 <a href="{% url 'yitp:home' %}">
-                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 75%;" alt="logo">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="logo">
                 </a>
             </div>
 
@@ -404,11 +433,23 @@
                                     </a>
                                 {% else %}
                                     {% with instructor_profile=user.instructor_profile|default:None %}
-                                        {% if instructor_profile %}
-                                            <a href="{% url 'users:instructor_profile' %}" class="mobile__auth-link">
-                                                <i class="fas fa-user"></i>
-                                                <span>My Profile</span>
-                                            </a>
+                                        {% if instructor_profile and instructor_profile.is_active %}
+                                            {% if instructor_profile.instructor_role == 'accountant' %}
+                                                <a href="{% url 'users:accountant_dashboard' %}" class="mobile__auth-link">
+                                                    <i class="fas fa-coins"></i>
+                                                    <span>Finance Dashboard</span>
+                                                </a>
+                                            {% elif instructor_profile.instructor_role == 'content_manager' %}
+                                                <a href="{% url 'users:content_manager_dashboard' %}" class="mobile__auth-link">
+                                                    <i class="fas fa-project-diagram"></i>
+                                                    <span>Content Dashboard</span>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'users:instructor_dashboard' %}" class="mobile__auth-link">
+                                                    <i class="fas fa-user-tie"></i>
+                                                    <span>Instructor Dashboard</span>
+                                                </a>
+                                            {% endif %}
                                         {% else %}
                                             <a href="{% url 'profile' %}" class="mobile__auth-link">
                                                 <i class="fas fa-user"></i>

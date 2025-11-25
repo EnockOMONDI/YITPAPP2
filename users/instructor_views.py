@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib import messages
 from django.http import JsonResponse
-from django.db.models import Count, Q, Avg
+from django.db.models import Count, Q, Avg, Sum
 from django.utils import timezone
 from datetime import timedelta
 
@@ -16,16 +16,21 @@ from courses.models import Course, Module, Lesson
 from assessments.models import Quiz
 from progress.models import QuizAttempt, Enrollment, LessonProgress
 from communication.models import Message, Notification
-from .models import InstructorProfile
+from payments.models import Payment
+from .models import InstructorProfile, SponsorshipRequest
 
 
 class InstructorRequiredMixin(UserPassesTestMixin):
     """Mixin to ensure user is a verified instructor"""
+    allowed_roles = None
     
     def test_func(self):
         try:
             instructor_profile = self.request.user.instructor_profile
-            return instructor_profile.is_verified and instructor_profile.is_active
+            role_allowed = True
+            if self.allowed_roles:
+                role_allowed = instructor_profile.instructor_role in self.allowed_roles
+            return instructor_profile.is_verified and instructor_profile.is_active and role_allowed
         except:
             return False
     
@@ -47,11 +52,18 @@ class InstructorDashboardView(LoginRequiredMixin, InstructorRequiredMixin, Templ
         instructor = self.request.user
         instructor_profile = instructor.instructor_profile
         
-        # Get instructor's courses
+        # Determine modules assigned to the instructor
         if instructor_profile.instructor_role == 'system_admin':
+            assigned_modules = Module.objects.select_related('course').all()
             instructor_courses = Course.objects.all()
         else:
-            instructor_courses = Course.objects.filter(instructor=instructor)
+            assigned_modules = Module.objects.select_related('course').filter(
+                module_instructors__instructor=instructor,
+                module_instructors__is_active=True
+            ).distinct()
+            instructor_courses = Course.objects.filter(
+                modules__in=assigned_modules
+            ).distinct()
         
         # Calculate statistics
         total_students = Enrollment.objects.filter(
@@ -61,6 +73,8 @@ class InstructorDashboardView(LoginRequiredMixin, InstructorRequiredMixin, Templ
         
         total_courses = instructor_courses.count()
         published_courses = instructor_courses.filter(is_published=True).count()
+        module_count = assigned_modules.count()
+        published_modules = assigned_modules.filter(is_published=True).count()
         
         # Recent activity (last 30 days)
         thirty_days_ago = timezone.now() - timedelta(days=30)
@@ -84,6 +98,10 @@ class InstructorDashboardView(LoginRequiredMixin, InstructorRequiredMixin, Templ
             recipient=instructor,
             sent_at__gte=thirty_days_ago
         ).order_by('-sent_at')[:5]
+        unread_messages_count = Message.objects.filter(
+            recipient=instructor,
+            is_read=False
+        ).count()
         
         # Course performance data
         course_analytics = []
@@ -112,17 +130,21 @@ class InstructorDashboardView(LoginRequiredMixin, InstructorRequiredMixin, Templ
             'recent_enrollments': recent_enrollments,
             'avg_quiz_score': round(avg_quiz_score, 1),
             'recent_messages': recent_messages,
+            'assigned_modules': assigned_modules[:8],
+            'module_count': module_count,
+            'published_modules': published_modules,
             'course_analytics': course_analytics,
             'instructor_courses': instructor_courses[:10],  # Recent courses
+            'unread_messages_count': unread_messages_count,
         })
         
         return context
 
 
 class InstructorCoursesView(LoginRequiredMixin, InstructorRequiredMixin, ListView):
-    """List view of instructor's courses with management options"""
+    """List view of instructor's modules with management options"""
     template_name = 'instructor/courses.html'
-    context_object_name = 'courses'
+    context_object_name = 'modules'
     paginate_by = 12
     
     def get_queryset(self):
@@ -130,33 +152,37 @@ class InstructorCoursesView(LoginRequiredMixin, InstructorRequiredMixin, ListVie
         instructor_profile = instructor.instructor_profile
         
         if instructor_profile.instructor_role == 'system_admin':
-            queryset = Course.objects.all()
+            queryset = Module.objects.select_related('course').all()
         else:
-            queryset = Course.objects.filter(instructor=instructor)
+            queryset = Module.objects.select_related('course').filter(
+                module_instructors__instructor=instructor,
+                module_instructors__is_active=True
+            ).distinct()
         
-        # Filter by status if requested
         status = self.request.GET.get('status')
         if status == 'published':
             queryset = queryset.filter(is_published=True)
         elif status == 'draft':
             queryset = queryset.filter(is_published=False)
-        elif status == 'featured':
-            queryset = queryset.filter(is_featured=True)
         
-        # Search functionality
         search = self.request.GET.get('search')
         if search:
             queryset = queryset.filter(
                 Q(title__icontains=search) |
-                Q(description__icontains=search)
+                Q(description__icontains=search) |
+                Q(course__title__icontains=search)
             )
         
-        return queryset.order_by('-created_at')
+        return queryset.order_by('course__title', 'sort_order')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search', '')
         context['status_filter'] = self.request.GET.get('status', '')
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
         return context
 
 
@@ -234,8 +260,75 @@ class InstructorAnalyticsView(LoginRequiredMixin, InstructorRequiredMixin, Templ
             'active_students': active_students,
             'course_completion_data': course_completion_data[:10],  # Top 10
             'total_courses': instructor_courses.count(),
+            'unread_messages_count': Message.objects.filter(
+                recipient=self.request.user,
+                is_read=False
+            ).count(),
         })
         
+        return context
+
+
+class AccountantDashboardView(LoginRequiredMixin, InstructorRequiredMixin, TemplateView):
+    """Finance-focused dashboard for accountant role"""
+    template_name = 'accountant/dashboard.html'
+    allowed_roles = ['accountant']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        now = timezone.now()
+        confirmed_payments = Payment.objects.filter(status='confirmed')
+        pending_payments = Payment.objects.filter(status='pending')
+
+        total_confirmed = confirmed_payments.aggregate(total=Sum('amount'))['total'] or 0
+        today_total = confirmed_payments.filter(confirmed_at__date=now.date()).aggregate(total=Sum('amount'))['total'] or 0
+        week_total = confirmed_payments.filter(confirmed_at__gte=now - timedelta(days=7)).aggregate(total=Sum('amount'))['total'] or 0
+
+        sponsorship_summary = SponsorshipRequest.objects.values('status').annotate(total=Count('id'))
+        sponsorship_map = {item['status']: item['total'] for item in sponsorship_summary}
+
+        context.update({
+            'total_confirmed_revenue': total_confirmed,
+            'today_revenue': today_total,
+            'week_revenue': week_total,
+            'pending_payments_count': pending_payments.count(),
+            'pending_payments': pending_payments.select_related('user', 'course')[:8],
+            'recent_payments': Payment.objects.select_related('user', 'course').order_by('-created_at')[:10],
+            'sponsorship_counts': sponsorship_map,
+            'recent_sponsorships': SponsorshipRequest.objects.select_related('user', 'course').order_by('-created_at')[:6],
+        })
+        return context
+
+
+class ContentManagerDashboardView(LoginRequiredMixin, InstructorRequiredMixin, TemplateView):
+    """Content operations dashboard for content managers"""
+    template_name = 'content_manager/dashboard.html'
+    allowed_roles = ['content_manager']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        total_courses = Course.objects.count()
+        published_courses = Course.objects.filter(is_published=True).count()
+        draft_courses = total_courses - published_courses
+
+        total_modules = Module.objects.count()
+        published_modules = Module.objects.filter(is_published=True).count()
+
+        total_lessons = Lesson.objects.count()
+        published_lessons = Lesson.objects.filter(is_published=True).count()
+
+        context.update({
+            'total_courses': total_courses,
+            'published_courses': published_courses,
+            'draft_courses': draft_courses,
+            'total_modules': total_modules,
+            'published_modules': published_modules,
+            'total_lessons': total_lessons,
+            'published_lessons': published_lessons,
+            'recent_courses': Course.objects.order_by('-updated_at')[:6],
+            'draft_lessons': Lesson.objects.filter(is_published=False).select_related('module__course').order_by('-updated_at')[:6],
+            'recent_updates': Lesson.objects.order_by('-updated_at')[:6],
+        })
         return context
 
 
@@ -349,5 +442,9 @@ class InstructorTutorialView(InstructorRequiredMixin, TemplateView):
             'Course Review & Publishing',
             'Student Management & Analytics'
         ]
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
 
         return context

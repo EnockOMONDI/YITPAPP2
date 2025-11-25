@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your YITP {{ request_type }} Request</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f7;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="padding:24px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;">
+                    <tr>
+                        <td style="background:#ff5d15;padding:24px;text-align:center;color:#ffffff;">
+                            <h1 style="margin:0;font-size:24px;">Youth Impact Training Programme</h1>
+                            <p style="margin:8px 0 0;font-size:14px;letter-spacing:1px;text-transform:uppercase;">Request received</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:32px;">
+                            <p style="color:#111827;font-size:16px;margin:0 0 16px;">{{ greeting }}</p>
+                            <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
+                                Thanks for submitting a <strong>{{ request_type }}</strong> request. Our team has received it and will reach out via email once it’s processed.
+                            </p>
+
+                            <p style="color:#4b5563;font-size:14px;line-height:1.6;margin:0 0 12px;">
+                                Here’s a quick summary of the account we’ll be working with:
+                            </p>
+                            <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 24px;">
+                                {% for row in snapshot_rows %}
+                                <tr>
+                                    <td style="padding:6px 0;width:40%;color:#6b7280;font-size:13px;">{{ row.label }}</td>
+                                    <td style="padding:6px 0;width:60%;color:#111827;font-size:13px;font-weight:600;">{{ row.value }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                            <div style="text-align:center;margin-bottom:16px;">
+                                <a href="{{ dashboard_url }}" style="display:inline-block;background:#341C67;color:#ffffff;text-decoration:none;padding:14px 32px;border-radius:999px;font-weight:600;font-size:15px;">
+                                    View Your Dashboard
+                                </a>
+                            </div>
+
+                            <p style="color:#6b7280;font-size:13px;margin:0;">
+                                Need assistance? Reply to this email or contact us at <a href="mailto:{{ support_email }}" style="color:#ff5d15;text-decoration:none;">{{ support_email }}</a>.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background:#f3f4f6;text-align:center;padding:16px;color:#6b7280;font-size:12px;">
+                            © {{ current_year }} Youth Impact Training Programme. Keep leading with impact.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

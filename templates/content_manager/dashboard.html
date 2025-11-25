@@ -1,0 +1,142 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Content Manager Dashboard - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper { margin-top: 100px; }
+    @media (max-width: 991px) { .content-wrapper { margin-top: 90px; } }
+    @media (max-width: 575px) { .content-wrapper { margin-top: 80px; } }
+    .content-hero {
+        background: linear-gradient(135deg, #ff5d15, #ff8743);
+        color: white;
+        border-radius: 18px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 15px 35px rgba(255, 93, 21, 0.25);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+    .stat-card { background:white; border-radius:16px; padding:1.5rem; box-shadow:0 10px 30px rgba(15,26,53,.08); border-left:5px solid #ff5d15; }
+    .stat-value { font-size:2rem; font-weight:700; color:#341C67; margin-bottom:.25rem; }
+    .stat-label { font-size:.95rem; color:#6c757d; }
+    .dashboard-section { background:white; border-radius:16px; padding:1.5rem; margin-bottom:2rem; box-shadow:0 10px 30px rgba(15,26,53,.08); }
+    .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; }
+    .section-header h5 { margin:0; color:#341C67; }
+    .badge-draft { background:rgba(255,193,7,.15); color:#b8860b; padding:4px 10px; border-radius:10px; font-size:.8rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="content-wrapper container">
+    <div class="content-hero">
+        <h2 class="mb-2">Content Operations Overview</h2>
+        <p class="mb-0">Monitor course publishing status, draft lessons, and recent updates.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Courses Published</div>
+            <div class="stat-value">{{ published_courses }}</div>
+            <small class="text-muted">{{ draft_courses }} awaiting review</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Modules Published</div>
+            <div class="stat-value">{{ published_modules }}</div>
+            <small class="text-muted">{{ total_modules }} total</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Lessons Published</div>
+            <div class="stat-value">{{ published_lessons }}</div>
+            <small class="text-muted">{{ total_lessons }} total lessons</small>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Editorial Tools</div>
+            <a href="/admin/blogapp/post/add/" class="btn btn-sm btn-outline-primary w-100 mt-2">
+                <i class="fas fa-pen-nib me-2"></i>Create Blog Post
+            </a>
+            <a href="/admin/blogapp/category/add/" class="btn btn-sm btn-outline-secondary w-100 mt-2">
+                <i class="fas fa-tags me-2"></i>Manage Categories
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h5><i class="fas fa-rocket me-2 text-warning"></i>Recently Updated Lessons</h5>
+                </div>
+                <div class="list-group">
+                    {% for lesson in recent_updates %}
+                    <div class="list-group-item">
+                        <div class="fw-semibold">{{ lesson.title }}</div>
+                        <small class="text-muted d-block">{{ lesson.module.course.title }} · {{ lesson.updated_at|date:"M d, H:i" }}</small>
+                        <span class="badge {% if lesson.is_published %}bg-success{% else %}bg-secondary{% endif %} mt-1">
+                            {{ lesson.is_published|yesno:"Published,Draft" }}
+                        </span>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted mb-0">No content updates yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h5><i class="fas fa-tasks me-2 text-primary"></i>Draft Lessons</h5>
+                    <span class="badge-draft">{{ draft_lessons|length }} items</span>
+                </div>
+                <div class="list-group">
+                    {% for lesson in draft_lessons %}
+                    <div class="list-group-item">
+                        <div class="fw-semibold">{{ lesson.title }}</div>
+                        <small class="text-muted d-block">{{ lesson.module.course.title }}</small>
+                        <small class="text-muted">Updated {{ lesson.updated_at|date:"M d" }}</small>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted mb-0">No draft lessons awaiting review.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-section">
+        <div class="section-header">
+            <h5><i class="fas fa-books me-2 text-success"></i>Course Portfolio</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Status</th>
+                        <th>Modules</th>
+                        <th>Lessons</th>
+                        <th>Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in recent_courses %}
+                    <tr>
+                        <td class="fw-semibold">{{ course.title }}</td>
+                        <td>
+                            <span class="badge {% if course.is_published %}bg-success{% else %}bg-secondary{% endif %}">
+                                {{ course.get_status_display }}
+                            </span>
+                        </td>
+                        <td>{{ course.modules.count }}</td>
+                        <td>{{ course.total_lessons }}</td>
+                        <td>{{ course.updated_at|date:"M d, Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5" class="text-muted">No courses found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -155,6 +155,11 @@ Access: Sidebar → "User Management"
 - Content publishing
 - Grade management
 
+#### 🧩 Module Ownership Management
+- Assign instructors to individual modules directly within the **Modules** admin screen using the new “Module Instructors” inline panel.
+- When onboarding a new instructor, use the **Module Assignments** inline inside the User admin to link them to specific modules immediately.
+- Instructors can review every assigned module (and jump to the admin edit screen) from the refreshed **Instructor Dashboard → Manage Modules** experience.
+
 ### 👨‍💼 **Content Creator**
 **Content Focus**: Blog and educational content creation
 

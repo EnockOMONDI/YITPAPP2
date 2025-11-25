@@ -43,6 +43,14 @@ class Enrollment(models.Model):
     last_accessed = models.DateTimeField(null=True, blank=True)
     certificate_issued = models.BooleanField(default=False)
     privacy_settings = models.JSONField(default=dict, help_text="Privacy settings for analytics and progress sharing")
+    last_active_lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='active_enrollments',
+        help_text="Tracks the last lesson the learner interacted with for resume functionality."
+    )
     
     def __str__(self):
         student_name = "Unknown student"
@@ -72,10 +80,21 @@ class Enrollment(models.Model):
             self.progress_percentage = (completed_lessons / total_lessons) * 100
         self.save(update_fields=['progress_percentage'])
     
-    def mark_as_accessed(self):
-        """Update last accessed timestamp"""
-        self.last_accessed = timezone.now()
-        self.save(update_fields=['last_accessed'])
+    def mark_as_accessed(self, lesson=None):
+        """Update last accessed timestamp and optional last active lesson pointer"""
+        update_fields = []
+        now = timezone.now()
+        self.last_accessed = now
+        update_fields.append('last_accessed')
+
+        if lesson and getattr(lesson, 'module', None):
+            lesson_course_id = getattr(lesson.module, 'course_id', None)
+            if lesson_course_id == self.course_id:
+                self.last_active_lesson = lesson
+                update_fields.append('last_active_lesson')
+
+        if update_fields:
+            self.save(update_fields=update_fields)
 
     def get_progress_percentage(self):
         """Get current progress percentage"""

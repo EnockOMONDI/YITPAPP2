@@ -75,6 +75,12 @@ High-performance preloader with YITP branding
     animation: textPulse 1.5s ease-in-out infinite;
 }
 
+/* Force all nested elements (e.g., headings/paragraphs in older templates) to keep the white text */
+.loading-text,
+.loading-text * {
+    color: #ffffff !important;
+}
+
 @keyframes textPulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }

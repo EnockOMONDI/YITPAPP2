@@ -956,11 +956,34 @@ class ProfileInline(admin.StackedInline):
     readonly_fields = ['verification_reminder_count']
 
 
+class ModuleAssignmentInline(admin.TabularInline):
+    """
+    Allow superusers to manage module ownership directly from the user admin.
+    """
+    model = ModuleInstructor
+    fk_name = 'instructor'
+    extra = 0
+    autocomplete_fields = ('module',)
+    fields = (
+        'module',
+        'assignment_role',
+        'is_active',
+        'can_edit_content',
+        'can_manage_enrollments',
+        'can_grade_assessments',
+        'can_view_analytics',
+        'can_communicate_students',
+        'can_publish_course',
+    )
+    verbose_name = "Module Assignment"
+    verbose_name_plural = "Module Assignments"
+
+
 class CustomUserAdmin(BaseUserAdmin):
     """
     Enhanced User admin with profile and instructor profile integration
     """
-    inlines = (ProfileInline, InstructorProfileInline)
+    inlines = (ProfileInline, InstructorProfileInline, ModuleAssignmentInline)
 
     # Override add_fieldsets to include email field in user creation form
     add_fieldsets = (
@@ -1015,7 +1038,8 @@ class CustomUserAdmin(BaseUserAdmin):
                 'system_admin': '#dc3545',  # Red
                 'course_instructor': '#ff5d15',  # YITP Orange
                 'teaching_assistant': '#28a745',  # Green
-                'content_creator': '#17a2b8',  # Cyan
+                'content_manager': '#17a2b8',  # Cyan
+                'accountant': '#6f42c1',  # Purple
                 'grader': '#6c757d',  # Gray
             }
             color = role_colors.get(profile.instructor_role, '#6c757d')
@@ -1161,7 +1185,8 @@ class InstructorProfileAdmin(admin.ModelAdmin):
     """Enhanced admin interface for instructor profiles with visual indicators"""
     list_display = [
         'user_full_name', 'instructor_role_display', 'verification_status_display',
-        'years_experience', 'specializations_count', 'is_active', 'created_at'
+        'years_experience', 'specializations_count', 'assigned_module_count',
+        'is_active', 'created_at'
     ]
     list_filter = [
         'instructor_role', 'verification_status', 'is_active',
@@ -1221,7 +1246,8 @@ class InstructorProfileAdmin(admin.ModelAdmin):
             'system_admin': '#dc3545',  # Red
             'course_instructor': '#ff5d15',  # YITP Orange
             'teaching_assistant': '#28a745',  # Green
-            'content_creator': '#17a2b8',  # Cyan
+            'content_manager': '#17a2b8',  # Cyan
+            'accountant': '#6f42c1',  # Purple
             'grader': '#6c757d',  # Gray
         }
         color = role_colors.get(obj.instructor_role, '#6c757d')
@@ -1266,6 +1292,10 @@ class InstructorProfileAdmin(admin.ModelAdmin):
             )
         return '-'
     specializations_count.short_description = 'Specializations'
+
+    def assigned_module_count(self, obj):
+        return ModuleInstructor.objects.filter(instructor=obj.user, is_active=True).count()
+    assigned_module_count.short_description = 'Active Modules'
 
     def save_model(self, request, obj, form, change):
         """Enhanced save with auto-verification and email notification for instructor profiles"""

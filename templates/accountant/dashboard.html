@@ -1,0 +1,181 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Accountant Dashboard - YITP{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-wrapper { margin-top: 100px; }
+    @media (max-width: 991px) { .content-wrapper { margin-top: 90px; } }
+    @media (max-width: 575px) { .content-wrapper { margin-top: 80px; } }
+    .finance-hero {
+        background: linear-gradient(135deg, #341C67, #4f2d97);
+        color: white;
+        border-radius: 18px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 15px 35px rgba(52, 28, 103, 0.25);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .stat-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(15, 26, 53, 0.08);
+        border-left: 5px solid #ff5d15;
+    }
+    .stat-value { font-size: 2rem; font-weight: 700; color: #341C67; margin-bottom: .25rem; }
+    .stat-label { font-size: .95rem; color: #6c757d; }
+    .dashboard-section {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(15, 26, 53, 0.08);
+    }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .section-header h5 { margin: 0; color: #341C67; }
+    .badge-status { padding: 4px 12px; border-radius: 12px; font-size: .8rem; font-weight: 600; }
+    .badge-pending { background: rgba(255,193,7,.15); color: #b8860b; }
+    .badge-confirmed { background: rgba(40,167,69,.15); color: #1b6e35; }
+    .badge-under-review { background: rgba(0,123,255,.15); color: #005cbf; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="content-wrapper container">
+    <div class="finance-hero">
+        <h2 class="mb-2">Finance & Sponsorship Overview</h2>
+        <p class="mb-0">Monitor payments, sponsorship approvals, and revenue health in one place.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Confirmed Revenue (All Time)</div>
+            <div class="stat-value">${{ total_confirmed_revenue|floatformat:2 }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Revenue (This Week)</div>
+            <div class="stat-value">${{ week_revenue|floatformat:2 }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Revenue (Today)</div>
+            <div class="stat-value">${{ today_revenue|floatformat:2 }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Pending Payments</div>
+            <div class="stat-value">{{ pending_payments_count }}</div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h5><i class="fas fa-receipt me-2 text-warning"></i>Pending Payments</h5>
+                    <span class="badge-status badge-pending">{{ pending_payments|length }} awaiting review</span>
+                </div>
+                {% if pending_payments %}
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Reference</th>
+                                <th>Learner</th>
+                                <th>Course</th>
+                                <th>Amount</th>
+                                <th>Requested</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for payment in pending_payments %}
+                            <tr>
+                                <td class="fw-bold">{{ payment.reference_number }}</td>
+                                <td>{{ payment.user.get_full_name|default:payment.user.username }}</td>
+                                <td>{{ payment.course.title }}</td>
+                                <td>${{ payment.amount|floatformat:2 }}</td>
+                                <td>{{ payment.created_at|date:"M d, H:i" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted mb-0">All caught up! No pending payments right now.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h5><i class="fas fa-hands-helping me-2 text-primary"></i>Sponsorship Pipeline</h5>
+                </div>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Pending
+                        <span class="badge-status badge-pending">{{ sponsorship_counts.pending|default:0 }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Under Review
+                        <span class="badge-status badge-under-review">{{ sponsorship_counts.under_review|default:0 }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Approved
+                        <span class="badge-status badge-confirmed">{{ sponsorship_counts.approved|default:0 }}</span>
+                    </li>
+                </ul>
+                <h6 class="text-muted mb-2">Recent submissions</h6>
+                <div class="list-group">
+                    {% for request in recent_sponsorships %}
+                    <div class="list-group-item">
+                        <div class="fw-semibold">{{ request.user.get_full_name|default:request.user.username }}</div>
+                        <small class="text-muted d-block">{{ request.course.title if request.course }} · {{ request.created_at|date:"M d" }}</small>
+                        <small class="badge-status badge-{{ request.status }}">{{ request.get_status_display }}</small>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted mb-0">No sponsorship activity yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-section">
+        <div class="section-header">
+            <h5><i class="fas fa-history me-2 text-success"></i>Recent Transactions</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Learner</th>
+                        <th>Course</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in recent_payments %}
+                    <tr>
+                        <td>{{ payment.reference_number }}</td>
+                        <td>{{ payment.user.get_full_name|default:payment.user.username }}</td>
+                        <td>{{ payment.course.title }}</td>
+                        <td>
+                            <span class="badge-status {% if payment.status == 'confirmed' %}badge-confirmed{% elif payment.status == 'pending' %}badge-pending{% else %}badge-under-review{% endif %}">
+                                {{ payment.get_status_display }}
+                            </span>
+                        </td>
+                        <td>${{ payment.amount|floatformat:2 }}</td>
+                        <td>{{ payment.created_at|date:"M d, Y H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="text-muted">No transactions recorded yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

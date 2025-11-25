@@ -44,6 +44,11 @@ class InstructorAwareLoginView(auth_views.LoginView):
                 # Send admin notification for instructor login
                 self.send_instructor_login_notification(user)
 
+                role = instructor_profile.instructor_role
+                if role == 'accountant':
+                    return reverse('users:accountant_dashboard')
+                if role == 'content_manager':
+                    return reverse('users:content_manager_dashboard')
                 return reverse('users:instructor_dashboard')
         except:
             pass

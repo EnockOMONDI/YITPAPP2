@@ -28,6 +28,8 @@ urlpatterns = [
     path('instructor/messages/', instructor_views.InstructorMessagesView.as_view(), name='instructor_messages'),
     path('instructor/course/<int:course_id>/', instructor_views.instructor_course_detail, name='instructor_course_detail'),
     path('instructor/tutorial/', instructor_views.InstructorTutorialView.as_view(), name='instructor_tutorial'),
+    path('accountant/dashboard/', instructor_views.AccountantDashboardView.as_view(), name='accountant_dashboard'),
+    path('content-manager/dashboard/', instructor_views.ContentManagerDashboardView.as_view(), name='content_manager_dashboard'),
 
     # Content Management URLs
     path('content/', content_management.ContentManagementView.as_view(), name='content_management'),

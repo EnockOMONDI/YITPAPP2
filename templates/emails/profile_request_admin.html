@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YITP {{ request_type }} Request</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f7;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="padding:24px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;">
+                    <tr>
+                        <td style="background:#341C67;padding:24px;text-align:center;color:#ffffff;">
+                            <h1 style="margin:0;font-size:24px;">Youth Impact Training Programme</h1>
+                            <p style="margin:8px 0 0;font-size:14px;letter-spacing:1px;text-transform:uppercase;">Learner Request Alert</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:32px;">
+                            <p style="color:#111827;font-size:16px;margin:0 0 16px;">{{ greeting }}</p>
+                            <p style="color:#4b5563;font-size:15px;line-height:1.6;margin:0 0 16px;">
+                                A learner just submitted a <strong>{{ request_type }}</strong> request. Use the details below to take action.
+                            </p>
+
+                            <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 24px;">
+                                {% for row in snapshot_rows %}
+                                <tr>
+                                    <td style="padding:8px 0;width:40%;color:#6b7280;font-size:14px;">{{ row.label }}</td>
+                                    <td style="padding:8px 0;width:60%;color:#111827;font-size:14px;font-weight:600;">{{ row.value }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                            {% if reason %}
+                            <div style="border-left:4px solid #ff5d15;padding:12px 16px;margin-bottom:24px;background:#fff8f2;border-radius:12px;">
+                                <p style="margin:0 0 4px;font-size:14px;color:#ff5d15;font-weight:600;">Learner note</p>
+                                <p style="margin:0;color:#4b5563;font-size:14px;line-height:1.5;">{{ reason }}</p>
+                            </div>
+                            {% endif %}
+
+                            <div style="text-align:center;margin-bottom:16px;">
+                                <a href="{{ dashboard_url }}" style="display:inline-block;background:#ff5d15;color:#ffffff;text-decoration:none;padding:14px 32px;border-radius:999px;font-weight:600;font-size:15px;">
+                                    Open Learner Profile
+                                </a>
+                            </div>
+
+                            <p style="color:#6b7280;font-size:13px;margin:0;">
+                                This email was sent to {{ support_email }}. Reply directly if you need further details.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background:#f3f4f6;text-align:center;padding:16px;color:#6b7280;font-size:12px;">
+                            © {{ current_year }} Youth Impact Training Programme. All rights reserved.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

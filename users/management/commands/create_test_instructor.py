@@ -38,7 +38,7 @@ class Command(BaseCommand):
             '--role',
             type=str,
             default='course_instructor',
-            choices=['system_admin', 'course_instructor', 'teaching_assistant', 'content_creator', 'grader'],
+            choices=['system_admin', 'course_instructor', 'teaching_assistant', 'content_manager', 'accountant', 'grader'],
             help='Instructor role'
         )
 
@@ -200,12 +200,16 @@ class Command(BaseCommand):
                         ('assessments', 'quiz', ['view', 'add', 'change']),
                         ('assessments', 'question', ['view', 'add', 'change']),
                     ],
-                    'content_creator': [
+                    'content_manager': [
                         ('courses', 'course', ['view', 'add', 'change']),
                         ('courses', 'module', ['view', 'add', 'change']),
                         ('courses', 'lesson', ['view', 'add', 'change']),
                         ('assessments', 'quiz', ['view', 'add', 'change']),
                         ('assessments', 'question', ['view', 'add', 'change']),
+                    ],
+                    'accountant': [
+                        ('payments', 'payment', ['view', 'change']),
+                        ('users', 'sponsorshiprequest', ['view', 'change']),
                     ],
                     'teaching_assistant': [
                         ('courses', 'course', ['view']),

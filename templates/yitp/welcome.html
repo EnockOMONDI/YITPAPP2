@@ -5,92 +5,46 @@
 
 {% block content %}
 <div id="yitp-welcome-page">
-    <section class="welcome-hero">
-        <div class="eyebrow"><i class="fas fa-check-circle me-2"></i>Account verified</div>
-        <h1>Welcome to YITP, {{ user.first_name|default:user.username }}!</h1>
+    <section class="brand-hero">
+        <div class="brand-tag">Youth Impact Training Programme</div>
+        <h1>Welcome {{ user.first_name|default:user.username }}</h1>
         <p class="lead">
-            You’re officially part of the Youth Impact Training Programme. Let’s focus on a few essentials so you can
-            start learning within minutes.
+            Your YITP learning studio is ready.
         </p>
-        <div class="hero-actions">
-            <a href="{% url 'yitp:web_courses_list' %}" class="btn-primary">
-                <i class="fas fa-layer-group me-2"></i>Explore Programmes
-            </a>
-            <a href="/lms/courses/" class="btn-secondary">
-                <i class="fas fa-graduation-cap me-2"></i>Go to LMS
-            </a>
-            <a href="{% url 'profile' %}" class="btn-link">
-                Complete profile<i class="fas fa-arrow-right ms-2"></i>
-            </a>
-        </div>
+        <a href="/lms/courses/" class="btn-primary">
+           Start Learning
+        </a>
+        <br> <br>
     </section>
 
-    <section class="tour-section">
-        <div class="tour-header">
-            <div>
-                <p class="eyebrow">Guided tour</p>
-                <h2>Three quick moves to feel at home</h2>
-            </div>
-            <div class="tour-controls">
-                <button class="tour-btn" id="tourPrev" aria-label="Previous step">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <button class="tour-btn" id="tourNext" aria-label="Next step">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-        <div class="tour-carousel" id="tourCarousel">
-            <div class="tour-track">
-                <article class="tour-slide active">
-                    <div class="icon-circle"><i class="fas fa-user-edit"></i></div>
-                    <h3>Personalize your profile</h3>
-                    <p>Upload a photo, add your bio, and tell us which industries excite you most.</p>
-                    <a href="{% url 'profile' %}">Update profile</a>
-                </article>
-                <article class="tour-slide">
-                    <div class="icon-circle"><i class="fas fa-layer-group"></i></div>
-                    <h3>Curate your learning path</h3>
-                    <p>Browse the programmes library and bookmark sessions that align with your goals.</p>
-                    <a href="{% url 'yitp:web_courses_list' %}">Browse programmes</a>
-                </article>
-                <article class="tour-slide">
-                    <div class="icon-circle"><i class="fas fa-rocket"></i></div>
-                    <h3>Launch your first sprint</h3>
-                    <p>Head into the LMS, pick your start date, and meet your accountability pod.</p>
-                    <a href="/lms/courses/">Go to LMS</a>
-                </article>
-            </div>
-        </div>
-        <div class="tour-dots" id="tourDots">
-            <button class="active" data-index="0" aria-label="Step 1"></button>
-            <button data-index="1" aria-label="Step 2"></button>
-            <button data-index="2" aria-label="Step 3"></button>
-        </div>
-    </section>
-
-    <section class="support-card">
-        <div>
-            <p class="eyebrow">Need a hand?</p>
-            <h3>We’re available for onboarding questions.</h3>
-            <p class="small">
-                Reach out anytime for guidance on your dashboard, programme selection, or mentorship options.
-            </p>
-        </div>
-        <div class="support-actions">
-            <a href="{% url 'yitp:contact' %}" class="btn-primary">
-                <i class="fas fa-headset me-2"></i>Contact support
-            </a>
-            <a href="{% url 'yitp:faqs' %}" class="btn-secondary">
-                FAQs
-            </a>
+    <section class="next-steps">
+        <div class="steps-grid">
+            <article class="step-card">
+                <div class="icon-circle brand"><i class="fas fa-layer-group"></i></div>
+                <h3>Explore curriculum</h3>
+                <p>See the programme lineup.</p>
+                <a href="{% url 'yitp:web_courses_list' %}" class="btn-secondary">View courses</a>
+            </article>
+            <article class="step-card">
+                <div class="icon-circle brand"><i class="fas fa-id-card"></i></div>
+                <h3>Complete profile</h3>
+                <p>Add your details.</p>
+                <a href="{% url 'profile_edit' %}" class="btn-secondary">Update profile</a>
+            </article>
+            <article class="step-card">
+                <div class="icon-circle brand"><i class="fas fa-headset"></i></div>
+                <h3>Need support?</h3>
+                <p>We’re here.</p>
+                <a href="{% url 'yitp:contact' %}" class="btn-secondary">Contact team</a>
+            </article>
         </div>
     </section>
 </div>
 
 <style>
 body.welcome-page {
-    background: #f3f5fa;
+    background: #ffffff;
+    min-height: 100vh;
 }
 
 body.welcome-page .header__area,
@@ -99,363 +53,132 @@ body.welcome-page .progress-wrap {
 }
 
 #yitp-welcome-page {
-    padding: 90px 0 40px;
+    padding: 80px 0 40px;
 }
 
 #yitp-welcome-page > section {
-    max-width: 1400px;
+    max-width: 1000px;
     margin: 0 auto 30px;
     padding: 0 24px;
 }
 
-#yitp-welcome-page .welcome-hero,
-#yitp-welcome-page .tour-slide,
-#yitp-welcome-page .support-card {
+.brand-hero {
     background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(23, 26, 51, 0.08);
-    padding: 50px;
-}
-
-.welcome-hero {
+    border-radius: 28px;
+    padding: 60px;
     text-align: center;
-    padding: 60px 40px;
+    box-shadow: 0 30px 60px rgba(249, 115, 22, 0.15);
 }
 
-.welcome-hero .eyebrow {
+.brand-tag {
     display: inline-flex;
-    align-items: center;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #6b7280;
-    margin-bottom: 10px;
-}
-
-.welcome-hero h1 {
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    font-weight: 800;
-    margin-bottom: 15px;
-}
-
-.welcome-hero .lead {
-    max-width: 640px;
-    margin: 0 auto 30px;
-}
-
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-}
-
-.btn-primary,
-.btn-secondary,
-.btn-tertiary,
-.btn-link {
+    padding: 6px 16px;
     border-radius: 999px;
-    padding: 12px 24px;
-    font-weight: 600;
-    border: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: all 0.25s ease;
-}
-
-
-.btn-secondary {
-    background: #eef1fb;
-    color: #341C67;
-}
-
-.btn-tertiary {
-    border: 1px solid rgba(52, 28, 103, 0.1);
-    color: #341C67;
-    border-radius: 12px;
-    padding: 10px 16px;
-    width: 100%;
-    text-align: center;
-}
-
-.btn-link {
-    padding: 0;
-    background: transparent;
-    color: #341C67;
-    text-transform: none;
-}
-
-.welcome-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.grid-card {
-    padding: 30px;
-}
-
-.grid-card .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.grid-card h4 {
-    margin: 0;
-    font-weight: 700;
-    color: #1f2235;
-}
-
-.badge {
+    text-transform: uppercase;
+    letter-spacing: 2px;
     font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: rgba(52, 28, 103, 0.08);
-    color: #341C67;
-    padding: 6px 12px;
-    border-radius: 999px;
-}
-
-.badge.muted {
-    background: rgba(107, 114, 128, 0.15);
-    color: #4b5563;
-}
-
-.progress-wrap {
-    margin: 15px 0 20px;
-}
-
-.progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-bottom: 6px;
-}
-
-.progress {
-    background: #eef0f7;
-    border-radius: 999px;
-    height: 8px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    background: linear-gradient(90deg, #341C67, #51407e);
-    height: 100%;
-}
-
-.checklist {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 15px;
-}
-
-.checklist li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-    color: #4b5563;
-}
-
-.checklist i {
-    color: #c7cad9;
-}
-
-.placeholder-progress {
-    background: #f6f7fb;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    font-size: 1.5rem;
-    color: #b2b7c6;
-    margin: 15px 0;
-}
-
-.snapshot-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 20px;
-}
-
-.snapshot-list li {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-    color: #4b5563;
-}
-
-.snapshot-list i {
-    color: #341C67;
-    font-size: 1.1rem;
-}
-
-.pill-list {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.pill-list li {
-    background: #f4f6fb;
-    border-radius: 999px;
-    padding: 8px 14px;
-    font-size: 0.95rem;
-    color: #4b5563;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.tour-section {
-    background: transparent;
-    margin-bottom: 40px;
-}
-
-.tour-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.tour-header h2 {
-    margin: 5px 0 0;
-    font-size: 2rem;
-    color: #1f2235;
-}
-
-.tour-carousel {
-    overflow: hidden;
-    border-radius: 20px;
+    color: #f97316;
+    border: 1px solid rgba(249, 115, 22, 0.3);
     margin-bottom: 16px;
 }
 
-.tour-track {
-    display: flex;
-    width: 100%;
+.brand-hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    margin: 0 0 10px;
+    color: #0f172a;
 }
 
-.tour-slide {
-    padding: 30px;
-    min-height: 240px;
-    border: 1px solid rgba(52, 28, 103, 0.05);
-    width: 100%;
-    display: none;
+.brand-hero .lead {
+    color: #475467;
+    margin-bottom: 20px;
 }
 
-.tour-slide h3 {
-    margin-top: 15px;
-    font-size: 1.4rem;
-    color: #1f2235;
-}
-
-.tour-slide p {
-    color: #4b5563;
-    margin: 10px 0 15px;
-}
-
-.tour-slide a {
+.btn-primary,
+.btn-secondary {
+    border-radius: 999px;
+    padding: 12px 32px;
     font-weight: 600;
-    color: #341C67;
-    text-decoration: none;
-}
-
-.icon-circle {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: rgba(52, 28, 103, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #341C67;
-    font-size: 1.4rem;
-}
-
-.tour-controls {
-    display: flex;
-    gap: 10px;
-}
-
-.tour-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid rgba(52, 28, 103, 0.2);
-    background: #fff;
-    color: #341C67;
-    cursor: pointer;
-}
-
-.tour-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-}
-
-.tour-dots button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
     border: none;
-    background: rgba(52, 28, 103, 0.25);
-}
-
-.tour-dots button.active {
-    background: #341C67;
-}
-
-.tour-slide.active {
-    display: block;
-}
-
-.support-card {
-    padding: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+    box-shadow: 0 15px 30px rgba(249, 115, 22, 0.25);
+}
+
+.btn-primary {
+    background: #f97316;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #fff5ed;
+    color: #f97316;
+    border: 1px solid rgba(249, 115, 22, 0.35);
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.12);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    transform: translateY(-2px);
+}
+
+.next-steps {
+    background: transparent;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
 }
 
-.support-card .small {
-    color: #4b5563;
-    margin-bottom: 0;
-}
-
-.support-actions {
+.step-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 20px 45px rgba(249, 115, 22, 0.12);
     display: flex;
+    flex-direction: column;
     gap: 12px;
-    flex-wrap: wrap;
+    text-align: center;
 }
 
-@media (max-width: 992px) {
-    .tour-slide {
-        min-height: 200px;
-    }
+.icon-circle.brand {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background: #fff5ed;
+    color: #f97316;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.step-card h3 {
+    margin: 0;
+    color: #0f172a;
+}
+
+.step-card p {
+    margin: 0;
+    color: #475467;
+}
+
+.step-card .btn-secondary {
+    align-self: center;
+    padding: 10px 24px;
 }
 
 @media (max-width: 768px) {
-    .hero-actions {
-        flex-direction: column;
+    .brand-hero {
+        padding: 40px 24px;
     }
-    .welcome-grid {
-        grid-template-columns: 1fr;
-    }
-    .support-card {
-        flex-direction: column;
-        text-align: center;
+    .step-card {
+        padding: 24px;
     }
 }
 </style>
@@ -463,40 +186,6 @@ body.welcome-page .progress-wrap {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('welcome-page');
-
-    const slides = Array.from(document.querySelectorAll('.tour-slide'));
-    const dots = Array.from(document.querySelectorAll('#tourDots button'));
-    const prevBtn = document.getElementById('tourPrev');
-    const nextBtn = document.getElementById('tourNext');
-    let currentIndex = 0;
-
-    function updateCarousel(index) {
-        slides.forEach((slide, i) => {
-            const isActive = i === index;
-            slide.classList.toggle('active', isActive);
-            slide.style.display = isActive ? 'block' : 'none';
-        });
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-        currentIndex = index;
-    }
-
-    prevBtn.addEventListener('click', () => {
-        const newIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateCarousel(newIndex);
-    });
-
-    nextBtn.addEventListener('click', () => {
-        const newIndex = (currentIndex + 1) % slides.length;
-        updateCarousel(newIndex);
-    });
-
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            updateCarousel(parseInt(dot.dataset.index, 10));
-        });
-    });
-
-    updateCarousel(0);
 });
 </script>
 {% endblock %}
