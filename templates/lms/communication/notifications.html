@@ -3,59 +3,65 @@
 
 {% block title %}Notifications - YITP LMS{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/yitp-communication.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h3 text-primary">
-                    <i class="fas fa-bell me-2"></i>Notifications
-                </h1>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-primary" id="markAllRead">
-                        <i class="fas fa-check me-1"></i>Mark All Read
-                    </button>
-                    <a href="{% url 'communication:dashboard' %}" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
-                    </a>
-                </div>
-            </div>
+<div class="container-fluid py-4 communication-shell">
+    <div class="communication-page-header mb-5">
+        <div>
+            <p class="communication-eyebrow">Alerts</p>
+            <h1>Notifications</h1>
+            <p>Assignments, forum replies, and course milestones show up here. Mark them as read when you are done.</p>
+        </div>
+        <div class="communication-header-actions">
+            <button type="button" class="btn btn-gradient" id="markAllRead">
+                <i class="fas fa-check me-2"></i>Mark All Read
+            </button>
+            <a href="{% url 'communication:dashboard' %}" class="btn btn-outline-light text-white">
+                <i class="fas fa-arrow-left me-2"></i>Dashboard
+            </a>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-list me-2"></i>Recent Notifications
-                    </h5>
+    <div class="card communication-card">
+        <div class="communication-card-header">
+            <h5 class="communication-card-title mb-0">
+                <i class="fas fa-list me-2 text-primary"></i>Recent Notifications
+            </h5>
+        </div>
+        <div class="communication-card-body p-0">
+            <div class="list-group communication-list communication-notification-list">
+                <div class="list-group-item">
+                    <div class="communication-notification-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold">New course available</div>
+                        <p class="mb-1 text-muted">Advanced Business Strategy & Leadership is now available for enrollment.</p>
+                        <small class="communication-meta">2 hours ago</small>
+                    </div>
+                    <span class="communication-badge">New</span>
                 </div>
-                <div class="card-body p-0">
-                    <div class="list-group list-group-flush">
-                        <!-- Sample notifications - replace with dynamic content -->
-                        <div class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">New course available</div>
-                                <p class="mb-1">Advanced Business Strategy & Leadership is now available for enrollment.</p>
-                                <small class="text-muted">2 hours ago</small>
-                            </div>
-                            <span class="badge bg-primary rounded-pill">New</span>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Assignment due reminder</div>
-                                <p class="mb-1">Your assignment for "Business Planning" is due in 2 days.</p>
-                                <small class="text-muted">1 day ago</small>
-                            </div>
-                        </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Forum reply</div>
-                                <p class="mb-1">Someone replied to your topic in the General Discussion forum.</p>
-                                <small class="text-muted">3 days ago</small>
-                            </div>
-                        </div>
+                <div class="list-group-item">
+                    <div class="communication-notification-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold">Assignment due reminder</div>
+                        <p class="mb-1 text-muted">Your assignment for "Business Planning" is due in 2 days.</p>
+                        <small class="communication-meta">1 day ago</small>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="communication-notification-icon">
+                        <i class="fas fa-reply"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold">Forum reply</div>
+                        <p class="mb-1 text-muted">Someone replied to your topic in the General Discussion forum.</p>
+                        <small class="communication-meta">3 days ago</small>
                     </div>
                 </div>
             </div>

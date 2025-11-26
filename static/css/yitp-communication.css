@@ -1,0 +1,458 @@
+:root {
+    --yitp-primary: #ff5d15;
+    --yitp-secondary: #341C67;
+    --yitp-accent: #ff8a3d;
+    --yitp-soft: #f7f6fb;
+    --yitp-gradient: linear-gradient(135deg, #341C67, #ff5d15);
+}
+
+.communication-shell {
+    max-width: 1260px;
+    margin: 90px auto 48px;
+    background: #ffffff;
+    border-radius: 32px;
+    padding: clamp(1.5rem, 2vw, 3rem);
+    box-shadow: 0 40px 80px rgba(52, 28, 103, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.communication-shell::before,
+.communication-shell::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 93, 21, 0.2), transparent 70%);
+    z-index: 0;
+}
+
+.communication-shell::before {
+    width: 480px;
+    height: 480px;
+    top: -240px;
+    right: -220px;
+}
+
+.communication-shell::after {
+    width: 380px;
+    height: 380px;
+    bottom: -200px;
+    left: -180px;
+    background: radial-gradient(circle, rgba(52, 28, 103, 0.18), transparent 70%);
+}
+
+.communication-shell > * {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 991px) {
+    .communication-shell {
+        margin: 80px auto 32px;
+        padding: 1.5rem;
+        border-radius: 24px;
+    }
+}
+
+@media (max-width: 575px) {
+    .communication-shell {
+        margin: 70px auto 24px;
+        padding: 1.1rem;
+        border-radius: 20px;
+    }
+}
+
+.communication-page-header {
+    background: var(--yitp-gradient);
+    color: #ffffff;
+    border-radius: 24px;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.communication-page-header h1 {
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    font-size: clamp(2rem, 3vw, 2.75rem);
+}
+
+.communication-page-header p {
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 540px;
+}
+
+.communication-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.35rem;
+}
+
+.communication-header-actions {
+    display: flex;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #ff5d15, #ff8a3d);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 12px 25px rgba(255, 93, 21, 0.35);
+}
+
+.btn-gradient:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #f24d05, #ff7a24);
+}
+
+.communication-card {
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(12, 22, 44, 0.08);
+    background: #ffffff;
+    height: 100%;
+}
+
+.communication-card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(52, 28, 103, 0.08);
+    background: rgba(52, 28, 103, 0.03);
+    border-radius: 24px 24px 0 0 !important;
+}
+
+.communication-card-title {
+    font-weight: 700;
+    color: var(--yitp-secondary);
+    margin: 0;
+}
+
+.communication-card-body {
+    padding: 1.5rem;
+}
+
+.communication-card-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid rgba(52, 28, 103, 0.08);
+    background: rgba(52, 28, 103, 0.02);
+    border-radius: 0 0 24px 24px;
+}
+
+.communication-stat-card {
+    border-radius: 24px;
+    padding: 1.5rem;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 170px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.12);
+}
+
+.communication-stat-card h4 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.communication-stat-card p {
+    margin-bottom: 0;
+    opacity: 0.85;
+}
+
+.communication-stat-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+}
+
+.gradient-primary {
+    background: linear-gradient(135deg, #ff5d15, #ff9b4a);
+}
+
+.gradient-success {
+    background: linear-gradient(135deg, #26c281, #7dd87d);
+}
+
+.gradient-warning {
+    background: linear-gradient(135deg, #ffc107, #ff8921);
+}
+
+.gradient-info {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.communication-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.communication-quick-action {
+    padding: 1.25rem;
+    border-radius: 18px;
+    border: 1px solid rgba(52, 28, 103, 0.08);
+    background: rgba(52, 28, 103, 0.02);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    color: var(--yitp-secondary);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.communication-quick-action:hover {
+    transform: translateY(-4px);
+    background: #ffffff;
+    border-color: rgba(255, 93, 21, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    color: var(--yitp-primary);
+}
+
+.communication-icon-bubble {
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+    background: rgba(255, 93, 21, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--yitp-primary);
+    font-size: 1.2rem;
+}
+
+.communication-list .list-group-item {
+    border: none;
+    padding: 1.2rem 0;
+}
+
+.communication-list .list-group-item + .list-group-item {
+    border-top: 1px solid rgba(52, 28, 103, 0.08);
+}
+
+.communication-list .fw-bold {
+    color: var(--yitp-secondary);
+    font-weight: 600;
+}
+
+.communication-empty-state {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+}
+
+.communication-empty-state i {
+    color: rgba(52, 28, 103, 0.35);
+    margin-bottom: 1rem;
+}
+
+.communication-empty-state p {
+    color: #6c6b80;
+    margin-bottom: 1.25rem;
+}
+
+.communication-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    background: rgba(52, 28, 103, 0.1);
+    color: var(--yitp-secondary);
+}
+
+.communication-avatar.primary {
+    background: rgba(255, 93, 21, 0.12);
+    color: var(--yitp-primary);
+}
+
+.communication-table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.communication-table thead th {
+    border: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(52, 28, 103, 0.65);
+    background: rgba(52, 28, 103, 0.05);
+    padding: 0.85rem;
+}
+
+.communication-table tbody tr {
+    background: rgba(52, 28, 103, 0.02);
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(12, 22, 44, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.communication-table tbody tr:hover {
+    transform: translateX(5px);
+    box-shadow: 0 12px 30px rgba(12, 22, 44, 0.1);
+}
+
+.communication-table-row td {
+    border: none;
+    padding: 1.1rem 0.85rem;
+    vertical-align: middle;
+}
+
+.communication-table-row.is-unread {
+    background: rgba(255, 93, 21, 0.08);
+}
+
+.communication-table-row input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+}
+
+.communication-badge {
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-urgent {
+    background: rgba(220, 53, 69, 0.15);
+    color: #c82333;
+}
+
+.badge-priority {
+    background: rgba(255, 193, 7, 0.18);
+    color: #b25b00;
+}
+
+.badge-new {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.communication-topic-card {
+    border-radius: 18px;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid rgba(52, 28, 103, 0.08);
+    margin-bottom: 0.65rem;
+    transition: all 0.2s ease;
+}
+
+.communication-topic-card:hover {
+    border-color: rgba(255, 93, 21, 0.35);
+    background: rgba(255, 93, 21, 0.05);
+    transform: translateX(4px);
+}
+
+.communication-topic-meta {
+    color: #6c6b80;
+    font-size: 0.9rem;
+}
+
+.communication-reply-card {
+    border-left: 4px solid rgba(255, 93, 21, 0.5);
+    padding-left: 1.25rem;
+}
+
+.communication-alert {
+    border-radius: 18px;
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    background: rgba(255, 193, 7, 0.12);
+    color: #7a4c00;
+}
+
+.communication-form-card .form-control:focus,
+.communication-form-card textarea:focus {
+    border-color: var(--yitp-primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.18);
+}
+
+.communication-list-subtitle {
+    color: #6c6b80;
+    margin-bottom: 0.35rem;
+}
+
+.communication-breadcrumb {
+    font-size: 0.85rem;
+    color: rgba(52, 28, 103, 0.65);
+}
+
+.communication-tab-group .btn {
+    border-radius: 999px;
+    border: 1px solid rgba(52, 28, 103, 0.2);
+    font-weight: 600;
+    padding: 0.35rem 1.35rem;
+}
+
+.communication-tab-group .btn-check:checked + .btn {
+    background: rgba(255, 93, 21, 0.15);
+    border-color: transparent;
+    color: var(--yitp-primary);
+}
+
+.communication-form-hint {
+    color: #6c6b80;
+    font-size: 0.85rem;
+}
+
+.communication-announcement {
+    border-left: 6px solid rgba(255, 93, 21, 0.6);
+}
+
+.communication-announcement + .communication-announcement {
+    margin-top: 1.25rem;
+}
+
+.communication-notification-list .list-group-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.communication-notification-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba(52, 28, 103, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--yitp-secondary);
+}
+
+.communication-notification-list .badge {
+    background: rgba(255, 93, 21, 0.15);
+    color: var(--yitp-primary);
+}
+
+.communication-meta {
+    font-size: 0.85rem;
+    color: #6c6b80;
+}
+
+.communication-divider {
+    border-top: 1px dashed rgba(52, 28, 103, 0.15);
+    margin: 1.5rem 0;
+}
+
+.communication-highlight {
+    background: rgba(255, 93, 21, 0.08);
+    border-radius: 16px;
+    padding: 1rem;
+}

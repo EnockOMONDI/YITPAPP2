@@ -3,43 +3,44 @@
 
 {% block title %}Forums - YITP LMS{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/yitp-communication.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h3 text-primary">
-                    <i class="fas fa-users me-2"></i>Discussion Forums
-                </h1>
-                <a href="{% url 'communication:dashboard' %}" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
-                </a>
-            </div>
+<div class="container-fluid py-4 communication-shell">
+    <div class="communication-page-header mb-5">
+        <div>
+            <p class="communication-eyebrow">Community</p>
+            <h1>Discussion Forums</h1>
+            <p>Connect with fellow entrepreneurs, unpack module insights, and co-create solutions inside branded YITP spaces.</p>
+        </div>
+        <div class="communication-header-actions">
+            <a href="{% url 'communication:dashboard' %}" class="btn btn-outline-light text-white">
+                <i class="fas fa-arrow-left me-2"></i>Dashboard
+            </a>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
         {% for forum in forums %}
-        <div class="col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{% url 'communication:forum_detail' forum.id %}" class="text-decoration-none">
+        <div class="col-md-6">
+            <div class="card communication-card h-100">
+                <div class="communication-card-body">
+                    <p class="communication-eyebrow text-uppercase text-muted mb-2">{{ forum.course.title }}</p>
+                    <h5 class="communication-card-title">
+                        <a href="{% url 'communication:forum_detail' forum.id %}" class="text-decoration-none text-dark">
                             {{ forum.title }}
                         </a>
                     </h5>
-                    <p class="card-text">{{ forum.description }}</p>
-                    <div class="d-flex justify-content-between text-muted">
-                        <small>
-                            <i class="fas fa-comments me-1"></i>{{ forum.total_topics }} topics
-                        </small>
-                        <small>
-                            <i class="fas fa-book me-1"></i>{{ forum.course.title }}
-                        </small>
+                    <p class="text-muted">{{ forum.description }}</p>
+                    <div class="d-flex justify-content-between communication-meta">
+                        <span><i class="fas fa-comments me-1"></i>{{ forum.total_topics }} topics</span>
+                        <span><i class="fas fa-book me-1"></i>{{ forum.course.title }}</span>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <a href="{% url 'communication:forum_detail' forum.id %}" class="btn btn-primary btn-sm">
+                <div class="communication-card-footer text-end">
+                    <a href="{% url 'communication:forum_detail' forum.id %}" class="btn btn-gradient btn-sm">
                         <i class="fas fa-arrow-right me-1"></i>Enter Forum
                     </a>
                 </div>
@@ -47,8 +48,8 @@
         </div>
         {% empty %}
         <div class="col-12">
-            <div class="text-center py-5">
-                <i class="fas fa-users fa-4x text-muted mb-3"></i>
+            <div class="communication-empty-state">
+                <i class="fas fa-users fa-4x mb-3"></i>
                 <h4 class="text-muted">No forums available</h4>
                 <p class="text-muted">Forums will appear here when they are created for your courses.</p>
             </div>

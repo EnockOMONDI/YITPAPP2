@@ -3,232 +3,164 @@
 
 {% block title %}{{ topic.title|default:"Topic Discussion" }} - YITP LMS{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/yitp-communication.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <h1 class="h3 text-primary">{{ topic.title|default:"Topic Discussion" }}</h1>
-                    <p class="text-muted mb-0">
-                        {% if topic %}
-                        <i class="fas fa-user me-1"></i>{{ topic.created_by.get_full_name|default:topic.created_by.username }}
-                        <i class="fas fa-clock ms-3 me-1"></i>{{ topic.created_at|timesince }} ago
-                        {% if topic.is_pinned %}
-                        <i class="fas fa-thumbtack text-warning ms-3" title="Pinned"></i>
-                        {% endif %}
-                        {% if topic.is_locked %}
-                        <i class="fas fa-lock text-danger ms-2" title="Locked"></i>
-                        {% endif %}
-                        {% else %}
-                        <i class="fas fa-comments me-1"></i>Forum Discussion
-                        {% endif %}
-                    </p>
-                </div>
-                <div class="btn-group" role="group">
-                    {% if topic and not topic.is_locked %}
-                    <a href="{% url 'communication:reply_topic' topic.id %}" class="btn btn-primary">
-                        <i class="fas fa-reply me-1"></i>Reply
-                    </a>
-                    {% endif %}
-                    {% if topic and topic.forum %}
-                    <a href="{% url 'communication:forum_detail' topic.forum.id %}" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-1"></i>Back to Forum
-                    </a>
-                    {% else %}
-                    <a href="{% url 'communication:forum_list' %}" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-1"></i>Back to Forums
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Original Topic -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <div class="avatar-sm me-3">
-                            <div class="avatar-title bg-primary rounded-circle">
-                                {{ topic.created_by.first_name|first|default:topic.created_by.username|first|upper }}
-                            </div>
-                        </div>
-                        <div>
-                            <h6 class="mb-0">{{ topic.created_by.get_full_name|default:topic.created_by.username }}</h6>
-                            <small class="text-muted">{{ topic.created_at|date:"M d, Y g:i A" }}</small>
-                        </div>
-                    </div>
-                    {% if topic.is_pinned %}
-                    <span class="badge bg-warning">Pinned</span>
-                    {% endif %}
-                </div>
-                <div class="card-body">
-                    <div class="topic-content">
-                        {{ topic.content|linebreaks }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Replies -->
-    <div class="row">
-        <div class="col-12">
-            <h4 class="mb-3">
-                <i class="fas fa-comments me-2"></i>Replies ({{ replies.count }})
-            </h4>
-            
-            {% for reply in replies %}
-            <div class="card mb-3">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <div class="avatar-sm me-3">
-                            <div class="avatar-title bg-secondary rounded-circle">
-                                {{ reply.created_by.first_name|first|default:reply.created_by.username|first|upper }}
-                            </div>
-                        </div>
-                        <div>
-                            <h6 class="mb-0">{{ reply.created_by.get_full_name|default:reply.created_by.username }}</h6>
-                            <small class="text-muted">{{ reply.created_at|date:"M d, Y g:i A" }}</small>
-                        </div>
-                    </div>
-                    <small class="text-muted">#{{ forloop.counter }}</small>
-                </div>
-                <div class="card-body">
-                    <div class="reply-content">
-                        {{ reply.content|linebreaks }}
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="text-center py-4">
-                <i class="fas fa-comments fa-3x text-muted mb-3"></i>
-                <h5 class="text-muted">No replies yet</h5>
-                <p class="text-muted">Be the first to reply to this topic!</p>
-                {% if topic and not topic.is_locked %}
-                <a href="{% url 'communication:reply_topic' topic.id %}" class="btn btn-primary">
-                    <i class="fas fa-reply me-1"></i>Add Reply
-                </a>
+<div class="container-fluid py-4 communication-shell">
+    <div class="communication-page-header mb-5">
+        <div>
+            <p class="communication-eyebrow">Discussion</p>
+            <h1>{{ topic.title|default:"Topic Discussion" }}</h1>
+            <p class="mb-0">
+                {% if topic %}
+                <i class="fas fa-user me-1"></i>{{ topic.created_by.get_full_name|default:topic.created_by.username }}
+                <i class="fas fa-clock ms-3 me-1"></i>{{ topic.created_at|timesince }} ago
+                {% else %}
+                Engage with your peers and facilitators.
                 {% endif %}
-            </div>
-            {% endfor %}
-
-            <!-- Pagination -->
-            {% if is_paginated %}
-            <nav aria-label="Replies pagination" class="mt-4">
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                        </li>
-                    {% endif %}
-                    
-                    {% for num in page_obj.paginator.page_range %}
-                        {% if page_obj.number == num %}
-                            <li class="page-item active">
-                                <span class="page-link">{{ num }}</span>
-                            </li>
-                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                    
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
+            </p>
+        </div>
+        <div class="communication-header-actions">
+            {% if topic and not topic.is_locked %}
+            <a href="{% url 'communication:reply_topic' topic.id %}" class="btn btn-gradient">
+                <i class="fas fa-reply me-2"></i>Reply
+            </a>
+            {% endif %}
+            {% if topic and topic.forum %}
+            <a href="{% url 'communication:forum_detail' topic.forum.id %}" class="btn btn-outline-light text-white">
+                <i class="fas fa-arrow-left me-2"></i>Back to Forum
+            </a>
+            {% else %}
+            <a href="{% url 'communication:forum_list' %}" class="btn btn-outline-light text-white">
+                <i class="fas fa-arrow-left me-2"></i>Back to Forums
+            </a>
             {% endif %}
         </div>
     </div>
 
-    <!-- Quick Reply Form -->
-    {% if not topic.is_locked %}
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-reply me-2"></i>Quick Reply
-                    </h5>
+    <div class="card communication-card mb-4">
+        <div class="communication-card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="communication-avatar primary me-3">
+                    {{ topic.created_by.first_name|first|default:topic.created_by.username|first|upper }}
                 </div>
-                <div class="card-body">
-                    <form method="post" action="{% if topic %}{% url 'communication:reply_topic' topic.id %}{% else %}#{% endif %}"{% if not topic %} style="display:none;"{% endif %}>
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <textarea class="form-control" name="content" rows="4" placeholder="Write your reply..." required></textarea>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-reply me-1"></i>Post Reply
-                            </button>
-                        </div>
-                    </form>
+                <div>
+                    <h6 class="mb-0">{{ topic.created_by.get_full_name|default:topic.created_by.username }}</h6>
+                    <small class="communication-meta">{{ topic.created_at|date:"M d, Y g:i A" }}</small>
                 </div>
             </div>
+            {% if topic.is_pinned %}
+            <span class="communication-badge badge-priority">Pinned</span>
+            {% endif %}
+        </div>
+        <div class="communication-card-body">
+            <div class="topic-content">
+                {{ topic.content|linebreaks }}
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <h4 class="mb-0">
+            <i class="fas fa-comments me-2 text-primary"></i>Replies ({{ replies.count }})
+        </h4>
+        {% if topic and not topic.is_locked %}
+        <a href="{% url 'communication:reply_topic' topic.id %}" class="btn btn-outline-primary btn-sm">
+            <i class="fas fa-reply me-1"></i>Reply
+        </a>
+        {% endif %}
+    </div>
+
+    {% for reply in replies %}
+    <div class="card communication-card mb-3">
+        <div class="communication-card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="communication-avatar me-3">
+                    {{ reply.created_by.first_name|first|default:reply.created_by.username|first|upper }}
+                </div>
+                <div>
+                    <h6 class="mb-0">{{ reply.created_by.get_full_name|default:reply.created_by.username }}</h6>
+                    <small class="communication-meta">{{ reply.created_at|date:"M d, Y g:i A" }}</small>
+                </div>
+            </div>
+            <small class="communication-meta">#{{ forloop.counter }}</small>
+        </div>
+        <div class="communication-card-body">
+            <div class="reply-content">
+                {{ reply.content|linebreaks }}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="communication-empty-state">
+        <i class="fas fa-comments fa-3x mb-3"></i>
+        <h5 class="text-muted">No replies yet</h5>
+        <p class="text-muted">Be the first to reply to this topic!</p>
+        {% if topic and not topic.is_locked %}
+        <a href="{% url 'communication:reply_topic' topic.id %}" class="btn btn-gradient">
+            <i class="fas fa-reply me-1"></i>Add Reply
+        </a>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    {% if is_paginated %}
+    <nav aria-label="Replies pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+            
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% if topic and not topic.is_locked %}
+    <div class="card communication-card mt-4">
+        <div class="communication-card-header">
+            <h5 class="communication-card-title mb-0">
+                <i class="fas fa-reply me-2 text-primary"></i>Quick Reply
+            </h5>
+        </div>
+        <div class="communication-card-body">
+            <form method="post" action="{% url 'communication:reply_topic' topic.id %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <textarea class="form-control" name="content" rows="4" placeholder="Write your reply..." required></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-gradient">
+                        <i class="fas fa-reply me-1"></i>Post Reply
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     {% else %}
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="alert alert-warning text-center">
-                <i class="fas fa-lock me-2"></i>This topic is locked and no longer accepting replies.
-            </div>
-        </div>
+    <div class="communication-alert mt-4 text-center">
+        <i class="fas fa-lock me-2"></i>This topic is locked and no longer accepting replies.
     </div>
     {% endif %}
 </div>
-
-<style>
-.avatar-sm {
-    width: 40px;
-    height: 40px;
-}
-
-.avatar-title {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.topic-content,
-.reply-content {
-    line-height: 1.6;
-}
-
-.card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-}
-
-.card-header {
-    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
-    color: white;
-    border-radius: 15px 15px 0 0 !important;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #ff5d15 0%, #ff7b3d 100%);
-    border: none;
-}
-
-.btn-primary:hover {
-    background: linear-gradient(135deg, #e54d0f 0%, #e56b2d 100%);
-}
-
-.text-primary {
-    color: #ff5d15 !important;
-}
-</style>
 {% endblock %}

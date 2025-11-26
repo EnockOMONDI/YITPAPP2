@@ -4,25 +4,46 @@
 
 {% block title %}Compose Message - YITP LMS{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/yitp-communication.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 communication-shell">
+    <div class="communication-page-header mb-5">
+        <div>
+            <p class="communication-eyebrow">Message Center</p>
+            <h1>Compose Message</h1>
+            <p>Reach out to instructors, peers, or mentees with a branded YITP message that reflects the warmth of the programme.</p>
+        </div>
+        <div class="communication-header-actions">
+            <a href="{% url 'communication:inbox' %}" class="btn btn-outline-light text-white">
+                <i class="fas fa-arrow-left me-2"></i>Back to Inbox
+            </a>
+        </div>
+    </div>
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-edit me-2"></i>Compose New Message
+        <div class="col-lg-8">
+            <div class="card communication-card communication-form-card">
+                <div class="communication-card-header">
+                    <h5 class="communication-card-title mb-0">
+                        <i class="fas fa-edit me-2 text-primary"></i>Compose New Message
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="communication-card-body">
                     <form method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <div class="d-flex justify-content-between">
-                            <a href="{% url 'communication:inbox' %}" class="btn btn-secondary">
+                        <p class="communication-form-hint">
+                            <i class="fas fa-lightbulb me-1 text-warning"></i>
+                            Keep your message concise and action-oriented. Recipients are notified instantly.
+                        </p>
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'communication:inbox' %}" class="btn btn-outline-secondary">
                                 <i class="fas fa-arrow-left me-1"></i>Cancel
                             </a>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-gradient">
                                 <i class="fas fa-paper-plane me-1"></i>Send Message
                             </button>
                         </div>
