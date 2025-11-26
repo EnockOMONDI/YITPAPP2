@@ -2,8 +2,10 @@ from django import forms
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from .models import SponsorshipRequest, Profile
+from .models import SponsorshipRequest, Profile, InstructorProfile
 import re
+import secrets
+import string
 
 
 class SponsorshipRequestForm(forms.ModelForm):
@@ -301,3 +303,75 @@ class ProfileDetailsForm(forms.ModelForm):
                 raise ValidationError('Phone number must be between 7 and 15 digits.')
             return cleaned_phone
         return phone
+
+
+class AdminUserCreationForm(forms.Form):
+    """Superuser-facing form to quickly create learners and staff accounts."""
+
+    ROLE_CHOICES = [
+        ('learner', 'Learner'),
+        ('course_instructor', 'Course Instructor'),
+        ('content_manager', 'Content Manager'),
+        ('accountant', 'Accountant'),
+        ('teaching_assistant', 'Teaching Assistant'),
+        ('grader', 'Grader'),
+        ('system_admin', 'System Administrator'),
+    ]
+
+    first_name = forms.CharField(label='First name', max_length=150)
+    last_name = forms.CharField(label='Last name', max_length=150, required=False)
+    email = forms.EmailField(label='Email')
+    username = forms.CharField(label='Username', max_length=150)
+    role = forms.ChoiceField(label='Assign role', choices=ROLE_CHOICES)
+    password = forms.CharField(
+        label='Temporary password',
+        max_length=128,
+        required=False,
+        help_text='Leave blank to auto-generate a secure password.',
+        widget=forms.PasswordInput(render_value=True)
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email__iexact=email).exists():
+            raise ValidationError('A user with this email already exists.')
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username).exists():
+            raise ValidationError('This username is already taken.')
+        return username
+
+    def _generate_password(self):
+        alphabet = string.ascii_letters + string.digits + '!@#$%^&*'
+        return ''.join(secrets.choice(alphabet) for _ in range(12))
+
+    def save(self):
+        cleaned = self.cleaned_data
+        password = cleaned['password'] or self._generate_password()
+        user = User.objects.create_user(
+            username=cleaned['username'],
+            email=cleaned['email'],
+            password=password,
+            first_name=cleaned['first_name'],
+            last_name=cleaned['last_name'],
+        )
+
+        role = cleaned['role']
+        if role == 'system_admin':
+            user.is_staff = True
+            user.is_superuser = True
+        elif role != 'learner':
+            user.is_staff = True
+        user.save()
+
+        if role != 'learner':
+            profile, _ = InstructorProfile.objects.get_or_create(user=user)
+            profile.instructor_role = role
+            profile.is_active = True
+            if role == 'system_admin':
+                profile.verification_status = 'verified'
+            profile.save()
+
+        return user, password

@@ -56,6 +56,7 @@ urlpatterns = [
     path('superuser/export/enrollments/', views.export_enrollments_csv, name='export_enrollments_csv'),
     path('superuser/export/payments/', views.export_payments_csv, name='export_payments_csv'),
     path('superuser/api/data/', views.dashboard_api_data, name='dashboard_api_data'),
+    path('superuser/create-user/', views.superuser_create_user, name='superuser_create_user'),
 
 ]
 

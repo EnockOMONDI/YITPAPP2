@@ -247,6 +247,7 @@
                                             {% with instructor_profile=user.instructor_profile|default:None %}
                                                 {% if user.is_superuser %}
                                                     <li><a class="dropdown-item" href="{% url 'users:superuser_dashboard' %}"><i class="fas fa-crown mr-10"></i>Admin Dashboard</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'users:superuser_create_user' %}"><i class="fas fa-user-plus mr-10"></i>Create User</a></li>
                                                     <li><a class="dropdown-item" href="/admin/"><i class="fas fa-tools mr-10"></i>Django Admin</a></li>
                                                     <li><a class="dropdown-item" href="{% url 'users:dashboard_api_data' %}"><i class="fas fa-broadcast-tower mr-10"></i>Live Metrics</a></li>
                                                     <li><a class="dropdown-item" href="{% url 'progress:achievements' %}"><i class="fas fa-award mr-10"></i>Achievements</a></li>
@@ -430,6 +431,10 @@
                                     <a href="{% url 'users:superuser_dashboard' %}" class="mobile__auth-link">
                                         <i class="fas fa-crown"></i>
                                         <span>Admin Dashboard</span>
+                                    </a>
+                                    <a href="{% url 'users:superuser_create_user' %}" class="mobile__auth-link">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Create User</span>
                                     </a>
                                 {% else %}
                                     {% with instructor_profile=user.instructor_profile|default:None %}

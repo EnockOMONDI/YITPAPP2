@@ -20,7 +20,7 @@ from django.utils.encoding import force_bytes
 from django.db.models import Count, Sum, Q, Avg
 from django.http import HttpResponse
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile
-from .forms import SponsorshipRequestForm, UserProfileForm, ProfileDetailsForm
+from .forms import SponsorshipRequestForm, UserProfileForm, ProfileDetailsForm, AdminUserCreationForm
 from .otp_views import send_otp_for_registration
 from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification, test_email_configuration, send_html_email
 
@@ -2315,6 +2315,36 @@ def superuser_dashboard(request):
     }
 
     return render(request, 'users/superuser_dashboard.html', context)
+
+
+@login_required
+def superuser_create_user(request):
+    """Branded wizard for creating learners and staff profiles."""
+    if not request.user.is_superuser:
+        messages.error(request, "Only super administrators can access the user creation panel.")
+        return redirect('profile')
+
+    generated_password = None
+    created_user = None
+
+    if request.method == 'POST':
+        form = AdminUserCreationForm(request.POST)
+        if form.is_valid():
+            created_user, generated_password = form.save()
+            messages.success(
+                request,
+                f"User '{created_user.username}' created successfully."
+            )
+            form = AdminUserCreationForm()
+    else:
+        form = AdminUserCreationForm()
+
+    context = {
+        'form': form,
+        'generated_password': generated_password,
+        'created_user': created_user,
+    }
+    return render(request, 'users/admin_create_user.html', context)
 
 @login_required
 @user_passes_test(is_superuser)

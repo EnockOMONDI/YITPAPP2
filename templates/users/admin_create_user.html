@@ -1,0 +1,107 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block title %}Create User - YITP Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+.admin-create-wrapper {
+    max-width: 720px;
+    margin: 110px auto 60px;
+}
+@media (max-width: 991px) {
+    .admin-create-wrapper { margin-top: 90px; }
+}
+.create-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(15, 26, 53, 0.12);
+}
+.create-card h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #341C67;
+}
+.role-hint {
+    background: #f8f9ff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 25px;
+}
+.form-control, .form-select {
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+.submit-btn {
+    border-radius: 999px;
+    padding: 12px 30px;
+    font-weight: 600;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="admin-create-wrapper">
+    <div class="create-card">
+        <h1>Create a New User</h1>
+        <p class="text-muted mb-4">
+            Super administrators can quickly onboard learners, instructors, content managers, and accountants from this panel.
+        </p>
+
+        <div class="role-hint">
+            <strong>Tip:</strong> Choose <em>Content Manager</em> for editorial staff (access to content studio + blogs), and <em>Accountant</em> for finance officers (payment & sponsorship dashboards).
+        </div>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">First name</label>
+                {{ form.first_name }}
+                {{ form.first_name.errors }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Last name</label>
+                {{ form.last_name }}
+                {{ form.last_name.errors }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Username</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Role</label>
+                {{ form.role }}
+                {{ form.role.errors }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Temporary password</label>
+                {{ form.password }}
+                <div class="form-text">Leave blank to generate a secure password automatically.</div>
+                {{ form.password.errors }}
+            </div>
+
+            {% if generated_password and created_user %}
+                <div class="alert alert-success">
+                    <strong>{{ created_user.username }}</strong> was created. Temporary password:
+                    <code>{{ generated_password }}</code>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary submit-btn">
+                <i class="fas fa-user-plus me-2"></i>Create User
+            </button>
+        </form>
+    </div>
+</section>
+{% endblock %}

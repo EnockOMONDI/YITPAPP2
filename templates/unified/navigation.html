@@ -195,8 +195,9 @@
                                                 <ul class="user__dropdown-menu">
                                                     {% with instructor_profile=user.instructor_profile|default:None %}
                                                         {% if user.is_superuser %}
-                                                            <li><a href="{% url 'users:superuser_dashboard' %}"><i class="fas fa-user-shield me-2"></i>Super Dashboard</a></li>
-                                                            <li><a href="/admin/"><i class="fas fa-tools me-2"></i>Admin Panel</a></li>
+                                                    <li><a href="{% url 'users:superuser_dashboard' %}"><i class="fas fa-user-shield me-2"></i>Super Dashboard</a></li>
+                                                    <li><a href="{% url 'users:superuser_create_user' %}"><i class="fas fa-user-plus me-2"></i>Create User</a></li>
+                                                    <li><a href="/admin/"><i class="fas fa-tools me-2"></i>Admin Panel</a></li>
                                                             <li><a href="{% url 'users:dashboard_api_data' %}"><i class="fas fa-chart-area me-2"></i>Live Metrics</a></li>
                                                             <li><a href="{% url 'progress:achievements' %}"><i class="fas fa-award me-2"></i>Achievements</a></li>
                                                         {% elif instructor_profile and instructor_profile.is_active %}

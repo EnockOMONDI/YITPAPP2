@@ -129,8 +129,8 @@
                     {% for request in recent_sponsorships %}
                     <div class="list-group-item">
                         <div class="fw-semibold">{{ request.user.get_full_name|default:request.user.username }}</div>
-                        <small class="text-muted d-block">{% if request.course %}{{ request.course.title }}{% endif %} · {{ request.created_at|date:"M d" }}</small>
-                        <small class="badge-status {% if request.status == 'pending' %}badge-pending{% elif request.status == 'confirmed' %}badge-confirmed{% elif request.status == 'under_review' %}badge-under-review{% endif %}">{{ request.get_status_display }}</small>
+                        <small class="text-muted d-block">{% if request.course %}{{ request.course.title }} · {% endif %}{{ request.created_at|date:"M d" }}</small>
+                        <small class="badge-status {% if request.status == 'pending' %}badge-pending{% elif request.status == 'confirmed' %}badge-confirmed{% elif request.status == 'under_review' %}badge-under-review{% else %}badge-under-review{% endif %}">{{ request.get_status_display }}</small>
                     </div>
                     {% empty %}
                     <p class="text-muted mb-0">No sponsorship activity yet.</p>
