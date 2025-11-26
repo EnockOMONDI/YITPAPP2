@@ -3,175 +3,396 @@
 
 {% block title %}Home - Entrepreneurship LMS{% endblock %}
 
+{% block extra_css %}
+<style>
+    :root {
+        --yitp-primary: #ff5d15;
+        --yitp-secondary: #341C67;
+        --yitp-gradient: linear-gradient(135deg, #341C67, #ff5d15);
+    }
+
+    .home-hero {
+        background: var(--yitp-gradient);
+        padding: 6rem 0 5rem;
+        color: #fff;
+        margin-top: 80px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .home-hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 45%),
+                    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.12), transparent 50%),
+                    radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.1), transparent 45%);
+        opacity: 0.9;
+        z-index: 1;
+    }
+
+    .home-hero .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.15);
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 4vw, 3.75rem);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-top: 1.5rem;
+    }
+
+    .hero-metrics {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+        flex-wrap: wrap;
+    }
+
+    .hero-metric {
+        background: rgba(255, 255, 255, 0.12);
+        padding: 1rem 1.5rem;
+        border-radius: 1.25rem;
+        min-width: 140px;
+        text-align: left;
+    }
+
+    .hero-metric strong {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .hero-illustration {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 32px;
+        padding: 2.5rem;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-illustration i {
+        font-size: 8rem;
+        opacity: 0.4;
+    }
+
+    .yitp-feature-grid {
+        background: #f7f6fb;
+        position: relative;
+        z-index: 2;
+    }
+
+    .feature-card {
+        background: #fff;
+        border-radius: 24px;
+        padding: 2rem;
+        height: 100%;
+        box-shadow: 0 15px 30px rgba(52, 28, 103, 0.08);
+        border: 1px solid rgba(255, 93, 21, 0.15);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 55px rgba(52, 28, 103, 0.15);
+    }
+
+    .feature-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(255, 93, 21, 0.15);
+        color: var(--yitp-primary);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-heading .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--yitp-primary);
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+
+    .section-heading h2 {
+        font-weight: 700;
+        font-size: clamp(2rem, 3vw, 2.75rem);
+        color: var(--yitp-secondary);
+    }
+
+    .section-heading p {
+        color: #6c6b80;
+        max-width: 640px;
+        margin: 0.5rem auto 0;
+    }
+
+    .yitp-courses-section {
+        position: relative;
+        background: #f7f6fb;
+    }
+
+    .yitp-course-card {
+        border-radius: 28px;
+        background: #fff;
+        box-shadow: 0 20px 40px rgba(52, 28, 103, 0.08);
+        border: 1px solid rgba(255, 93, 21, 0.18);
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .yitp-course-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 28px;
+        padding: 1px;
+        background: linear-gradient(130deg, rgba(255, 93, 21, 0.6), rgba(52, 28, 103, 0.3));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .yitp-course-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 60px rgba(255, 93, 21, 0.25);
+    }
+
+    .course-thumbnail {
+        height: 220px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .course-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .yitp-course-card:hover .course-thumbnail img {
+        transform: scale(1.05);
+    }
+
+    .course-thumbnail::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 20%, rgba(0,0,0,0.55) 100%);
+    }
+
+    .course-badges {
+        position: absolute;
+        inset: 0;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 2;
+    }
+
+    .course-level-chip {
+        align-self: flex-start;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--yitp-secondary);
+        font-weight: 600;
+        border-radius: 12px;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.85rem;
+    }
+
+    .course-thumb-badges span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        border-radius: 999px;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #fff;
+        margin-right: 0.4rem;
+    }
+
+    .course-card-body {
+        padding: 1.75rem;
+    }
+
+    .course-card-body h5 {
+        font-weight: 700;
+        color: var(--yitp-secondary);
+    }
+
+    .course-card-body p {
+        color: #6b6b7a;
+        font-size: 0.95rem;
+    }
+
+    .course-meta {
+        padding-top: 1rem;
+        border-top: 1px solid rgba(52, 28, 103, 0.1);
+    }
+
+    .price-pill {
+        padding: 0.4rem 0.85rem;
+        border-radius: 999px;
+        font-weight: 600;
+        background: rgba(255, 93, 21, 0.1);
+        color: var(--yitp-primary);
+    }
+
+    .yitp-impact-section {
+        background: #fff;
+    }
+
+    .impact-card {
+        padding: 2rem 1rem;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 93, 21, 0.12);
+        box-shadow: 0 15px 35px rgba(52, 28, 103, 0.08);
+        transition: transform 0.3s ease;
+    }
+
+    .impact-card:hover {
+        transform: translateY(-6px);
+    }
+
+    @media (max-width: 767px) {
+        .hero-metrics {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<!-- Hero Section -->
 
 
-<!-- Features Section -->
 
-
-<!-- Featured Courses Section -->
 {% if featured_courses %}
-<br><br><br><br><br>
-<section class="py-5 bg-light">
+<section class="yitp-courses-section py-5" style="margin-top: 6%;" >
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="display-5 fw-bold mb-3">Courses</h2>
-            </div>
+        <div class="section-heading text-center mb-5">
+            <div class="eyebrow">Courses</div>
+            <h2>Featured Learning Experiences</h2>
+            <p>Stay ahead with modules crafted in partnership with industry leaders.</p>
         </div>
-        
         <div class="row g-4">
             {% for course in featured_courses %}
             <div class="col-lg-4 col-md-6">
-                <div class="card course-card h-100">
-                    <div class="position-relative">
+                <div class="yitp-course-card h-100 d-flex flex-column">
+                    <div class="course-thumbnail rounded-top-4">
                         {% if course.thumbnail_url %}
-                        <img src="{{ course.thumbnail_src }}" class="card-img-top" alt="{{ course.title }}" style="height: 200px; object-fit: cover;">
+                        <img src="{{ course.thumbnail_src }}" alt="{{ course.title }}">
                         {% else %}
-                        <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" class="card-img-top" alt="{{ course.title }}" style="height: 200px; object-fit: cover;">
+                        <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" alt="{{ course.title }}">
                         {% endif %}
-
-                        <!-- Prerequisite Course Badge for Home Page -->
-                        {% if 'Introduction to YITP' in course.title %}
-                        <div class="position-absolute top-0 start-0 m-2">
-                            <span class="badge" style="background: linear-gradient(135deg, #ff5d15, #341C67); color: white; font-size: 0.9rem; padding: 8px 12px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-                                <i class="fas fa-star me-1"></i>START HERE
-                            </span>
+                        <div class="course-badges">
+                            <div class="course-level-chip">
+                                {{ course.get_difficulty_level_display }}
+                            </div>
+                            <div class="course-thumb-badges text-end">
+                                {% if 'Introduction to YITP' in course.title %}
+                                <span style="background: linear-gradient(135deg, #ff5d15, #ff9648);">
+                                    <i class="fas fa-star"></i> Start Here
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.3); color: #1b1b1b; backdrop-filter: blur(4px);">
+                                    <i class="fas fa-exclamation-circle"></i> Mandatory
+                                </span>
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="position-absolute top-0 end-0 m-2">
-                            <span class="badge bg-warning text-dark" style="font-size: 0.8rem; padding: 6px 10px; border-radius: 15px; font-weight: 600;">
-                                <i class="fas fa-exclamation-circle me-1"></i>MANDATORY
-                            </span>
-                        </div>
-                        {% endif %}
                     </div>
-                    
-                    <div class="card-body d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <span class="badge bg-primary">{{ course.get_difficulty_level_display }}</span>
-                            <small class="text-muted">{{ course.estimated_duration }}h</small>
+                    <div class="course-card-body flex-grow-1 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center text-muted small mb-3">
+                            <span>
+                                <i class="fas fa-clock me-1"></i>{{ course.estimated_duration }}h
+                            </span>
+                            <span>
+                                <i class="fas fa-layer-group me-1"></i>
+                                {% if course.category %}
+                                    {{ course.category.name }}
+                                {% else %}
+                                    Multi-topic
+                                {% endif %}
+                            </span>
                         </div>
-                        
-                        <h5 class="card-title">{{ course.title }}</h5>
-                        <p class="card-text text-muted flex-grow-1">{{ course.description|truncatewords:20 }}</p>
-                        
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5>{{ course.title }}</h5>
+                        <p class="flex-grow-1">{{ course.description|truncatewords:25 }}</p>
+                        <div class="course-meta d-flex flex-column gap-2 mt-3">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">
                                     <i class="fas fa-user me-1"></i>{{ course.instructor_display_name }}
                                 </small>
-            
-                            </div>
-                            
-                            <div class="d-flex justify-content-between align-items-center">
                                 {% if course.price > 0 %}
-                                <span class="h5 mb-0 text-primary">${{ course.price }}</span>
+                                <span class="price-pill">${{ course.price }}</span>
                                 {% else %}
-                                <span class="h5 mb-0 text-success">Free</span>
+                                <span class="price-pill text-success bg-white border border-success">Free</span>
                                 {% endif %}
-                                <br>
-                                <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-secondary">
-                                    View Course
-                                </a>
                             </div>
+                            <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-secondary w-100">
+                                Enroll Now
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <br>
-        <div class="text-center mt-5">
-            <a href="{% url 'courses:course_list' %}" class="btn.btn-secondary btn-lg">
-                View All Courses <i class="fas fa-arrow-right ms-2"></i>
-            </a>
-        </div>
     </div>
 </section>
 {% endif %}
 
-<!-- Categories Section -->
-{% if categories %}
-<!-- <section class="py-5">
+<section class="yitp-impact-section py-5">
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="display-5 fw-bold mb-3">Learning Categories</h2>
-                <p class="lead text-muted">Explore different areas of entrepreneurship</p>
+        <div class="row text-center mb-4">
+            <div class="col">
+                <div class="section-heading">
+                    <div class="eyebrow">Impact</div>
+                    <h2>Numbers that Tell Our Story</h2>
+                    <p>Every learner, mentor, and cohort contributes to a growing ecosystem of impact.</p>
+                </div>
             </div>
         </div>
-        
         <div class="row g-4">
-            {% for category in categories %}
-            <div class="col-lg-3 col-md-6">
-                <a href="{% url 'courses:course_list' %}?category={{ category.slug }}" class="text-decoration-none">
-                    <div class="card text-center h-100 border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="mb-3" style="color: {{ category.color }};">
-                                <i class="{{ category.icon|default:'fas fa-folder' }} fa-3x"></i>
-                            </div>
-                            <h5 class="card-title">{{ category.name }}</h5>
-                            <p class="card-text text-muted">{{ category.description|truncatewords:15 }}</p>
-                            <small class="text-muted">{{ category.courses.count }} courses</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section> -->
-{% endif %}
-
-<!-- Statistics Section -->
-<section class="py-5 bg-primary text-white">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4 col-6 mb-4">
-                <div class="h2 fw-bold">500+</div>
-                <p class="mb-0">Students Enrolled</p>
-            </div>
-            <div class="col-md-4 col-6 mb-4">
-                <div class="h2 fw-bold">10+</div>
-                <p class="mb-0">Expert Instructors</p>
-            </div>
-           
-            <div class="col-md-4 col-6 mb-4">
-                <div class="h2 fw-bold">95%</div>
-                <p class="mb-0">Success Rate</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4 text-white ">
-                    Master Entrepreneurship Skills
-                </h1>
-                <p class="lead mb-4 text-white">
-                    Transform your business ideas into reality with our comprehensive entrepreneurship training program. 
-                    Learn from industry experts and develop the skills needed to succeed in today's competitive market.
-                </p>
-                <div class="d-flex gap-3">
-                    <a href="{% url 'courses:course_list' %}" class="btn btn-light btn-lg">
-                        <i class="fas fa-play me-2"></i>Start Learning
-                    </a>
-                    {% if not user.is_authenticated %}
-                    <a href="{% url 'yitp:registration' %}" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-user-plus me-2"></i>Join Now
-                    </a>
-                    {% endif %}
+            <div class="col-md-4">
+                <div class="impact-card text-center">
+                    <div class="display-5 fw-bold text-primary mb-2">500+</div>
+                    <p class="mb-0 text-muted">Students Enrolled</p>
                 </div>
             </div>
-            <div class="col-lg-6 text-center">
-                <i class="fas fa-lightbulb" style="font-size: 12rem; opacity: 0.3;"></i>
+            <div class="col-md-4">
+                <div class="impact-card text-center">
+                    <div class="display-5 fw-bold text-primary mb-2">10+</div>
+                    <p class="mb-0 text-muted">Expert Instructors</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="impact-card text-center">
+                    <div class="display-5 fw-bold text-primary mb-2">95%</div>
+                    <p class="mb-0 text-muted">Success Rate</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
 
 {% endblock %}

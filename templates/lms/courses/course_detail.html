@@ -201,17 +201,17 @@
 
     /* Module Cards - Mobile optimized */
     .module-card {
-        background: white;
-        border-radius: 12px;
-        margin-bottom: 1rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        overflow: hidden;
+        background: #fff;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        border: 1px solid rgba(26,46,83,0.08);
     }
 
     .module-header {
-        padding: 1rem 1.5rem;
-        background: #f8f9fa;
-        border-bottom: 1px solid #e9ecef;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, rgba(255,93,21,0.05), rgba(26,46,83,0.03));
+        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .module-title {
@@ -222,26 +222,34 @@
 
     .module-meta {
         display: flex;
-        gap: 1rem;
-        font-size: 0.875rem;
-        color: #666;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+        color: #555;
     }
 
     .module-content {
-        padding: 0;
+        padding: 1.25rem 1.5rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
     }
 
     .lesson-item {
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid #f0f0f0;
+        padding: 1rem 1.25rem;
+        border: 1px solid #f0f0f5;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        transition: background-color 0.2s;
+        gap: 1rem;
+        background: #fafafe;
+        transition: background-color 0.2s, box-shadow 0.2s;
     }
 
     .lesson-item:hover {
-        background: #f8f9fa;
+        background: #fff8f3;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
 
     .lesson-item:last-child {
@@ -250,7 +258,7 @@
 
     .lesson-info {
         flex: 1;
-        margin-right: 1rem;
+        margin-right: 0;
     }
 
     .lesson-title {
@@ -259,14 +267,17 @@
     }
 
     .lesson-meta {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         color: #666;
         display: flex;
-        gap: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
     }
 
     .lesson-action {
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
     }
 
     /* Payment Sections - Mobile optimized */
@@ -391,6 +402,25 @@
     .share-btn.twitter { background: #1da1f2; }
     .share-btn.linkedin { background: #0077b5; }
     .share-btn.email { background: #6c757d; }
+
+    @media (max-width: 575.98px) {
+        .module-content {
+            padding: 1rem;
+        }
+
+        .lesson-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .lesson-action {
+            width: 100%;
+        }
+
+        .lesson-action .btn {
+            width: 100%;
+        }
+    }
 
     /* ===== TABLET AND DESKTOP ENHANCEMENTS ===== */
     @media (min-width: 768px) {
@@ -534,7 +564,9 @@
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <div class="mb-3">
+                    {% if course.slug != 'youth-impact-training-programme-yitp' %}
                     <span class="badge bg-light text-dark me-2">{{ course.get_difficulty_level_display }}</span>
+                    {% endif %}
                     {% if course.category %}
                     <span class="badge bg-secondary">{{ course.category.name }}</span>
                     {% endif %}
@@ -551,6 +583,7 @@
                             <div class="small opacity-75">hours</div>
                         </div>
                     </div>
+                    {% if course.slug != 'youth-impact-training-programme-yitp' %}
                     <div class="stat-item">
                         <i class="fas fa-users"></i>
                         <div>
@@ -558,6 +591,7 @@
                             <div class="small opacity-75">students</div>
                         </div>
                     </div>
+                    {% endif %}
                     <div class="stat-item">
                         <i class="fas fa-book"></i>
                         <div>
@@ -619,13 +653,13 @@
                                     <a href="{% url 'courses:course_quick_start' course.slug %}" class="btn btn-primary btn-lg">
                                         <i class="fas fa-user-plus me-2"></i>
                                         {% if user.profile.has_confirmed_payment %}
-                                            Enroll Now - ${{ course.price }} USD
+                                           Start Enrollment - ${{ course.price }} USD
                                         {% elif user.profile.has_partial_payment %}
-                                            Enroll Now - Partial Payment Active
+                                            Start Enrollment - Partial Payment Active
                                         {% elif user.profile.has_sponsorship_access %}
-                                            Enroll Now - Sponsored Access
+                                            Start Enrollment - Sponsored Access
                                         {% else %}
-                                            Enroll Now - ${{ course.price }} USD
+                                            Start Enrollment - ${{ course.price }} USD
                                         {% endif %}
                                     </a>
                                 {% else %}
@@ -665,7 +699,7 @@
                                 <!-- Free Course Enrollment -->
                                 <div class="d-flex gap-2 flex-wrap">
                                     <a href="{% url 'courses:course_quick_start' course.slug %}" class="btn btn-primary btn-lg">
-                                        <i class="fas fa-user-plus me-2"></i>Enroll Now - Free
+                                        <i class="fas fa-user-plus me-2"></i> Start Learning - Free
                                     </a>
 
                                     <!-- Trial option for free courses (if available) -->
