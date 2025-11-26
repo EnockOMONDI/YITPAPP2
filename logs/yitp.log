@@ -29970,3 +29970,6 @@ INFO 2025-11-26 20:23:57,991 basehttp 1539 6203584512 "GET /lms/courses/ HTTP/1.
 INFO 2025-11-26 20:24:23,263 basehttp 1539 6203584512 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 175005
 INFO 2025-11-26 20:29:02,645 basehttp 1539 6203584512 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 175005
 INFO 2025-11-26 20:29:28,185 basehttp 1539 6203584512 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 175442
+INFO 2025-11-26 20:36:06,299 autoreload 7737 8330836672 Watching for file changes with StatReloader
+INFO 2025-11-26 20:36:07,582 basehttp 7737 6158135296 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 175427
+INFO 2025-11-26 20:36:36,339 basehttp 7737 6158135296 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 175255
