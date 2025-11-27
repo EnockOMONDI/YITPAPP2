@@ -122,6 +122,21 @@
     animation: toastOut 0.35s ease-in forwards;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .message-alert {
+        animation: none;
+    }
+
+    .message-alert.fade-out {
+        animation: none;
+        opacity: 0;
+    }
+
+    .btn-close {
+        transition: none;
+    }
+}
+
 @media (max-width: 768px) {
     .messages-container {
         top: auto;

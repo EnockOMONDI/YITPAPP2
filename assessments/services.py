@@ -99,6 +99,11 @@ class QuizValidationService:
         last_attempt_id = latest_attempt.id if latest_attempt else None
         review_url = reverse('assessments:quiz_results', kwargs={'attempt_id': last_attempt_id}) if last_attempt_id else None
         
+        can_attempt = (
+            best_attempt is None and
+            (quiz.max_attempts == 0 or attempts.count() < quiz.max_attempts)
+        )
+
         return {
             'has_quiz': True,
             'quiz_required': True,
@@ -106,7 +111,7 @@ class QuizValidationService:
             'quiz_url': reverse('assessments:take_quiz', kwargs={'quiz_id': quiz.id}),
             'attempts_count': attempts.count(),
             'max_attempts': quiz.max_attempts,
-            'can_attempt': attempts.count() < quiz.max_attempts or quiz.max_attempts == 0,
+            'can_attempt': can_attempt,
             'has_passed': best_attempt is not None,
             'best_score': float(best_attempt.score) if best_attempt else None,
             'latest_score': float(latest_attempt.score) if latest_attempt and latest_attempt.score else None,

@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let celebrationPlayed = false;
     function playCelebrationSound() {
-        if (celebrationPlayed || !window.AudioContext) return;
+        if (celebrationPlayed || !(window.AudioContext || window.webkitAudioContext)) return;
         celebrationPlayed = true;
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = ctx.createOscillator();

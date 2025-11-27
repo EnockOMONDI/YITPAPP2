@@ -221,7 +221,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const messages = document.querySelectorAll('.message-alert[data-auto-dismiss]');
             messages.forEach(function(message) {
-                const dismissTime = parseInt(message.getAttribute('data-auto-dismiss')) || 5000;
+                const dismissTime = parseInt(message.getAttribute('data-auto-dismiss'), 10) || 5000;
                 setTimeout(function() {
                     message.classList.add('fade-out');
                     setTimeout(function() {

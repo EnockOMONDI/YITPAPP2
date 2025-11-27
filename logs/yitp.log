@@ -32978,3 +32978,36 @@ WARNING 2025-11-28 00:51:30,132 log 1115 6192558080 Not Found: /.well-known/apps
 WARNING 2025-11-28 00:51:30,133 basehttp 1115 6192558080 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
 WARNING 2025-11-28 00:51:30,629 basehttp 1115 6192558080 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
 WARNING 2025-11-28 00:51:30,694 basehttp 1115 6209384448 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 01:07:27,791 autoreload 20672 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:07:35,274 basehttp 20672 6172274688 "GET /lms/progress/achievements/ HTTP/1.1" 200 73178
+INFO 2025-11-28 01:07:35,499 basehttp 20672 6172274688 "GET /static/assets/css/messages.css HTTP/1.1" 200 2902
+INFO 2025-11-28 01:07:42,382 basehttp 20672 6172274688 "GET /lms/assessments/quiz-success/149/ HTTP/1.1" 200 77363
+INFO 2025-11-28 01:07:44,641 basehttp 20672 6172274688 "GET /lms/assessments/quiz-success/149/ HTTP/1.1" 200 77363
+INFO 2025-11-28 01:07:48,585 basehttp 20672 6172274688 "GET /lms/assessments/quizzes/37/take/ HTTP/1.1" 302 0
+INFO 2025-11-28 01:07:48,612 basehttp 20672 6172274688 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85456
+INFO 2025-11-28 01:08:08,197 basehttp 20672 6172274688 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 146326
+INFO 2025-11-28 01:08:14,766 basehttp 20672 6172274688 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 84884
+INFO 2025-11-28 01:08:14,867 basehttp 20672 6172274688 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:08:19,393 basehttp 20672 6172274688 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 71957
+INFO 2025-11-28 01:10:37,555 basehttp 20672 6172274688 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 71957
+INFO 2025-11-28 01:10:37,680 basehttp 20672 6172274688 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:11:20,642 basehttp 20672 6172274688 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158351
+INFO 2025-11-28 01:11:33,525 basehttp 20672 6172274688 "GET /lms/assessments/ HTTP/1.1" 200 79673
+INFO 2025-11-28 01:11:33,593 basehttp 20672 6172274688 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:12:19,571 basehttp 20672 6172274688 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 71957
+INFO 2025-11-28 01:12:46,599 basehttp 20672 6172274688 "GET /lms/assessments/ HTTP/1.1" 200 79673
+INFO 2025-11-28 01:12:46,752 basehttp 20672 6172274688 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:13:17,729 autoreload 20672 8480799424 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py changed, reloading.
+INFO 2025-11-28 01:13:19,123 autoreload 22137 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:13:27,812 autoreload 22137 8480799424 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py changed, reloading.
+INFO 2025-11-28 01:13:29,619 autoreload 22188 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:13:59,519 basehttp 22188 6161739776 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85135
+INFO 2025-11-28 01:13:59,624 basehttp 22188 6161739776 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+WARNING 2025-11-28 01:14:21,657 log 22188 6161739776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 01:14:21,658 basehttp 22188 6161739776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 01:14:21,986 basehttp 22188 6161739776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 01:14:22,052 basehttp 22188 6161739776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 01:14:29,964 log 22188 6161739776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 01:14:29,964 basehttp 22188 6161739776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 01:14:30,240 basehttp 22188 6161739776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 01:14:30,325 basehttp 22188 6178566144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861

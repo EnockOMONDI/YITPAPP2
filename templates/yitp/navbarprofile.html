@@ -150,12 +150,12 @@
                             <nav id="mobile-menu">
                                 <ul class="d-flex align-items-center" style="margin: 0; padding: 0; list-style: none;">
                                     <li style="margin-right: 25px;">
-                                        <a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
+                                        <a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog-list' %}active{% endif %}">
                                             Blogs &amp; News
                                         </a>
                                     </li>
                                     <li style="margin-right: 25px;">
-                                        <a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">
+                                        <a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'event_list' %}active{% endif %}">
                                             Events
                                         </a>
                                     </li>

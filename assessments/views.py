@@ -1,9 +1,12 @@
+from collections import defaultdict
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView, View
 from django.contrib import messages
 from django.http import JsonResponse
 from django.utils import timezone
+from django.urls import reverse
 from .models import Quiz, Question, Assignment
 from courses.models import Course, Lesson
 from progress.models import Enrollment, QuizAttempt
@@ -42,7 +45,6 @@ class QuizListView(LoginRequiredMixin, ListView):
     context_object_name = 'quizzes'
 
     def get_queryset(self):
-        # Only show quizzes from courses the user is enrolled in
         enrolled_courses = Enrollment.objects.filter(
             student=self.request.user,
             status='active'
@@ -55,11 +57,42 @@ class QuizListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_attempts = QuizAttempt.objects.filter(student=self.request.user)
+        user = self.request.user
+        quizzes = list(context.get('quizzes') or context.get('object_list') or [])
+
+        attempts_map = defaultdict(list)
+        if quizzes:
+            for attempt in QuizAttempt.objects.filter(
+                student=user,
+                quiz__in=quizzes
+            ).order_by('-started_at'):
+                attempts_map[attempt.quiz_id].append(attempt)
+
+        for quiz in quizzes:
+            attempts = attempts_map.get(quiz.id, [])
+            attempts_count = len(attempts)
+            passed_attempt = next((a for a in attempts if a.is_passed), None)
+            best_score = max((a.score for a in attempts if a.score is not None), default=None)
+            last_attempt = attempts[0] if attempts else None
+
+            quiz.user_attempts = attempts_count
+            quiz.best_score = best_score
+            quiz.is_completed = passed_attempt is not None
+            quiz.is_available = quiz.is_published
+            quiz.can_attempt = (
+                not quiz.is_completed and
+                (quiz.max_attempts == 0 or attempts_count < quiz.max_attempts)
+            )
+            quiz.last_attempt_id = last_attempt.id if last_attempt else None
+
+        context['quizzes'] = quizzes
+        context['object_list'] = quizzes
+
+        user_attempts = QuizAttempt.objects.filter(student=user)
         context['total_attempts'] = user_attempts.count()
         context['completed_attempts'] = user_attempts.filter(is_passed=True).count()
         context['active_courses_count'] = Enrollment.objects.filter(
-            student=self.request.user,
+            student=user,
             status='active'
         ).count()
         return context
@@ -94,18 +127,26 @@ class QuizDetailView(LoginRequiredMixin, DetailView):
             quiz=quiz
         ).order_by('-started_at')
 
+        attempts_count = attempts.count()
+        has_passed = attempts.filter(is_passed=True).exists()
+        can_attempt = (not has_passed) and (quiz.max_attempts == 0 or attempts_count < quiz.max_attempts)
+
         context['attempts'] = attempts
-        context['attempts_count'] = attempts.count()
-        context['can_retake'] = (
-            not attempts.filter(score__gte=quiz.passing_score).exists() and
-            (quiz.max_attempts == 0 or attempts.count() < quiz.max_attempts)
-        )
+        context['attempts_count'] = attempts_count
+        context['can_retake'] = can_attempt
 
         # Get best score
         if attempts.exists():
             context['best_score'] = max(attempt.score for attempt in attempts)
         else:
             context['best_score'] = None
+
+        # Expose status flags on the quiz object for templates that expect them
+        quiz.user_attempts = attempts_count
+        quiz.is_completed = has_passed
+        quiz.is_available = quiz.is_published
+        quiz.can_attempt = can_attempt
+        quiz.last_attempt_id = attempts.first().id if attempts else None
 
         return context
 
@@ -135,6 +176,14 @@ class TakeQuizView(LoginRequiredMixin, DetailView):
 
         # Check if user can take the quiz
         attempts = QuizAttempt.objects.filter(student=user, quiz=quiz)
+        passed_attempt = attempts.filter(is_passed=True).order_by('-completed_at').first()
+        if passed_attempt:
+            messages.info(
+                request,
+                'You have already passed this quiz. Review your results or continue to the next lesson.'
+            )
+            return redirect('assessments:quiz_results', attempt_id=passed_attempt.id)
+
         if quiz.max_attempts > 0 and attempts.count() >= quiz.max_attempts:
             messages.error(request, 'You have reached the maximum number of attempts for this quiz.')
             return redirect('assessments:quiz_detail', quiz_id=quiz.id)
@@ -362,6 +411,17 @@ class QuizResultsView(LoginRequiredMixin, DetailView):
             }
             for result in question_results
         ]
+
+        # Determine next lesson for pass state
+        next_lesson = lesson.get_next_lesson()
+        if next_lesson:
+            is_accessible, _ = next_lesson.is_accessible_for_user(self.request.user)
+            if is_accessible:
+                context['next_lesson_url'] = reverse(
+                    'courses:lesson_detail',
+                    kwargs={'course_slug': course.slug, 'lesson_id': next_lesson.id}
+                )
+                context['next_lesson_title'] = next_lesson.title
 
         return context
 

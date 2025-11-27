@@ -62,16 +62,19 @@ class Quiz(models.Model):
         """
         Check if user can attempt this quiz (considering attempt limits and trial access)
         """
+        from progress.models import QuizAttempt
+
         # First check basic accessibility
         can_access, access_message = self.is_accessible_for_user(user)
         if not can_access:
             return False, access_message
 
         # Check attempt limits
-        if self.max_attempts > 0:
-            attempt_count = QuizAttempt.objects.filter(user=user, quiz=self).count()
-            if attempt_count >= self.max_attempts:
-                return False, f"Maximum attempts ({self.max_attempts}) reached for this quiz."
+        attempts = QuizAttempt.objects.filter(student=user, quiz=self)
+        if attempts.filter(is_passed=True).exists():
+            return False, "You have already passed this quiz."
+        if self.max_attempts > 0 and attempts.count() >= self.max_attempts:
+            return False, f"Maximum attempts ({self.max_attempts}) reached for this quiz."
 
         return True, "Quiz attempt allowed."
 
@@ -392,4 +395,3 @@ class AssessmentTemplate(models.Model):
     class Meta:
         verbose_name = "Assessment Template"
         verbose_name_plural = "Assessment Templates"
-
