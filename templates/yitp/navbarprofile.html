@@ -149,7 +149,16 @@
                         <div class="main-menu d-none d-xl-block" style="margin-right: 20px;">
                             <nav id="mobile-menu">
                                 <ul class="d-flex align-items-center" style="margin: 0; padding: 0; list-style: none;">
-
+                                    <li style="margin-right: 25px;">
+                                        <a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
+                                            Blogs &amp; News
+                                        </a>
+                                    </li>
+                                    <li style="margin-right: 25px;">
+                                        <a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">
+                                            Events
+                                        </a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -465,6 +474,18 @@
                                 {% endif %}
                             </li>
                             <li>
+                                <a href="{% url 'blogapp:blog-list' %}" class="mobile__auth-link">
+                                    <i class="fas fa-blog"></i>
+                                    <span>Blogs &amp; News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'events:event_list' %}" class="mobile__auth-link">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Events</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{% url 'yitp:registration' %}" class="mobile__auth-link">
                                     <i class="fas fa-graduation-cap"></i>
                                     <span>Programs</span>
@@ -492,6 +513,14 @@
                         <a href="{% url 'yitp:contact' %}" class="e-btn e-btn-outline w-100 text-center">
                             <i class="fas fa-envelope mr-8"></i>
                             Contact Us
+                        </a>
+                        <a href="{% url 'blogapp:blog-list' %}" class="e-btn e-btn-outline w-100 text-center">
+                            <i class="fas fa-blog mr-8"></i>
+                            Blogs &amp; News
+                        </a>
+                        <a href="{% url 'events:event_list' %}" class="e-btn e-btn-outline w-100 text-center">
+                            <i class="fas fa-calendar-alt mr-8"></i>
+                            Events
                         </a>
                     </div>
                 {% endif %}
