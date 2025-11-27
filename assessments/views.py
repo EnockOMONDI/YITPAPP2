@@ -518,8 +518,7 @@ class AssignmentListView(LoginRequiredMixin, ListView):
         ).values_list('course', flat=True)
 
         return Assignment.objects.filter(
-            lesson__module__course__in=enrolled_courses,
-            is_published=True
+            lesson__module__course__in=enrolled_courses
         ).select_related('lesson__module__course')
 
 

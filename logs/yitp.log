@@ -33109,3 +33109,329 @@ INFO 2025-11-28 01:35:29,437 basehttp 25382 6164279296 "GET /lms/assessments/ HT
 INFO 2025-11-28 01:35:29,455 basehttp 25382 6164279296 - Broken pipe from ('127.0.0.1', 60525)
 INFO 2025-11-28 01:35:30,423 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80403
 INFO 2025-11-28 01:35:43,237 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80408
+INFO 2025-11-28 01:37:57,233 autoreload 37816 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:37:58,980 basehttp 37816 6160314368 "GET /events/ HTTP/1.1" 200 44648
+INFO 2025-11-28 01:37:59,611 basehttp 37816 6160314368 "GET /static/assets/img/shape/yellow-bg-2.png HTTP/1.1" 200 2116
+INFO 2025-11-28 01:37:59,662 basehttp 37816 6160314368 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:38:09,677 basehttp 37816 6160314368 "GET /events/?type=physical HTTP/1.1" 200 44690
+INFO 2025-11-28 01:38:10,894 basehttp 37816 6160314368 "GET /events/?type=online HTTP/1.1" 200 44684
+INFO 2025-11-28 01:38:12,274 basehttp 37816 6160314368 "GET /events/?type=all HTTP/1.1" 200 44675
+INFO 2025-11-28 01:38:15,687 basehttp 37816 6160314368 "GET /events/?type=online HTTP/1.1" 200 44684
+INFO 2025-11-28 01:38:17,467 basehttp 37816 6160314368 "GET /blogs/ HTTP/1.1" 200 40934
+INFO 2025-11-28 01:38:22,294 basehttp 37816 6160314368 "GET /events/?type=physical HTTP/1.1" 200 44690
+INFO 2025-11-28 01:38:23,416 basehttp 37816 6160314368 "GET /events/ HTTP/1.1" 200 44648
+INFO 2025-11-28 01:38:24,513 basehttp 37816 6160314368 "GET /lms/assessments/ HTTP/1.1" 200 80408
+ERROR 2025-11-28 01:38:28,866 log 37816 6160314368 Internal Server Error: /lms/assessments/assignments/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/list.py", line 154, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py", line 520, in get_queryset
+    return Assignment.objects.filter(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1495, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1307, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'is_published' into field. Choices are: allowed_file_types, assignment_type, created_at, description, due_date, id, instructions, is_peer_reviewed, lesson, lesson_id, max_file_size, max_score, peer_reviews, rubric, rubric_criteria, submission_format, submissions, title
+ERROR 2025-11-28 01:38:28,870 basehttp 37816 6160314368 "GET /lms/assessments/assignments/ HTTP/1.1" 500 163937
+INFO 2025-11-28 01:39:09,618 autoreload 37816 8480799424 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py changed, reloading.
+INFO 2025-11-28 01:39:11,085 autoreload 38550 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:39:13,520 basehttp 38550 6191165440 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:39:28,119 basehttp 38550 6191165440 "GET /faqs/ HTTP/1.1" 200 73828
+INFO 2025-11-28 01:40:17,608 basehttp 38550 6191165440 "GET /lms/assessments/ HTTP/1.1" 200 80408
+INFO 2025-11-28 01:40:18,576 basehttp 38550 6191165440 "GET /lms/assessments/assignments/ HTTP/1.1" 200 69560
+INFO 2025-11-28 01:40:27,381 basehttp 38550 6191165440 "GET /lms/assessments/ HTTP/1.1" 200 80408
+INFO 2025-11-28 01:40:34,977 basehttp 38550 6191165440 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 73701
+INFO 2025-11-28 01:40:34,998 autoreload 38550 8480799424 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2025-11-28 01:40:36,566 autoreload 39321 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:40:42,662 basehttp 39321 6163607552 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+INFO 2025-11-28 01:40:45,519 basehttp 39321 6163607552 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 146326
+INFO 2025-11-28 01:41:15,051 basehttp 39321 6163607552 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 01:42:32,632 basehttp 39321 6163607552 "GET /logout/ HTTP/1.1" 200 12743
+INFO 2025-11-28 01:42:32,750 basehttp 39321 6163607552 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:42:37,782 basehttp 39321 6163607552 "GET /login/ HTTP/1.1" 200 15010
+INFO 2025-11-28 01:42:50,662 basehttp 39321 6163607552 "POST /login/ HTTP/1.1" 200 15557
+INFO 2025-11-28 01:43:01,586 basehttp 39321 6163607552 "GET /register/ HTTP/1.1" 200 17114
+INFO 2025-11-28 01:47:24,402 basehttp 39321 6163607552 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-28 01:47:24,442 basehttp 39321 6163607552 "GET / HTTP/1.1" 302 0
+INFO 2025-11-28 01:47:24,494 basehttp 39321 6163607552 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 146837
+INFO 2025-11-28 01:47:24,599 basehttp 39321 6163607552 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:47:36,005 basehttp 39321 6163607552 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 146326
+INFO 2025-11-28 01:47:51,361 basehttp 39321 6163607552 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 01:47:54,126 basehttp 39321 6163607552 "GET /lms/assessments/quizzes/30/take/ HTTP/1.1" 200 113106
+INFO 2025-11-28 01:47:59,535 basehttp 39321 6163607552 "GET /lms/assessments/quizzes/30/take/ HTTP/1.1" 200 113106
+INFO 2025-11-28 01:48:27,571 basehttp 39321 6163607552 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 146326
+INFO 2025-11-28 01:48:30,755 basehttp 39321 6163607552 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+INFO 2025-11-28 01:48:47,400 basehttp 39321 6163607552 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+WARNING 2025-11-28 01:48:51,079 log 39321 6163607552 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 01:48:51,079 basehttp 39321 6163607552 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 01:48:51,651 basehttp 39321 6163607552 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 01:48:51,710 basehttp 39321 6163607552 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 01:50:04,537 autoreload 45070 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:50:12,031 basehttp 45070 6197932032 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+WARNING 2025-11-28 01:50:12,170 log 45070 6197932032 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 01:50:12,171 basehttp 45070 6197932032 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 01:50:12,675 basehttp 45070 6197932032 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 01:50:12,769 basehttp 45070 6214758400 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 01:50:37,582 basehttp 45070 6197932032 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 01:50:42,761 basehttp 45070 6197932032 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 01:50:47,194 basehttp 45070 6197932032 "GET /profile/ HTTP/1.1" 200 104787
+INFO 2025-11-28 01:50:57,386 basehttp 45070 6197932032 "GET /profile/?section=courses HTTP/1.1" 200 89333
+INFO 2025-11-28 01:51:01,768 basehttp 45070 6197932032 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 01:52:10,843 basehttp 45070 6197932032 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 01:52:10,948 basehttp 45070 6197932032 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:53:58,610 basehttp 45070 6197932032 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 01:54:51,271 basehttp 45070 6197932032 "GET /lms/assessments/quizzes/30/take/ HTTP/1.1" 200 113106
+INFO 2025-11-28 01:56:38,813 basehttp 45070 6197932032 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 01:57:11,473 basehttp 45070 6197932032 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 01:57:11,645 basehttp 45070 6231584768 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-11-28 01:57:11,649 basehttp 45070 6282063872 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-11-28 01:57:11,650 basehttp 45070 6265237504 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-11-28 01:57:11,656 basehttp 45070 6231584768 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-11-28 01:57:11,661 basehttp 45070 6248411136 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-11-28 01:57:11,662 basehttp 45070 6197932032 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7247
+INFO 2025-11-28 01:57:11,666 basehttp 45070 6282063872 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-11-28 01:57:11,667 basehttp 45070 6248411136 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-11-28 01:57:11,667 basehttp 45070 6231584768 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-11-28 01:57:11,670 basehttp 45070 6282063872 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 7049
+INFO 2025-11-28 01:57:11,674 basehttp 45070 6248411136 "GET /static/css/yitp-course-branding.css HTTP/1.1" 200 15187
+INFO 2025-11-28 01:57:11,675 basehttp 45070 6231584768 "GET /static/assets/css/messages.css HTTP/1.1" 200 2902
+INFO 2025-11-28 01:57:11,675 basehttp 45070 6214758400 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-11-28 01:57:11,679 basehttp 45070 6265237504 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-11-28 01:57:11,684 basehttp 45070 6197932032 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-11-28 01:57:11,688 basehttp 45070 6282063872 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-11-28 01:57:11,688 basehttp 45070 6214758400 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-11-28 01:57:11,697 basehttp 45070 6214758400 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-11-28 01:57:11,701 basehttp 45070 6214758400 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-11-28 01:57:11,713 basehttp 45070 6214758400 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-11-28 01:57:11,720 basehttp 45070 6214758400 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-11-28 01:57:11,730 basehttp 45070 6214758400 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-11-28 01:57:11,741 basehttp 45070 6214758400 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-11-28 01:57:11,744 basehttp 45070 6214758400 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-11-28 01:57:11,747 basehttp 45070 6214758400 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-11-28 01:57:11,754 basehttp 45070 6214758400 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-11-28 01:57:11,758 basehttp 45070 6214758400 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-11-28 01:57:11,761 basehttp 45070 6214758400 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-11-28 01:57:11,765 basehttp 45070 6214758400 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-11-28 01:57:11,768 basehttp 45070 6214758400 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-11-28 01:57:11,771 basehttp 45070 6214758400 "GET /static/assets/js/main.js HTTP/1.1" 200 9054
+INFO 2025-11-28 01:57:12,029 basehttp 45070 6214758400 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 8712
+INFO 2025-11-28 01:57:12,041 basehttp 45070 6214758400 "GET /static/css/yitp-translate.css HTTP/1.1" 200 2241
+INFO 2025-11-28 01:57:12,102 basehttp 45070 6265237504 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-11-28 01:57:12,105 basehttp 45070 6214758400 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-11-28 01:57:12,106 basehttp 45070 6282063872 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-11-28 01:57:12,136 basehttp 45070 6282063872 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-11-28 01:57:27,260 basehttp 45070 6197932032 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 01:57:31,018 basehttp 45070 6197932032 "GET /profile/?section=courses HTTP/1.1" 200 89335
+INFO 2025-11-28 01:57:31,119 basehttp 45070 6214758400 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-11-28 01:57:31,120 basehttp 45070 6197932032 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2025-11-28 01:57:31,122 basehttp 45070 6231584768 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-11-28 01:57:31,243 basehttp 45070 6231584768 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2025-11-28 01:57:31,281 basehttp 45070 6231584768 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-11-28 01:57:33,992 basehttp 45070 6231584768 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 01:57:35,830 basehttp 45070 6231584768 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 01:57:35,949 basehttp 45070 6214758400 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 01:57:35,949 basehttp 45070 6197932032 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:59:01,266 autoreload 50424 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:59:02,531 basehttp 50424 6193590272 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 01:59:02,616 basehttp 50424 6193590272 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-11-28 01:59:03,027 basehttp 50424 6193590272 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2025-11-28 01:59:44,121 basehttp 50424 6193590272 "GET /profile/?section=courses HTTP/1.1" 200 89335
+INFO 2025-11-28 01:59:48,328 basehttp 50424 6193590272 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 01:59:48,421 basehttp 50424 6193590272 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:59:48,423 basehttp 50424 6210416640 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:00:07,275 basehttp 50424 6193590272 "GET /profile HTTP/1.1" 301 0
+INFO 2025-11-28 02:00:07,337 basehttp 50424 6210416640 "GET /profile/ HTTP/1.1" 200 104789
+INFO 2025-11-28 02:00:07,425 basehttp 50424 6210416640 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:00:07,492 basehttp 50424 6210416640 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:01:04,131 basehttp 50424 6193590272 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:01:04,218 basehttp 50424 6193590272 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:01:04,219 basehttp 50424 6210416640 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:01:37,951 basehttp 50424 6193590272 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 02:01:38,071 basehttp 50424 6193590272 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:01:38,072 basehttp 50424 6210416640 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:01:55,976 basehttp 50424 6193590272 "POST /lms/courses/youth-impact-training-programme-yitp/lessons/111/complete/ HTTP/1.1" 200 412
+INFO 2025-11-28 02:02:00,230 basehttp 50424 6193590272 "GET /lms/assessments/quizzes/30/take/ HTTP/1.1" 200 113106
+INFO 2025-11-28 02:02:00,300 basehttp 50424 6193590272 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:02:00,301 basehttp 50424 6210416640 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:03:45,006 basehttp 50424 6210416640 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:03:45,019 basehttp 50424 6227243008 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+WARNING 2025-11-28 02:03:45,480 basehttp 50424 6210416640 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 02:03:45,480 basehttp 50424 6227243008 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 02:03:45,545 log 50424 6193590272 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 02:03:45,545 basehttp 50424 6193590272 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 02:03:58,274 log 50424 6193590272 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 02:03:58,275 basehttp 50424 6193590272 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 02:03:58,852 basehttp 50424 6193590272 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 02:03:58,909 basehttp 50424 6193590272 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 02:08:37,182 autoreload 54037 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 02:08:41,071 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 02:08:41,224 basehttp 54037 6216790016 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+WARNING 2025-11-28 02:08:41,229 log 54037 6199963648 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 02:08:41,230 basehttp 54037 6199963648 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 02:08:41,696 basehttp 54037 6199963648 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+WARNING 2025-11-28 02:08:41,724 basehttp 54037 6199963648 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 02:08:41,915 basehttp 54037 6216790016 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 02:08:50,606 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 02:13:02,902 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 02:13:03,022 basehttp 54037 6216790016 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:13:03,023 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:13:03,080 basehttp 54037 6199963648 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:13:22,409 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 02:13:35,703 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 02:14:01,270 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147731
+INFO 2025-11-28 02:14:04,389 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:14:04,801 basehttp 54037 6199963648 "GET /profile/ HTTP/1.1" 200 104788
+INFO 2025-11-28 02:14:07,650 basehttp 54037 6199963648 "GET /profile/ HTTP/1.1" 200 104788
+INFO 2025-11-28 02:14:42,059 basehttp 54037 6199963648 "GET /profile/ HTTP/1.1" 200 104788
+INFO 2025-11-28 02:14:42,149 basehttp 54037 6250442752 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2025-11-28 02:14:42,149 basehttp 54037 6233616384 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7247
+INFO 2025-11-28 02:14:42,152 basehttp 54037 6267269120 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-11-28 02:14:42,153 basehttp 54037 6284095488 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-11-28 02:14:42,154 basehttp 54037 6199963648 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-11-28 02:14:42,155 basehttp 54037 6216790016 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-11-28 02:14:42,208 basehttp 54037 6199963648 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-11-28 02:14:42,211 basehttp 54037 6216790016 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-11-28 02:14:42,221 basehttp 54037 6199963648 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2025-11-28 02:14:42,221 basehttp 54037 6216790016 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-11-28 02:14:42,224 basehttp 54037 6284095488 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-11-28 02:14:42,227 basehttp 54037 6284095488 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1003
+INFO 2025-11-28 02:14:42,228 basehttp 54037 6216790016 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-11-28 02:14:42,229 basehttp 54037 6250442752 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-11-28 02:14:42,232 basehttp 54037 6233616384 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-11-28 02:14:42,235 basehttp 54037 6250442752 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-11-28 02:14:42,235 basehttp 54037 6284095488 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-11-28 02:14:42,236 basehttp 54037 6199963648 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-11-28 02:14:42,237 basehttp 54037 6233616384 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-11-28 02:14:42,238 basehttp 54037 6216790016 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-11-28 02:14:42,239 basehttp 54037 6267269120 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-11-28 02:14:42,240 basehttp 54037 6284095488 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 8712
+INFO 2025-11-28 02:14:42,241 basehttp 54037 6199963648 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2025-11-28 02:14:42,245 basehttp 54037 6250442752 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-11-28 02:14:42,251 basehttp 54037 6216790016 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-11-28 02:14:42,255 basehttp 54037 6199963648 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-11-28 02:14:42,257 basehttp 54037 6233616384 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-11-28 02:14:42,273 basehttp 54037 6284095488 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-11-28 02:14:42,277 basehttp 54037 6267269120 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-11-28 02:14:42,277 basehttp 54037 6233616384 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-11-28 02:14:42,278 basehttp 54037 6216790016 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6931
+INFO 2025-11-28 02:14:42,278 basehttp 54037 6199963648 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-11-28 02:14:42,279 basehttp 54037 6284095488 "GET /static/assets/css/messages.css HTTP/1.1" 200 2902
+INFO 2025-11-28 02:14:42,281 basehttp 54037 6250442752 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-11-28 02:14:42,294 basehttp 54037 6267269120 "GET /static/css/yitp-translate.css HTTP/1.1" 200 2241
+INFO 2025-11-28 02:14:42,336 basehttp 54037 6267269120 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-11-28 02:14:42,339 basehttp 54037 6233616384 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-11-28 02:14:42,342 basehttp 54037 6216790016 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-11-28 02:14:42,786 basehttp 54037 6216790016 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-11-28 02:14:47,164 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:14:47,237 basehttp 54037 6199963648 "GET /static/css/yitp-course-branding.css HTTP/1.1" 200 15187
+INFO 2025-11-28 02:14:47,727 basehttp 54037 6199963648 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-11-28 02:14:47,754 basehttp 54037 6199963648 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-11-28 02:14:51,565 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:14:51,644 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6933
+INFO 2025-11-28 02:15:23,800 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:15:23,900 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6933
+INFO 2025-11-28 02:15:25,337 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:15:25,556 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:15:25,816 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:15:36,083 basehttp 54037 6199963648 "GET /profile/ HTTP/1.1" 200 104788
+INFO 2025-11-28 02:15:36,205 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:15:47,267 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:15:47,334 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6933
+INFO 2025-11-28 02:16:40,570 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:16:40,672 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:16:40,673 basehttp 54037 6216790016 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:17:20,142 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:17:20,260 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6935
+INFO 2025-11-28 02:17:22,784 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:17:22,858 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:17:23,289 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:17:23,377 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:18:17,525 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:18:17,622 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6935
+INFO 2025-11-28 02:19:20,377 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:19:20,478 basehttp 54037 6216790016 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:19:20,483 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6933
+INFO 2025-11-28 02:21:05,642 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:21:05,735 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 6933
+INFO 2025-11-28 02:21:08,100 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:21:08,163 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:21:08,498 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:21:10,264 basehttp 54037 6199963648 "GET /profile/ HTTP/1.1" 200 104788
+INFO 2025-11-28 02:21:12,140 basehttp 54037 6199963648 "GET /profile/ HTTP/1.1" 200 104788
+INFO 2025-11-28 02:21:12,453 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:21:17,239 basehttp 54037 6199963648 "GET /profile/?section=courses HTTP/1.1" 200 89334
+INFO 2025-11-28 02:21:19,540 basehttp 54037 6199963648 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 02:21:21,586 basehttp 54037 6199963648 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 02:21:21,654 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:21:24,312 basehttp 54037 6199963648 "GET /profile/?section=courses HTTP/1.1" 200 89334
+INFO 2025-11-28 02:21:24,685 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:21:25,956 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:21:28,327 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:21:28,457 basehttp 54037 6199963648 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:21:28,477 basehttp 54037 6199963648 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:21:30,119 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:21:30,446 basehttp 54037 6199963648 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:22:22,425 autoreload 64716 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 02:22:27,523 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:22:27,635 basehttp 64716 6194868224 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:22:27,637 basehttp 64716 6211694592 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:24:55,369 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:24:55,468 basehttp 64716 6194868224 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:24:55,638 basehttp 64716 6194868224 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:24:57,024 basehttp 64716 6194868224 "GET /profile/?section=courses HTTP/1.1" 200 89335
+INFO 2025-11-28 02:24:59,694 basehttp 64716 6194868224 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 02:25:04,492 basehttp 64716 6194868224 "GET / HTTP/1.1" 200 85556
+INFO 2025-11-28 02:25:34,182 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:25:34,248 basehttp 64716 6194868224 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:25:35,977 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:25:37,885 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:25:38,231 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:26:06,526 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:26:06,624 basehttp 64716 6194868224 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:27:12,683 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:27:12,961 basehttp 64716 6194868224 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:27:22,175 basehttp 64716 6194868224 "GET /profile/?section=courses HTTP/1.1" 200 89335
+INFO 2025-11-28 02:27:24,214 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:29:07,629 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:29:07,739 basehttp 64716 6194868224 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 02:29:07,851 basehttp 64716 6194868224 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 02:29:10,086 basehttp 64716 6194868224 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152526
+INFO 2025-11-28 02:29:13,603 basehttp 64716 6194868224 "GET /profile/?section=courses HTTP/1.1" 200 89335
+INFO 2025-11-28 02:29:15,421 basehttp 64716 6194868224 "GET /profile/?section=courses HTTP/1.1" 200 89335

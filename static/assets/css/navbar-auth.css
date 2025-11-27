@@ -16,14 +16,14 @@
 
 .avatar__text {
     color: white;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .user__toggle {
     text-decoration: none;
-    color: inherit;
+    color: #ff5d15;
     transition: all 0.3s ease;
     padding: 8px 12px;
     border-radius: 6px;
@@ -32,7 +32,7 @@
 .user__toggle:hover {
     background: rgba(255, 93, 21, 0.1);
     text-decoration: none;
-    color: inherit;
+    color: #ff5d15;
 }
 
 .user__details {
@@ -42,7 +42,7 @@
 .user__name {
     font-size: 14px;
     font-weight: 600;
-    color: inherit;
+    color: #ff5d15;
     transition: color 0.3s ease;
 }
 
@@ -91,7 +91,7 @@
 
 .user__dropdown .dropdown-item {
     padding: 12px 20px;
-    color: #6d6e75;
+    color: #341C67;
     font-size: 14px;
     transition: all 0.3s ease;
     display: flex;
@@ -179,7 +179,7 @@
 
 .avatar__text-mobile {
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -189,7 +189,7 @@
 }
 
 .user__name-mobile {
-    color: #341C67;
+    color: #ff5d15;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 2px;
@@ -262,7 +262,7 @@
 /* Initial state (transparent header) */
 .header__transparent .user__name,
 .header__transparent .user__toggle {
-    color: white;
+    color: #ff5d15;
 }
 
 .header__transparent .e-btn-border {
@@ -288,7 +288,7 @@
 /* Sticky state (white header) */
 .header__area.sticky .user__name,
 .header__area.sticky .user__toggle {
-    color: #341C67;
+    color: #ff5d15;
 }
 
 .header__area.sticky .e-btn-border {

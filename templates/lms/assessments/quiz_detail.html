@@ -129,26 +129,26 @@
             <div class="quiz-hero-stat">
                 <label>Passing score</label>
                 <strong>{{ quiz.passing_score }}%</strong>
-            </div>
-            <div class="quiz-hero-stat">
-                <label>Best score</label>
-                <strong>{{ best_score|default:"--" }}%</strong>
-            </div>
-        </div>
-    </div>
-
-    <div class="row g-4">
-        <div class="col-lg-8">
-            <div class="quiz-card mb-4">
-                <div class="card-body p-4">
-                    <h5 class="mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Quiz brief</h5>
-                    <p class="text-muted">{{ quiz.description|default:"No description provided yet." }}</p>
-
-                    <div class="quiz-info-list">
-                        <div class="quiz-info-pill">
-                            <strong>{{ quiz.max_attempts|default:"∞" }}</strong>
-                            <small class="text-muted d-block">Attempts</small>
-                        </div>
+                        {% if quiz.is_completed %}
+                            <div class="alert alert-success border-0 shadow-sm">
+                                <h6 class="alert-heading d-flex align-items-center gap-2">
+                                    <i class="fas fa-trophy"></i> Quiz Completed
+                                </h6>
+                                <p class="mb-3">
+                                    You've already completed this quiz. Review your results any time or continue through the course.
+                                </p>
+                                <div class="d-grid gap-2">
+                                    {% if quiz.last_attempt_id %}
+                                    <a href="{% url 'assessments:quiz_results' quiz.last_attempt_id %}" class="btn btn-outline-primary">
+                                        <i class="fas fa-chart-line me-1"></i>Review results
+                                    </a>
+                                    {% endif %}
+                                    <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}"
+                                       class="btn btn-primary">
+                                        <i class="fas fa-arrow-right me-1"></i>Continue to next lesson
+                                    </a>
+                                </div>
+                            </div>
                         <div class="quiz-info-pill">
                             <strong>{{ quiz.lesson.module.course.title }}</strong>
                             <small class="text-muted d-block">Course</small>

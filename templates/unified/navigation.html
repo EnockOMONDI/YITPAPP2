@@ -84,12 +84,16 @@
                     color: #341C67;
                 }
 
-                .header__transparent .cat-menu {
-                    color: white;
+                .header__transparent .cat-menu,
+                .header__transparent .user__toggle,
+                .header__transparent .user__name {
+                    color: #ff5d15;
                 }
 
-                .header__area.sticky .cat-menu {
-                    color: #341C67;
+                .header__area.sticky .cat-menu,
+                .header__area.sticky .user__toggle,
+                .header__area.sticky .user__name {
+                    color: #ff5d15;
                 }
 
                 /* Button state improvements */
@@ -187,7 +191,7 @@
                                 <div class="header__auth d-flex align-items-center">
                                     <div class="user__avatar">
                                         <div class="user__details d-flex align-items-center">
-                                            <span class="user__name me-2">{{ user.get_full_name|default:user.username }}</span>
+                                            <span class="user__name me-2" style="color: #ff5d15!important ;" >{{ user.get_full_name|default:user.username }}</span>
                                             <div class="user__dropdown">
                                                 <button class="user__dropdown-btn" type="button">
                                                     <i class="fas fa-chevron-down"></i>

@@ -250,7 +250,7 @@ def support(request):
     support_channels = [
         {
             "label": "WhatsApp & Phone",
-            "value": "+254 722 646 959",
+            "value": "+254 722 646 958",
             "href": "https://wa.me/254722646959",
             "icon": "fas fa-mobile-alt",
             "subtext": "Weekdays 9:00am - 6:00pm EAT",
