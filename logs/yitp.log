@@ -33011,3 +33011,101 @@ WARNING 2025-11-28 01:14:29,964 log 22188 6161739776 Not Found: /.well-known/app
 WARNING 2025-11-28 01:14:29,964 basehttp 22188 6161739776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
 WARNING 2025-11-28 01:14:30,240 basehttp 22188 6161739776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
 WARNING 2025-11-28 01:14:30,325 basehttp 22188 6178566144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 01:16:17,630 autoreload 25382 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-28 01:16:36,008 basehttp 25382 6164279296 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85135
+INFO 2025-11-28 01:16:36,081 basehttp 25382 6164279296 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:21:05,631 basehttp 25382 6164279296 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85146
+INFO 2025-11-28 01:21:05,773 basehttp 25382 6164279296 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:22:32,437 basehttp 25382 6164279296 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+INFO 2025-11-28 01:22:49,736 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158351
+INFO 2025-11-28 01:23:23,407 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:23:23,582 basehttp 25382 6164279296 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:24:01,735 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/?search=zd HTTP/1.1" 200 158383
+INFO 2025-11-28 01:24:46,182 basehttp 25382 6164279296 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+INFO 2025-11-28 01:24:54,388 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:24:58,417 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:25:17,198 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 71957
+INFO 2025-11-28 01:26:20,889 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:26:21,058 basehttp 25382 6164279296 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:26:23,202 basehttp 25382 6164279296 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+INFO 2025-11-28 01:26:30,559 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:26:38,916 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+ERROR 2025-11-28 01:26:41,176 log 25382 6164279296 Internal Server Error: /lms/assessments/assignments/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/list.py", line 154, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/assessments/views.py", line 520, in get_queryset
+    return Assignment.objects.filter(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1495, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1307, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'is_published' into field. Choices are: allowed_file_types, assignment_type, created_at, description, due_date, id, instructions, is_peer_reviewed, lesson, lesson_id, max_file_size, max_score, peer_reviews, rubric, rubric_criteria, submission_format, submissions, title
+ERROR 2025-11-28 01:26:41,180 basehttp 25382 6164279296 "GET /lms/assessments/assignments/ HTTP/1.1" 500 163937
+INFO 2025-11-28 01:26:41,519 basehttp 25382 6164279296 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-11-28 01:26:46,741 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:26:50,092 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:28:06,492 basehttp 25382 6164279296 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+INFO 2025-11-28 01:28:12,354 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:28:15,134 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 73693
+INFO 2025-11-28 01:28:19,283 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 73693
+INFO 2025-11-28 01:30:00,484 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 73704
+INFO 2025-11-28 01:30:00,608 basehttp 25382 6164279296 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:30:15,196 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 73701
+INFO 2025-11-28 01:30:26,700 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:30:30,022 basehttp 25382 6164279296 "GET /lms/assessments/quiz-results/149/ HTTP/1.1" 200 85000
+INFO 2025-11-28 01:30:39,990 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/37/ HTTP/1.1" 200 73701
+INFO 2025-11-28 01:30:43,028 basehttp 25382 6164279296 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 158381
+INFO 2025-11-28 01:30:44,068 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:30:46,151 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:30:47,890 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:30:48,819 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:30:57,750 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:30:58,954 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:31:01,496 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 79676
+INFO 2025-11-28 01:32:07,088 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80383
+INFO 2025-11-28 01:33:16,529 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80383
+INFO 2025-11-28 01:33:16,682 basehttp 25382 6164279296 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 01:33:51,628 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80383
+INFO 2025-11-28 01:33:55,084 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80383
+INFO 2025-11-28 01:35:29,437 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80403
+INFO 2025-11-28 01:35:29,455 basehttp 25382 6164279296 - Broken pipe from ('127.0.0.1', 60525)
+INFO 2025-11-28 01:35:30,423 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80403
+INFO 2025-11-28 01:35:43,237 basehttp 25382 6164279296 "GET /lms/assessments/ HTTP/1.1" 200 80408

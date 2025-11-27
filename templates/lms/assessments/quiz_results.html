@@ -182,12 +182,11 @@
                 <span class="results-status-badge">
                     {% if score_percentage >= quiz.passing_score %}PASSED{% else %}KEEP GOING{% endif %}
                 </span>
-                <h1 class="results-title">{{ quiz.title }}</h1>
+                <h1 class="results-title text-white">{{ quiz.title }}</h1>
                 <p class="results-subtitle text-white">Lesson: {{ quiz.lesson.title }} • Course: {{ quiz.lesson.module.course.title }}</p>
             </div>
             <div class="results-actions d-flex flex-wrap gap-2">
-                <a href="{% url 'assessments:quiz_detail' quiz.id %}" class="btn btn-outline-light"><i class="fas fa-info-circle me-1"></i>Quiz Details</a>
-                <a href="{% url 'assessments:quiz_list' %}" class="btn btn-light text-primary"><i class="fas fa-list me-1"></i>All Quizzes</a>
+                <a href="{% url 'assessments:quiz_list' %}" class="btn btn-outline-light"><i class="fas fa-list me-1"></i>All Quizzes</a>
             </div>
         </div>
         <div class="results-stats-grid">

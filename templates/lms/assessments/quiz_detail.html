@@ -3,109 +3,210 @@
 
 {% block title %}{{ quiz.title }} - YITP LMS{% endblock %}
 
+{% block extra_css %}
+<style>
+.quiz-detail-wrapper { margin-top: 95px; }
+.quiz-detail-hero {
+    background: linear-gradient(135deg, rgba(52,28,103,0.95), rgba(255,93,21,0.92));
+    color: #fff;
+    border-radius: 32px;
+    padding: clamp(2rem, 4vw, 3rem);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+.quiz-detail-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 15% 25%, rgba(255,255,255,0.2), transparent 60%);
+    opacity: 0.8;
+}
+.quiz-hero-content { position: relative; z-index: 2; }
+.quiz-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    padding: 0.35rem 1.2rem;
+    background: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+.quiz-hero-stats {
+    margin-top: 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+}
+.quiz-hero-stat {
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 1rem 1.25rem;
+    backdrop-filter: blur(8px);
+}
+.quiz-hero-stat label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.7);
+}
+.quiz-hero-stat strong { display: block; font-size: 1.75rem; font-weight: 700; }
+.quiz-card {
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 25px 55px rgba(10,9,30,0.08);
+    overflow: hidden;
+}
+.quiz-info-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.quiz-info-pill {
+    border-radius: 18px;
+    padding: 1rem;
+    background: rgba(52,28,103,0.04);
+    text-align: center;
+}
+.quiz-action-card {
+    border-radius: 24px;
+    padding: 1.75rem;
+    border: 1px solid rgba(52,28,103,0.08);
+    box-shadow: 0 30px 60px rgba(15,23,42,0.15);
+}
+.quiz-action-card .btn {
+    border-radius: 16px;
+    padding: 0.85rem 1rem;
+    font-weight: 600;
+}
+.quiz-attempts-table thead { background: rgba(52,28,103,0.05); }
+.quiz-attempts-table th, .quiz-attempts-table td { vertical-align: middle; }
+.quiz-related-card {
+    border-radius: 18px;
+    border: 1px dashed rgba(52,28,103,0.25);
+    padding: 1.25rem;
+}
+@media (max-width: 991px) { .quiz-detail-wrapper { margin-top: 80px; } }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h3 text-primary">
-                    <i class="fas fa-question-circle me-2"></i>
-                    {{ quiz.title }}
-                </h1>
-                <a href="{% url 'assessments:quiz_list' %}" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left me-1"></i>Back to Quizzes
+<div class="quiz-detail-wrapper container pb-5">
+    <div class="quiz-detail-hero mb-4">
+        <div class="quiz-hero-content d-flex flex-column flex-lg-row justify-content-between gap-3">
+            <div>
+                <span class="quiz-status-badge">
+                    {% if quiz.is_completed %}
+                        <i class="fas fa-check-circle"></i> Passed
+                    {% elif best_score %}
+                        <i class="fas fa-redo"></i> Keep Going
+                    {% else %}
+                        <i class="fas fa-play"></i> New Challenge
+                    {% endif %}
+                </span>
+                <h1 class="mt-3 mb-2 text-white">{{ quiz.title }}</h1>
+                <p class="mb-0 text-white">Lesson: {{ quiz.lesson.title }} • Module: {{ quiz.lesson.module.title }}</p>
+            </div>
+            <div class="text-lg-end">
+                <a href="{% url 'assessments:quiz_list' %}" class="btn btn-light text-primary fw-semibold rounded-pill">
+                    <i class="fas fa-arrow-left me-1"></i> Back to all quizzes
                 </a>
+            </div>
+        </div>
+        <div class="quiz-hero-stats">
+            <div class="quiz-hero-stat">
+                <label>Questions</label>
+                <strong>{{ quiz.total_questions }}</strong>
+            </div>
+            <div class="quiz-hero-stat">
+                <label>Time limit</label>
+                <strong>{{ quiz.time_limit }} min</strong>
+            </div>
+            <div class="quiz-hero-stat">
+                <label>Passing score</label>
+                <strong>{{ quiz.passing_score }}%</strong>
+            </div>
+            <div class="quiz-hero-stat">
+                <label>Best score</label>
+                <strong>{{ best_score|default:"--" }}%</strong>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <!-- Quiz Information -->
+    <div class="row g-4">
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-white border-bottom">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-info-circle me-2"></i>Quiz Information
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{ quiz.description }}</p>
-                    
-                    <div class="row text-center mb-4">
-                        <div class="col-md-3">
-                            <div class="border-end">
-                                <h4 class="text-primary">{{ quiz.total_questions }}</h4>
-                                <small class="text-muted">Questions</small>
-                            </div>
+            <div class="quiz-card mb-4">
+                <div class="card-body p-4">
+                    <h5 class="mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Quiz brief</h5>
+                    <p class="text-muted">{{ quiz.description|default:"No description provided yet." }}</p>
+
+                    <div class="quiz-info-list">
+                        <div class="quiz-info-pill">
+                            <strong>{{ quiz.max_attempts|default:"∞" }}</strong>
+                            <small class="text-muted d-block">Attempts</small>
                         </div>
-                        <div class="col-md-3">
-                            <div class="border-end">
-                                <h4 class="text-secondary">{{ quiz.time_limit }}</h4>
-                                <small class="text-muted">Minutes</small>
-                            </div>
+                        <div class="quiz-info-pill">
+                            <strong>{{ quiz.lesson.module.course.title }}</strong>
+                            <small class="text-muted d-block">Course</small>
                         </div>
-                        <div class="col-md-3">
-                            <div class="border-end">
-                                <h4 class="text-success">{{ quiz.max_attempts }}</h4>
-                                <small class="text-muted">Max Attempts</small>
-                            </div>
+                        <div class="quiz-info-pill">
+                            <strong>{{ quiz.pass_rate }}%</strong>
+                            <small class="text-muted d-block">Pass rate</small>
                         </div>
-                        <div class="col-md-3">
-                            <h4 class="text-warning">{{ quiz.passing_score }}%</h4>
-                            <small class="text-muted">Passing Score</small>
+                        <div class="quiz-info-pill">
+                            <strong>{{ quiz.total_attempts }}</strong>
+                            <small class="text-muted d-block">Total attempts</small>
                         </div>
                     </div>
 
                     {% if quiz.instructions %}
-                    <div class="alert alert-info">
-                        <h6><i class="fas fa-lightbulb me-2"></i>Instructions:</h6>
-                        {{ quiz.instructions|linebreaks }}
+                    <div class="alert alert-light border mt-3 mb-0">
+                        <h6 class="fw-semibold mb-2"><i class="fas fa-lightbulb me-2 text-warning"></i>Important instructions</h6>
+                        <div class="text-muted">{{ quiz.instructions|linebreaks }}</div>
                     </div>
                     {% endif %}
                 </div>
             </div>
 
-            <!-- Previous Attempts -->
             {% if user_attempts %}
-            <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white border-bottom">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-history me-2"></i>Your Previous Attempts
-                    </h5>
-                </div>
-                <div class="card-body">
+            <div class="quiz-card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0"><i class="fas fa-history me-2 text-primary"></i>Your attempts</h5>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
+                            {{ user_attempts|length }} total
+                        </span>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table quiz-attempts-table align-middle mb-0">
                             <thead>
                                 <tr>
-                                    <th>Attempt</th>
+                                    <th>#</th>
                                     <th>Score</th>
-                                    <th>Percentage</th>
-                                    <th>Date</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>Date</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for attempt in user_attempts %}
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ attempt.score }}/{{ attempt.total_questions }}</td>
-                                    <td>
-                                        <span class="badge bg-{% if attempt.percentage >= quiz.passing_score %}success{% else %}danger{% endif %}">
-                                            {{ attempt.percentage }}%
-                                        </span>
-                                    </td>
-                                    <td>{{ attempt.completed_at|date:"M d, Y H:i" }}</td>
+                                    <td class="fw-semibold">{{ forloop.counter }}</td>
+                                    <td>{{ attempt.score }}/{{ attempt.total_questions }} ({{ attempt.percentage }}%)</td>
                                     <td>
                                         {% if attempt.percentage >= quiz.passing_score %}
-                                            <span class="badge bg-success">Passed</span>
+                                        <span class="badge bg-success-subtle text-success">Passed</span>
                                         {% else %}
-                                            <span class="badge bg-danger">Failed</span>
+                                        <span class="badge bg-danger-subtle text-danger">Keep Practicing</span>
                                         {% endif %}
                                     </td>
-                                    <td>
-                                        <a href="{% url 'assessments:quiz_results' attempt.id %}" class="btn btn-sm btn-outline-primary">
+                                    <td class="text-muted">{{ attempt.completed_at|date:"M d, Y H:i" }}</td>
+                                    <td class="text-end">
+                                        <a href="{% url 'assessments:quiz_results' attempt.id %}" class="btn btn-sm btn-outline-primary rounded-pill">
                                             <i class="fas fa-eye me-1"></i>View
                                         </a>
                                     </td>
@@ -117,70 +218,76 @@
                 </div>
             </div>
             {% endif %}
+
+            {% if quiz.lesson %}
+            <div class="quiz-card">
+                <div class="card-body p-4">
+                    <h5 class="mb-3"><i class="fas fa-book me-2 text-primary"></i>Related lesson</h5>
+                    <div class="quiz-related-card d-flex align-items-center justify-content-between flex-wrap gap-3">
+                        <div>
+                            <h6 class="mb-1">{{ quiz.lesson.title }}</h6>
+                            <small class="text-muted">{{ quiz.lesson.module.course.title }}</small>
+                        </div>
+                        <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}"
+                           class="btn btn-outline-primary rounded-pill">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
 
-        <!-- Quiz Actions -->
         <div class="col-lg-4">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white border-bottom">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-play me-2"></i>Quiz Actions
-                    </h5>
-                </div>
-                <div class="card-body">
-                    {% if quiz.is_available %}
-                        {% if quiz.is_completed %}
-                            <div class="alert alert-success border-0 shadow-sm">
-                                <h6 class="alert-heading d-flex align-items-center gap-2">
-                                    <i class="fas fa-trophy"></i> Quiz Completed
-                                </h6>
-                                <p class="mb-3">
-                                    You’ve already passed this quiz. Review your results any time or keep moving through the course.
-                                </p>
-                                <div class="d-grid gap-2">
-                                    {% if quiz.last_attempt_id %}
-                                    <a href="{% url 'assessments:quiz_results' quiz.last_attempt_id %}" class="btn btn-outline-primary">
-                                        <i class="fas fa-chart-line me-1"></i>Review results
-                                    </a>
-                                    {% endif %}
-                                    <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}"
-                                       class="btn btn-primary">
-                                        <i class="fas fa-arrow-right me-1"></i>Continue to next lesson
-                                    </a>
-                                </div>
-                            </div>
-                        {% elif quiz.can_attempt %}
-                            <div class="d-grid gap-2">
-                                <a href="{% url 'assessments:take_quiz' quiz.id %}" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-play me-2"></i>
-                                    {% if user_attempts %}Start New Attempt{% else %}Start Quiz{% endif %}
-                                </a>
-                            </div>
-                            
-                            {% if user_attempts %}
-                            <div class="alert alert-warning mt-3">
-                                <small>
-                                    <i class="fas fa-exclamation-triangle me-1"></i>
-                                    You have used {{ user_attempts|length }}/{{ quiz.max_attempts }} attempts.
-                                </small>
-                            </div>
+            <div class="quiz-action-card h-100">
+                <h5 class="mb-3 d-flex align-items-center gap-2">
+                    <i class="fas fa-play text-primary"></i> Action center
+                </h5>
+                {% if quiz.is_available %}
+                    {% if quiz.is_completed %}
+                    <div class="alert alert-success border-0 shadow-sm mb-4">
+                        <h6 class="alert-heading d-flex align-items-center gap-2">
+                            <i class="fas fa-trophy"></i> Quiz completed
+                        </h6>
+                        <p class="mb-3">You’ve passed this quiz. Review your results or continue learning.</p>
+                        <div class="d-grid gap-2">
+                            {% if quiz.last_attempt_id %}
+                            <a href="{% url 'assessments:quiz_results' quiz.last_attempt_id %}" class="btn btn-outline-primary rounded-pill">
+                                <i class="fas fa-chart-line me-1"></i>Review results
+                            </a>
                             {% endif %}
-                        {% else %}
-                            <div class="alert alert-warning border-0 shadow-sm">
-                                <div class="d-flex align-items-start">
-                                    <div class="me-3">
-                                        <i class="fas fa-exclamation-triangle text-warning" style="font-size: 1.5rem;"></i>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="alert-heading mb-2">Maximum Attempts Reached</h6>
-                                        <p class="mb-3">
-                                            You've used all {{ quiz.max_attempts }} attempts for this quiz.
-                                            Don't worry - this is part of the learning process!
-                                        </p>
-
-                                        <div class="row g-2">
-                                            <div class="col-md-6">
-                                                <a href="mailto:{{ quiz.lesson.module.course.instructor.email }}?subject=Quiz Help Request - {{ quiz.title }}&body=Hi {{ quiz.lesson.module.course.instructor_display_name }},
+                            <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}"
+                               class="btn btn-primary rounded-pill">
+                                <i class="fas fa-arrow-right me-1"></i>Continue to next lesson
+                            </a>
+                        </div>
+                    </div>
+                    {% elif quiz.can_attempt %}
+                    <div class="d-grid gap-3 mb-4">
+                        <a href="{% url 'assessments:take_quiz' quiz.id %}" class="btn btn-primary btn-lg rounded-pill">
+                            <i class="fas fa-play me-2"></i>
+                            {% if user_attempts %}Start new attempt{% else %}Start quiz{% endif %}
+                        </a>
+                        {% if user_attempts %}
+                        <div class="alert alert-warning border-0 rounded-3 mb-0">
+                            <small class="fw-semibold d-flex align-items-center gap-2">
+                                <i class="fas fa-info-circle"></i>
+                                Attempts used: {{ user_attempts|length }}/{{ quiz.max_attempts|default:"∞" }}
+                            </small>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-warning border-0 shadow-sm mb-4">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-warning" style="font-size:1.5rem;"></i>
+                            </div>
+                            <div>
+                                <h6 class="alert-heading mb-2">Maximum attempts reached</h6>
+                                <p class="mb-3">You’ve used all {{ quiz.max_attempts }} attempts. Reach out to your instructor for support.</p>
+                                <div class="d-grid gap-2">
+                                    <a href="mailto:{{ quiz.lesson.module.course.instructor.email }}?subject=Quiz Help Request - {{ quiz.title }}&body=Hi {{ quiz.lesson.module.course.instructor_display_name }},
 
 I need help with the quiz '{{ quiz.title }}' in the course '{{ quiz.lesson.module.course.title }}'. I've reached the maximum number of attempts ({{ quiz.max_attempts }}) and would appreciate some guidance.
 
@@ -192,100 +299,43 @@ Thank you for your help!
 
 Best regards,
 {{ user.get_full_name|default:user.username }}"
-                                                   class="btn btn-primary btn-sm w-100">
-                                                    <i class="fas fa-envelope me-1"></i>
-                                                    Contact Instructor
-                                                </a>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}"
-                                                   class="btn btn-outline-secondary btn-sm w-100">
-                                                    <i class="fas fa-book-open me-1"></i>
-                                                    Review Lesson
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-3 p-3 bg-light rounded">
-                                            <small class="text-muted">
-                                                <i class="fas fa-lightbulb me-1"></i>
-                                                <strong>Study Tips:</strong> Review the lesson content, take notes on key concepts,
-                                                and don't hesitate to reach out to your instructor for clarification.
-                                            </small>
-                                        </div>
-                                    </div>
+                                       class="btn btn-primary rounded-pill">
+                                        <i class="fas fa-envelope me-1"></i>Contact instructor
+                                    </a>
+                                    <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}"
+                                       class="btn btn-outline-secondary rounded-pill">
+                                        <i class="fas fa-book-open me-1"></i>Review lesson
+                                    </a>
                                 </div>
                             </div>
-                        {% endif %}
-                    {% else %}
-                        <div class="alert alert-secondary">
-                            <i class="fas fa-lock me-2"></i>
-                            This quiz is not currently available.
                         </div>
+                    </div>
                     {% endif %}
+                {% else %}
+                <div class="alert alert-secondary"><i class="fas fa-lock me-1"></i> This quiz is not currently available.</div>
+                {% endif %}
 
-                    <!-- Quiz Statistics -->
-                    <div class="mt-4">
-                        <h6 class="text-muted mb-3">Quiz Statistics</h6>
-                        
-                        {% if best_score is not None %}
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb-1">
-                                <small>Your Best Score</small>
-                                <small>{{ best_score }}%</small>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-{% if best_score >= quiz.passing_score %}success{% else %}warning{% endif %}" 
-                                     style="width: {{ best_score }}%"></div>
-                            </div>
+                <div class="mt-4">
+                    <h6 class="text-muted mb-3">Quiz statistics</h6>
+                    {% if best_score is not None %}
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small>Your best score</small>
+                            <small>{{ best_score }}%</small>
                         </div>
-                        {% endif %}
-
-                        <div class="mb-2">
-                            <small class="text-muted">
-                                <i class="fas fa-users me-1"></i>
-                                {{ quiz.total_attempts }} total attempts by all students
-                            </small>
-                        </div>
-                        
-                        <div class="mb-2">
-                            <small class="text-muted">
-                                <i class="fas fa-chart-line me-1"></i>
-                                Average score: {{ quiz.average_score }}%
-                            </small>
-                        </div>
-                        
-                        <div class="mb-2">
-                            <small class="text-muted">
-                                <i class="fas fa-percentage me-1"></i>
-                                Pass rate: {{ quiz.pass_rate }}%
-                            </small>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-{% if best_score >= quiz.passing_score %}success{% else %}warning{% endif %}" style="width: {{ best_score }}%"></div>
                         </div>
                     </div>
+                    {% endif %}
+                    <p class="small text-muted mb-1">
+                        <i class="fas fa-users me-1"></i>{{ quiz.total_attempts }} attempts • Avg score {{ quiz.average_score }}%
+                    </p>
+                    <p class="small text-muted">
+                        <i class="fas fa-percentage me-1"></i>Pass rate {{ quiz.pass_rate }}%
+                    </p>
                 </div>
             </div>
-
-            <!-- Related Content -->
-            {% if quiz.lesson %}
-            <div class="card border-0 shadow-sm mt-4">
-                <div class="card-header bg-white border-bottom">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-book me-2"></i>Related Content
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <h6 class="mb-1">{{ quiz.lesson.title }}</h6>
-                            <small class="text-muted">{{ quiz.lesson.course.title }}</small>
-                        </div>
-                        <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
         </div>
     </div>
 </div>
@@ -293,12 +343,13 @@ Best regards,
 
 {% block extra_js %}
 <script>
-$(document).ready(function() {
-    // Confirmation before starting quiz
-    $('.btn-primary[href*="take_quiz"]').click(function(e) {
-        if (!confirm('Are you ready to start this quiz? Make sure you have enough time to complete it.')) {
-            e.preventDefault();
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.btn-primary[href*="take_quiz"]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            if (!confirm('Ready to start this quiz? Make sure you have enough focused time to finish.')) {
+                e.preventDefault();
+            }
+        });
     });
 });
 </script>
