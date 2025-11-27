@@ -248,7 +248,7 @@
                                 {% endif %}
                             </div>
                             {% endfor %}
-                            {% if not result.is_correct and result.correct_answer_display %}
+                            {% if result.is_correct and result.correct_answer_display %}
                             <div class="alert alert-light border mt-3">
                                 <strong>Correct answer:</strong> {{ result.correct_answer_display }}
                             </div>
@@ -265,7 +265,7 @@
                             </div>
                             {% endif %}
                         {% endif %}
-                        {% if result.question.explanation %}
+                        {% if result.is_correct and result.question.explanation %}
                         <small class="text-muted d-block"><strong>Explanation:</strong> {{ result.question.explanation }}</small>
                         {% endif %}
                     </div>

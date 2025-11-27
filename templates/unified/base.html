@@ -392,36 +392,31 @@
         {% include 'yitp/navbar.html' %}
     {% endif %}
     
-    <!-- Django Messages -->
+    {% if messages %}
     <div class="messages-container">
-        {% if messages %}
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show message-alert"
-                             role="alert"
-                             data-auto-dismiss="5000">
-                            <div class="d-flex align-items-center">
-                                {% if message.tags == 'success' %}
-                                    <i class="fas fa-check-circle me-2"></i>
-                                {% elif message.tags == 'error' %}
-                                    <i class="fas fa-exclamation-circle me-2"></i>
-                                {% elif message.tags == 'warning' %}
-                                    <i class="fas fa-exclamation-triangle me-2"></i>
-                                {% elif message.tags == 'info' %}
-                                    <i class="fas fa-info-circle me-2"></i>
-                                {% endif %}
-                                <span>{{ message }}</span>
-                            </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} message-alert" role="alert" data-auto-dismiss="5000" tabindex="0">
+            <div class="message-icon">
+                {% if message.tags == 'success' %}
+                    <i class="fas fa-check"></i>
+                {% elif message.tags == 'error' %}
+                    <i class="fas fa-exclamation"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="fas fa-exclamation-circle"></i>
+                {% elif message.tags == 'info' %}
+                    <i class="fas fa-info"></i>
+                {% else %}
+                    <i class="fas fa-bell"></i>
+                {% endif %}
             </div>
-        {% endif %}
+            <div class="message-text">
+                {{ message }}
+            </div>
+            <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        {% endfor %}
     </div>
+    {% endif %}
 
     <!-- Comprehensive Notification System -->
     {% include 'includes/notifications.html' %}
