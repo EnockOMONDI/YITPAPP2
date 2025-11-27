@@ -118,22 +118,28 @@
     }
     
     .auth-links {
-        text-align: center;
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(255,255,255,0.2);
-        color: #fff;
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
     }
     
     .auth-links a {
-        color: #fff;
+        color: #ff5d15;
         text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
+        font-weight: 600;
+        border: 1px solid rgba(255,93,21,0.4);
+        border-radius: 14px;
+        padding: 0.9rem 1rem;
+        background: rgba(255,255,255,0.05);
+        display: block;
+        transition: all 0.2s ease;
     }
 
     .auth-links a:hover {
-        color: #ffb98a;
+        color: #ffa067;
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,93,21,0.6);
     }
     
     .social-login {
@@ -263,18 +269,17 @@
                         {% endif %}
                         
                         <div class="auth-links">
-                            <p class="mb-2">
-                                <a href="{% url 'account_reset_password' %}">
-                                    <i class="fas fa-key me-1"></i>
-                                    Forgot your password?
-                                </a>
-                            </p>
-                            <p class="mb-0">
-                                Don't have an account? 
-                                <a href="{% url 'yitp:registration' %}">
-                                    <strong>Sign up here</strong>
-                                </a>
-                            </p>
+                            <a href="{% url 'account_reset_password' %}">
+                                <i class="fas fa-key me-2"></i>
+                                Forgot your password?
+                                <small class="d-block text-white-50 mt-1">Tap to reset it in under a minute.</small>
+                            </a>
+                            <a href="{% url 'yitp:registration' %}" class="text-center">
+                                <button type="button" class="btn btn-light w-100" style="border-radius: 999px; font-weight: 600;">
+                                    <i class="fas fa-user-plus me-2"></i>Create Account
+                                </button>
+                                <small class="d-block text-white-50 mt-2">Join the programme and keep learning.</small>
+                            </a>
                         </div>
                         
                         {% if SOCIALACCOUNT_ENABLED %}

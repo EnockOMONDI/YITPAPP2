@@ -167,6 +167,31 @@
     padding-top: 1.5rem;
 }
 
+.login-link p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.75rem;
+}
+
+.login-link .btn-switch {
+    border: 1px solid rgba(255,93,21,0.5);
+    color: #ff5d15;
+    border-radius: 999px;
+    padding: 0.85rem 1.5rem;
+    background: rgba(255,255,255,0.08);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.login-link .btn-switch:hover {
+    background: rgba(255,255,255,0.2);
+    color: #ffa067;
+    border-color: rgba(255,93,21,0.7);
+}
+
 @media (max-width: 992px) {
     .auth-panel { border-radius: 18px; }
     .auth-showcase { padding: 3rem 2rem; }
@@ -277,7 +302,9 @@
 
                     <div class="login-link">
                         <p>Already have an account?</p>
-                        <a href="{% url 'login' %}">Sign in here</a>
+                        <a href="{% url 'login' %}" class="btn-switch">
+                            <i class="fas fa-sign-in-alt"></i>Sign in instead
+                        </a>
                     </div>
                 </div>
             </div>

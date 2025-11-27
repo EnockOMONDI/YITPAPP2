@@ -136,6 +136,29 @@
     margin-top: 0.5rem;
 }
 
+.auth-links {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.auth-links a {
+    color: #ff5d15;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba(255,93,21,0.4);
+    border-radius: 14px;
+    padding: 0.9rem 1rem;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.2s ease;
+}
+
+.auth-links a:hover {
+    color: #ffa067;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,93,21,0.6);
+}
 .login__options .forgot-password,
 .register-link a {
     color: #f8fafc;
@@ -233,26 +256,22 @@
                                 <small style="display:block;color:rgba(255,255,255,0.7);font-size:0.8rem;">Coming soon</small>
                             </div>
                         </button>
-                        <div class="social-note">Our Google login option will return shortly.</div>
 
                         {% if next %}
                             <input type="hidden" name="next" value="{{ next }}">
                         {% endif %}
-                        <div class="login__options">
-                            <div class="remember-me">
-                                <input type="checkbox" id="remember" name="remember">
-                                <label for="remember" style="color: #ffffff; font-size: 14px;">Remember me</label>
-                            </div>
-                            <a href="{% url 'password_reset' %}" class="forgot-password">
-                                <i class="fas fa-key" style="margin-right: 5px;"></i>
-                                Forgot Password?
-                            </a>
-                        </div>
+                    
                     </form>
 
-                    <div class=" forgot-password">
-
-                        <a   href="{% url 'register' %}"> Don't have an account? Create your account here.</a>
+                    <div class="auth-links">
+                        <a href="{% url 'password_reset' %}">
+                            <i class="fas fa-key me-2"></i>Forgot your password?<br>
+                            <small class="d-block text-white-50">Reset it in under a minute.</small>
+                        </a>
+                        <a href="{% url 'register' %}">
+                            <i class="fas fa-user-plus me-2"></i>Don’t have an account?<br>
+                            <small class="d-block text-white-50">Create one and start learning.</small>
+                        </a>
                     </div>
                 </div>
             </div>
