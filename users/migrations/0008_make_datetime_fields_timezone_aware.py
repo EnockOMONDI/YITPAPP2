@@ -27,21 +27,18 @@ def make_datetimes_aware(apps, schema_editor):
             user.save(update_fields=update_fields)
 
     for payment in Payment.objects.all().only('id', 'created_at', 'confirmed_at', 'expires_at').iterator(chunk_size=batch_size):
-        update_fields = []
+        updates = {}
         new_created_at = to_aware(payment.created_at)
         if new_created_at != payment.created_at:
-            payment.created_at = new_created_at
-            update_fields.append('created_at')
+            updates['created_at'] = new_created_at
         new_confirmed_at = to_aware(payment.confirmed_at)
         if new_confirmed_at != payment.confirmed_at:
-            payment.confirmed_at = new_confirmed_at
-            update_fields.append('confirmed_at')
+            updates['confirmed_at'] = new_confirmed_at
         new_expires_at = to_aware(payment.expires_at)
         if new_expires_at != payment.expires_at:
-            payment.expires_at = new_expires_at
-            update_fields.append('expires_at')
-        if update_fields:
-            payment.save(update_fields=update_fields)
+            updates['expires_at'] = new_expires_at
+        if updates:
+            Payment.objects.filter(pk=payment.pk).update(**updates)
 
 
 def noop_reverse(apps, schema_editor):

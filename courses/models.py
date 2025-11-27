@@ -298,10 +298,12 @@ class Module(models.Model):
     @property
     def active_instructors(self):
         """Return a queryset of instructors actively assigned to this module."""
-        return User.objects.filter(
-            module_instructors__module=self,
-            module_instructors__is_active=True
-        ).distinct()
+        ModuleInstructor = apps.get_model('users', 'ModuleInstructor')
+        active_assignments = ModuleInstructor.objects.filter(
+            module=self,
+            is_active=True
+        ).values_list('instructor_id', flat=True)
+        return User.objects.filter(id__in=active_assignments).distinct()
 
     def get_primary_instructor(self):
         """Return the primary instructor for this module, if set."""

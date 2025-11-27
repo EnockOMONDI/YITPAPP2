@@ -30283,3 +30283,86 @@ ERROR 2025-11-27 15:41:17,062 basehttp 73854 6138949632 "GET /lms/assessments/qu
 INFO 2025-11-27 15:43:03,598 autoreload 77382 8480799424 Watching for file changes with StatReloader
 INFO 2025-11-27 15:43:04,724 basehttp 77382 6204862464 "GET /lms/assessments/quiz-results/47/ HTTP/1.1" 200 84058
 INFO 2025-11-27 15:43:06,131 basehttp 77382 6204862464 "GET /lms/assessments/quiz-results/47/ HTTP/1.1" 200 83158
+INFO 2025-11-27 15:48:17,341 autoreload 79111 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-27 15:48:28,132 basehttp 79111 6137327616 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 36399
+INFO 2025-11-27 15:48:54,909 basehttp 79111 6137327616 "GET /lms/assessments/ HTTP/1.1" 200 36878
+INFO 2025-11-27 15:50:37,643 basehttp 79111 6137327616 "GET /lms/assessments/quizzes/ HTTP/1.1" 200 36399
+INFO 2025-11-27 15:51:54,842 basehttp 79111 6137327616 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 146385
+INFO 2025-11-27 15:54:24,655 autoreload 79111 8480799424 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/courses/models.py changed, reloading.
+INFO 2025-11-27 15:54:26,331 autoreload 81131 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-27 15:55:39,299 autoreload 81131 8480799424 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/migrations/0008_make_datetime_fields_timezone_aware.py changed, reloading.
+INFO 2025-11-27 15:55:42,981 autoreload 82446 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-27 16:14:42,681 autoreload 87652 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-27 16:14:45,589 basehttp 87652 6198882304 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/112/ HTTP/1.1" 200 147954
+INFO 2025-11-27 16:14:56,264 basehttp 87652 6198882304 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/113/ HTTP/1.1" 200 145537
+INFO 2025-11-27 16:14:59,437 basehttp 87652 6198882304 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/114/ HTTP/1.1" 200 144429
+INFO 2025-11-27 16:15:04,373 basehttp 87652 6198882304 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/115/ HTTP/1.1" 200 143077
+INFO 2025-11-27 16:15:07,146 basehttp 87652 6198882304 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/116/ HTTP/1.1" 200 142593
+INFO 2025-11-27 16:15:10,770 basehttp 87652 6198882304 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/117/ HTTP/1.1" 200 142700
+INFO 2025-11-27 16:15:18,509 basehttp 87652 6198882304 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/118/ HTTP/1.1" 200 143383
+INFO 2025-11-27 16:15:52,046 basehttp 87652 6198882304 "GET /admin/ HTTP/1.1" 200 154943
+INFO 2025-11-27 16:17:25,133 autoreload 88632 8480799424 Watching for file changes with StatReloader
+ERROR 2025-11-27 16:17:35,118 exception 88632 6157086720 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-11-27 16:17:35,126 log 88632 6157086720 Bad Request: /admin/courses/course/
+WARNING 2025-11-27 16:17:35,126 basehttp 88632 6157086720 "GET /admin/courses/course/ HTTP/1.1" 400 8967
+ERROR 2025-11-27 16:17:37,502 exception 88632 6173913088 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-11-27 16:17:37,505 log 88632 6173913088 Bad Request: /admin/
+WARNING 2025-11-27 16:17:37,506 basehttp 88632 6173913088 "GET /admin/ HTTP/1.1" 400 8967
+ERROR 2025-11-27 16:17:40,011 exception 88632 6157086720 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-11-27 16:17:40,013 log 88632 6157086720 Bad Request: /admin/login/
+WARNING 2025-11-27 16:17:40,013 basehttp 88632 6157086720 "GET /admin/login/?next=/admin/ HTTP/1.1" 400 8967
+ERROR 2025-11-27 16:17:44,507 exception 88632 6157086720 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-11-27 16:17:44,509 log 88632 6157086720 Bad Request: /admin/
+WARNING 2025-11-27 16:17:44,510 basehttp 88632 6157086720 "GET /admin/ HTTP/1.1" 400 8967
