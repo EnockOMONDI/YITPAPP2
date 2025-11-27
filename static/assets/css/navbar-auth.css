@@ -1,5 +1,19 @@
 /* YITP Navbar Authentication Styles */
 
+body.has-sticky-header {
+    padding-top: var(--header-sticky-offset, 0px);
+    transition: padding-top 0.2s ease;
+}
+
+#header-offset {
+    height: 0;
+    transition: height 0.2s ease;
+}
+
+body.has-sticky-header #header-offset {
+    height: var(--header-sticky-offset, 0px);
+}
+
 /* ===== DESKTOP AUTHENTICATION STYLES ===== */
 
 /* User Avatar */
