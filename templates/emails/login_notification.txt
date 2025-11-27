@@ -39,6 +39,6 @@ Youth Impact Training Programme
 
 ---
 Note: This is an automated security notification. Please do not reply to this email.
-If you need assistance, contact us at {{ support_email|default:'youthimpactglobal3@gmail.com' }}.
+If you need assistance, contact us at {{ support_email|default:'info@youthimpactglobal.com' }}.
 
 © 2025 Youth Impact Global. All rights reserved.

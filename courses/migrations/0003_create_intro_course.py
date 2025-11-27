@@ -176,7 +176,7 @@ This is a mandatory first course for all new students and takes approximately 25
                 <div>
                     <h3 style="color: #ff5d15;">📧 Email Support</h3>
                     <p style="color: #666;">For technical issues or course questions:<br>
-                    <strong>youthimpactglobal3@gmail.com</strong></p>
+                    <strong>info@youthimpactglobal.com</strong></p>
                 </div>
                 <div>
                     <h3 style="color: #ff5d15;">📚 Help Center</h3>
@@ -269,11 +269,11 @@ This is a mandatory first course for all new students and takes approximately 25
             'points': 10,
             'options': [
                 'support@yitp.com',
-                'youthimpactglobal3@gmail.com',
+                'info@youthimpactglobal.com',
                 'help@youthimpact.org',
                 'info@yitp.edu'
             ],
-            'correct_answer': 'youthimpactglobal3@gmail.com'
+            'correct_answer': 'info@youthimpactglobal.com'
         },
         {
             'question_text': 'How long does it typically take for YITP support to respond to requests?',
@@ -301,10 +301,10 @@ This is a mandatory first course for all new students and takes approximately 25
             'options': [
                 'Give up and quit the course',
                 'Skip the difficult parts',
-                'Contact support at youthimpactglobal3@gmail.com or use the Help Center',
+                'Contact support at info@youthimpactglobal.com or use the Help Center',
                 'Guess the answers randomly'
             ],
-            'correct_answer': 'Contact support at youthimpactglobal3@gmail.com or use the Help Center'
+            'correct_answer': 'Contact support at info@youthimpactglobal.com or use the Help Center'
         },
         {
             'question_text': 'What happens when you successfully complete all lessons and assessments in a YITP course?',

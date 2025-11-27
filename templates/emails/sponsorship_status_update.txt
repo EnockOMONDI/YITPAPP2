@@ -96,5 +96,5 @@ Reference Number: YITP-SPONSOR-{{ sponsorship_request.id }}
 Status Updated: {{ sponsorship_request.updated_at|date:"F d, Y" }} at {{ sponsorship_request.updated_at|time:"g:i A" }}
 
 ---
-Contact Support: {{ support_email|default:'youthimpactglobal3@gmail.com' }}
+Contact Support: {{ support_email|default:'info@youthimpactglobal.com' }}
 © 2025 Youth Impact Global. All rights reserved.

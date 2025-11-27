@@ -183,7 +183,7 @@
                     {% if attempt.percentage >= quiz.passing_score %}PASSED{% else %}KEEP GOING{% endif %}
                 </span>
                 <h1 class="results-title">{{ quiz.title }}</h1>
-                <p class="results-subtitle">Lesson: {{ quiz.lesson.title }} • Course: {{ quiz.lesson.module.course.title }}</p>
+                <p class="results-subtitle text-white">Lesson: {{ quiz.lesson.title }} • Course: {{ quiz.lesson.module.course.title }}</p>
             </div>
             <div class="results-actions d-flex flex-wrap gap-2">
                 <a href="{% url 'assessments:quiz_detail' quiz.id %}" class="btn btn-outline-light"><i class="fas fa-info-circle me-1"></i>Quiz Details</a>
@@ -238,22 +238,21 @@
                             </div>
                         </div>
                         <div class="mb-3">{{ result.question.question_text|linebreaks }}</div>
-                        {% if result.question.question_type == 'multiple_choice' %}
+                        {% if result.question.question_type == 'multiple_choice' or result.question.question_type == 'true_false' %}
                             {% for choice in result.choices %}
-                            <div class="choice-pill {% if choice.is_correct %}correct{% elif choice.is_selected %}incorrect{% endif %}">
-                                <i class="fas {% if choice.is_correct %}fa-check text-success{% elif choice.is_selected %}fa-times text-danger{% else %}fa-circle{% endif %}"></i>
+                            <div class="choice-pill {% if choice.is_selected %}{% if choice.is_correct %}correct{% else %}incorrect{% endif %}{% endif %}">
+                                <i class="fas {% if choice.is_selected and choice.is_correct %}fa-check text-success{% elif choice.is_selected %}fa-times text-danger{% else %}fa-circle text-muted{% endif %}"></i>
                                 <span>{{ choice.text }}</span>
+                                {% if choice.is_selected %}
+                                <small class="text-muted ms-auto">Your choice</small>
+                                {% endif %}
                             </div>
                             {% endfor %}
-                        {% elif result.question.question_type == 'true_false' %}
-                            <div class="choice-pill {% if result.question.correct_answer == 'true' %}correct{% elif result.user_answer == 'true' %}incorrect{% endif %}">
-                                <i class="fas {% if result.question.correct_answer == 'true' %}fa-check text-success{% elif result.user_answer == 'true' %}fa-times text-danger{% else %}fa-circle{% endif %}"></i>
-                                <span>True</span>
+                            {% if not result.is_correct and result.correct_answer_display %}
+                            <div class="alert alert-light border mt-3">
+                                <strong>Correct answer:</strong> {{ result.correct_answer_display }}
                             </div>
-                            <div class="choice-pill {% if result.question.correct_answer == 'false' %}correct{% elif result.user_answer == 'false' %}incorrect{% endif %}">
-                                <i class="fas {% if result.question.correct_answer == 'false' %}fa-check text-success{% elif result.user_answer == 'false' %}fa-times text-danger{% else %}fa-circle{% endif %}"></i>
-                                <span>False</span>
-                            </div>
+                            {% endif %}
                         {% else %}
                             <div class="mb-3">
                                 <strong>Your Answer</strong>
@@ -275,6 +274,20 @@
             {% endfor %}
         </div>
         <div class="col-lg-4 results-sidebar">
+            <div class="card mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="card-title mb-0"><i class="fas fa-list-ol me-2"></i>Question Overview</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for item in question_overview %}
+                        <div class="badge {% if item.is_correct %}bg-success-subtle text-success{% else %}bg-danger-subtle text-danger{% endif %} rounded-pill px-3 py-2">
+                            Q{{ item.number }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
             <div class="card mb-4">
                 <div class="card-header bg-white border-bottom">
                     <h6 class="card-title mb-0"><i class="fas fa-chart-pie me-2"></i>Performance Summary</h6>

@@ -185,7 +185,7 @@ def create_blog_import_template():
         "5. Upload your file and review the preview",
         "6. Confirm the import",
         "",
-        "For support, contact: youthimpactglobal3@gmail.com"
+        "For support, contact: info@youthimpactglobal.com"
     ]
     
     for row_num, instruction in enumerate(instructions, 1):

@@ -20,7 +20,7 @@ class PaymentEmailService:
     """Service for sending payment-related email notifications"""
     
     # Email addresses
-    ADMIN_EMAIL = 'youthimpactglobal3@gmail.com'
+    ADMIN_EMAIL = 'info@youthimpactglobal.com'
     FROM_EMAIL = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@yitp.org')
     
     @staticmethod

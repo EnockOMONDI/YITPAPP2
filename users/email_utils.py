@@ -880,7 +880,7 @@ Youth Impact Training Programme
     logger.info(f"Sending course creation notification with subject: {subject}")
 
     # Send email to admin
-    admin_email = getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com')
+    admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@youthimpactglobal.com')
     result = send_html_email(
         subject=subject,
         html_content=admin_email_content,  # Using plain text as HTML for simplicity
@@ -1017,7 +1017,7 @@ def send_instructor_welcome_email(user, instructor_profile, temporary_password=N
             'resources_url': resources_url,
             'profile_url': profile_url,
             'magic_link_url': magic_link_url,  # Add magic link to context
-            'support_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
+            'support_email': getattr(settings, 'ADMIN_EMAIL', 'info@youthimpactglobal.com'),
             'created_by_admin': created_by_admin,
             'site_name': 'Youth Impact Training Programme'
         }
@@ -1098,7 +1098,7 @@ def send_instructor_login_notification(user, login_timestamp=None, ip_address=No
             'user_agent': user_agent or 'Unknown',
             'instructor_role_display': instructor_profile.get_instructor_role_display(),
             'verification_status': instructor_profile.get_verification_status_display(),
-            'admin_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
+            'admin_email': getattr(settings, 'ADMIN_EMAIL', 'info@youthimpactglobal.com'),
             'site_name': 'Youth Impact Training Programme',
             'login_location': f"{ip_address}" if ip_address else "Unknown Location"
         }
@@ -1140,7 +1140,7 @@ Youth Impact Training Programme
         logger.info(f"Sending instructor login notification with subject: {subject}")
 
         # Send email to admin
-        admin_email = getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com')
+        admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@youthimpactglobal.com')
         result = send_html_email(
             subject=subject,
             html_content=email_content,  # Using plain text as HTML for simplicity

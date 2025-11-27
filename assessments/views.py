@@ -53,6 +53,17 @@ class QuizListView(LoginRequiredMixin, ListView):
             is_published=True
         ).select_related('lesson__module__course')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_attempts = QuizAttempt.objects.filter(student=self.request.user)
+        context['total_attempts'] = user_attempts.count()
+        context['completed_attempts'] = user_attempts.filter(is_passed=True).count()
+        context['active_courses_count'] = Enrollment.objects.filter(
+            student=self.request.user,
+            status='active'
+        ).count()
+        return context
+
 
 class QuizDetailView(LoginRequiredMixin, DetailView):
     """Quiz detail and taking view"""
@@ -303,33 +314,54 @@ class QuizResultsView(LoginRequiredMixin, DetailView):
                 return option.get('text') or option.get('label') or option.get('value') or ''
             return str(option)
 
-        for question in questions:
+        for idx, question in enumerate(questions, start=1):
             user_answer = answer_map.get(str(question.id))
             normalized_correct = (question.correct_answer or '').strip().lower()
             normalized_user = (user_answer or '').strip().lower()
             is_correct = normalized_user == normalized_correct if user_answer else False
 
-            choice_entries = []
+            result_entry = {
+                'number': idx,
+                'question': question,
+                'user_answer': user_answer,
+                'is_correct': is_correct,
+                'choices': [],
+                'correct_answer_display': question.correct_answer,
+            }
+
             if question.question_type == 'multiple_choice':
                 for option in question.options or []:
                     text = _normalize_option(option)
                     normalized_text = text.strip().lower()
-                    choice_entries.append({
+                    result_entry['choices'].append({
                         'text': text,
                         'is_correct': normalized_text == normalized_correct,
                         'is_selected': normalized_text == normalized_user
                     })
+            elif question.question_type == 'true_false':
+                result_entry['choices'] = [
+                    {
+                        'text': 'True',
+                        'is_correct': normalized_correct == 'true',
+                        'is_selected': normalized_user == 'true'
+                    },
+                    {
+                        'text': 'False',
+                        'is_correct': normalized_correct == 'false',
+                        'is_selected': normalized_user == 'false'
+                    }
+                ]
 
-                question_results.append({
-                    'question': question,
-                    'user_answer': user_answer,
-                    'is_correct': is_correct,
-                    'choices': choice_entries,
-                    'correct_answer_normalized': normalized_correct,
-                    'user_answer_normalized': normalized_user,
-                })
+            question_results.append(result_entry)
 
         context['question_results'] = question_results
+        context['question_overview'] = [
+            {
+                'number': result['number'],
+                'is_correct': result['is_correct']
+            }
+            for result in question_results
+        ]
 
         return context
 

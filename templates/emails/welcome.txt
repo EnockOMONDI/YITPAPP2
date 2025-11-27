@@ -48,5 +48,5 @@ Youth Impact Training Programme
 "Empowering young minds for a better tomorrow"
 
 ---
-Contact Support: {{ support_email|default:'youthimpactglobal3@gmail.com' }}
+Contact Support: {{ support_email|default:'info@youthimpactglobal.com' }}
 © 2025 Youth Impact Global. All rights reserved.

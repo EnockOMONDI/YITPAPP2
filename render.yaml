@@ -60,7 +60,7 @@ services:
 
       # Admin Configuration
       - key: ADMIN_EMAIL
-        value: "youthimpactglobal3@gmail.com"
+        value: "info@youthimpactglobal.com"
 
       # TinyMCE Configuration
       - key: TINYMCE_API_KEY

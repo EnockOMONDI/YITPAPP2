@@ -84,7 +84,7 @@ def magic_login_view(request, token):
                 'Contact support if you continue to have issues',
             ],
             'login_url': reverse('login'),
-            'support_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
+            'support_email': getattr(settings, 'ADMIN_EMAIL', 'info@youthimpactglobal.com'),
         }
         
         return render(request, 'users/magic_link_error.html', context, status=400)
@@ -164,7 +164,7 @@ def magic_link_help_view(request):
     context = {
         'page_title': 'Magic Link Help',
         'site_name': 'YITP Learning Management System',
-        'support_email': getattr(settings, 'ADMIN_EMAIL', 'youthimpactglobal3@gmail.com'),
+        'support_email': getattr(settings, 'ADMIN_EMAIL', 'info@youthimpactglobal.com'),
     }
     
     return render(request, 'users/magic_link_help.html', context)

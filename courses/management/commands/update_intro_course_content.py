@@ -134,7 +134,7 @@ class Command(BaseCommand):
                     <div style="margin: 20px 0;">
                         <h3 style="color: #ff5d15;">📧 Contact Information</h3>
                         <p style="color: #666; margin-left: 20px;">
-                            <strong>Email:</strong> youthimpactglobal3@gmail.com<br>
+                            <strong>Email:</strong> info@youthimpactglobal.com<br>
                             <strong>Response Time:</strong> Within 24 hours
                         </p>
                         
