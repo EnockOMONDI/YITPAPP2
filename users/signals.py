@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.dispatch import receiver
@@ -11,6 +11,28 @@ import logging
 
 # Set up logger
 logger = logging.getLogger(__name__)
+
+
+def _ensure_aware(dt):
+    """Return a timezone-aware datetime (if value is provided)."""
+    if dt and timezone.is_naive(dt):
+        return timezone.make_aware(dt, timezone.get_default_timezone())
+    return dt
+
+
+@receiver(pre_save, sender=User)
+def ensure_user_datetimes_are_aware(sender, instance, **kwargs):
+    """Force core auth datetime fields to be timezone aware."""
+    instance.last_login = _ensure_aware(instance.last_login)
+    instance.date_joined = _ensure_aware(instance.date_joined)
+
+
+@receiver(pre_save, sender=Payment)
+def ensure_payment_datetimes_are_aware(sender, instance, **kwargs):
+    """Guard Payment timestamps against naive assignments."""
+    instance.created_at = _ensure_aware(instance.created_at)
+    instance.confirmed_at = _ensure_aware(instance.confirmed_at)
+    instance.expires_at = _ensure_aware(instance.expires_at)
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
