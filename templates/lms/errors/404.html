@@ -30,7 +30,7 @@
         box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         padding: 3rem 2rem;
         border: 3px solid var(--yitp-orange);
-        max-width: 700px;
+        max-width: 600px;
         width: 100%;
         text-align: center;
     }
@@ -42,14 +42,36 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin-bottom: 1.5rem;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
     }
     
     .error-code {
         font-size: 3.5rem;
         font-weight: 800;
         color: var(--yitp-dark-blue);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .error-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255, 93, 21, 0.15);
+        color: var(--yitp-orange);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.75rem;
+        margin-bottom: 0.75rem;
     }
     
     .error-title {
@@ -113,59 +135,63 @@
         text-decoration: none;
     }
     
-    .quick-links {
+    .status-section {
         background: linear-gradient(135deg, rgba(255,93,21,0.1), rgba(26,46,83,0.1));
         border: 2px solid var(--yitp-orange);
         border-radius: 15px;
         padding: 1.5rem;
     }
     
-    .quick-links-title {
+    .status-title {
         color: var(--yitp-dark-blue);
         font-weight: 600;
         margin-bottom: 1rem;
     }
     
-    .links-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
+    .status-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.8rem;
+        padding: 0.5rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         text-align: left;
     }
     
-    .link-item {
+    .status-icon {
+        color: var(--yitp-orange);
+        margin-right: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .status-text {
+        color: #666;
+        flex: 1;
+    }
+    
+    .status-text strong {
+        color: var(--yitp-dark-blue);
+    }
+    
+    .retry-timer {
         background: white;
         padding: 1rem;
         border-radius: 10px;
+        margin-top: 1rem;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
     }
     
-    .link-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    
-    .link-item a {
+    .timer-text {
         color: var(--yitp-dark-blue);
-        text-decoration: none;
         font-weight: 600;
+        margin-bottom: 0.5rem;
     }
     
-    .link-item a:hover {
+    .timer-display {
+        font-size: 1.5rem;
         color: var(--yitp-orange);
-        text-decoration: none;
-    }
-    
-    .link-item i {
-        color: var(--yitp-orange);
-        margin-right: 0.5rem;
-    }
-    
-    .link-description {
-        color: #666;
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
+        font-weight: 700;
     }
     
     @media (max-width: 768px) {
@@ -188,10 +214,6 @@
         .error-description {
             font-size: 1rem;
         }
-        
-        .links-grid {
-            grid-template-columns: 1fr;
-        }
     }
 </style>
 {% endblock %}
@@ -200,14 +222,15 @@
 <div class="error-container">
     <div class="error-card">
         <div class="error-icon">
-            <i class="fas fa-map-marked-alt"></i>
+            <i class="fas fa-compass"></i>
         </div>
         
         <div class="error-code">404</div>
-        <h1 class="error-title">Content Not Found</h1>
+        <div class="error-badge">Page not found</div>
+        <h1 class="error-title">We can't find that page right now</h1>
         
         <p class="error-description">
-            The lesson, quiz, or course content you're looking for doesn't exist or may have been moved. Let's help you find what you need!
+            The link you followed may be outdated or the content has moved. Your courses and submissions are safe—let's guide you back to familiar ground.
         </p>
         
         <div class="action-buttons">
@@ -219,48 +242,43 @@
             </a>
         </div>
         
-        <div class="quick-links">
-            <h3 class="quick-links-title">
-                <i class="fas fa-compass me-2" style="color: var(--yitp-orange);"></i>
-                Find Your Learning Path
+        <div class="status-section">
+            <h3 class="status-title">
+                <i class="fas fa-info-circle me-2" style="color: var(--yitp-orange);"></i>
+                Here's what you can do
             </h3>
-            <div class="links-grid">
-                <div class="link-item">
-                    <a href="{% url 'courses:course_list' %}">
-                        <i class="fas fa-graduation-cap"></i>My Courses
-                    </a>
-                    <div class="link-description">Access your enrolled courses</div>
+            
+            <div class="status-item">
+                <i class="fas fa-shield-alt status-icon"></i>
+                <div class="status-text">
+                    <strong>Your progress is secure:</strong> All learning data remains intact even though this page is missing
                 </div>
-                <div class="link-item">
-                    <a href="{% url 'courses:course_list' %}">
-                        <i class="fas fa-book-open"></i>Browse Courses
-                    </a>
-                    <div class="link-description">Discover new learning opportunities</div>
+            </div>
+            
+            <div class="status-item">
+                <i class="fas fa-route status-icon"></i>
+                <div class="status-text">
+                    <strong>Navigate from home:</strong> Head back to the dashboard or course list to continue learning
                 </div>
-                <div class="link-item">
-                    <a href="{% url 'progress:dashboard' %}">
-                        <i class="fas fa-chart-line"></i>Progress Dashboard
-                    </a>
-                    <div class="link-description">Track your learning progress</div>
+            </div>
+            
+            <div class="status-item">
+                <i class="fas fa-search status-icon"></i>
+                <div class="status-text">
+                    <strong>Check the URL:</strong> Make sure the link is spelled correctly or use our menus to locate content
                 </div>
-                <div class="link-item">
-                    <a href="{% url 'assessments:quiz_list' %}">
-                        <i class="fas fa-tasks"></i>Assessments
-                    </a>
-                    <div class="link-description">View quizzes and assignments</div>
+            </div>
+            
+            <div class="status-item">
+                <i class="fas fa-envelope status-icon"></i>
+                <div class="status-text">
+                    <strong>Need help?</strong> Reach us at <a href="mailto:info@youthimpactglobal.com" style="color: var(--yitp-orange);">info@youthimpactglobal.com</a>
                 </div>
-                <div class="link-item">
-                    <a href="{% url 'users:profile' %}">
-                        <i class="fas fa-user-circle"></i>My Profile
-                    </a>
-                    <div class="link-description">Update your account settings</div>
-                </div>
-                <div class="link-item">
-                    <a href="{% url 'yitp:contact' %}">
-                        <i class="fas fa-envelope"></i>Get Support
-                    </a>
-                    <div class="link-description">Contact our support team</div>
-                </div>
+            </div>
+            
+            <div class="retry-timer">
+                <div class="timer-text">Automatically guiding you home in:</div>
+                <div class="timer-display" id="countdown">30</div>
             </div>
         </div>
     </div>
@@ -276,5 +294,20 @@ document.addEventListener('DOMContentLoaded', function() {
         mainButton.focus();
     }
 });
+
+// Redirect to homepage after countdown
+let countdown = 30;
+const countdownElement = document.getElementById('countdown');
+const redirectUrl = "{% url 'yitp:home' %}";
+
+const timer = setInterval(() => {
+    countdown--;
+    countdownElement.textContent = countdown;
+    
+    if (countdown <= 0) {
+        clearInterval(timer);
+        window.location.href = redirectUrl;
+    }
+}, 1000);
 </script>
 {% endblock %}

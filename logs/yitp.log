@@ -30405,3 +30405,5 @@ INFO 2025-11-27 18:04:06,282 basehttp 22447 6134067200 "GET /profile/?section=co
 INFO 2025-11-27 18:04:06,366 basehttp 22447 6134067200 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
 INFO 2025-11-27 18:07:21,359 autoreload 24414 8480799424 Watching for file changes with StatReloader
 INFO 2025-11-27 18:07:23,096 basehttp 24414 6168489984 "GET /profile/?section=courses HTTP/1.1" 200 88110
+INFO 2025-11-27 18:10:11,848 autoreload 27120 8480799424 Watching for file changes with StatReloader
+INFO 2025-11-27 18:10:21,910 basehttp 27120 6125023232 "GET /lms/assessments/ HTTP/1.1" 200 33684

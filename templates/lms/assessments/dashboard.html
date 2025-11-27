@@ -4,152 +4,289 @@
 {% block title %}Assessment Dashboard - YITP LMS{% endblock %}
 
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h3 text-primary">
-                    <i class="fas fa-clipboard-check me-2"></i>
-                    Assessment Dashboard
-                </h1>
-                <div class="btn-group" role="group">
-                    <a href="{% url 'assessments:quiz_list' %}" class="btn btn-outline-primary">
-                        <i class="fas fa-question-circle me-1"></i>Quizzes
-                    </a>
-                    <a href="{% url 'assessments:assignment_list' %}" class="btn btn-outline-secondary">
-                        <i class="fas fa-tasks me-1"></i>Assignments
-                    </a>
+<section class="assessments-area py-5">
+    <style>
+        .assessments-area {
+            background: #f5f5fb;
+        }
+        .assessments-hero {
+            background: linear-gradient(135deg, #341C67, #5b2ab5 60%, #ff5d15);
+            border-radius: 28px;
+            padding: 40px;
+            color: #fff;
+            box-shadow: 0 20px 60px rgba(52, 28, 103, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .assessments-hero::after {
+            content: "";
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            width: 220px;
+            height: 220px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            transform: rotate(35deg);
+        }
+        .assessments-hero h1 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .assessments-hero p {
+            max-width: 520px;
+            opacity: 0.9;
+        }
+        .assessments-hero .hero-stat {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 15px 25px;
+            display: inline-flex;
+            flex-direction: column;
+            min-width: 140px;
+        }
+        .assessments-hero .hero-stat span {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .assessment-cta .btn {
+            border-radius: 999px;
+            font-weight: 600;
+            padding: 0.65rem 1.75rem;
+        }
+        .assessment-stat-card {
+            border: none;
+            border-radius: 24px;
+            padding: 25px;
+            color: #341C67;
+            background: #fff;
+            box-shadow: 0 25px 45px rgba(114, 114, 153, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .assessment-stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px rgba(114, 114, 153, 0.2);
+        }
+        .assessment-stat-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .recent-card,
+        .deadline-card {
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 25px 45px rgba(114, 114, 153, 0.15);
+        }
+        .recent-card .list-group-item,
+        .deadline-card .list-group-item {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(52, 28, 103, 0.08);
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .recent-card .list-group-item:last-child,
+        .deadline-card .list-group-item:last-child {
+            border-bottom: none;
+        }
+        .badge-soft-success {
+            background: rgba(25, 135, 84, 0.15);
+            color: #198754;
+        }
+        .badge-soft-warning {
+            background: rgba(255, 193, 7, 0.18);
+            color: #c28100;
+        }
+        .badge-soft-danger {
+            background: rgba(220, 53, 69, 0.15);
+            color: #dc3545;
+        }
+        .deadline-tag {
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            font-weight: 600;
+        }
+        @media (max-width: 767px) {
+            .assessments-hero {
+                padding: 30px;
+            }
+            .assessments-hero .hero-stat {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <div class="container">
+        <div class="assessments-hero mb-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 position-relative">
+                    <p class="text-uppercase small mb-2 fw-semibold" style="letter-spacing: 2px; opacity: 0.8;">YITP Learning Hub</p>
+                    <h1 class="display-6 mb-3">Assessment Command Center</h1>
+                    <p class="mb-4">Track your quiz attempts, assignments, and upcoming deadlines in one colorful dashboard built with YITP’s bold energy.</p>
+                    <div class="assessment-cta d-flex flex-wrap gap-3">
+                        <a href="{% url 'assessments:quiz_list' %}" class="btn btn-light text-dark"><i class="fas fa-question-circle me-2 text-primary"></i>Explore Quizzes</a>
+                        <a href="{% url 'assessments:assignment_list' %}" class="btn btn-outline-light"><i class="fas fa-tasks me-2"></i>View Assignments</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 mt-4 mt-lg-0">
+                    <div class="d-flex flex-wrap gap-3 justify-content-lg-end">
+                        <div class="hero-stat">
+                            <span>{{ total_quizzes }}</span>
+                            Quizzes Active
+                        </div>
+                        <div class="hero-stat">
+                            <span>{{ total_assignments }}</span>
+                            Assignments Live
+                        </div>
+                        <div class="hero-stat">
+                            <span>{{ completed_assessments }}</span>
+                            Completed Tasks
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="text-primary mb-2">
-                        <i class="fas fa-question-circle fa-2x"></i>
+        <div class="row gy-4 mb-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="assessment-stat-card">
+                    <div class="icon bg-light text-primary">
+                        <i class="fas fa-question-circle"></i>
                     </div>
-                    <h5 class="card-title">{{ total_quizzes }}</h5>
-                    <p class="card-text text-muted">Available Quizzes</p>
+                    <p class="text-muted mb-1">Available Quizzes</p>
+                    <h3 class="fw-bold">{{ total_quizzes }}</h3>
+                    <span class="small text-muted">Challenge your knowledge</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="assessment-stat-card">
+                    <div class="icon bg-light text-warning">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <p class="text-muted mb-1">Assignments</p>
+                    <h3 class="fw-bold">{{ total_assignments }}</h3>
+                    <span class="small text-muted">Deep-dive projects</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="assessment-stat-card">
+                    <div class="icon bg-light text-success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <p class="text-muted mb-1">Completed</p>
+                    <h3 class="fw-bold">{{ completed_assessments }}</h3>
+                    <span class="small text-muted">Wins on record</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="assessment-stat-card">
+                    <div class="icon bg-light text-danger">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <p class="text-muted mb-1">Pending</p>
+                    <h3 class="fw-bold">{{ pending_assessments }}</h3>
+                    <span class="small text-muted">Keep the momentum</span>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="text-secondary mb-2">
-                        <i class="fas fa-tasks fa-2x"></i>
-                    </div>
-                    <h5 class="card-title">{{ total_assignments }}</h5>
-                    <p class="card-text text-muted">Available Assignments</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="text-success mb-2">
-                        <i class="fas fa-check-circle fa-2x"></i>
-                    </div>
-                    <h5 class="card-title">{{ completed_assessments }}</h5>
-                    <p class="card-text text-muted">Completed</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="text-warning mb-2">
-                        <i class="fas fa-clock fa-2x"></i>
-                    </div>
-                    <h5 class="card-title">{{ pending_assessments }}</h5>
-                    <p class="card-text text-muted">Pending</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Recent Activity -->
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white border-bottom">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-history me-2"></i>Recent Activity
-                    </h5>
-                </div>
-                <div class="card-body">
-                    {% if recent_attempts %}
-                        <div class="list-group list-group-flush">
-                            {% for attempt in recent_attempts %}
-                            <div class="list-group-item border-0 px-0">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <h6 class="mb-1">{{ attempt.quiz.title }}</h6>
-                                        <p class="mb-1 text-muted">
-                                            Score: {{ attempt.score }}/{{ attempt.total_questions }}
-                                            ({{ attempt.percentage }}%)
-                                        </p>
-                                        <small class="text-muted">{{ attempt.completed_at|timesince }} ago</small>
+        <div class="row gy-4">
+            <div class="col-lg-8">
+                <div class="card recent-card">
+                    <div class="card-header bg-white border-0 pt-4 px-4">
+                        <h5 class="card-title mb-1">
+                            <i class="fas fa-history me-2 text-primary"></i>Recent Activity
+                        </h5>
+                        <p class="text-muted small mb-0">Your latest quiz attempts and performance trends.</p>
+                    </div>
+                    <div class="card-body px-4 pb-4">
+                        {% if recent_attempts %}
+                            <div class="list-group list-group-flush">
+                                {% for attempt in recent_attempts %}
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">{{ attempt.quiz.title }}</h6>
+                                            <p class="mb-1 text-muted small">
+                                                Score: {{ attempt.score }}/{{ attempt.total_questions }} • {{ attempt.percentage }}%
+                                            </p>
+                                            <small class="text-muted"><i class="far fa-clock me-1"></i>{{ attempt.completed_at|timesince }} ago</small>
+                                        </div>
+                                        <span class="badge {% if attempt.percentage >= 80 %}badge-soft-success{% elif attempt.percentage >= 60 %}badge-soft-warning{% else %}badge-soft-danger{% endif %}">
+                                            {{ attempt.percentage }}%
+                                        </span>
                                     </div>
-                                    <span class="badge bg-{% if attempt.percentage >= 80 %}success{% elif attempt.percentage >= 60 %}warning{% else %}danger{% endif %}">
-                                        {{ attempt.percentage }}%
-                                    </span>
                                 </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        <div class="text-center py-4">
-                            <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">No recent assessment activity</p>
-                            <a href="{% url 'assessments:quiz_list' %}" class="btn btn-primary">
-                                Start Your First Quiz
-                            </a>
-                        </div>
-                    {% endif %}
+                        {% else %}
+                            <div class="text-center py-5">
+                                <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
+                                <p class="text-muted mb-3">No recent assessment activity yet.</p>
+                                <a href="{% url 'assessments:quiz_list' %}" class="btn btn-primary">
+                                    <i class="fas fa-bolt me-2"></i>Start Your First Quiz
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-4">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white border-bottom">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-exclamation-triangle me-2"></i>Upcoming Deadlines
-                    </h5>
-                </div>
-                <div class="card-body">
-                    {% if upcoming_deadlines %}
-                        <div class="list-group list-group-flush">
-                            {% for assignment in upcoming_deadlines %}
-                            <div class="list-group-item border-0 px-0">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <h6 class="mb-1">{{ assignment.title }}</h6>
-                                        <small class="text-muted">Due: {{ assignment.due_date|date:"M d, Y" }}</small>
+            <div class="col-lg-4">
+                <div class="card deadline-card mb-4">
+                    <div class="card-header bg-white border-0 pt-4 px-4">
+                        <h5 class="card-title mb-1">
+                            <i class="fas fa-calendar-alt me-2 text-warning"></i>Upcoming Deadlines
+                        </h5>
+                        <p class="text-muted small mb-0">Stay ahead of assignment due dates.</p>
+                    </div>
+                    <div class="card-body px-4 pb-4">
+                        {% if upcoming_deadlines %}
+                            <div class="list-group list-group-flush">
+                                {% for assignment in upcoming_deadlines %}
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">{{ assignment.title }}</h6>
+                                            <small class="text-muted">Due {{ assignment.due_date|date:"M d, Y" }}</small>
+                                        </div>
+                                        <span class="deadline-tag bg-{% if assignment.days_until_due <= 1 %}danger{% elif assignment.days_until_due <= 3 %}warning{% else %}info{% endif %} bg-opacity-10 text-{% if assignment.days_until_due <= 1 %}danger{% elif assignment.days_until_due <= 3 %}warning{% else %}info{% endif %}">
+                                            {{ assignment.days_until_due }}d
+                                        </span>
                                     </div>
-                                    <span class="badge bg-{% if assignment.days_until_due <= 1 %}danger{% elif assignment.days_until_due <= 3 %}warning{% else %}info{% endif %}">
-                                        {{ assignment.days_until_due }} days
-                                    </span>
                                 </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
+                        {% else %}
+                            <div class="text-center py-4">
+                                <i class="fas fa-calendar-check fa-3x text-muted mb-3"></i>
+                                <p class="text-muted mb-1">No upcoming deadlines.</p>
+                                <small class="text-muted">You’re all caught up!</small>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card deadline-card">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3"><i class="fas fa-lightbulb me-2 text-info"></i>Need a boost?</h5>
+                        <p class="text-muted small mb-3">Jump into a lesson review or connect with mentors to sharpen your next attempt.</p>
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'courses:course_list' %}" class="btn btn-outline-primary"><i class="fas fa-play-circle me-2"></i>Review Lessons</a>
+                            <a href="{% url 'progress:achievements' %}" class="btn btn-outline-secondary"><i class="fas fa-award me-2"></i>View Achievements</a>
                         </div>
-                    {% else %}
-                        <div class="text-center py-4">
-                            <i class="fas fa-calendar-check fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">No upcoming deadlines</p>
-                        </div>
-                    {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}
 
 {% block extra_js %}

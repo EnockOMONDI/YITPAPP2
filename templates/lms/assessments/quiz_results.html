@@ -338,9 +338,6 @@
                         {% if study_materials %}<a href="{{ study_materials.url }}" class="btn btn-outline-warning w-100 mb-2"><i class="fas fa-book me-1"></i>Study Materials</a>{% endif %}
                         <a href="{% url 'courses:lesson_detail' course_slug=quiz.lesson.module.course.slug lesson_id=quiz.lesson.id %}" class="btn btn-outline-secondary w-100">Review Lesson Content</a>
                     </div>
-                    {% if not can_retake %}
-                    <div class="alert alert-info small"><i class="fas fa-info-circle me-1"></i>You've used all attempts. Contact your instructor for additional guidance.</div>
-                    {% endif %}
                     {% endif %}
                     <a href="{% url 'assessments:quiz_list' %}" class="btn btn-outline-secondary w-100"><i class="fas fa-list me-1"></i>All Quizzes</a>
                 </div>
