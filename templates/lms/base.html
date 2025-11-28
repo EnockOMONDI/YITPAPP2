@@ -159,11 +159,8 @@
     </div>
     <!-- Preloader End -->
 
-    {% if request.user.is_authenticated %}
-        {% include 'yitp/navbarprofile.html' %}
-    {% else %}
-        {% include 'yitp/navbar.html' %}
-    {% endif %}
+    {% include 'unified/navigation.html' %}
+    <div id="header-offset"></div>
 
     {% if messages %}
     <div class="messages-container">

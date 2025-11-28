@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <header>
     <div id="header-sticky" class="header__area header__transparent header__padding" style="padding-top: 20px; padding-bottom: 20px;">
         <div class="container-fluid">
@@ -19,114 +20,111 @@
                     }
                 }
 
-                /* Logo sizing improvements */
+                .logo img {
+                    max-height: 60px;
+                    width: auto;
+                }
+
+                @media (max-width: 575px) {
+                    .logo img {
+                        max-height: 48px;
+                    }
+                }
+
+                @media (min-width: 992px) {
+                    .header__left {
+                        min-height: 60px;
+                    }
+
+                    .logo {
+                        display: flex;
+                        align-items: center;
+                    }
+
                 .logo img {
                     transition: all 0.3s ease;
+                    height: auto;
+                    object-fit: contain;
                 }
 
-                /* Navigation link improvements */
+                .sidebar__content .logo img {
+                    max-height: 50px;
+                    width: auto;
+                }
+
+                    .header__category {
+                        display: flex;
+                        align-items: center;
+                        min-height: 60px;
+                    }
+
+                    .header__category .cat-menu {
+                        border-radius: 4px;
+                        transition: all 0.3s ease;
+                        white-space: nowrap;
+                        color: #341C67;
+                        font-weight: 500;
+                        text-decoration: none;
+                    }
+
+                .header__category .cat-menu:hover {
+                    color: #341C67;
+                    background-color: rgba(52, 28, 103, 0.08);
+                }
+
+                /* Ensure language/profile text maintains accent color */
+                .header__language .dropdown-toggle {
+                    color: #341C67 !important;
+                }
+
                 .main-menu ul li a {
+                    padding: 8px 0;
+                    font-weight: 500;
                     transition: all 0.3s ease;
-                    position: relative;
-                }
-
-                /* Authentication button improvements */
-                .header__auth .e-btn {
-                    transition: all 0.3s ease;
-                    border-radius: 6px;
-                }
-
-                /* Mobile menu improvements */
-                .sidebar__area {
-                    z-index: 9999;
-                }
-
-                /* Category menu improvements */
-                .cat-menu {
-                    transition: all 0.3s ease;
-                }
-
-                /* Dropdown improvements */
-                .user__dropdown {
-                    animation: fadeInDown 0.3s ease;
-                }
-
-                @keyframes fadeInDown {
-                    from {
-                        opacity: 0;
-                        transform: translateY(-10px);
+                    white-space: nowrap;
+                   
                     }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
+
+                    .header__auth {
+                        flex-shrink: 0;
+                    }
+
+                    .header__btn {
+                        flex-shrink: 0;
                     }
                 }
 
-                /* Responsive improvements */
-                @media (max-width: 1199px) {
-                    .header__auth .user__details {
-                        display: none;
+                @media (min-width: 1200px) {
+                    .main-menu ul li {
+                        margin-right: 10px !important;
+                    }
+
+                    .main-menu ul li:last-child {
+                        margin-right: 0 !important;
+                    }
+
+                    .logo {
+                        margin-right: 20px !important;
                     }
                 }
 
-                /* Mobile sidebar improvements */
-                .sidebar__wrapper {
-                    background: white;
-                    box-shadow: 0 0 30px rgba(0,0,0,0.1);
-                }
+                @media (max-width: 1199px) and (min-width: 992px) {
+                    .main-menu ul li {
+                        margin-right: 15px !important;
+                    }
 
-                /* Authentication state improvements */
-                .header__transparent .main-menu ul li a {
-                    color: white;
-                }
+                    .main-menu ul li a {
+                        font-size: 14px;
+                      
+                    }
 
-                .header__area.sticky .main-menu ul li a {
-                    color: #341C67;
-                }
+                    .logo {
+                        margin-right: 10px !important;
+                    }
 
-<<<<<<< ours
-                .header__transparent .cat-menu,
-                .header__transparent .user__toggle,
-                .header__transparent .user__name {
-                    color: #ff5d15;
-=======
-                .header__transparent .cat-menu {
-                    color: white;
->>>>>>> theirs
-                }
-
-                .header__area.sticky .cat-menu {
-                    color: #341C67;
-                }
-
-                /* Button state improvements */
-                .header__transparent .e-btn-border {
-                    border-color: white;
-                    color: white;
-                }
-
-                .header__transparent .e-btn-border:hover {
-                    background: white;
-                    color: #341C67;
-                }
-
-                .header__area.sticky .e-btn-border {
-                    border-color: #ff5d15;
-                    color: #ff5d15;
-                }
-
-                .header__area.sticky .e-btn-border:hover {
-                    background: #ff5d15;
-                    color: white;
-                }
-
-                /* Mobile toggle improvements */
-                .header__transparent .sidebar-toggle-btn .line {
-                    background-color: white;
-                }
-
-                .header__area.sticky .sidebar-toggle-btn .line {
-                    background-color: #341C67;
+                    .header__category {
+                        padding-left: 5px !important;
+                    }
                 }
             </style>
             <div class="row align-items-center">
@@ -139,117 +137,177 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Course Category Section -->
                 <div class="col-xxl-2 col-xl-2 col-lg-3 d-none d-lg-block">
                     <div class="header__category" style="padding-left: 10px;">
                         <nav>
-                            <ul>
-                                <li>
-                                    <a href="{% url 'yitp:web_courses_list' %}" class="cat-menu d-flex align-items-center" style="padding: 8px 12px; white-space: nowrap;">
-                                        <div class="cat-dot-icon d-inline-block" style="margin-right: 8px;">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle class="cat-dot" cx="2" cy="2" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="8" cy="2" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="14" cy="2" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="2" cy="8" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="8" cy="8" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="14" cy="8" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="2" cy="14" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="8" cy="14" r="2" fill="#ff5d15"/>
-                                                <circle class="cat-dot" cx="14" cy="14" r="2" fill="#ff5d15"/>
-                                            </svg>
-                                        </div>
-                                        <span>View Course</span>
-                                    </a>
-                                    <ul class="cat-submenu">
-                                        <li style="padding-left: 30px; color: #341C67;">
-                                            <a href="{% url 'yitp:web_courses_list' %}">YITP Course & Units</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                         
                         </nav>
                     </div>
                 </div>
-
-                <!-- Main Navigation -->
                 <div class="col-xxl-8 col-xl-8 col-lg-7 col-md-10 col-sm-8 col-6">
                     <div class="header__right d-flex justify-content-end align-items-center">
                         <div class="main-menu d-none d-xl-block" style="margin-right: 20px;">
                             <nav id="mobile-menu">
-                                <ul>
-                                    <li><a href="{% url 'yitp:about' %}">Our Story</a></li>
-                                    <li><a href="{% url 'yitp:team' %}">Our Team</a></li>
-                                    <li><a href="{% url 'yitp:events' %}">Events</a></li>
-                                    <li><a href="{% url 'yitp:faqs' %}">FAQs</a></li>
-                                    <li><a href="{% url 'yitp:contact' %}">Contact</a></li>
-                                    <li><a href="{% url 'yitp:documentation' %}">Documentation</a></li>
+                                <ul class="d-flex align-items-center" style="margin: 0; padding: 0; list-style: none;">
+                                    <li style="margin-right: 25px;">
+                                        <a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog-list' %}active{% endif %}">
+                                            Blogs &amp; News
+                                        </a>
+                                    </li>
+                                    <li style="margin-right: 25px;">
+                                        <a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'event_list' %}active{% endif %}">
+                                            Events
+                                        </a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
 
-                        <div class="header__btn d-flex align-items-center">
+                        <!-- Language Selector - Desktop -->
+                        <div class="header__language d-none d-lg-block" style="margin-right: 15px;">
+                            <div class="dropdown yitp-language-selector">
+                                <button class="dropdown-toggle d-flex align-items-center" id="yitpLanguageDropdown"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="color: #341C67; text-decoration: none; padding: 8px 12px; border-radius: 6px;">
+                                    <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px; font-size: 16px;"></i>
+                                    <span id="currentLanguageFlag" style="font-size: 16px; margin-right: 5px;">🇬🇧</span>
+                                    <span id="currentLanguageName" class="d-none d-lg-inline" style="font-weight: 500; margin-right: 5px;">
+                                        English
+                                    </span>
+                                    <i class="fas fa-chevron-down" style="font-size: 12px; color: #ff5d15;"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end yitp-language-menu" aria-labelledby="yitpLanguageDropdown">
+                                    <li>
+                                    <button type="button" class="dropdown-item yitp-language-option active" data-lang="en" aria-checked="true">
+                                            <span class="language-flag">🇬🇧</span>
+                                            <span class="language-name">English</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="sw" aria-checked="false">
+                                            <span class="language-flag">🇰🇪</span>
+                                            <span class="language-name">Swahili (Kiswahili)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="ar" aria-checked="false">
+                                            <span class="language-flag">🇸🇦</span>
+                                            <span class="language-name">Arabic (العربية)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="af" aria-checked="false">
+                                            <span class="language-flag">🇿🇦</span>
+                                            <span class="language-name">Africana (Afrikaans)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item yitp-language-option" data-lang="fr" aria-checked="false">
+                                            <span class="language-flag">🇫🇷</span>
+                                            <span class="language-name">French (Français)</span>
+                                            <span class="language-check text-success"><i class="fas fa-check"></i></span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Authentication Section -->
+                        <div class="header__auth d-none d-sm-block" style="margin-left: 15px; margin-right: 15px;">
                             {% if user.is_authenticated %}
-                                <div class="header__auth d-flex align-items-center">
-                                    <div class="user__avatar">
-                                        <div class="user__details d-flex align-items-center">
-                                            <span class="user__name me-2" style="color: #ff5d15!important ;" >{{ user.get_full_name|default:user.username }}</span>
-                                            <div class="user__dropdown">
-                                                <button class="user__dropdown-btn" type="button">
-                                                    <i class="fas fa-chevron-down"></i>
-                                                </button>
-                                                <ul class="user__dropdown-menu">
-                                                    {% with instructor_profile=user.instructor_profile|default:None %}
-                                                        {% if user.is_superuser %}
-                                                    <li><a href="{% url 'users:superuser_dashboard' %}"><i class="fas fa-user-shield me-2"></i>Super Dashboard</a></li>
-                                                    <li><a href="{% url 'users:superuser_create_user' %}"><i class="fas fa-user-plus me-2"></i>Create User</a></li>
-                                                    <li><a href="/admin/"><i class="fas fa-tools me-2"></i>Admin Panel</a></li>
-                                                            <li><a href="{% url 'users:dashboard_api_data' %}"><i class="fas fa-chart-area me-2"></i>Live Metrics</a></li>
-                                                            <li><a href="{% url 'progress:achievements' %}"><i class="fas fa-award me-2"></i>Achievements</a></li>
-                                                        {% elif instructor_profile and instructor_profile.is_active %}
-                                                            {% if instructor_profile.instructor_role == 'accountant' %}
-                                                                <li><a href="{% url 'users:accountant_dashboard' %}"><i class="fas fa-coins me-2"></i>Finance Dashboard</a></li>
-                                                                <li><a href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet me-2"></i>Billing Overview</a></li>
-                                                                <li><a href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line me-2"></i>Payment Analytics</a></li>
-                                                                <li><a href="{% url 'profile' %}?section=settings"><i class="fas fa-cog me-2"></i>Account Settings</a></li>
-                                                            {% elif instructor_profile.instructor_role == 'content_manager' %}
-                                                                <li><a href="{% url 'users:content_manager_dashboard' %}"><i class="fas fa-project-diagram me-2"></i>Content Dashboard</a></li>
-                                                                <li><a href="{% url 'users:content_management' %}"><i class="fas fa-file-code me-2"></i>Content Studio</a></li>
-                                                                <li><a href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group me-2"></i>Modules & Lessons</a></li>
-                                                                <li><a href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-bar me-2"></i>Content Analytics</a></li>
-                                                                <li><a href="{% url 'profile' %}?section=settings"><i class="fas fa-cog me-2"></i>Account Settings</a></li>
-                                                            {% else %}
-                                                                <li><a href="{% url 'users:instructor_dashboard' %}"><i class="fas fa-chalkboard-teacher me-2"></i>Instructor Dashboard</a></li>
-                                                                <li><a href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group me-2"></i>Manage Courses</a></li>
-                                                                <li><a href="{% url 'users:instructor_messages' %}"><i class="fas fa-envelope-open me-2"></i>Messages</a></li>
-                                                                <li><a href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-line me-2"></i>Analytics</a></li>
-                                                                <li><a href="{% url 'users:content_management' %}"><i class="fas fa-file-code me-2"></i>Content Studio</a></li>
-                                                                <li><a href="{% url 'users:instructor_profile' %}"><i class="fas fa-id-badge me-2"></i>My Profile</a></li>
-                                                            {% endif %}
-                                                        {% else %}
-                                                            <li><a href="{% url 'profile' %}"><i class="fas fa-id-badge me-2"></i>Profile Overview</a></li>
-                                                            <li><a href="{% url 'profile' %}?section=courses"><i class="fas fa-book me-2"></i>My Courses</a></li>
-                                                            <li><a href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line me-2"></i>Analytics</a></li>
-                                                            <li><a href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet me-2"></i>Billing</a></li>
-                                                            <li><a href="{% url 'profile' %}?section=settings"><i class="fas fa-cog me-2"></i>Account Settings</a></li>
-                                                            <li><a href="{% url 'progress:achievements' %}"><i class="fas fa-award me-2"></i>Achievements</a></li>
-                                                        {% endif %}
-                                                    {% endwith %}
-                                                    <li><a href="{% url 'yitp:contact' %}"><i class="fas fa-life-ring me-2"></i>Support</a></li>
-                                                    <li><a href="{% url 'logout' %}" class="text-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-                                                </ul>
+                                <!-- Authenticated User Menu -->
+                                <div class="auth__user-menu d-flex align-items-center">
+                                    <div class="user__info dropdown">
+                                        <a href="#" class="user__toggle d-flex align-items-center" id="yitpUserDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div class="user__avatar">
+                                                <span class="avatar__text" >
+                                                    {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
+                                                </span>
                                             </div>
-                                        </div>
+                                            <div class="user__details ml-10 d-none d-md-block">
+                                                <span class="user__name" style="color: #ff5d15;">
+                                                    {% if user.first_name %}
+                                                        {{ user.first_name }}
+                                                    {% else %}
+                                                        {{ user.username }}
+                                                    {% endif %}
+                                                </span>
+                                                <i style="color: #ff5d15;" class="fas fa-chevron-down ml-5"></i>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu user__dropdown" aria-labelledby="yitpUserDropdown">
+                                            <li class="dropdown-header">
+                                                <div class="user__info-full">
+                                                    <strong class="user__fullname">
+                                                        {% if user.first_name %}
+                                                            {{ user.first_name }} {{ user.last_name }}
+                                                        {% else %}
+                                                            {{ user.username }}
+                                                        {% endif %}
+                                                    </strong>
+                                                    <small class="user__email">{{ user.email }}</small>
+                                                </div>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            {% with instructor_profile=user.instructor_profile|default:None %}
+                                                {% if user.is_superuser %}
+                                                    <li><a class="dropdown-item" href="{% url 'users:superuser_dashboard' %}"><i class="fas fa-crown mr-10"></i>Admin Dashboard</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'users:superuser_create_user' %}"><i class="fas fa-user-plus mr-10"></i>Create User</a></li>
+                                                    <li><a class="dropdown-item" href="/admin/"><i class="fas fa-tools mr-10"></i>Django Admin</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'users:dashboard_api_data' %}"><i class="fas fa-broadcast-tower mr-10"></i>Live Metrics</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'progress:achievements' %}"><i class="fas fa-award mr-10"></i>Achievements</a></li>
+                                                {% elif instructor_profile and instructor_profile.is_active %}
+                                                    {% if instructor_profile.instructor_role == 'accountant' %}
+                                                        <li><a class="dropdown-item" href="{% url 'users:accountant_dashboard' %}"><i class="fas fa-coins mr-10"></i>Finance Dashboard</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet mr-10"></i>Billing Overview</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line mr-10"></i>Payment Analytics</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=settings"><i class="fas fa-cog mr-10"></i>Account Settings</a></li>
+                                                    {% elif instructor_profile.instructor_role == 'content_manager' %}
+                                                        <li><a class="dropdown-item" href="{% url 'users:content_manager_dashboard' %}"><i class="fas fa-project-diagram mr-10"></i>Content Dashboard</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:content_management' %}"><i class="fas fa-file-code mr-10"></i>Content Studio</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group mr-10"></i>Modules & Lessons</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-bar mr-10"></i>Content Analytics</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'profile' %}?section=settings"><i class="fas fa-cog mr-10"></i>Account Settings</a></li>
+                                                    {% else %}
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_dashboard' %}"><i class="fas fa-chalkboard-teacher mr-10"></i>Instructor Dashboard</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_courses' %}"><i class="fas fa-layer-group mr-10"></i>Manage Courses</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_messages' %}"><i class="fas fa-envelope-open mr-10"></i>Messages</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_analytics' %}"><i class="fas fa-chart-line mr-10"></i>Analytics</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:content_management' %}"><i class="fas fa-file-code mr-10"></i>Content Studio</a></li>
+                                                        <li><a class="dropdown-item" href="{% url 'users:instructor_profile' %}"><i class="fas fa-id-badge mr-10"></i>My Profile</a></li>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-id-badge mr-10"></i>Profile Overview</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}?section=courses"><i class="fas fa-book mr-10"></i>My Courses</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}?section=analytics"><i class="fas fa-chart-line mr-10"></i>Analytics</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}?section=billing"><i class="fas fa-wallet mr-10"></i>Billing</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'profile' %}?section=settings"><i class="fas fa-cog mr-10"></i>Account Settings</a></li>
+                                                    <li><a class="dropdown-item" href="{% url 'progress:achievements' %}"><i class="fas fa-award mr-10"></i>Achievements</a></li>
+                                                {% endif %}
+                                            {% endwith %}
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item logout-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt mr-10"></i>Logout</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             {% else %}
-                                <a href="{% url 'login' %}" class="e-btn e-btn-border me-2">Login</a>
-                                <a href="{% url 'register' %}" class="e-btn">Join Now</a>
+                                <!-- Unauthenticated User Buttons -->
+                                <div class="auth__buttons d-flex align-items-center">
+                                    <a href="{% url 'login' %}" class="e-btn mr-15">
+                                        <i class="fas fa-sign-in-alt mr-8"></i>
+                                        Login
+                                    </a>
+                                 
+                                </div>
                             {% endif %}
                         </div>
 
-                        <div class="sidebar__menu d-lg-none">
+                        <!-- Contact Button removed to make space for language selector -->
+                        <div class="sidebar__menu d-xl-none" style="margin-left: 20px;">
                             <div class="sidebar-toggle-btn" id="sidebar-toggle">
                                 <span class="line"></span>
                                 <span class="line"></span>
@@ -263,7 +321,7 @@
     </div>
 </header>
 
-<!-- sidebar area start -->
+<!-- Mobile sidebar -->
 <div class="sidebar__area">
     <div class="sidebar__wrapper">
         <div class="sidebar__close">
@@ -277,18 +335,6 @@
                 <a href="{% url 'yitp:home' %}">
                     <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="logo">
                 </a>
-            </div>
-            <div class="mobile__menu">
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'yitp:about' %}">Our Story</a></li>
-                        <li><a href="{% url 'yitp:team' %}">Our Team</a></li>
-                        <li><a href="{% url 'yitp:events' %}">Events</a></li>
-                        <li><a href="{% url 'yitp:faqs' %}">FAQs</a></li>
-                        <li><a href="{% url 'yitp:contact' %}">Contact</a></li>
-                        <li><a href="{% url 'yitp:documentation' %}">Documentation</a></li>
-                    </ul>
-                </nav>
             </div>
 
             <!-- Mobile Language Selector -->
@@ -363,34 +409,151 @@
                 </div>
             </div>
 
-            <div class="sidebar__contact mt-30">
-                <div class="sidebar__contact-content">
-                    <div class="sidebar__contact-title">
-                        <h5>Contact Info</h5>
-                    </div>
-                    <div class="sidebar__contact-list">
-                        <div class="sidebar__contact-item">
-                            <div class="sidebar__contact-icon">
-                                <i class="fal fa-envelope"></i>
+            <!-- Mobile Authentication Section -->
+            <div class="mobile__auth mb-30">
+                {% if user.is_authenticated %}
+                    <!-- Authenticated User Mobile Menu -->
+                    <div class="mobile__user-info mb-20">
+                        <div class="user__profile d-flex align-items-center p-15" style="background: #f8f9fa; border-radius: 6px;">
+                            <div class="user__avatar-mobile">
+                                <span class="avatar__text-mobile">
+                                    {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
+                                </span>
                             </div>
-                            <div class="sidebar__contact-text">
-                                <a href="mailto:info@youthimpacttraining.org">info@youthimpacttraining.org</a>
+                            <div class="user__details-mobile ml-15">
+                                <div class="user__name-mobile">
+                                    {% if user.first_name %}
+                                        {{ user.first_name }} {{ user.last_name }}
+                                    {% else %}
+                                        {{ user.username }}
+                                    {% endif %}
+                                </div>
+                                <small class="user__email-mobile">{{ user.email }}</small>
                             </div>
                         </div>
-                        <div class="sidebar__contact-item">
-                            <div class="sidebar__contact-icon">
-                                <i class="fal fa-phone"></i>
-                            </div>
-                            <div class="sidebar__contact-text">
-                                <a href="tel:+1234567890">+1 (234) 567-890</a>
-                            </div>
-                        </div>
                     </div>
-                </div>
+
+                    <div class="mobile__auth-links">
+                        <ul class="mobile__auth-menu">
+                            <li>
+                                {% if user.is_superuser %}
+                                    <a href="{% url 'users:superuser_dashboard' %}" class="mobile__auth-link">
+                                        <i class="fas fa-crown"></i>
+                                        <span>Admin Dashboard</span>
+                                    </a>
+                                    <a href="{% url 'users:superuser_create_user' %}" class="mobile__auth-link">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Create User</span>
+                                    </a>
+                                {% else %}
+                                    {% with instructor_profile=user.instructor_profile|default:None %}
+                                        {% if instructor_profile and instructor_profile.is_active %}
+                                            {% if instructor_profile.instructor_role == 'accountant' %}
+                                                <a href="{% url 'users:accountant_dashboard' %}" class="mobile__auth-link">
+                                                    <i class="fas fa-coins"></i>
+                                                    <span>Finance Dashboard</span>
+                                                </a>
+                                            {% elif instructor_profile.instructor_role == 'content_manager' %}
+                                                <a href="{% url 'users:content_manager_dashboard' %}" class="mobile__auth-link">
+                                                    <i class="fas fa-project-diagram"></i>
+                                                    <span>Content Dashboard</span>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'users:instructor_dashboard' %}" class="mobile__auth-link">
+                                                    <i class="fas fa-user-tie"></i>
+                                                    <span>Instructor Dashboard</span>
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="{% url 'profile' %}" class="mobile__auth-link">
+                                                <i class="fas fa-user"></i>
+                                                <span>My Profile</span>
+                                            </a>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endif %}
+                            </li>
+                            <li>
+                                <a href="{% url 'blogapp:blog-list' %}" class="mobile__auth-link">
+                                    <i class="fas fa-blog"></i>
+                                    <span>Blogs &amp; News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'events:event_list' %}" class="mobile__auth-link">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Events</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'yitp:registration' %}" class="mobile__auth-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Programs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}" class="mobile__auth-link logout-mobile">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <!-- Unauthenticated User Mobile Buttons -->
+                    <div class="mobile__auth-buttons">
+                        <a href="{% url 'login' %}" class="e-btn e-btn-border mb-15 w-100 text-center">
+                            <i class="fas fa-sign-in-alt mr-8"></i>
+                            Login
+                        </a>
+                        <a href="{% url 'register' %}" class="e-btn mb-15 w-100 text-center">
+                            <i class="fas fa-user-plus mr-8"></i>
+                            Sign Up
+                        </a>
+                        <a href="{% url 'yitp:contact' %}" class="e-btn e-btn-outline w-100 text-center">
+                            <i class="fas fa-envelope mr-8"></i>
+                            Contact Us
+                        </a>
+                        <a href="{% url 'blogapp:blog-list' %}" class="e-btn e-btn-outline w-100 text-center">
+                            <i class="fas fa-blog mr-8"></i>
+                            Blogs &amp; News
+                        </a>
+                        <a href="{% url 'events:event_list' %}" class="e-btn e-btn-outline w-100 text-center">
+                            <i class="fas fa-calendar-alt mr-8"></i>
+                            Events
+                        </a>
+                    </div>
+                {% endif %}
             </div>
+
+            <div class="mobile-menu fix"></div>
         </div>
     </div>
 </div>
-
-<!-- Mobile Sidebar Overlay -->
 <div class="body-overlay"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('header-sticky');
+    const headerOffset = document.getElementById('header-offset');
+
+    if (!header || !headerOffset) {
+        return;
+    }
+
+    const updateHeaderOffset = () => {
+        const headerHeight = header.offsetHeight || 0;
+        document.documentElement.style.setProperty('--header-sticky-offset', `${headerHeight}px`);
+
+        if (header.classList.contains('sticky')) {
+            document.body.classList.add('has-sticky-header');
+        } else {
+            document.body.classList.remove('has-sticky-header');
+        }
+    };
+
+    updateHeaderOffset();
+    window.addEventListener('resize', updateHeaderOffset);
+    window.addEventListener('scroll', updateHeaderOffset, { passive: true });
+});
+</script>
