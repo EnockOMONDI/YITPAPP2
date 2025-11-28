@@ -323,78 +323,7 @@
                 </a>
             </div>
 
-            <!-- Mobile Language Selector -->
-            <div class="mobile__language mb-20">
-                <div class="language__selector-mobile">
-                    <h6 class="mobile__menu-title" style="color: #341C67; margin-bottom: 15px;">
-                        <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px;"></i>
-                        Choose Language
-                    </h6>
-                    <div id="mobile-language-options" class="mobile__language-grid">
-                        <button type="button" class="mobile__language-option active" data-lang="en" aria-checked="true">
-                            <div class="language__item d-flex align-items-center p-10">
-                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇬🇧</span>
-                                <div class="language__details">
-                                    <span class="language-name" style="font-weight: 500; color: #341C67;">English</span>
-                                    <small class="text-muted">Default language</small>
-                                </div>
-                                <span class="language-check text-success">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </div>
-                        </button>
-                        <button type="button" class="mobile__language-option" data-lang="sw" aria-checked="false">
-                            <div class="language__item d-flex align-items-center p-10">
-                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇰🇪</span>
-                                <div class="language__details">
-                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Swahili (Kiswahili)</span>
-                                    <small class="text-muted">Popular in East Africa</small>
-                                </div>
-                                <span class="language-check text-success">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </div>
-                        </button>
-                        <button type="button" class="mobile__language-option" data-lang="ar" aria-checked="false">
-                            <div class="language__item d-flex align-items-center p-10">
-                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇸🇦</span>
-                                <div class="language__details">
-                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Arabic (العربية)</span>
-                                    <small class="text-muted">Spoken across North Africa</small>
-                                </div>
-                                <span class="language-check text-success">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </div>
-                        </button>
-                        <button type="button" class="mobile__language-option" data-lang="af" aria-checked="false">
-                            <div class="language__item d-flex align-items-center p-10">
-                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇿🇦</span>
-                                <div class="language__details">
-                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Africana (Afrikaans)</span>
-                                    <small class="text-muted">Southern Africa</small>
-                                </div>
-                                <span class="language-check text-success">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </div>
-                        </button>
-                        <button type="button" class="mobile__language-option" data-lang="fr" aria-checked="false">
-                            <div class="language__item d-flex align-items-center p-10">
-                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇫🇷</span>
-                                <div class="language__details">
-                                    <span class="language-name" style="font-weight: 500; color: #341C67;">French (Français)</span>
-                                    <small class="text-muted">Spoken widely across Africa</small>
-                                </div>
-                                <span class="language-check text-success">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+        
             <!-- Mobile Authentication Section -->
             <div class="mobile__auth mb-30">
                 {% if user.is_authenticated %}
@@ -474,6 +403,77 @@
                         </a>
                     </div>
                 {% endif %}
+            </div>
+            <!-- Mobile Language Selector -->
+            <div class="mobile__language mb-20">
+                <div class="language__selector-mobile">
+                    <h6 class="mobile__menu-title" style="color: #341C67; margin-bottom: 15px;">
+                        <i class="fas fa-globe" style="color: #ff5d15; margin-right: 8px;"></i>
+                        Choose Language
+                    </h6>
+                    <div id="mobile-language-options" class="mobile__language-grid">
+                        <button type="button" class="mobile__language-option active" data-lang="en" aria-checked="true">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇬🇧</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">English</span>
+                                    <small class="text-muted">Default language</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="sw" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇰🇪</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Swahili (Kiswahili)</span>
+                                    <small class="text-muted">Popular in East Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="ar" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇸🇦</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Arabic (العربية)</span>
+                                    <small class="text-muted">Spoken across North Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="af" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇿🇦</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">Africana (Afrikaans)</span>
+                                    <small class="text-muted">Southern Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                        <button type="button" class="mobile__language-option" data-lang="fr" aria-checked="false">
+                            <div class="language__item d-flex align-items-center p-10">
+                                <span class="language-flag" style="font-size: 18px; margin-right: 10px;">🇫🇷</span>
+                                <div class="language__details">
+                                    <span class="language-name" style="font-weight: 500; color: #341C67;">French (Français)</span>
+                                    <small class="text-muted">Spoken widely across Africa</small>
+                                </div>
+                                <span class="language-check text-success">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="mobile-menu fix"></div>

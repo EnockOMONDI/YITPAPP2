@@ -33800,3 +33800,148 @@ INFO 2025-11-28 15:05:24,078 basehttp 11327 6133968896 "GET /static/assets/img/f
 WARNING 2025-11-28 15:05:49,757 basehttp 11327 6150795264 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
 WARNING 2025-11-28 15:05:49,758 log 11327 6133968896 Not Found: /.well-known/appspecific/com.chrome.devtools.json
 WARNING 2025-11-28 15:05:49,759 basehttp 11327 6133968896 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 15:07:33,267 autoreload 12221 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-28 15:07:35,577 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 148509
+WARNING 2025-11-28 15:07:35,628 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:07:35,632 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:07:45,157 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:07:45,172 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 15:08:04,512 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 86334
+WARNING 2025-11-28 15:08:04,558 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:08:04,558 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:08:20,993 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:08:21,385 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:08:46,084 basehttp 12221 6179762176 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:08:46,085 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:08:46,115 log 12221 6196588544 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:08:46,115 basehttp 12221 6196588544 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:08:46,142 log 12221 6196588544 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:08:46,142 basehttp 12221 6196588544 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 15:10:32,000 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147888
+INFO 2025-11-28 15:10:51,329 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147888
+INFO 2025-11-28 15:11:14,070 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 85713
+WARNING 2025-11-28 15:11:30,514 basehttp 12221 6179762176 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:11:30,533 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:11:30,534 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 15:11:38,803 basehttp 12221 6162935808 "GET /profile/ HTTP/1.1" 200 104962
+INFO 2025-11-28 15:11:38,831 basehttp 12221 6325039104 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+WARNING 2025-11-28 15:11:38,849 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:11:38,849 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:11:38,903 basehttp 12221 6162935808 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 15:11:47,051 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:11:47,629 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 15:11:56,015 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152683
+WARNING 2025-11-28 15:11:56,055 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:11:56,055 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:12:07,820 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:12:07,829 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 15:17:12,938 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152683
+WARNING 2025-11-28 15:17:45,714 basehttp 12221 6325039104 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:17:45,738 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:17:45,738 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 15:17:50,390 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152683
+WARNING 2025-11-28 15:17:50,453 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:17:50,453 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:18:01,348 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:18:03,057 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 15:18:13,802 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152683
+WARNING 2025-11-28 15:18:13,834 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:18:13,834 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:18:27,773 basehttp 12221 6325039104 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 15:18:27,783 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:18:27,783 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 15:18:45,582 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 85713
+INFO 2025-11-28 15:19:05,098 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 85713
+INFO 2025-11-28 15:20:03,455 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 85713
+WARNING 2025-11-28 15:25:50,113 basehttp 12221 6325039104 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:25:50,134 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:25:50,135 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 15:25:53,793 basehttp 12221 6162935808 "GET /logout/ HTTP/1.1" 200 12743
+WARNING 2025-11-28 15:25:53,826 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:25:53,826 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:26:10,316 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:26:10,329 basehttp 12221 6162935808 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 15:26:10,330 basehttp 12221 6325039104 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 15:26:26,630 basehttp 12221 6162935808 "GET /login/ HTTP/1.1" 200 15010
+WARNING 2025-11-28 15:26:26,658 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:26:26,659 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:26:36,196 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:26:36,211 basehttp 12221 6162935808 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 15:26:36,211 basehttp 12221 6325039104 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:26:44,967 basehttp 12221 6162935808 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 15:26:44,967 basehttp 12221 6325039104 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:26:44,968 basehttp 12221 6341865472 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:26:44,976 log 12221 6358691840 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:26:44,977 basehttp 12221 6358691840 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:26:44,985 log 12221 6358691840 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:26:44,985 basehttp 12221 6358691840 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:26:44,997 basehttp 12221 6358691840 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 15:26:46,261 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 80402
+WARNING 2025-11-28 15:26:46,291 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:26:46,291 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:26:56,476 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:26:56,521 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 15:34:19,512 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 80402
+WARNING 2025-11-28 15:34:23,252 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:34:23,252 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:34:31,426 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:34:32,481 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 15:34:36,459 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 80402
+WARNING 2025-11-28 15:34:36,489 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:34:36,490 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:34:49,375 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:34:50,492 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 15:35:38,247 basehttp 12221 6162935808 "GET / HTTP/1.1" 200 80402
+WARNING 2025-11-28 15:35:38,281 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:35:38,281 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:35:54,786 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:35:54,806 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 15:54:13,518 basehttp 12221 6162935808 "GET /login/ HTTP/1.1" 200 15010
+INFO 2025-11-28 15:57:29,840 basehttp 12221 6162935808 "GET /login/ HTTP/1.1" 200 15010
+INFO 2025-11-28 15:57:46,626 basehttp 12221 6162935808 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-28 15:57:46,643 basehttp 12221 6162935808 "GET / HTTP/1.1" 302 0
+INFO 2025-11-28 15:57:46,667 basehttp 12221 6162935808 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 148399
+INFO 2025-11-28 15:58:15,553 basehttp 12221 6162935808 "GET /profile HTTP/1.1" 301 0
+INFO 2025-11-28 15:58:15,593 basehttp 12221 6162935808 "GET /profile/ HTTP/1.1" 200 104962
+INFO 2025-11-28 15:58:22,165 basehttp 12221 6162935808 "GET /profile/ HTTP/1.1" 200 104962
+WARNING 2025-11-28 15:58:48,701 basehttp 12221 6341865472 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:58:48,702 basehttp 12221 6325039104 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 15:58:48,716 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:58:48,716 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 15:58:57,739 basehttp 12221 6162935808 "GET /profile/ HTTP/1.1" 200 104961
+WARNING 2025-11-28 15:58:57,768 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 15:58:57,801 log 12221 6162935808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 15:58:57,802 basehttp 12221 6162935808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 15:58:57,827 basehttp 12221 6162935808 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 15:59:07,929 basehttp 12221 6162935808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 15:59:08,524 basehttp 12221 6162935808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 16:01:52,119 autoreload 19635 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-28 16:01:55,270 basehttp 19635 6170226688 "GET /profile/ HTTP/1.1" 200 104962
+WARNING 2025-11-28 16:01:55,325 log 19635 6170226688 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:01:55,325 basehttp 19635 6187053056 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 16:01:55,326 basehttp 19635 6170226688 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:02:03,396 basehttp 19635 6170226688 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 16:02:04,110 basehttp 19635 6170226688 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:02:21,212 log 19635 6170226688 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:02:21,212 basehttp 19635 6170226688 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 16:02:29,821 basehttp 19635 6170226688 "GET / HTTP/1.1" 200 85713
+WARNING 2025-11-28 16:02:29,863 log 19635 6170226688 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:02:29,864 basehttp 19635 6170226688 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:02:38,726 basehttp 19635 6170226688 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:02:38,734 basehttp 19635 6187053056 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 16:06:30,222 basehttp 19635 6170226688 "GET / HTTP/1.1" 200 85659
+WARNING 2025-11-28 16:06:30,261 log 19635 6170226688 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:06:30,262 basehttp 19635 6170226688 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:06:43,968 basehttp 19635 6170226688 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:06:44,002 basehttp 19635 6170226688 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 16:07:01,658 basehttp 19635 6170226688 "GET / HTTP/1.1" 200 85659
+WARNING 2025-11-28 16:07:04,258 log 19635 6170226688 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:07:04,258 basehttp 19635 6170226688 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:07:13,997 basehttp 19635 6170226688 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:07:14,009 basehttp 19635 6170226688 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 16:08:31,512 basehttp 19635 6170226688 "GET /logout/ HTTP/1.1" 200 12743
+WARNING 2025-11-28 16:08:31,550 log 19635 6170226688 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:08:31,550 basehttp 19635 6170226688 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:08:47,018 basehttp 19635 6203879424 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 16:08:47,018 basehttp 19635 6170226688 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:08:47,018 basehttp 19635 6187053056 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
