@@ -1,0 +1,178 @@
+# YITP Navigation Reference
+
+This document captures every navigation surface currently active in the Youth Impact Training Programme (YITP) project as of the latest commit. All URLs are listed exactly as referenced in the templates so product, QA, and engineering teams can trace how each role experiences the system.
+
+## 1. Public (Desktop) Navigation
+
+Rendered from `templates/unified/navigation.html` and included by every base template (`unified/base.html`, `yitp/base.html`, `yitp/baseprofile.html`, `lms/base.html`).
+
+### 1.1 Primary Links (always visible on desktop)
+
+| Label | URL helper | Notes |
+| --- | --- | --- |
+| Home (logo link) | `{% url 'yitp:home' %}` | Main landing page via the logo at the far-left. |
+| Blogs & News | `{% url 'blogapp:blog-list' %}` | Navigation item with active state tied to `blog-list`. |
+| Events | `{% url 'events:event_list' %}` | Navigation item with active state tied to `event_list`. |
+
+### 1.2 Language Selector (desktop)
+
+Dropdown button (`.yitp-language-selector`) with options:
+
+| Language | Data attribute |
+| --- | --- |
+| English | `data-lang="en"` |
+| Swahili (Kiswahili) | `data-lang="sw"` |
+| Arabic (العربية) | `data-lang="ar"` |
+| Africana (Afrikaans) | `data-lang="af"` |
+| French (Français) | `data-lang="fr"` |
+
+Each option updates the frontend Google Translate integration (`static/js/yitp-translate-basic.js`).
+
+### 1.3 Authentication Area (desktop)
+
+- **Anonymous visitors** see a single CTA: `Login` → `{% url 'login' %}`. (Additional buttons were pruned earlier to make space for language selector.)
+- **Authenticated users** see a dropdown anchored to the avatar chips. Menu items vary by role (see Sections 4–7).
+
+## 2. Mobile Navigation Drawer
+
+Triggered via the hamburger icon (`#sidebar-toggle`). Lives inside the same template block.
+
+### 2.1 Language Grid
+
+Repeats the five languages from Section 1.2. Buttons use the same `data-lang` attributes.
+
+### 2.2 Authenticated Mobile Links
+
+Structured as `.mobile__auth-menu` with conditional logic:
+
+| Role condition | Menu entries |
+| --- | --- |
+| `user.is_superuser` | `Admin Dashboard` → `{% url 'users:superuser_dashboard' %}`, `Create User` → `{% url 'users:superuser_create_user' %}` |
+| `instructor_profile.is_active` and `instructor_role == 'accountant'` | `Finance Dashboard` → `{% url 'users:accountant_dashboard' %}` |
+| `instructor_profile.is_active` and `instructor_role == 'content_manager'` | `Content Dashboard` → `{% url 'users:content_manager_dashboard' %}` |
+| `instructor_profile.is_active` and any other role (default instructor) | `Instructor Dashboard` → `{% url 'users:instructor_dashboard' %}` |
+| No special role | `My Profile` → `{% url 'profile' %}` |
+| Shared for everyone | `Programs` → `{% url 'yitp:registration' %}`, `Logout` → `{% url 'logout' %}` |
+
+### 2.3 Anonymous Mobile Buttons
+
+| Label | URL |
+| --- | --- |
+| Login | `{% url 'login' %}` |
+| Sign Up | `{% url 'register' %}` |
+| Contact Us | `{% url 'yitp:contact' %}` |
+
+## 3. Profile Navigation (Authenticated Students / Participants)
+
+There is no separate profile navbar; instead, the authenticated dropdown in Section 1.3 exposes contextual entries based on the user’s role.
+
+### 3.1 Base Authenticated Menu (non staff/instructor)
+
+| Order | Label | URL |
+| --- | --- | --- |
+| 1 | Profile Overview | `{% url 'profile' %}` |
+| 2 | My Courses | `{% url 'profile' %}?section=courses` |
+| 3 | Analytics | `{% url 'profile' %}?section=analytics` |
+| 4 | Billing | `{% url 'profile' %}?section=billing` |
+| 5 | Account Settings | `{% url 'profile' %}?section=settings` |
+| 6 | Achievements | `{% url 'progress:achievements' %}` |
+| 7 | Logout | `{% url 'logout' %}` (listed after a divider) |
+
+### 3.2 LMS Entry Points for Students
+
+Although the navigation template is shared, LMS-specific dashboards are exposed through:
+
+- `My Courses` (see above) → internal section switching.
+- Deep links from elsewhere (e.g., `courses:my_courses`, `progress:*`) rely on page content rather than nav.
+
+## 4. Superuser / Project Owner Navigation
+
+Condition: `user.is_superuser` inside the dropdown. Items appear in this order:
+
+| Label | URL |
+| --- | --- |
+| Admin Dashboard | `{% url 'users:superuser_dashboard' %}` |
+| Create User | `{% url 'users:superuser_create_user' %}` |
+| Django Admin | `/admin/` |
+| Live Metrics | `{% url 'users:dashboard_api_data' %}` |
+| Achievements | `{% url 'progress:achievements' %}` |
+| Logout | `{% url 'logout' %}` |
+
+These options also appear in the mobile drawer (Section 2.2).
+
+## 5. Instructor Navigation (General)
+
+Condition: `instructor_profile.is_active` with `instructor_role` not equal to `accountant` or `content_manager`. Desktop dropdown entries:
+
+| Label | URL |
+| --- | --- |
+| Instructor Dashboard | `{% url 'users:instructor_dashboard' %}` |
+| Manage Courses | `{% url 'users:instructor_courses' %}` |
+| Messages | `{% url 'users:instructor_messages' %}` |
+| Analytics | `{% url 'users:instructor_analytics' %}` |
+| Content Studio | `{% url 'users:content_management' %}` |
+| My Profile | `{% url 'users:instructor_profile' %}` |
+| Logout | `{% url 'logout' %}` |
+
+### 5.1 Dedicated Instructor Ribbon
+
+Views under `templates/instructor/*.html` also include `templates/instructor/navigation.html`, which overlays an instructor-only ribbon containing:
+
+| Quick Action | URL |
+| --- | --- |
+| New Module | `{% url 'admin:courses_module_add' %}` |
+| Assign Module | `{% url 'admin:users_moduleinstructor_add' %}` |
+| New Quiz | `{% url 'admin:assessments_quiz_add' %}` |
+| Messages (with badge) | `{% url 'users:instructor_messages' %}` |
+| Analytics | `{% url 'users:instructor_analytics' %}` |
+
+Breadcrumb root always links to `{% url 'users:instructor_dashboard' %}`.
+
+## 6. Content Manager Navigation
+
+Condition: `instructor_profile.instructor_role == 'content_manager'`.
+
+| Label | URL |
+| --- | --- |
+| Content Dashboard | `{% url 'users:content_manager_dashboard' %}` |
+| Content Studio | `{% url 'users:content_management' %}` |
+| Modules & Lessons | `{% url 'users:instructor_courses' %}` |
+| Content Analytics | `{% url 'users:instructor_analytics' %}` |
+| Account Settings | `{% url 'profile' %}?section=settings` |
+| Logout | `{% url 'logout' %}` |
+
+Displayed both in desktop dropdown and mobile drawer.
+
+## 7. Accountant Navigation
+
+Condition: `instructor_profile.instructor_role == 'accountant'`.
+
+| Label | URL |
+| --- | --- |
+| Finance Dashboard | `{% url 'users:accountant_dashboard' %}` |
+| Billing Overview | `{% url 'profile' %}?section=billing` |
+| Payment Analytics | `{% url 'profile' %}?section=analytics` |
+| Account Settings | `{% url 'profile' %}?section=settings` |
+| Logout | `{% url 'logout' %}` |
+
+## 8. LMS Navigation
+
+All LMS templates currently extend `unified/base.html`, so they reuse the public navigation. Additional LMS-specific access points come from page content (sidebars, tabs) rather than the global navbar. Key routes surfaced elsewhere:
+
+| Feature | URL |
+| --- | --- |
+| LMS Dashboard | `{% url 'courses:dashboard' %}` |
+| My Courses | `{% url 'courses:my_courses' %}` |
+| Progress Dashboard | `{% url 'progress:dashboard' %}` |
+| Achievements | `{% url 'progress:achievements' %}` |
+| Communication Hub | `{% url 'communication:dashboard' %}` |
+
+While not visible as top-level nav buttons, these routes are referenced throughout LMS templates (`templates/lms/*`) and from the authenticated dropdown (Achievements) and page content.
+
+## 9. Additional Notes
+
+- **Notifications:** `templates/unified/base.html` includes `includes/notifications.html` immediately after the navbar for all contexts. Indicators within the nav rely on the same data.
+- **Sticky behavior:** The nav writes CSS variables (`--header-sticky-offset`) via inline script to keep page content from jumping when the header becomes fixed.
+- **CTA buttons removed:** Only a Login button is rendered for anonymous users on desktop; mobile retains Login, Sign Up, and Contact Us.
+
+This document should be updated whenever a new role, menu item, or base template modifies the navigation include.
