@@ -33945,3 +33945,128 @@ WARNING 2025-11-28 16:08:31,550 basehttp 19635 6170226688 "GET /.well-known/apps
 WARNING 2025-11-28 16:08:47,018 basehttp 19635 6203879424 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
 WARNING 2025-11-28 16:08:47,018 basehttp 19635 6170226688 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
 WARNING 2025-11-28 16:08:47,018 basehttp 19635 6187053056 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+INFO 2025-11-28 16:10:03,025 autoreload 21147 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-28 16:10:30,263 basehttp 21147 6137999360 "GET / HTTP/1.1" 200 80348
+WARNING 2025-11-28 16:10:30,318 log 21147 6137999360 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:10:30,319 basehttp 21147 6137999360 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:10:59,506 basehttp 21147 6137999360 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:11:01,283 basehttp 21147 6137999360 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 16:11:54,652 basehttp 21147 6137999360 "GET /login/ HTTP/1.1" 200 15010
+INFO 2025-11-28 16:12:21,974 basehttp 21147 6137999360 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-28 16:12:21,989 basehttp 21147 6137999360 "GET / HTTP/1.1" 302 0
+INFO 2025-11-28 16:12:22,014 basehttp 21147 6137999360 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 148345
+WARNING 2025-11-28 16:12:47,578 basehttp 21147 6154825728 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 16:12:47,595 log 21147 6137999360 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:12:47,596 basehttp 21147 6137999360 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:12:58,372 basehttp 21147 6137999360 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 16:13:01,779 basehttp 21147 6137999360 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147834
+WARNING 2025-11-28 16:13:01,817 log 21147 6137999360 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:13:01,817 basehttp 21147 6137999360 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 16:34:32,401 basehttp 21147 6137999360 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147948
+INFO 2025-11-28 16:34:32,435 basehttp 21147 6137999360 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 304 0
+INFO 2025-11-28 16:34:32,435 basehttp 21147 6154825728 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-11-28 16:34:45,070 basehttp 21147 6154825728 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-11-28 16:38:20,711 autoreload 24801 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-28 16:38:23,827 basehttp 24801 6167015424 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 147948
+WARNING 2025-11-28 16:38:44,346 basehttp 24801 6183841792 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 16:38:44,348 log 24801 6167015424 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:38:44,349 basehttp 24801 6167015424 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-11-28 16:38:48,619 basehttp 24801 6167015424 "GET /logout/ HTTP/1.1" 200 12743
+WARNING 2025-11-28 16:38:48,653 log 24801 6167015424 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:38:48,653 basehttp 24801 6167015424 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:39:06,846 basehttp 24801 6167015424 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:39:06,859 basehttp 24801 6167015424 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-11-28 16:39:06,859 basehttp 24801 6183841792 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 16:39:12,746 basehttp 24801 6167015424 "GET / HTTP/1.1" 200 81363
+WARNING 2025-11-28 16:39:12,778 log 24801 6167015424 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:39:12,778 basehttp 24801 6167015424 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:39:27,762 basehttp 24801 6167015424 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:39:28,296 basehttp 24801 6167015424 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 16:39:43,702 basehttp 24801 6167015424 "GET /login/ HTTP/1.1" 200 15010
+INFO 2025-11-28 16:39:50,265 basehttp 24801 6167015424 "GET / HTTP/1.1" 200 81363
+INFO 2025-11-28 16:40:15,752 basehttp 24801 6167015424 "GET /login/ HTTP/1.1" 200 15010
+INFO 2025-11-28 16:40:39,379 basehttp 24801 6167015424 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-28 16:40:39,393 basehttp 24801 6167015424 "GET / HTTP/1.1" 302 0
+INFO 2025-11-28 16:40:39,413 basehttp 24801 6167015424 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/111/ HTTP/1.1" 200 148459
+INFO 2025-11-28 16:41:20,317 basehttp 24801 6167015424 "GET /lms/assessments/quizzes/30/take/ HTTP/1.1" 200 113323
+INFO 2025-11-28 16:41:53,309 basehttp 24801 6167015424 "GET /events/ HTTP/1.1" 200 44919
+INFO 2025-11-28 16:41:53,321 basehttp 24801 6167015424 "GET /static/assets/img/shape/yellow-bg-2.png HTTP/1.1" 200 2116
+INFO 2025-11-28 16:42:05,827 basehttp 24801 6167015424 "GET /profile/ HTTP/1.1" 200 105075
+INFO 2025-11-28 16:43:24,425 basehttp 24801 6167015424 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 152743
+INFO 2025-11-28 16:43:54,822 basehttp 24801 6167015424 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 147646
+INFO 2025-11-28 16:44:34,535 basehttp 24801 6167015424 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 147646
+INFO 2025-11-28 16:44:51,632 autoreload 26067 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-28 16:45:02,623 basehttp 26067 6203338752 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 147646
+WARNING 2025-11-28 16:45:25,219 log 26067 6203338752 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:45:25,220 basehttp 26067 6203338752 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:45:28,337 basehttp 26067 6203338752 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 16:45:36,166 basehttp 26067 6203338752 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 16:46:50,529 basehttp 26067 6203338752 "GET / HTTP/1.1" 200 86876
+INFO 2025-11-28 16:49:11,822 basehttp 26067 6203338752 "GET /profile HTTP/1.1" 301 0
+INFO 2025-11-28 16:49:11,862 basehttp 26067 6203338752 "GET /profile/ HTTP/1.1" 200 106178
+INFO 2025-11-28 16:49:37,061 basehttp 26067 6203338752 "GET /profile/?section=billing HTTP/1.1" 200 85862
+INFO 2025-11-28 16:52:11,788 basehttp 26067 6203338752 "GET /profile/?section=courses HTTP/1.1" 200 90725
+INFO 2025-11-28 16:52:14,419 basehttp 26067 6203338752 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 153846
+WARNING 2025-11-28 16:52:30,054 basehttp 26067 6220165120 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-11-28 16:52:30,075 log 26067 6203338752 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:52:30,075 basehttp 26067 6203338752 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:52:40,572 basehttp 26067 6203338752 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-28 16:57:01,185 basehttp 26067 6203338752 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 153846
+WARNING 2025-11-28 16:57:01,259 log 26067 6203338752 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 16:57:01,259 basehttp 26067 6203338752 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 16:57:11,467 basehttp 26067 6203338752 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 16:57:11,475 basehttp 26067 6203338752 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 17:03:58,513 autoreload 29557 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-28 17:04:02,329 basehttp 29557 6198046720 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 153846
+WARNING 2025-11-28 17:04:02,395 log 29557 6198046720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-28 17:04:02,396 basehttp 29557 6198046720 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-28 17:04:13,129 basehttp 29557 6198046720 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-28 17:04:22,803 basehttp 29557 6198046720 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-11-28 17:04:34,664 basehttp 29557 6198046720 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 153846
+INFO 2025-11-28 17:07:05,733 basehttp 29557 6198046720 "GET /profile/?section=courses HTTP/1.1" 200 90726
+INFO 2025-11-28 17:07:52,756 basehttp 29557 6198046720 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 153846
+INFO 2025-11-28 17:08:11,635 basehttp 29557 6198046720 "GET /events/ HTTP/1.1" 200 46022
+INFO 2025-11-28 17:08:30,124 basehttp 29557 6198046720 "GET / HTTP/1.1" 200 86876
+INFO 2025-11-28 17:08:58,502 basehttp 29557 6198046720 "GET /blogs/ HTTP/1.1" 200 42308
+INFO 2025-11-28 17:09:03,179 basehttp 29557 6198046720 "GET /logout/ HTTP/1.1" 200 12743
+INFO 2025-11-28 17:12:32,453 basehttp 29557 6198046720 "GET /login/ HTTP/1.1" 200 15010
+INFO 2025-11-28 17:12:55,368 basehttp 29557 6198046720 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-11-28 17:12:55,378 basehttp 29557 6198046720 "GET / HTTP/1.1" 302 0
+INFO 2025-11-28 17:12:55,401 basehttp 29557 6198046720 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 123399
+INFO 2025-11-29 20:22:18,757 autoreload 98456 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-29 20:22:38,392 basehttp 98456 6163623936 "GET / HTTP/1.1" 200 80348
+INFO 2025-11-29 20:22:38,424 basehttp 98456 6163623936 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7247
+INFO 2025-11-29 20:22:38,902 basehttp 98456 6180450304 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-11-29 20:22:38,919 basehttp 98456 6163623936 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-11-29 20:22:38,923 basehttp 98456 6180450304 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-11-29 20:22:38,924 basehttp 98456 6163623936 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-11-29 20:22:38,927 basehttp 98456 6180450304 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-11-29 20:22:38,927 basehttp 98456 6163623936 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-11-29 20:22:38,931 basehttp 98456 6180450304 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-11-29 20:22:38,932 basehttp 98456 6163623936 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-11-29 20:22:38,935 basehttp 98456 6180450304 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-11-29 20:22:38,945 basehttp 98456 6180450304 "GET /static/assets/css/navbar-auth.css HTTP/1.1" 200 7209
+INFO 2025-11-29 20:22:38,950 basehttp 98456 6180450304 "GET /static/assets/css/messages.css HTTP/1.1" 200 2902
+INFO 2025-11-29 20:22:41,463 basehttp 98456 6163623936 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-11-29 20:22:41,465 basehttp 98456 6180450304 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-11-29 20:22:41,468 basehttp 98456 6180450304 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-11-29 20:22:41,473 basehttp 98456 6180450304 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-11-29 20:22:41,476 basehttp 98456 6180450304 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-11-29 20:22:41,478 basehttp 98456 6163623936 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-11-29 20:22:41,483 basehttp 98456 6180450304 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-11-29 20:22:41,487 basehttp 98456 6163623936 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-11-29 20:22:41,489 basehttp 98456 6180450304 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-11-29 20:22:41,494 basehttp 98456 6163623936 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-11-29 20:22:41,495 basehttp 98456 6180450304 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-11-29 20:22:41,502 basehttp 98456 6180450304 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1040
+INFO 2025-11-29 20:22:41,504 basehttp 98456 6163623936 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-11-29 20:22:41,507 basehttp 98456 6163623936 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-11-29 20:22:41,508 basehttp 98456 6180450304 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-11-29 20:22:41,511 basehttp 98456 6180450304 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2025-11-29 20:22:41,515 basehttp 98456 6180450304 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 8712
+INFO 2025-11-29 20:22:41,518 basehttp 98456 6180450304 "GET /static/css/yitp-translate.css HTTP/1.1" 200 2241
+INFO 2025-11-29 20:22:41,778 basehttp 98456 6197276672 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-11-29 20:22:41,779 basehttp 98456 6180450304 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-11-29 20:22:41,782 basehttp 98456 6163623936 "GET /static/assets/fonts/fa-light-300.woff2 HTTP/1.1" 200 189452
+INFO 2025-11-29 20:22:41,822 basehttp 98456 6163623936 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-11-29 20:23:00,992 basehttp 98456 6163623936 "GET / HTTP/1.1" 200 80348

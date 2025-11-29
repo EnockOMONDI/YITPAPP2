@@ -9,6 +9,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.sites.models import Site
 from django.utils.html import strip_tags
+from django.core.mail import send_mail
 
 # Import Mailtrap service for email sending
 from users.mailtrap_service import mailtrap_service
