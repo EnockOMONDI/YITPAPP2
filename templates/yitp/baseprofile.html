@@ -112,11 +112,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/fontAwesome5Pro.css' %}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{% static 'assets/css/elegantFont.css' %}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{% static 'assets/css/default.css' %}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{% static 'assets/css/navbar-auth.css' %}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{% static 'assets/css/messages.css' %}" media="print" onload="this.media='all'">
-
-    <!-- YITP Translation System CSS -->
-    <link rel="stylesheet" href="{% static 'css/yitp-translate.css' %}" media="print" onload="this.media='all'">
     <!-- Google Analytics 4 -->
     {% if not debug %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -358,15 +354,6 @@
             }
         });
     </script>
-
-    <!-- YITP Translation System JavaScript - Basic Version -->
-    <script src="{% static 'js/yitp-translate-basic.js' %}" defer></script>
-
-    <!-- Translation Status Indicator -->
-    <div id="translation-status" class="translation-status" style="display: none;">
-        <i class="fas fa-globe"></i> <span id="translation-status-text">Translating...</span>
-    </div>
-
     {% block extra_js %}{% endblock %}
 </body>
 </html>

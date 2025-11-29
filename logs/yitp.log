@@ -34231,3 +34231,24 @@ INFO 2025-11-30 01:45:20,484 basehttp 39650 6127431680 "GET /profile/?section=co
 INFO 2025-11-30 01:46:35,618 basehttp 39650 6127431680 "GET /profile/?section=courses HTTP/1.1" 200 89498
 INFO 2025-11-30 01:46:54,084 basehttp 39650 6127431680 "GET /profile/ HTTP/1.1" 200 104952
 INFO 2025-11-30 01:47:43,602 basehttp 39650 6127431680 "GET /profile/ HTTP/1.1" 200 104952
+INFO 2025-11-30 02:22:23,301 autoreload 47628 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-30 02:22:32,218 basehttp 47628 6169325568 "GET /profile/ HTTP/1.1" 200 80342
+INFO 2025-11-30 02:22:36,232 basehttp 47628 6169325568 "GET /profile/?section=courses HTTP/1.1" 200 64888
+INFO 2025-11-30 02:22:46,393 basehttp 47628 6169325568 "GET /logout/ HTTP/1.1" 200 12673
+INFO 2025-11-30 02:22:50,542 basehttp 47628 6169325568 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-11-30 02:22:53,900 basehttp 47628 6169325568 "GET /register/ HTTP/1.1" 200 17044
+INFO 2025-11-30 02:23:00,520 basehttp 47628 6169325568 "GET /register/ HTTP/1.1" 200 17044
+WARNING 2025-11-30 02:23:20,925 log 47628 6169325568 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-30 02:23:20,927 basehttp 47628 6169325568 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-30 02:23:21,432 basehttp 47628 6169325568 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-30 02:23:38,280 log 47628 6169325568 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-30 02:23:38,281 basehttp 47628 6169325568 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-30 02:23:38,596 log 47628 6169325568 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-30 02:23:38,604 basehttp 47628 6169325568 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-30 02:23:38,745 basehttp 47628 6186151936 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-30 02:23:40,462 basehttp 47628 6169325568 "GET /profile/?section=courses HTTP/1.1" 302 0
+INFO 2025-11-30 02:23:40,589 basehttp 47628 6169325568 "GET / HTTP/1.1" 200 61011
+WARNING 2025-11-30 02:23:40,715 log 47628 6169325568 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-11-30 02:23:40,715 basehttp 47628 6169325568 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-11-30 02:23:41,308 basehttp 47628 6169325568 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-11-30 02:23:41,464 basehttp 47628 6186151936 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
