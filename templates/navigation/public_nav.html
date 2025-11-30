@@ -14,7 +14,7 @@
     gap: 1rem;
 }
 .yitp-header__brand img {
-    height: 82px;
+    height: 75px;
     width: auto;
 }
 .yitp-nav-links {
@@ -213,13 +213,13 @@
                     <a href="{% url 'communication:notifications' %}" class="btn btn-link text-decoration-none text-secondary position-relative" aria-label="Notifications">
                         <i class="fas fa-bell"></i>
                     </a>
-                    <a href="{% url 'profile' %}" class="yitp-profile-pill">
+                    <button type="button" class="yitp-profile-pill" id="yitpRoleToggle">
                         <span class="yitp-profile-avatar">
                             {{ user.first_name|first|default:user.username|first|upper }}
                         </span>
                         <span class="d-none d-md-inline">{{ user.first_name|default:user.username }}</span>
                         <i class="fas fa-chevron-down small text-muted"></i>
-                    </a>
+                    </button>
                 {% else %}
                     <a class="yitp-cta-outline" href="{% url 'login' %}">Login</a>
                     <a class="yitp-cta" href="{% url 'yitp:registration' %}">Apply Now</a>
@@ -248,6 +248,18 @@
             if (!dropdown.contains(evt.target)) {
                 dropdown.setAttribute('data-open', 'false');
             }
+        });
+    }
+})();
+
+(function() {
+    const toggle = document.getElementById('yitpRoleToggle');
+    const roleNav = document.getElementById('yitpRoleNav');
+    if (toggle && roleNav) {
+        toggle.addEventListener('click', function() {
+            const open = roleNav.getAttribute('data-open') === 'true';
+            roleNav.setAttribute('data-open', open ? 'false' : 'true');
+            toggle.classList.toggle('active', !open);
         });
     }
 })();

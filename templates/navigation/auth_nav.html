@@ -1,5 +1,8 @@
 {% load static %}
 <style>
+.yitp-role-nav-wrapper:not([data-open="true"]) .yitp-role-nav {
+    display: none;
+}
 .yitp-role-nav {
     background: #f8f9fb;
     border-top: 1px solid #e5e7eb;
@@ -70,6 +73,7 @@
 </style>
 
 {% if user.is_authenticated %}
+<div class="yitp-role-nav-wrapper" id="yitpRoleNav" data-open="false">
     {% with instructor_profile=user.instructor_profile|default:None %}
     {% if user.is_superuser %}
         {% include 'navigation/role_tabs_superuser.html' %}
@@ -79,8 +83,10 @@
         {% include 'navigation/role_tabs_content_manager.html' %}
     {% elif instructor_profile and instructor_profile.is_active %}
         {% include 'navigation/role_tabs_instructor.html' %}
-    {% else %}
-        {% include 'navigation/role_tabs_student.html' %}
+    <!-- {% else %}
+        {% include 'navigation/role_tabs_student.html' %} -->
     {% endif %}
     {% endwith %}
+    <div class="border-top d-lg-none"></div>
+</div>
 {% endif %}
