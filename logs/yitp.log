@@ -34505,3 +34505,104 @@ WARNING 2025-11-30 03:26:25,371 basehttp 61310 6157119488 "GET /.well-known/apps
 WARNING 2025-11-30 03:26:25,461 log 61310 6157119488 Not Found: /.well-known/appspecific/com.chrome.devtools.json
 WARNING 2025-11-30 03:26:25,465 basehttp 61310 6157119488 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
 WARNING 2025-11-30 03:26:25,465 basehttp 61310 6123466752 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-11-30 03:31:04,235 autoreload 65520 8685533888 Watching for file changes with StatReloader
+INFO 2025-11-30 03:31:06,396 basehttp 65520 6164901888 "GET / HTTP/1.1" 200 72005
+INFO 2025-11-30 03:31:08,457 basehttp 65520 6164901888 "GET /registration/ HTTP/1.1" 302 0
+INFO 2025-11-30 03:31:08,497 basehttp 65520 6164901888 "GET /register/ HTTP/1.1" 200 17044
+INFO 2025-11-30 03:31:13,395 basehttp 65520 6164901888 "GET /lms/courses/ HTTP/1.1" 302 0
+INFO 2025-11-30 03:31:13,430 basehttp 65520 6164901888 "GET /login/?next=/lms/courses/ HTTP/1.1" 200 14940
+INFO 2025-11-30 03:31:17,546 basehttp 65520 6164901888 "GET /blogs/ HTTP/1.1" 200 27516
+INFO 2025-11-30 03:31:18,003 basehttp 65520 6164901888 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2025-11-30 03:31:21,860 basehttp 65520 6164901888 "GET /events/ HTTP/1.1" 200 31230
+INFO 2025-11-30 03:31:21,952 basehttp 65520 6164901888 "GET /static/assets/img/shape/yellow-bg-2.png HTTP/1.1" 200 2116
+INFO 2025-11-30 03:31:23,503 basehttp 65520 6164901888 "GET /team/ HTTP/1.1" 200 59643
+INFO 2025-11-30 03:31:24,002 basehttp 65520 6215380992 "GET /static/assets/img/hero/levin.jpeg HTTP/1.1" 200 61761
+INFO 2025-11-30 03:31:24,003 basehttp 65520 6164901888 "GET /static/assets/img/hero/sylvester.jpeg HTTP/1.1" 200 68707
+INFO 2025-11-30 03:31:24,005 basehttp 65520 6232207360 "GET /static/assets/img/hero/lilian.jpeg HTTP/1.1" 200 63171
+INFO 2025-11-30 03:31:24,006 basehttp 65520 6181728256 "GET /static/assets/img/hero/ruth.jpeg HTTP/1.1" 200 97374
+INFO 2025-11-30 03:31:24,007 basehttp 65520 6198554624 "GET /static/assets/img/hero/meshack.jpeg HTTP/1.1" 200 188051
+INFO 2025-11-30 03:31:27,697 basehttp 65520 6198554624 "GET /support/ HTTP/1.1" 200 63162
+ERROR 2025-11-30 03:32:23,370 log 65520 6198554624 Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/yitp/views.py", line 133, in home
+    return render(request, 'yitp/index.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 210, in render
+    return template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 173, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'web_course_list' not found. 'web_course_list' is not a valid view function or pattern name.
+ERROR 2025-11-30 03:32:23,374 basehttp 65520 6198554624 "GET / HTTP/1.1" 500 202513
+INFO 2025-11-30 03:32:23,858 basehttp 65520 6198554624 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-11-30 03:34:01,971 basehttp 65520 6198554624 "GET / HTTP/1.1" 200 71951
+INFO 2025-11-30 03:34:05,192 basehttp 65520 6198554624 "GET /registration/ HTTP/1.1" 302 0
+INFO 2025-11-30 03:34:05,331 basehttp 65520 6198554624 "GET /register/ HTTP/1.1" 200 17044
+INFO 2025-11-30 03:34:48,870 basehttp 65520 6198554624 "GET / HTTP/1.1" 200 71952
+INFO 2025-11-30 03:34:53,785 basehttp 65520 6198554624 "GET / HTTP/1.1" 200 71952
+INFO 2025-11-30 03:35:21,751 basehttp 65520 6198554624 "GET / HTTP/1.1" 200 71935
+INFO 2025-11-30 03:36:20,372 basehttp 65520 6198554624 "GET / HTTP/1.1" 200 71935
+INFO 2025-11-30 03:36:44,490 basehttp 65520 6198554624 "GET / HTTP/1.1" 200 71935
+INFO 2025-11-30 03:37:05,953 basehttp 65520 6198554624 "GET / HTTP/1.1" 200 71935
+INFO 2025-11-30 03:37:15,083 basehttp 65520 6198554624 "GET /web_courses_list/ HTTP/1.1" 200 111674
+INFO 2025-11-30 03:37:15,498 basehttp 65520 6198554624 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2025-11-30 03:37:45,655 basehttp 65520 6198554624 "GET /registration2/ HTTP/1.1" 302 0
+INFO 2025-11-30 03:37:45,706 basehttp 65520 6198554624 "GET /register/ HTTP/1.1" 200 17044
+INFO 2025-11-30 03:38:20,458 basehttp 65520 6198554624 "GET /team/ HTTP/1.1" 200 59594
