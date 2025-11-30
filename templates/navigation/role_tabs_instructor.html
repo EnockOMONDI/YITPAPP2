@@ -1,0 +1,24 @@
+<div class="yitp-role-nav">
+    <div class="container-fluid">
+        <div class="yitp-role-nav__row">
+            <div class="yitp-role-label">
+                <i class="fas fa-chalkboard-teacher text-primary"></i>
+                Instructor Hub
+            </div>
+            <div class="yitp-role-tabs">
+                {% with current=request.resolver_match %}
+                <a href="{% url 'users:instructor_dashboard' %}" class="{% if current.url_name == 'instructor_dashboard' %}active{% endif %}">Teaching Hub</a>
+                <a href="{% url 'users:content_management' %}" class="{% if current.url_name == 'content_management' %}active{% endif %}">Content Studio</a>
+                <a href="{% url 'users:instructor_courses' %}" class="{% if current.url_name == 'instructor_courses' %}active{% endif %}">Modules &amp; Lessons</a>
+                <a href="{% url 'assessments:dashboard' %}" class="{% if current.namespace == 'assessments' %}active{% endif %}">Assessments</a>
+                <a href="{% url 'users:instructor_messages' %}" class="{% if current.url_name == 'instructor_messages' %}active{% endif %}">Messages</a>
+                <a href="{% url 'users:instructor_analytics' %}" class="{% if current.url_name == 'instructor_analytics' %}active{% endif %}">Analytics</a>
+                {% endwith %}
+            </div>
+            <div class="yitp-role-actions">
+                <a href="{% url 'admin:courses_module_add' %}"><i class="fas fa-plus me-1"></i>New Module</a>
+                <a href="{% url 'admin:assessments_quiz_add' %}"><i class="fas fa-question-circle me-1"></i>New Quiz</a>
+            </div>
+        </div>
+    </div>
+</div>

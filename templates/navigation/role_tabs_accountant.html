@@ -1,0 +1,21 @@
+<div class="yitp-role-nav">
+    <div class="container-fluid">
+        <div class="yitp-role-nav__row">
+            <div class="yitp-role-label">
+                <i class="fas fa-coins text-success"></i>
+                Finance Suite
+            </div>
+            <div class="yitp-role-tabs">
+                {% with current=request.resolver_match %}
+                <a href="{% url 'users:accountant_dashboard' %}" class="{% if current.url_name == 'accountant_dashboard' %}active{% endif %}">Finance Dashboard</a>
+                <a href="{% url 'profile' %}?section=billing" class="{% if request.GET.section == 'billing' %}active{% endif %}">Billing</a>
+                <a href="{% url 'profile' %}?section=analytics" class="{% if request.GET.section == 'analytics' %}active{% endif %}">Payment Analytics</a>
+                <a href="{% url 'payments:payment_methods' 1 %}" class="{% if current.namespace == 'payments' %}active{% endif %}">Payment Methods</a>
+                {% endwith %}
+            </div>
+            <div class="yitp-role-actions">
+                <a href="{% url 'payments:payment_status' 1 %}"><i class="fas fa-receipt me-1"></i>Recent Payments</a>
+            </div>
+        </div>
+    </div>
+</div>

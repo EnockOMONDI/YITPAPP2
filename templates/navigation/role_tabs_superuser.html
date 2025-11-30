@@ -1,0 +1,23 @@
+<div class="yitp-role-nav">
+    <div class="container-fluid">
+        <div class="yitp-role-nav__row">
+            <div class="yitp-role-label">
+                <i class="fas fa-crown text-warning"></i>
+                Superuser Controls
+            </div>
+            <div class="yitp-role-tabs">
+                {% with current=request.resolver_match %}
+                <a href="{% url 'users:superuser_dashboard' %}" class="{% if current.url_name == 'superuser_dashboard' %}active{% endif %}">HQ Dashboard</a>
+                <a href="{% url 'users:superuser_create_user' %}" class="{% if current.url_name == 'superuser_create_user' %}active{% endif %}">Users</a>
+                <a href="{% url 'users:dashboard_api_data' %}" class="{% if current.url_name == 'dashboard_api_data' %}active{% endif %}">Live Metrics</a>
+                <a href="/admin/" class="">Admin Console</a>
+                <a href="{% url 'analytics:dashboard' %}" class="{% if current.namespace == 'analytics' %}active{% endif %}">Analytics</a>
+                {% endwith %}
+            </div>
+            <div class="yitp-role-actions">
+                <a href="{% url 'users:export_users_csv' %}"><i class="fas fa-file-export me-1"></i>Export Users</a>
+                <a href="{% url 'users:export_payments_csv' %}"><i class="fas fa-file-invoice-dollar me-1"></i>Export Payments</a>
+            </div>
+        </div>
+    </div>
+</div>

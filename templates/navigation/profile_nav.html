@@ -1,0 +1,55 @@
+<style>
+.yitp-profile-nav {
+    position: sticky;
+    top: 70px;
+    border-right: 1px solid #f1f5f9;
+    padding-right: 1rem;
+}
+.yitp-profile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.yitp-profile-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: #475569;
+    font-weight: 600;
+}
+.yitp-profile-nav a.active {
+    background: #fff2ea;
+    color: #ff5d15;
+}
+.yitp-profile-nav a:hover:not(.active) {
+    background: #f8fafc;
+}
+@media (max-width: 992px) {
+    .yitp-profile-nav {
+        position: static;
+        padding-right: 0;
+    }
+    .yitp-profile-nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+</style>
+
+<nav class="yitp-profile-nav">
+    <ul>
+        <li><a href="{% url 'profile' %}" class="{% if not request.GET.section %}active{% endif %}"><i class="fas fa-user-circle"></i>Overview</a></li>
+        <li><a href="{% url 'profile' %}?section=courses" class="{% if request.GET.section == 'courses' %}active{% endif %}"><i class="fas fa-book"></i>Courses</a></li>
+        <li><a href="{% url 'profile' %}?section=analytics" class="{% if request.GET.section == 'analytics' %}active{% endif %}"><i class="fas fa-chart-line"></i>Analytics</a></li>
+        <li><a href="{% url 'profile' %}?section=billing" class="{% if request.GET.section == 'billing' %}active{% endif %}"><i class="fas fa-wallet"></i>Billing</a></li>
+        <li><a href="{% url 'progress:achievements' %}" class="{% if request.resolver_match.url_name == 'achievements' %}active{% endif %}"><i class="fas fa-award"></i>Achievements</a></li>
+        <li><a href="{% url 'profile' %}?section=settings" class="{% if request.GET.section == 'settings' %}active{% endif %}"><i class="fas fa-cog"></i>Settings</a></li>
+        <li><a href="{% url 'profile' %}?section=security" class="{% if request.GET.section == 'security' %}active{% endif %}"><i class="fas fa-lock"></i>Security</a></li>
+    </ul>
+</nav>

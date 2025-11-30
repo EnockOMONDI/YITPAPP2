@@ -158,7 +158,10 @@
     </div>
     <!-- Preloader End -->
 
-    {% include 'unified/navigation.html' %}
+    {% include 'navigation/public_nav.html' %}
+    {% block sub_navigation %}
+        {% include 'navigation/lms_nav.html' %}
+    {% endblock %}
     <div id="header-offset"></div>
 
     {% if messages %}

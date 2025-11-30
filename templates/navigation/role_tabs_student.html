@@ -1,0 +1,23 @@
+<div class="yitp-role-nav">
+    <div class="container-fluid">
+        <div class="yitp-role-nav__row">
+            <div class="yitp-role-label">
+                <i class="fas fa-graduation-cap text-warning"></i>
+                Student Workspace
+            </div>
+            <div class="yitp-role-tabs">
+                {% with current=request.resolver_match %}
+                <a href="{% url 'courses:dashboard' %}" class="{% if current.namespace == 'courses' and current.url_name == 'dashboard' %}active{% endif %}">Dashboard</a>
+                <a href="{% url 'courses:my_courses' %}" class="{% if current.namespace == 'courses' and current.url_name == 'my_courses' %}active{% endif %}">My Courses</a>
+                <a href="{% url 'progress:dashboard' %}" class="{% if current.namespace == 'progress' and current.url_name == 'dashboard' %}active{% endif %}">Progress</a>
+                <a href="{% url 'communication:dashboard' %}" class="{% if current.namespace == 'communication' %}active{% endif %}">Community</a>
+                <a href="{% url 'progress:achievements' %}" class="{% if current.namespace == 'progress' and current.url_name == 'achievements' %}active{% endif %}">Achievements</a>
+                <a href="{% url 'yitp:support' %}" class="{% if current.url_name == 'support' %}active{% endif %}">Support</a>
+                {% endwith %}
+            </div>
+            <div class="yitp-role-actions">
+                <a href="{% url 'courses:course_list' %}"><i class="fas fa-compass me-1"></i>Browse Courses</a>
+            </div>
+        </div>
+    </div>
+</div>

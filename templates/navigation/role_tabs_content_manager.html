@@ -1,0 +1,22 @@
+<div class="yitp-role-nav">
+    <div class="container-fluid">
+        <div class="yitp-role-nav__row">
+            <div class="yitp-role-label">
+                <i class="fas fa-project-diagram text-purple"></i>
+                Content Manager
+            </div>
+            <div class="yitp-role-tabs">
+                {% with current=request.resolver_match %}
+                <a href="{% url 'users:content_manager_dashboard' %}" class="{% if current.url_name == 'content_manager_dashboard' %}active{% endif %}">Content Dashboard</a>
+                <a href="{% url 'users:content_management' %}" class="{% if current.url_name == 'content_management' %}active{% endif %}">Studio</a>
+                <a href="{% url 'course_builder:dashboard' %}" class="{% if current.namespace == 'course_builder' %}active{% endif %}">Builder</a>
+                <a href="{% url 'users:instructor_courses' %}" class="{% if current.url_name == 'instructor_courses' %}active{% endif %}">Modules</a>
+                <a href="{% url 'users:instructor_analytics' %}" class="{% if current.url_name == 'instructor_analytics' %}active{% endif %}">Analytics</a>
+                {% endwith %}
+            </div>
+            <div class="yitp-role-actions">
+                <a href="{% url 'course_builder:wizard' %}"><i class="fas fa-magic me-1"></i>Launch Wizard</a>
+            </div>
+        </div>
+    </div>
+</div>

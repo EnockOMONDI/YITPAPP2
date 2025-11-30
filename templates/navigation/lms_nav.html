@@ -1,0 +1,51 @@
+{% if course %}
+<style>
+.yitp-lms-nav {
+    background: #0f172a;
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+.yitp-lms-nav__list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 0.6rem 1rem;
+}
+.yitp-lms-nav__list a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid transparent;
+}
+.yitp-lms-nav__list a.active {
+    color: #ffffff;
+    border-color: #ff5d15;
+}
+.yitp-lms-nav__meta {
+    padding: 0.35rem 1rem;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+</style>
+
+<div class="yitp-lms-nav">
+    <div class="yitp-lms-nav__list">
+        <a href="{% url 'courses:course_detail' course.slug %}" class="{% if request.resolver_match.url_name == 'course_detail' %}active{% endif %}">Course Dashboard</a>
+        <a href="{% url 'courses:course_detail' course.slug %}#modules" class="">Modules</a>
+        <a href="{% url 'courses:course_detail' course.slug %}#lessons" class="{% if request.resolver_match.url_name == 'lesson_detail' %}active{% endif %}">Lessons</a>
+        <a href="{% url 'assessments:quiz_list' %}" class="{% if request.resolver_match.namespace == 'assessments' %}active{% endif %}">Quizzes</a>
+        <a href="{% url 'progress:course_progress' course.id %}" class="{% if request.resolver_match.url_name == 'course_progress' %}active{% endif %}">Progress</a>
+        <a href="{% url 'communication:dashboard' %}" class="{% if request.resolver_match.namespace == 'communication' %}active{% endif %}">Community</a>
+        <a href="{% url 'progress:achievements' %}" class="{% if request.resolver_match.url_name == 'achievements' %}active{% endif %}">Achievements</a>
+    </div>
+    <div class="yitp-lms-nav__meta">
+        <strong>{{ course.title }}</strong> · {{ course.level|default:"Self-paced" }}
+    </div>
+</div>
+{% endif %}

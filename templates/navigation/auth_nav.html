@@ -1,0 +1,86 @@
+{% load static %}
+<style>
+.yitp-role-nav {
+    background: #f8f9fb;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+.yitp-role-nav__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.yitp-role-label {
+    font-weight: 600;
+    color: #341C67;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.yitp-role-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+.yitp-role-tabs a {
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    color: #475569;
+    background: #ffffff;
+}
+.yitp-role-tabs a.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff5d15, #ff7b3d);
+    border-color: transparent;
+}
+.yitp-role-tabs a:hover:not(.active) {
+    border-color: #ffd2be;
+    color: #341C67;
+}
+.yitp-role-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.yitp-role-actions a {
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 0.35rem 0.75rem;
+    border: 1px dashed rgba(255,93,21,0.4);
+    color: #ff5d15;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+    .yitp-role-nav__row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .yitp-role-actions {
+        width: 100%;
+    }
+}
+</style>
+
+{% if user.is_authenticated %}
+    {% with instructor_profile=user.instructor_profile|default:None %}
+    {% if user.is_superuser %}
+        {% include 'navigation/role_tabs_superuser.html' %}
+    {% elif instructor_profile and instructor_profile.is_active and instructor_profile.instructor_role == 'accountant' %}
+        {% include 'navigation/role_tabs_accountant.html' %}
+    {% elif instructor_profile and instructor_profile.is_active and instructor_profile.instructor_role == 'content_manager' %}
+        {% include 'navigation/role_tabs_content_manager.html' %}
+    {% elif instructor_profile and instructor_profile.is_active %}
+        {% include 'navigation/role_tabs_instructor.html' %}
+    {% else %}
+        {% include 'navigation/role_tabs_student.html' %}
+    {% endif %}
+    {% endwith %}
+{% endif %}

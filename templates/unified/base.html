@@ -384,7 +384,8 @@
 </head>
 <body>
     <!-- YITP Main Navigation -->
-    {% include 'unified/navigation.html' %}
+    {% include 'navigation/public_nav.html' %}
+    {% block sub_navigation %}{% endblock %}
     <div id="header-offset"></div>
     
     {% if messages %}
