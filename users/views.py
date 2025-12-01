@@ -17,7 +17,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, url_has_allowed_host_and_scheme
 from django.utils.encoding import force_bytes
-from django.db.models import Count, Sum, Q, Avg
+from django.db.models import Count, Sum, Q, Avg, Prefetch
 from django.http import HttpResponse
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile
 from .forms import SponsorshipRequestForm, UserProfileForm, ProfileDetailsForm, AdminUserCreationForm
@@ -2045,6 +2045,7 @@ def superuser_dashboard(request):
         from assessments.models import Quiz, Question
         from progress.models import Enrollment, LessonProgress, QuizAttempt
         from payments.models import Payment
+        from users.models import ModuleInstructor
 
         # Revenue & Payment Metrics
         total_payments = Payment.objects.filter(status='completed').aggregate(
@@ -2085,6 +2086,22 @@ def superuser_dashboard(request):
             completed_at__isnull=False
         ).aggregate(avg_score=Avg('score'))
 
+        module_prefetch = Prefetch(
+            'module_instructors',
+            queryset=ModuleInstructor.objects.filter(is_active=True)
+            .select_related('instructor')
+            .order_by('assignment_role')
+        )
+        recent_modules = Module.objects.select_related('course') \
+            .prefetch_related(module_prefetch) \
+            .order_by('-updated_at')[:8]
+        active_module_assignments = ModuleInstructor.objects.filter(is_active=True).count()
+        unassigned_modules = Module.objects.annotate(
+            active_assignments=Count('module_instructors', filter=Q(module_instructors__is_active=True))
+        ).filter(active_assignments=0).count()
+        module_assignment_activity = ModuleInstructor.objects.select_related('module__course', 'instructor') \
+            .order_by('-assigned_at')[:8]
+
     except ImportError as e:
         # Fallback values if models don't exist
         total_payments = {'total': 0, 'count': 0}
@@ -2103,6 +2120,10 @@ def superuser_dashboard(request):
         recent_enrollments = []
         recent_payments = []
         avg_quiz_score = {'avg_score': 0}
+        recent_modules = []
+        module_assignment_activity = []
+        unassigned_modules = 0
+        active_module_assignments = 0
 
     # Instructor Management
     instructors = User.objects.filter(courses_taught__isnull=False).distinct() if 'courses_taught' in [f.name for f in User._meta.get_fields()] else User.objects.filter(is_staff=True)
@@ -2282,6 +2303,10 @@ def superuser_dashboard(request):
         'total_lessons': total_lessons,
         'total_quizzes': total_quizzes,
         'popular_courses': popular_courses,
+        'recent_modules': recent_modules,
+        'module_assignment_activity': module_assignment_activity,
+        'unassigned_modules': unassigned_modules,
+        'active_module_assignments': active_module_assignments,
 
         # Enrollments
         'total_enrollments': total_enrollments,

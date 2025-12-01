@@ -35323,3 +35323,365 @@ INFO 2025-12-01 11:33:25,713 basehttp 21341 6150156288 "GET / HTTP/1.1" 200 7249
 INFO 2025-12-01 11:33:54,158 basehttp 21341 6150156288 "GET / HTTP/1.1" 200 72497
 INFO 2025-12-01 11:34:43,221 basehttp 21341 6150156288 "GET /registration/ HTTP/1.1" 302 0
 INFO 2025-12-01 11:34:43,240 basehttp 21341 6150156288 "GET /register/ HTTP/1.1" 200 17044
+INFO 2025-12-01 11:43:07,393 autoreload 25651 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-01 11:43:10,383 basehttp 25651 6129610752 "GET / HTTP/1.1" 200 73458
+INFO 2025-12-01 11:43:10,976 basehttp 25651 6129610752 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 200 1840
+INFO 2025-12-01 11:44:43,180 autoreload 26127 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-01 11:44:44,484 basehttp 26127 6169161728 "GET / HTTP/1.1" 200 73458
+INFO 2025-12-01 11:44:46,830 basehttp 26127 6169161728 "GET / HTTP/1.1" 200 73458
+INFO 2025-12-01 11:44:47,101 basehttp 26127 6169161728 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 304 0
+INFO 2025-12-01 11:44:50,987 basehttp 26127 6169161728 "GET / HTTP/1.1" 200 73458
+WARNING 2025-12-01 11:47:08,354 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:47:08,358 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:47:08,495 basehttp 26127 6169161728 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 11:47:08,591 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:48:27,760 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:48:27,765 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:48:28,242 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:48:28,338 basehttp 26127 6169161728 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 11:48:28,338 basehttp 26127 12901707776 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+INFO 2025-12-01 11:48:37,913 basehttp 26127 6169161728 "GET / HTTP/1.1" 200 73458
+WARNING 2025-12-01 11:48:38,211 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:48:38,211 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:48:38,592 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 11:48:38,605 basehttp 26127 12901707776 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 304 0
+WARNING 2025-12-01 11:48:38,715 basehttp 26127 12901707776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 11:48:50,489 basehttp 26127 6169161728 "GET /login/ HTTP/1.1" 200 14940
+WARNING 2025-12-01 11:48:51,130 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:48:51,132 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:48:51,231 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:48:51,287 basehttp 26127 12901707776 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 11:48:51,288 basehttp 26127 6169161728 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 11:49:11,074 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:49:11,076 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:49:11,767 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:49:11,972 basehttp 26127 12901707776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 11:50:02,701 basehttp 26127 6169161728 "GET / HTTP/1.1" 200 73458
+WARNING 2025-12-01 11:50:02,890 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:50:02,893 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:50:03,522 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 11:50:03,572 basehttp 26127 12901707776 "GET /static/js/yitp-translate-basic.js HTTP/1.1" 304 0
+WARNING 2025-12-01 11:50:03,676 basehttp 26127 12901707776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 11:50:10,755 basehttp 26127 6169161728 "GET / HTTP/1.1" 200 73458
+WARNING 2025-12-01 11:50:15,377 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:50:15,378 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:50:15,969 basehttp 26127 6169161728 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 11:50:16,037 basehttp 26127 12901707776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 11:50:58,469 basehttp 26127 6169161728 "GET /login/ HTTP/1.1" 200 14940
+WARNING 2025-12-01 11:50:58,639 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:50:58,639 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:50:59,241 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:50:59,335 basehttp 26127 6169161728 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 11:50:59,336 basehttp 26127 12901707776 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 11:51:07,541 basehttp 26127 6169161728 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 11:51:07,580 log 26127 12918534144 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:51:07,580 basehttp 26127 12901707776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:51:07,580 basehttp 26127 12918534144 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:51:07,627 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:51:07,629 log 26127 12918534144 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:51:07,630 basehttp 26127 12918534144 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 11:51:11,127 basehttp 26127 12918534144 "GET /registration/ HTTP/1.1" 302 0
+INFO 2025-12-01 11:51:11,155 basehttp 26127 12918534144 "GET /register/ HTTP/1.1" 200 17044
+WARNING 2025-12-01 11:51:11,535 log 26127 12918534144 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:51:11,535 basehttp 26127 12918534144 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:51:12,068 basehttp 26127 12918534144 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:51:12,143 basehttp 26127 12901707776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 11:51:12,175 basehttp 26127 6169161728 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 11:54:36,960 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:54:36,962 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:54:37,452 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:54:37,559 basehttp 26127 12901707776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 11:54:40,875 basehttp 26127 6169161728 "GET / HTTP/1.1" 200 72497
+WARNING 2025-12-01 11:54:41,304 log 26127 6169161728 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 11:54:41,304 basehttp 26127 6169161728 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 11:54:41,694 basehttp 26127 6169161728 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 11:54:41,783 basehttp 26127 12901707776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:00:07,821 autoreload 28936 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-01 12:00:11,981 basehttp 28936 6202699776 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:00:12,467 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:00:12,468 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:00:12,960 basehttp 28936 6202699776 "GET /static/js/yitp-translate.js HTTP/1.1" 200 1802
+WARNING 2025-12-01 12:00:12,988 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:00:13,149 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:00:24,977 basehttp 28936 6202699776 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:00:25,214 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:00:25,214 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:00:26,233 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:00:26,235 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:02:30,916 basehttp 28936 6202699776 "GET / HTTP/1.1" 200 76665
+INFO 2025-12-01 12:02:30,968 basehttp 28936 6202699776 - Broken pipe from ('127.0.0.1', 65363)
+INFO 2025-12-01 12:02:31,850 basehttp 28936 6219526144 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:02:32,111 log 28936 6219526144 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:02:32,112 basehttp 28936 6219526144 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:02:32,651 basehttp 28936 6219526144 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 12:02:32,892 basehttp 28936 6202699776 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+WARNING 2025-12-01 12:02:32,934 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:05:13,840 basehttp 28936 6202699776 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:05:14,300 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:05:14,302 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:05:16,155 basehttp 28936 6219526144 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+WARNING 2025-12-01 12:05:16,167 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:05:16,454 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:06:52,068 basehttp 28936 6202699776 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:06:52,967 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:06:52,967 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:06:53,238 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 12:06:53,706 basehttp 28936 6219526144 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:06:53,981 log 28936 6219526144 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:06:53,982 basehttp 28936 6219526144 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:06:54,608 basehttp 28936 6219526144 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 12:06:54,666 basehttp 28936 6202699776 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+WARNING 2025-12-01 12:06:54,844 basehttp 28936 6202699776 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:08:10,032 basehttp 28936 6202699776 "GET /blogs/ HTTP/1.1" 200 32197
+WARNING 2025-12-01 12:08:10,584 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:08:10,587 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:08:12,146 basehttp 28936 6202699776 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+WARNING 2025-12-01 12:08:12,183 basehttp 28936 6202699776 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 12:08:12,318 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 12:08:12,320 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 12:08:15,539 basehttp 28936 6202699776 "GET /events/ HTTP/1.1" 200 35911
+WARNING 2025-12-01 12:08:17,372 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:08:17,373 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:08:17,834 basehttp 28936 6236352512 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:08:17,839 basehttp 28936 6202699776 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 12:08:17,840 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:08:17,940 basehttp 28936 6202699776 "GET /static/assets/img/shape/yellow-bg-2.png HTTP/1.1" 200 2116
+INFO 2025-12-01 12:08:18,765 basehttp 28936 6202699776 "GET /team/ HTTP/1.1" 200 64324
+WARNING 2025-12-01 12:08:18,959 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:08:18,963 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:08:19,635 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:08:19,902 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:08:26,069 basehttp 28936 6202699776 "GET /contact/ HTTP/1.1" 200 69317
+WARNING 2025-12-01 12:08:26,457 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:08:26,457 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:08:26,815 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:08:26,880 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:14:44,802 basehttp 28936 6202699776 "GET /contact/ HTTP/1.1" 200 69317
+WARNING 2025-12-01 12:14:45,107 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:14:45,111 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:14:45,580 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 12:14:45,651 basehttp 28936 6219526144 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+WARNING 2025-12-01 12:14:45,711 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:15:47,061 basehttp 28936 6202699776 "GET /events/ HTTP/1.1" 200 35911
+WARNING 2025-12-01 12:15:48,538 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:15:48,540 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:15:49,940 basehttp 28936 6219526144 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 12:15:50,094 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:15:50,507 basehttp 28936 6236352512 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:15:52,962 basehttp 28936 6202699776 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:15:54,373 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:15:54,376 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:15:55,315 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:15:56,013 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:16:04,257 basehttp 28936 6202699776 "GET /web_courses_list/ HTTP/1.1" 200 116404
+WARNING 2025-12-01 12:16:06,272 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:16:06,272 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:16:06,846 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:16:07,294 basehttp 28936 6219526144 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:16:13,214 basehttp 28936 6202699776 "GET /registration2/ HTTP/1.1" 302 0
+INFO 2025-12-01 12:16:13,679 basehttp 28936 6202699776 "GET /register/ HTTP/1.1" 200 17044
+WARNING 2025-12-01 12:16:16,341 log 28936 6202699776 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:16:16,386 basehttp 28936 6202699776 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:16:18,185 basehttp 28936 6219526144 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 12:16:18,186 basehttp 28936 6202699776 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:16:18,188 basehttp 28936 6236352512 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:28:49,799 autoreload 46379 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-01 12:33:33,252 basehttp 46379 6159364096 "GET /register/ HTTP/1.1" 200 17044
+WARNING 2025-12-01 12:33:33,766 log 46379 6159364096 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:33:33,767 basehttp 46379 6159364096 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:33:34,450 basehttp 46379 6159364096 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:33:34,646 basehttp 46379 6159364096 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 12:33:34,648 basehttp 46379 6176190464 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+INFO 2025-12-01 12:33:35,889 basehttp 46379 6159364096 "GET / HTTP/1.1" 200 76665
+WARNING 2025-12-01 12:33:36,182 log 46379 6159364096 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:33:36,182 basehttp 46379 6159364096 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:33:36,982 basehttp 46379 6176190464 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+WARNING 2025-12-01 12:33:36,987 basehttp 46379 6159364096 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:33:37,701 basehttp 46379 6176190464 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:42:01,936 autoreload 47651 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-01 12:42:08,556 basehttp 47651 6132215808 "GET /login/ HTTP/1.1" 200 14940
+WARNING 2025-12-01 12:42:09,479 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:42:09,481 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:42:13,139 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:42:13,160 basehttp 47651 6149042176 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 12:42:13,339 basehttp 47651 6165868544 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:42:23,825 basehttp 47651 6132215808 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-01 12:42:24,090 basehttp 47651 6132215808 "GET / HTTP/1.1" 302 0
+INFO 2025-12-01 12:42:24,454 basehttp 47651 6132215808 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 141302
+WARNING 2025-12-01 12:42:25,355 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:42:25,374 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:42:26,320 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-01 12:42:26,549 basehttp 47651 6149042176 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+WARNING 2025-12-01 12:42:27,009 basehttp 47651 6149042176 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:43:56,171 basehttp 47651 6132215808 "GET /login/ HTTP/1.1" 302 0
+WARNING 2025-12-01 12:43:56,563 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:43:56,564 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:43:57,126 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:43:57,302 basehttp 47651 6149042176 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 12:43:58,663 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:43:58,665 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:43:59,279 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:43:59,301 basehttp 47651 6149042176 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:44:00,267 basehttp 47651 6132215808 "GET /register/ HTTP/1.1" 302 0
+WARNING 2025-12-01 12:44:00,829 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:44:00,831 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:44:03,489 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:44:03,506 basehttp 47651 6149042176 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:44:04,284 basehttp 47651 6132215808 "GET / HTTP/1.1" 200 80000
+WARNING 2025-12-01 12:44:06,073 basehttp 47651 6149042176 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:44:06,132 basehttp 47651 6165868544 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-01 12:44:07,313 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:44:07,320 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:44:12,684 basehttp 47651 6132215808 "GET / HTTP/1.1" 200 80000
+WARNING 2025-12-01 12:44:13,185 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:44:13,188 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:44:14,341 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:44:14,393 basehttp 47651 6149042176 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:44:18,606 basehttp 47651 6132215808 "GET /logout/ HTTP/1.1" 200 12673
+WARNING 2025-12-01 12:44:19,597 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:44:19,600 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:44:21,900 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:44:22,268 basehttp 47651 6149042176 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 12:44:22,355 basehttp 47651 6165868544 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:44:26,381 basehttp 47651 6132215808 "GET /login/ HTTP/1.1" 200 14940
+WARNING 2025-12-01 12:44:27,699 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:44:27,701 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:44:28,253 basehttp 47651 6132215808 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-01 12:44:28,349 basehttp 47651 6149042176 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-01 12:44:28,390 basehttp 47651 6132215808 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-01 12:44:35,216 basehttp 47651 6132215808 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-01 12:44:35,417 basehttp 47651 6132215808 "GET / HTTP/1.1" 302 0
+INFO 2025-12-01 12:44:35,999 basehttp 47651 6132215808 "GET /users/superuser/profile/ HTTP/1.1" 200 114593
+WARNING 2025-12-01 12:44:36,613 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:44:36,628 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:45:58,769 basehttp 47651 6132215808 "GET /admin/courses/course/ HTTP/1.1" 200 164609
+WARNING 2025-12-01 12:45:59,341 log 47651 6132215808 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:45:59,348 basehttp 47651 6132215808 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:45:59,400 basehttp 47651 6149042176 "GET /static/unfold/fonts/material-symbols/styles.css HTTP/1.1" 200 164
+INFO 2025-12-01 12:45:59,403 basehttp 47651 6165868544 "GET /static/css/admin-custom.css HTTP/1.1" 200 6732
+INFO 2025-12-01 12:45:59,405 basehttp 47651 6132215808 "GET /static/unfold/fonts/inter/styles.css HTTP/1.1" 200 608
+INFO 2025-12-01 12:45:59,511 basehttp 47651 6199521280 "GET /static/unfold/css/simplebar/simplebar.css HTTP/1.1" 200 4647
+INFO 2025-12-01 12:45:59,556 basehttp 47651 6165868544 "GET /static/js/admin-custom.js HTTP/1.1" 200 5858
+INFO 2025-12-01 12:45:59,737 basehttp 47651 6165868544 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-12-01 12:45:59,744 basehttp 47651 6182694912 "GET /static/unfold/css/styles.css HTTP/1.1" 200 159990
+INFO 2025-12-01 12:45:59,756 basehttp 47651 6216347648 "GET /static/unfold/js/htmx/htmx.js HTTP/1.1" 200 50918
+INFO 2025-12-01 12:45:59,808 basehttp 47651 6182694912 "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-12-01 12:45:59,817 basehttp 47651 6216347648 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9222
+INFO 2025-12-01 12:45:59,824 basehttp 47651 6165868544 "GET /static/admin/js/actions.js HTTP/1.1" 200 8067
+INFO 2025-12-01 12:45:59,845 basehttp 47651 6182694912 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-12-01 12:45:59,853 basehttp 47651 6216347648 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-12-01 12:45:59,857 basehttp 47651 6132215808 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-12-01 12:45:59,861 basehttp 47651 6149042176 "GET /static/unfold/js/chart/chart.js HTTP/1.1" 200 200633
+INFO 2025-12-01 12:45:59,870 basehttp 47651 6182694912 "GET /static/unfold/js/app.js HTTP/1.1" 200 9414
+WARNING 2025-12-01 12:45:59,882 basehttp 47651 6216347648 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:45:59,884 basehttp 47651 6199521280 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-12-01 12:45:59,886 basehttp 47651 6132215808 "GET /static/unfold/js/simplebar/simplebar.js HTTP/1.1" 200 27176
+INFO 2025-12-01 12:45:59,890 basehttp 47651 6165868544 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-12-01 12:45:59,923 basehttp 47651 6182694912 "GET /static/unfold/js/alpine/alpine.resize.js HTTP/1.1" 200 703
+INFO 2025-12-01 12:45:59,945 basehttp 47651 6165868544 "GET /static/unfold/js/alpine/alpine.anchor.js HTTP/1.1" 200 15524
+INFO 2025-12-01 12:45:59,952 basehttp 47651 6132215808 "GET /static/unfold/js/alpine/alpine.persist.js HTTP/1.1" 200 837
+INFO 2025-12-01 12:45:59,961 basehttp 47651 6199521280 "GET /static/unfold/js/alpine/alpine.sort.js HTTP/1.1" 200 37891
+WARNING 2025-12-01 12:45:59,964 basehttp 47651 6216347648 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:45:59,965 basehttp 47651 6149042176 "GET /static/unfold/js/alpine/alpine.js HTTP/1.1" 200 44758
+INFO 2025-12-01 12:46:00,083 basehttp 47651 6132215808 "GET /static/unfold/fonts/inter/Inter-SemiBold.woff2 HTTP/1.1" 200 114812
+INFO 2025-12-01 12:46:00,092 basehttp 47651 6165868544 "GET /static/unfold/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 111268
+INFO 2025-12-01 12:46:00,135 basehttp 47651 6199521280 "GET /static/unfold/fonts/inter/Inter-Medium.woff2 HTTP/1.1" 200 114348
+INFO 2025-12-01 12:46:00,180 basehttp 47651 6182694912 "GET /static/unfold/fonts/inter/Inter-Bold.woff2 HTTP/1.1" 200 114840
+INFO 2025-12-01 12:46:00,182 basehttp 47651 6149042176 "GET /static/unfold/fonts/material-symbols/Material-Symbols-Outlined.woff2 HTTP/1.1" 200 274228
+INFO 2025-12-01 12:46:09,111 basehttp 47651 6149042176 "GET /admin/courses/course/6/change/ HTTP/1.1" 200 97849
+INFO 2025-12-01 12:46:09,326 basehttp 47651 6132215808 "GET /static/admin/js/collapse.js HTTP/1.1" 200 1803
+INFO 2025-12-01 12:46:09,344 basehttp 47651 6132215808 "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+WARNING 2025-12-01 12:46:09,346 basehttp 47651 6216347648 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-01 12:46:09,356 log 47651 6149042176 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-12-01 12:46:09,358 basehttp 47651 6182694912 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 12:46:09,358 basehttp 47651 6149042176 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 12:46:09,363 basehttp 47651 6199521280 "GET /static/django_ckeditor_5/dist/styles.css HTTP/1.1" 200 213809
+INFO 2025-12-01 12:46:09,371 basehttp 47651 6165868544 "GET /static/django_ckeditor_5/dist/bundle.js HTTP/1.1" 200 1275904
+INFO 2025-12-01 12:46:09,918 basehttp 47651 6199521280 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-12-01 12:46:09,919 basehttp 47651 6165868544 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-12-01 12:46:09,973 basehttp 47651 6199521280 "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO 2025-12-01 12:46:09,978 basehttp 47651 6149042176 "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-12-01 12:46:09,983 basehttp 47651 6182694912 "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+WARNING 2025-12-01 12:46:10,008 basehttp 47651 6182694912 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:46:10,017 basehttp 47651 6199521280 "GET /static/django_ckeditor_5/dist/styles.css.map HTTP/1.1" 200 327495
+INFO 2025-12-01 12:46:10,146 basehttp 47651 6165868544 "GET /static/django_ckeditor_5/dist/bundle.js.map HTTP/1.1" 200 7182824
+INFO 2025-12-01 12:46:23,272 basehttp 47651 6165868544 "POST /admin/courses/course/6/change/ HTTP/1.1" 302 0
+INFO 2025-12-01 12:46:23,350 basehttp 47651 6165868544 "GET /admin/courses/course/ HTTP/1.1" 200 164705
+WARNING 2025-12-01 12:46:23,900 log 47651 6165868544 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:46:23,902 basehttp 47651 6165868544 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:46:23,934 basehttp 47651 6149042176 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:46:23,935 basehttp 47651 6199521280 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 12:46:24,179 basehttp 47651 6199521280 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:54:51,280 autoreload 49751 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-01 12:54:54,227 basehttp 49751 6130806784 "GET /admin/courses/course/ HTTP/1.1" 200 164267
+INFO 2025-12-01 12:54:54,388 basehttp 49751 6147633152 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 12:54:54,398 log 49751 6130806784 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:54:54,402 basehttp 49751 6130806784 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:54:54,406 basehttp 49751 6164459520 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-01 12:54:55,375 basehttp 49751 6130806784 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:54:55,636 basehttp 49751 6147633152 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-12-01 12:55:12,098 basehttp 49751 6147633152 "GET /admin/courses/course/ HTTP/1.1" 200 164267
+WARNING 2025-12-01 12:55:12,918 basehttp 49751 6164459520 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:55:12,920 basehttp 49751 6130806784 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 12:55:12,947 log 49751 6147633152 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:55:12,948 basehttp 49751 6147633152 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:55:13,296 basehttp 49751 6147633152 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:55:18,392 basehttp 49751 6130806784 "GET /admin/ HTTP/1.1" 200 154943
+WARNING 2025-12-01 12:55:18,656 basehttp 49751 6147633152 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-01 12:55:18,661 log 49751 6130806784 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:55:18,661 basehttp 49751 6130806784 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:55:19,239 basehttp 49751 6130806784 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:55:34,710 basehttp 49751 6130806784 "GET /admin/courses/module/ HTTP/1.1" 200 141236
+WARNING 2025-12-01 12:55:36,086 log 49751 6130806784 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:55:36,086 basehttp 49751 6130806784 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:55:36,467 basehttp 49751 6147633152 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:55:36,471 basehttp 49751 6130806784 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 12:55:36,752 basehttp 49751 6130806784 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:55:39,631 basehttp 49751 6130806784 "GET /admin/courses/module/14/change/ HTTP/1.1" 200 213009
+INFO 2025-12-01 12:55:40,398 basehttp 49751 6181285888 "GET /static/admin/css/autocomplete.css HTTP/1.1" 200 9114
+INFO 2025-12-01 12:55:40,437 basehttp 49751 6164459520 "GET /static/admin/css/vendor/select2/select2.css HTTP/1.1" 200 17358
+INFO 2025-12-01 12:55:40,526 basehttp 49751 6164459520 "GET /static/admin/js/autocomplete.js HTTP/1.1" 200 1060
+INFO 2025-12-01 12:55:40,530 basehttp 49751 6214938624 "GET /static/admin/js/vendor/select2/i18n/en.js HTTP/1.1" 200 844
+INFO 2025-12-01 12:55:40,543 basehttp 49751 6181285888 "GET /static/admin/js/inlines.js HTTP/1.1" 200 16222
+WARNING 2025-12-01 12:55:40,564 log 49751 6130806784 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 12:55:40,580 basehttp 49751 6130806784 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 12:55:40,582 basehttp 49751 6164459520 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:55:40,585 basehttp 49751 6147633152 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-12-01 12:55:40,596 basehttp 49751 6198112256 "GET /static/admin/js/vendor/select2/select2.full.js HTTP/1.1" 200 173566
+WARNING 2025-12-01 12:55:41,034 basehttp 49751 6198112256 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 12:55:50,003 basehttp 49751 6147633152 "GET /admin/autocomplete/?app_label=users&model_name=moduleinstructor&field_name=instructor HTTP/1.1" 200 844
+INFO 2025-12-01 15:31:47,390 basehttp 49751 6130806784 "GET /admin/auth/user/ HTTP/1.1" 200 523987
+WARNING 2025-12-01 15:31:47,701 basehttp 49751 6147633152 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 15:31:47,709 basehttp 49751 6130806784 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 15:31:48,340 log 49751 6130806784 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 15:31:48,343 basehttp 49751 6130806784 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 15:31:48,687 basehttp 49751 6130806784 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 15:31:57,856 basehttp 49751 6130806784 "GET /admin/auth/user/?o=6.1 HTTP/1.1" 200 527807
+WARNING 2025-12-01 15:31:58,298 log 49751 6130806784 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 15:31:58,310 basehttp 49751 6130806784 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 15:31:58,315 basehttp 49751 6164459520 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 15:31:58,322 basehttp 49751 6147633152 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 15:31:58,666 basehttp 49751 6147633152 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 15:32:54,039 basehttp 49751 6130806784 "GET /admin/auth/user/46/change/?_changelist_filters=o%3D6.1 HTTP/1.1" 200 178389
+INFO 2025-12-01 15:32:54,379 basehttp 49751 6198112256 "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+INFO 2025-12-01 15:32:54,383 basehttp 49751 6181285888 "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+INFO 2025-12-01 15:32:54,392 basehttp 49751 6147633152 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-12-01 15:32:54,418 basehttp 49751 6214938624 "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 15492
+INFO 2025-12-01 15:32:54,419 basehttp 49751 6164459520 "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+WARNING 2025-12-01 15:32:54,435 basehttp 49751 6198112256 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-01 15:32:54,475 log 49751 6130806784 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 15:32:54,476 basehttp 49751 6130806784 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 15:32:55,206 basehttp 49751 6130806784 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 15:33:24,627 basehttp 49751 6164459520 "POST /admin/auth/user/46/change/?_changelist_filters=o%3D6.1 HTTP/1.1" 302 0
+INFO 2025-12-01 15:33:24,756 basehttp 49751 6164459520 "GET /admin/auth/user/?o=6.1 HTTP/1.1" 200 528219
+WARNING 2025-12-01 15:33:25,255 log 49751 6164459520 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 15:33:25,257 basehttp 49751 6147633152 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-01 15:33:25,258 basehttp 49751 6164459520 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2025-12-01 15:33:25,258 basehttp 49751 6214938624 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 15:33:25,661 basehttp 49751 6214938624 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-01 15:33:44,443 basehttp 49751 6164459520 "GET /admin/auth/user/3/change/?_changelist_filters=o%3D6.1 HTTP/1.1" 200 255185
+INFO 2025-12-01 15:33:44,767 basehttp 49751 6181285888 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-01 15:33:44,769 basehttp 49751 6130806784 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-01 15:33:44,785 log 49751 6164459520 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-01 15:33:44,786 basehttp 49751 6164459520 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-01 15:33:45,375 basehttp 49751 6164459520 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
