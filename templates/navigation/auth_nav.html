@@ -83,8 +83,8 @@
         {% include 'navigation/role_tabs_content_manager.html' %}
     {% elif instructor_profile and instructor_profile.is_active %}
         {% include 'navigation/role_tabs_instructor.html' %}
-    <!-- {% else %}
-        {% include 'navigation/role_tabs_student.html' %} -->
+    {% else %}
+        {% include 'navigation/role_tabs_student.html' %}
     {% endif %}
     {% endwith %}
     <div class="border-top d-lg-none"></div>
