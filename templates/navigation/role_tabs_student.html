@@ -13,7 +13,7 @@
                 <a href="{% url 'progress:dashboard' %}" class="{% if current.namespace == 'progress' and current.url_name == 'dashboard' %}active{% endif %}">Progress</a>
                 <a href="{% url 'communication:dashboard' %}" class="{% if current.namespace == 'communication' %}active{% endif %}">Community</a>
                 <a href="{% url 'progress:achievements' %}" class="{% if current.namespace == 'progress' and current.url_name == 'achievements' %}active{% endif %}">Achievements</a>
-                <a href="{% url 'yitp:support' %}" class="{% if current.url_name == 'support' %}active{% endif %}">Support</a>
+                <a href="{% url 'logout' %}" class="">Logout</a>
                 {% endwith %}
             </div>
             <div class="yitp-role-actions">
