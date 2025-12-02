@@ -35685,3 +35685,843 @@ WARNING 2025-12-01 15:33:44,769 basehttp 49751 6130806784 "GET /static/assets/im
 WARNING 2025-12-01 15:33:44,785 log 49751 6164459520 Not Found: /.well-known/appspecific/com.chrome.devtools.json
 WARNING 2025-12-01 15:33:44,786 basehttp 49751 6164459520 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
 WARNING 2025-12-01 15:33:45,375 basehttp 49751 6164459520 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 18:56:56,508 autoreload 99949 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-02 18:57:31,539 basehttp 99949 6158462976 "GET /users/instructor/ HTTP/1.1" 302 0
+INFO 2025-12-02 18:57:32,169 basehttp 99949 6158462976 "GET /profile/ HTTP/1.1" 200 106020
+INFO 2025-12-02 18:57:32,257 basehttp 99949 6175289344 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,260 basehttp 99949 6192115712 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,261 basehttp 99949 6208942080 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,263 basehttp 99949 6158462976 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-12-02 18:57:32,329 basehttp 99949 6158462976 "GET /static/assets/js/main.js HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,355 basehttp 99949 6158462976 "GET /static/assets/js/backToTop.js HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,360 basehttp 99949 6208942080 "GET /static/js/yitp-translate.js HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,384 basehttp 99949 6158462976 "GET /static/assets/css/meanmenu.css HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,391 basehttp 99949 6208942080 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,392 basehttp 99949 6158462976 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,395 basehttp 99949 6192115712 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-12-02 18:57:32,421 basehttp 99949 6192115712 "GET /static/assets/css/messages.css HTTP/1.1" 304 0
+INFO 2025-12-02 18:57:32,465 basehttp 99949 6192115712 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-12-02 18:58:09,314 basehttp 99949 6192115712 "GET /users/superuser/profile/ HTTP/1.1" 200 143195
+INFO 2025-12-02 18:58:14,943 basehttp 99949 6192115712 "GET /users/superuser/create-user/ HTTP/1.1" 200 37627
+INFO 2025-12-02 18:58:20,545 basehttp 99949 6192115712 "GET /users/superuser/api/data/ HTTP/1.1" 200 139
+INFO 2025-12-02 18:58:26,943 basehttp 99949 6192115712 "GET /admin/ HTTP/1.1" 200 154945
+INFO 2025-12-02 18:58:27,052 basehttp 99949 6192115712 "GET /static/unfold/js/chart/chart.js HTTP/1.1" 200 200633
+WARNING 2025-12-02 18:58:27,084 basehttp 99949 6158462976 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-02 18:58:27,169 basehttp 99949 6192115712 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 18:58:27,187 basehttp 99949 6208942080 "GET /static/unfold/fonts/material-symbols/Material-Symbols-Outlined.woff2 HTTP/1.1" 200 274228
+ERROR 2025-12-02 18:58:32,515 log 99949 6208942080 Internal Server Error: /analytics/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 502, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 504, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 565, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 310: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-12-02 18:58:32,518 basehttp 99949 6208942080 "GET /analytics/ HTTP/1.1" 500 206696
+INFO 2025-12-02 18:58:41,180 basehttp 99949 6208942080 "GET /users/superuser/profile/ HTTP/1.1" 200 143195
+INFO 2025-12-02 18:58:47,956 basehttp 99949 6208942080 "GET /users/superuser/export/users/ HTTP/1.1" 200 6846
+ERROR 2025-12-02 18:59:13,804 log 99949 6208942080 Internal Server Error: /users/superuser/export/payments/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/views.py", line 2449, in export_payments_csv
+    payment.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Payment' object has no attribute 'updated_at'. Did you mean: 'created_at'?
+ERROR 2025-12-02 18:59:13,810 basehttp 99949 6208942080 "GET /users/superuser/export/payments/ HTTP/1.1" 500 112301
+INFO 2025-12-02 18:59:26,367 basehttp 99949 6208942080 "GET /users/instructor/ HTTP/1.1" 302 0
+INFO 2025-12-02 18:59:26,999 basehttp 99949 6208942080 "GET /profile/ HTTP/1.1" 200 106020
+INFO 2025-12-02 18:59:40,269 basehttp 99949 6208942080 "GET /profile/ HTTP/1.1" 200 105469
+INFO 2025-12-02 18:59:43,362 basehttp 99949 6208942080 "GET /logout/ HTTP/1.1" 200 12673
+INFO 2025-12-02 18:59:45,332 basehttp 99949 6208942080 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-12-02 19:00:28,540 basehttp 99949 6208942080 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-02 19:00:28,564 basehttp 99949 6208942080 "GET / HTTP/1.1" 302 0
+INFO 2025-12-02 19:00:28,625 basehttp 99949 6208942080 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 141302
+INFO 2025-12-02 19:00:33,362 basehttp 99949 6208942080 "GET /logout/ HTTP/1.1" 200 12673
+INFO 2025-12-02 19:00:36,019 basehttp 99949 6208942080 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-12-02 19:00:41,027 basehttp 99949 6208942080 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-02 19:00:41,040 basehttp 99949 6208942080 "GET / HTTP/1.1" 302 0
+INFO 2025-12-02 19:00:41,282 basehttp 99949 6208942080 "GET /users/superuser/profile/ HTTP/1.1" 200 143195
+INFO 2025-12-02 19:00:54,975 basehttp 99949 6208942080 "GET /admin/progress/enrollment/34/change/ HTTP/1.1" 200 87079
+INFO 2025-12-02 19:00:55,241 basehttp 99949 6208942080 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:00:55,244 basehttp 99949 6192115712 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:00:55,246 basehttp 99949 6175289344 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-12-02 19:00:55,247 basehttp 99949 6158462976 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+WARNING 2025-12-02 19:00:55,278 basehttp 99949 6158462976 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:01:16,402 basehttp 99949 6175289344 "GET /admin/auth/user/ HTTP/1.1" 200 523985
+WARNING 2025-12-02 19:01:16,699 basehttp 99949 6208942080 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:01:16,701 basehttp 99949 6175289344 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:01:16,720 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:01:39,607 basehttp 99949 6158462976 "POST /admin/logout/ HTTP/1.1" 302 0
+INFO 2025-12-02 19:01:39,619 basehttp 99949 6158462976 "GET / HTTP/1.1" 200 76665
+INFO 2025-12-02 19:01:41,487 basehttp 99949 6158462976 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-12-02 19:03:37,841 basehttp 99949 6158462976 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-02 19:03:37,867 basehttp 99949 6158462976 "GET / HTTP/1.1" 302 0
+INFO 2025-12-02 19:03:38,255 basehttp 99949 6158462976 "GET /users/superuser/profile/ HTTP/1.1" 200 143195
+INFO 2025-12-02 19:03:44,705 basehttp 99949 6158462976 "GET /admin/auth/user/ HTTP/1.1" 200 524327
+INFO 2025-12-02 19:03:45,192 basehttp 99949 6158462976 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:03:45,209 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:03:53,352 basehttp 99949 6158462976 "GET /admin/auth/user/add/ HTTP/1.1" 200 115841
+INFO 2025-12-02 19:03:53,478 basehttp 99949 6158462976 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:03:53,487 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-02 19:03:53,573 basehttp 99949 6158462976 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:05:40,066 basehttp 99949 6158462976 "GET /admin/autocomplete/?app_label=users&model_name=moduleinstructor&field_name=module HTTP/1.1" 200 602
+INFO 2025-12-02 19:06:06,732 basehttp 99949 6158462976 "POST /admin/auth/user/add/ HTTP/1.1" 200 151925
+INFO 2025-12-02 19:06:07,106 basehttp 99949 6158462976 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:06:07,119 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:06:28,526 basehttp 99949 6158462976 "POST /admin/auth/user/add/ HTTP/1.1" 200 151926
+INFO 2025-12-02 19:06:28,613 basehttp 99949 6158462976 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:06:28,630 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-02 19:06:28,709 basehttp 99949 6158462976 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:06:59,887 basehttp 99949 6158462976 "POST /admin/auth/user/add/ HTTP/1.1" 302 0
+INFO 2025-12-02 19:07:00,109 basehttp 99949 6158462976 "GET /admin/auth/user/86/change/ HTTP/1.1" 200 192024
+WARNING 2025-12-02 19:07:00,725 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:07:00,729 basehttp 99949 6158462976 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:07:00,765 basehttp 99949 6158462976 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:07:16,292 basehttp 99949 6158462976 "POST /admin/auth/user/86/change/ HTTP/1.1" 302 0
+INFO 2025-12-02 19:07:16,392 basehttp 99949 6158462976 "GET /admin/auth/user/ HTTP/1.1" 200 530800
+INFO 2025-12-02 19:07:16,517 basehttp 99949 6158462976 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 19:07:16,550 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-02 19:07:16,638 basehttp 99949 6158462976 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:07:29,662 basehttp 99949 6158462976 "GET / HTTP/1.1" 200 80250
+INFO 2025-12-02 19:07:40,338 basehttp 99949 6158462976 "GET /admin/ HTTP/1.1" 200 154836
+WARNING 2025-12-02 19:07:40,426 basehttp 99949 6158462976 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+WARNING 2025-12-02 19:07:40,538 basehttp 99949 6175289344 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 19:08:17,007 basehttp 99949 6158462976 "GET /logout/ HTTP/1.1" 200 12673
+INFO 2025-12-02 19:08:20,681 basehttp 99949 6158462976 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-12-02 19:08:30,015 basehttp 99949 6158462976 "POST /login/ HTTP/1.1" 302 0
+ERROR 2025-12-02 19:08:30,111 log 99949 6158462976 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 226, in get
+    context = self.get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/instructor_views.py", line 235, in get_context_data
+    ).select_related('lesson', 'enrollment__student').order_by('-updated_at')[:6]
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1701, in order_by
+    obj.query.add_ordering(*field_names)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 2253, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'updated_at' into field. Choices are: attempts, completed_at, enrollment, enrollment_id, id, lesson, lesson_id, score, started_at, status, time_spent
+ERROR 2025-12-02 19:08:30,116 basehttp 99949 6158462976 "GET /users/instructor/ HTTP/1.1" 500 150592
+INFO 2025-12-02 19:09:23,945 autoreload 99949 8685533888 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-02 19:09:25,835 autoreload 2212 8685533888 Watching for file changes with StatReloader
+ERROR 2025-12-02 19:15:23,267 log 2212 6132543488 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 226, in get
+    context = self.get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/instructor_views.py", line 235, in get_context_data
+    ).select_related('lesson', 'enrollment__student').order_by('-updated_at')[:6]
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1701, in order_by
+    obj.query.add_ordering(*field_names)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 2253, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'updated_at' into field. Choices are: attempts, completed_at, enrollment, enrollment_id, id, lesson, lesson_id, score, started_at, status, time_spent
+ERROR 2025-12-02 19:15:23,274 basehttp 2212 6132543488 "GET /users/instructor/ HTTP/1.1" 500 150594
+INFO 2025-12-02 19:15:23,912 basehttp 2212 6132543488 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-12-02 19:16:16,353 autoreload 2212 8685533888 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-02 19:16:18,276 autoreload 3473 8685533888 Watching for file changes with StatReloader
+ERROR 2025-12-02 19:17:21,629 log 3473 6204207104 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 1034, in find_library
+    return parser.libraries[name]
+           ~~~~~~~~~~~~~~~~^^^^^^
+KeyError: 'humanize'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 1096, in load
+    lib = find_library(parser, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 1036, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'humanize' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+course_extras
+crispy_forms_field
+crispy_forms_filters
+crispy_forms_tags
+crispy_forms_utils
+currency_filters
+i18n
+import_export_tags
+l10n
+log
+payment_filters
+rest_framework
+static
+tz
+unfold
+unfold_list
+ERROR 2025-12-02 19:17:21,633 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 500 262539
+ERROR 2025-12-02 19:18:01,753 log 3473 6204207104 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 961, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 861, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 481, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 693, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 603, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'naturaltime'
+ERROR 2025-12-02 19:18:01,757 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 500 297006
+ERROR 2025-12-02 19:18:02,589 log 3473 6204207104 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 961, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 861, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 481, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 693, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 603, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'naturaltime'
+ERROR 2025-12-02 19:18:02,592 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 500 297006
+ERROR 2025-12-02 19:18:03,473 log 3473 6204207104 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 961, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 861, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 481, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 693, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 603, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'naturaltime'
+ERROR 2025-12-02 19:18:03,476 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 500 297006
+ERROR 2025-12-02 19:18:04,662 log 3473 6204207104 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 961, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 861, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 481, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 693, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 603, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'naturaltime'
+ERROR 2025-12-02 19:18:04,667 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 500 297006
+INFO 2025-12-02 19:18:46,886 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 200 66235
+INFO 2025-12-02 19:19:47,501 basehttp 3473 6204207104 "GET /users/instructor/courses/ HTTP/1.1" 200 49507
+INFO 2025-12-02 19:19:54,206 basehttp 3473 6204207104 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 19:20:11,805 basehttp 3473 6204207104 "GET /users/instructor/messages/ HTTP/1.1" 200 44537
+WARNING 2025-12-02 19:21:11,154 log 3473 6204207104 Forbidden (Permission denied): /admin/courses/module/add/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/options.py", line 716, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1947, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1806, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/admin/options.py", line 1822, in _changeform_view
+    raise PermissionDenied
+django.core.exceptions.PermissionDenied
+WARNING 2025-12-02 19:21:11,163 basehttp 3473 6204207104 "GET /admin/courses/module/add/ HTTP/1.1" 403 6527
+INFO 2025-12-02 19:21:13,530 basehttp 3473 6204207104 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-12-02 19:21:21,967 basehttp 3473 6204207104 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 19:21:44,835 basehttp 3473 6204207104 "GET /users/content/ HTTP/1.1" 200 56345
+INFO 2025-12-02 19:21:59,344 basehttp 3473 6204207104 "GET /users/instructor/courses/ HTTP/1.1" 200 49507
+INFO 2025-12-02 19:22:04,505 basehttp 3473 6204207104 "GET /lms/assessments/ HTTP/1.1" 200 70630
+INFO 2025-12-02 19:22:34,804 basehttp 3473 6204207104 "GET /login/ HTTP/1.1" 302 0
+INFO 2025-12-02 19:22:34,825 basehttp 3473 6204207104 "GET /users/instructor/profile/ HTTP/1.1" 200 43236
+INFO 2025-12-02 19:23:31,222 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 19:25:40,725 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 19:25:47,261 basehttp 3473 6204207104 "GET /users/instructor/messages/ HTTP/1.1" 200 40321
+INFO 2025-12-02 19:27:03,785 basehttp 3473 6204207104 "GET /users/instructor/messages/ HTTP/1.1" 200 40321
+WARNING 2025-12-02 19:27:09,594 log 3473 6204207104 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-02 19:27:09,594 basehttp 3473 6204207104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-02 19:27:10,208 basehttp 3473 6221033472 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-02 19:27:10,209 basehttp 3473 6204207104 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-02 19:27:10,251 basehttp 3473 6204207104 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-02 19:29:12,727 basehttp 3473 6204207104 "GET /users/instructor/messages/ HTTP/1.1" 200 40539
+INFO 2025-12-02 19:58:23,888 basehttp 3473 6204207104 "GET /users/instructor/messages/ HTTP/1.1" 200 40261
+INFO 2025-12-02 19:58:34,907 basehttp 3473 6204207104 "GET /lms/communication/compose/ HTTP/1.1" 200 65524
+INFO 2025-12-02 19:58:35,188 basehttp 3473 6204207104 "GET /static/css/yitp-communication.css HTTP/1.1" 304 0
+INFO 2025-12-02 20:00:01,965 basehttp 3473 6204207104 "POST /lms/communication/compose/ HTTP/1.1" 302 0
+INFO 2025-12-02 20:00:01,978 basehttp 3473 6204207104 "GET /lms/communication/inbox/ HTTP/1.1" 200 63003
+INFO 2025-12-02 20:00:09,710 basehttp 3473 6204207104 "GET /lms/communication/ HTTP/1.1" 200 66758
+INFO 2025-12-02 20:00:57,260 basehttp 3473 6204207104 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 20:01:07,189 basehttp 3473 6204207104 "GET /lms/communication/inbox/ HTTP/1.1" 200 63003
+INFO 2025-12-02 20:01:14,288 basehttp 3473 6204207104 "GET /lms/communication/compose/ HTTP/1.1" 200 65524
+ERROR 2025-12-02 20:01:21,961 log 3473 6204207104 Internal Server Error: /lms/communication/forums/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/list.py", line 154, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/communication/views.py", line 153, in get_queryset
+    return Forum.objects.filter(is_active=True).order_by('order')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1701, in order_by
+    obj.query.add_ordering(*field_names)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 2253, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'order' into field. Choices are: course, course_id, created_at, created_by, created_by_id, description, id, is_active, is_moderated, title, topics
+ERROR 2025-12-02 20:01:21,968 basehttp 3473 6204207104 "GET /lms/communication/forums/ HTTP/1.1" 500 129614
+INFO 2025-12-02 20:20:24,895 autoreload 3473 8685533888 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/communication/views.py changed, reloading.
+INFO 2025-12-02 20:20:26,568 autoreload 13539 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-02 20:20:42,659 basehttp 13539 6202585088 "GET /lms/communication/forums/ HTTP/1.1" 200 60523
+INFO 2025-12-02 20:27:26,718 basehttp 13539 6202585088 "GET / HTTP/1.1" 302 0
+INFO 2025-12-02 20:27:26,817 basehttp 13539 6202585088 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 20:27:36,180 basehttp 13539 6202585088 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 20:29:49,021 basehttp 13539 6202585088 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 20:31:35,951 basehttp 13539 6202585088 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 20:31:58,567 basehttp 13539 6202585088 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 20:32:05,442 basehttp 13539 6202585088 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 20:32:07,686 basehttp 13539 6202585088 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 20:32:11,248 basehttp 13539 6202585088 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 20:32:55,771 basehttp 13539 6202585088 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 20:33:17,446 basehttp 13539 6202585088 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 20:33:24,055 basehttp 13539 6202585088 "GET /users/instructor/analytics/ HTTP/1.1" 200 46045
+INFO 2025-12-02 20:33:29,736 basehttp 13539 6202585088 "GET /users/instructor/courses/ HTTP/1.1" 200 49507
+INFO 2025-12-02 20:33:39,157 basehttp 13539 6202585088 "GET /admin/courses/module/14/change/ HTTP/1.1" 302 0
+INFO 2025-12-02 20:33:39,211 basehttp 13539 6202585088 "GET /admin/ HTTP/1.1" 200 41427
+WARNING 2025-12-02 20:33:39,538 basehttp 13539 6202585088 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 20:33:39,640 basehttp 13539 6219411456 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-12-02 20:33:53,165 basehttp 13539 6219411456 "GET /admin/assessments/quiz/ HTTP/1.1" 200 78613
+WARNING 2025-12-02 20:33:53,297 basehttp 13539 6202585088 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 20:33:53,300 basehttp 13539 6219411456 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+WARNING 2025-12-02 20:33:53,429 basehttp 13539 6219411456 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 20:34:16,417 basehttp 13539 6202585088 "GET /users/instructor/ HTTP/1.1" 200 65670
+INFO 2025-12-02 20:40:52,457 basehttp 13539 6202585088 "GET /users/instructor/ HTTP/1.1" 200 65678
+WARNING 2025-12-02 20:41:54,621 log 13539 6202585088 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-02 20:41:54,622 basehttp 13539 6202585088 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-02 20:41:55,228 basehttp 13539 6219411456 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-02 20:41:55,229 basehttp 13539 6202585088 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-02 20:41:55,275 basehttp 13539 6202585088 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-02 20:42:03,344 basehttp 13539 6202585088 "GET /lms/courses/dashboard/ HTTP/1.1" 200 68138
+WARNING 2025-12-02 20:42:03,698 log 13539 6202585088 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-02 20:42:03,699 basehttp 13539 6202585088 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-02 20:42:04,182 basehttp 13539 6202585088 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-02 20:42:04,422 basehttp 13539 6219411456 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-02 20:42:13,963 basehttp 13539 6202585088 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-02 20:42:13,966 basehttp 13539 6219411456 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2025-12-02 20:42:13,971 basehttp 13539 6236237824 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-02 20:42:14,004 log 13539 6253064192 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-02 20:42:14,005 basehttp 13539 6253064192 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-02 20:42:14,019 log 13539 6253064192 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-02 20:42:14,019 basehttp 13539 6253064192 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-02 20:42:14,044 basehttp 13539 6253064192 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+INFO 2025-12-02 20:42:24,483 autoreload 13539 8685533888 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/forms.py changed, reloading.
+INFO 2025-12-02 20:42:26,067 autoreload 18142 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-02 20:47:44,459 autoreload 18142 8685533888 /Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/users/forms.py changed, reloading.
+INFO 2025-12-02 20:47:46,008 autoreload 20040 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-02 20:48:09,005 basehttp 20040 6167326720 "GET /users/instructor/ HTTP/1.1" 200 70199
+INFO 2025-12-02 20:48:09,007 basehttp 20040 6167326720 - Broken pipe from ('127.0.0.1', 49895)
+INFO 2025-12-02 20:48:09,826 basehttp 20040 6184153088 "GET /users/instructor/ HTTP/1.1" 200 70199
+WARNING 2025-12-02 20:48:09,954 log 20040 6184153088 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-12-02 20:48:09,954 basehttp 20040 6184153088 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2025-12-02 20:48:10,524 basehttp 20040 6184153088 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2025-12-02 20:48:10,728 basehttp 20040 6167326720 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2025-12-02 20:48:11,075 basehttp 20040 6167326720 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2025-12-02 20:50:08,965 basehttp 20040 6167326720 "GET /users/instructor/analytics/ HTTP/1.1" 200 46067

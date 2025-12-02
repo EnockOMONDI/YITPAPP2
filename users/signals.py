@@ -90,9 +90,10 @@ def setup_instructor_permissions(sender, instance, created, **kwargs):
             'course_instructor': {
                 'is_superuser': False,
                 'permissions': [
-                    # Course management
-                    (course_ct, ['view', 'add', 'change']),
-                    (module_ct, ['view', 'add', 'change']),
+                    # Course visibility
+                    (course_ct, ['view']),
+                    # Module and lesson management
+                    (module_ct, ['view', 'change']),
                     (lesson_ct, ['view', 'add', 'change']),
                     (enrollment_ct, ['view', 'change']),
                     # Assessment management
@@ -116,8 +117,8 @@ def setup_instructor_permissions(sender, instance, created, **kwargs):
             'content_manager': {
                 'is_superuser': False,
                 'permissions': [
-                    # Content creation focus
-                    (course_ct, ['view', 'add', 'change']),
+                    # Content creation focus (course creation restricted to super admins)
+                    (course_ct, ['view']),
                     (module_ct, ['view', 'add', 'change']),
                     (lesson_ct, ['view', 'add', 'change']),
                     (enrollment_ct, ['view']),

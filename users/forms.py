@@ -2,6 +2,8 @@ from django import forms
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from courses.models import Module, Lesson
+from assessments.models import Quiz, Question
 from .models import SponsorshipRequest, Profile, InstructorProfile
 import re
 import secrets
@@ -375,3 +377,136 @@ class AdminUserCreationForm(forms.Form):
             profile.save()
 
         return user, password
+
+
+class InstructorModuleForm(forms.ModelForm):
+    """Lightweight module form for instructor dashboard edits."""
+
+    class Meta:
+        model = Module
+        fields = ['title', 'description', 'sort_order', 'estimated_duration', 'is_published']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Module title'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Describe the focus of this module'
+            }),
+            'sort_order': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 0
+            }),
+            'estimated_duration': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 0
+            }),
+            'is_published': forms.CheckboxInput(attrs={
+                'class': 'form-check-input'
+            })
+        }
+
+
+class InstructorLessonForm(forms.ModelForm):
+    """Form for instructors to create lessons within assigned modules."""
+
+    class Meta:
+        model = Lesson
+        fields = [
+            'title', 'content_type', 'content', 'video_url', 'document_url',
+            'audio_url', 'sort_order', 'is_published', 'is_mandatory',
+            'estimated_duration', 'learning_objectives'
+        ]
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Lesson title'}),
+            'content_type': forms.Select(attrs={'class': 'form-select'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'video_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Optional video URL'}),
+            'document_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Optional document URL'}),
+            'audio_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Optional audio URL'}),
+            'sort_order': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'is_published': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'is_mandatory': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'estimated_duration': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
+            'learning_objectives': forms.Textarea(attrs={'class': 'form-control', 'rows': 3})
+        }
+
+
+class InstructorQuizForm(forms.ModelForm):
+    """Quiz creation form that scopes lessons to an instructor's module."""
+
+    class Meta:
+        model = Quiz
+        fields = [
+            'lesson', 'title', 'description', 'instructions', 'time_limit',
+            'max_attempts', 'passing_score', 'is_randomized', 'show_results',
+            'is_published'
+        ]
+        widgets = {
+            'lesson': forms.Select(attrs={'class': 'form-select'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Quiz title'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'instructions': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'time_limit': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'max_attempts': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'passing_score': forms.NumberInput(attrs={'class': 'form-control', 'min': 0, 'max': 100}),
+            'is_randomized': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'show_results': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'is_published': forms.CheckboxInput(attrs={'class': 'form-check-input'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        lesson_queryset = kwargs.pop('lesson_queryset', Lesson.objects.none())
+        super().__init__(*args, **kwargs)
+        self.fields['lesson'].queryset = lesson_queryset
+
+
+class InstructorQuestionForm(forms.ModelForm):
+    """Allow instructors to add questions (and answers) to their quizzes."""
+    options_text = forms.CharField(
+        required=False,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 3,
+            'placeholder': 'Enter one option per line for multiple choice questions'
+        }),
+        help_text="Required for multiple choice questions. Each line becomes an answer option."
+    )
+
+    class Meta:
+        model = Question
+        fields = ['quiz', 'question_text', 'question_type', 'options_text', 'correct_answer', 'points']
+        widgets = {
+            'quiz': forms.Select(attrs={'class': 'form-select'}),
+            'question_text': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'question_type': forms.Select(attrs={'class': 'form-select'}),
+            'correct_answer': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+            'points': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        quiz_queryset = kwargs.pop('quiz_queryset', Quiz.objects.none())
+        super().__init__(*args, **kwargs)
+        self.fields['quiz'].queryset = quiz_queryset
+
+    def clean(self):
+        cleaned = super().clean()
+        question_type = cleaned.get('question_type')
+        options_text = cleaned.get('options_text', '')
+        if question_type == 'multiple_choice':
+            options = [opt.strip() for opt in options_text.splitlines() if opt.strip()]
+            if len(options) < 2:
+                self.add_error('options_text', 'Provide at least two options for multiple choice questions.')
+            cleaned['options'] = options
+        else:
+            cleaned['options'] = []
+        return cleaned
+
+    def save(self, commit=True):
+        question = super().save(commit=False)
+        question.options = self.cleaned_data.get('options', [])
+        if commit:
+            question.save()
+        return question

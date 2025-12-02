@@ -5,542 +5,306 @@
 
 {% block extra_css %}
 <style>
-    .content-wrapper {
-        margin-top: 100px;
-    }
-    
-    @media (max-width: 991px) {
-        .content-wrapper {
-            margin-top: 90px;
-        }
-    }
-    
-    @media (max-width: 575px) {
-        .content-wrapper {
-            margin-top: 80px;
-        }
-    }
-    
-    .messages-header {
-        background: linear-gradient(135deg, #341C67, #ff5d15);
-        color: white;
-        border-radius: 15px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-    }
-    
-    .messages-container {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
-    
-    .messages-sidebar {
-        background: #f8f9fa;
-        border-right: 1px solid #dee2e6;
-        padding: 1.5rem;
-        min-height: 600px;
-    }
-    
-    .messages-content {
-        padding: 1.5rem;
-        min-height: 600px;
-    }
-    
-    .message-item {
-        border: 1px solid #e9ecef;
-        border-radius: 10px;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        position: relative;
-    }
-    
-    .message-item:hover {
-        border-color: #ff5d15;
-        box-shadow: 0 4px 12px rgba(255, 93, 21, 0.1);
-    }
-    
-    .message-item.unread {
-        border-left: 4px solid #ff5d15;
-        background: #fff8f5;
-    }
-    
-    .message-item.unread::before {
-        content: '';
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 8px;
-        height: 8px;
-        background: #ff5d15;
-        border-radius: 50%;
-    }
-    
-    .message-sender {
-        font-weight: 600;
-        color: #341C67;
-        margin-bottom: 0.25rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .sender-avatar {
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, #ff5d15, #341C67);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-        font-size: 0.8rem;
-    }
-    
-    .message-subject {
-        color: #495057;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-    }
-    
-    .message-preview {
-        color: #6c757d;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-        line-height: 1.4;
-    }
-    
-    .message-meta {
-        display: flex;
-        justify-content: between;
-        align-items: center;
-        font-size: 0.8rem;
-        color: #6c757d;
-    }
-    
-    .message-time {
-        margin-left: auto;
-    }
-    
-    .message-type-badge {
-        padding: 2px 8px;
-        border-radius: 12px;
-        font-size: 0.7rem;
-        font-weight: 600;
-    }
-    
-    .badge-course {
-        background: #e8f5e8;
-        color: #28a745;
-    }
-    
-    .badge-quiz {
-        background: #fff3cd;
-        color: #856404;
-    }
-    
-    .badge-general {
-        background: #e2e3e5;
-        color: #6c757d;
-    }
-    
-    .message-detail {
-        display: none;
-    }
-    
-    .message-detail.active {
-        display: block;
-    }
-    
-    .message-detail-header {
-        border-bottom: 2px solid #f8f9fa;
-        padding-bottom: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .message-detail-title {
-        color: #341C67;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
-    
-    .message-detail-meta {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: #6c757d;
-        font-size: 0.9rem;
-    }
-    
-    .message-detail-content {
-        line-height: 1.6;
-        color: #495057;
-        margin-bottom: 2rem;
-    }
-    
-    .reply-section {
-        border-top: 2px solid #f8f9fa;
-        padding-top: 1.5rem;
-    }
-    
-    .reply-form {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 1.5rem;
-    }
-    
-    .form-label {
-        font-weight: 600;
-        color: #341C67;
-        margin-bottom: 0.5rem;
-    }
-    
-    .form-control {
-        border-radius: 8px;
-        border: 1px solid #dee2e6;
-        padding: 0.75rem;
-    }
-    
-    .form-control:focus {
-        border-color: #ff5d15;
-        box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25);
-    }
-    
-    .btn-reply {
-        background: #ff5d15;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-reply:hover {
-        background: #e54d0f;
-        color: white;
-    }
-    
-    .btn-mark-read {
-        background: #28a745;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-mark-read:hover {
-        background: #218838;
-        color: white;
-    }
-    
-    .no-messages {
-        text-align: center;
-        padding: 4rem 2rem;
-        color: #6c757d;
-    }
-    
-    .no-messages i {
-        font-size: 5rem;
-        margin-bottom: 1.5rem;
-        opacity: 0.5;
-    }
-    
-    .unread-count {
-        background: #ff5d15;
-        color: white;
-        border-radius: 50%;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.8rem;
-        font-weight: bold;
-        min-width: 24px;
-        text-align: center;
-    }
-    
-    .message-actions {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 1rem;
-    }
-    
-    .action-btn {
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    
-    .action-btn.primary {
-        background: #ff5d15;
-        color: white;
-    }
-    
-    .action-btn.primary:hover {
-        background: #e54d0f;
-        color: white;
-    }
-    
-    .action-btn.secondary {
-        background: #6c757d;
-        color: white;
-    }
-    
-    .action-btn.secondary:hover {
-        background: #5a6268;
-        color: white;
-    }
+:root {
+    --inbox-gradient: linear-gradient(135deg, #341C67 0%, #ff8744 100%);
+    --inbox-shadow: 0 35px 70px rgba(52,28,103,0.25);
+}
+
+.content-wrapper { margin-top: 90px; }
+@media (max-width: 991px) { .content-wrapper { margin-top: 70px; } }
+
+.inbox-hero {
+    background: var(--inbox-gradient);
+    border-radius: 30px;
+    padding: 2.8rem;
+    color: #fff;
+    box-shadow: var(--inbox-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.inbox-hero::after {
+    content: '';
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    top: -60px;
+    right: -40px;
+}
+
+.inbox-shell {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 30px 60px rgba(15,23,42,0.12);
+    border: 1px solid #eef2ff;
+    margin-top: -70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.conversation-list {
+    background: #fafbff;
+    border-right: 1px solid #eef2ff;
+    min-height: 620px;
+    padding: 1.75rem;
+}
+
+.conversation-item {
+    border-radius: 18px;
+    border: 1px solid transparent;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+    cursor: pointer;
+    transition: transform 0.18s ease, border 0.18s ease, box-shadow 0.18s ease;
+}
+
+.conversation-item:hover { transform: translateY(-4px); border-color: rgba(255,93,21,0.5); }
+.conversation-item.active { border-color: rgba(255,93,21,0.8); box-shadow: 0 18px 45px rgba(255,93,21,0.15); }
+.conversation-item.unread { background: rgba(255,93,21,0.05); }
+
+.conversation-item .avatar-pill {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: var(--inbox-gradient);
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+}
+
+.conversation-detail { padding: 2.25rem; min-height: 620px; }
+
+.detail-card {
+    background: #fff;
+    border-radius: 24px;
+    border: 1px solid #eef2ff;
+    box-shadow: 0 20px 45px rgba(15,23,42,0.08);
+    padding: 2rem;
+    min-height: 520px;
+}
+
+.detail-subject { font-size: 1.35rem; font-weight: 700; color: #1d2040; }
+.detail-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.9rem; color: #8a8fb6; }
+.detail-content { margin-top: 1.5rem; line-height: 1.7; color: #4c4f6e; }
+.detail-actions { border-top: 1px solid #f1f4ff; margin-top: 2rem; padding-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.pill-btn { border-radius: 999px; font-weight: 600; padding: 0.65rem 1.6rem; }
+
+.search-input {
+    border-radius: 999px;
+    border: 1px solid #e1e5ff;
+    padding-left: 2.6rem;
+    background: #fff url('data:image/svg+xml;utf8,<svg fill="%238a8fb6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>') no-repeat 1rem center;
+}
+
+.tag-pill {
+    border: 1px solid transparent;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: #6b6f92;
+    background: #fff;
+    cursor: pointer;
+}
+.tag-pill.active { border-color: rgba(255,93,21,0.6); color: #ff5d15; background: rgba(255,93,21,0.08); }
+
+.empty-state { text-align: center; padding: 4rem 1rem; color: #8a8fb6; }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-    <div class="container-fluid py-4">
-        <!-- Header -->
-        <div class="messages-header">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="mb-2">
-                        <i class="fas fa-envelope me-3"></i>
-                        Messages
-                    </h1>
-                    <p class="mb-0">Communicate with your students and manage inquiries</p>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <div class="d-flex align-items-center justify-content-md-end gap-3">
-                        {% if unread_count > 0 %}
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="unread-count">{{ unread_count }}</span>
-                            <span>Unread</span>
-                        </div>
-                        {% endif %}
-                        <small>{{ messages.count }} Total Messages</small>
-                    </div>
-                </div>
+<div class="container content-wrapper">
+    <div class="inbox-hero mb-4">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <p class="mb-2 text-uppercase fw-semibold text-white" style="letter-spacing:0.15em;">Instructor Inbox</p>
+                <h1 class="display-6 fw-bold mb-3 text-white">Stay in sync with your learners</h1>
+                <p class="mb-0 text-white">View learner questions, system nudges, and collaboration notes in one polished workspace.</p>
             </div>
-        </div>
-
-        <!-- Messages Container -->
-        <div class="messages-container">
-            <div class="row g-0">
-                <!-- Messages List -->
-                <div class="col-md-4 messages-sidebar">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h5 class="mb-0">
-                            <i class="fas fa-inbox me-2"></i>Inbox
-                        </h5>
-                        {% if unread_count > 0 %}
-                        <button class="btn btn-sm btn-outline-primary" onclick="markAllAsRead()">
-                            Mark All Read
-                        </button>
-                        {% endif %}
+            <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+                <div class="d-flex flex-lg-column flex-sm-row flex-column gap-3 align-items-lg-end">
+                    <div class="text-center px-4 py-3 bg-white text-primary rounded-4">
+                        <div class="display-6 fw-bold mb-0">{{ unread_count }}</div>
+                        <small class="text-uppercase fw-semibold">Unread</small>
                     </div>
-                    
-                    {% if messages %}
-                        {% for message in messages %}
-                        <div class="message-item {% if not message.is_read %}unread{% endif %}" 
-                             onclick="showMessage({{ message.id }})">
-                            <div class="message-sender">
-                                <div class="sender-avatar">
-                                    {{ message.sender.first_name|first|default:message.sender.username|first }}
-                                </div>
-                                <span>{{ message.sender.get_full_name|default:message.sender.username }}</span>
-                            </div>
-                            
-                            <div class="message-subject">{{ message.subject|truncatechars:40 }}</div>
-                            
-                            <div class="message-preview">
-                                {{ message.content|truncatechars:80 }}
-                            </div>
-                            
-                            <div class="message-meta">
-                                {% if "lesson" in message.subject|lower %}
-                                    <span class="message-type-badge badge-course">Course</span>
-                                {% elif "quiz" in message.subject|lower %}
-                                    <span class="message-type-badge badge-quiz">Quiz</span>
-                                {% else %}
-                                    <span class="message-type-badge badge-general">General</span>
-                                {% endif %}
-                                
-                                <span class="message-time">{{ message.sent_at|timesince }} ago</span>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        
-                        <!-- Pagination for messages list -->
-                        {% if is_paginated %}
-                        <div class="text-center mt-3">
-                            {% if page_obj.has_previous %}
-                                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-sm btn-outline-primary me-2">
-                                    <i class="fas fa-chevron-left"></i> Previous
-                                </a>
-                            {% endif %}
-                            
-                            <span class="text-muted">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                            
-                            {% if page_obj.has_next %}
-                                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-sm btn-outline-primary ms-2">
-                                    Next <i class="fas fa-chevron-right"></i>
-                                </a>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    {% else %}
-                        <div class="no-messages">
-                            <i class="fas fa-envelope-open"></i>
-                            <h5>No messages yet</h5>
-                            <p>Student messages and inquiries will appear here.</p>
-                        </div>
-                    {% endif %}
-                </div>
-                
-                <!-- Message Detail -->
-                <div class="col-md-8 messages-content">
-                    <div id="no-message-selected" class="text-center py-5">
-                        <i class="fas fa-envelope-open fa-4x text-muted mb-3"></i>
-                        <h4 class="text-muted">Select a message to view</h4>
-                        <p class="text-muted">Choose a message from the inbox to read and respond</p>
-                    </div>
-                    
-                    {% for message in messages %}
-                    <div id="message-{{ message.id }}" class="message-detail">
-                        <div class="message-detail-header">
-                            <h4 class="message-detail-title">{{ message.subject }}</h4>
-                            <div class="message-detail-meta">
-                                <span><i class="fas fa-user me-1"></i>{{ message.sender.get_full_name|default:message.sender.username }}</span>
-                                <span><i class="fas fa-clock me-1"></i>{{ message.sent_at|date:"M d, Y H:i" }}</span>
-                                {% if not message.is_read %}
-                                <span class="badge bg-warning">Unread</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        
-                        <div class="message-detail-content">
-                            {{ message.content|linebreaks }}
-                        </div>
-                        
-                        <div class="message-actions">
-                            {% if not message.is_read %}
-                            <button class="action-btn primary" onclick="markAsRead({{ message.id }})">
-                                <i class="fas fa-check me-1"></i>Mark as Read
-                            </button>
-                            {% endif %}
-                            <button class="action-btn secondary" onclick="showReplyForm({{ message.id }})">
-                                <i class="fas fa-reply me-1"></i>Reply
-                            </button>
-                        </div>
-                        
-                        <!-- Reply Form -->
-                        <div id="reply-form-{{ message.id }}" class="reply-section" style="display: none;">
-                            <h5 class="mb-3">
-                                <i class="fas fa-reply me-2"></i>Reply to {{ message.sender.get_full_name|default:message.sender.username }}
-                            </h5>
-                            
-                            <form class="reply-form" onsubmit="sendReply(event, {{ message.id }})">
-                                {% csrf_token %}
-                                <div class="mb-3">
-                                    <label class="form-label">Subject</label>
-                                    <input type="text" class="form-control" 
-                                           value="Re: {{ message.subject }}" required>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label class="form-label">Message</label>
-                                    <textarea class="form-control" rows="4" 
-                                              placeholder="Type your reply here..." required></textarea>
-                                </div>
-                                
-                                <div class="d-flex gap-2">
-                                    <button type="submit" class="btn-reply">
-                                        <i class="fas fa-paper-plane me-2"></i>Send Reply
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary" 
-                                            onclick="hideReplyForm({{ message.id }})">
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    {% endfor %}
+                    <a href="{% url 'communication:compose' %}" class="btn btn-light text-primary pill-btn">
+                        <i class="fas fa-pen me-2"></i>Compose
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="inbox-shell row g-0">
+        <div class="col-lg-4 conversation-list">
+            <div class="mb-3 position-relative">
+                <input type="text" class="form-control search-input" placeholder="Search messages..." id="messageSearch">
+            </div>
+            <div class="mb-4 d-flex flex-wrap gap-2">
+                <span class="tag-pill active" data-filter="all">All</span>
+                <span class="tag-pill" data-filter="unread">Unread</span>
+                <span class="tag-pill" data-filter="announcement">Announcements</span>
+                <span class="tag-pill" data-filter="student">Students</span>
+                <span class="tag-pill" data-filter="sent">Sent</span>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                <div class="conversation-item {% if not message.is_read %}unread{% endif %}"
+                     data-message-id="{{ message.id }}"
+                     data-subject="{{ message.subject|escape }}"
+                     data-sender="{{ message.sender.get_full_name|default:message.sender.username|escape }}"
+                     data-email="{{ message.sender.email|default:'' }}"
+                     data-sent="{{ message.sent_at|date:'M d, Y · H:i a' }}"
+                     data-content="{{ message.content|escape }}"
+                     data-read="{{ message.is_read|yesno:'true,false' }}"
+                     data-category="{% if message.sender == user %}sent{% elif message.sender.is_staff %}announcement{% else %}student{% endif %}"
+                     data-search="{{ message.sender.get_full_name|default:message.sender.username|default:''|lower }} {{ message.subject|default:''|lower }} {{ message.content|striptags|default:''|lower }}">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar-pill">{{ message.sender.get_full_name|default:message.sender.username|slice:':1'|upper }}</div>
+                        <div>
+                            <div class="fw-semibold">{{ message.sender.get_full_name|default:message.sender.username }}</div>
+                            <small>{{ message.sent_at|timesince }} ago</small>
+                        </div>
+                        {% if not message.is_read %}
+                        <span class="badge bg-warning text-dark ms-auto">New</span>
+                        {% endif %}
+                    </div>
+                    <div class="subject">{{ message.subject }}</div>
+                    <div class="text-muted small">{{ message.content|truncatewords:20 }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <i class="fas fa-inbox fa-3x mb-3"></i>
+                    <p class="mb-3">No messages yet. Learner communications will appear here.</p>
+                    <a href="{% url 'communication:compose' %}" class="btn btn-primary pill-btn">Send a welcome note</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-8 conversation-detail">
+            {% if messages %}
+            <div class="detail-card" id="messageDetailCard">
+                <div class="text-center text-muted my-5" id="detailEmptyState">
+                    <i class="fas fa-comment-dots fa-3x mb-3"></i>
+                    <p class="mb-0">Select a message to view the full conversation.</p>
+                </div>
+                <div id="detailContent" class="d-none">
+                    <div class="detail-subject mb-2" id="detailSubject"></div>
+                    <div class="detail-meta mb-4">
+                        <span><i class="fas fa-user-circle me-2"></i><span id="detailSender"></span></span>
+                        <span><i class="fas fa-envelope me-2"></i><span id="detailEmail"></span></span>
+                        <span><i class="fas fa-clock me-2"></i><span id="detailSent"></span></span>
+                    </div>
+                    <div class="detail-content" id="detailBody"></div>
+                    <div class="detail-actions">
+                        <a href="#" id="replyEmailBtn" class="btn btn-primary pill-btn"><i class="fas fa-reply me-2"></i>Reply via email</a>
+                        <a href="{% url 'communication:compose' %}" class="btn btn-outline-primary pill-btn"><i class="fas fa-pen me-2"></i>Compose new</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="detail-card text-center text-muted">
+                <i class="fas fa-comment-slash fa-3x mb-3"></i>
+                <p class="mb-0">Message content will appear here once you start receiving communications.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
-{% endblock %}
 
-{% block extra_js %}
+{% if messages %}
 <script>
-function showMessage(messageId) {
-    // Hide all message details
-    document.querySelectorAll('.message-detail').forEach(detail => {
-        detail.classList.remove('active');
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = Array.from(document.querySelectorAll('.conversation-item'));
+    const detailSubject = document.getElementById('detailSubject');
+    const detailSender = document.getElementById('detailSender');
+    const detailEmail = document.getElementById('detailEmail');
+    const detailSent = document.getElementById('detailSent');
+    const detailBody = document.getElementById('detailBody');
+    const replyBtn = document.getElementById('replyEmailBtn');
+    const detailEmpty = document.getElementById('detailEmptyState');
+    const detailContent = document.getElementById('detailContent');
+    const searchInput = document.getElementById('messageSearch');
+    const filterPills = document.querySelectorAll('.tag-pill');
+    let activeFilter = 'all';
+
+    function openCard(card) {
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+
+        detailSubject.textContent = card.dataset.subject || 'Untitled';
+        detailSender.textContent = card.dataset.sender || 'Unknown sender';
+        detailEmail.textContent = card.dataset.email || 'Not provided';
+        detailSent.textContent = card.dataset.sent || '';
+        detailBody.innerHTML = (card.dataset.content || '').replace(/\n/g, '<br>');
+
+        card.classList.remove('unread');
+        card.dataset.read = 'true';
+        const badge = card.querySelector('.badge.bg-warning');
+        if (badge) badge.remove();
+
+        if (card.dataset.email) {
+            replyBtn.href = `mailto:${card.dataset.email}?subject=${encodeURIComponent('Re: ' + (card.dataset.subject || ''))}`;
+            replyBtn.classList.remove('disabled');
+        } else {
+            replyBtn.href = '#';
+            replyBtn.classList.add('disabled');
+        }
+
+        detailEmpty.classList.add('d-none');
+        detailContent.classList.remove('d-none');
+    }
+
+    function applyFilters() {
+        const term = (searchInput.value || '').trim().toLowerCase();
+        let firstVisible = null;
+        cards.forEach(card => {
+            const matchesSearch = !term || card.dataset.search.includes(term);
+            let matchesFilter = true;
+            if (activeFilter === 'unread') {
+                matchesFilter = card.dataset.read === 'false';
+            } else if (activeFilter !== 'all') {
+                matchesFilter = card.dataset.category === activeFilter;
+            }
+            const visible = matchesSearch && matchesFilter;
+            card.style.display = visible ? '' : 'none';
+            if (visible && !firstVisible) firstVisible = card;
+        });
+        if (firstVisible) {
+            openCard(firstVisible);
+        } else {
+            detailContent.classList.add('d-none');
+            detailEmpty.classList.remove('d-none');
+        }
+    }
+
+    cards.forEach(card => {
+        card.dataset.search = (card.dataset.search || '').toLowerCase();
+        card.addEventListener('click', () => openCard(card));
     });
-    
-    // Hide no message selected
-    document.getElementById('no-message-selected').style.display = 'none';
-    
-    // Show selected message
-    document.getElementById('message-' + messageId).classList.add('active');
-    
-    // Mark message item as selected
-    document.querySelectorAll('.message-item').forEach(item => {
-        item.classList.remove('selected');
+
+    filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            filterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            activeFilter = pill.dataset.filter;
+            applyFilters();
+        });
     });
-    event.currentTarget.classList.add('selected');
-}
 
-function showReplyForm(messageId) {
-    document.getElementById('reply-form-' + messageId).style.display = 'block';
-}
+    searchInput.addEventListener('input', () => applyFilters());
 
-function hideReplyForm(messageId) {
-    document.getElementById('reply-form-' + messageId).style.display = 'none';
-}
-
-function markAsRead(messageId) {
-    // Implementation for marking message as read
-    // This would typically make an AJAX call to update the message status
-    console.log('Marking message ' + messageId + ' as read');
-}
-
-function markAllAsRead() {
-    // Implementation for marking all messages as read
-    console.log('Marking all messages as read');
-}
-
-function sendReply(event, messageId) {
-    event.preventDefault();
-    // Implementation for sending reply
-    // This would typically make an AJAX call to send the reply
-    console.log('Sending reply to message ' + messageId);
-}
-
-// Add entrance animations
-document.addEventListener('DOMContentLoaded', function() {
-    const messageItems = document.querySelectorAll('.message-item');
-    
-    messageItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-20px)';
-        
-        setTimeout(() => {
-            item.style.transition = 'all 0.4s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'translateX(0)';
-        }, index * 50);
-    });
+    applyFilters();
 });
 </script>
+{% endif %}
 {% endblock %}

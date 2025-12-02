@@ -123,18 +123,6 @@
             <div class="quick-actions">
                 {% block quick_actions %}
                 <!-- Default Quick Actions -->
-                <a href="{% url 'admin:courses_module_add' %}" class="quick-action-btn primary">
-                    <i class="fas fa-layer-group"></i>
-                    New Module
-                </a>
-                <a href="{% url 'admin:users_moduleinstructor_add' %}" class="quick-action-btn">
-                    <i class="fas fa-user-plus"></i>
-                    Assign Module
-                </a>
-                <a href="{% url 'admin:assessments_quiz_add' %}" class="quick-action-btn">
-                    <i class="fas fa-question-circle"></i>
-                    New Quiz
-                </a>
                 <a href="{% url 'users:instructor_messages' %}" class="quick-action-btn">
                     <i class="fas fa-envelope"></i>
                     Messages
