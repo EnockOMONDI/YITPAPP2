@@ -150,7 +150,7 @@ class ForumListView(ListView):
     context_object_name = 'forums'
 
     def get_queryset(self):
-        return Forum.objects.filter(is_active=True).order_by('order')
+        return Forum.objects.filter(is_active=True).select_related('course').order_by('course__title', 'title')
 
 
 class ForumDetailView(DetailView):
@@ -165,10 +165,7 @@ class ForumDetailView(DetailView):
         forum = self.object
 
         # Get topics in this forum
-        topics = Topic.objects.filter(
-            forum=forum,
-            is_published=True
-        ).order_by('-is_pinned', '-last_activity')
+        topics = forum.topics.select_related('forum').order_by('-is_pinned', '-updated_at')
 
         context['topics'] = topics
         return context
@@ -183,7 +180,7 @@ class CreateTopicView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         forum = get_object_or_404(Forum, id=self.kwargs['forum_id'])
         form.instance.forum = forum
-        form.instance.author = self.request.user
+        form.instance.created_by = self.request.user
         messages.success(self.request, 'Topic created successfully!')
         return super().form_valid(form)
 
@@ -217,7 +214,7 @@ class ReplyTopicView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         topic = get_object_or_404(Topic, id=self.kwargs['topic_id'])
         form.instance.topic = topic
-        form.instance.author = self.request.user
+        form.instance.created_by = self.request.user
 
         # Update topic last activity
         topic.last_activity = timezone.now()
