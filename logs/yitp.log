@@ -36525,3 +36525,11 @@ WARNING 2025-12-02 20:48:10,524 basehttp 20040 6184153088 "GET /static/assets/cs
 WARNING 2025-12-02 20:48:10,728 basehttp 20040 6167326720 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
 WARNING 2025-12-02 20:48:11,075 basehttp 20040 6167326720 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
 INFO 2025-12-02 20:50:08,965 basehttp 20040 6167326720 "GET /users/instructor/analytics/ HTTP/1.1" 200 46067
+INFO 2025-12-02 20:59:31,712 autoreload 23154 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-02 20:59:39,171 basehttp 23154 6192050176 "GET /users/instructor/analytics/ HTTP/1.1" 200 46067
+INFO 2025-12-02 20:59:48,100 basehttp 23154 6192050176 "GET /users/instructor/courses/ HTTP/1.1" 200 48928
+INFO 2025-12-02 20:59:55,058 basehttp 23154 6192050176 "GET /admin/courses/module/14/change/ HTTP/1.1" 302 0
+INFO 2025-12-02 20:59:55,138 basehttp 23154 6192050176 "GET /admin/ HTTP/1.1" 200 41427
+WARNING 2025-12-02 20:59:56,723 basehttp 23154 6192050176 "GET /static/assets/img/logo.png HTTP/1.1" 404 1816
+INFO 2025-12-02 20:59:58,174 basehttp 23154 6208876544 "GET /users/instructor/courses/ HTTP/1.1" 200 48928
+INFO 2025-12-02 21:00:12,231 basehttp 23154 6208876544 "GET /users/instructor/analytics/ HTTP/1.1" 200 46067
