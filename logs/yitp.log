@@ -39105,3 +39105,245 @@ INFO 2025-12-03 14:06:49,321 basehttp 9465 6177861632 "GET /users/instructor/qui
 INFO 2025-12-03 14:09:57,483 basehttp 9465 6177861632 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
 INFO 2025-12-03 14:09:58,962 basehttp 9465 6177861632 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
 INFO 2025-12-03 14:09:59,604 basehttp 9465 6177861632 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20269
+INFO 2025-12-03 14:48:17,224 autoreload 12723 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 14:48:24,032 basehttp 12723 6192771072 "GET /users/instructor/tutorial/ HTTP/1.1" 200 32403
+INFO 2025-12-03 14:51:00,685 basehttp 12723 6192771072 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
+INFO 2025-12-03 14:51:13,427 basehttp 12723 6192771072 "GET /users/instructor/ HTTP/1.1" 200 22547
+INFO 2025-12-03 14:51:27,075 basehttp 12723 6192771072 "GET /users/instructor/ HTTP/1.1" 200 22547
+INFO 2025-12-03 14:51:29,536 basehttp 12723 6192771072 "GET /users/instructor/courses/ HTTP/1.1" 200 13173
+INFO 2025-12-03 14:51:31,472 basehttp 12723 6192771072 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22547
+INFO 2025-12-03 14:51:36,828 basehttp 12723 6192771072 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 29543
+INFO 2025-12-03 14:51:45,965 autoreload 12723 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 14:51:48,324 autoreload 12804 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 14:52:02,735 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 13166
+INFO 2025-12-03 14:52:05,418 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 13166
+INFO 2025-12-03 14:52:16,132 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 13166
+INFO 2025-12-03 14:53:49,074 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 57544
+INFO 2025-12-03 14:54:39,937 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 57544
+INFO 2025-12-03 14:55:23,285 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 57552
+INFO 2025-12-03 14:55:27,714 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 57552
+INFO 2025-12-03 14:55:42,434 basehttp 12804 6126759936 "GET /users/instructor/tutorial/ HTTP/1.1" 200 57552
+INFO 2025-12-03 14:56:56,846 autoreload 13265 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 14:56:59,609 basehttp 13265 6127808512 "GET /users/instructor/tutorial/ HTTP/1.1" 200 57552
+INFO 2025-12-03 14:56:59,675 basehttp 13265 6178287616 "GET /static/assets/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-12-03 14:56:59,679 basehttp 13265 6195113984 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-12-03 14:56:59,680 basehttp 13265 6144634880 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-12-03 14:56:59,682 basehttp 13265 6127808512 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-12-03 14:56:59,682 basehttp 13265 6161461248 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-12-03 14:57:00,071 basehttp 13265 6127808512 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-12-03 14:57:00,684 basehttp 13265 6161461248 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-12-03 14:57:00,692 basehttp 13265 6127808512 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-12-03 14:57:41,580 basehttp 13265 6127808512 "GET /users/instructor/ HTTP/1.1" 200 22547
+INFO 2025-12-03 14:58:16,316 basehttp 13265 6127808512 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
+INFO 2025-12-03 14:58:22,801 basehttp 13265 6127808512 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
+INFO 2025-12-03 14:58:23,617 basehttp 13265 6127808512 "GET /users/instructor/students/ HTTP/1.1" 200 41868
+INFO 2025-12-03 14:58:38,219 basehttp 13265 6127808512 "GET /users/instructor/student/72/ HTTP/1.1" 200 17597
+INFO 2025-12-03 14:59:13,372 basehttp 13265 6127808512 "POST /users/instructor/student/72/send-message/ HTTP/1.1" 302 0
+INFO 2025-12-03 14:59:13,403 basehttp 13265 6127808512 "GET /users/instructor/student/72/ HTTP/1.1" 200 17965
+INFO 2025-12-03 14:59:20,579 basehttp 13265 6127808512 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
+INFO 2025-12-03 14:59:29,250 basehttp 13265 6127808512 "GET /users/instructor/students/ HTTP/1.1" 200 41868
+INFO 2025-12-03 14:59:32,425 basehttp 13265 6127808512 "GET /users/instructor/student/72/ HTTP/1.1" 200 17597
+INFO 2025-12-03 14:59:47,907 basehttp 13265 6127808512 "GET /logout/ HTTP/1.1" 200 12682
+INFO 2025-12-03 14:59:47,942 basehttp 13265 6161461248 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2025-12-03 14:59:47,944 basehttp 13265 6127808512 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7247
+INFO 2025-12-03 14:59:48,471 basehttp 13265 6161461248 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2025-12-03 14:59:48,472 basehttp 13265 6144634880 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2025-12-03 14:59:48,473 basehttp 13265 6127808512 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2025-12-03 14:59:48,501 basehttp 13265 6127808512 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2025-12-03 14:59:48,501 basehttp 13265 6144634880 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2025-12-03 14:59:48,514 basehttp 13265 6127808512 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2025-12-03 14:59:48,519 basehttp 13265 6127808512 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2025-12-03 14:59:48,519 basehttp 13265 6144634880 "GET /static/assets/css/messages.css HTTP/1.1" 200 2902
+INFO 2025-12-03 14:59:48,804 basehttp 13265 6144634880 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-12-03 14:59:48,806 basehttp 13265 6127808512 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2025-12-03 14:59:48,810 basehttp 13265 6127808512 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2025-12-03 14:59:48,813 basehttp 13265 6127808512 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2025-12-03 14:59:48,814 basehttp 13265 6144634880 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2025-12-03 14:59:48,816 basehttp 13265 6127808512 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2025-12-03 14:59:48,820 basehttp 13265 6127808512 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2025-12-03 14:59:48,820 basehttp 13265 6144634880 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2025-12-03 14:59:48,823 basehttp 13265 6144634880 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2025-12-03 14:59:48,823 basehttp 13265 6127808512 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1040
+INFO 2025-12-03 14:59:48,825 basehttp 13265 6144634880 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2025-12-03 14:59:48,826 basehttp 13265 6127808512 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2025-12-03 14:59:48,829 basehttp 13265 6144634880 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2025-12-03 14:59:48,829 basehttp 13265 6127808512 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2025-12-03 14:59:48,832 basehttp 13265 6127808512 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2025-12-03 14:59:48,836 basehttp 13265 6127808512 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2025-12-03 14:59:50,426 basehttp 13265 6127808512 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-12-03 14:59:53,980 basehttp 13265 6127808512 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-12-03 15:00:03,542 basehttp 13265 6127808512 "GET / HTTP/1.1" 200 76665
+INFO 2025-12-03 15:00:03,664 basehttp 13265 6127808512 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2025-12-03 15:00:04,532 basehttp 13265 6127808512 "GET /static/js/yitp-translate.js HTTP/1.1" 200 1802
+INFO 2025-12-03 15:00:04,663 basehttp 13265 6127808512 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2025-12-03 15:00:05,855 basehttp 13265 6127808512 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-12-03 15:51:48,463 autoreload 14720 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 15:52:14,173 basehttp 14720 6204993536 "GET / HTTP/1.1" 200 76665
+INFO 2025-12-03 15:52:23,825 basehttp 14720 6204993536 "GET /login/ HTTP/1.1" 200 14940
+INFO 2025-12-03 15:52:30,691 basehttp 14720 6204993536 "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-03 15:52:30,737 basehttp 14720 6204993536 "GET /users/instructor/ HTTP/1.1" 200 22962
+INFO 2025-12-03 15:59:52,067 basehttp 14720 6204993536 "GET /users/instructor/ HTTP/1.1" 200 22537
+INFO 2025-12-03 16:01:53,181 basehttp 14720 6204993536 "GET /users/instructor/ HTTP/1.1" 200 22537
+ERROR 2025-12-03 16:03:07,109 log 14720 6204993536 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 481, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 693, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 603, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'floatform'
+ERROR 2025-12-03 16:03:07,116 basehttp 14720 6204993536 "GET /users/instructor/ HTTP/1.1" 500 271742
+INFO 2025-12-03 16:03:07,499 basehttp 14720 6204993536 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-12-03 16:03:07,501 basehttp 14720 6204993536 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+ERROR 2025-12-03 16:03:36,367 log 14720 6204993536 Internal Server Error: /users/instructor/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 481, in parse
+    raise self.error(token, e)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 693, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 603, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'floatform'
+ERROR 2025-12-03 16:03:36,370 basehttp 14720 6204993536 "GET /users/instructor/ HTTP/1.1" 500 271742
+INFO 2025-12-03 16:04:30,468 autoreload 14720 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 16:04:31,861 autoreload 14949 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 16:06:17,905 autoreload 14949 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 16:06:19,500 autoreload 14994 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 16:06:21,607 basehttp 14994 6165590016 "GET /users/instructor/ HTTP/1.1" 200 33413
+INFO 2025-12-03 16:06:21,752 basehttp 14994 6216069120 "GET /static/assets/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-12-03 16:06:21,781 basehttp 14994 6182416384 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-12-03 16:06:21,783 basehttp 14994 6199242752 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-12-03 16:06:21,786 basehttp 14994 6232895488 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-12-03 16:06:21,790 basehttp 14994 6165590016 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-12-03 16:06:22,195 basehttp 14994 6165590016 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-12-03 16:06:22,762 basehttp 14994 6232895488 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2025-12-03 16:06:22,763 basehttp 14994 6165590016 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-12-03 16:14:47,267 basehttp 14994 6165590016 "GET /users/instructor/ HTTP/1.1" 200 34341
+INFO 2025-12-03 16:19:37,411 basehttp 14994 6165590016 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 30471
+INFO 2025-12-03 16:19:41,130 basehttp 14994 6165590016 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 25828
+INFO 2025-12-03 16:19:44,680 basehttp 14994 6165590016 "GET /users/instructor/analytics/ HTTP/1.1" 200 16335

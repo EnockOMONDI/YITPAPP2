@@ -275,6 +275,25 @@
                     <span>Tutorials</span>
                 </a>
             </div>
+
+            <!-- Public Section -->
+            <hr class="my-3 mx-3 border-secondary opacity-25">
+            <div class="px-3 mb-2 text-uppercase small fw-bold text-muted" style="font-size: 0.7rem;">Public Pages</div>
+
+            <div class="nav-item">
+                <a href="{% url 'blogapp:blog-list' %}" target="_blank" class="nav-link">
+                    <i class="fas fa-newspaper"></i>
+                    <span>News & Blog</span>
+                    <i class="fas fa-external-link-alt ms-auto small opacity-50" style="font-size: 0.7rem;"></i>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="{% url 'events:event_list' %}" target="_blank" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Events</span>
+                    <i class="fas fa-external-link-alt ms-auto small opacity-50" style="font-size: 0.7rem;"></i>
+                </a>
+            </div>
         </nav>
 
         <div class="sidebar-footer">
