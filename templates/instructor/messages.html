@@ -1,310 +1,283 @@
-{% extends 'yitp/base.html' %}
+{% extends 'instructor/base_instructor.html' %}
 {% load static %}
 
-{% block title %}Messages - YITP LMS{% endblock %}
+{% block title %}Messages · YITP Instructor{% endblock %}
 
 {% block extra_css %}
 <style>
-:root {
-    --inbox-gradient: linear-gradient(135deg, #341C67 0%, #ff8744 100%);
-    --inbox-shadow: 0 35px 70px rgba(52,28,103,0.25);
-}
+    .inbox-container {
+        height: calc(100vh - 140px);
+        min-height: 600px;
+    }
 
-.content-wrapper { margin-top: 90px; }
-@media (max-width: 991px) { .content-wrapper { margin-top: 70px; } }
+    .conversation-list {
+        border-right: 1px solid #eef2ff;
+        height: 100%;
+        overflow-y: auto;
+    }
 
-.inbox-hero {
-    background: var(--inbox-gradient);
-    border-radius: 30px;
-    padding: 2.8rem;
-    color: #fff;
-    box-shadow: var(--inbox-shadow);
-    position: relative;
-    overflow: hidden;
-}
+    .conversation-item {
+        border-radius: 12px;
+        border: 1px solid transparent;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
 
-.inbox-hero::after {
-    content: '';
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    top: -60px;
-    right: -40px;
-}
+    .conversation-item:hover {
+        background-color: #f8f9fa;
+    }
 
-.inbox-shell {
-    background: #fff;
-    border-radius: 24px;
-    box-shadow: 0 30px 60px rgba(15,23,42,0.12);
-    border: 1px solid #eef2ff;
-    margin-top: -70px;
-    position: relative;
-    overflow: hidden;
-}
+    .conversation-item.active {
+        background-color: #fff8f5;
+        border-color: #ff5d15;
+    }
 
-.conversation-list {
-    background: #fafbff;
-    border-right: 1px solid #eef2ff;
-    min-height: 620px;
-    padding: 1.75rem;
-}
+    .conversation-item.unread {
+        background-color: #fff;
+        border-left: 3px solid #ff5d15;
+    }
 
-.conversation-item {
-    border-radius: 18px;
-    border: 1px solid transparent;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background: #fff;
-    box-shadow: 0 12px 30px rgba(15,23,42,0.06);
-    cursor: pointer;
-    transition: transform 0.18s ease, border 0.18s ease, box-shadow 0.18s ease;
-}
+    .avatar-pill {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #341C67, #ff5d15);
+        color: white;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+    }
 
-.conversation-item:hover { transform: translateY(-4px); border-color: rgba(255,93,21,0.5); }
-.conversation-item.active { border-color: rgba(255,93,21,0.8); box-shadow: 0 18px 45px rgba(255,93,21,0.15); }
-.conversation-item.unread { background: rgba(255,93,21,0.05); }
+    .detail-view {
+        height: 100%;
+        overflow-y: auto;
+    }
 
-.conversation-item .avatar-pill {
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
-    background: var(--inbox-gradient);
-    color: white;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.75rem;
-}
+    .tag-pill {
+        cursor: pointer;
+        user-select: none;
+    }
 
-.conversation-detail { padding: 2.25rem; min-height: 620px; }
-
-.detail-card {
-    background: #fff;
-    border-radius: 24px;
-    border: 1px solid #eef2ff;
-    box-shadow: 0 20px 45px rgba(15,23,42,0.08);
-    padding: 2rem;
-    min-height: 520px;
-}
-
-.detail-subject { font-size: 1.35rem; font-weight: 700; color: #1d2040; }
-.detail-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.9rem; color: #8a8fb6; }
-.detail-content { margin-top: 1.5rem; line-height: 1.7; color: #4c4f6e; }
-.detail-actions { border-top: 1px solid #f1f4ff; margin-top: 2rem; padding-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
-
-.pill-btn { border-radius: 999px; font-weight: 600; padding: 0.65rem 1.6rem; }
-
-.search-input {
-    border-radius: 999px;
-    border: 1px solid #e1e5ff;
-    padding-left: 2.6rem;
-    background: #fff url('data:image/svg+xml;utf8,<svg fill="%238a8fb6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>') no-repeat 1rem center;
-}
-
-.tag-pill {
-    border: 1px solid transparent;
-    padding: 0.35rem 0.85rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    color: #6b6f92;
-    background: #fff;
-    cursor: pointer;
-}
-.tag-pill.active { border-color: rgba(255,93,21,0.6); color: #ff5d15; background: rgba(255,93,21,0.08); }
-
-.empty-state { text-align: center; padding: 4rem 1rem; color: #8a8fb6; }
+    .tag-pill.active {
+        background-color: #341C67 !important;
+        color: white !important;
+        border-color: #341C67 !important;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container content-wrapper">
-    <div class="inbox-hero mb-4">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <p class="mb-2 text-uppercase fw-semibold text-white" style="letter-spacing:0.15em;">Instructor Inbox</p>
-                <h1 class="display-6 fw-bold mb-3 text-white">Stay in sync with your learners</h1>
-                <p class="mb-0 text-white">View learner questions, system nudges, and collaboration notes in one polished workspace.</p>
-            </div>
-            <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
-                <div class="d-flex flex-lg-column flex-sm-row flex-column gap-3 align-items-lg-end">
-                    <div class="text-center px-4 py-3 bg-white text-primary rounded-4">
-                        <div class="display-6 fw-bold mb-0">{{ unread_count }}</div>
-                        <small class="text-uppercase fw-semibold">Unread</small>
-                    </div>
-                    <a href="{% url 'communication:compose' %}" class="btn btn-light text-primary pill-btn">
-                        <i class="fas fa-pen me-2"></i>Compose
-                    </a>
-                </div>
-            </div>
+<div class="container-fluid h-100 d-flex flex-column">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h1 class="h3 mb-1 fw-bold">Messages</h1>
+            <p class="text-muted mb-0">Stay in sync with your learners.</p>
+        </div>
+        <div>
+            <a href="{% url 'communication:compose' %}" class="btn btn-primary">
+                <i class="fas fa-pen me-2"></i>Compose
+            </a>
         </div>
     </div>
 
-    <div class="inbox-shell row g-0">
-        <div class="col-lg-4 conversation-list">
-            <div class="mb-3 position-relative">
-                <input type="text" class="form-control search-input" placeholder="Search messages..." id="messageSearch">
-            </div>
-            <div class="mb-4 d-flex flex-wrap gap-2">
-                <span class="tag-pill active" data-filter="all">All</span>
-                <span class="tag-pill" data-filter="unread">Unread</span>
-                <span class="tag-pill" data-filter="announcement">Announcements</span>
-                <span class="tag-pill" data-filter="student">Students</span>
-                <span class="tag-pill" data-filter="sent">Sent</span>
-            </div>
+    <div class="card-custom bg-white flex-grow-1 overflow-hidden">
+        <div class="row g-0 h-100">
+            <!-- Sidebar List -->
+            <div class="col-lg-4 conversation-list p-3 bg-light bg-opacity-10">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0"><i
+                                class="fas fa-search text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0 ps-0" placeholder="Search messages..."
+                            id="messageSearch">
+                    </div>
+                </div>
 
-            {% if messages %}
-                {% for message in messages %}
-                <div class="conversation-item {% if not message.is_read %}unread{% endif %}"
-                     data-message-id="{{ message.id }}"
-                     data-subject="{{ message.subject|escape }}"
-                     data-sender="{{ message.sender.get_full_name|default:message.sender.username|escape }}"
-                     data-email="{{ message.sender.email|default:'' }}"
-                     data-sent="{{ message.sent_at|date:'M d, Y · H:i a' }}"
-                     data-content="{{ message.content|escape }}"
-                     data-read="{{ message.is_read|yesno:'true,false' }}"
-                     data-category="{% if message.sender == user %}sent{% elif message.sender.is_staff %}announcement{% else %}student{% endif %}"
-                     data-search="{{ message.sender.get_full_name|default:message.sender.username|default:''|lower }} {{ message.subject|default:''|lower }} {{ message.content|striptags|default:''|lower }}">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar-pill">{{ message.sender.get_full_name|default:message.sender.username|slice:':1'|upper }}</div>
-                        <div>
-                            <div class="fw-semibold">{{ message.sender.get_full_name|default:message.sender.username }}</div>
-                            <small>{{ message.sent_at|timesince }} ago</small>
+                <div class="d-flex gap-2 mb-3 overflow-auto pb-2">
+                    <span class="badge bg-white text-dark border tag-pill active px-3 py-2" data-filter="all">All</span>
+                    <span class="badge bg-white text-dark border tag-pill px-3 py-2" data-filter="unread">Unread</span>
+                    <span class="badge bg-white text-dark border tag-pill px-3 py-2"
+                        data-filter="student">Students</span>
+                    <span class="badge bg-white text-dark border tag-pill px-3 py-2"
+                        data-filter="announcement">Announcements</span>
+                </div>
+
+                <div id="messageList">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="conversation-item {% if not message.is_read %}unread{% endif %}"
+                        data-message-id="{{ message.id }}" data-subject="{{ message.subject|escape }}"
+                        data-sender="{{ message.sender.get_full_name|default:message.sender.username|escape }}"
+                        data-email="{{ message.sender.email|default:'' }}"
+                        data-sent="{{ message.sent_at|date:'M d, Y · H:i a' }}"
+                        data-content="{{ message.content|escape }}" data-read="{{ message.is_read|yesno:'true,false' }}"
+                        data-category="{% if message.sender == user %}sent{% elif message.sender.is_staff %}announcement{% else %}student{% endif %}"
+                        data-search="{{ message.sender.get_full_name|default:message.sender.username|default:''|lower }} {{ message.subject|default:''|lower }} {{ message.content|striptags|default:''|lower }}">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="avatar-pill me-3">{{
+                                message.sender.get_full_name|default:message.sender.username|slice:':1'|upper }}</div>
+                            <div class="flex-grow-1 min-width-0">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-truncate">{{
+                                        message.sender.get_full_name|default:message.sender.username }}</span>
+                                    <small class="text-muted" style="font-size: 0.75rem;">{{ message.sent_at|timesince
+                                        }}</small>
+                                </div>
+                                <div class="text-dark small text-truncate">{{ message.subject }}</div>
+                            </div>
                         </div>
-                        {% if not message.is_read %}
-                        <span class="badge bg-warning text-dark ms-auto">New</span>
-                        {% endif %}
+                        <div class="text-muted small text-truncate ps-5 ms-2">{{
+                            message.content|striptags|truncatewords:10 }}</div>
                     </div>
-                    <div class="subject">{{ message.subject }}</div>
-                    <div class="text-muted small">{{ message.content|truncatewords:20 }}</div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="text-center py-5 text-muted">
+                        <i class="fas fa-inbox fa-3x mb-3 opacity-25"></i>
+                        <p>No messages found.</p>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endfor %}
-            {% else %}
-                <div class="empty-state">
-                    <i class="fas fa-inbox fa-3x mb-3"></i>
-                    <p class="mb-3">No messages yet. Learner communications will appear here.</p>
-                    <a href="{% url 'communication:compose' %}" class="btn btn-primary pill-btn">Send a welcome note</a>
-                </div>
-            {% endif %}
-        </div>
+            </div>
 
-        <div class="col-lg-8 conversation-detail">
-            {% if messages %}
-            <div class="detail-card" id="messageDetailCard">
-                <div class="text-center text-muted my-5" id="detailEmptyState">
-                    <i class="fas fa-comment-dots fa-3x mb-3"></i>
-                    <p class="mb-0">Select a message to view the full conversation.</p>
-                </div>
-                <div id="detailContent" class="d-none">
-                    <div class="detail-subject mb-2" id="detailSubject"></div>
-                    <div class="detail-meta mb-4">
-                        <span><i class="fas fa-user-circle me-2"></i><span id="detailSender"></span></span>
-                        <span><i class="fas fa-envelope me-2"></i><span id="detailEmail"></span></span>
-                        <span><i class="fas fa-clock me-2"></i><span id="detailSent"></span></span>
+            <!-- Detail View -->
+            <div class="col-lg-8 detail-view p-4">
+                <div id="messageDetailCard" class="h-100">
+                    <div class="h-100 d-flex flex-column align-items-center justify-content-center text-muted"
+                        id="detailEmptyState">
+                        <div class="bg-light rounded-circle p-4 mb-3">
+                            <i class="fas fa-comment-dots fa-3x opacity-50"></i>
+                        </div>
+                        <h5>Select a message</h5>
+                        <p>Choose a conversation from the list to view details.</p>
                     </div>
-                    <div class="detail-content" id="detailBody"></div>
-                    <div class="detail-actions">
-                        <a href="#" id="replyEmailBtn" class="btn btn-primary pill-btn"><i class="fas fa-reply me-2"></i>Reply via email</a>
-                        <a href="{% url 'communication:compose' %}" class="btn btn-outline-primary pill-btn"><i class="fas fa-pen me-2"></i>Compose new</a>
+
+                    <div id="detailContent" class="d-none h-100 d-flex flex-column">
+                        <div class="border-bottom pb-4 mb-4">
+                            <h2 class="h4 fw-bold mb-3" id="detailSubject"></h2>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-pill me-3" id="detailAvatar"></div>
+                                <div>
+                                    <div class="fw-bold" id="detailSender"></div>
+                                    <div class="small text-muted">
+                                        <span id="detailEmail"></span> • <span id="detailSent"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-grow-1 overflow-auto mb-4">
+                            <div class="text-dark" id="detailBody" style="line-height: 1.6;"></div>
+                        </div>
+
+                        <div class="border-top pt-4 mt-auto">
+                            <div class="d-flex gap-2">
+                                <a href="#" id="replyEmailBtn" class="btn btn-primary">
+                                    <i class="fas fa-reply me-2"></i>Reply via Email
+                                </a>
+                                <a href="{% url 'communication:compose' %}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-pen me-2"></i>New Message
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% else %}
-            <div class="detail-card text-center text-muted">
-                <i class="fas fa-comment-slash fa-3x mb-3"></i>
-                <p class="mb-0">Message content will appear here once you start receiving communications.</p>
-            </div>
-            {% endif %}
         </div>
     </div>
 </div>
+{% endblock %}
 
+{% block extra_js %}
 {% if messages %}
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = Array.from(document.querySelectorAll('.conversation-item'));
-    const detailSubject = document.getElementById('detailSubject');
-    const detailSender = document.getElementById('detailSender');
-    const detailEmail = document.getElementById('detailEmail');
-    const detailSent = document.getElementById('detailSent');
-    const detailBody = document.getElementById('detailBody');
-    const replyBtn = document.getElementById('replyEmailBtn');
-    const detailEmpty = document.getElementById('detailEmptyState');
-    const detailContent = document.getElementById('detailContent');
-    const searchInput = document.getElementById('messageSearch');
-    const filterPills = document.querySelectorAll('.tag-pill');
-    let activeFilter = 'all';
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = Array.from(document.querySelectorAll('.conversation-item'));
+        const detailSubject = document.getElementById('detailSubject');
+        const detailSender = document.getElementById('detailSender');
+        const detailEmail = document.getElementById('detailEmail');
+        const detailSent = document.getElementById('detailSent');
+        const detailBody = document.getElementById('detailBody');
+        const detailAvatar = document.getElementById('detailAvatar');
+        const replyBtn = document.getElementById('replyEmailBtn');
+        const detailEmpty = document.getElementById('detailEmptyState');
+        const detailContent = document.getElementById('detailContent');
+        const searchInput = document.getElementById('messageSearch');
+        const filterPills = document.querySelectorAll('.tag-pill');
+        let activeFilter = 'all';
 
-    function openCard(card) {
-        cards.forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
+        function openCard(card) {
+            cards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
 
-        detailSubject.textContent = card.dataset.subject || 'Untitled';
-        detailSender.textContent = card.dataset.sender || 'Unknown sender';
-        detailEmail.textContent = card.dataset.email || 'Not provided';
-        detailSent.textContent = card.dataset.sent || '';
-        detailBody.innerHTML = (card.dataset.content || '').replace(/\n/g, '<br>');
+            const senderName = card.dataset.sender || 'Unknown';
+            detailSubject.textContent = card.dataset.subject || 'Untitled';
+            detailSender.textContent = senderName;
+            detailEmail.textContent = card.dataset.email || 'Not provided';
+            detailSent.textContent = card.dataset.sent || '';
+            detailBody.innerHTML = (card.dataset.content || '').replace(/\n/g, '<br>');
+            detailAvatar.textContent = senderName.charAt(0).toUpperCase();
 
-        card.classList.remove('unread');
-        card.dataset.read = 'true';
-        const badge = card.querySelector('.badge.bg-warning');
-        if (badge) badge.remove();
+            card.classList.remove('unread');
+            card.dataset.read = 'true';
 
-        if (card.dataset.email) {
-            replyBtn.href = `mailto:${card.dataset.email}?subject=${encodeURIComponent('Re: ' + (card.dataset.subject || ''))}`;
-            replyBtn.classList.remove('disabled');
-        } else {
-            replyBtn.href = '#';
-            replyBtn.classList.add('disabled');
-        }
-
-        detailEmpty.classList.add('d-none');
-        detailContent.classList.remove('d-none');
-    }
-
-    function applyFilters() {
-        const term = (searchInput.value || '').trim().toLowerCase();
-        let firstVisible = null;
-        cards.forEach(card => {
-            const matchesSearch = !term || card.dataset.search.includes(term);
-            let matchesFilter = true;
-            if (activeFilter === 'unread') {
-                matchesFilter = card.dataset.read === 'false';
-            } else if (activeFilter !== 'all') {
-                matchesFilter = card.dataset.category === activeFilter;
+            if (card.dataset.email) {
+                replyBtn.href = `mailto:${card.dataset.email}?subject=${encodeURIComponent('Re: ' + (card.dataset.subject || ''))}`;
+                replyBtn.classList.remove('disabled');
+            } else {
+                replyBtn.href = '#';
+                replyBtn.classList.add('disabled');
             }
-            const visible = matchesSearch && matchesFilter;
-            card.style.display = visible ? '' : 'none';
-            if (visible && !firstVisible) firstVisible = card;
-        });
-        if (firstVisible) {
-            openCard(firstVisible);
-        } else {
-            detailContent.classList.add('d-none');
-            detailEmpty.classList.remove('d-none');
+
+            detailEmpty.classList.add('d-none');
+            detailContent.classList.remove('d-none');
         }
-    }
 
-    cards.forEach(card => {
-        card.dataset.search = (card.dataset.search || '').toLowerCase();
-        card.addEventListener('click', () => openCard(card));
-    });
+        function applyFilters() {
+            const term = (searchInput.value || '').trim().toLowerCase();
+            let firstVisible = null;
 
-    filterPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            filterPills.forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-            activeFilter = pill.dataset.filter;
-            applyFilters();
+            cards.forEach(card => {
+                const matchesSearch = !term || card.dataset.search.includes(term);
+                let matchesFilter = true;
+
+                if (activeFilter === 'unread') {
+                    matchesFilter = card.dataset.read === 'false';
+                } else if (activeFilter !== 'all') {
+                    matchesFilter = card.dataset.category === activeFilter;
+                }
+
+                const visible = matchesSearch && matchesFilter;
+                card.style.display = visible ? '' : 'none';
+                if (visible && !firstVisible) firstVisible = card;
+            });
+
+            // Optional: Auto-select first visible if none selected? 
+            // For now, let's just keep the current selection or show empty state if nothing visible matches
+        }
+
+        cards.forEach(card => {
+            card.dataset.search = (card.dataset.search || '').toLowerCase();
+            card.addEventListener('click', () => openCard(card));
         });
+
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeFilter = pill.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        searchInput.addEventListener('input', () => applyFilters());
+
+        // Initial check
+        applyFilters();
     });
-
-    searchInput.addEventListener('input', () => applyFilters());
-
-    applyFilters();
-});
 </script>
 {% endif %}
 {% endblock %}

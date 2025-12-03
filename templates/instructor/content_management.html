@@ -1,399 +1,206 @@
-{% extends 'yitp/base.html' %}
+{% extends 'instructor/base_instructor.html' %}
 {% load static %}
 
-{% block title %}Content Management - YITP LMS{% endblock %}
-
-{% block breadcrumb %}
-<li class="breadcrumb-item active" aria-current="page">Content Management</li>
-{% endblock %}
-
-{% block title_icon %}<i class="fas fa-cloud-upload-alt me-3"></i>{% endblock %}
-
-{% block page_title_text %}Content Management{% endblock %}
-
-{% block page_subtitle %}
-<p class="page-subtitle text-muted mb-0">
-    Upload files, import content, and manage your media library
-</p>
-{% endblock %}
-
-{% block quick_actions %}
-<button class="quick-action-btn primary" onclick="showUploadModal()">
-    <i class="fas fa-upload"></i>
-    Upload Files
-</button>
-<button class="quick-action-btn" onclick="showBulkImportModal()">
-    <i class="fas fa-file-import"></i>
-    Bulk Import
-</button>
-<a href="#media-library" class="quick-action-btn">
-    <i class="fas fa-photo-video"></i>
-    Media Library
-</a>
-<a href="{% url 'admin:courses_lesson_add' %}" class="quick-action-btn">
-    <i class="fas fa-plus"></i>
-    New Lesson
-</a>
-{% endblock %}
+{% block title %}Content Management · YITP Instructor{% endblock %}
 
 {% block extra_css %}
 <style>
-    .content-wrapper {
-        margin-top: 100px;
-    }
-    
-    @media (max-width: 991px) {
-        .content-wrapper {
-            margin-top: 90px;
-        }
-    }
-    
-    @media (max-width: 575px) {
-        .content-wrapper {
-            margin-top: 80px;
-        }
-    }
-    
     .upload-zone {
-        border: 3px dashed #dee2e6;
-        border-radius: 15px;
-        padding: 3rem;
+        border: 2px dashed #eef2ff;
+        border-radius: 16px;
+        padding: 4rem 2rem;
         text-align: center;
         background: #f8f9fa;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         cursor: pointer;
-        margin-bottom: 2rem;
     }
-    
+
     .upload-zone:hover,
     .upload-zone.dragover {
         border-color: #ff5d15;
         background: #fff8f5;
-        transform: translateY(-2px);
     }
-    
+
     .upload-zone.uploading {
         border-color: #28a745;
-        background: #f8fff8;
+        background: #f0fff4;
     }
-    
-    .upload-icon {
-        font-size: 4rem;
-        color: #6c757d;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
+
+    .format-card {
+        background: #fff;
+        border: 1px solid #eef2ff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.2s ease;
+        height: 100%;
     }
-    
-    .upload-zone:hover .upload-icon,
-    .upload-zone.dragover .upload-icon {
+
+    .format-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+        border-color: #ff5d15;
+    }
+
+    .format-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: #fff8f5;
         color: #ff5d15;
-        transform: scale(1.1);
-    }
-    
-    .content-section {
-        background: white;
-        border-radius: 15px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .section-header {
         display: flex;
         align-items: center;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #f8f9fa;
+        justify-content: center;
+        font-size: 1.25rem;
+        margin: 0 auto 1rem;
     }
-    
-    .section-icon {
-        font-size: 1.5rem;
-        color: #ff5d15;
-        margin-right: 0.75rem;
-    }
-    
-    .section-title {
-        color: #341C67;
-        margin: 0;
-        font-weight: 600;
-    }
-    
-    .file-format-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-    
-    .format-card {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 1rem;
-        text-align: center;
-        border: 1px solid #e9ecef;
-        transition: all 0.3s ease;
-    }
-    
-    .format-card:hover {
-        border-color: #ff5d15;
-        background: #fff8f5;
-    }
-    
-    .format-icon {
-        font-size: 2rem;
-        color: #ff5d15;
-        margin-bottom: 0.5rem;
-    }
-    
-    .format-title {
-        font-weight: 600;
-        color: #341C67;
-        margin-bottom: 0.5rem;
-    }
-    
-    .format-types {
-        font-size: 0.8rem;
-        color: #6c757d;
-    }
-    
-    .progress-bar-custom {
-        height: 8px;
-        border-radius: 4px;
-        background: #e9ecef;
-        overflow: hidden;
-        margin-top: 1rem;
-    }
-    
-    .progress-fill-custom {
-        height: 100%;
-        background: linear-gradient(135deg, #ff5d15, #341C67);
-        border-radius: 4px;
-        transition: width 0.3s ease;
-    }
-    
-    .upload-list {
-        max-height: 300px;
-        overflow-y: auto;
-    }
-    
+
     .upload-item {
         display: flex;
         align-items: center;
-        padding: 0.75rem;
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
-        margin-bottom: 0.5rem;
+        padding: 1rem;
+        border: 1px solid #eef2ff;
+        border-radius: 12px;
+        margin-bottom: 0.75rem;
         background: white;
     }
-    
+
     .upload-item.success {
         border-color: #28a745;
-        background: #f8fff8;
+        background: #f0fff4;
     }
-    
+
     .upload-item.error {
         border-color: #dc3545;
-        background: #fff8f8;
+        background: #fff5f5;
     }
-    
-    .file-icon {
-        font-size: 1.5rem;
-        margin-right: 1rem;
-        color: #ff5d15;
-    }
-    
-    .file-info {
-        flex: 1;
-    }
-    
-    .file-name {
-        font-weight: 600;
-        color: #341C67;
-    }
-    
-    .file-size {
-        font-size: 0.8rem;
-        color: #6c757d;
-    }
-    
-    .file-status {
-        font-size: 0.8rem;
-        font-weight: 600;
-    }
-    
-    .file-status.success {
-        color: #28a745;
-    }
-    
-    .file-status.error {
-        color: #dc3545;
-    }
-    
-    .modal-content {
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .modal-header {
-        background: linear-gradient(135deg, #ff5d15, #341C67);
-        color: white;
-        border-radius: 15px 15px 0 0;
-        border-bottom: none;
-    }
-    
-    .btn-yitp {
-        background: linear-gradient(135deg, #ff5d15, #e54d0f);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-yitp:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 93, 21, 0.3);
-        color: white;
-    }
-    
-    .btn-yitp.secondary {
-        background: linear-gradient(135deg, #341C67, #341C67);
+
+    .progress-thin {
+        height: 4px;
+        border-radius: 2px;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-    {% include 'instructor/navigation.html' %}
-    
-    <div class="container-fluid py-4">
-        <!-- Quick Upload Zone -->
-        <div class="content-section">
-            <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                </div>
-                <h4 class="section-title">Quick Upload</h4>
-            </div>
-            
-            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-                <div class="upload-icon">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                </div>
-                <h5>Drag & Drop Files Here</h5>
-                <p class="text-muted mb-3">or click to browse files</p>
-                <button class="btn btn-yitp">
-                    <i class="fas fa-folder-open me-2"></i>Choose Files
-                </button>
-                <input type="file" id="fileInput" multiple style="display: none;" accept=".pdf,.doc,.docx,.txt,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.mp4,.mp3,.zip">
-            </div>
-            
-            <!-- Upload Progress -->
-            <div id="uploadProgress" style="display: none;">
-                <h6>Upload Progress</h6>
-                <div class="progress-bar-custom">
-                    <div class="progress-fill-custom" id="progressFill" style="width: 0%;"></div>
-                </div>
-                <div class="upload-list" id="uploadList"></div>
-            </div>
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1 fw-bold">Content Management</h1>
+            <p class="text-muted mb-0">Upload files, import content, and manage your media library.</p>
         </div>
-
-        <!-- Supported Formats -->
-        <div class="content-section">
-            <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <h4 class="section-title">Supported File Formats</h4>
-            </div>
-            
-            <div class="file-format-grid">
-                <div class="format-card">
-                    <div class="format-icon">
-                        <i class="fas fa-file-word"></i>
-                    </div>
-                    <div class="format-title">Documents</div>
-                    <div class="format-types">PDF, DOC, DOCX, TXT, RTF</div>
-                </div>
-                
-                <div class="format-card">
-                    <div class="format-icon">
-                        <i class="fas fa-file-powerpoint"></i>
-                    </div>
-                    <div class="format-title">Presentations</div>
-                    <div class="format-types">PPT, PPTX, ODP</div>
-                </div>
-                
-                <div class="format-card">
-                    <div class="format-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="format-title">Images</div>
-                    <div class="format-types">JPG, PNG, GIF, SVG</div>
-                </div>
-                
-                <div class="format-card">
-                    <div class="format-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <div class="format-title">Videos</div>
-                    <div class="format-types">MP4, AVI, MOV, WMV</div>
-                </div>
-                
-                <div class="format-card">
-                    <div class="format-icon">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <div class="format-title">Audio</div>
-                    <div class="format-types">MP3, WAV, OGG, M4A</div>
-                </div>
-                
-                <div class="format-card">
-                    <div class="format-icon">
-                        <i class="fas fa-file-archive"></i>
-                    </div>
-                    <div class="format-title">Archives</div>
-                    <div class="format-types">ZIP, RAR, 7Z, TAR.GZ</div>
-                </div>
-            </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary" onclick="showBulkImportModal()">
+                <i class="fas fa-file-import me-2"></i>Bulk Import
+            </button>
+            <a href="{% url 'admin:courses_lesson_add' %}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>New Lesson
+            </a>
         </div>
+    </div>
 
-        <!-- Quick Actions -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="content-section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-file-import"></i>
+    <div class="row g-4">
+        <!-- Main Upload Area -->
+        <div class="col-lg-8">
+            <div class="card-custom bg-white p-4 mb-4">
+                <h5 class="fw-bold mb-4">Quick Upload</h5>
+
+                <div class="upload-zone mb-4" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                    <div class="mb-3">
+                        <div
+                            class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm p-3 text-primary">
+                            <i class="fas fa-cloud-upload-alt fa-2x"></i>
                         </div>
-                        <h4 class="section-title">Bulk Import</h4>
                     </div>
-                    
-                    <p class="text-muted mb-3">Import content from Word documents, PDFs, or PowerPoint presentations directly into your courses.</p>
-                    
-                    <button class="btn btn-yitp" onclick="showBulkImportModal()">
-                        <i class="fas fa-file-import me-2"></i>Start Bulk Import
+                    <h5 class="fw-bold mb-2">Drag & Drop Files Here</h5>
+                    <p class="text-muted mb-4">or click to browse from your computer</p>
+                    <button class="btn btn-primary px-4 rounded-pill">
+                        Choose Files
                     </button>
+                    <input type="file" id="fileInput" multiple style="display: none;"
+                        accept=".pdf,.doc,.docx,.txt,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.mp4,.mp3,.zip">
+                </div>
+
+                <!-- Upload Progress -->
+                <div id="uploadProgress" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="fw-bold mb-0">Uploading...</h6>
+                        <span class="small text-muted" id="uploadCount">0 files</span>
+                    </div>
+                    <div class="progress progress-thin mb-4">
+                        <div class="progress-bar bg-primary" id="progressFill" role="progressbar" style="width: 0%">
+                        </div>
+                    </div>
+                    <div class="upload-list" id="uploadList"></div>
                 </div>
             </div>
-            
-            <div class="col-md-6">
-                <div class="content-section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-photo-video"></i>
+
+            <!-- Supported Formats -->
+            <div class="mb-4">
+                <h5 class="fw-bold mb-3">Supported Formats</h5>
+                <div class="row g-3">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="format-card">
+                            <div class="format-icon"><i class="fas fa-file-word"></i></div>
+                            <h6 class="fw-bold mb-1">Documents</h6>
+                            <p class="small text-muted mb-0">PDF, DOCX, TXT</p>
                         </div>
-                        <h4 class="section-title">Media Library</h4>
                     </div>
-                    
-                    <p class="text-muted mb-3">Manage your uploaded files, organize media assets, and track storage usage.</p>
-                    
-                    <a href="#media-library" class="btn btn-yitp secondary">
-                        <i class="fas fa-photo-video me-2"></i>Open Media Library
-                    </a>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="format-card">
+                            <div class="format-icon"><i class="fas fa-file-powerpoint"></i></div>
+                            <h6 class="fw-bold mb-1">Presentations</h6>
+                            <p class="small text-muted mb-0">PPT, PPTX</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="format-card">
+                            <div class="format-icon"><i class="fas fa-video"></i></div>
+                            <h6 class="fw-bold mb-1">Media</h6>
+                            <p class="small text-muted mb-0">MP4, MP3, JPG, PNG</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Storage Usage (Mockup) -->
+            <div class="card-custom bg-white p-4 mb-4">
+                <h5 class="fw-bold mb-3">Storage Usage</h5>
+                <div class="d-flex align-items-center mb-2">
+                    <h2 class="fw-bold mb-0">2.4 GB</h2>
+                    <span class="text-muted ms-2">/ 5 GB</span>
+                </div>
+                <div class="progress progress-thin mb-3">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 48%"></div>
+                </div>
+                <p class="small text-muted mb-0">
+                    <i class="fas fa-info-circle me-1"></i>
+                    You're using 48% of your allocated storage.
+                </p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card-custom bg-primary text-white p-4 mb-4">
+                <h5 class="fw-bold mb-3">Bulk Import</h5>
+                <p class="small opacity-75 mb-4">
+                    Import content from Word documents, PDFs, or PowerPoint presentations directly into your courses.
+                </p>
+                <button class="btn btn-light text-primary w-100 fw-bold" onclick="showBulkImportModal()">
+                    <i class="fas fa-file-import me-2"></i>Start Import
+                </button>
+            </div>
+
+            <div class="card-custom bg-white p-4">
+                <h5 class="fw-bold mb-3">Media Library</h5>
+                <p class="small text-muted mb-4">
+                    Manage your uploaded files, organize media assets, and track storage usage.
+                </p>
+                <a href="#media-library" class="btn btn-outline-secondary w-100">
+                    <i class="fas fa-folder-open me-2"></i>Open Library
+                </a>
             </div>
         </div>
     </div>
@@ -401,40 +208,35 @@
 
 <!-- Bulk Import Modal -->
 <div class="modal fade" id="bulkImportModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="fas fa-file-import me-2"></i>Bulk Content Import
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold">Bulk Content Import</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-4">
                 <form method="post" action="{% url 'users:bulk_import_content' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label class="form-label">Select Course</label>
-                        <select name="course_id" class="form-control" required>
+                        <label class="form-label fw-bold small text-uppercase text-muted">Select Course</label>
+                        <select name="course_id" class="form-select" required>
                             <option value="">Choose a course...</option>
                             {% for course in user.course_set.all %}
                             <option value="{{ course.id }}">{{ course.title }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Import File</label>
-                        <input type="file" name="import_file" class="form-control" 
-                               accept=".pdf,.doc,.docx,.ppt,.pptx" required>
-                        <div class="form-text">Supported: PDF, Word documents, PowerPoint presentations</div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold small text-uppercase text-muted">Import File</label>
+                        <input type="file" name="import_file" class="form-control" accept=".pdf,.doc,.docx,.ppt,.pptx"
+                            required>
+                        <div class="form-text">Supported: PDF, Word, PowerPoint</div>
                     </div>
-                    
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-yitp">
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary py-2">
                             <i class="fas fa-upload me-2"></i>Import Content
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Cancel
                         </button>
                     </div>
                 </form>
@@ -446,135 +248,112 @@
 
 {% block extra_js %}
 <script>
-// Drag and drop functionality
-const uploadZone = document.getElementById('uploadZone');
-const fileInput = document.getElementById('fileInput');
-const uploadProgress = document.getElementById('uploadProgress');
-const uploadList = document.getElementById('uploadList');
-const progressFill = document.getElementById('progressFill');
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const uploadProgress = document.getElementById('uploadProgress');
+    const uploadList = document.getElementById('uploadList');
+    const progressFill = document.getElementById('progressFill');
 
-// Prevent default drag behaviors
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    uploadZone.addEventListener(eventName, preventDefaults, false);
-    document.body.addEventListener(eventName, preventDefaults, false);
-});
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
 
-// Highlight drop area when item is dragged over it
-['dragenter', 'dragover'].forEach(eventName => {
-    uploadZone.addEventListener(eventName, highlight, false);
-});
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, highlight, false);
+    });
 
-['dragleave', 'drop'].forEach(eventName => {
-    uploadZone.addEventListener(eventName, unhighlight, false);
-});
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, unhighlight, false);
+    });
 
-// Handle dropped files
-uploadZone.addEventListener('drop', handleDrop, false);
+    uploadZone.addEventListener('drop', handleDrop, false);
 
-// Handle file input change
-fileInput.addEventListener('change', function() {
-    handleFiles(this.files);
-});
+    fileInput.addEventListener('change', function () {
+        handleFiles(this.files);
+    });
 
-function preventDefaults(e) {
-    e.preventDefault();
-    e.stopPropagation();
-}
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
 
-function highlight(e) {
-    uploadZone.classList.add('dragover');
-}
+    function highlight(e) {
+        uploadZone.classList.add('dragover');
+    }
 
-function unhighlight(e) {
-    uploadZone.classList.remove('dragover');
-}
+    function unhighlight(e) {
+        uploadZone.classList.remove('dragover');
+    }
 
-function handleDrop(e) {
-    const dt = e.dataTransfer;
-    const files = dt.files;
-    handleFiles(files);
-}
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    }
 
-function handleFiles(files) {
-    uploadProgress.style.display = 'block';
-    uploadList.innerHTML = '';
-    
-    Array.from(files).forEach(uploadFile);
-}
+    function handleFiles(files) {
+        uploadProgress.style.display = 'block';
+        uploadList.innerHTML = '';
 
-function uploadFile(file) {
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    // Add file to upload list
-    const uploadItem = document.createElement('div');
-    uploadItem.className = 'upload-item';
-    uploadItem.innerHTML = `
-        <div class="file-icon">
-            <i class="fas fa-file"></i>
+        Array.from(files).forEach(uploadFile);
+    }
+
+    function uploadFile(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const uploadItem = document.createElement('div');
+        uploadItem.className = 'upload-item';
+        uploadItem.innerHTML = `
+        <div class="d-flex align-items-center w-100">
+            <div class="me-3 text-primary"><i class="fas fa-file"></i></div>
+            <div class="flex-grow-1 min-width-0">
+                <div class="fw-bold text-truncate">${file.name}</div>
+                <div class="small text-muted">${formatFileSize(file.size)}</div>
+            </div>
+            <div class="ms-3 file-status badge bg-light text-dark">Uploading...</div>
         </div>
-        <div class="file-info">
-            <div class="file-name">${file.name}</div>
-            <div class="file-size">${formatFileSize(file.size)}</div>
-        </div>
-        <div class="file-status">Uploading...</div>
     `;
-    uploadList.appendChild(uploadItem);
-    
-    // Upload file via AJAX
-    fetch('{% url "users:upload_file_ajax" %}', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            uploadItem.classList.add('success');
-            uploadItem.querySelector('.file-status').textContent = 'Uploaded';
-            uploadItem.querySelector('.file-status').classList.add('success');
-        } else {
-            uploadItem.classList.add('error');
-            uploadItem.querySelector('.file-status').textContent = data.error;
-            uploadItem.querySelector('.file-status').classList.add('error');
-        }
-    })
-    .catch(error => {
-        uploadItem.classList.add('error');
-        uploadItem.querySelector('.file-status').textContent = 'Upload failed';
-        uploadItem.querySelector('.file-status').classList.add('error');
-    });
-}
+        uploadList.appendChild(uploadItem);
 
-function formatFileSize(bytes) {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
+        fetch('{% url "users:upload_file_ajax" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    uploadItem.classList.add('success');
+                    uploadItem.querySelector('.file-status').textContent = 'Uploaded';
+                    uploadItem.querySelector('.file-status').className = 'ms-3 badge bg-success';
+                } else {
+                    uploadItem.classList.add('error');
+                    uploadItem.querySelector('.file-status').textContent = 'Error';
+                    uploadItem.querySelector('.file-status').className = 'ms-3 badge bg-danger';
+                }
+            })
+            .catch(error => {
+                uploadItem.classList.add('error');
+                uploadItem.querySelector('.file-status').textContent = 'Failed';
+                uploadItem.querySelector('.file-status').className = 'ms-3 badge bg-danger';
+            });
+    }
 
-function showBulkImportModal() {
-    const modal = new bootstrap.Modal(document.getElementById('bulkImportModal'));
-    modal.show();
-}
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
 
-// Add entrance animations
-document.addEventListener('DOMContentLoaded', function() {
-    const sections = document.querySelectorAll('.content-section');
-    
-    sections.forEach((section, index) => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            section.style.transition = 'all 0.6s ease';
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
-        }, index * 200);
-    });
-});
+    function showBulkImportModal() {
+        const modal = new bootstrap.Modal(document.getElementById('bulkImportModal'));
+        modal.show();
+    }
 </script>
 {% endblock %}

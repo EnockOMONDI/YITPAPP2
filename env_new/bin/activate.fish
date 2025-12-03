@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/djsean/Desktop/APPS2024/YITP2025/YITPAPP/env_new"
+set -gx VIRTUAL_ENV "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/env_new"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

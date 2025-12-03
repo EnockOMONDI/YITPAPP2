@@ -1,0 +1,148 @@
+{% extends 'instructor/base_instructor.html' %}
+{% load static %}
+
+{% block title %}Students · YITP Instructor{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1 fw-bold">Students</h1>
+            <p class="text-muted mb-0">View and manage students enrolled in your modules.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <form class="d-flex" method="get">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" name="search" class="form-control border-start-0 ps-0"
+                        placeholder="Search students..." value="{{ search_query }}">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if students %}
+    <div class="card-custom bg-white">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="border-0 ps-4">Student</th>
+                        <th class="border-0">Email</th>
+                        <th class="border-0">Enrolled Modules</th>
+                        <th class="border-0">Avg. Progress</th>
+                        <th class="border-0">Avg. Quiz Score</th>
+                        <th class="border-0">Last Activity</th>
+                        <th class="border-0 pe-4 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student_data in students %}
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center">
+                                {% with image=student_data.student.profile.image %}
+                                {% if image and image.url and image.name != 'default.jpg' %}
+                                <img src="{{ image.url }}" class="rounded-circle me-3"
+                                    width="40" height="40" alt="{{ student_data.display_name }}">
+                                {% else %}
+                                <div class="rounded-circle me-3 bg-light d-flex align-items-center justify-content-center text-primary"
+                                    style="width: 40px; height: 40px;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                {% endif %}
+                                {% endwith %}
+                                <div>
+                                    <div class="fw-bold">{{ student_data.display_name }}</div>
+                                    <small class="text-muted">{{ student_data.student.username }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ student_data.student.email }}</td>
+                        <td>
+                            <span class="badge bg-primary bg-opacity-10 text-primary">{{ student_data.enrolled_modules
+                                }} module{{ student_data.enrolled_modules|pluralize }}</span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="progress flex-grow-1" style="height: 6px; width: 80px;">
+                                    <div class="progress-bar bg-primary" role="progressbar"
+                                        style="width: {{ student_data.avg_progress }}%"></div>
+                                </div>
+                                <span class="small fw-bold">{{ student_data.avg_progress }}%</span>
+                            </div>
+                        </td>
+                        <td>
+                            {% if student_data.avg_quiz_score %}
+                            <span
+                                class="badge {% if student_data.avg_quiz_score >= 70 %}bg-success{% else %}bg-warning{% endif %} bg-opacity-10 text-dark">
+                                {{ student_data.avg_quiz_score }}%
+                            </span>
+                            {% else %}
+                            <span class="text-muted small">No quizzes</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if student_data.last_activity %}
+                            <small class="text-muted">{{ student_data.last_activity|timesince }} ago</small>
+                            {% else %}
+                            <small class="text-muted">No activity</small>
+                            {% endif %}
+                        </td>
+                        <td class="pe-4 text-end">
+                            <a href="{% url 'users:instructor_student_detail' student_data.student.id %}"
+                                class="btn btn-sm btn-outline-primary">View Details</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if is_paginated %}
+        <div class="card-footer bg-white border-top p-3">
+            <nav aria-label="Student pagination">
+                <ul class="pagination pagination-sm mb-0 justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}">Last</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="card-custom bg-white p-5">
+        <div class="text-center">
+            <div class="mb-3 text-muted opacity-50">
+                <i class="fas fa-users fa-3x"></i>
+            </div>
+            <h5 class="fw-bold mb-2">No Students Found</h5>
+            <p class="text-muted">No students are currently enrolled in your modules.</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
