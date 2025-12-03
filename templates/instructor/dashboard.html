@@ -1,453 +1,195 @@
-{% extends 'yitp/base.html' %}
+{% extends 'instructor/base_instructor.html' %}
 {% load static %}
 
-{% block title %}Instructor Module Manager · YITP{% endblock %}
-
-{% block extra_css %}
-<style>
-:root {
-    --yitp-primary: #ff5d15;
-    --yitp-secondary: #341C67;
-    --yitp-surface: #f8f9fb;
-}
-
-.content-wrapper { margin-top: 90px; }
-
-.module-hero {
-    background: linear-gradient(135deg, rgba(52,28,103,0.95), rgba(255,93,21,0.92));
-    border-radius: 28px;
-    padding: 2.8rem;
-    color: #ffffff;
-    box-shadow: 0 25px 80px rgba(52,28,103,0.35);
-    position: relative;
-    overflow: hidden;
-}
-
-.module-hero::after {
-    content: '';
-    position: absolute;
-    right: -30px;
-    top: -30px;
-    width: 220px;
-    height: 220px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 50%;
-}
-
-.stat-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 15px 40px rgba(15,23,42,0.08);
-    border: none;
-}
-
-.stat-card .label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #94a3b8;
-}
-
-.stat-card .value {
-    font-size: 2.1rem;
-    font-weight: 700;
-    color: var(--yitp-secondary);
-}
-
-.module-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-}
-
-.module-card {
-    background: #fff;
-    border-radius: 18px;
-    border: 1px solid #f1f5f9;
-    padding: 1.5rem;
-    box-shadow: 0 15px 45px rgba(15,23,42,0.07);
-    text-decoration: none;
-    color: inherit;
-}
-
-.module-card.active {
-    border-color: rgba(255,93,21,0.6);
-    box-shadow: 0 25px 60px rgba(255,93,21,0.15);
-}
-
-.dashboard-panel {
-    background: #fff;
-    border-radius: 24px;
-    padding: 1.5rem;
-    box-shadow: 0 25px 50px rgba(15,23,42,0.08);
-    border: 1px solid #f1f5f9;
-}
-
-.lesson-item, .activity-item, .student-tile {
-    border-radius: 16px;
-    border: 1px solid #eef2ff;
-    padding: 1rem;
-    margin-bottom: 0.85rem;
-}
-
-.quick-action-card {
-    border-radius: 16px;
-    border: 1px solid #f1f5f9;
-    padding: 1.2rem;
-    text-decoration: none;
-    color: var(--yitp-secondary);
-    box-shadow: 0 12px 30px rgba(15,23,42,0.08);
-}
-
-.quick-action-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 1rem;
-}
-
-@media (max-width: 991px) {
-    .module-hero { padding: 2rem; }
-    .content-wrapper { margin-top: 70px; }
-}
-</style>
-{% endblock %}
+{% block title %}Dashboard · YITP Instructor{% endblock %}
 
 {% block content %}
-<div class="container-fluid content-wrapper">
-    <div class="module-hero mb-4">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <span class="badge bg-light text-dark mb-3">Instructor Hub</span>
-                <h1 class="mb-3 text-white">Welcome back, {{ user.get_full_name|default:user.username }} 👋</h1>
-                <p class="mb-4 lead text-white">
-                    Manage every aspect of your assigned modules from one YITP workspace. Track learners, publish content, and keep assessments fresh without touching the Django admin.
-                </p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="{% url 'users:instructor_messages' %}" class="btn btn-light text-primary pill-btn">
-                        <i class="fas fa-envelope me-2"></i>Messages ({{ unread_messages_count }})
-                    </a>
-                    <a href="{% url 'users:instructor_analytics' %}" class="btn btn-outline-light pill-btn">
-                        <i class="fas fa-chart-line me-2"></i>Analytics
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
-                {% if selected_module %}
-                <span class="badge bg-white text-primary">
-                    <i class="fas fa-layer-group me-1"></i> Active Module: {{ selected_module.title|truncatechars:24 }}
-                </span>
-                {% else %}
-                <span class="badge bg-white text-primary">
-                    <i class="fas fa-exclamation-circle me-1"></i> No module assigned yet
+<div class="container-fluid">
+    <!-- Welcome Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1 fw-bold">Good morning, {{ user.first_name|default:user.username }}! 👋</h1>
+            <p class="text-muted mb-0">Here's what's happening with your modules today.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{% url 'users:instructor_messages' %}" class="btn btn-outline-primary position-relative">
+                <i class="fas fa-envelope me-2"></i>Messages
+                {% if unread_messages_count %}
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ unread_messages_count }}
+                    <span class="visually-hidden">unread messages</span>
                 </span>
                 {% endif %}
-            </div>
-        </div>
-    </div>
-
-    <div class="row g-4 mb-4">
-        <div class="col-sm-6 col-lg-3">
-            <div class="stat-card">
-                <div class="label">Modules</div>
-                <div class="value">{{ module_count|default:0 }}</div>
-                <div class="chip">{{ published_modules|default:0 }} published</div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="stat-card">
-                <div class="label">Learners</div>
-                <div class="value">{{ total_students|default:0 }}</div>
-                <div class="chip">{{ recent_enrollments|default:0 }} joined in 30d</div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="stat-card">
-                <div class="label">Avg Quiz Score</div>
-                <div class="value">{{ avg_quiz_score|default:0 }}%</div>
-                <div class="chip">Live attempts</div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <div class="stat-card">
-                <div class="label">Courses</div>
-                <div class="value">{{ total_courses|default:0 }}</div>
-                <div class="chip">{{ published_courses|default:0 }} active</div>
-            </div>
-        </div>
-    </div>
-    {% if assigned_modules %}
-    <div class="dashboard-panel mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="mb-0"><i class="fas fa-layer-group me-2 text-primary"></i>Your Modules</h5>
-            <small class="text-muted">Tap a module to focus</small>
-        </div>
-        <div class="module-grid">
-            {% for module_card in assigned_modules %}
-            {% with module=module_card.module %}
-            <a href="?module_id={{ module.id }}" class="module-card {% if selected_module and selected_module.id == module.id %}active{% endif %}">
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="badge bg-light text-dark">{{ module.course.title|truncatechars:26 }}</span>
-                    {% if module_card.is_static %}
-                    <span class="badge bg-warning text-dark"><i class="fas fa-lock me-1"></i>Static</span>
-                    {% endif %}
-                </div>
-                <h5 class="fw-bold">{{ module.title }}</h5>
-                <p class="text-muted small mb-3">{{ module.description|default:"No description"|truncatewords:24 }}</p>
-                <div class="row text-muted small">
-                    <div class="col-6">Lessons: <strong>{{ module_card.lessons }}</strong></div>
-                    <div class="col-6">Quizzes: <strong>{{ module_card.quizzes }}</strong></div>
-                    <div class="col-6 mt-1">Students: <strong>{{ module_card.students }}</strong></div>
-                    <div class="col-6 mt-1">Progress: <strong>{{ module_card.avg_progress }}%</strong></div>
-                </div>
             </a>
-            {% endwith %}
-            {% endfor %}
         </div>
     </div>
-    {% endif %}
 
-    <div class="row g-4 mb-4">
-        <div class="col-xl-7">
-            <div class="dashboard-panel h-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Module Overview</h5>
-                    {% if selected_module_is_static %}
-                    <span class="badge bg-warning text-dark"><i class="fas fa-info-circle me-1"></i>Static module</span>
-                    {% endif %}
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 col-xl-3">
+            <div class="card-custom p-4 h-100 bg-white">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="bg-orange bg-opacity-10 p-3 rounded-circle text-orange">
+                        <i class="fas fa-users fa-lg"></i>
+                    </div>
+                    <span class="badge bg-success bg-opacity-10 text-success">+{{ recent_enrollments }} new</span>
                 </div>
-                {% if selected_module %}
-                <div class="mb-3">
-                    <h4 class="fw-bold text-primary">{{ selected_module.title }}</h4>
-                    <p class="text-muted">{{ selected_module.description|default:"This module does not yet have a description." }}</p>
+                <h3 class="fw-bold mb-1">{{ total_students }}</h3>
+                <p class="text-muted small mb-0">Active Students</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <div class="card-custom p-4 h-100 bg-white">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="bg-purple bg-opacity-10 p-3 rounded-circle text-purple">
+                        <i class="fas fa-star fa-lg"></i>
+                    </div>
                 </div>
-                <div class="lesson-list">
-                    {% if selected_module_lessons %}
-                        {% for lesson in selected_module_lessons|slice:':6' %}
-                        <div class="lesson-item">
-                            <div class="d-flex justify-content-between">
-                                <strong>{{ lesson.title }}</strong>
-                                <span class="badge {% if lesson.is_published %}bg-success{% else %}bg-secondary{% endif %}">
-                                    {% if lesson.is_published %}Published{% else %}Draft{% endif %}
-                                </span>
+                <h3 class="fw-bold mb-1">{{ avg_quiz_score }}%</h3>
+                <p class="text-muted small mb-0">Avg. Quiz Score</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <div class="card-custom p-4 h-100 bg-white">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="bg-info bg-opacity-10 p-3 rounded-circle text-info">
+                        <i class="fas fa-layer-group fa-lg"></i>
+                    </div>
+                    <span class="badge bg-info bg-opacity-10 text-info">{{ published_modules }} active</span>
+                </div>
+                <h3 class="fw-bold mb-1">{{ module_count }}</h3>
+                <p class="text-muted small mb-0">Assigned Modules</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <div class="card-custom p-4 h-100 bg-white">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="bg-warning bg-opacity-10 p-3 rounded-circle text-warning">
+                        <i class="fas fa-check-circle fa-lg"></i>
+                    </div>
+                </div>
+                <h3 class="fw-bold mb-1">92%</h3>
+                <p class="text-muted small mb-0">Completion Rate</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Recent Activity -->
+        <div class="col-lg-8">
+            <div class="card-custom bg-white h-100">
+                <div
+                    class="card-header bg-transparent border-0 p-4 pb-0 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0">Recent Activity</h5>
+                    <a href="#" class="text-decoration-none small fw-bold text-orange">View All</a>
+                </div>
+                <div class="card-body p-4">
+                    {% if recent_progress %}
+                    <div class="activity-feed">
+                        {% for activity in recent_progress %}
+                        <div class="d-flex align-items-start mb-4">
+                            {% with image=activity.enrollment.student.profile.image %}
+                            {% if image and image.url and image.name != 'default.jpg' %}
+                            <img src="{{ image.url }}" class="rounded-circle me-3" width="40" height="40"
+                                alt="{{ activity.student_display_name }}">
+                            {% else %}
+                            <div class="rounded-circle me-3 bg-light d-flex align-items-center justify-content-center text-primary"
+                                style="width: 40px; height: 40px;">
+                                <i class="fas fa-user"></i>
                             </div>
-                            <small class="text-muted">{{ lesson.get_content_type_display }} • {{ lesson.estimated_duration }} mins</small>
+                            {% endif %}
+                            {% endwith %}
+                            <div class="flex-grow-1">
+                                <p class="mb-1">
+                                    <span class="fw-bold">{{ activity.student_display_name }}</span>
+                                    {% if activity.status == 'completed' %}
+                                    completed the lesson
+                                    {% else %}
+                                    started the lesson
+                                    {% endif %}
+                                    <span class="fw-bold text-purple">{{ activity.lesson.title }}</span>
+                                </p>
+                                <small class="text-muted">{{ activity.updated_at|timesince }} ago</small>
+                            </div>
                         </div>
                         {% endfor %}
-                    {% else %}
-                        <p class="text-muted mb-0">No lessons created yet.</p>
-                    {% endif %}
-                </div>
-                {% else %}
-                <p class="text-muted mb-0">Select a module above to view its structure.</p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-xl-5">
-            <div class="dashboard-panel module-form mb-4">
-                <h5 class="mb-3">Module Settings</h5>
-                {% if module_form and selected_module %}
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="update_module">
-                    <input type="hidden" name="module_id" value="{{ selected_module.id }}">
-                    <fieldset {% if selected_module_is_static or not module_capabilities.can_edit_content %}disabled{% endif %}>
-                        {{ module_form.as_p }}
-                    </fieldset>
-                    <p class="form-text text-muted mt-2">Rename the module, refine the description, and toggle publishing from here.</p>
-                    {% if selected_module_is_static %}
-                    <div class="alert alert-warning mt-3">This module uses static courseware—contact a super admin for structural edits.</div>
-                    {% elif not module_capabilities.can_edit_content %}
-                    <div class="alert alert-info mt-3">You do not have edit rights for this module.</div>
-                    {% else %}
-                    <button class="btn btn-primary w-100" type="submit">Save changes</button>
-                    {% endif %}
-                </form>
-                {% else %}
-                <p class="text-muted">Select a module to edit its properties.</p>
-                {% endif %}
-            </div>
-            <div class="dashboard-panel module-form">
-                <h5 class="mb-3">Create Lesson</h5>
-                {% if lesson_form and selected_module %}
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="create_lesson">
-                    <input type="hidden" name="module_id" value="{{ selected_module.id }}">
-                    {% if selected_module_is_static or not module_capabilities.can_edit_content %}
-                    <fieldset disabled>{{ lesson_form.as_p }}</fieldset>
-                    <div class="alert alert-info">Lesson creation is disabled for this module.</div>
-                    {% else %}
-                    {{ lesson_form.as_p }}
-                    <p class="form-text text-muted mt-2">Lessons will appear in the module timeline in the order you set here.</p>
-                    <button class="btn btn-outline-primary w-100" type="submit">Add lesson</button>
-                    {% endif %}
-                </form>
-                {% else %}
-                <p class="text-muted">Select a module to add lessons.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="row g-4 mb-4">
-        <div class="col-xl-7">
-            <div class="dashboard-panel h-100">
-                <h5 class="mb-3">Quizzes & Assessments</h5>
-                {% if quiz_form and selected_module %}
-                <form method="post" action="" class="mb-4">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="create_quiz">
-                    <input type="hidden" name="module_id" value="{{ selected_module.id }}">
-                    {% if not module_capabilities.can_grade_assessments %}
-                    <fieldset disabled>{{ quiz_form.as_p }}</fieldset>
-                    <div class="alert alert-info">You can view quizzes but lack creation rights.</div>
-                    {% else %}
-                    {{ quiz_form.as_p }}
-                    <p class="form-text text-muted mt-2">Choose the target lesson, configure attempts and timing, then publish when ready.</p>
-                    <button class="btn btn-primary w-100" type="submit">Create quiz</button>
-                    {% endif %}
-                </form>
-                {% endif %}
-                <h6 class="text-uppercase text-muted">Recent Quizzes</h6>
-                {% if selected_module_quizzes %}
-                    {% for quiz in selected_module_quizzes|slice:':4' %}
-                    <div class="lesson-item">
-                        <div class="d-flex justify-content-between">
-                            <strong>{{ quiz.title }}</strong>
-                            <span class="badge {% if quiz.is_published %}bg-success{% else %}bg-secondary{% endif %}">{{ quiz.is_published|yesno:'Live,Draft' }}</span>
-                        </div>
-                        <small class="text-muted">Lesson: {{ quiz.lesson.title }}</small>
                     </div>
-                    {% endfor %}
-                {% else %}
-                <p class="text-muted">No quizzes yet for this module.</p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-xl-5">
-            <div class="dashboard-panel h-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Student Spotlight</h5>
-                    {% if module_capabilities.can_manage_enrollments %}
-                    <a href="{% url 'users:instructor_courses' %}" class="text-primary small">View all</a>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <div class="mb-3 text-muted opacity-50">
+                            <i class="fas fa-history fa-3x"></i>
+                        </div>
+                        <p class="text-muted">No recent activity to show.</p>
+                    </div>
                     {% endif %}
                 </div>
-                {% if selected_module_students %}
-                    {% for enrollment in selected_module_students %}
-                    <div class="student-tile">
-                        <div class="d-flex justify-content-between">
-                            <strong>{{ enrollment.student.get_full_name|default:enrollment.student.username }}</strong>
-                            <span class="badge bg-light text-dark">{{ enrollment.get_status_display }}</span>
-                        </div>
-                        <div class="mt-2">
-                            <small class="text-muted">Progress</small>
-                            <div class="progress" style="height:6px;">
-                                <div class="progress-bar bg-warning" style="width: {{ enrollment.progress_percentage|floatformat:0 }}%"></div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="col-lg-4">
+            <div class="card-custom bg-white h-100">
+                <div class="card-header bg-transparent border-0 p-4 pb-0">
+                    <h5 class="fw-bold mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-grid gap-3">
+                        <a href="{% url 'users:instructor_messages' %}"
+                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
+                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3 text-primary">
+                                <i class="fas fa-bullhorn"></i>
                             </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                <p class="text-muted">No learners enrolled in this module's course yet.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="row g-4 mb-4">
-        <div class="col-xl-12">
-            <div class="dashboard-panel">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Add Questions & Correct Answers</h5>
-                </div>
-                {% if question_form and selected_module %}
-                    {% if selected_module_quizzes %}
-                    <form method="post" action="">
-                        {% csrf_token %}
-                        <input type="hidden" name="action" value="create_question">
-                        <input type="hidden" name="module_id" value="{{ selected_module.id }}">
-                        {% if not module_capabilities.can_grade_assessments %}
-                        <fieldset disabled>{{ question_form.as_p }}</fieldset>
-                        <div class="alert alert-info mt-2">You do not have permission to add questions for this module.</div>
-                        {% else %}
-                        {{ question_form.as_p }}
-                        <p class="form-text text-muted mt-2">Pick a quiz, enter the prompt, and specify the correct answer. For multiple choice questions, add one option per line.</p>
-                        <button class="btn btn-outline-secondary pill-btn" type="submit">Save question</button>
-                        {% endif %}
-                    </form>
-                    {% else %}
-                    <p class="text-muted">Create a quiz first, then return here to add individual questions and answers.</p>
-                    {% endif %}
-                {% else %}
-                <p class="text-muted mb-0">Select a module to add questions.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+                            <div>
+                                <div class="fw-bold">Send Announcement</div>
+                                <div class="small text-muted">Notify all students</div>
+                            </div>
+                        </a>
 
-    <div class="row g-4 mb-4">
-        <div class="col-xl-7">
-            <div class="dashboard-panel h-100">
-                <h5 class="mb-3">Recent Activity</h5>
-                {% if selected_module_progress %}
-                    {% for entry in selected_module_progress %}
-                    <div class="activity-item">
-                        <strong>{{ entry.enrollment.student.get_full_name|default:entry.enrollment.student.username }}</strong>
-                        <div class="text-muted small">
-                            Completed {{ entry.lesson.title }}
-                            • {{ entry.completed_at|default:entry.started_at|timesince }} ago
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                <p class="text-muted">No recent learner activity.</p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-xl-5">
-            <div class="dashboard-panel h-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Inbox Preview</h5>
-                    <a href="{% url 'users:instructor_messages' %}" class="text-primary small">Open inbox</a>
-                </div>
-                {% if recent_messages %}
-                    {% for message in recent_messages %}
-                    <div class="lesson-item">
-                        <strong>{{ message.sender.get_full_name|default:message.sender.username }}</strong>
-                        <div class="text-muted small">{{ message.sent_at|timesince }} ago</div>
-                        <p class="mb-0 mt-1">{{ message.subject|default:"No subject"|truncatechars:60 }}</p>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                <p class="text-muted">No recent messages.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+                        <a href="{% if selected_module %}{% url 'users:instructor_edit_module' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
+                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
+                            <div class="bg-info bg-opacity-10 p-2 rounded me-3 text-info">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Update Module</div>
+                                <div class="small text-muted">Edit current module</div>
+                            </div>
+                        </a>
 
-    <div class="dashboard-panel mb-5">
-        <h5 class="mb-3">Quick Actions</h5>
-        <div class="quick-action-grid">
-            <a href="{% url 'users:instructor_courses' %}" class="quick-action-card">
-                <i class="fas fa-layer-group mb-3 text-primary"></i>
-                <h6 class="fw-bold">Modules & Lessons</h6>
-                <p class="text-muted mb-0">Deep dive into module settings and ordering.</p>
-            </a>
-            <a href="{% url 'users:instructor_messages' %}" class="quick-action-card">
-                <i class="fas fa-comments mb-3 text-primary"></i>
-                <h6 class="fw-bold">Messages</h6>
-                <p class="text-muted mb-0">Reply to learners and send announcements.</p>
-            </a>
-            <a href="{% url 'users:instructor_analytics' %}" class="quick-action-card">
-                <i class="fas fa-chart-area mb-3 text-primary"></i>
-                <h6 class="fw-bold">Analytics</h6>
-                <p class="text-muted mb-0">Visualize progress across modules.</p>
-            </a>
-            <a href="{% url 'users:instructor_tutorial' %}" class="quick-action-card">
-                <i class="fas fa-graduation-cap mb-3 text-primary"></i>
-                <h6 class="fw-bold">Instructor Playbook</h6>
-                <p class="text-muted mb-0">Refresh on best practices for YITP delivery.</p>
-            </a>
+                        <a href="{% if selected_module %}{% url 'users:instructor_manage_quizzes' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
+                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
+                            <div class="bg-success bg-opacity-10 p-2 rounded me-3 text-success">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Manage Quizzes</div>
+                                <div class="small text-muted">Create & edit assessments</div>
+                            </div>
+                        </a>
+
+                        <a href="{% url 'users:instructor_analytics' %}"
+                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
+                            <div class="bg-warning bg-opacity-10 p-2 rounded me-3 text-warning">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">View Analytics</div>
+                                <div class="small text-muted">Check performance</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+    .hover-shadow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border-color: transparent !important;
+        background-color: #fff;
+    }
+</style>
 {% endblock %}

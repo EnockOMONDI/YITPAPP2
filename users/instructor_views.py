@@ -3,16 +3,21 @@ Instructor-specific views for enhanced instructor experience
 """
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth import get_user_model
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, CreateView
 from django.contrib import messages
 from django.http import JsonResponse
 from django.db.models import Count, Q, Avg, Sum, Prefetch
+from django.templatetags.static import static
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
 from collections import defaultdict
+
+User = get_user_model()
 
 from courses.models import Course, Module, Lesson
 from assessments.models import Quiz
@@ -246,9 +251,18 @@ class InstructorDashboardView(LoginRequiredMixin, InstructorRequiredMixin, Templ
             lesson__module__in=assigned_modules
         ).select_related('lesson', 'lesson__module').order_by('-created_at')[:4]
 
-        recent_progress = LessonProgress.objects.filter(
-            lesson__module__in=assigned_modules
-        ).select_related('lesson', 'enrollment__student').order_by('-completed_at', '-started_at')[:6]
+        recent_progress = list(
+            LessonProgress.objects.filter(
+                lesson__module__in=assigned_modules
+            ).select_related('lesson', 'enrollment__student').order_by('-completed_at', '-started_at')[:6]
+        )
+        for progress in recent_progress:
+            student = getattr(getattr(progress, 'enrollment', None), 'student', None)
+            if student:
+                full_name = (student.get_full_name() or '').strip()
+                progress.student_display_name = full_name or student.username
+            else:
+                progress.student_display_name = "Unknown student"
 
         module_cards = []
         for module in assigned_modules:
@@ -361,6 +375,16 @@ class InstructorCoursesView(LoginRequiredMixin, InstructorRequiredMixin, ListVie
                 Q(course__title__icontains=search)
             )
         
+        queryset = queryset.annotate(
+            lesson_count=Count('lessons', distinct=True),
+            quiz_count=Count('lessons__quizzes', distinct=True),
+            student_count=Count(
+                'course__enrollments',
+                filter=Q(course__enrollments__status='active'),
+                distinct=True
+            ),
+        )
+        
         return queryset.order_by('course__title', 'sort_order')
     
     def get_context_data(self, **kwargs):
@@ -371,6 +395,35 @@ class InstructorCoursesView(LoginRequiredMixin, InstructorRequiredMixin, ListVie
             recipient=self.request.user,
             is_read=False
         ).count()
+        
+        modules_page = context.get('modules')
+        module_cards = []
+        if modules_page:
+            for module in modules_page:
+                course = getattr(module, 'course', None)
+                course_title = ((course.title if course else '') or '').strip()
+                description = (module.description or '').strip()
+                thumbnail_field = getattr(course, 'thumbnail', None)
+                thumbnail_url = ''
+                if thumbnail_field:
+                    url = getattr(thumbnail_field, 'url', None)
+                    if url:
+                        thumbnail_url = url
+                    elif isinstance(thumbnail_field, str):
+                        if thumbnail_field.startswith(('http://', 'https://', '/')):
+                            thumbnail_url = thumbnail_field
+                        else:
+                            thumbnail_url = static(thumbnail_field)
+                module_cards.append({
+                    'module': module,
+                    'course_title': course_title or "Untitled Course",
+                    'description': description or "No description provided.",
+                    'lesson_count': getattr(module, 'lesson_count', None) or module.lessons.count(),
+                    'quiz_count': getattr(module, 'quiz_count', 0),
+                    'student_count': getattr(module, 'student_count', 0),
+                    'thumbnail_url': thumbnail_url,
+                })
+        context['module_cards'] = module_cards
         return context
 
 
@@ -544,6 +597,283 @@ class InstructorMessagesView(LoginRequiredMixin, InstructorRequiredMixin, ListVi
         return context
 
 
+class InstructorStudentsView(LoginRequiredMixin, InstructorRequiredMixin, TemplateView):
+    """List view of students enrolled in instructor's modules"""
+    template_name = 'instructor/students.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+        
+        # Get all modules assigned to this instructor
+        if instructor_profile.instructor_role == 'system_admin':
+            assigned_modules = Module.objects.all()
+        else:
+            assigned_modules = Module.objects.filter(
+                module_instructors__instructor=instructor,
+                module_instructors__is_active=True
+            ).distinct()
+        
+        # Get all courses for these modules
+        course_ids = list(assigned_modules.values_list('course_id', flat=True).distinct())
+        
+        # Get all enrollments for these courses
+        enrollments = Enrollment.objects.filter(
+            course_id__in=course_ids,
+            status='active'
+        ).select_related('student', 'student__profile', 'course')
+        
+        # Group by student and calculate stats
+        student_stats = defaultdict(lambda: {
+            'student': None,
+            'enrolled_modules': set(),
+            'total_progress': [],
+            'quiz_scores': [],
+            'last_activity': None
+        })
+        
+        for enrollment in enrollments:
+            student_id = enrollment.student.id
+            student_stats[student_id]['student'] = enrollment.student
+            student_stats[student_id]['enrolled_modules'].add(enrollment.course_id)
+            student_stats[student_id]['total_progress'].append(float(enrollment.progress_percentage))
+            
+            # Get last activity
+            last_progress = LessonProgress.objects.filter(
+                enrollment=enrollment
+            ).order_by('-completed_at', '-started_at').first()
+            
+            if last_progress:
+                current_last = student_stats[student_id]['last_activity']
+                # Use completed_at if available, otherwise started_at
+                activity_time = last_progress.completed_at or last_progress.started_at
+                if activity_time and (not current_last or activity_time > current_last):
+                    student_stats[student_id]['last_activity'] = activity_time
+            
+            # Get quiz scores
+            quiz_attempts = QuizAttempt.objects.filter(
+                student=enrollment.student,
+                quiz__lesson__module__course_id=enrollment.course_id
+            ).values_list('score', flat=True)
+            student_stats[student_id]['quiz_scores'].extend(quiz_attempts)
+        
+        # Convert to list with calculated averages
+        students_list = []
+        for student_id, stats in student_stats.items():
+            avg_progress = sum(stats['total_progress']) / len(stats['total_progress']) if stats['total_progress'] else 0
+            avg_quiz_score = sum(stats['quiz_scores']) / len(stats['quiz_scores']) if stats['quiz_scores'] else None
+            student_obj = stats['student']
+            if student_obj:
+                full_name = (student_obj.get_full_name() or '').strip()
+                display_name = full_name or student_obj.username
+            else:
+                display_name = "Unknown student"
+            
+            students_list.append({
+                'student': student_obj,
+                'enrolled_modules': len(stats['enrolled_modules']),
+                'avg_progress': round(avg_progress, 1),
+                'avg_quiz_score': round(avg_quiz_score, 1) if avg_quiz_score else None,
+                'last_activity': stats['last_activity'],
+                'display_name': display_name,
+            })
+        
+        # Apply search filter
+        search = self.request.GET.get('search')
+        if search:
+            search_lower = search.lower()
+            students_list = [
+                s for s in students_list
+                if (search_lower in s['display_name'].lower()) or
+                   (s['student'] and (
+                       search_lower in (s['student'].username or '').lower() or
+                       search_lower in (s['student'].email or '').lower()
+                   ))
+            ]
+        
+        # Sort by last activity (most recent first)
+        from datetime import datetime, timezone as dt_timezone
+        students_list.sort(key=lambda x: x['last_activity'] or datetime.min.replace(tzinfo=dt_timezone.utc), reverse=True)
+        
+        context['students'] = students_list
+        context['search_query'] = self.request.GET.get('search', '')
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        return context
+
+
+class InstructorStudentDetailView(LoginRequiredMixin, InstructorRequiredMixin, DetailView):
+    """Detailed view of a specific student for instructors"""
+    model = User
+    template_name = 'instructor/student_detail.html'
+    context_object_name = 'student'
+    pk_url_kwarg = 'student_id'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        student = self.get_object()
+        full_name = (student.get_full_name() or '').strip()
+        display_name = full_name or student.username
+        profile = getattr(student, 'profile', None)
+        phone_number = getattr(profile, 'phone_number', '') if profile else ''
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+        
+        # Get instructor's modules
+        if instructor_profile.instructor_role == 'system_admin':
+            assigned_modules = Module.objects.all()
+        else:
+            assigned_modules = Module.objects.filter(
+                module_instructors__instructor=instructor,
+                module_instructors__is_active=True
+            ).distinct()
+        
+        course_ids = list(assigned_modules.values_list('course_id', flat=True).distinct())
+        
+        # Get student's enrollments in instructor's courses
+        enrollments = Enrollment.objects.filter(
+            student=student,
+            course_id__in=course_ids
+        ).select_related('course').prefetch_related('lesson_progress')
+        
+        # Calculate stats
+        total_progress = []
+        quiz_scores = []
+        completed_lessons = 0
+        total_lessons = 0
+        
+        for enrollment in enrollments:
+            total_progress.append(float(enrollment.progress_percentage))
+            completed_lessons += enrollment.lesson_progress.filter(status='completed').count()
+            total_lessons += enrollment.course.total_lessons or 0
+            
+            # Get quiz scores for this enrollment
+            quiz_attempts = QuizAttempt.objects.filter(
+                student=student,
+                quiz__lesson__module__course=enrollment.course
+            ).values_list('score', flat=True)
+            quiz_scores.extend(quiz_attempts)
+        
+        overall_progress = sum(total_progress) / len(total_progress) if total_progress else 0
+        avg_quiz_score = sum(quiz_scores) / len(quiz_scores) if quiz_scores else None
+        
+        # Get total study time
+        total_time_seconds = LessonProgress.objects.filter(
+            enrollment__student=student,
+            enrollment__course_id__in=course_ids
+        ).aggregate(total=Sum('time_spent'))['total'] or 0
+        total_study_hours = round(total_time_seconds / 3600, 1)
+        
+        # Get last activity
+        last_activity = LessonProgress.objects.filter(
+            enrollment__student=student,
+            enrollment__course_id__in=course_ids
+        ).order_by('-completed_at', '-started_at').first()
+        
+        last_activity_time = None
+        if last_activity:
+            last_activity_time = last_activity.completed_at or last_activity.started_at
+        
+        # Get recent activities
+        recent_progress = LessonProgress.objects.filter(
+            enrollment__student=student,
+            enrollment__course_id__in=course_ids
+        ).select_related('lesson').order_by('-completed_at', '-started_at')[:10]
+        
+        recent_activities = []
+        for progress in recent_progress:
+            if progress.completed_at:
+                recent_activities.append({
+                    'type': 'lesson_completed',
+                    'title': f"Completed: {progress.lesson.title}",
+                    'date': progress.completed_at
+                })
+            elif progress.started_at:
+                recent_activities.append({
+                    'type': 'lesson_started',
+                    'title': f"Started: {progress.lesson.title}",
+                    'date': progress.started_at
+                })
+        
+        # Add enrollment details
+        enriched_enrollments = []
+        for enrollment in enrollments:
+            enrollment_date_display = "N/A"
+            if enrollment.enrollment_date:
+                local_date = timezone.localtime(enrollment.enrollment_date)
+                enrollment_date_display = local_date.strftime("%b %d, %Y")
+            completed_count = enrollment.lesson_progress.filter(status='completed').count()
+            total_course_lessons = enrollment.course.total_lessons or 0
+            progress_value = float(enrollment.progress_percentage)
+            enriched_enrollments.append({
+                'course_title': (enrollment.course.title or '').strip() or "Untitled Module",
+                'enrollment_date_display': enrollment_date_display,
+                'progress_value': progress_value,
+                'progress_display': f"{progress_value:.2f}%",
+                'status_display': enrollment.get_status_display(),
+                'status_badge_class': self._status_badge_class(enrollment.status),
+                'lessons_display': f"{completed_count}/{total_course_lessons or '—'}",
+                'completed_lessons': completed_count,
+                'total_lessons': total_course_lessons,
+            })
+    
+        context.update({
+            'enrollments': enriched_enrollments,
+            'enrolled_modules_count': enrollments.count(),
+            'overall_progress': round(overall_progress, 1),
+            'avg_quiz_score': round(avg_quiz_score, 1) if avg_quiz_score else None,
+            'total_study_hours': total_study_hours,
+            'last_activity': last_activity_time,
+            'completed_lessons_count': completed_lessons,
+            'recent_activities': recent_activities[:5],
+            'student_display_name': display_name,
+            'student_phone_number': phone_number,
+            'unread_messages_count': Message.objects.filter(
+                recipient=self.request.user,
+                is_read=False
+            ).count()
+        })
+        
+        return context
+
+    def _status_badge_class(self, status):
+        if status == 'completed':
+            return 'bg-success'
+        if status == 'active':
+            return 'bg-primary'
+        if status == 'dropped':
+            return 'bg-danger'
+        if status == 'suspended':
+            return 'bg-warning text-dark'
+        return 'bg-secondary'
+
+
+@login_required
+@user_passes_test(lambda u: hasattr(u, 'instructor_profile'))
+def send_message_to_student(request, student_id):
+    """Send a message from instructor to student"""
+    if request.method == 'POST':
+        student = get_object_or_404(User, id=student_id)
+        subject = request.POST.get('subject')
+        content = request.POST.get('content')
+        
+        if subject and content:
+            Message.objects.create(
+                sender=request.user,
+                recipient=student,
+                subject=subject,
+                content=content
+            )
+            messages.success(request, f'Message sent to {student.get_full_name() or student.username} successfully!')
+        else:
+            messages.error(request, 'Please provide both subject and message content.')
+    
+    return redirect('users:instructor_student_detail', student_id=student_id)
+
+
 @login_required
 def instructor_course_detail(request, course_id):
     """Detailed view of a specific course for instructors"""
@@ -621,14 +951,78 @@ class InstructorTutorialView(InstructorRequiredMixin, TemplateView):
         # Add any additional context data for the tutorial
         context['page_title'] = 'YITP LMS Instructor User Manual'
         context['tutorial_sections'] = [
-            'Scenario Introduction: Meet Beryl Omondi',
-            'Initial Setup & Course Creation',
-            'Module Structure Planning',
-            'Content Development',
-            'Multimedia Integration',
-            'Assessment Creation',
-            'Course Review & Publishing',
-            'Student Management & Analytics'
+            {
+                'title': 'Scenario: Meet Beryl Omondi',
+                'description': 'Understand the learner persona you are guiding through Youth Impact Training.',
+                'steps': [
+                    'Review Beryl’s goals inside the Students tab to personalize messaging.',
+                    'Highlight outcomes that link back to her entrepreneurial ambitions.',
+                    'Capture any blockers in Messages for follow up.'
+                ]
+            },
+            {
+                'title': 'Initial Setup & Course Creation',
+                'description': 'Create modules and lessons that align with the approved curriculum.',
+                'steps': [
+                    'Navigate to My Modules → “Create Module”.',
+                    'Add at least 3 learning outcomes per lesson before publishing.',
+                    'Use estimated duration to keep pacing consistent across the cohort.'
+                ]
+            },
+            {
+                'title': 'Module Structure Planning',
+                'description': 'Organize lessons so students always know what comes next.',
+                'steps': [
+                    'Drag lessons to reorder by difficulty or chronology.',
+                    'Tag mandatory lessons to prevent students from skipping prerequisites.',
+                    'Preview the module outline from the student view before publishing.'
+                ]
+            },
+            {
+                'title': 'Content Development',
+                'description': 'Build rich lessons using the editor and reuse approved assets.',
+                'steps': [
+                    'Start with a hook; use the quote component or video embed.',
+                    'Break content into sections with callouts for activities.',
+                    'End each lesson with reflection prompts or a resource list.'
+                ]
+            },
+            {
+                'title': 'Multimedia Integration',
+                'description': 'Keep learners engaged with video, audio, and downloadable resources.',
+                'steps': [
+                    'Upload files via Content Management so they stay versioned.',
+                    'Provide transcripts for all videos to support accessibility.',
+                    'Use galleries for before/after examples or case studies.'
+                ]
+            },
+            {
+                'title': 'Assessment Creation',
+                'description': 'Measure competency with quizzes, assignments, or projects.',
+                'steps': [
+                    'Define pass criteria and number of attempts before publishing.',
+                    'Mix question types—e.g., scenario-based MCQs plus reflections.',
+                    'Attach rubrics so graders score consistently.'
+                ]
+            },
+            {
+                'title': 'Course Review & Publishing',
+                'description': 'Verify every module is polished before making it live.',
+                'steps': [
+                    'Run the pre-launch checklist (assets, captions, accessibility).',
+                    'Share the preview link with a peer instructor for QA.',
+                    'Publish modules during off-peak hours to minimize impact.'
+                ]
+            },
+            {
+                'title': 'Student Management & Analytics',
+                'description': 'Respond fast to student signals across tabs.',
+                'steps': [
+                    'Monitor lagging students from the Students tab each Monday.',
+                    'Use Analytics to spot lessons with unusual drop-off.',
+                    'Send nudges via Messages and log action items.'
+                ]
+            },
         ]
         context['unread_messages_count'] = Message.objects.filter(
             recipient=self.request.user,
@@ -636,3 +1030,380 @@ class InstructorTutorialView(InstructorRequiredMixin, TemplateView):
         ).count()
 
         return context
+
+class EditModuleView(LoginRequiredMixin, InstructorRequiredMixin, UpdateView):
+    """Dedicated page for editing a module"""
+    model = Module
+    form_class = InstructorModuleForm
+    template_name = 'instructor/edit_module.html'
+    pk_url_kwarg = 'module_id'
+    context_object_name = 'module'
+
+    def get_queryset(self):
+        """Ensure instructor can only edit assigned modules"""
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+        
+        if instructor_profile.instructor_role == 'system_admin':
+            return Module.objects.all()
+        
+        return Module.objects.filter(
+            module_instructors__instructor=instructor,
+            module_instructors__is_active=True
+        ).distinct()
+
+    def get_success_url(self):
+        messages.success(self.request, f"Module '{self.object.title}' updated successfully.")
+        return reverse('users:instructor_dashboard') + f'?module_id={self.object.id}'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        return context
+
+
+class AddQuizView(LoginRequiredMixin, InstructorRequiredMixin, CreateView):
+    """Dedicated page for adding a quiz"""
+    model = Quiz
+    form_class = InstructorQuizForm
+    template_name = 'instructor/add_quiz.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # We need to pass lesson_queryset to the form
+        # But we don't have a specific module context unless passed in GET
+        module_id = self.request.GET.get('module_id')
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+
+        if instructor_profile.instructor_role == 'system_admin':
+            base_qs = Lesson.objects.all()
+        else:
+            base_qs = Lesson.objects.filter(
+                module__module_instructors__instructor=instructor,
+                module__module_instructors__is_active=True
+            ).distinct()
+
+        if module_id:
+            base_qs = base_qs.filter(module_id=module_id)
+        
+        kwargs['lesson_queryset'] = base_qs
+        return kwargs
+
+    def get_success_url(self):
+        messages.success(self.request, "Quiz created successfully. Now add questions.")
+        return reverse('users:instructor_edit_quiz_questions', kwargs={'quiz_id': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        module_id = self.request.GET.get('module_id')
+        if module_id:
+            context['target_module'] = Module.objects.filter(id=module_id).first()
+        return context
+
+
+class EditQuizQuestionsView(LoginRequiredMixin, InstructorRequiredMixin, DetailView):
+    """View to manage questions for a quiz"""
+    model = Quiz
+    template_name = 'instructor/edit_quiz_questions.html'
+    context_object_name = 'quiz'
+    pk_url_kwarg = 'quiz_id'
+
+    def get_queryset(self):
+        """Ensure instructor can only edit their own quizzes"""
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+        
+        if instructor_profile.instructor_role == 'system_admin':
+            return Quiz.objects.all()
+        
+        return Quiz.objects.filter(
+            lesson__module__module_instructors__instructor=instructor,
+            lesson__module__module_instructors__is_active=True
+        ).distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['questions'] = self.object.questions.all().order_by('sort_order')
+        context['question_form'] = InstructorQuestionForm(initial={'quiz': self.object})
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = InstructorQuestionForm(request.POST)
+        
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.quiz = self.object
+            # Auto-assign sort order
+            last_question = self.object.questions.order_by('-sort_order').first()
+            question.sort_order = (last_question.sort_order + 1) if last_question else 0
+            question.save()
+            messages.success(request, "Question added successfully.")
+            return redirect('users:instructor_edit_quiz_questions', quiz_id=self.object.id)
+        
+        context = self.get_context_data()
+        context['question_form'] = form
+        return self.render_to_response(context)
+
+
+@login_required
+def delete_quiz_question(request, question_id):
+    """Delete a question from a quiz"""
+    question = get_object_or_404(Question, id=question_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=question.quiz.lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            messages.error(request, "You do not have permission to delete this question.")
+            return redirect('users:instructor_dashboard')
+
+    quiz_id = question.quiz.id
+    question.delete()
+    messages.success(request, "Question deleted successfully.")
+    return redirect('users:instructor_edit_quiz_questions', quiz_id=quiz_id)
+
+
+@login_required
+def get_lesson_form(request, lesson_id):
+    """AJAX view to get lesson edit form"""
+    lesson = get_object_or_404(Lesson, id=lesson_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    if request.method == 'POST':
+        form = InstructorLessonForm(request.POST, instance=lesson)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True, 'message': 'Lesson updated successfully'})
+        return JsonResponse({'success': False, 'errors': form.errors.as_json()}, status=400)
+
+    form = InstructorLessonForm(instance=lesson)
+    from django.template.loader import render_to_string
+    html = render_to_string('instructor/partials/lesson_form.html', {'form': form, 'lesson': lesson}, request=request)
+    return JsonResponse({'html': html})
+
+
+@login_required
+def create_module_lesson(request, module_id):
+    """Create a new lesson for a module and return its form"""
+    module = get_object_or_404(Module, id=module_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    # Create a draft lesson
+    last_lesson = module.lessons.order_by('-sort_order').first()
+    sort_order = (last_lesson.sort_order + 1) if last_lesson else 0
+    
+    lesson = Lesson.objects.create(
+        module=module,
+        title="New Lesson",
+        content_type='text',
+        sort_order=sort_order,
+        estimated_duration=30,
+        is_published=False
+    )
+    
+    return JsonResponse({'success': True, 'lesson_id': lesson.id})
+
+
+class ManageModuleQuizzesView(LoginRequiredMixin, InstructorRequiredMixin, DetailView):
+    """View to manage all quizzes for a module in a master-detail layout"""
+    model = Module
+    template_name = 'instructor/manage_quizzes.html'
+    context_object_name = 'module'
+    pk_url_kwarg = 'module_id'
+
+    def get_queryset(self):
+        instructor = self.request.user
+        if instructor.instructor_profile.instructor_role == 'system_admin':
+            return Module.objects.all()
+        return Module.objects.filter(
+            module_instructors__instructor=instructor,
+            module_instructors__is_active=True
+        ).distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get all lessons for this module (for left panel)
+        context['lessons'] = self.object.lessons.all().order_by('sort_order')
+        
+        # Get all quizzes for this module (will be filtered by lesson via AJAX)
+        context['all_quizzes'] = Quiz.objects.filter(
+            lesson__module=self.object
+        ).select_related('lesson').order_by('lesson__sort_order', 'title')
+        
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        return context
+
+
+@login_required
+def create_module_quiz(request, module_id):
+    """Create a new draft quiz for a module"""
+    module = get_object_or_404(Module, id=module_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    # Get lesson_id from request body if provided, otherwise use first lesson
+    import json
+    lesson_id = None
+    if request.body:
+        try:
+            data = json.loads(request.body)
+            lesson_id = data.get('lesson_id')
+        except:
+            pass
+    
+    if lesson_id:
+        lesson = get_object_or_404(Lesson, id=lesson_id, module=module)
+    else:
+        # Get the first lesson to attach to by default, or create one if none exist
+        lesson = module.lessons.first()
+        if not lesson:
+            # Create a default lesson if needed
+            lesson = Lesson.objects.create(
+                module=module,
+                title="Lesson 1",
+                content_type='text',
+                sort_order=0,
+                estimated_duration=30
+            )
+
+    quiz = Quiz.objects.create(
+        lesson=lesson,
+        title="New Quiz",
+        description="Quiz description",
+        is_published=False
+    )
+    
+    return JsonResponse({'success': True, 'quiz_id': quiz.id})
+
+
+@login_required
+def get_quiz_details(request, quiz_id):
+    """AJAX view to get quiz editor (settings + questions)"""
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=quiz.lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    if request.method == 'POST':
+        # Check if this is a quiz settings update or question addition
+        action = request.POST.get('action', 'update_settings')
+        
+        if action == 'add_question':
+            # Handle Question Addition
+            form = InstructorQuestionForm(request.POST)
+            if form.is_valid():
+                question = form.save(commit=False)
+                question.quiz = quiz
+                # Auto-assign sort order
+                last_question = quiz.questions.order_by('-sort_order').first()
+                question.sort_order = (last_question.sort_order + 1) if last_question else 0
+                question.save()
+                return JsonResponse({'success': True, 'message': 'Question added successfully', 'reload': True})
+            return JsonResponse({'success': False, 'errors': form.errors.as_json()}, status=400)
+        else:
+            # Handle Quiz Settings Update
+            form = InstructorQuizForm(request.POST, instance=quiz, lesson_queryset=quiz.lesson.module.lessons.all())
+            if form.is_valid():
+                form.save()
+                return JsonResponse({'success': True, 'message': 'Quiz settings updated'})
+            return JsonResponse({'success': False, 'errors': form.errors.as_json()}, status=400)
+
+    # GET request: Render the editor partial
+    form = InstructorQuizForm(instance=quiz, lesson_queryset=quiz.lesson.module.lessons.all())
+    question_form = InstructorQuestionForm(initial={'quiz': quiz})
+    questions = quiz.questions.all().order_by('sort_order')
+    
+    from django.template.loader import render_to_string
+    html = render_to_string('instructor/partials/quiz_editor.html', {
+        'quiz': quiz,
+        'form': form,
+        'question_form': question_form,
+        'questions': questions
+    }, request=request)
+    
+    return JsonResponse({'html': html})
+
+
+@login_required
+def get_lesson_quizzes_list(request, lesson_id):
+    """AJAX view to get quizzes list for a specific lesson (middle panel)"""
+    lesson = get_object_or_404(Lesson, id=lesson_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+    
+    quizzes = Quiz.objects.filter(lesson=lesson).order_by('title')
+    
+    from django.template.loader import render_to_string
+    html = render_to_string('instructor/partials/quizzes_list.html', {
+        'lesson': lesson,
+        'quizzes': quizzes
+    }, request=request)
+    
+    return JsonResponse({'html': html})
