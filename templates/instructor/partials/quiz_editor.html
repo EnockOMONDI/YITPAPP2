@@ -1,0 +1,199 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold mb-0">Edit Quiz: {{ quiz.title }}</h5>
+    <span class="badge {% if quiz.is_published %}bg-success{% else %}bg-warning text-dark{% endif %}">
+        {% if quiz.is_published %}Published{% else %}Draft{% endif %}
+    </span>
+</div>
+
+<ul class="nav nav-tabs mb-4" id="quizTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">Settings</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="questions-tab" data-bs-toggle="tab" href="#questions" role="tab">Questions ({{ questions|length }})</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="quizTabsContent">
+    <!-- Settings Tab -->
+    <div class="tab-pane fade show active" id="settings" role="tabpanel">
+        <form id="quizSettingsForm" method="post" action="{% url 'users:instructor_get_quiz_details' quiz.id %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Title</label>
+                {{ form.title }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Associated Lesson</label>
+                {{ form.lesson }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Description</label>
+                {{ form.description }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Instructions</label>
+                {{ form.instructions }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-bold">Time Limit (mins)</label>
+                    {{ form.time_limit }}
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-bold">Max Attempts</label>
+                    {{ form.max_attempts }}
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-bold">Passing Score (%)</label>
+                    {{ form.passing_score }}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="form-check form-switch mb-2">
+                    {{ form.is_randomized }}
+                    <label class="form-check-label">Randomize Questions</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    {{ form.show_results }}
+                    <label class="form-check-label">Show Results Immediately</label>
+                </div>
+                <div class="form-check form-switch">
+                    {{ form.is_published }}
+                    <label class="form-check-label">Publish Quiz</label>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Save Settings
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Questions Tab -->
+    <div class="tab-pane fade" id="questions" role="tabpanel">
+        <div class="row">
+            <!-- Questions List -->
+            <div class="col-md-7 border-end">
+                <h6 class="fw-bold mb-3 text-uppercase small text-muted">Existing Questions</h6>
+                {% if questions %}
+                <div class="accordion" id="questionsAccordion">
+                    {% for question in questions %}
+                    <div class="accordion-item border-0 mb-3 shadow-sm rounded overflow-hidden">
+                        <h2 class="accordion-header" id="heading{{ question.id }}">
+                            <button class="accordion-button collapsed bg-light p-3" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse{{ question.id }}">
+                                <div class="d-flex align-items-center w-100 me-3">
+                                    <span class="badge bg-primary me-2">{{ forloop.counter }}</span>
+                                    <span class="fw-semibold text-truncate small">{{ question.question_text|truncatechars:30 }}</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapse{{ question.id }}" class="accordion-collapse collapse"
+                            data-bs-parent="#questionsAccordion">
+                            <div class="accordion-body bg-white p-3">
+                                <p class="small mb-2">{{ question.question_text }}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <span class="badge bg-secondary bg-opacity-10 text-secondary">{{ question.get_question_type_display }}</span>
+                                    <a href="{% url 'users:instructor_delete_quiz_question' question.id %}"
+                                        class="text-danger small" onclick="return confirm('Delete this question?')">
+                                        <i class="fas fa-trash-alt me-1"></i>Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted small text-center py-4">No questions yet.</p>
+                {% endif %}
+            </div>
+
+            <!-- Add Question Form -->
+            <div class="col-md-5">
+                <h6 class="fw-bold mb-3 text-uppercase small text-muted">Add Question</h6>
+                <form id="addQuestionForm" method="post" action="{% url 'users:instructor_get_quiz_details' quiz.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add_question">
+                    <input type="hidden" name="quiz" value="{{ quiz.id }}">
+
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold">Type</label>
+                        {{ question_form.question_type }}
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold">Question</label>
+                        {{ question_form.question_text }}
+                    </div>
+
+                    <div class="mb-2" id="optionsContainer">
+                        <label class="form-label small fw-bold">Options (One per line)</label>
+                        <textarea name="options_text" class="form-control form-control-sm" rows="3"
+                            placeholder="Option A&#10;Option B"></textarea>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold">Correct Answer</label>
+                        {{ question_form.correct_answer }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Points</label>
+                        {{ question_form.points }}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fas fa-plus me-2"></i>Add Question
+                        </button>
+                    </div>
+                </form>
+
+                <script>
+                    document.getElementById('addQuestionForm').addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const submitBtn = this.querySelector('button[type="submit"]');
+                        const originalText = submitBtn.innerHTML;
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Adding...';
+
+                        fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // Reload the quiz editor to show the new question
+                                    location.reload();
+                                } else {
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML = originalText;
+                                    alert('Error adding question: ' + JSON.stringify(data.errors));
+                                }
+                            })
+                            .catch(error => {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = originalText;
+                                alert('Network error occurred');
+                            });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

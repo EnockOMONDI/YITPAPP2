@@ -1,0 +1,203 @@
+{% extends 'instructor/base_instructor.html' %}
+{% load static %}
+
+{% block title %}Manage Quizzes: {{ module.title }} · YITP Instructor{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1 fw-bold">Manage Quizzes</h1>
+            <p class="text-muted mb-0">Module: {{ module.title }}</p>
+        </div>
+        <div>
+            <a href="{% url 'users:instructor_dashboard' %}?module_id={{ module.id }}"
+                class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <!-- Left Panel: Lessons (25%) -->
+        <div class="col-lg-3">
+            <div class="card-custom bg-white h-100">
+                <div class="p-3 bg-light border-bottom">
+                    <h6 class="fw-bold mb-0 text-uppercase small">Lessons</h6>
+                </div>
+                <div class="list-group list-group-flush" style="max-height: 70vh; overflow-y: auto;">
+                    {% for lesson in lessons %}
+                    <button type="button" class="list-group-item list-group-item-action lesson-item"
+                        data-lesson-id="{{ lesson.id }}" onclick="loadLessonQuizzes({{ lesson.id }}, this)">
+                        <div class="fw-semibold small">{{ lesson.title }}</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">{{ lesson.get_content_type_display }}</div>
+                    </button>
+                    {% empty %}
+                    <div class="p-3 text-center text-muted small">
+                        No lessons found
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Panel: Quizzes List (25%) -->
+        <div class="col-lg-3">
+            <div class="card-custom bg-white h-100">
+                <div id="quizzesListContainer">
+                    <div class="text-center py-5 text-muted">
+                        <i class="fas fa-arrow-left fa-2x mb-3 opacity-25"></i>
+                        <p class="small">Select a lesson</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Quiz Editor (50%) -->
+        <div class="col-lg-6">
+            <div class="card-custom bg-white h-100 p-4">
+                <div id="quizEditorContainer" style="display: none;">
+                    <div id="quizLoading" class="text-center py-5">
+                        <div class="spinner-border text-primary"></div>
+                        <p class="text-muted mt-2 small">Loading...</p>
+                    </div>
+                    <div id="quizEditorContent"></div>
+                </div>
+
+                <div id="editorEmptyState" class="text-center py-5 mt-5">
+                    <div class="bg-light rounded-circle d-inline-flex p-4 mb-3">
+                        <i class="fas fa-clipboard-question fa-2x text-muted"></i>
+                    </div>
+                    <h6 class="text-muted">Select or create a quiz</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    let currentLessonId = null;
+
+    function loadLessonQuizzes(lessonId, element) {
+        currentLessonId = lessonId;
+
+        // Update active state
+        document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
+        if (element) element.classList.add('active');
+
+        // Clear editor
+        document.getElementById('editorEmptyState').style.display = 'block';
+        document.getElementById('quizEditorContainer').style.display = 'none';
+
+        // Load quizzes list
+        fetch(`/users/instructor/lesson/${lessonId}/quizzes-list/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.html) {
+                    document.getElementById('quizzesListContainer').innerHTML = data.html;
+                } else {
+                    alert('Error loading quizzes');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error loading quizzes');
+            });
+    }
+
+    function loadQuizEditor(quizId) {
+        document.getElementById('editorEmptyState').style.display = 'none';
+        document.getElementById('quizEditorContainer').style.display = 'block';
+        document.getElementById('quizLoading').style.display = 'block';
+        document.getElementById('quizEditorContent').innerHTML = '';
+
+        fetch(`/users/instructor/quiz/${quizId}/details/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('quizLoading').style.display = 'none';
+                if (data.html) {
+                    document.getElementById('quizEditorContent').innerHTML = data.html;
+                    initializeQuizScripts();
+                } else {
+                    alert('Error loading quiz');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error loading quiz');
+            });
+    }
+
+    function createNewQuiz() {
+        if (!currentLessonId) {
+            alert('Please select a lesson first');
+            return;
+        }
+
+        fetch(`/users/instructor/module/{{ module.id }}/quiz/create/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ lesson_id: currentLessonId })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Reload quizzes list
+                    loadLessonQuizzes(currentLessonId);
+                    // Load the new quiz in editor
+                    loadQuizEditor(data.quiz_id);
+                } else {
+                    alert('Error creating quiz');
+                }
+            });
+    }
+
+    function initializeQuizScripts() {
+        // Initialize question type toggle
+        const typeSelect = document.querySelector('select[name="question_type"]');
+        const optionsContainer = document.getElementById('optionsContainer');
+
+        function toggleOptions() {
+            if (!typeSelect || !optionsContainer) return;
+            optionsContainer.style.display = (typeSelect.value === 'multiple_choice') ? 'block' : 'none';
+        }
+
+        if (typeSelect) {
+            typeSelect.addEventListener('change', toggleOptions);
+            toggleOptions();
+        }
+
+        // Settings form
+        const settingsForm = document.getElementById('quizSettingsForm');
+        if (settingsForm) {
+            settingsForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        submitBtn.disabled = false;
+                        if (data.success) {
+                            alert('Settings saved');
+                            // Reload quizzes list to reflect changes
+                            if (currentLessonId) loadLessonQuizzes(currentLessonId);
+                        } else {
+                            alert('Error: ' + JSON.stringify(data.errors));
+                        }
+                    });
+            });
+        }
+    }
+</script>
+{% endblock %}
+{% endblock %}

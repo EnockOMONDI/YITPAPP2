@@ -38894,3 +38894,214 @@ INFO 2025-12-03 03:49:47,627 basehttp 86740 6212284416 "GET /users/instructor/an
 INFO 2025-12-03 03:49:49,235 basehttp 86740 6212284416 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
 INFO 2025-12-03 03:49:52,540 basehttp 86740 6212284416 "GET /lms/communication/compose/ HTTP/1.1" 200 65534
 INFO 2025-12-03 03:49:52,990 basehttp 86740 6212284416 "GET /static/css/yitp-communication.css HTTP/1.1" 200 9712
+INFO 2025-12-03 12:48:41,403 autoreload 6131 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 12:49:03,053 basehttp 6131 6191624192 "GET / HTTP/1.1" 302 0
+INFO 2025-12-03 12:49:03,107 basehttp 6131 6191624192 "GET /users/instructor/ HTTP/1.1" 200 21883
+INFO 2025-12-03 12:49:07,193 basehttp 6131 6191624192 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
+INFO 2025-12-03 12:49:08,813 basehttp 6131 6191624192 "GET /users/instructor/tutorial/ HTTP/1.1" 200 32403
+INFO 2025-12-03 12:49:12,465 basehttp 6131 6191624192 "GET /users/instructor/analytics/ HTTP/1.1" 200 15407
+INFO 2025-12-03 12:49:13,882 basehttp 6131 6191624192 "GET /users/instructor/students/ HTTP/1.1" 200 41868
+INFO 2025-12-03 12:49:16,405 basehttp 6131 6191624192 "GET /users/instructor/student/83/ HTTP/1.1" 200 18609
+INFO 2025-12-03 12:49:29,604 basehttp 6131 6191624192 "GET /users/instructor/courses/ HTTP/1.1" 200 13172
+INFO 2025-12-03 12:49:31,937 basehttp 6131 6191624192 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 21883
+INFO 2025-12-03 12:49:36,849 basehttp 6131 6191624192 "GET /users/instructor/courses/ HTTP/1.1" 200 13172
+INFO 2025-12-03 12:50:08,422 basehttp 6131 6191624192 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 21883
+INFO 2025-12-03 12:52:55,078 basehttp 6131 6191624192 "GET /users/instructor/courses/ HTTP/1.1" 200 13172
+INFO 2025-12-03 12:52:56,923 basehttp 6131 6191624192 "GET /users/instructor/students/ HTTP/1.1" 200 41868
+INFO 2025-12-03 12:52:58,729 basehttp 6131 6191624192 "GET /users/instructor/analytics/ HTTP/1.1" 200 15407
+INFO 2025-12-03 12:53:00,123 basehttp 6131 6191624192 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
+INFO 2025-12-03 12:53:16,210 basehttp 6131 6191624192 "GET /users/instructor/ HTTP/1.1" 200 21883
+INFO 2025-12-03 12:53:22,597 basehttp 6131 6191624192 "GET /users/instructor/analytics/ HTTP/1.1" 200 15407
+INFO 2025-12-03 12:59:13,517 basehttp 6131 6191624192 "GET /users/instructor/ HTTP/1.1" 200 21883
+INFO 2025-12-03 13:00:29,976 autoreload 6500 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:00:56,346 basehttp 6500 6190166016 "GET /users/instructor/messages/ HTTP/1.1" 200 14711
+INFO 2025-12-03 13:06:24,265 autoreload 6500 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:06:25,790 autoreload 6662 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:06:33,797 autoreload 6662 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:06:35,388 autoreload 6689 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:06:44,370 autoreload 6689 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/urls.py changed, reloading.
+INFO 2025-12-03 13:06:45,544 autoreload 6706 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:07:07,425 basehttp 6706 6162804736 "GET /users/instructor/ HTTP/1.1" 200 21883
+INFO 2025-12-03 13:07:13,355 basehttp 6706 6162804736 "GET /users/instructor/analytics/ HTTP/1.1" 200 15407
+INFO 2025-12-03 13:07:14,714 basehttp 6706 6162804736 "GET /users/instructor/courses/ HTTP/1.1" 200 13172
+INFO 2025-12-03 13:07:16,601 basehttp 6706 6162804736 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 21883
+INFO 2025-12-03 13:07:36,838 basehttp 6706 6162804736 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 21883
+INFO 2025-12-03 13:07:40,814 basehttp 6706 6162804736 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:07:43,961 basehttp 6706 6162804736 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 12269
+INFO 2025-12-03 13:07:54,619 basehttp 6706 6162804736 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:07:57,446 basehttp 6706 6162804736 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 14938
+INFO 2025-12-03 13:09:13,994 basehttp 6706 6162804736 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 14938
+INFO 2025-12-03 13:14:39,798 basehttp 6706 6162804736 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 14938
+INFO 2025-12-03 13:21:51,222 autoreload 6706 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/urls.py changed, reloading.
+INFO 2025-12-03 13:21:52,697 autoreload 6940 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:22:10,911 autoreload 6940 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:22:12,092 autoreload 6957 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:23:39,653 basehttp 6957 6160429056 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 14938
+INFO 2025-12-03 13:23:43,767 basehttp 6957 6160429056 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:23:51,911 autoreload 7117 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:23:53,544 basehttp 7117 6161330176 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:23:55,492 basehttp 7117 6161330176 "GET /users/instructor/courses/ HTTP/1.1" 200 13172
+INFO 2025-12-03 13:23:57,306 basehttp 7117 6161330176 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:24:06,009 basehttp 7117 6161330176 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 28265
+INFO 2025-12-03 13:24:11,081 basehttp 7117 6161330176 "GET /users/instructor/lesson/103/form/ HTTP/1.1" 200 9195
+INFO 2025-12-03 13:24:16,360 basehttp 7117 6161330176 "GET /users/instructor/lesson/111/form/ HTTP/1.1" 200 10389
+INFO 2025-12-03 13:24:19,260 basehttp 7117 6161330176 "GET /users/instructor/lesson/113/form/ HTTP/1.1" 200 8980
+INFO 2025-12-03 13:24:23,121 basehttp 7117 6161330176 "GET /users/instructor/lesson/114/form/ HTTP/1.1" 200 7780
+INFO 2025-12-03 13:24:27,228 basehttp 7117 6161330176 "GET /users/instructor/lesson/115/form/ HTTP/1.1" 200 6292
+INFO 2025-12-03 13:24:29,475 basehttp 7117 6161330176 "GET /users/instructor/lesson/116/form/ HTTP/1.1" 200 5580
+INFO 2025-12-03 13:24:30,704 basehttp 7117 6161330176 "GET /users/instructor/lesson/116/form/ HTTP/1.1" 200 5580
+INFO 2025-12-03 13:24:36,032 basehttp 7117 6161330176 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:24:37,815 basehttp 7117 6161330176 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 14938
+INFO 2025-12-03 13:24:50,510 basehttp 7117 6161330176 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 14938
+INFO 2025-12-03 13:27:22,799 basehttp 7117 6161330176 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 28265
+INFO 2025-12-03 13:28:42,071 basehttp 7117 6161330176 "GET /users/instructor/lesson/111/form/ HTTP/1.1" 200 10389
+INFO 2025-12-03 13:28:43,347 basehttp 7117 6161330176 "GET /users/instructor/lesson/112/form/ HTTP/1.1" 200 11523
+INFO 2025-12-03 13:28:44,216 basehttp 7117 6161330176 "GET /users/instructor/lesson/113/form/ HTTP/1.1" 200 8980
+INFO 2025-12-03 13:28:45,144 basehttp 7117 6161330176 "GET /users/instructor/lesson/114/form/ HTTP/1.1" 200 7780
+INFO 2025-12-03 13:28:46,012 basehttp 7117 6161330176 "GET /users/instructor/lesson/115/form/ HTTP/1.1" 200 6292
+INFO 2025-12-03 13:28:46,891 basehttp 7117 6161330176 "GET /users/instructor/lesson/116/form/ HTTP/1.1" 200 5580
+INFO 2025-12-03 13:28:47,579 basehttp 7117 6161330176 "GET /users/instructor/lesson/116/form/ HTTP/1.1" 200 5580
+INFO 2025-12-03 13:28:51,062 basehttp 7117 6161330176 "GET /users/instructor/lesson/117/form/ HTTP/1.1" 200 5794
+INFO 2025-12-03 13:28:54,367 basehttp 7117 6161330176 "GET /users/instructor/module/14/lesson/create/ HTTP/1.1" 200 35
+INFO 2025-12-03 13:28:54,434 basehttp 7117 6161330176 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 28904
+INFO 2025-12-03 13:28:58,871 basehttp 7117 6161330176 "GET /users/instructor/module/14/lesson/create/ HTTP/1.1" 200 35
+INFO 2025-12-03 13:28:58,921 basehttp 7117 6161330176 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 29543
+INFO 2025-12-03 13:29:00,787 basehttp 7117 6161330176 "GET /users/instructor/lesson/175/form/ HTTP/1.1" 200 3545
+INFO 2025-12-03 13:29:06,234 basehttp 7117 6161330176 "GET /users/instructor/lesson/176/form/ HTTP/1.1" 200 3545
+INFO 2025-12-03 13:35:07,271 autoreload 7117 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:35:08,717 autoreload 7471 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:35:54,570 basehttp 7471 6128300032 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:35:56,433 basehttp 7471 6128300032 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 15100
+INFO 2025-12-03 13:36:30,436 basehttp 7471 6128300032 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:36:32,487 basehttp 7471 6128300032 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:36:33,796 basehttp 7471 6128300032 "GET /users/instructor/courses/ HTTP/1.1" 200 13173
+INFO 2025-12-03 13:36:35,508 basehttp 7471 6128300032 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:36:38,700 basehttp 7471 6128300032 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 15100
+INFO 2025-12-03 13:36:58,759 autoreload 7471 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/urls.py changed, reloading.
+INFO 2025-12-03 13:37:00,106 autoreload 7518 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:38:39,909 basehttp 7518 6193426432 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:38:42,824 basehttp 7518 6193426432 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:38:44,994 basehttp 7518 6193426432 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 15100
+INFO 2025-12-03 13:39:28,369 basehttp 7518 6193426432 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22541
+INFO 2025-12-03 13:39:30,466 basehttp 7518 6193426432 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 29543
+INFO 2025-12-03 13:39:35,037 basehttp 7518 6193426432 "GET /users/instructor/quiz/add/?module_id=14 HTTP/1.1" 200 15100
+INFO 2025-12-03 13:39:39,907 basehttp 7518 6193426432 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 29543
+INFO 2025-12-03 13:41:14,412 basehttp 7518 6193426432 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 29543
+INFO 2025-12-03 13:41:15,487 basehttp 7518 6193426432 "GET /users/instructor/ HTTP/1.1" 200 22547
+INFO 2025-12-03 13:41:17,048 basehttp 7518 6193426432 "GET /users/instructor/students/ HTTP/1.1" 200 41868
+INFO 2025-12-03 13:41:18,972 basehttp 7518 6193426432 "GET /users/instructor/courses/ HTTP/1.1" 200 13173
+INFO 2025-12-03 13:41:22,286 basehttp 7518 6193426432 "GET /users/instructor/courses/ HTTP/1.1" 200 13173
+INFO 2025-12-03 13:41:23,973 basehttp 7518 6193426432 "GET /users/instructor/ HTTP/1.1" 200 22547
+INFO 2025-12-03 13:41:27,433 basehttp 7518 6193426432 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 26235
+INFO 2025-12-03 13:41:28,154 autoreload 7518 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:41:29,768 autoreload 7665 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:41:33,253 basehttp 7665 6201470976 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 18935
+INFO 2025-12-03 13:41:47,543 basehttp 7665 6201470976 "GET /users/instructor/quiz/30/details/ HTTP/1.1" 200 18982
+INFO 2025-12-03 13:41:51,923 basehttp 7665 6201470976 "GET /users/instructor/quiz/35/details/ HTTP/1.1" 200 18939
+INFO 2025-12-03 13:42:51,723 basehttp 7665 6201470976 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 26235
+INFO 2025-12-03 13:42:53,378 basehttp 7665 6201470976 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:42:59,953 basehttp 7665 6201470976 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:43:04,570 basehttp 7665 6201470976 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:53:31,858 autoreload 7665 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:53:33,329 autoreload 7878 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:53:52,843 autoreload 7878 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:53:54,061 autoreload 7902 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:54:05,821 autoreload 7902 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:54:07,186 autoreload 7915 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:54:22,418 autoreload 7915 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/urls.py changed, reloading.
+INFO 2025-12-03 13:54:23,671 autoreload 7933 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:55:35,761 autoreload 7933 8685533888 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/instructor_views.py changed, reloading.
+INFO 2025-12-03 13:55:37,072 autoreload 8009 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:55:57,603 basehttp 8009 6166114304 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 13:56:00,791 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 13:56:02,653 basehttp 8009 6166114304 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:56:12,293 basehttp 8009 6166114304 "GET /users/instructor/lesson/111/quizzes-list/ HTTP/1.1" 200 1221
+INFO 2025-12-03 13:56:13,894 basehttp 8009 6166114304 "GET /users/instructor/lesson/112/quizzes-list/ HTTP/1.1" 200 1215
+INFO 2025-12-03 13:56:15,404 basehttp 8009 6166114304 "GET /users/instructor/lesson/113/quizzes-list/ HTTP/1.1" 200 1216
+INFO 2025-12-03 13:56:16,388 basehttp 8009 6166114304 "GET /users/instructor/quiz/32/details/ HTTP/1.1" 200 20832
+INFO 2025-12-03 13:56:25,245 basehttp 8009 6166114304 "GET /users/instructor/lesson/114/quizzes-list/ HTTP/1.1" 200 1217
+INFO 2025-12-03 13:56:26,641 basehttp 8009 6166114304 "GET /users/instructor/lesson/115/quizzes-list/ HTTP/1.1" 200 1213
+INFO 2025-12-03 13:56:28,525 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 13:56:29,527 basehttp 8009 6166114304 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:57:36,880 basehttp 8009 6166114304 "GET /users/instructor/lesson/111/quizzes-list/ HTTP/1.1" 200 1221
+INFO 2025-12-03 13:57:38,065 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 13:57:39,331 basehttp 8009 6166114304 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:57:55,786 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 13:57:59,168 basehttp 8009 6166114304 "GET /users/instructor/lesson/111/quizzes-list/ HTTP/1.1" 200 1221
+INFO 2025-12-03 13:58:00,329 basehttp 8009 6166114304 "GET /users/instructor/lesson/112/quizzes-list/ HTTP/1.1" 200 1215
+INFO 2025-12-03 13:58:01,304 basehttp 8009 6166114304 "GET /users/instructor/lesson/113/quizzes-list/ HTTP/1.1" 200 1216
+INFO 2025-12-03 13:58:03,775 basehttp 8009 6166114304 "GET /users/instructor/lesson/116/quizzes-list/ HTTP/1.1" 200 1228
+INFO 2025-12-03 13:58:04,511 basehttp 8009 6166114304 "GET /users/instructor/lesson/114/quizzes-list/ HTTP/1.1" 200 1217
+INFO 2025-12-03 13:58:06,469 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 13:58:10,185 basehttp 8009 6166114304 "GET /users/instructor/?module_id=14 HTTP/1.1" 200 22547
+INFO 2025-12-03 13:58:29,350 basehttp 8009 6166114304 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 29543
+INFO 2025-12-03 13:58:31,830 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/form/ HTTP/1.1" 200 9195
+INFO 2025-12-03 13:58:33,210 basehttp 8009 6166114304 "GET /users/instructor/courses/ HTTP/1.1" 200 13173
+INFO 2025-12-03 13:58:35,934 basehttp 8009 6166114304 "GET /users/instructor/courses/ HTTP/1.1" 200 13173
+INFO 2025-12-03 13:58:38,045 basehttp 8009 6166114304 "GET /users/instructor/ HTTP/1.1" 200 22547
+INFO 2025-12-03 13:58:40,731 basehttp 8009 6166114304 "GET /users/instructor/module/14/edit/ HTTP/1.1" 200 29543
+INFO 2025-12-03 13:58:44,714 basehttp 8009 6166114304 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 13:58:46,648 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 13:58:47,534 basehttp 8009 6166114304 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:58:59,363 basehttp 8009 6166114304 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 13:59:01,103 basehttp 8009 6166114304 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 13:59:02,136 basehttp 8009 6166114304 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 13:59:30,287 autoreload 8266 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 13:59:31,448 basehttp 8266 6341865472 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 13:59:32,772 basehttp 8266 6341865472 "GET /users/instructor/lesson/111/quizzes-list/ HTTP/1.1" 200 1221
+INFO 2025-12-03 13:59:33,579 basehttp 8266 6341865472 "GET /users/instructor/quiz/30/details/ HTTP/1.1" 200 20968
+INFO 2025-12-03 14:00:07,235 basehttp 8266 6341865472 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:00:08,667 basehttp 8266 6341865472 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:00:09,532 basehttp 8266 6341865472 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 14:00:46,531 basehttp 8266 6341865472 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:00:47,718 basehttp 8266 6341865472 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:00:48,611 basehttp 8266 6341865472 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 14:02:21,495 basehttp 8266 6341865472 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:02:21,604 basehttp 8266 6392344576 "GET /static/assets/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-12-03 14:02:21,608 basehttp 8266 6341865472 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-12-03 14:02:21,609 basehttp 8266 6409170944 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-12-03 14:02:21,609 basehttp 8266 6375518208 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-12-03 14:02:21,609 basehttp 8266 6358691840 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-12-03 14:02:21,647 basehttp 8266 6409170944 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-12-03 14:02:21,840 basehttp 8266 6409170944 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-12-03 14:02:21,842 basehttp 8266 6358691840 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-12-03 14:02:22,105 basehttp 8266 6358691840 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-12-03 14:02:23,371 basehttp 8266 6358691840 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:02:24,139 basehttp 8266 6358691840 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 14:03:36,167 autoreload 8670 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 14:04:04,264 basehttp 8670 6126497792 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:04:04,391 basehttp 8670 6176976896 "GET /static/assets/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-12-03 14:04:04,401 basehttp 8670 6193803264 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-12-03 14:04:04,403 basehttp 8670 6126497792 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-12-03 14:04:04,408 basehttp 8670 6160150528 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-12-03 14:04:04,410 basehttp 8670 6143324160 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-12-03 14:04:04,439 basehttp 8670 6143324160 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-12-03 14:04:05,297 basehttp 8670 6143324160 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-12-03 14:04:05,302 basehttp 8670 6143324160 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-12-03 14:04:06,321 basehttp 8670 6143324160 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:04:07,051 basehttp 8670 6143324160 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 14:04:36,555 basehttp 8670 6143324160 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:04:37,921 basehttp 8670 6143324160 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:04:38,550 basehttp 8670 6143324160 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 14:05:22,000 basehttp 8670 6143324160 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:05:23,530 basehttp 8670 6143324160 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:05:24,267 basehttp 8670 6143324160 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 14:05:27,916 basehttp 8670 6143324160 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:05:32,743 basehttp 8670 6143324160 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:05:33,637 basehttp 8670 6143324160 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20921
+INFO 2025-12-03 14:06:31,603 autoreload 9465 8685533888 Watching for file changes with StatReloader
+INFO 2025-12-03 14:06:46,051 basehttp 9465 6161035264 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:06:46,154 basehttp 9465 6211514368 "GET /static/assets/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2025-12-03 14:06:46,161 basehttp 9465 6194688000 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2025-12-03 14:06:46,164 basehttp 9465 6228340736 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-12-03 14:06:46,166 basehttp 9465 6161035264 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2025-12-03 14:06:46,167 basehttp 9465 6177861632 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2025-12-03 14:06:46,205 basehttp 9465 6177861632 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2025-12-03 14:06:46,645 basehttp 9465 6177861632 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2025-12-03 14:06:46,654 basehttp 9465 6177861632 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-12-03 14:06:46,865 basehttp 9465 6177861632 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2025-12-03 14:06:48,266 basehttp 9465 6177861632 "GET /users/instructor/lesson/111/quizzes-list/ HTTP/1.1" 200 1221
+INFO 2025-12-03 14:06:49,321 basehttp 9465 6177861632 "GET /users/instructor/quiz/30/details/ HTTP/1.1" 200 20968
+INFO 2025-12-03 14:09:57,483 basehttp 9465 6177861632 "GET /users/instructor/module/14/quizzes/ HTTP/1.1" 200 24900
+INFO 2025-12-03 14:09:58,962 basehttp 9465 6177861632 "GET /users/instructor/lesson/103/quizzes-list/ HTTP/1.1" 200 1231
+INFO 2025-12-03 14:09:59,604 basehttp 9465 6177861632 "GET /users/instructor/quiz/37/details/ HTTP/1.1" 200 20269
