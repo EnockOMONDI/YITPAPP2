@@ -3,10 +3,11 @@ Instructor-specific views for enhanced instructor experience
 """
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, CreateView
 from django.contrib import messages
 from django.http import JsonResponse
 from django.db.models import Count, Q, Avg, Sum, Prefetch
@@ -1029,3 +1030,380 @@ class InstructorTutorialView(InstructorRequiredMixin, TemplateView):
         ).count()
 
         return context
+
+class EditModuleView(LoginRequiredMixin, InstructorRequiredMixin, UpdateView):
+    """Dedicated page for editing a module"""
+    model = Module
+    form_class = InstructorModuleForm
+    template_name = 'instructor/edit_module.html'
+    pk_url_kwarg = 'module_id'
+    context_object_name = 'module'
+
+    def get_queryset(self):
+        """Ensure instructor can only edit assigned modules"""
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+        
+        if instructor_profile.instructor_role == 'system_admin':
+            return Module.objects.all()
+        
+        return Module.objects.filter(
+            module_instructors__instructor=instructor,
+            module_instructors__is_active=True
+        ).distinct()
+
+    def get_success_url(self):
+        messages.success(self.request, f"Module '{self.object.title}' updated successfully.")
+        return reverse('users:instructor_dashboard') + f'?module_id={self.object.id}'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        return context
+
+
+class AddQuizView(LoginRequiredMixin, InstructorRequiredMixin, CreateView):
+    """Dedicated page for adding a quiz"""
+    model = Quiz
+    form_class = InstructorQuizForm
+    template_name = 'instructor/add_quiz.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # We need to pass lesson_queryset to the form
+        # But we don't have a specific module context unless passed in GET
+        module_id = self.request.GET.get('module_id')
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+
+        if instructor_profile.instructor_role == 'system_admin':
+            base_qs = Lesson.objects.all()
+        else:
+            base_qs = Lesson.objects.filter(
+                module__module_instructors__instructor=instructor,
+                module__module_instructors__is_active=True
+            ).distinct()
+
+        if module_id:
+            base_qs = base_qs.filter(module_id=module_id)
+        
+        kwargs['lesson_queryset'] = base_qs
+        return kwargs
+
+    def get_success_url(self):
+        messages.success(self.request, "Quiz created successfully. Now add questions.")
+        return reverse('users:instructor_edit_quiz_questions', kwargs={'quiz_id': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        module_id = self.request.GET.get('module_id')
+        if module_id:
+            context['target_module'] = Module.objects.filter(id=module_id).first()
+        return context
+
+
+class EditQuizQuestionsView(LoginRequiredMixin, InstructorRequiredMixin, DetailView):
+    """View to manage questions for a quiz"""
+    model = Quiz
+    template_name = 'instructor/edit_quiz_questions.html'
+    context_object_name = 'quiz'
+    pk_url_kwarg = 'quiz_id'
+
+    def get_queryset(self):
+        """Ensure instructor can only edit their own quizzes"""
+        instructor = self.request.user
+        instructor_profile = instructor.instructor_profile
+        
+        if instructor_profile.instructor_role == 'system_admin':
+            return Quiz.objects.all()
+        
+        return Quiz.objects.filter(
+            lesson__module__module_instructors__instructor=instructor,
+            lesson__module__module_instructors__is_active=True
+        ).distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['questions'] = self.object.questions.all().order_by('sort_order')
+        context['question_form'] = InstructorQuestionForm(initial={'quiz': self.object})
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = InstructorQuestionForm(request.POST)
+        
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.quiz = self.object
+            # Auto-assign sort order
+            last_question = self.object.questions.order_by('-sort_order').first()
+            question.sort_order = (last_question.sort_order + 1) if last_question else 0
+            question.save()
+            messages.success(request, "Question added successfully.")
+            return redirect('users:instructor_edit_quiz_questions', quiz_id=self.object.id)
+        
+        context = self.get_context_data()
+        context['question_form'] = form
+        return self.render_to_response(context)
+
+
+@login_required
+def delete_quiz_question(request, question_id):
+    """Delete a question from a quiz"""
+    question = get_object_or_404(Question, id=question_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=question.quiz.lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            messages.error(request, "You do not have permission to delete this question.")
+            return redirect('users:instructor_dashboard')
+
+    quiz_id = question.quiz.id
+    question.delete()
+    messages.success(request, "Question deleted successfully.")
+    return redirect('users:instructor_edit_quiz_questions', quiz_id=quiz_id)
+
+
+@login_required
+def get_lesson_form(request, lesson_id):
+    """AJAX view to get lesson edit form"""
+    lesson = get_object_or_404(Lesson, id=lesson_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    if request.method == 'POST':
+        form = InstructorLessonForm(request.POST, instance=lesson)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True, 'message': 'Lesson updated successfully'})
+        return JsonResponse({'success': False, 'errors': form.errors.as_json()}, status=400)
+
+    form = InstructorLessonForm(instance=lesson)
+    from django.template.loader import render_to_string
+    html = render_to_string('instructor/partials/lesson_form.html', {'form': form, 'lesson': lesson}, request=request)
+    return JsonResponse({'html': html})
+
+
+@login_required
+def create_module_lesson(request, module_id):
+    """Create a new lesson for a module and return its form"""
+    module = get_object_or_404(Module, id=module_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    # Create a draft lesson
+    last_lesson = module.lessons.order_by('-sort_order').first()
+    sort_order = (last_lesson.sort_order + 1) if last_lesson else 0
+    
+    lesson = Lesson.objects.create(
+        module=module,
+        title="New Lesson",
+        content_type='text',
+        sort_order=sort_order,
+        estimated_duration=30,
+        is_published=False
+    )
+    
+    return JsonResponse({'success': True, 'lesson_id': lesson.id})
+
+
+class ManageModuleQuizzesView(LoginRequiredMixin, InstructorRequiredMixin, DetailView):
+    """View to manage all quizzes for a module in a master-detail layout"""
+    model = Module
+    template_name = 'instructor/manage_quizzes.html'
+    context_object_name = 'module'
+    pk_url_kwarg = 'module_id'
+
+    def get_queryset(self):
+        instructor = self.request.user
+        if instructor.instructor_profile.instructor_role == 'system_admin':
+            return Module.objects.all()
+        return Module.objects.filter(
+            module_instructors__instructor=instructor,
+            module_instructors__is_active=True
+        ).distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get all lessons for this module (for left panel)
+        context['lessons'] = self.object.lessons.all().order_by('sort_order')
+        
+        # Get all quizzes for this module (will be filtered by lesson via AJAX)
+        context['all_quizzes'] = Quiz.objects.filter(
+            lesson__module=self.object
+        ).select_related('lesson').order_by('lesson__sort_order', 'title')
+        
+        context['unread_messages_count'] = Message.objects.filter(
+            recipient=self.request.user,
+            is_read=False
+        ).count()
+        return context
+
+
+@login_required
+def create_module_quiz(request, module_id):
+    """Create a new draft quiz for a module"""
+    module = get_object_or_404(Module, id=module_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    # Get lesson_id from request body if provided, otherwise use first lesson
+    import json
+    lesson_id = None
+    if request.body:
+        try:
+            data = json.loads(request.body)
+            lesson_id = data.get('lesson_id')
+        except:
+            pass
+    
+    if lesson_id:
+        lesson = get_object_or_404(Lesson, id=lesson_id, module=module)
+    else:
+        # Get the first lesson to attach to by default, or create one if none exist
+        lesson = module.lessons.first()
+        if not lesson:
+            # Create a default lesson if needed
+            lesson = Lesson.objects.create(
+                module=module,
+                title="Lesson 1",
+                content_type='text',
+                sort_order=0,
+                estimated_duration=30
+            )
+
+    quiz = Quiz.objects.create(
+        lesson=lesson,
+        title="New Quiz",
+        description="Quiz description",
+        is_published=False
+    )
+    
+    return JsonResponse({'success': True, 'quiz_id': quiz.id})
+
+
+@login_required
+def get_quiz_details(request, quiz_id):
+    """AJAX view to get quiz editor (settings + questions)"""
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=quiz.lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+
+    if request.method == 'POST':
+        # Check if this is a quiz settings update or question addition
+        action = request.POST.get('action', 'update_settings')
+        
+        if action == 'add_question':
+            # Handle Question Addition
+            form = InstructorQuestionForm(request.POST)
+            if form.is_valid():
+                question = form.save(commit=False)
+                question.quiz = quiz
+                # Auto-assign sort order
+                last_question = quiz.questions.order_by('-sort_order').first()
+                question.sort_order = (last_question.sort_order + 1) if last_question else 0
+                question.save()
+                return JsonResponse({'success': True, 'message': 'Question added successfully', 'reload': True})
+            return JsonResponse({'success': False, 'errors': form.errors.as_json()}, status=400)
+        else:
+            # Handle Quiz Settings Update
+            form = InstructorQuizForm(request.POST, instance=quiz, lesson_queryset=quiz.lesson.module.lessons.all())
+            if form.is_valid():
+                form.save()
+                return JsonResponse({'success': True, 'message': 'Quiz settings updated'})
+            return JsonResponse({'success': False, 'errors': form.errors.as_json()}, status=400)
+
+    # GET request: Render the editor partial
+    form = InstructorQuizForm(instance=quiz, lesson_queryset=quiz.lesson.module.lessons.all())
+    question_form = InstructorQuestionForm(initial={'quiz': quiz})
+    questions = quiz.questions.all().order_by('sort_order')
+    
+    from django.template.loader import render_to_string
+    html = render_to_string('instructor/partials/quiz_editor.html', {
+        'quiz': quiz,
+        'form': form,
+        'question_form': question_form,
+        'questions': questions
+    }, request=request)
+    
+    return JsonResponse({'html': html})
+
+
+@login_required
+def get_lesson_quizzes_list(request, lesson_id):
+    """AJAX view to get quizzes list for a specific lesson (middle panel)"""
+    lesson = get_object_or_404(Lesson, id=lesson_id)
+    
+    # Check permission
+    instructor = request.user
+    if not instructor.instructor_profile.instructor_role == 'system_admin':
+        has_permission = ModuleInstructor.objects.filter(
+            module=lesson.module,
+            instructor=instructor,
+            is_active=True
+        ).exists()
+        if not has_permission:
+            return JsonResponse({'error': 'Permission denied'}, status=403)
+    
+    quizzes = Quiz.objects.filter(lesson=lesson).order_by('title')
+    
+    from django.template.loader import render_to_string
+    html = render_to_string('instructor/partials/quizzes_list.html', {
+        'lesson': lesson,
+        'quizzes': quizzes
+    }, request=request)
+    
+    return JsonResponse({'html': html})

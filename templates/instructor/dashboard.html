@@ -145,14 +145,25 @@
                             </div>
                         </a>
 
-                        <a href="{% url 'users:instructor_courses' %}"
+                        <a href="{% if selected_module %}{% url 'users:instructor_edit_module' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
+                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
+                            <div class="bg-info bg-opacity-10 p-2 rounded me-3 text-info">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">Update Module</div>
+                                <div class="small text-muted">Edit current module</div>
+                            </div>
+                        </a>
+
+                        <a href="{% if selected_module %}{% url 'users:instructor_manage_quizzes' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
                             class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
                             <div class="bg-success bg-opacity-10 p-2 rounded me-3 text-success">
                                 <i class="fas fa-plus-circle"></i>
                             </div>
                             <div>
-                                <div class="fw-bold">Add Quiz</div>
-                                <div class="small text-muted">Create new assessment</div>
+                                <div class="fw-bold">Manage Quizzes</div>
+                                <div class="small text-muted">Create & edit assessments</div>
                             </div>
                         </a>
 

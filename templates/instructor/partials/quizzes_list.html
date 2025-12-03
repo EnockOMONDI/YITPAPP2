@@ -1,0 +1,37 @@
+<div class="p-3 bg-light border-bottom d-flex justify-content-between align-items-center">
+    <h6 class="fw-bold mb-0 text-uppercase small">Quizzes</h6>
+    <button class="btn btn-sm btn-primary" onclick="createNewQuiz()">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+
+<div class="list-group list-group-flush" style="max-height: 65vh; overflow-y: auto;">
+    {% if quizzes %}
+    {% for quiz in quizzes %}
+    <button type="button"
+        class="list-group-item list-group-item-action quiz-item d-flex justify-content-between align-items-start"
+        data-quiz-id="{{ quiz.id }}"
+        onclick="loadQuizEditor({{ quiz.id }}); this.parentElement.querySelectorAll('.quiz-item').forEach(el => el.classList.remove('active')); this.classList.add('active');">
+        <div class="flex-grow-1">
+            <div class="fw-semibold small">{{ quiz.title }}</div>
+            <div class="text-muted" style="font-size: 0.7rem;">
+                {{ quiz.questions.count }} question{{ quiz.questions.count|pluralize }}
+            </div>
+        </div>
+        <div>
+            {% if quiz.is_published %}
+            <span class="badge bg-success" style="font-size: 0.65rem;">Published</span>
+            {% else %}
+            <span class="badge bg-warning text-dark" style="font-size: 0.65rem;">Draft</span>
+            {% endif %}
+        </div>
+    </button>
+    {% endfor %}
+    {% else %}
+    <div class="p-4 text-center text-muted small">
+        <i class="fas fa-clipboard-question fa-2x mb-2 opacity-25"></i>
+        <p class="mb-0">No quizzes yet</p>
+        <p class="mb-0">Click + to create one</p>
+    </div>
+    {% endif %}
+</div>
