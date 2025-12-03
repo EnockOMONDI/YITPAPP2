@@ -27,49 +27,71 @@
     <!-- Stats Cards -->
     <div class="row g-4 mb-5">
         <div class="col-md-6 col-xl-3">
-            <div class="card-custom p-4 h-100 bg-white">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div class="bg-orange bg-opacity-10 p-3 rounded-circle text-orange">
-                        <i class="fas fa-users fa-lg"></i>
+            <div
+                class="card-custom p-4 h-100 bg-white border-start border-3 border-orange shadow-sm position-relative overflow-hidden">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small text-uppercase fw-bold mb-1">Active Students</p>
+                        <h3 class="fw-bold mb-0 text-dark">{{ total_students }}</h3>
+                        <span class="badge bg-orange bg-opacity-10 text-orange mt-2 rounded-pill">
+                            <i class="fas fa-arrow-up me-1"></i>{{ recent_enrollments }} new
+                        </span>
                     </div>
-                    <span class="badge bg-success bg-opacity-10 text-success">+{{ recent_enrollments }} new</span>
+                    <div class="text-orange opacity-25">
+                        <i class="fas fa-users fa-3x"></i>
+                    </div>
                 </div>
-                <h3 class="fw-bold mb-1">{{ total_students }}</h3>
-                <p class="text-muted small mb-0">Active Students</p>
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
-            <div class="card-custom p-4 h-100 bg-white">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div class="bg-purple bg-opacity-10 p-3 rounded-circle text-purple">
-                        <i class="fas fa-star fa-lg"></i>
+            <div
+                class="card-custom p-4 h-100 bg-white border-start border-3 border-purple shadow-sm position-relative overflow-hidden">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small text-uppercase fw-bold mb-1">Avg. Quiz Score</p>
+                        <h3 class="fw-bold mb-0 text-dark">{{ avg_quiz_score }}%</h3>
+                        <span class="badge bg-purple bg-opacity-10 text-purple mt-2 rounded-pill">
+                            <i class="fas fa-chart-bar me-1"></i>Performance
+                        </span>
+                    </div>
+                    <div class="text-purple opacity-25">
+                        <i class="fas fa-star fa-3x"></i>
                     </div>
                 </div>
-                <h3 class="fw-bold mb-1">{{ avg_quiz_score }}%</h3>
-                <p class="text-muted small mb-0">Avg. Quiz Score</p>
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
-            <div class="card-custom p-4 h-100 bg-white">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div class="bg-info bg-opacity-10 p-3 rounded-circle text-info">
-                        <i class="fas fa-layer-group fa-lg"></i>
+            <div
+                class="card-custom p-4 h-100 bg-white border-start border-3 border-info shadow-sm position-relative overflow-hidden">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small text-uppercase fw-bold mb-1">Assigned Modules</p>
+                        <h3 class="fw-bold mb-0 text-dark">{{ module_count }}</h3>
+                        <span class="badge bg-info bg-opacity-10 text-info mt-2 rounded-pill">
+                            {{ published_modules }} active
+                        </span>
                     </div>
-                    <span class="badge bg-info bg-opacity-10 text-info">{{ published_modules }} active</span>
+                    <div class="text-info opacity-25">
+                        <i class="fas fa-layer-group fa-3x"></i>
+                    </div>
                 </div>
-                <h3 class="fw-bold mb-1">{{ module_count }}</h3>
-                <p class="text-muted small mb-0">Assigned Modules</p>
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
-            <div class="card-custom p-4 h-100 bg-white">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div class="bg-warning bg-opacity-10 p-3 rounded-circle text-warning">
-                        <i class="fas fa-check-circle fa-lg"></i>
+            <div
+                class="card-custom p-4 h-100 bg-white border-start border-3 border-success shadow-sm position-relative overflow-hidden">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small text-uppercase fw-bold mb-1">Completion Rate</p>
+                        <h3 class="fw-bold mb-0 text-dark">92%</h3>
+                        <span class="badge bg-success bg-opacity-10 text-success mt-2 rounded-pill">
+                            <i class="fas fa-check me-1"></i>On track
+                        </span>
+                    </div>
+                    <div class="text-success opacity-25">
+                        <i class="fas fa-check-circle fa-3x"></i>
                     </div>
                 </div>
-                <h3 class="fw-bold mb-1">92%</h3>
-                <p class="text-muted small mb-0">Completion Rate</p>
             </div>
         </div>
     </div>
@@ -77,7 +99,7 @@
     <div class="row g-4">
         <!-- Recent Activity -->
         <div class="col-lg-8">
-            <div class="card-custom bg-white h-100">
+            <div class="card-custom bg-white h-100 shadow-sm">
                 <div
                     class="card-header bg-transparent border-0 p-4 pb-0 d-flex justify-content-between align-items-center">
                     <h5 class="fw-bold mb-0">Recent Activity</h5>
@@ -87,36 +109,62 @@
                     {% if recent_progress %}
                     <div class="activity-feed">
                         {% for activity in recent_progress %}
-                        <div class="d-flex align-items-start mb-4">
-                            {% with image=activity.enrollment.student.profile.image %}
-                            {% if image and image.url and image.name != 'default.jpg' %}
-                            <img src="{{ image.url }}" class="rounded-circle me-3" width="40" height="40"
-                                alt="{{ activity.student_display_name }}">
-                            {% else %}
-                            <div class="rounded-circle me-3 bg-light d-flex align-items-center justify-content-center text-primary"
-                                style="width: 40px; height: 40px;">
-                                <i class="fas fa-user"></i>
-                            </div>
+                        <div class="d-flex align-items-start mb-4 position-relative">
+                            <!-- Timeline connector -->
+                            {% if not forloop.last %}
+                            <div class="position-absolute top-0 start-0 h-100 border-start border-2 border-light"
+                                style="left: 20px; z-index: 0;"></div>
                             {% endif %}
+
+                            {% with image=activity.enrollment.student.profile.image %}
+                            <div class="position-relative" style="z-index: 1;">
+                                {% if image and image.url and image.name != 'default.jpg' %}
+                                <img src="{{ image.url }}"
+                                    class="rounded-circle me-3 border border-2 border-white shadow-sm" width="40"
+                                    height="40" alt="{{ activity.student_display_name }}" style="object-fit: cover;">
+                                {% else %}
+                                <div class="rounded-circle me-3 bg-light d-flex align-items-center justify-content-center text-primary border border-2 border-white shadow-sm"
+                                    style="width: 40px; height: 40px;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                {% endif %}
+                            </div>
                             {% endwith %}
-                            <div class="flex-grow-1">
-                                <p class="mb-1">
-                                    <span class="fw-bold">{{ activity.student_display_name }}</span>
-                                    {% if activity.status == 'completed' %}
-                                    completed the lesson
-                                    {% else %}
-                                    started the lesson
-                                    {% endif %}
-                                    <span class="fw-bold text-purple">{{ activity.lesson.title }}</span>
-                                </p>
-                                <small class="text-muted">{{ activity.updated_at|timesince }} ago</small>
+
+                            <div class="flex-grow-1 pt-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="mb-1">
+                                            <span class="fw-bold text-dark">{{ activity.student_display_name }}</span>
+                                            {% if activity.status == 'completed' %}
+                                            <span class="badge bg-success bg-opacity-10 text-success ms-2"
+                                                style="font-size: 0.7rem;">Completed</span>
+                                            {% else %}
+                                            <span class="badge bg-primary bg-opacity-10 text-primary ms-2"
+                                                style="font-size: 0.7rem;">Started</span>
+                                            {% endif %}
+                                        </p>
+                                        <p class="mb-1 small text-muted">
+                                            Working on <span class="fw-semibold text-purple">{{ activity.lesson.title
+                                                }}</span>
+                                        </p>
+                                    </div>
+                                    <small class="text-muted" style="font-size: 0.75rem;">
+                                        <i class="far fa-clock me-1"></i>
+                                        {% if activity.status == 'completed' %}
+                                        {{ activity.completed_at|timesince }} ago
+                                        {% else %}
+                                        {{ activity.started_at|timesince }} ago
+                                        {% endif %}
+                                    </small>
+                                </div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
                     {% else %}
                     <div class="text-center py-5">
-                        <div class="mb-3 text-muted opacity-50">
+                        <div class="mb-3 text-muted opacity-25">
                             <i class="fas fa-history fa-3x"></i>
                         </div>
                         <p class="text-muted">No recent activity to show.</p>
@@ -128,55 +176,64 @@
 
         <!-- Quick Actions -->
         <div class="col-lg-4">
-            <div class="card-custom bg-white h-100">
+            <div class="card-custom bg-white h-100 shadow-sm">
                 <div class="card-header bg-transparent border-0 p-4 pb-0">
                     <h5 class="fw-bold mb-0">Quick Actions</h5>
+                    <p class="text-muted small mb-0">Common tasks for you</p>
                 </div>
                 <div class="card-body p-4">
-                    <div class="d-grid gap-3">
-                        <a href="{% url 'users:instructor_messages' %}"
-                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
-                            <div class="bg-primary bg-opacity-10 p-2 rounded me-3 text-primary">
-                                <i class="fas fa-bullhorn"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold">Send Announcement</div>
-                                <div class="small text-muted">Notify all students</div>
-                            </div>
-                        </a>
+                    <div class="row g-3">
+                        <!-- Send Announcement -->
+                        <div class="col-6">
+                            <a href="{% url 'users:instructor_messages' %}"
+                                class="card-custom bg-light border-0 p-3 h-100 text-decoration-none hover-lift text-center d-block">
+                                <div class="bg-white rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center mb-3 text-primary"
+                                    style="width: 50px; height: 50px;">
+                                    <i class="fas fa-bullhorn fa-lg"></i>
+                                </div>
+                                <h6 class="fw-bold text-dark mb-1" style="font-size: 0.9rem;">Announce</h6>
+                                <p class="text-muted small mb-0" style="font-size: 0.75rem;">Notify students</p>
+                            </a>
+                        </div>
 
-                        <a href="{% if selected_module %}{% url 'users:instructor_edit_module' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
-                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
-                            <div class="bg-info bg-opacity-10 p-2 rounded me-3 text-info">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold">Update Module</div>
-                                <div class="small text-muted">Edit current module</div>
-                            </div>
-                        </a>
+                        <!-- Update Module -->
+                        <div class="col-6">
+                            <a href="{% if selected_module %}{% url 'users:instructor_edit_module' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
+                                class="card-custom bg-light border-0 p-3 h-100 text-decoration-none hover-lift text-center d-block">
+                                <div class="bg-white rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center mb-3 text-purple"
+                                    style="width: 50px; height: 50px;">
+                                    <i class="fas fa-edit fa-lg"></i>
+                                </div>
+                                <h6 class="fw-bold text-dark mb-1" style="font-size: 0.9rem;">Edit Module</h6>
+                                <p class="text-muted small mb-0" style="font-size: 0.75rem;">Update content</p>
+                            </a>
+                        </div>
 
-                        <a href="{% if selected_module %}{% url 'users:instructor_manage_quizzes' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
-                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
-                            <div class="bg-success bg-opacity-10 p-2 rounded me-3 text-success">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold">Manage Quizzes</div>
-                                <div class="small text-muted">Create & edit assessments</div>
-                            </div>
-                        </a>
+                        <!-- Manage Quizzes -->
+                        <div class="col-6">
+                            <a href="{% if selected_module %}{% url 'users:instructor_manage_quizzes' selected_module.id %}{% else %}{% url 'users:instructor_courses' %}{% endif %}"
+                                class="card-custom bg-light border-0 p-3 h-100 text-decoration-none hover-lift text-center d-block">
+                                <div class="bg-white rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center mb-3 text-orange"
+                                    style="width: 50px; height: 50px;">
+                                    <i class="fas fa-clipboard-check fa-lg"></i>
+                                </div>
+                                <h6 class="fw-bold text-dark mb-1" style="font-size: 0.9rem;">Quizzes</h6>
+                                <p class="text-muted small mb-0" style="font-size: 0.75rem;">Assessments</p>
+                            </a>
+                        </div>
 
-                        <a href="{% url 'users:instructor_analytics' %}"
-                            class="btn btn-outline-light text-start p-3 border d-flex align-items-center text-dark hover-shadow">
-                            <div class="bg-warning bg-opacity-10 p-2 rounded me-3 text-warning">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold">View Analytics</div>
-                                <div class="small text-muted">Check performance</div>
-                            </div>
-                        </a>
+                        <!-- View Analytics -->
+                        <div class="col-6">
+                            <a href="{% url 'users:instructor_analytics' %}"
+                                class="card-custom bg-light border-0 p-3 h-100 text-decoration-none hover-lift text-center d-block">
+                                <div class="bg-white rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center mb-3 text-success"
+                                    style="width: 50px; height: 50px;">
+                                    <i class="fas fa-chart-pie fa-lg"></i>
+                                </div>
+                                <h6 class="fw-bold text-dark mb-1" style="font-size: 0.9rem;">Analytics</h6>
+                                <p class="text-muted small mb-0" style="font-size: 0.75rem;">Check stats</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,11 +242,38 @@
 </div>
 
 <style>
-    .hover-shadow:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        border-color: transparent !important;
-        background-color: #fff;
+    .hover-lift {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+        background-color: #fff !important;
+    }
+
+    .text-purple {
+        color: #5B3A9E !important;
+    }
+
+    .bg-purple {
+        background-color: #5B3A9E !important;
+    }
+
+    .border-purple {
+        border-color: #5B3A9E !important;
+    }
+
+    .text-orange {
+        color: #ff5d15 !important;
+    }
+
+    .bg-orange {
+        background-color: #ff5d15 !important;
+    }
+
+    .border-orange {
+        border-color: #ff5d15 !important;
     }
 </style>
 {% endblock %}

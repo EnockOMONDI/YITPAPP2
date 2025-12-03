@@ -5,67 +5,94 @@
 
 {% block content %}
 <div class="container-fluid">
+    <!-- Header -->
     <div class="card-custom bg-gradient p-4 mb-4 text-white"
-        style="background: linear-gradient(120deg, #341C67, #ff5d15); border-radius: 18px;">
+        style="background: linear-gradient(135deg, #341C67 0%, #5B3A9E 100%); border-radius: 18px;">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <p class="text-uppercase small mb-2 fw-semibold opacity-75">Instructor Tutorials</p>
-                <h1 class="h3 fw-bold mb-3">Master your teaching toolkit in YITP</h1>
-                <p class="mb-3">Follow these quick guides to publish modules, engage students, and track progress without
-                    leaving your dashboard.</p>
+                <h1 class="h3 fw-bold mb-3">Learn How to Use YITP</h1>
+                <p class="mb-3">Simple, step-by-step guides to help you create courses, manage students, and track
+                    progress.</p>
                 <div class="d-flex flex-wrap gap-2">
-                    <span class="badge bg-white text-dark px-3 py-2"><i class="fas fa-play-circle me-2"></i>Step-by-step walkthroughs</span>
-                    <span class="badge bg-white text-dark px-3 py-2"><i class="fas fa-bolt me-2"></i>Actionable tips</span>
-                    <span class="badge bg-white text-dark px-3 py-2"><i class="fas fa-user-check me-2"></i>Best practices</span>
+                    <span class="badge bg-white text-dark px-3 py-2"><i class="fas fa-graduation-cap me-2"></i>Beginner
+                        Friendly</span>
+                    <span class="badge bg-white text-dark px-3 py-2"><i class="fas fa-clock me-2"></i>Quick to
+                        Learn</span>
+                    <span class="badge bg-white text-dark px-3 py-2"><i class="fas fa-check-circle me-2"></i>Easy to
+                        Follow</span>
                 </div>
             </div>
             <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
                 <a href="{% url 'users:instructor_dashboard' %}" class="btn btn-light text-dark">
-                    <i class="fas fa-tachometer-alt me-2"></i>Back to Dashboard
+                    <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="row g-4 mb-4">
-        <div class="col-lg-8">
-            <div class="card-custom bg-white p-4 h-100">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
-                        <h5 class="fw-bold mb-1">Core Tutorials</h5>
-                        <p class="text-muted small mb-0">Learn the essential workflows every instructor should master.</p>
+    <!-- Tutorial Categories -->
+    <div class="row g-4">
+        {% for category in tutorial_categories %}
+        <div class="col-12">
+            <div class="card-custom bg-white p-4">
+                <!-- Category Header -->
+                <div class="d-flex align-items-center mb-4">
+                    <div class="badge bg-{{ category.color }} bg-opacity-10 text-{{ category.color }} p-3 me-3"
+                        style="font-size: 1.5rem;">
+                        <i class="fas {{ category.icon }}"></i>
                     </div>
-                    <div class="text-end">
-                        <div class="text-muted small">Need help? <a href="{% url 'users:instructor_messages' %}">Message support</a></div>
+                    <div>
+                        <h4 class="fw-bold mb-1">{{ category.name }}</h4>
+                        <p class="text-muted small mb-0">{{ category.tutorials|length }} tutorial{{
+                            category.tutorials|length|pluralize }}</p>
                     </div>
                 </div>
 
-                <div class="accordion" id="tutorialAccordion">
-                    {% for section in tutorial_sections %}
+                <!-- Tutorials in this category -->
+                <div class="accordion" id="accordion{{ forloop.counter }}">
+                    {% for tutorial in category.tutorials %}
                     <div class="accordion-item border-0 mb-3 shadow-sm" style="border-radius: 12px;">
-                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
-                            <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}"
+                        <h2 class="accordion-header" id="heading{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                            <button class="accordion-button {% if not forloop.first %}collapsed{% endif %} bg-light"
                                 type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse{{ forloop.counter }}"
-                                aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
-                                aria-controls="collapse{{ forloop.counter }}">
-                                <span class="badge bg-orange bg-opacity-10 text-orange me-2">{{ forloop.counter }}</span>
-                                {{ section.title }}
+                                data-bs-target="#collapse{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+                                <div class="d-flex align-items-center w-100 me-3">
+                                    <span class="badge bg-{{ category.color }} me-3">{{ forloop.counter }}</span>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">{{ tutorial.title }}</div>
+                                        <div class="small text-muted mt-1">{{ tutorial.description }}</div>
+                                    </div>
+                                    <span class="badge bg-light text-dark ms-2">
+                                        <i class="fas fa-clock me-1"></i>{{ tutorial.duration }}
+                                    </span>
+                                </div>
                             </button>
                         </h2>
-                        <div id="collapse{{ forloop.counter }}"
-                            class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
-                            aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#tutorialAccordion">
-                            <div class="accordion-body">
-                                <p class="text-muted mb-3">{{ section.description }}</p>
-                                <ul class="list-unstyled mb-0">
-                                    {% for tip in section.steps %}
-                                    <li class="d-flex mb-2">
-                                        <i class="fas fa-check-circle text-success me-2 mt-1"></i>
-                                        <span>{{ tip }}</span>
+                        <div id="collapse{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                            class="accordion-collapse collapse {% if forloop.first and forloop.parentloop.first %}show{% endif %}"
+                            data-bs-parent="#accordion{{ forloop.parentloop.counter }}">
+                            <div class="accordion-body bg-white p-4">
+                                <h6 class="fw-bold mb-3 text-uppercase small text-muted">
+                                    <i class="fas fa-list-ol me-2"></i>Step-by-Step Instructions
+                                </h6>
+                                <ol class="mb-0 ps-3">
+                                    {% for step in tutorial.steps %}
+                                    <li class="mb-3">
+                                        <span class="text-dark">{{ step }}</span>
                                     </li>
                                     {% endfor %}
-                                </ul>
+                                </ol>
+
+                                <div class="mt-4 p-3 bg-light rounded">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-lightbulb text-warning me-2"></i>
+                                        <small class="text-muted">
+                                            <strong>Tip:</strong> Try following these steps right now to practice!
+                                        </small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -73,40 +100,27 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
+    </div>
 
-        <div class="col-lg-4">
-            <div class="card-custom bg-white p-4 mb-4">
-                <h6 class="fw-bold mb-3">Quick Start Checklist</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-start mb-3">
-                        <div class="badge bg-primary bg-opacity-10 text-primary me-3"><i class="fas fa-plug"></i></div>
-                        <div>
-                            <strong>Connect with your modules</strong>
-                            <p class="text-muted small mb-0">Confirm you’re assigned to the right modules before editing.</p>
-                        </div>
-                    </li>
-                    <li class="d-flex align-items-start mb-3">
-                        <div class="badge bg-success bg-opacity-10 text-success me-3"><i class="fas fa-clipboard-check"></i></div>
-                        <div>
-                            <strong>Map your lesson flow</strong>
-                            <p class="text-muted small mb-0">Use consistent lesson objectives and estimated durations.</p>
-                        </div>
-                    </li>
-                    <li class="d-flex align-items-start">
-                        <div class="badge bg-warning bg-opacity-10 text-warning me-3"><i class="fas fa-chart-line"></i></div>
-                        <div>
-                            <strong>Monitor engagement weekly</strong>
-                            <p class="text-muted small mb-0">Review Students & Analytics tabs for progress trends.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card-custom bg-light p-4">
-                <h6 class="fw-bold mb-3">Need a walkthrough?</h6>
-                <p class="text-muted small mb-3">Request a live onboarding session with our success team.</p>
-                <a href="{% url 'users:instructor_messages' %}" class="btn btn-outline-primary w-100">
+    <!-- Help Section -->
+    <div class="row g-4 mt-2">
+        <div class="col-md-6">
+            <div class="card-custom bg-light p-4 h-100">
+                <h6 class="fw-bold mb-3"><i class="fas fa-question-circle me-2"></i>Still Have Questions?</h6>
+                <p class="text-muted small mb-3">Our support team is here to help you succeed.</p>
+                <a href="{% url 'users:instructor_messages' %}" class="btn btn-primary">
                     <i class="fas fa-comments me-2"></i>Contact Support
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-custom bg-light p-4 h-100">
+                <h6 class="fw-bold mb-3"><i class="fas fa-video me-2"></i>Prefer Video Tutorials?</h6>
+                <p class="text-muted small mb-3">Watch video walkthroughs of common tasks.</p>
+                <a href="#" class="btn btn-outline-primary"
+                    onclick="alert('Video tutorials coming soon!'); return false;">
+                    <i class="fas fa-play-circle me-2"></i>Watch Videos
                 </a>
             </div>
         </div>

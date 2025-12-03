@@ -235,6 +235,8 @@ class InstructorDashboardView(LoginRequiredMixin, InstructorRequiredMixin, Templ
             completed_at__gte=thirty_days_ago
         )
         avg_quiz_score = quiz_attempts.aggregate(avg_score=Avg('score'))['avg_score'] or 0
+        if avg_quiz_score:
+            avg_quiz_score = round(avg_quiz_score, 1)
 
         recent_messages = Message.objects.filter(
             recipient=instructor
@@ -948,82 +950,177 @@ class InstructorTutorialView(InstructorRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Add any additional context data for the tutorial
-        context['page_title'] = 'YITP LMS Instructor User Manual'
-        context['tutorial_sections'] = [
+        context['page_title'] = 'YITP LMS Instructor Tutorials'
+        
+        # Organized tutorial categories
+        context['tutorial_categories'] = [
             {
-                'title': 'Scenario: Meet Beryl Omondi',
-                'description': 'Understand the learner persona you are guiding through Youth Impact Training.',
-                'steps': [
-                    'Review Beryl’s goals inside the Students tab to personalize messaging.',
-                    'Highlight outcomes that link back to her entrepreneurial ambitions.',
-                    'Capture any blockers in Messages for follow up.'
+                'name': 'Getting Started',
+                'icon': 'fa-rocket',
+                'color': 'primary',
+                'tutorials': [
+                    {
+                        'title': 'Welcome to YITP',
+                        'duration': '3 min',
+                        'description': 'Learn what you can do as an instructor on this platform.',
+                        'steps': [
+                            'Your dashboard shows all your courses and modules in one place',
+                            'Use the sidebar to navigate between Students, Analytics, and Messages',
+                            'The Quick Actions panel helps you create content faster'
+                        ]
+                    },
+                    {
+                        'title': 'Understanding Your Dashboard',
+                        'duration': '5 min',
+                        'description': 'Navigate the main interface and find what you need quickly.',
+                        'steps': [
+                            'Top bar: Select which module you\'re working on',
+                            'Left sidebar: Access different sections (Students, Courses, etc.)',
+                            'Main area: View and edit your content',
+                            'Quick Actions: Create modules, lessons, and quizzes with one click'
+                        ]
+                    }
                 ]
             },
             {
-                'title': 'Initial Setup & Course Creation',
-                'description': 'Create modules and lessons that align with the approved curriculum.',
-                'steps': [
-                    'Navigate to My Modules → “Create Module”.',
-                    'Add at least 3 learning outcomes per lesson before publishing.',
-                    'Use estimated duration to keep pacing consistent across the cohort.'
+                'name': 'Creating Content',
+                'icon': 'fa-book',
+                'color': 'success',
+                'tutorials': [
+                    {
+                        'title': 'Creating Your First Module',
+                        'duration': '7 min',
+                        'description': 'Modules are like folders that organize your lessons.',
+                        'steps': [
+                            'Click "My Modules" in the sidebar',
+                            'Click the "Create Module" button',
+                            'Give it a clear name (e.g., "Week 1: Introduction")',
+                            'Add a description so students know what to expect',
+                            'Click "Save" - your module is created!'
+                        ]
+                    },
+                    {
+                        'title': 'Adding Lessons to Your Module',
+                        'duration': '10 min',
+                        'description': 'Lessons are the actual content students will learn from.',
+                        'steps': [
+                            'Go to Dashboard and select your module',
+                            'Click "Update Module" in Quick Actions',
+                            'Click the "+" button to add a new lesson',
+                            'Choose lesson type: Text (reading), Video, or Document',
+                            'Add your content using the editor',
+                            'Set how long the lesson should take (helps students plan)',
+                            'Toggle "Published" when ready for students to see it'
+                        ]
+                    },
+                    {
+                        'title': 'Using the Content Editor',
+                        'duration': '8 min',
+                        'description': 'Format your text, add images, and make content look professional.',
+                        'steps': [
+                            'Type your content like you would in Word or Google Docs',
+                            'Highlight text to make it bold, italic, or underlined',
+                            'Use headings to organize sections (makes it easier to read)',
+                            'Add bullet points or numbered lists for steps',
+                            'Click the image icon to upload pictures',
+                            'Preview your lesson before saving'
+                        ]
+                    }
                 ]
             },
             {
-                'title': 'Module Structure Planning',
-                'description': 'Organize lessons so students always know what comes next.',
-                'steps': [
-                    'Drag lessons to reorder by difficulty or chronology.',
-                    'Tag mandatory lessons to prevent students from skipping prerequisites.',
-                    'Preview the module outline from the student view before publishing.'
+                'name': 'Creating Quizzes',
+                'icon': 'fa-clipboard-question',
+                'color': 'warning',
+                'tutorials': [
+                    {
+                        'title': 'Your First Quiz',
+                        'duration': '10 min',
+                        'description': 'Test student knowledge with quizzes.',
+                        'steps': [
+                            'Select your module from the dashboard',
+                            'Click "Manage Quizzes" in Quick Actions',
+                            'Click a lesson on the left to see its quizzes',
+                            'Click the "+" button to create a new quiz',
+                            'Fill in the Settings tab: quiz name, time limit, passing score',
+                            'Switch to the Questions tab to add questions'
+                        ]
+                    },
+                    {
+                        'title': 'Adding Different Question Types',
+                        'duration': '12 min',
+                        'description': 'Mix question types to test different skills.',
+                        'steps': [
+                            'Multiple Choice: Students pick one answer from a list',
+                            '  → Type your question',
+                            '  → Add options (one per line)',
+                            '  → Enter which option is correct',
+                            'True/False: Simple yes/no questions',
+                            'Fill in the Blank: Students type the answer',
+                            'Set points for each question (usually 1-5 points)',
+                            'Click "Add Question" when done'
+                        ]
+                    },
+                    {
+                        'title': 'Publishing Your Quiz',
+                        'duration': '3 min',
+                        'description': 'Make your quiz available to students.',
+                        'steps': [
+                            'Review all your questions in the Questions tab',
+                            'Go back to the Settings tab',
+                            'Toggle "Publish Quiz" to ON',
+                            'Click "Save Settings"',
+                            'Students can now take the quiz!'
+                        ]
+                    }
                 ]
             },
             {
-                'title': 'Content Development',
-                'description': 'Build rich lessons using the editor and reuse approved assets.',
-                'steps': [
-                    'Start with a hook; use the quote component or video embed.',
-                    'Break content into sections with callouts for activities.',
-                    'End each lesson with reflection prompts or a resource list.'
+                'name': 'Managing Students',
+                'icon': 'fa-users',
+                'color': 'info',
+                'tutorials': [
+                    {
+                        'title': 'Viewing Student Progress',
+                        'duration': '5 min',
+                        'description': 'See how your students are doing.',
+                        'steps': [
+                            'Click "Students" in the sidebar',
+                            'See all enrolled students in your courses',
+                            'Green badges = active, Gray badges = inactive',
+                            'Click on a student to see their detailed progress',
+                            'Check which lessons they\'ve completed'
+                        ]
+                    },
+                    {
+                        'title': 'Sending Messages to Students',
+                        'duration': '4 min',
+                        'description': 'Communicate with students directly.',
+                        'steps': [
+                            'Click "Messages" in the sidebar',
+                            'Click "New Message" button',
+                            'Select the student from the dropdown',
+                            'Type your message',
+                            'Click "Send"',
+                            'You\'ll get notified when they reply'
+                        ]
+                    },
+                    {
+                        'title': 'Understanding Analytics',
+                        'duration': '6 min',
+                        'description': 'Use data to improve your teaching.',
+                        'steps': [
+                            'Click "Analytics" in the sidebar',
+                            'See overall course completion rates',
+                            'Check which lessons students struggle with',
+                            'View quiz performance to identify difficult topics',
+                            'Use this info to add extra support where needed'
+                        ]
+                    }
                 ]
-            },
-            {
-                'title': 'Multimedia Integration',
-                'description': 'Keep learners engaged with video, audio, and downloadable resources.',
-                'steps': [
-                    'Upload files via Content Management so they stay versioned.',
-                    'Provide transcripts for all videos to support accessibility.',
-                    'Use galleries for before/after examples or case studies.'
-                ]
-            },
-            {
-                'title': 'Assessment Creation',
-                'description': 'Measure competency with quizzes, assignments, or projects.',
-                'steps': [
-                    'Define pass criteria and number of attempts before publishing.',
-                    'Mix question types—e.g., scenario-based MCQs plus reflections.',
-                    'Attach rubrics so graders score consistently.'
-                ]
-            },
-            {
-                'title': 'Course Review & Publishing',
-                'description': 'Verify every module is polished before making it live.',
-                'steps': [
-                    'Run the pre-launch checklist (assets, captions, accessibility).',
-                    'Share the preview link with a peer instructor for QA.',
-                    'Publish modules during off-peak hours to minimize impact.'
-                ]
-            },
-            {
-                'title': 'Student Management & Analytics',
-                'description': 'Respond fast to student signals across tabs.',
-                'steps': [
-                    'Monitor lagging students from the Students tab each Monday.',
-                    'Use Analytics to spot lessons with unusual drop-off.',
-                    'Send nudges via Messages and log action items.'
-                ]
-            },
+            }
         ]
+        
         context['unread_messages_count'] = Message.objects.filter(
             recipient=self.request.user,
             is_read=False
