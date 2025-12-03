@@ -33,9 +33,9 @@
                     <div>
                         <p class="text-muted small text-uppercase fw-bold mb-1">Active Students</p>
                         <h3 class="fw-bold mb-0 text-dark">{{ total_students }}</h3>
-                        <span class="badge bg-orange bg-opacity-10 text-orange mt-2 rounded-pill">
+                        <div class="text-orange mt-2 small fw-bold">
                             <i class="fas fa-arrow-up me-1"></i>{{ recent_enrollments }} new
-                        </span>
+                        </div>
                     </div>
                     <div class="text-orange opacity-25">
                         <i class="fas fa-users fa-3x"></i>
@@ -50,9 +50,9 @@
                     <div>
                         <p class="text-muted small text-uppercase fw-bold mb-1">Avg. Quiz Score</p>
                         <h3 class="fw-bold mb-0 text-dark">{{ avg_quiz_score }}%</h3>
-                        <span class="badge bg-purple bg-opacity-10 text-purple mt-2 rounded-pill">
+                        <div class="text-purple mt-2 small fw-bold">
                             <i class="fas fa-chart-bar me-1"></i>Performance
-                        </span>
+                        </div>
                     </div>
                     <div class="text-purple opacity-25">
                         <i class="fas fa-star fa-3x"></i>
@@ -67,9 +67,9 @@
                     <div>
                         <p class="text-muted small text-uppercase fw-bold mb-1">Assigned Modules</p>
                         <h3 class="fw-bold mb-0 text-dark">{{ module_count }}</h3>
-                        <span class="badge bg-info bg-opacity-10 text-info mt-2 rounded-pill">
+                        <div class="text-info mt-2 small fw-bold">
                             {{ published_modules }} active
-                        </span>
+                        </div>
                     </div>
                     <div class="text-info opacity-25">
                         <i class="fas fa-layer-group fa-3x"></i>
@@ -84,9 +84,9 @@
                     <div>
                         <p class="text-muted small text-uppercase fw-bold mb-1">Completion Rate</p>
                         <h3 class="fw-bold mb-0 text-dark">92%</h3>
-                        <span class="badge bg-success bg-opacity-10 text-success mt-2 rounded-pill">
+                        <div class="text-success mt-2 small fw-bold">
                             <i class="fas fa-check me-1"></i>On track
-                        </span>
+                        </div>
                     </div>
                     <div class="text-success opacity-25">
                         <i class="fas fa-check-circle fa-3x"></i>
@@ -137,7 +137,7 @@
                                         <p class="mb-1">
                                             <span class="fw-bold text-dark">{{ activity.student_display_name }}</span>
                                             {% if activity.status == 'completed' %}
-                                            <span class="badge bg-success bg-opacity-10 text-success ms-2"
+                                            <span class="badge bg-orange text-white rounded-pill ms-2"
                                                 style="font-size: 0.7rem;">Completed</span>
                                             {% else %}
                                             <span class="badge bg-primary bg-opacity-10 text-primary ms-2"

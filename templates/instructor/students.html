@@ -43,8 +43,8 @@
                             <div class="d-flex align-items-center">
                                 {% with image=student_data.student.profile.image %}
                                 {% if image and image.url and image.name != 'default.jpg' %}
-                                <img src="{{ image.url }}" class="rounded-circle me-3"
-                                    width="40" height="40" alt="{{ student_data.display_name }}">
+                                <img src="{{ image.url }}" class="rounded-circle me-3" width="40" height="40"
+                                    alt="{{ student_data.display_name }}">
                                 {% else %}
                                 <div class="rounded-circle me-3 bg-light d-flex align-items-center justify-content-center text-primary"
                                     style="width: 40px; height: 40px;">

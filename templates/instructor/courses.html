@@ -66,7 +66,7 @@
                 </div>
                 <div class="card-body p-4 flex-grow-1">
                     <div class="mb-2">
-                      
+
                     </div>
                     <h5 class="fw-bold mb-2">{{ module.title }}</h5>
                     <p class="text-muted small mb-4">{{ card.description|truncatewords:20 }}</p>
@@ -94,8 +94,7 @@
                 </div>
                 <div class="card-footer bg-white border-top p-3">
                     <div class="d-grid">
-                        <a href="{% url 'users:instructor_dashboard' %}?module_id={{ module.id }}"
-                            class="btn btn-outline-primary">
+                        <a href="{% url 'users:instructor_edit_module' module.id %}" class="btn btn-outline-primary">
                             <i class="fas fa-edit me-2"></i>Manage Module
                         </a>
                     </div>
