@@ -1,0 +1,214 @@
+{% extends 'instructor/base_instructor.html' %}
+{% load static %}
+
+{% block title %}{{ course.title }} · YITP Instructor{% endblock %}
+
+{% block extra_css %}
+<style>
+    .course-header {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid #eef2ff;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid #eef2ff;
+        height: 100%;
+        transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
+
+    .progress-thin {
+        height: 6px;
+        border-radius: 3px;
+        background-color: #f3f4f6;
+    }
+
+    .avatar-stack {
+        display: flex;
+        padding-left: 10px;
+    }
+
+    .avatar-stack img,
+    .avatar-stack .avatar-placeholder {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid white;
+        margin-left: -10px;
+        object-fit: cover;
+    }
+
+    .avatar-placeholder {
+        background: #eef2ff;
+        color: #4f46e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="course-header">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div class="d-flex gap-4">
+                {% if course.thumbnail %}
+                <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="rounded-3"
+                    style="width: 120px; height: 120px; object-fit: cover;">
+                {% else %}
+                <div class="rounded-3 bg-light d-flex align-items-center justify-content-center"
+                    style="width: 120px; height: 120px;">
+                    <i class="fas fa-image fa-2x text-muted opacity-50"></i>
+                </div>
+                {% endif %}
+
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        {% if course.is_published %}
+                        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Published</span>
+                        {% else %}
+                        <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill px-3">Draft</span>
+                        {% endif %}
+                        <span class="text-muted small"><i class="far fa-clock me-1"></i>Updated {{
+                            course.updated_at|date:"M d, Y" }}</span>
+                    </div>
+                    <h1 class="h2 fw-bold mb-2">{{ course.title }}</h1>
+                    <p class="text-muted mb-3" style="max-width: 600px;">{{ course.description|truncatewords:30 }}</p>
+
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'users:instructor_dashboard' %}?module_id={{ course.modules.first.id }}"
+                            class="btn btn-primary">
+                            <i class="fas fa-edit me-2"></i>Manage Content
+                        </a>
+                        <a href="#" class="btn btn-outline-secondary">
+                            <i class="fas fa-external-link-alt me-2"></i>Preview Course
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-end">
+                <div class="display-6 fw-bold text-dark mb-0">{{ total_students }}</div>
+                <div class="text-muted small text-uppercase fw-semibold">Active Students</div>
+
+                <div class="avatar-stack mt-3 justify-content-end">
+                    {% for enrollment in enrollments|slice:":5" %}
+                    {% if enrollment.student.profile.avatar %}
+                    <img src="{{ enrollment.student.profile.avatar.url }}"
+                        title="{{ enrollment.student.get_full_name }}">
+                    {% else %}
+                    <div class="avatar-placeholder" title="{{ enrollment.student.get_full_name }}">
+                        {{ enrollment.student.first_name|first }}{{ enrollment.student.last_name|first }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% if total_students > 5 %}
+                    <div class="avatar-placeholder bg-light text-muted">
+                        +{{ total_students|add:"-5" }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <!-- Lesson Progress -->
+        <div class="col-lg-8">
+            <div class="card-custom bg-white p-4 h-100">
+                <h5 class="fw-bold mb-4">Lesson Engagement</h5>
+
+                {% if lesson_progress_data %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="border-0 rounded-start ps-3">Lesson Title</th>
+                                <th class="border-0">Module</th>
+                                <th class="border-0 text-center">Completion Rate</th>
+                                <th class="border-0 rounded-end text-end pe-3">Completed By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in lesson_progress_data %}
+                            <tr>
+                                <td class="ps-3">
+                                    <div class="fw-semibold text-dark">{{ item.lesson.title }}</div>
+                                </td>
+                                <td class="text-muted small">{{ item.lesson.module.title }}</td>
+                                <td class="text-center" style="width: 30%;">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress flex-grow-1 progress-thin">
+                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                style="width: {{ item.completion_rate }}%"></div>
+                                        </div>
+                                        <span class="small fw-bold">{{ item.completion_rate }}%</span>
+                                    </div>
+                                </td>
+                                <td class="text-end pe-3">
+                                    <span class="badge bg-light text-dark border">{{ item.completed_count }}
+                                        students</span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <i class="fas fa-chart-bar fa-3x mb-3 opacity-25"></i>
+                    <p>No lesson data available yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Quiz Performance -->
+        <div class="col-lg-4">
+            <div class="card-custom bg-white p-4 h-100">
+                <h5 class="fw-bold mb-4">Quiz Performance</h5>
+
+                {% if quiz_data %}
+                <div class="d-flex flex-column gap-3">
+                    {% for item in quiz_data %}
+                    <div class="p-3 border rounded-3 bg-light bg-opacity-25">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="fw-semibold text-truncate" style="max-width: 70%;">{{ item.quiz.title }}</span>
+                            <span
+                                class="badge {% if item.pass_rate >= 70 %}bg-success{% else %}bg-warning{% endif %} bg-opacity-10 text-dark">
+                                {{ item.pass_rate }}% Pass Rate
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted small">
+                            <span>Avg. Score: <strong>{{ item.avg_score }}%</strong></span>
+                            <span>{{ item.total_attempts }} Attempts</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <i class="fas fa-clipboard-check fa-3x mb-3 opacity-25"></i>
+                    <p>No quiz data available yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

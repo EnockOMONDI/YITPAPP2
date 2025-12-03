@@ -79,7 +79,7 @@ class SmartRedirectMiddleware(MiddlewareMixin):
 
         instructor_profile = getattr(user, 'instructor_profile', None)
         if instructor_profile and getattr(instructor_profile, 'is_active', False):
-            return 'users:instructor_profile'
+            return 'users:instructor_dashboard'
         lesson_url = self._get_last_lesson_url(user)
         return lesson_url or 'profile'
 
@@ -162,7 +162,7 @@ class WelcomePageRedirectMiddleware(MiddlewareMixin):
                         return redirect('users:superuser_dashboard')
                     instructor_profile = getattr(user, 'instructor_profile', None)
                     if instructor_profile and getattr(instructor_profile, 'is_active', False):
-                        return redirect('users:instructor_profile')
+                        return redirect('users:instructor_dashboard')
                     return redirect('profile')
 
             except Exception as exc:  # pragma: no cover - defensive

@@ -1,258 +1,157 @@
-{% extends 'yitp/base.html' %}
+{% extends 'instructor/base_instructor.html' %}
 {% load static %}
 
-{% block title %}My Modules - YITP LMS{% endblock %}
-
-{% block extra_css %}
-<style>
-    .content-wrapper {
-        margin-top: 100px;
-    }
-    @media (max-width: 991px) { .content-wrapper { margin-top: 90px; } }
-    @media (max-width: 575px) { .content-wrapper { margin-top: 80px; } }
-
-    .courses-header { background: linear-gradient(135deg, #ff5d15, #341C67); color: white; border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
-    .filter-section { background: white; border-radius: 15px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-    .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-    .course-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; border: 1px solid #e9ecef; }
-    .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-color: #ff5d15; }
-    .course-thumbnail { height: 200px; background: linear-gradient(135deg, #ff5d15, #341C67); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; position: relative; }
-    .course-status { position: absolute; top: 1rem; right: 1rem; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-    .status-published { background: #28a745; color: white; }
-    .status-draft { background: #ffc107; color: #212529; }
-    .course-content { padding: 1.5rem; }
-    .course-title { color: #341C67; font-weight: 600; margin-bottom: 0.75rem; font-size: 1.1rem; line-height: 1.3; }
-    .course-description { color: #6c757d; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5; }
-    .course-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 10px; }
-    .course-stat { text-align: center; }
-    .course-stat-value { font-size: 1.2rem; font-weight: bold; color: #341C67; }
-    .course-stat-label { font-size: 0.7rem; color: #6c757d; margin-top: 0.25rem; }
-    .course-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .action-btn { flex: 1; min-width: 80px; padding: 0.5rem; border: none; border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-decoration: none; text-align: center; transition: all 0.3s ease; }
-    .action-btn.primary { background: #ff5d15; color: white; }
-    .action-btn.primary:hover { background: #e54d0f; color: white; text-decoration: none; }
-    .action-btn.secondary { background: #341C67; color: white; }
-    .action-btn.secondary:hover { background: #2a1550; color: white; text-decoration: none; }
-    .action-btn.outline { background: transparent; color: #6c757d; border: 1px solid #dee2e6; }
-    .action-btn.outline:hover { background: #f8f9fa; color: #495057; text-decoration: none; }
-    .search-filter-form { display: flex; gap: 1rem; align-items: end; flex-wrap: wrap; }
-    .form-group { flex: 1; min-width: 200px; }
-    .form-label { font-weight: 600; color: #341C67; margin-bottom: 0.5rem; }
-    .form-control { border-radius: 8px; border: 1px solid #dee2e6; padding: 0.75rem; }
-    .form-control:focus { border-color: #ff5d15; box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.25); }
-    .btn-filter { background: #ff5d15; color: white; border: none; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; transition: all 0.3s ease; }
-    .btn-clear { background: #6c757d; color: white; border: none; border-radius: 8px; padding: 0.75rem 1rem; font-weight: 600; transition: all 0.3s ease; }
-    .no-courses { text-align: center; padding: 4rem 2rem; color: #6c757d; }
-    .no-courses i { font-size: 5rem; margin-bottom: 1.5rem; opacity: 0.5; }
-    .create-course-btn { background: linear-gradient(135deg, #ff5d15, #e54d0f); color: white; border: none; border-radius: 10px; padding: 1rem 2rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; }
-    .create-course-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 93, 21, 0.3); color: white; text-decoration: none; }
-    .pagination-wrapper { display: flex; justify-content: center; margin-top: 2rem; }
-    .pagination .page-link { color: #ff5d15; border-color: #dee2e6; }
-    .pagination .page-link:hover { color: #e54d0f; background-color: #fff8f5; border-color: #ff5d15; }
-    .pagination .page-item.active .page-link { background-color: #ff5d15; border-color: #ff5d15; }
-</style>
-{% endblock %}
-
-{% block breadcrumb %}
-<li class="breadcrumb-item active" aria-current="page">My Modules</li>
-{% endblock %}
-
-{% block title_icon %}<i class="fas fa-layer-group me-3"></i>{% endblock %}
-{% block page_title_text %}My Modules{% endblock %}
-
-{% block page_subtitle %}
-<p class="page-subtitle text-muted mb-0">
-    Manage the modules you own and keep student experiences aligned across courses
-</p>
-{% endblock %}
-
-{% block page_actions %}
-<a href="{% url 'admin:courses_module_add' %}" class="create-course-btn">
-    <i class="fas fa-plus"></i>
-    Create New Module
-</a>
-{% endblock %}
-
-{% block quick_actions %}
-<a href="{% url 'admin:courses_module_add' %}" class="quick-action-btn primary">
-    <i class="fas fa-layer-group"></i>
-    New Module
-</a>
-<a href="{% url 'admin:users_moduleinstructor_add' %}" class="quick-action-btn">
-    <i class="fas fa-user-plus"></i>
-    Assign Module
-</a>
-<a href="{% url 'admin:courses_lesson_add' %}" class="quick-action-btn">
-    <i class="fas fa-file-alt"></i>
-    New Lesson
-</a>
-<a href="{% url 'users:instructor_analytics' %}" class="quick-action-btn">
-    <i class="fas fa-chart-line"></i>
-    Analytics
-</a>
-{% endblock %}
+{% block title %}My Modules · YITP Instructor{% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-    {% include 'instructor/navigation.html' %}
-
-    <div class="container-fluid py-4">
-
-        <!-- Filters -->
-        <div class="filter-section">
-            <form method="get" class="search-filter-form">
-                <div class="form-group">
-                    <label class="form-label">Search Modules</label>
-                    <input type="text" name="search" class="form-control" 
-                           placeholder="Search by title, description, or course..." 
-                           value="{{ search_query }}">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Filter by Status</label>
-                    <select name="status" class="form-control">
-                        <option value="">All Modules</option>
-                        <option value="published" {% if status_filter == 'published' %}selected{% endif %}>Published</option>
-                        <option value="draft" {% if status_filter == 'draft' %}selected{% endif %}>Draft</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <button type="submit" class="btn-filter">
-                        <i class="fas fa-search me-2"></i>Filter
-                    </button>
-                    <a href="{% url 'users:instructor_courses' %}" class="btn-clear ms-2">
-                        <i class="fas fa-times me-2"></i>Clear
-                    </a>
-                </div>
-            </form>
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1 fw-bold">My Modules</h1>
+            <p class="text-muted mb-0">Manage your assigned modules and track their performance.</p>
         </div>
+        <div class="d-flex gap-2">
+            <form class="d-flex" method="get">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" name="search" class="form-control border-start-0 ps-0"
+                        placeholder="Search modules..." value="{{ search_query }}">
+                </div>
+                {% if status_filter %}
+                <input type="hidden" name="status" value="{{ status_filter }}">
+                {% endif %}
+            </form>
+            <div class="dropdown">
+                <button class="btn btn-white border dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="fas fa-filter me-2 text-muted"></i>
+                    {% if status_filter == 'published' %}Published
+                    {% elif status_filter == 'draft' %}Drafts
+                    {% else %}All Status
+                    {% endif %}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="?{% if search_query %}search={{ search_query }}&{% endif %}">All
+                            Status</a></li>
+                    <li><a class="dropdown-item"
+                            href="?status=published{% if search_query %}&search={{ search_query }}{% endif %}">Published</a>
+                    </li>
+                    <li><a class="dropdown-item"
+                            href="?status=draft{% if search_query %}&search={{ search_query }}{% endif %}">Drafts</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-        <!-- Modules Grid -->
-        {% if modules %}
-            <div class="course-grid">
-                {% for module in modules %}
-                <div class="course-card">
-                    <div class="course-thumbnail">
-                        {% if module.course.thumbnail_url %}
-                            <img src="{{ module.course.thumbnail_src }}" alt="{{ module.course.title }}"
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                        {% else %}
-                            <img src="{% static 'img/courses/default-course-thumbnail.jpeg' %}" alt="{{ module.course.title }}"
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                        {% endif %}
-                        
-                        <div class="course-status 
-                            {% if module.is_published %}status-published
-                            {% else %}status-draft{% endif %}">
-                            {% if module.is_published %}
-                                <i class="fas fa-eye me-1"></i>Published
-                            {% else %}
-                                <i class="fas fa-edit me-1"></i>Draft
-                            {% endif %}
-                        </div>
+    {% if module_cards %}
+    <div class="row g-4">
+        {% for card in module_cards %}
+        {% with module=card.module %}
+        <div class="col-md-6 col-xl-4">
+            <div class="card-custom h-100 bg-white d-flex flex-column">
+                <div class="position-relative">
+                    {% if card.thumbnail_url %}
+                    <img src="{{ card.thumbnail_url }}" class="card-img-top" alt="{{ module.title }}"
+                        style="height: 160px; object-fit: cover; border-radius: 16px 16px 0 0;">
+                    {% else %}
+                    <div class="bg-light d-flex align-items-center justify-content-center"
+                        style="height: 160px; border-radius: 16px 16px 0 0;">
+                        <i class="fas fa-layer-group fa-3x text-muted opacity-25"></i>
                     </div>
-                    
-                    <div class="course-content">
-                        <h5 class="course-title">{{ module.title }}</h5>
-                        <p class="course-description mb-1">
-                            <strong>Course:</strong> {{ module.course.title }}
-                        </p>
-                        <p class="course-description">
-                            {{ module.description|truncatechars:160|default:"No description provided." }}
-                        </p>
-                        
-                        <div class="course-stats">
-                            <div class="course-stat">
-                                <div class="course-stat-value">{{ module.total_lessons }}</div>
-                                <div class="course-stat-label">Lessons</div>
-                            </div>
-                            <div class="course-stat">
-                                <div class="course-stat-value">{{ module.course.enrolled_students_count }}</div>
-                                <div class="course-stat-label">Students</div>
-                            </div>
-                            <div class="course-stat">
-                                <div class="course-stat-value">{{ module.active_instructors.count }}</div>
-                                <div class="course-stat-label">Instructors</div>
+                    {% endif %}
+                    <span
+                        class="position-absolute top-0 end-0 m-3 badge {% if module.is_published %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                        {{ module.is_published|yesno:"Published,Draft" }}
+                    </span>
+                </div>
+                <div class="card-body p-4 flex-grow-1">
+                    <div class="mb-2">
+                      
+                    </div>
+                    <h5 class="fw-bold mb-2">{{ module.title }}</h5>
+                    <p class="text-muted small mb-4">{{ card.description|truncatewords:20 }}</p>
+
+                    <div class="row g-2 mb-4">
+                        <div class="col-4">
+                            <div class="p-2 bg-light rounded text-center">
+                                <div class="fw-bold text-primary">{{ card.lesson_count }}</div>
+                                <div class="small text-muted" style="font-size: 0.7rem;">Lessons</div>
                             </div>
                         </div>
-                        
-                        <div class="course-actions">
-                            <a href="{% url 'admin:courses_module_change' module.pk %}" 
-                               class="action-btn primary">
-                                <i class="fas fa-edit"></i> Edit Module
-                            </a>
-                            <a href="{% url 'admin:courses_lesson_changelist' %}?module__id__exact={{ module.id }}" 
-                               class="action-btn secondary">
-                                <i class="fas fa-file-alt"></i> Lessons
-                            </a>
-                            <a href="{% url 'admin:users_moduleinstructor_changelist' %}?module__id__exact={{ module.id }}" 
-                               class="action-btn outline">
-                                <i class="fas fa-user-plus"></i> Assign
-                            </a>
+                        <div class="col-4">
+                            <div class="p-2 bg-light rounded text-center">
+                                <div class="fw-bold text-primary">{{ card.quiz_count }}</div>
+                                <div class="small text-muted" style="font-size: 0.7rem;">Quizzes</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="p-2 bg-light rounded text-center">
+                                <div class="fw-bold text-primary">{{ card.student_count }}</div>
+                                <div class="small text-muted" style="font-size: 0.7rem;">Students</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                <div class="card-footer bg-white border-top p-3">
+                    <div class="d-grid">
+                        <a href="{% url 'users:instructor_dashboard' %}?module_id={{ module.id }}"
+                            class="btn btn-outline-primary">
+                            <i class="fas fa-edit me-2"></i>Manage Module
+                        </a>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Pagination -->
-            {% if is_paginated %}
-            <div class="pagination-wrapper">
-                <nav aria-label="Module pagination">
-                    <ul class="pagination">
-                        {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">
-                                Previous
-                            </a>
-                        </li>
-                        {% endif %}
-                        
-                        {% for page_num in page_obj.paginator.page_range %}
-                        <li class="page-item {% if page_obj.number == page_num %}active{% endif %}">
-                            <a class="page-link" href="?page={{ page_num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">
-                                {{ page_num }}
-                            </a>
-                        </li>
-                        {% endfor %}
-                        
-                        {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">
-                                Next
-                            </a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-            {% endif %}
-        {% else %}
-            <div class="no-courses">
-                <i class="fas fa-layer-group"></i>
-                <h4>No modules assigned</h4>
-                <p>Once an administrator assigns you to a module, it will appear here.</p>
-            </div>
-        {% endif %}
+        </div>
+        {% endwith %}
+        {% endfor %}
     </div>
-</div>
-{% endblock %}
 
-{% block extra_js %}
-<script>
-// Add entrance animations
-document.addEventListener('DOMContentLoaded', function() {
-    const courseCards = document.querySelectorAll('.course-card');
-    courseCards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-            card.style.transition = 'all 0.6s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-});
-</script>
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <div class="d-flex justify-content-center mt-5">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link border-0 text-dark"
+                        href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link border-0 {% if page_obj.number == num %}bg-primary text-white rounded-circle{% else %}text-dark{% endif %}"
+                        href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}"
+                        style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin: 0 4px;">
+                        {{ num }}
+                    </a>
+                </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link border-0 text-dark"
+                        href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="text-center py-5">
+        <div class="mb-4 text-muted opacity-25">
+            <i class="fas fa-layer-group fa-4x"></i>
+        </div>
+        <h4>No modules found</h4>
+        <p class="text-muted">Try adjusting your search or filters.</p>
+        <a href="{% url 'users:instructor_courses' %}" class="btn btn-outline-primary mt-3">Clear Filters</a>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

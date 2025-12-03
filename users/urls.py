@@ -24,6 +24,9 @@ urlpatterns = [
     # Instructor Dashboard URLs
     path('instructor/', instructor_views.InstructorDashboardView.as_view(), name='instructor_dashboard'),
     path('instructor/courses/', instructor_views.InstructorCoursesView.as_view(), name='instructor_courses'),
+    path('instructor/students/', instructor_views.InstructorStudentsView.as_view(), name='instructor_students'),
+    path('instructor/student/<int:student_id>/', instructor_views.InstructorStudentDetailView.as_view(), name='instructor_student_detail'),
+    path('instructor/student/<int:student_id>/send-message/', instructor_views.send_message_to_student, name='instructor_send_message'),
     path('instructor/analytics/', instructor_views.InstructorAnalyticsView.as_view(), name='instructor_analytics'),
     path('instructor/messages/', instructor_views.InstructorMessagesView.as_view(), name='instructor_messages'),
     path('instructor/course/<int:course_id>/', instructor_views.instructor_course_detail, name='instructor_course_detail'),

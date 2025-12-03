@@ -1,0 +1,219 @@
+{% extends 'instructor/base_instructor.html' %}
+{% load static %}
+
+{% block title %}{{ student_display_name }} · YITP Instructor{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Student Header -->
+    <div class="card-custom bg-white p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-start">
+            <div class="d-flex gap-4">
+                {% with image=student.profile.image %}
+                {% if image and image.url and image.name != 'default.jpg' %}
+                <img src="{{ image.url }}" class="rounded-circle" width="100" height="100"
+                    alt="{{ student_display_name }}">
+                {% else %}
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center text-primary"
+                    style="width: 100px; height: 100px; font-size: 2rem;">
+                    <i class="fas fa-user"></i>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <div>
+                    <h1 class="h3 fw-bold mb-1">{{ student_display_name }}</h1>
+                    <p class="text-muted mb-2">@{{ student.username }}</p>
+                    <div class="d-flex gap-3 mb-3">
+                        <span class="text-muted small"><i class="fas fa-envelope me-1"></i>{{ student.email }}</span>
+                        {% if student_phone_number %}
+                        <span class="text-muted small"><i class="fas fa-phone me-1"></i>{{ student_phone_number }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-primary bg-opacity-10 text-primary">{{ enrolled_modules_count }} Enrolled
+                            Module{{ enrolled_modules_count|pluralize }}</span>
+                        <span class="badge bg-success bg-opacity-10 text-success">{{ completed_lessons_count }} Lessons
+                            Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-end">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal">
+                    <i class="fas fa-comment-dots me-2"></i>Send Message
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card-custom bg-white p-4 h-100">
+                <div class="text-muted small mb-2">Overall Progress</div>
+                <div class="h3 fw-bold mb-0">{{ overall_progress }}%</div>
+                <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-primary" style="width: {{ overall_progress }}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-custom bg-white p-4 h-100">
+                <div class="text-muted small mb-2">Avg. Quiz Score</div>
+                <div class="h3 fw-bold mb-0">{{ avg_quiz_score|default:"N/A" }}{% if avg_quiz_score %}%{% endif %}</div>
+                {% if avg_quiz_score %}
+                <div class="small {% if avg_quiz_score >= 70 %}text-success{% else %}text-warning{% endif %} mt-2">
+                    <i
+                        class="fas fa-{% if avg_quiz_score >= 70 %}check-circle{% else %}exclamation-circle{% endif %} me-1"></i>
+                    {% if avg_quiz_score >= 70 %}Good Performance{% else %}Needs Improvement{% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-custom bg-white p-4 h-100">
+                <div class="text-muted small mb-2">Total Study Time</div>
+                <div class="h3 fw-bold mb-0">{{ total_study_hours }}h</div>
+                <div class="small text-muted mt-2">Across all modules</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-custom bg-white p-4 h-100">
+                <div class="text-muted small mb-2">Last Activity</div>
+                <div class="h3 fw-bold mb-0">
+                    {% if last_activity %}
+                    {{ last_activity|timesince }}
+                    {% else %}
+                    Never
+                    {% endif %}
+                </div>
+                <div class="small text-muted mt-2">ago</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enrolled Modules & Progress -->
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card-custom bg-white h-100">
+                <div class="card-header bg-transparent border-0 p-4 pb-0">
+                <h5 class="fw-bold mb-0">Enrolled Modules</h5>
+                </div>
+                <div class="card-body p-4">
+                    {% if enrollments %}
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="border-0 rounded-start ps-3">Module</th>
+                                    <th class="border-0">Progress</th>
+                                    <th class="border-0">Lessons</th>
+                                    <th class="border-0 rounded-end pe-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for enrollment in enrollments %}
+                                <tr>
+                                    <td class="ps-3">
+                                        <div class="fw-bold">{{ enrollment.course_title }}</div>
+                                        <small class="text-muted">Enrolled {{ enrollment.enrollment_date_display }}</small>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="progress flex-grow-1" style="height: 6px;">
+                                                <div class="progress-bar bg-primary"
+                                                    style="width: {{ enrollment.progress_value }}%"></div>
+                                            </div>
+                                            <span class="small fw-bold">{{ enrollment.progress_display }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="small">{{ enrollment.lessons_display }}</span>
+                                    </td>
+                                    <td class="pe-3">
+                                        <span
+                                            class="badge {{ enrollment.status_badge_class }} bg-opacity-10 text-dark">
+                                            {{ enrollment.status_display }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-book-open fa-3x text-muted opacity-25 mb-3"></i>
+                        <p class="text-muted">No enrollments yet</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity & Communication -->
+        <div class="col-lg-4">
+            <div class="card-custom bg-white h-100">
+                <div class="card-header bg-transparent border-0 p-4 pb-0">
+                    <h5 class="fw-bold mb-0">Recent Activity</h5>
+                </div>
+                <div class="card-body p-4">
+                    {% if recent_activities %}
+                    <div class="d-flex flex-column gap-3">
+                        {% for activity in recent_activities %}
+                        <div class="d-flex align-items-start">
+                            <div class="bg-light rounded-circle p-2 me-3">
+                                <i
+                                    class="fas fa-{% if activity.type == 'lesson_completed' %}check-circle text-success{% elif activity.type == 'quiz_completed' %}clipboard-check text-primary{% else %}play-circle text-info{% endif %}"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="small fw-bold">{{ activity.title }}</div>
+                                <div class="small text-muted">{{ activity.date|timesince }} ago</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-history fa-2x text-muted opacity-25 mb-2"></i>
+                        <p class="text-muted small">No recent activity</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Message Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="messageModalLabel">Send Message to {{ student_display_name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="{% url 'users:instructor_send_message' student.id %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="messageSubject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="messageSubject" name="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="messageContent" class="form-label">Message</label>
+                        <textarea class="form-control" id="messageContent" name="content" rows="5" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
