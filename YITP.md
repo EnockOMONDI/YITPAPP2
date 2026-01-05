@@ -1,4 +1,4 @@
-# YITP Django System Architecture A
+# YITP Django System Architecture 
 
 > How the Youth Impact Training Programme (YITP) LMS is wired together. Every statement below is backed by the code in this repository.
 
