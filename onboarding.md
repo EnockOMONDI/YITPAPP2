@@ -1,4 +1,4 @@
-# YITP Engineering Onboarding
+# YITP Engineering Onboarding 
 
 > Purpose: give new contributors a fast, safe path from laptop setup to production deployments. Keep this document current whenever the project or processes change.
 
@@ -126,4 +126,4 @@
 ## 8. Maintaining This Doc
 - Update immediately after changing deployment steps, access requirements, or adding new apps/integrations.
 - Run an onboarding retro with each new hire and capture gaps or confusing steps here.
-- Version-control this file so it evolves alongside the project.
+- -Version-control this file so it evolves alongside the project.
