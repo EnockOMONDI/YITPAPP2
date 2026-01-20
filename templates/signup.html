@@ -70,11 +70,29 @@
     color: #ffffff;
 }
 
+.signup__form-input select {
+    width: 100%;
+    padding: 15px 15px 15px 3rem;
+    border: 2px solid rgba(99, 102, 241, 0.35);
+    border-radius: 12px;
+    background: rgba(13, 18, 40, 0.4);
+    color: #ffffff;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
 .signup__form-input input::placeholder {
     color: rgba(255,255,255,0.7);
 }
 
 .signup__form-input input:focus {
+    border-color: #ff5d15;
+    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.2);
+    outline: none;
+}
+
+.signup__form-input select:focus {
     border-color: #ff5d15;
     box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.2);
     outline: none;
@@ -257,6 +275,21 @@
                             <input type="tel" name="phone_number" placeholder="Phone Number (Optional)"
                                    value="{{ request.POST.phone_number|default:'' }}">
                             <i class="fas fa-phone"></i>
+                        </div>
+
+                        <div class="signup__form-input">
+                            <select name="heard_about" required>
+                                <option value="" disabled {% if not request.POST.heard_about %}selected{% endif %}>How did you hear about us?</option>
+                                <option value="google" {% if request.POST.heard_about == 'google' %}selected{% endif %}>Google Search</option>
+                                <option value="chatgpt" {% if request.POST.heard_about == 'chatgpt' %}selected{% endif %}>ChatGPT</option>
+                                <option value="youtube" {% if request.POST.heard_about == 'youtube' %}selected{% endif %}>YouTube</option>
+                                <option value="twitter" {% if request.POST.heard_about == 'twitter' %}selected{% endif %}>Twitter / X</option>
+                                <option value="facebook" {% if request.POST.heard_about == 'facebook' %}selected{% endif %}>Facebook</option>
+                                <option value="livegreat" {% if request.POST.heard_about == 'livegreat' %}selected{% endif %}>LiveGreat Foundation</option>
+                                <option value="referral" {% if request.POST.heard_about == 'referral' %}selected{% endif %}>Friend / Referral</option>
+                                <option value="other" {% if request.POST.heard_about == 'other' %}selected{% endif %}>Other</option>
+                            </select>
+                            <i class="fas fa-bullhorn"></i>
                         </div>
 
                         <div class="signup__form-input">

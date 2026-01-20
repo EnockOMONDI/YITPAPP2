@@ -1,5 +1,8 @@
 # Generated migration for YITP Introductory Course
 
+import secrets
+import string
+
 from django.db import migrations
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password

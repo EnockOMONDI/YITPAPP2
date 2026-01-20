@@ -39467,3 +39467,257 @@ INFO 2025-12-03 17:40:34,911 basehttp 18602 6158413824 "GET /users/instructor/ H
 INFO 2025-12-03 17:40:35,305 basehttp 18602 6158413824 "GET /users/instructor/ HTTP/1.1" 200 34194
 INFO 2025-12-03 17:40:41,771 basehttp 18602 6158413824 "GET /users/instructor/students/ HTTP/1.1" 200 42804
 INFO 2025-12-03 17:40:43,890 basehttp 18602 6158413824 "GET /users/instructor/students/ HTTP/1.1" 200 42804
+INFO 2026-01-12 00:42:40,591 autoreload 16712 8542714560 Watching for file changes with StatReloader
+INFO 2026-01-12 00:43:00,061 basehttp 16712 6201880576 "GET / HTTP/1.1" 200 76665
+INFO 2026-01-12 00:43:00,133 basehttp 16712 6235533312 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2026-01-12 00:43:00,135 basehttp 16712 6201880576 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7247
+INFO 2026-01-12 00:43:00,136 basehttp 16712 6269186048 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2026-01-12 00:43:00,137 basehttp 16712 6286012416 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2026-01-12 00:43:00,139 basehttp 16712 6235533312 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2026-01-12 00:43:00,140 basehttp 16712 6252359680 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2026-01-12 00:43:00,143 basehttp 16712 6235533312 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2026-01-12 00:43:00,144 basehttp 16712 6201880576 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2026-01-12 00:43:00,146 basehttp 16712 6218706944 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2026-01-12 00:43:00,148 basehttp 16712 6235533312 "GET /static/assets/css/messages.css HTTP/1.1" 200 2902
+INFO 2026-01-12 00:43:00,148 basehttp 16712 6286012416 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2026-01-12 00:43:00,152 basehttp 16712 6218706944 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2026-01-12 00:43:00,152 basehttp 16712 6201880576 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2026-01-12 00:43:00,153 basehttp 16712 6269186048 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2026-01-12 00:43:00,156 basehttp 16712 6252359680 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2026-01-12 00:43:00,156 basehttp 16712 6269186048 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2026-01-12 00:43:00,173 basehttp 16712 6252359680 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2026-01-12 00:43:00,178 basehttp 16712 6252359680 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2026-01-12 00:43:00,183 basehttp 16712 6252359680 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2026-01-12 00:43:00,190 basehttp 16712 6252359680 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2026-01-12 00:43:00,195 basehttp 16712 6252359680 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2026-01-12 00:43:00,198 basehttp 16712 6252359680 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2026-01-12 00:43:00,200 basehttp 16712 6252359680 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2026-01-12 00:43:00,203 basehttp 16712 6252359680 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2026-01-12 00:43:00,205 basehttp 16712 6252359680 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1040
+INFO 2026-01-12 00:43:00,207 basehttp 16712 6252359680 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2026-01-12 00:43:00,209 basehttp 16712 6252359680 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2026-01-12 00:43:00,210 basehttp 16712 6252359680 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2026-01-12 00:43:00,212 basehttp 16712 6252359680 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2026-01-12 00:43:01,686 basehttp 16712 6252359680 "GET /static/js/yitp-translate.js HTTP/1.1" 200 1802
+INFO 2026-01-12 00:43:03,209 basehttp 16712 6269186048 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2026-01-12 00:43:03,212 basehttp 16712 6252359680 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2026-01-12 00:43:05,562 basehttp 16712 6201880576 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2026-01-12 00:43:06,314 basehttp 16712 6201880576 "GET /web_courses_list/ HTTP/1.1" 200 116404
+INFO 2026-01-12 00:43:06,384 basehttp 16712 6201880576 "GET /static/assets/img/hero/sylvester.jpeg HTTP/1.1" 200 68707
+INFO 2026-01-12 00:43:06,388 basehttp 16712 6252359680 "GET /static/assets/img/hero/levin.jpeg HTTP/1.1" 200 61761
+INFO 2026-01-12 00:43:06,389 basehttp 16712 6235533312 "GET /static/assets/img/hero/meshack.jpeg HTTP/1.1" 200 188051
+INFO 2026-01-12 00:43:06,393 basehttp 16712 6269186048 "GET /static/assets/img/hero/lilian.jpeg HTTP/1.1" 200 63171
+INFO 2026-01-12 00:43:06,395 basehttp 16712 6218706944 "GET /static/assets/img/hero/ruth.jpeg HTTP/1.1" 200 97374
+INFO 2026-01-12 00:43:06,480 basehttp 16712 6286012416 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2026-01-12 00:43:06,528 basehttp 16712 6201880576 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2026-01-12 00:44:03,892 autoreload 16712 8542714560 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2026-01-12 00:44:21,028 autoreload 37703 8542714560 Watching for file changes with StatReloader
+INFO 2026-01-12 00:44:45,738 autoreload 44750 8542714560 Watching for file changes with StatReloader
+INFO 2026-01-12 00:44:56,015 basehttp 44750 6130315264 "GET / HTTP/1.1" 200 76665
+INFO 2026-01-12 00:44:59,669 basehttp 44750 6130315264 "GET /web_courses_list/ HTTP/1.1" 200 88189
+INFO 2026-01-12 01:10:07,219 basehttp 44750 6130315264 "GET /web_courses_list/ HTTP/1.1" 200 88189
+INFO 2026-01-12 01:12:24,088 autoreload 44750 8542714560 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/yitp/views.py changed, reloading.
+INFO 2026-01-12 01:12:25,746 autoreload 16804 8542714560 Watching for file changes with StatReloader
+INFO 2026-01-12 01:12:26,415 basehttp 16804 6193557504 "GET /web_courses_list/ HTTP/1.1" 200 116404
+INFO 2026-01-12 01:12:44,432 basehttp 16804 6193557504 "GET /coursedetail2/ HTTP/1.1" 200 36828
+INFO 2026-01-12 01:12:44,488 basehttp 16804 6193557504 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2026-01-12 01:12:44,489 basehttp 16804 6210383872 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2026-01-12 01:12:44,490 basehttp 16804 6244036608 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2026-01-12 01:12:44,494 basehttp 16804 6227210240 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2026-01-12 01:13:28,755 basehttp 16804 6193557504 "GET /registration/ HTTP/1.1" 302 0
+INFO 2026-01-12 01:13:28,773 basehttp 16804 6193557504 "GET /register/ HTTP/1.1" 200 17044
+INFO 2026-01-12 01:13:33,609 basehttp 16804 6193557504 "GET /login/ HTTP/1.1" 200 14940
+INFO 2026-01-12 01:13:51,893 basehttp 16804 6193557504 "POST /login/ HTTP/1.1" 200 15487
+INFO 2026-01-12 01:13:51,894 basehttp 16804 6193557504 - Broken pipe from ('127.0.0.1', 52077)
+INFO 2026-01-12 01:13:52,147 basehttp 16804 6210383872 "POST /login/ HTTP/1.1" 200 15487
+INFO 2026-01-12 01:13:57,244 basehttp 16804 6193557504 "POST /login/ HTTP/1.1" 200 15487
+INFO 2026-01-12 01:14:00,973 basehttp 16804 6193557504 "POST /login/ HTTP/1.1" 200 15487
+INFO 2026-01-12 01:14:18,384 basehttp 16804 6193557504 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-01-12 01:14:18,532 basehttp 16804 6193557504 "GET / HTTP/1.1" 302 0
+INFO 2026-01-12 01:14:22,035 basehttp 16804 6193557504 "GET /users/superuser/profile/ HTTP/1.1" 200 144490
+INFO 2026-01-12 01:14:22,490 basehttp 16804 6193557504 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2026-01-12 01:14:32,281 basehttp 16804 6193557504 "GET / HTTP/1.1" 200 80761
+INFO 2026-01-12 01:14:35,564 basehttp 16804 6193557504 "GET /lms/courses/ HTTP/1.1" 200 70380
+INFO 2026-01-12 01:26:06,843 autoreload 87833 8542714560 Watching for file changes with StatReloader
+INFO 2026-01-12 01:33:16,275 basehttp 87833 6153007104 "GET / HTTP/1.1" 200 76178
+INFO 2026-01-12 01:33:16,384 basehttp 87833 6136180736 - Broken pipe from ('127.0.0.1', 53922)
+WARNING 2026-01-12 01:33:30,086 basehttp 87833 6169833472 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-01-12 01:33:30,130 basehttp 87833 6136180736 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-01-12 01:33:30,282 log 87833 6153007104 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-01-12 01:33:30,317 basehttp 87833 6153007104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2026-01-12 01:33:46,352 basehttp 87833 6153007104 "GET / HTTP/1.1" 200 76178
+WARNING 2026-01-12 01:33:46,619 basehttp 87833 6136180736 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-01-12 01:33:46,742 log 87833 6153007104 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-01-12 01:33:46,755 basehttp 87833 6136180736 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-01-12 01:33:46,762 basehttp 87833 6153007104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2026-01-12 01:34:12,919 basehttp 87833 6153007104 "GET / HTTP/1.1" 200 76178
+WARNING 2026-01-12 01:34:13,219 basehttp 87833 6136180736 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-01-12 01:34:13,293 basehttp 87833 6136180736 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-01-12 01:34:13,504 log 87833 6153007104 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-01-12 01:34:13,519 basehttp 87833 6153007104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2026-01-12 01:35:19,776 basehttp 87833 6153007104 "GET / HTTP/1.1" 200 76178
+WARNING 2026-01-12 01:35:19,826 log 87833 6153007104 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-01-12 01:35:19,826 basehttp 87833 6153007104 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2026-01-12 01:35:19,912 basehttp 87833 6153007104 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-01-12 01:35:19,936 basehttp 87833 6136180736 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2026-01-12 01:35:25,032 basehttp 87833 6136180736 "GET / HTTP/1.1" 200 76178
+WARNING 2026-01-12 01:35:25,067 log 87833 6136180736 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-01-12 01:35:25,067 basehttp 87833 6136180736 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2026-01-12 01:35:25,161 basehttp 87833 6136180736 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-01-12 01:35:25,192 basehttp 87833 6153007104 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+INFO 2026-01-12 01:36:36,036 basehttp 87833 6136180736 "GET / HTTP/1.1" 200 76178
+INFO 2026-01-12 01:36:36,037 basehttp 87833 6136180736 - Broken pipe from ('127.0.0.1', 54790)
+INFO 2026-01-20 18:45:45,653 autoreload 13380 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 18:46:05,225 basehttp 13380 6201192448 "GET / HTTP/1.1" 200 72769
+INFO 2026-01-20 18:46:05,604 basehttp 13380 6234845184 "GET /static/assets/css/meanmenu.css HTTP/1.1" 200 2936
+INFO 2026-01-20 18:46:05,605 basehttp 13380 6201192448 "GET /static/assets/css/preloader-optimized.css HTTP/1.1" 200 7247
+INFO 2026-01-20 18:46:05,609 basehttp 13380 6268497920 "GET /static/assets/css/owl.carousel.min.css HTTP/1.1" 200 2937
+INFO 2026-01-20 18:46:05,629 basehttp 13380 6234845184 "GET /static/assets/css/backToTop.css HTTP/1.1" 200 1165
+INFO 2026-01-20 18:46:05,631 basehttp 13380 6268497920 "GET /static/assets/css/jquery.fancybox.min.css HTTP/1.1" 200 12795
+INFO 2026-01-20 18:46:05,637 basehttp 13380 6285324288 "GET /static/assets/css/swiper-bundle.css HTTP/1.1" 200 15806
+INFO 2026-01-20 18:46:05,642 basehttp 13380 6251671552 "GET /static/assets/css/animate.min.css HTTP/1.1" 200 68606
+INFO 2026-01-20 18:46:05,643 basehttp 13380 6234845184 "GET /static/assets/css/elegantFont.css HTTP/1.1" 200 25256
+INFO 2026-01-20 18:46:05,647 basehttp 13380 6268497920 "GET /static/assets/css/default.css HTTP/1.1" 200 8364
+INFO 2026-01-20 18:46:05,648 basehttp 13380 6218018816 "GET /static/assets/css/bootstrap.min.css HTTP/1.1" 200 153084
+INFO 2026-01-20 18:46:05,649 basehttp 13380 6251671552 "GET /static/assets/css/messages.css HTTP/1.1" 200 2902
+INFO 2026-01-20 18:46:05,653 basehttp 13380 6201192448 "GET /static/assets/css/fontAwesome5Pro.css HTTP/1.1" 200 173772
+INFO 2026-01-20 18:46:05,656 basehttp 13380 6285324288 "GET /static/assets/css/style.css HTTP/1.1" 200 175605
+INFO 2026-01-20 18:46:06,517 basehttp 13380 6285324288 "GET /static/assets/img/logo/youthImpact.png HTTP/1.1" 200 120503
+INFO 2026-01-20 18:46:06,518 basehttp 13380 6201192448 "GET /static/assets/js/vendor/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2026-01-20 18:46:06,520 basehttp 13380 6201192448 "GET /static/assets/js/vendor/waypoints.min.js HTTP/1.1" 200 8833
+INFO 2026-01-20 18:46:06,524 basehttp 13380 6201192448 "GET /static/assets/js/jquery.meanmenu.js HTTP/1.1" 200 11264
+INFO 2026-01-20 18:46:06,528 basehttp 13380 6201192448 "GET /static/assets/js/swiper-bundle.min.js HTTP/1.1" 200 141283
+INFO 2026-01-20 18:46:06,532 basehttp 13380 6201192448 "GET /static/assets/js/owl.carousel.min.js HTTP/1.1" 200 42766
+INFO 2026-01-20 18:46:06,536 basehttp 13380 6201192448 "GET /static/assets/js/jquery.fancybox.min.js HTTP/1.1" 200 68253
+INFO 2026-01-20 18:46:06,539 basehttp 13380 6201192448 "GET /static/assets/js/isotope.pkgd.min.js HTTP/1.1" 200 35503
+INFO 2026-01-20 18:46:06,543 basehttp 13380 6201192448 "GET /static/assets/js/parallax.min.js HTTP/1.1" 200 15991
+INFO 2026-01-20 18:46:06,545 basehttp 13380 6201192448 "GET /static/assets/js/jquery.appear.js HTTP/1.1" 200 539
+INFO 2026-01-20 18:46:06,547 basehttp 13380 6201192448 "GET /static/assets/js/imagesloaded.pkgd.min.js HTTP/1.1" 200 5594
+INFO 2026-01-20 18:46:06,549 basehttp 13380 6201192448 "GET /static/assets/js/backToTop.js HTTP/1.1" 200 1040
+INFO 2026-01-20 18:46:06,551 basehttp 13380 6201192448 "GET /static/assets/js/purecounter.js HTTP/1.1" 200 5361
+INFO 2026-01-20 18:46:06,553 basehttp 13380 6201192448 "GET /static/assets/js/ajax-form.js HTTP/1.1" 200 1202
+INFO 2026-01-20 18:46:06,555 basehttp 13380 6201192448 "GET /static/assets/js/wow.min.js HTTP/1.1" 200 8415
+INFO 2026-01-20 18:46:06,558 basehttp 13380 6201192448 "GET /static/assets/js/main.js HTTP/1.1" 200 8310
+INFO 2026-01-20 18:46:06,799 basehttp 13380 6201192448 "GET /static/js/yitp-translate.js HTTP/1.1" 200 1802
+INFO 2026-01-20 18:46:07,290 basehttp 13380 6285324288 "GET /static/assets/fonts/fa-brands-400.woff2 HTTP/1.1" 200 77376
+INFO 2026-01-20 18:46:07,291 basehttp 13380 6201192448 "GET /static/assets/fonts/fa-solid-900.woff2 HTTP/1.1" 200 140704
+INFO 2026-01-20 18:46:07,301 basehttp 13380 6201192448 "GET /static/assets/img/favicon.png HTTP/1.1" 200 1571
+INFO 2026-01-20 18:46:16,916 basehttp 13380 6201192448 "GET /login/ HTTP/1.1" 200 14940
+INFO 2026-01-20 18:46:17,445 basehttp 13380 6251671552 "GET /static/assets/js/preloader-optimized.js HTTP/1.1" 200 7838
+INFO 2026-01-20 18:46:17,446 basehttp 13380 6201192448 "GET /static/img/logo/logo.png HTTP/1.1" 200 16336
+INFO 2026-01-20 18:46:17,449 basehttp 13380 6285324288 "GET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1" 200 80821
+INFO 2026-01-20 18:46:17,455 basehttp 13380 6268497920 "GET /static/assets/fonts/fa-regular-400.woff2 HTTP/1.1" 200 173220
+INFO 2026-01-20 18:46:24,307 basehttp 13380 6268497920 "GET /register/ HTTP/1.1" 200 17044
+INFO 2026-01-20 18:51:42,122 autoreload 14098 8573369024 Watching for file changes with StatReloader
+ERROR 2026-01-20 20:43:20,463 log 56044 8573369024 Internal Server Error: /verify-otp/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 151, in verify_otp_view
+    user = User.objects.get(id=user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 156, in verify_otp_view
+    return redirect('users:register')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'register' not found. 'register' is not a valid view function or pattern name.
+ERROR 2026-01-20 20:48:55,666 log 6324 8573369024 Internal Server Error: /verify-otp/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 151, in verify_otp_view
+    user = User.objects.get(id=user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 156, in verify_otp_view
+    return redirect('users:register')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'register' not found. 'register' is not a valid view function or pattern name.
+ERROR 2026-01-20 20:51:56,293 log 41233 8573369024 Internal Server Error: /verify-otp/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 151, in verify_otp_view
+    user = User.objects.get(id=user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 156, in verify_otp_view
+    return redirect('users:register')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'register' not found. 'register' is not a valid view function or pattern name.
+INFO 2026-01-20 22:03:35,563 autoreload 68371 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 22:06:14,783 autoreload 3422 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 22:13:41,093 basehttp 3422 6204796928 "GET /register/ HTTP/1.1" 200 18024
+INFO 2026-01-20 22:15:14,947 basehttp 3422 6204796928 "GET /register/ HTTP/1.1" 200 18455

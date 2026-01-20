@@ -74,7 +74,8 @@ class UserRegistrationJourneyTestCase(TestCase):
             'phone_number': '+1234567890',
             'password1': 'TestPassword123!',
             'password2': 'TestPassword123!',
-            'terms': 'on'
+            'terms': 'on',
+            'heard_about': 'other'
         }
         self.test_results = []
         
@@ -220,6 +221,37 @@ class RegistrationFormValidationTests(UserRegistrationJourneyTestCase):
         message = "Password mismatch properly rejected"
         
         self.log_test_result("Password Mismatch Validation", success, message)
+        self.assertTrue(success)
+
+    def test_missing_heard_about_validation(self):
+        """Test validation when referral source is missing"""
+        user_data = self.test_user_data.copy()
+        user_data.pop('heard_about', None)
+
+        response = self.submit_registration_form(user_data)
+
+        success = response.status_code == 200 and 'All fields are required' in str(response.content)
+        message = "Missing referral source properly rejected"
+
+        self.log_test_result("Missing Heard About Validation", success, message)
+        self.assertTrue(success)
+
+    def test_heard_about_persists_to_profile(self):
+        """Test referral source is saved to the profile"""
+        user_data = self.test_user_data.copy()
+        user_data['heard_about'] = 'chatgpt'
+
+        response = self.submit_registration_form(user_data)
+
+        user = User.objects.filter(username=user_data['username']).first()
+        profile = Profile.objects.filter(user=user).first() if user else None
+        saved_value = profile.heard_about if profile else None
+
+        redirected_to_otp = '/verify-otp/' in response.redirect_chain[-1][0] if response.redirect_chain else False
+        success = bool(user) and bool(profile) and saved_value == 'chatgpt' and redirected_to_otp
+        message = f"Referral source saved: {saved_value}, redirected to OTP: {redirected_to_otp}"
+
+        self.log_test_result("Heard About Persistence", success, message)
         self.assertTrue(success)
     
     def test_required_fields_validation(self):

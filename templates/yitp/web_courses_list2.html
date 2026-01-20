@@ -1,0 +1,903 @@
+{% extends 'unified/base.html' %}
+{% load static %}
+
+{% block title %}YITP Courses - Outcome-Driven Skills Catalogue{% endblock %}
+{% block meta_description %}
+Browse the Youth Impact Training Programme skill catalogue and find outcome-driven learning paths designed to make you employable, launch real projects, and earn job-ready certifications fast.
+{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --yitp-ink: #1f1642;
+    --yitp-indigo: #341C67;
+    --yitp-orange: #ff5d15;
+    --yitp-orange-soft: #ff7b3d;
+    --yitp-sky: #76c8ff;
+    --surface: #f4f5fb;
+    --card-bg: #ffffff;
+    --chip-bg: rgba(52, 28, 103, 0.08);
+    --chip-border: rgba(52, 28, 103, 0.2);
+    --shadow-card: 0 25px 60px rgba(31, 22, 66, 0.1);
+    --shadow-hover: 0 35px 70px rgba(255, 93, 21, 0.2);
+    --transition: all 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+body {
+    background: var(--surface);
+}
+
+.courses-shell {
+    background: radial-gradient(circle at top left, rgba(255, 93, 21, 0.1), transparent 45%), #fdfbff;
+    padding: 110px 0 80px;
+    min-height: 100vh;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+.hero-card {
+    background: var(--card-bg);
+    border-radius: 28px;
+    padding: 48px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(52, 28, 103, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(52, 28, 103, 0.08), transparent);
+    pointer-events: none;
+}
+
+.hero-card h1 {
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    color: var(--yitp-ink);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.hero-card p {
+    color: rgba(31, 22, 66, 0.8);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: rgba(255, 93, 21, 0.12);
+    color: var(--yitp-orange);
+    margin-bottom: 18px;
+}
+
+.cta-primary,
+.cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 999px;
+    padding: 16px 32px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.cta-primary {
+    background: linear-gradient(120deg, var(--yitp-orange), var(--yitp-orange-soft));
+    color: #ffffff;
+    box-shadow: 0 20px 40px rgba(255, 93, 21, 0.35);
+}
+
+.cta-primary:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--shadow-hover);
+    color: #ffffff;
+}
+
+.cta-secondary {
+    color: var(--yitp-indigo);
+    background: rgba(52, 28, 103, 0.08);
+}
+
+.cta-secondary:hover {
+    background: rgba(52, 28, 103, 0.15);
+    color: var(--yitp-indigo);
+}
+
+.page-blueprint {
+    background: rgba(52, 28, 103, 0.06);
+    border-radius: 24px;
+    padding: 24px 32px;
+    margin-top: 18px;
+    border: 1px solid rgba(52, 28, 103, 0.1);
+}
+
+.page-blueprint h4 {
+    font-weight: 700;
+    color: var(--yitp-indigo);
+    margin-bottom: 12px;
+}
+
+.page-blueprint ol {
+    padding-left: 18px;
+    margin: 0;
+    color: rgba(31, 22, 66, 0.85);
+}
+
+.filter-and-meta {
+    margin-top: 70px;
+    display: grid;
+    gap: 26px;
+}
+
+.filters-card,
+.insight-card {
+    background: var(--card-bg);
+    border-radius: 22px;
+    padding: 32px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(52, 28, 103, 0.05);
+}
+
+.filters-card h3,
+.insight-card h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--yitp-indigo);
+    margin-bottom: 18px;
+}
+
+.filter-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(31, 22, 66, 0.55);
+    margin-bottom: 12px;
+}
+
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.chip {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--chip-border);
+    background: var(--chip-bg);
+    color: var(--yitp-indigo);
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chip.active,
+.chip:hover {
+    background: var(--yitp-indigo);
+    color: #ffffff;
+    box-shadow: 0 18px 40px rgba(31, 22, 66, 0.25);
+}
+
+.insight-card {
+    display: grid;
+    gap: 20px;
+}
+
+.insight-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px dashed rgba(52, 28, 103, 0.2);
+}
+
+.insight-pill strong {
+    color: var(--yitp-indigo);
+    font-size: 1rem;
+}
+
+.insight-pill span {
+    color: rgba(31, 22, 66, 0.65);
+}
+
+.track-highlight {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    border-radius: 26px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: linear-gradient(120deg, rgba(52, 28, 103, 0.9), rgba(52, 28, 103, 0.65));
+    color: #ffffff;
+}
+
+.track-highlight > div {
+    padding: 30px;
+}
+
+.track-highlight h4 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.track-highlight p {
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.track-highlight ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.track-highlight li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.course-section {
+    margin-top: 80px;
+}
+
+.course-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--yitp-indigo);
+}
+
+.course-section p.section-lead {
+    color: rgba(31, 22, 66, 0.7);
+    font-size: 1.1rem;
+}
+
+.course-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 26px;
+}
+
+.course-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border: 1px solid rgba(31, 22, 66, 0.08);
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.course-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(140deg, rgba(255, 93, 21, 0.08), transparent 60%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.course-card:hover::before {
+    opacity: 1;
+}
+
+.career-badge {
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(120deg, var(--yitp-orange), var(--yitp-orange-soft));
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.course-card h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--yitp-ink);
+    margin: 0;
+}
+
+.course-card p {
+    margin: 0;
+    color: rgba(31, 22, 66, 0.75);
+}
+
+.outcomes,
+.course-meta {
+    display: grid;
+    gap: 12px;
+}
+
+.outcomes strong {
+    color: var(--yitp-indigo);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.outcome-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 6px;
+}
+
+.outcome-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: rgba(31, 22, 66, 0.85);
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tags span {
+    background: rgba(52, 28, 103, 0.08);
+    color: var(--yitp-indigo);
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.course-meta {
+    font-size: 0.9rem;
+    color: rgba(31, 22, 66, 0.7);
+}
+
+.course-meta div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.meta-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    background: rgba(52, 28, 103, 0.08);
+    display: grid;
+    place-items: center;
+    color: var(--yitp-indigo);
+    font-size: 0.9rem;
+}
+
+.progress-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 20px;
+    background: rgba(52, 28, 103, 0.1);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(120deg, var(--yitp-orange), var(--yitp-orange-soft));
+    transition: width 1s ease;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.action-link {
+    font-weight: 700;
+    color: var(--yitp-indigo);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.action-link:hover {
+    color: var(--yitp-orange);
+}
+
+.recommended-badge {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    padding: 6px 14px;
+    background: rgba(118, 200, 255, 0.95);
+    color: #0c1f40;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.cta-panel {
+    margin-top: 90px;
+    background: linear-gradient(120deg, var(--yitp-indigo), #120a2a);
+    padding: 50px;
+    border-radius: 32px;
+    color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    align-items: center;
+}
+
+.cta-panel h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.cta-panel p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.cta-panel .cta-primary {
+    justify-self: flex-start;
+}
+
+@media (max-width: 768px) {
+    .hero-card,
+    .filters-card,
+    .insight-card,
+    .course-card,
+    .cta-panel {
+        padding: 24px;
+    }
+
+    .course-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .card-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="courses-shell">
+    <div class="container">
+        <div class="hero-grid">
+            <article class="hero-card">
+                <div class="hero-pill">
+                    <span aria-hidden="true">⚡</span>
+                    Job-ready in 9 weeks • Built with employers
+                </div>
+                <h1>Discover the YITP learning paths that unlock employability and bold entrepreneurship.</h1>
+                <p>
+                    Use this course navigator to move from discovery to confidence to enrollment.
+                    Every card shows real-world outcomes, skills, and the exact effort required to become career ready.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{% url 'register' %}" class="cta-primary">
+                        Start With the Recommended Track
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#course-gallery" class="cta-secondary">
+                        Explore All Courses
+                        <i class="fas fa-compass"></i>
+                    </a>
+                </div>
+                <div class="page-blueprint" aria-label="Page layout and interaction blueprint">
+                    <h4>Experience flow</h4>
+                    <ol>
+                        <li>Smart filters personalize the list based on skills, career path, and effort.</li>
+                        <li>Featured track highlights the highest placement potential with built-in mentorship.</li>
+                        <li>Detailed course cards outline “what you can do” plus skills, duration, and certificate signals.</li>
+                        <li>Clear CTA anchors (Enroll, Talk to Career Coach) guide you to the next best step.</li>
+                    </ol>
+                </div>
+            </article>
+            <article class="hero-card">
+                <h3 style="font-weight:700; color: var(--yitp-indigo);">Outcome snapshot</h3>
+                <ul class="list-unstyled" style="display:grid; gap:16px; margin:0;">
+                    <li class="insight-pill">
+                        <div>
+                            <strong>92% Job-ready rating</strong>
+                            <p class="mb-0" style="font-size:0.9rem;">Learners demonstrate portfolio-ready projects after unit 4.</p>
+                        </div>
+                        <span>Data from Aug 2025 cohort</span>
+                    </li>
+                    <li class="insight-pill">
+                        <div>
+                            <strong>3 Career tracks</strong>
+                            <p class="mb-0" style="font-size:0.9rem;">Employability, Entrepreneurship, and Community Impact.</p>
+                        </div>
+                        <span>Pick one or stack</span>
+                    </li>
+                    <li class="insight-pill">
+                        <div>
+                            <strong>Lead mentors every Friday</strong>
+                            <p class="mb-0" style="font-size:0.9rem;">Live clinics to review your projects and CV.</p>
+                        </div>
+                        <span>Included</span>
+                    </li>
+                </ul>
+            </article>
+        </div>
+
+        <section class="filter-and-meta" aria-label="Smart filters and insights">
+            <div class="filters-card">
+                <div class="d-flex justify-content-between flex-wrap gap-3 mb-3">
+                    <h3>Smart filters</h3>
+                    <span id="filter-summary" style="color: rgba(31,22,66,0.7); font-weight:600;">Showing all missions</span>
+                </div>
+                <div class="filter-groups">
+                    <div class="filter-group" data-filter-group="goal">
+                        <label>Career Impact</label>
+                        <div class="chip-row">
+                            <button class="chip active" data-value="job-ready">Job-ready</button>
+                            <button class="chip" data-value="cv">CV booster</button>
+                            <button class="chip" data-value="portfolio">Portfolio skill</button>
+                        </div>
+                    </div>
+                    <div class="filter-group" data-filter-group="skills">
+                        <label>Skill Focus</label>
+                        <div class="chip-row">
+                            <button class="chip" data-value="leadership">Leadership</button>
+                            <button class="chip" data-value="career">Career Design</button>
+                            <button class="chip" data-value="entrepreneurship">Entrepreneurship</button>
+                            <button class="chip" data-value="communication">Communication</button>
+                        </div>
+                    </div>
+                    <div class="filter-group" data-filter-group="level">
+                        <label>Level</label>
+                        <div class="chip-row">
+                            <button class="chip active" data-value="beginner">Starter</button>
+                            <button class="chip" data-value="intermediate">Accelerator</button>
+                            <button class="chip" data-value="advanced">Mastery</button>
+                        </div>
+                    </div>
+                    <div class="filter-group" data-filter-group="duration">
+                        <label>Duration</label>
+                        <div class="chip-row">
+                            <button class="chip" data-value="2-weeks">≤2 weeks</button>
+                            <button class="chip active" data-value="4-weeks">3-4 weeks</button>
+                            <button class="chip" data-value="full">Full programme</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside class="insight-card" aria-label="Personalized recommendations">
+                <h3>Recommended next step</h3>
+                <p style="color: rgba(31,22,66,0.7);">Based on learners aiming for internships, we suggest starting with a mindset reboot, then stacking soft skills and entrepreneurship labs.</p>
+                <div class="track-highlight">
+                    <div>
+                        <h4>Career Sprint • 30 days</h4>
+                        <p>Build confidence, polish communication, and ship a job-ready CV kit.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Daily accountability texts</li>
+                            <li><i class="fas fa-check"></i> Interview room simulations</li>
+                            <li><i class="fas fa-check"></i> Certificate + career coach</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Impact outcomes</h4>
+                        <ul>
+                            <li><i class="fas fa-rocket"></i> 3 portfolio artifacts</li>
+                            <li><i class="fas fa-briefcase"></i> Mentor referral letter</li>
+                            <li><i class="fas fa-users"></i> Peer accountability pod</li>
+                        </ul>
+                        <a href="{% url 'register' %}" class="cta-secondary mt-3" style="background: rgba(255,255,255,0.12); color:#fff;">
+                            Talk to a Career Coach
+                            <i class="fas fa-comment-dots"></i>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="course-section" id="course-gallery">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2>Courses engineered for outcomes, not theory.</h2>
+                    <p class="section-lead">Every module ladders toward a specific real-world win—first job, first venture, or amplified impact in your community.</p>
+                </div>
+            </div>
+            <div class="course-grid">
+                <article class="course-card" data-goal="job-ready" data-level="starter" data-duration="full">
+                    <span class="career-badge">Job-ready</span>
+                    <h3>Understanding Purpose in Life (UPL)</h3>
+                    <p>Activate clarity so you can make courageous career moves with a long-term compass.</p>
+                    <div class="outcomes">
+                        <strong>What you’ll be able to do</strong>
+                        <ul class="outcome-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Craft a personal mission + 3-year roadmap.</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Translate strengths into career stories.</li>
+                        </ul>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Self-awareness</span>
+                        <span>Career Design</span>
+                        <span>Mindset</span>
+                    </div>
+                    <div class="course-meta">
+                        <div><span class="meta-icon"><i class="fas fa-clock"></i></span> 2 weeks • 10 live labs</div>
+                        <div><span class="meta-icon"><i class="fas fa-signal"></i></span> Level: Starter</div>
+                        <div><span class="meta-icon"><i class="fas fa-burn"></i></span> Effort: 4-5 hrs/wk</div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <small style="font-weight:600; color: rgba(31,22,66,0.7);">Progress • cohort Aug 2025</small>
+                            <small style="color: var(--yitp-orange); font-weight:700;">72% completion</small>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width:72%;"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'yitp:coursedetail2' %}" class="action-link">View curriculum <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'register' %}" class="cta-secondary">Enroll now</a>
+                    </div>
+                </article>
+
+                <article class="course-card" data-goal="cv" data-level="starter" data-duration="2-weeks">
+                    <span class="career-badge">CV Booster</span>
+                    <div class="recommended-badge">Recommended</div>
+                    <h3>Personal Initiative Lab</h3>
+                    <p>Shift from passive to proactive using accountability sprints that employers notice.</p>
+                    <div class="outcomes">
+                        <strong>What you’ll be able to do</strong>
+                        <ul class="outcome-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Lead projects without waiting for approval.</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Pitch bold ideas + secure mentors.</li>
+                        </ul>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Leadership</span>
+                        <span>Confidence</span>
+                        <span>Decision Making</span>
+                    </div>
+                    <div class="course-meta">
+                        <div><span class="meta-icon"><i class="fas fa-clock"></i></span> 1 week intensive</div>
+                        <div><span class="meta-icon"><i class="fas fa-layer-group"></i></span> Level: Starter</div>
+                        <div><span class="meta-icon"><i class="fas fa-fire-alt"></i></span> Effort: 6 hrs/wk</div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <small style="font-weight:600; color: rgba(31,22,66,0.7);">Badge</small>
+                            <small style="color: #0c1f40; font-weight:700;">Initiative Catalyst Certificate</small>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width:40%;"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'yitp:coursedetail3' %}" class="action-link">See modules <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'register' %}" class="cta-primary">Hold my slot</a>
+                    </div>
+                </article>
+
+                <article class="course-card" data-goal="portfolio" data-level="accelerator" data-duration="4-weeks">
+                    <span class="career-badge">Portfolio Skill</span>
+                    <h3>The Power of Mindset (TPM)</h3>
+                    <p>Rewire limiting beliefs and ship a resilience journal that employers can review.</p>
+                    <div class="outcomes">
+                        <strong>What you’ll be able to do</strong>
+                        <ul class="outcome-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Convert setbacks into case-study stories.</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Sustain learning habits for 90 days.</li>
+                        </ul>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Growth Mindset</span>
+                        <span>Resilience</span>
+                        <span>Positive Psychology</span>
+                    </div>
+                    <div class="course-meta">
+                        <div><span class="meta-icon"><i class="fas fa-clock"></i></span> 2 weeks • 8 labs</div>
+                        <div><span class="meta-icon"><i class="fas fa-signal"></i></span> Level: Accelerator</div>
+                        <div><span class="meta-icon"><i class="fas fa-heartbeat"></i></span> Effort: 3 hrs/wk</div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'yitp:coursedetail4' %}" class="action-link">See success stories <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'register' %}" class="cta-secondary">Join waitlist</a>
+                    </div>
+                </article>
+
+                <article class="course-card" data-goal="job-ready" data-level="accelerator" data-duration="full">
+                    <span class="career-badge">Job-ready</span>
+                    <h3>Soft Skills for Work (TSW-SSS)</h3>
+                    <p>Master communication, collaboration, and remote professionalism through real workplace simulations.</p>
+                    <div class="outcomes">
+                        <strong>What you’ll be able to do</strong>
+                        <ul class="outcome-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Run client meetings and write follow-up emails.</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Facilitate project retrospectives.</li>
+                        </ul>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Communication</span>
+                        <span>Teamwork</span>
+                        <span>Problem Solving</span>
+                    </div>
+                    <div class="course-meta">
+                        <div><span class="meta-icon"><i class="fas fa-clock"></i></span> 2 weeks • 10 simulations</div>
+                        <div><span class="meta-icon"><i class="fas fa-signal"></i></span> Level: Accelerator</div>
+                        <div><span class="meta-icon"><i class="fas fa-bolt"></i></span> Effort: 5 hrs/wk</div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <small style="font-weight:600; color: rgba(31,22,66,0.7);">Enrolled learners</small>
+                            <small style="color: var(--yitp-orange); font-weight:700;">Current mentor: Faith A.</small>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width:58%;"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'yitp:coursedetail5' %}" class="action-link">See agenda <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'register' %}" class="cta-primary">Book a seat</a>
+                    </div>
+                </article>
+
+                <article class="course-card" data-goal="portfolio" data-level="accelerator" data-duration="4-weeks">
+                    <span class="career-badge">Portfolio Skill</span>
+                    <h3>Entrepreneurship & Business Alignment (ESBA)</h3>
+                    <p>Launch a micro-venture, validate demand, and craft a pitch deck reviewed by founders.</p>
+                    <div class="outcomes">
+                        <strong>What you’ll be able to do</strong>
+                        <ul class="outcome-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Validate a business problem with real interviews.</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Build a lean financial model + GTM plan.</li>
+                        </ul>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Entrepreneurship</span>
+                        <span>Market Research</span>
+                        <span>Pitching</span>
+                    </div>
+                    <div class="course-meta">
+                        <div><span class="meta-icon"><i class="fas fa-clock"></i></span> 3 weeks • 12 studios</div>
+                        <div><span class="meta-icon"><i class="fas fa-signal"></i></span> Level: Accelerator</div>
+                        <div><span class="meta-icon"><i class="fas fa-burn"></i></span> Effort: 6 hrs/wk</div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'yitp:coursedetail1' %}" class="action-link">View investor checklist <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'register' %}" class="cta-secondary">Pitch review</a>
+                    </div>
+                </article>
+
+                <article class="course-card" data-goal="cv" data-level="starter" data-duration="2-weeks">
+                    <span class="career-badge">CV Booster</span>
+                    <h3>CV Writing & Professional Growth</h3>
+                    <p>Design a standout CV, LinkedIn, and elevator pitch in one guided sprint.</p>
+                    <div class="outcomes">
+                        <strong>What you’ll be able to do</strong>
+                        <ul class="outcome-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Build a recruiter-ready CV kit.</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Run mock interviews with feedback data.</li>
+                        </ul>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Personal Branding</span>
+                        <span>Storytelling</span>
+                        <span>Interviewing</span>
+                    </div>
+                    <div class="course-meta">
+                        <div><span class="meta-icon"><i class="fas fa-clock"></i></span> 1 day live clinic + async reviews</div>
+                        <div><span class="meta-icon"><i class="fas fa-burn"></i></span> Effort: 3 hrs total</div>
+                        <div><span class="meta-icon"><i class="fas fa-certificate"></i></span> Certificate: Career Story Pro</div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'yitp:coursedetail6' %}" class="action-link">See deliverables <i class="fas fa-arrow-right"></i></a>
+                        <a href="{% url 'register' %}" class="cta-primary">Reserve a mentor</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta-panel">
+            <div>
+                <h3>Need a guided recommendation?</h3>
+                <p>Share your goal—internship, first job, or venture—and we will map the exact sessions that accelerate you there.</p>
+            </div>
+            <a href="{% url 'register' %}" class="cta-primary">Book a 10-min clarity call <i class="fas fa-arrow-right"></i></a>
+        </section>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const groups = document.querySelectorAll('[data-filter-group]');
+    const cards = document.querySelectorAll('.course-card');
+    const summary = document.getElementById('filter-summary');
+
+    function updateSummary() {
+        const chips = document.querySelectorAll('.chip.active');
+        const phrases = Array.from(chips).map(chip => chip.textContent.trim());
+        summary.textContent = phrases.length ? `Filtering by: ${phrases.join(', ')}` : 'Showing all missions';
+    }
+
+    function filterCourses() {
+        const activeFilters = {};
+        groups.forEach(group => {
+            const key = group.getAttribute('data-filter-group');
+            const activeChip = group.querySelector('.chip.active');
+            if (activeChip) {
+                activeFilters[key] = activeChip.getAttribute('data-value');
+            }
+        });
+
+        cards.forEach(card => {
+            let visible = true;
+            if (activeFilters.goal && card.dataset.goal !== activeFilters.goal) visible = false;
+            if (activeFilters.level && card.dataset.level !== activeFilters.level) visible = false;
+            if (activeFilters.duration && card.dataset.duration !== activeFilters.duration) visible = false;
+            card.style.display = visible ? 'flex' : 'none';
+        });
+    }
+
+    document.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            const group = chip.closest('[data-filter-group]');
+            group.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            updateSummary();
+            filterCourses();
+        });
+    });
+
+    // Kick off defaults
+    updateSummary();
+    filterCourses();
+});
+</script>
+{% endblock %}
+

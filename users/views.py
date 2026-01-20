@@ -161,15 +161,19 @@ def register(request):
             username = request.POST.get('username', '').strip()
             email = request.POST.get('email', '').strip()
             phone_number = request.POST.get('phone_number', '').strip()
+            heard_about = request.POST.get('heard_about', '').strip()
             password1 = request.POST.get('password1', '')
             password2 = request.POST.get('password2', '')
             terms = request.POST.get('terms')
 
             # Validation
+            heard_about_choices = {
+                'google', 'chatgpt', 'youtube', 'twitter', 'facebook', 'livegreat', 'referral', 'other'
+            }
             errors = []
 
             # Check required fields
-            if not all([first_name, last_name, username, email, password1, password2]):
+            if not all([first_name, last_name, username, email, password1, password2, heard_about]):
                 errors.append('All fields are required.')
 
             # Check terms acceptance
@@ -209,6 +213,10 @@ def register(request):
                 if len(phone_digits) < 10:
                     errors.append('Please enter a valid phone number with at least 10 digits.')
 
+            # Validate referral source selection
+            if heard_about and heard_about not in heard_about_choices:
+                errors.append('Please select a valid option for how you heard about us.')
+
             # If there are errors, show them
             if errors:
                 for error in errors:
@@ -231,7 +239,9 @@ def register(request):
             profile, created = Profile.objects.get_or_create(user=user)
             if phone_number:
                 profile.phone_number = phone_number
-                profile.save()
+            if heard_about:
+                profile.heard_about = heard_about
+            profile.save()
 
             # Send OTP for email verification
             try:

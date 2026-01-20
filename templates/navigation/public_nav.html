@@ -239,10 +239,8 @@
 </header>
 
 {% include 'navigation/mobile_nav.html' %}
-<div id="google_translate_element" style="display:none;"></div>
+<div id="google_translate_element" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; opacity:0;"></div>
 <script src="{% static 'js/yitp-translate.js' %}" defer></script>
-
-{% include 'navigation/mobile_nav.html' %}
 
 <script>
 (function() {

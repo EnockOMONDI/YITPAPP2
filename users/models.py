@@ -35,10 +35,27 @@ class Profile(models.Model):
         ('other', 'Other'),
     ]
 
+    HEARD_ABOUT_CHOICES = [
+        ('google', 'Google Search'),
+        ('chatgpt', 'ChatGPT'),
+        ('youtube', 'YouTube'),
+        ('twitter', 'Twitter / X'),
+        ('facebook', 'Facebook'),
+        ('livegreat', 'LiveGreat Foundation'),
+        ('referral', 'Friend / Referral'),
+        ('other', 'Other'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio = models.TextField(default='Edit your Bio!')
     phone_number = models.CharField(max_length=20, blank=True, null=True, help_text="Contact phone number")
+    heard_about = models.CharField(
+        max_length=50,
+        choices=HEARD_ABOUT_CHOICES,
+        default='other',
+        help_text="How the user heard about YITP"
+    )
 
     # Payment Status Fields
     payment_status = models.CharField(

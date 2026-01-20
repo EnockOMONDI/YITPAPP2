@@ -742,3 +742,1137 @@
 2025-07-05 03:03:26,692 - INFO - ❌ FAIL - Complete Registration Journey: Steps: Registration(False), User/OTP(True), Email(False), Verification(True), Activation(True), Redirect(True)
 2025-07-05 03:03:38,355 - INFO - ✅ Completed test: test_complete_registration_journey
 2025-07-05 03:03:38,357 - INFO - ------------------------------------------------------------
+2026-01-20 20:42:54,053 - ERROR - Could not initialize storage class: 'DefaultStorage' object is not callable
+2026-01-20 20:43:19,246 - INFO - ============================================================
+2026-01-20 20:43:19,249 - INFO - 🧪 Starting test: test_complete_registration_journey
+2026-01-20 20:43:19,249 - INFO - ============================================================
+2026-01-20 20:43:19,577 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:19,582 - INFO - Sending OTP email with subject: Your YITP Verification Code: 914811
+2026-01-20 20:43:19,582 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:19,599 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:19,599 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:19,630 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:19,639 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:19,640 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:19,644 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:19,644 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:19,645 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:19,645 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:19,645 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:19,675 - INFO - ❌ FAIL - Complete Registration Journey: Steps: Registration(False), User/OTP(True), Email(True), Verification(True), Activation(True), Redirect(True)
+2026-01-20 20:43:19,706 - INFO - ✅ Completed test: test_complete_registration_journey
+2026-01-20 20:43:19,706 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:19,707 - INFO - ============================================================
+2026-01-20 20:43:19,707 - INFO - 🧪 Starting test: test_admin_notification_email
+2026-01-20 20:43:19,707 - INFO - ============================================================
+2026-01-20 20:43:20,002 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:20,002 - INFO - Sending OTP email with subject: Your YITP Verification Code: 654693
+2026-01-20 20:43:20,002 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:20,003 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:20,003 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:20,007 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:20,010 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:20,010 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:20,011 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:20,011 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:20,012 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:20,012 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:20,012 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:20,014 - INFO - ✅ PASS - Admin Notification Email: Admin notification sent: True
+2026-01-20 20:43:20,032 - INFO - ✅ Completed test: test_admin_notification_email
+2026-01-20 20:43:20,032 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:20,034 - INFO - ============================================================
+2026-01-20 20:43:20,034 - INFO - 🧪 Starting test: test_welcome_email_after_verification
+2026-01-20 20:43:20,034 - INFO - ============================================================
+2026-01-20 20:43:20,372 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:20,373 - INFO - Sending OTP email with subject: Your YITP Verification Code: 445319
+2026-01-20 20:43:20,373 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:20,373 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:20,373 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:20,379 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:20,383 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:20,383 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:20,386 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:20,386 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:20,386 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:20,387 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:20,387 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:20,389 - INFO - ✅ PASS - Welcome Email After Verification: Welcome email sent: True
+2026-01-20 20:43:20,410 - INFO - ✅ Completed test: test_welcome_email_after_verification
+2026-01-20 20:43:20,410 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:20,412 - INFO - ============================================================
+2026-01-20 20:43:20,412 - INFO - 🧪 Starting test: test_otp_verification_with_invalid_user_id
+2026-01-20 20:43:20,413 - INFO - ============================================================
+2026-01-20 20:43:20,459 - INFO - OTP verification attempt: user_id=99999, code_length=6
+2026-01-20 20:43:20,460 - ERROR - OTP verification failed - user not found: user_id=99999
+2026-01-20 20:43:20,463 - ERROR - Internal Server Error: /verify-otp/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 151, in verify_otp_view
+    user = User.objects.get(id=user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 156, in verify_otp_view
+    return redirect('users:register')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'register' not found. 'register' is not a valid view function or pattern name.
+2026-01-20 20:43:20,471 - INFO - ✅ Completed test: test_otp_verification_with_invalid_user_id
+2026-01-20 20:43:20,471 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:20,473 - INFO - ============================================================
+2026-01-20 20:43:20,474 - INFO - 🧪 Starting test: test_otp_verification_with_missing_user_id
+2026-01-20 20:43:20,474 - INFO - ============================================================
+2026-01-20 20:43:20,578 - INFO - OTP verification attempt: user_id=None, code_length=6
+2026-01-20 20:43:20,578 - WARNING - OTP verification failed - missing fields: {'user_id': None, 'username': None, 'otp_code_length': 0, 'timestamp': '2026-01-20T17:43:20.578732+00:00'}
+2026-01-20 20:43:20,580 - INFO - ❌ FAIL - OTP Verification with Missing User ID: Missing user ID properly handled
+2026-01-20 20:43:20,581 - INFO - ✅ Completed test: test_otp_verification_with_missing_user_id
+2026-01-20 20:43:20,581 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:20,582 - INFO - ============================================================
+2026-01-20 20:43:20,582 - INFO - 🧪 Starting test: test_registration_with_email_failure
+2026-01-20 20:43:20,582 - INFO - ============================================================
+2026-01-20 20:43:20,870 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:20,870 - INFO - Sending OTP email with subject: Your YITP Verification Code: 614602
+2026-01-20 20:43:20,870 - INFO - Test environment detected via command line or environment
+2026-01-20 20:43:20,870 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:20,873 - INFO - ❌ FAIL - Registration with Email Failure: User created and activated despite email failure: False
+2026-01-20 20:43:20,890 - INFO - ✅ Completed test: test_registration_with_email_failure
+2026-01-20 20:43:20,890 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:20,891 - INFO - ============================================================
+2026-01-20 20:43:20,891 - INFO - 🧪 Starting test: test_authenticated_user_redirect_from_registration
+2026-01-20 20:43:20,892 - INFO - ============================================================
+2026-01-20 20:43:21,182 - INFO - ✅ PASS - Authenticated User Redirect from Registration: Authenticated user redirected from registration (Status: 302)
+2026-01-20 20:43:21,183 - INFO - ✅ Completed test: test_authenticated_user_redirect_from_registration
+2026-01-20 20:43:21,183 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:21,184 - INFO - ============================================================
+2026-01-20 20:43:21,184 - INFO - 🧪 Starting test: test_welcome_page_redirect_with_session_flag
+2026-01-20 20:43:21,184 - INFO - ============================================================
+2026-01-20 20:43:21,472 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:21,473 - INFO - Sending OTP email with subject: Your YITP Verification Code: 203653
+2026-01-20 20:43:21,473 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:21,473 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:21,473 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:21,477 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:21,481 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:21,481 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:21,482 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:21,482 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:21,482 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:21,483 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:21,483 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:21,491 - INFO - ✅ PASS - Welcome Page Redirect with Session Flag: Redirected to welcome page: True
+2026-01-20 20:43:21,509 - INFO - ✅ Completed test: test_welcome_page_redirect_with_session_flag
+2026-01-20 20:43:21,509 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:21,511 - INFO - ============================================================
+2026-01-20 20:43:21,511 - INFO - 🧪 Starting test: test_multiple_otp_invalidation
+2026-01-20 20:43:21,511 - INFO - ============================================================
+2026-01-20 20:43:21,761 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2026-01-20 20:43:21,762 - INFO - Sending OTP email with subject: Your YITP Verification Code: 649015
+2026-01-20 20:43:21,762 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:21,762 - INFO - ✅ Test email sent via Django backend to ['multipleotpuser@example.com']
+2026-01-20 20:43:21,762 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2026-01-20 20:43:21,763 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2026-01-20 20:43:21,763 - INFO - Sending OTP email with subject: Your YITP Verification Code: 385709
+2026-01-20 20:43:21,763 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:21,763 - INFO - ✅ Test email sent via Django backend to ['multipleotpuser@example.com']
+2026-01-20 20:43:21,763 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2026-01-20 20:43:21,764 - INFO - ✅ PASS - Multiple OTP Invalidation: First OTP invalidated: True, Second OTP valid: True
+2026-01-20 20:43:21,765 - INFO - ✅ Completed test: test_multiple_otp_invalidation
+2026-01-20 20:43:21,765 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:21,766 - INFO - ============================================================
+2026-01-20 20:43:21,766 - INFO - 🧪 Starting test: test_otp_email_delivery
+2026-01-20 20:43:21,766 - INFO - ============================================================
+2026-01-20 20:43:22,056 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:22,056 - INFO - Sending OTP email with subject: Your YITP Verification Code: 037051
+2026-01-20 20:43:22,056 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:22,057 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:22,057 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:22,060 - INFO - ✅ PASS - OTP Email Delivery: Email sent to testuser@example.com, subject: Your YITP Verification Code: 037051
+2026-01-20 20:43:22,078 - INFO - ✅ Completed test: test_otp_email_delivery
+2026-01-20 20:43:22,078 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:22,079 - INFO - ============================================================
+2026-01-20 20:43:22,079 - INFO - 🧪 Starting test: test_otp_generation_and_storage
+2026-01-20 20:43:22,079 - INFO - ============================================================
+2026-01-20 20:43:22,367 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:22,368 - INFO - Sending OTP email with subject: Your YITP Verification Code: 332389
+2026-01-20 20:43:22,368 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:22,368 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:22,368 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:22,371 - INFO - ✅ PASS - OTP Generation and Storage: OTP generated: 332389, expires: 2026-01-20 21:03:22.367404+00:00
+2026-01-20 20:43:22,388 - INFO - ✅ Completed test: test_otp_generation_and_storage
+2026-01-20 20:43:22,388 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:22,389 - INFO - ============================================================
+2026-01-20 20:43:22,389 - INFO - 🧪 Starting test: test_expired_otp_verification
+2026-01-20 20:43:22,389 - INFO - ============================================================
+2026-01-20 20:43:22,677 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:22,679 - WARNING - OTP verification failed - expired: {'user_id': 2, 'username': 'expiredotpuser', 'otp_code_length': 6, 'timestamp': '2026-01-20T17:43:22.679102+00:00'}
+2026-01-20 20:43:22,681 - INFO - ❌ FAIL - Expired OTP Verification: User remains inactive: True, Expired OTP rejected
+2026-01-20 20:43:22,682 - INFO - ✅ Completed test: test_expired_otp_verification
+2026-01-20 20:43:22,682 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:22,684 - INFO - ============================================================
+2026-01-20 20:43:22,684 - INFO - 🧪 Starting test: test_invalid_otp_verification
+2026-01-20 20:43:22,684 - INFO - ============================================================
+2026-01-20 20:43:22,980 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:22,981 - INFO - Sending OTP email with subject: Your YITP Verification Code: 955024
+2026-01-20 20:43:22,981 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:22,981 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:22,981 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:22,985 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:22,986 - WARNING - OTP verification failed - code not found: {'user_id': 2, 'username': 'testuser', 'otp_code_length': 6, 'timestamp': '2026-01-20T17:43:22.986557+00:00'}
+2026-01-20 20:43:22,988 - INFO - ❌ FAIL - Invalid OTP Verification: User remains inactive: True, Error message shown
+2026-01-20 20:43:23,004 - INFO - ✅ Completed test: test_invalid_otp_verification
+2026-01-20 20:43:23,004 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:23,006 - INFO - ============================================================
+2026-01-20 20:43:23,006 - INFO - 🧪 Starting test: test_valid_otp_verification
+2026-01-20 20:43:23,006 - INFO - ============================================================
+2026-01-20 20:43:23,297 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:23,298 - INFO - Sending OTP email with subject: Your YITP Verification Code: 350605
+2026-01-20 20:43:23,298 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:23,298 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:23,298 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:23,302 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:23,306 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:23,306 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:23,307 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:23,307 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:23,307 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:23,307 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:23,308 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:23,317 - INFO - ✅ PASS - Valid OTP Verification: User activated: True, OTP used: True, Redirected to welcome: True
+2026-01-20 20:43:23,339 - INFO - ✅ Completed test: test_valid_otp_verification
+2026-01-20 20:43:23,339 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:23,340 - INFO - ============================================================
+2026-01-20 20:43:23,340 - INFO - 🧪 Starting test: test_automatic_login_after_verification
+2026-01-20 20:43:23,340 - INFO - ============================================================
+2026-01-20 20:43:23,634 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:23,635 - INFO - Sending OTP email with subject: Your YITP Verification Code: 337414
+2026-01-20 20:43:23,635 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:23,635 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:23,635 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:23,639 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:23,642 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:23,643 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:23,643 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:23,644 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:23,644 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:23,644 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:23,644 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:23,652 - INFO - ✅ PASS - Automatic Login After Verification: User logged in: True, Correct user: True
+2026-01-20 20:43:23,667 - INFO - ✅ Completed test: test_automatic_login_after_verification
+2026-01-20 20:43:23,667 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:23,669 - INFO - ============================================================
+2026-01-20 20:43:23,669 - INFO - 🧪 Starting test: test_profile_email_verification_status
+2026-01-20 20:43:23,669 - INFO - ============================================================
+2026-01-20 20:43:24,011 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:24,011 - INFO - Sending OTP email with subject: Your YITP Verification Code: 071809
+2026-01-20 20:43:24,011 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,012 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:24,012 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:24,016 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:24,019 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,019 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:24,020 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:24,020 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,021 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:24,021 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:24,021 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:24,023 - INFO - ✅ PASS - Profile Email Verification Status: Email verification status: True
+2026-01-20 20:43:24,040 - INFO - ✅ Completed test: test_profile_email_verification_status
+2026-01-20 20:43:24,040 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:24,041 - INFO - ============================================================
+2026-01-20 20:43:24,041 - INFO - 🧪 Starting test: test_session_flag_management
+2026-01-20 20:43:24,041 - INFO - ============================================================
+2026-01-20 20:43:24,343 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:24,344 - INFO - Sending OTP email with subject: Your YITP Verification Code: 724485
+2026-01-20 20:43:24,344 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,344 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:24,344 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:24,349 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:24,353 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,353 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:24,354 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:24,354 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,354 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:24,354 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:24,354 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:24,357 - INFO - ✅ PASS - Session Flag Management: OTP flag set: True, Timestamp set: True
+2026-01-20 20:43:24,375 - INFO - ✅ Completed test: test_session_flag_management
+2026-01-20 20:43:24,375 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:24,377 - INFO - ============================================================
+2026-01-20 20:43:24,377 - INFO - 🧪 Starting test: test_profile_completion_calculation
+2026-01-20 20:43:24,377 - INFO - ============================================================
+2026-01-20 20:43:24,773 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:24,774 - INFO - Sending OTP email with subject: Your YITP Verification Code: 921900
+2026-01-20 20:43:24,774 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,775 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:24,775 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:24,786 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:43:24,792 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,793 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:24,794 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:43:24,794 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:24,795 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:43:24,795 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:43:24,795 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:43:24,800 - INFO - ✅ PASS - Profile Completion Calculation: Profile completion calculated: 66.67%
+2026-01-20 20:43:24,833 - INFO - ✅ Completed test: test_profile_completion_calculation
+2026-01-20 20:43:24,834 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:24,837 - INFO - ============================================================
+2026-01-20 20:43:24,837 - INFO - 🧪 Starting test: test_duplicate_email_validation
+2026-01-20 20:43:24,838 - INFO - ============================================================
+2026-01-20 20:43:25,500 - INFO - ✅ PASS - Duplicate Email Validation: Duplicate email properly rejected
+2026-01-20 20:43:25,502 - INFO - ✅ Completed test: test_duplicate_email_validation
+2026-01-20 20:43:25,502 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:25,504 - INFO - ============================================================
+2026-01-20 20:43:25,504 - INFO - 🧪 Starting test: test_duplicate_username_validation
+2026-01-20 20:43:25,505 - INFO - ============================================================
+2026-01-20 20:43:25,959 - INFO - ✅ PASS - Duplicate Username Validation: Duplicate username properly rejected
+2026-01-20 20:43:25,980 - INFO - ✅ Completed test: test_duplicate_username_validation
+2026-01-20 20:43:25,980 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:25,982 - INFO - ============================================================
+2026-01-20 20:43:25,982 - INFO - 🧪 Starting test: test_heard_about_persists_to_profile
+2026-01-20 20:43:25,982 - INFO - ============================================================
+2026-01-20 20:43:26,356 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:26,357 - INFO - Sending OTP email with subject: Your YITP Verification Code: 432585
+2026-01-20 20:43:26,357 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:26,358 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:26,358 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:26,363 - INFO - ✅ PASS - Heard About Persistence: Referral source saved: chatgpt, redirected to OTP: True
+2026-01-20 20:43:26,389 - INFO - ✅ Completed test: test_heard_about_persists_to_profile
+2026-01-20 20:43:26,389 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:26,391 - INFO - ============================================================
+2026-01-20 20:43:26,391 - INFO - 🧪 Starting test: test_missing_heard_about_validation
+2026-01-20 20:43:26,391 - INFO - ============================================================
+2026-01-20 20:43:26,447 - INFO - ✅ PASS - Missing Heard About Validation: Missing referral source properly rejected
+2026-01-20 20:43:26,448 - INFO - ✅ Completed test: test_missing_heard_about_validation
+2026-01-20 20:43:26,448 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:26,450 - INFO - ============================================================
+2026-01-20 20:43:26,450 - INFO - 🧪 Starting test: test_password_mismatch_validation
+2026-01-20 20:43:26,450 - INFO - ============================================================
+2026-01-20 20:43:26,499 - INFO - ✅ PASS - Password Mismatch Validation: Password mismatch properly rejected
+2026-01-20 20:43:26,500 - INFO - ✅ Completed test: test_password_mismatch_validation
+2026-01-20 20:43:26,500 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:26,502 - INFO - ============================================================
+2026-01-20 20:43:26,502 - INFO - 🧪 Starting test: test_registration_form_access
+2026-01-20 20:43:26,502 - INFO - ============================================================
+2026-01-20 20:43:26,553 - INFO - ✅ PASS - Registration Form Access: Registration form accessible (Status: 200)
+2026-01-20 20:43:26,554 - INFO - ✅ Completed test: test_registration_form_access
+2026-01-20 20:43:26,554 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:26,556 - INFO - ============================================================
+2026-01-20 20:43:26,556 - INFO - 🧪 Starting test: test_required_fields_validation
+2026-01-20 20:43:26,556 - INFO - ============================================================
+2026-01-20 20:43:26,605 - INFO - ✅ PASS - Required Fields Validation: Missing required fields properly rejected
+2026-01-20 20:43:26,606 - INFO - ✅ Completed test: test_required_fields_validation
+2026-01-20 20:43:26,607 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:26,609 - INFO - ============================================================
+2026-01-20 20:43:26,609 - INFO - 🧪 Starting test: test_valid_registration_submission
+2026-01-20 20:43:26,609 - INFO - ============================================================
+2026-01-20 20:43:26,991 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:26,992 - INFO - Sending OTP email with subject: Your YITP Verification Code: 076737
+2026-01-20 20:43:26,992 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:26,993 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:26,993 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:26,998 - INFO - ✅ PASS - Valid Registration Submission: User created: True, Redirected to OTP: True
+2026-01-20 20:43:27,029 - INFO - ✅ Completed test: test_valid_registration_submission
+2026-01-20 20:43:27,029 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:27,032 - INFO - ============================================================
+2026-01-20 20:43:27,032 - INFO - 🧪 Starting test: test_profile_creation_during_registration
+2026-01-20 20:43:27,032 - INFO - ============================================================
+2026-01-20 20:43:27,639 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:27,640 - INFO - Sending OTP email with subject: Your YITP Verification Code: 477052
+2026-01-20 20:43:27,640 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:27,641 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:27,641 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:27,650 - INFO - ✅ PASS - Profile Creation During Registration: Profile created with phone: +1234567890
+2026-01-20 20:43:27,682 - INFO - ✅ Completed test: test_profile_creation_during_registration
+2026-01-20 20:43:27,683 - INFO - ------------------------------------------------------------
+2026-01-20 20:43:27,685 - INFO - ============================================================
+2026-01-20 20:43:27,686 - INFO - 🧪 Starting test: test_user_creation_with_correct_data
+2026-01-20 20:43:27,686 - INFO - ============================================================
+2026-01-20 20:43:28,159 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:43:28,160 - INFO - Sending OTP email with subject: Your YITP Verification Code: 938319
+2026-01-20 20:43:28,160 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:43:28,161 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:43:28,161 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:43:28,165 - INFO - ✅ PASS - User Creation with Correct Data: User created with correct data, inactive status: True
+2026-01-20 20:43:28,194 - INFO - ✅ Completed test: test_user_creation_with_correct_data
+2026-01-20 20:43:28,194 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:52,001 - ERROR - Could not initialize storage class: 'DefaultStorage' object is not callable
+2026-01-20 20:48:54,575 - INFO - ============================================================
+2026-01-20 20:48:54,575 - INFO - 🧪 Starting test: test_complete_registration_journey
+2026-01-20 20:48:54,575 - INFO - ============================================================
+2026-01-20 20:48:54,888 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:54,893 - INFO - Sending OTP email with subject: Your YITP Verification Code: 180590
+2026-01-20 20:48:54,893 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:54,902 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:54,902 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:54,931 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:54,934 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:54,934 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:54,938 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:54,938 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:54,938 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:54,938 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:54,938 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:54,961 - INFO - ❌ FAIL - Complete Registration Journey: Steps: Registration(False), User/OTP(True), Email(True), Verification(True), Activation(True), Redirect(True)
+2026-01-20 20:48:54,989 - INFO - ✅ Completed test: test_complete_registration_journey
+2026-01-20 20:48:54,989 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:54,990 - INFO - ============================================================
+2026-01-20 20:48:54,990 - INFO - 🧪 Starting test: test_admin_notification_email
+2026-01-20 20:48:54,990 - INFO - ============================================================
+2026-01-20 20:48:55,278 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:55,279 - INFO - Sending OTP email with subject: Your YITP Verification Code: 053718
+2026-01-20 20:48:55,279 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:55,279 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:55,279 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:55,283 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:55,286 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:55,287 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:55,288 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:55,288 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:55,288 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:55,288 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:55,288 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:55,290 - INFO - ✅ PASS - Admin Notification Email: Admin notification sent: True
+2026-01-20 20:48:55,306 - INFO - ✅ Completed test: test_admin_notification_email
+2026-01-20 20:48:55,307 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:55,308 - INFO - ============================================================
+2026-01-20 20:48:55,308 - INFO - 🧪 Starting test: test_welcome_email_after_verification
+2026-01-20 20:48:55,308 - INFO - ============================================================
+2026-01-20 20:48:55,597 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:55,597 - INFO - Sending OTP email with subject: Your YITP Verification Code: 035379
+2026-01-20 20:48:55,597 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:55,598 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:55,598 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:55,602 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:55,604 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:55,605 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:55,606 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:55,606 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:55,606 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:55,606 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:55,607 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:55,608 - INFO - ✅ PASS - Welcome Email After Verification: Welcome email sent: True
+2026-01-20 20:48:55,625 - INFO - ✅ Completed test: test_welcome_email_after_verification
+2026-01-20 20:48:55,625 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:55,626 - INFO - ============================================================
+2026-01-20 20:48:55,626 - INFO - 🧪 Starting test: test_otp_verification_with_invalid_user_id
+2026-01-20 20:48:55,626 - INFO - ============================================================
+2026-01-20 20:48:55,663 - INFO - OTP verification attempt: user_id=99999, code_length=6
+2026-01-20 20:48:55,663 - ERROR - OTP verification failed - user not found: user_id=99999
+2026-01-20 20:48:55,666 - ERROR - Internal Server Error: /verify-otp/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 151, in verify_otp_view
+    user = User.objects.get(id=user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 156, in verify_otp_view
+    return redirect('users:register')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'register' not found. 'register' is not a valid view function or pattern name.
+2026-01-20 20:48:55,673 - INFO - ✅ Completed test: test_otp_verification_with_invalid_user_id
+2026-01-20 20:48:55,673 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:55,674 - INFO - ============================================================
+2026-01-20 20:48:55,675 - INFO - 🧪 Starting test: test_otp_verification_with_missing_user_id
+2026-01-20 20:48:55,675 - INFO - ============================================================
+2026-01-20 20:48:55,767 - INFO - OTP verification attempt: user_id=None, code_length=6
+2026-01-20 20:48:55,767 - WARNING - OTP verification failed - missing fields: {'user_id': None, 'username': None, 'otp_code_length': 0, 'timestamp': '2026-01-20T17:48:55.767443+00:00'}
+2026-01-20 20:48:55,768 - INFO - ❌ FAIL - OTP Verification with Missing User ID: Missing user ID properly handled
+2026-01-20 20:48:55,770 - INFO - ✅ Completed test: test_otp_verification_with_missing_user_id
+2026-01-20 20:48:55,770 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:55,771 - INFO - ============================================================
+2026-01-20 20:48:55,771 - INFO - 🧪 Starting test: test_registration_with_email_failure
+2026-01-20 20:48:55,771 - INFO - ============================================================
+2026-01-20 20:48:56,060 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:56,060 - INFO - Sending OTP email with subject: Your YITP Verification Code: 682052
+2026-01-20 20:48:56,060 - INFO - Test environment detected via command line or environment
+2026-01-20 20:48:56,060 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:56,063 - INFO - ❌ FAIL - Registration with Email Failure: User created and activated despite email failure: False
+2026-01-20 20:48:56,080 - INFO - ✅ Completed test: test_registration_with_email_failure
+2026-01-20 20:48:56,081 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:56,082 - INFO - ============================================================
+2026-01-20 20:48:56,082 - INFO - 🧪 Starting test: test_authenticated_user_redirect_from_registration
+2026-01-20 20:48:56,082 - INFO - ============================================================
+2026-01-20 20:48:56,372 - INFO - ✅ PASS - Authenticated User Redirect from Registration: Authenticated user redirected from registration (Status: 302)
+2026-01-20 20:48:56,373 - INFO - ✅ Completed test: test_authenticated_user_redirect_from_registration
+2026-01-20 20:48:56,373 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:56,374 - INFO - ============================================================
+2026-01-20 20:48:56,374 - INFO - 🧪 Starting test: test_welcome_page_redirect_with_session_flag
+2026-01-20 20:48:56,374 - INFO - ============================================================
+2026-01-20 20:48:56,661 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:56,662 - INFO - Sending OTP email with subject: Your YITP Verification Code: 524186
+2026-01-20 20:48:56,662 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:56,662 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:56,662 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:56,666 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:56,669 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:56,670 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:56,671 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:56,671 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:56,671 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:56,671 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:56,671 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:56,679 - INFO - ✅ PASS - Welcome Page Redirect with Session Flag: Redirected to welcome page: True
+2026-01-20 20:48:56,695 - INFO - ✅ Completed test: test_welcome_page_redirect_with_session_flag
+2026-01-20 20:48:56,695 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:56,697 - INFO - ============================================================
+2026-01-20 20:48:56,697 - INFO - 🧪 Starting test: test_multiple_otp_invalidation
+2026-01-20 20:48:56,697 - INFO - ============================================================
+2026-01-20 20:48:56,947 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2026-01-20 20:48:56,947 - INFO - Sending OTP email with subject: Your YITP Verification Code: 279754
+2026-01-20 20:48:56,947 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:56,948 - INFO - ✅ Test email sent via Django backend to ['multipleotpuser@example.com']
+2026-01-20 20:48:56,948 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2026-01-20 20:48:56,948 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2026-01-20 20:48:56,949 - INFO - Sending OTP email with subject: Your YITP Verification Code: 059629
+2026-01-20 20:48:56,949 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:56,949 - INFO - ✅ Test email sent via Django backend to ['multipleotpuser@example.com']
+2026-01-20 20:48:56,949 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2026-01-20 20:48:56,949 - INFO - ✅ PASS - Multiple OTP Invalidation: First OTP invalidated: True, Second OTP valid: True
+2026-01-20 20:48:56,950 - INFO - ✅ Completed test: test_multiple_otp_invalidation
+2026-01-20 20:48:56,951 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:56,952 - INFO - ============================================================
+2026-01-20 20:48:56,952 - INFO - 🧪 Starting test: test_otp_email_delivery
+2026-01-20 20:48:56,952 - INFO - ============================================================
+2026-01-20 20:48:57,250 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:57,250 - INFO - Sending OTP email with subject: Your YITP Verification Code: 248628
+2026-01-20 20:48:57,250 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:57,250 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:57,250 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:57,254 - INFO - ✅ PASS - OTP Email Delivery: Email sent to testuser@example.com, subject: Your YITP Verification Code: 248628
+2026-01-20 20:48:57,271 - INFO - ✅ Completed test: test_otp_email_delivery
+2026-01-20 20:48:57,271 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:57,272 - INFO - ============================================================
+2026-01-20 20:48:57,272 - INFO - 🧪 Starting test: test_otp_generation_and_storage
+2026-01-20 20:48:57,272 - INFO - ============================================================
+2026-01-20 20:48:57,562 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:57,563 - INFO - Sending OTP email with subject: Your YITP Verification Code: 763389
+2026-01-20 20:48:57,563 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:57,563 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:57,563 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:57,567 - INFO - ✅ PASS - OTP Generation and Storage: OTP generated: 763389, expires: 2026-01-20 21:08:57.562291+00:00
+2026-01-20 20:48:57,583 - INFO - ✅ Completed test: test_otp_generation_and_storage
+2026-01-20 20:48:57,583 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:57,585 - INFO - ============================================================
+2026-01-20 20:48:57,585 - INFO - 🧪 Starting test: test_expired_otp_verification
+2026-01-20 20:48:57,585 - INFO - ============================================================
+2026-01-20 20:48:57,874 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:57,876 - WARNING - OTP verification failed - expired: {'user_id': 2, 'username': 'expiredotpuser', 'otp_code_length': 6, 'timestamp': '2026-01-20T17:48:57.875996+00:00'}
+2026-01-20 20:48:57,877 - INFO - ❌ FAIL - Expired OTP Verification: User remains inactive: True, Expired OTP rejected
+2026-01-20 20:48:57,879 - INFO - ✅ Completed test: test_expired_otp_verification
+2026-01-20 20:48:57,879 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:57,880 - INFO - ============================================================
+2026-01-20 20:48:57,880 - INFO - 🧪 Starting test: test_invalid_otp_verification
+2026-01-20 20:48:57,880 - INFO - ============================================================
+2026-01-20 20:48:58,171 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:58,171 - INFO - Sending OTP email with subject: Your YITP Verification Code: 144560
+2026-01-20 20:48:58,171 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:58,172 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:58,172 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:58,176 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:58,177 - WARNING - OTP verification failed - code not found: {'user_id': 2, 'username': 'testuser', 'otp_code_length': 6, 'timestamp': '2026-01-20T17:48:58.177005+00:00'}
+2026-01-20 20:48:58,179 - INFO - ❌ FAIL - Invalid OTP Verification: User remains inactive: True, Error message shown
+2026-01-20 20:48:58,197 - INFO - ✅ Completed test: test_invalid_otp_verification
+2026-01-20 20:48:58,197 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:58,199 - INFO - ============================================================
+2026-01-20 20:48:58,199 - INFO - 🧪 Starting test: test_valid_otp_verification
+2026-01-20 20:48:58,199 - INFO - ============================================================
+2026-01-20 20:48:58,489 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:58,490 - INFO - Sending OTP email with subject: Your YITP Verification Code: 348742
+2026-01-20 20:48:58,490 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:58,490 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:58,490 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:58,494 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:58,497 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:58,498 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:58,498 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:58,498 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:58,499 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:58,499 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:58,499 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:58,507 - INFO - ✅ PASS - Valid OTP Verification: User activated: True, OTP used: True, Redirected to welcome: True
+2026-01-20 20:48:58,524 - INFO - ✅ Completed test: test_valid_otp_verification
+2026-01-20 20:48:58,524 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:58,525 - INFO - ============================================================
+2026-01-20 20:48:58,525 - INFO - 🧪 Starting test: test_automatic_login_after_verification
+2026-01-20 20:48:58,525 - INFO - ============================================================
+2026-01-20 20:48:58,815 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:58,815 - INFO - Sending OTP email with subject: Your YITP Verification Code: 191007
+2026-01-20 20:48:58,815 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:58,816 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:58,816 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:58,820 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:58,823 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:58,824 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:58,824 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:58,824 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:58,825 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:58,825 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:58,825 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:58,833 - INFO - ✅ PASS - Automatic Login After Verification: User logged in: True, Correct user: True
+2026-01-20 20:48:58,849 - INFO - ✅ Completed test: test_automatic_login_after_verification
+2026-01-20 20:48:58,849 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:58,851 - INFO - ============================================================
+2026-01-20 20:48:58,851 - INFO - 🧪 Starting test: test_profile_email_verification_status
+2026-01-20 20:48:58,851 - INFO - ============================================================
+2026-01-20 20:48:59,196 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:59,196 - INFO - Sending OTP email with subject: Your YITP Verification Code: 857092
+2026-01-20 20:48:59,196 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,196 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:59,196 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:59,201 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:59,203 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,204 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:59,204 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:59,205 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,205 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:59,205 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:59,205 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:59,208 - INFO - ✅ PASS - Profile Email Verification Status: Email verification status: True
+2026-01-20 20:48:59,224 - INFO - ✅ Completed test: test_profile_email_verification_status
+2026-01-20 20:48:59,224 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:59,226 - INFO - ============================================================
+2026-01-20 20:48:59,226 - INFO - 🧪 Starting test: test_session_flag_management
+2026-01-20 20:48:59,226 - INFO - ============================================================
+2026-01-20 20:48:59,515 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:59,515 - INFO - Sending OTP email with subject: Your YITP Verification Code: 094113
+2026-01-20 20:48:59,516 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,516 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:59,516 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:59,520 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:59,523 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,523 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:59,524 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:59,524 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,525 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:59,525 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:59,525 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:59,527 - INFO - ✅ PASS - Session Flag Management: OTP flag set: True, Timestamp set: True
+2026-01-20 20:48:59,543 - INFO - ✅ Completed test: test_session_flag_management
+2026-01-20 20:48:59,543 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:59,544 - INFO - ============================================================
+2026-01-20 20:48:59,544 - INFO - 🧪 Starting test: test_profile_completion_calculation
+2026-01-20 20:48:59,545 - INFO - ============================================================
+2026-01-20 20:48:59,834 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:48:59,834 - INFO - Sending OTP email with subject: Your YITP Verification Code: 241682
+2026-01-20 20:48:59,834 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,834 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:59,834 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:48:59,838 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:48:59,841 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,842 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:48:59,843 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:48:59,843 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:48:59,843 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:48:59,843 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:48:59,843 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:48:59,846 - INFO - ✅ PASS - Profile Completion Calculation: Profile completion calculated: 66.67%
+2026-01-20 20:48:59,862 - INFO - ✅ Completed test: test_profile_completion_calculation
+2026-01-20 20:48:59,862 - INFO - ------------------------------------------------------------
+2026-01-20 20:48:59,863 - INFO - ============================================================
+2026-01-20 20:48:59,863 - INFO - 🧪 Starting test: test_duplicate_email_validation
+2026-01-20 20:48:59,863 - INFO - ============================================================
+2026-01-20 20:49:00,155 - INFO - ✅ PASS - Duplicate Email Validation: Duplicate email properly rejected
+2026-01-20 20:49:00,156 - INFO - ✅ Completed test: test_duplicate_email_validation
+2026-01-20 20:49:00,156 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:00,157 - INFO - ============================================================
+2026-01-20 20:49:00,158 - INFO - 🧪 Starting test: test_duplicate_username_validation
+2026-01-20 20:49:00,158 - INFO - ============================================================
+2026-01-20 20:49:00,461 - INFO - ✅ PASS - Duplicate Username Validation: Duplicate username properly rejected
+2026-01-20 20:49:00,479 - INFO - ✅ Completed test: test_duplicate_username_validation
+2026-01-20 20:49:00,479 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:00,480 - INFO - ============================================================
+2026-01-20 20:49:00,480 - INFO - 🧪 Starting test: test_heard_about_persists_to_profile
+2026-01-20 20:49:00,480 - INFO - ============================================================
+2026-01-20 20:49:00,775 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:49:00,775 - INFO - Sending OTP email with subject: Your YITP Verification Code: 876909
+2026-01-20 20:49:00,775 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:49:00,776 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:49:00,776 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:49:00,780 - INFO - ✅ PASS - Heard About Persistence: Referral source saved: chatgpt, redirected to OTP: True
+2026-01-20 20:49:00,797 - INFO - ✅ Completed test: test_heard_about_persists_to_profile
+2026-01-20 20:49:00,797 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:00,798 - INFO - ============================================================
+2026-01-20 20:49:00,798 - INFO - 🧪 Starting test: test_missing_heard_about_validation
+2026-01-20 20:49:00,798 - INFO - ============================================================
+2026-01-20 20:49:00,837 - INFO - ✅ PASS - Missing Heard About Validation: Missing referral source properly rejected
+2026-01-20 20:49:00,838 - INFO - ✅ Completed test: test_missing_heard_about_validation
+2026-01-20 20:49:00,838 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:00,840 - INFO - ============================================================
+2026-01-20 20:49:00,840 - INFO - 🧪 Starting test: test_password_mismatch_validation
+2026-01-20 20:49:00,840 - INFO - ============================================================
+2026-01-20 20:49:00,878 - INFO - ✅ PASS - Password Mismatch Validation: Password mismatch properly rejected
+2026-01-20 20:49:00,879 - INFO - ✅ Completed test: test_password_mismatch_validation
+2026-01-20 20:49:00,879 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:00,880 - INFO - ============================================================
+2026-01-20 20:49:00,880 - INFO - 🧪 Starting test: test_registration_form_access
+2026-01-20 20:49:00,880 - INFO - ============================================================
+2026-01-20 20:49:00,917 - INFO - ✅ PASS - Registration Form Access: Registration form accessible (Status: 200)
+2026-01-20 20:49:00,918 - INFO - ✅ Completed test: test_registration_form_access
+2026-01-20 20:49:00,919 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:00,920 - INFO - ============================================================
+2026-01-20 20:49:00,920 - INFO - 🧪 Starting test: test_required_fields_validation
+2026-01-20 20:49:00,920 - INFO - ============================================================
+2026-01-20 20:49:00,958 - INFO - ✅ PASS - Required Fields Validation: Missing required fields properly rejected
+2026-01-20 20:49:00,959 - INFO - ✅ Completed test: test_required_fields_validation
+2026-01-20 20:49:00,959 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:00,961 - INFO - ============================================================
+2026-01-20 20:49:00,961 - INFO - 🧪 Starting test: test_valid_registration_submission
+2026-01-20 20:49:00,961 - INFO - ============================================================
+2026-01-20 20:49:01,249 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:49:01,249 - INFO - Sending OTP email with subject: Your YITP Verification Code: 476575
+2026-01-20 20:49:01,250 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:49:01,250 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:49:01,250 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:49:01,253 - INFO - ✅ PASS - Valid Registration Submission: User created: True, Redirected to OTP: True
+2026-01-20 20:49:01,269 - INFO - ✅ Completed test: test_valid_registration_submission
+2026-01-20 20:49:01,269 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:01,270 - INFO - ============================================================
+2026-01-20 20:49:01,270 - INFO - 🧪 Starting test: test_profile_creation_during_registration
+2026-01-20 20:49:01,271 - INFO - ============================================================
+2026-01-20 20:49:01,621 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:49:01,621 - INFO - Sending OTP email with subject: Your YITP Verification Code: 019873
+2026-01-20 20:49:01,621 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:49:01,621 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:49:01,621 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:49:01,625 - INFO - ✅ PASS - Profile Creation During Registration: Profile created with phone: +1234567890
+2026-01-20 20:49:01,641 - INFO - ✅ Completed test: test_profile_creation_during_registration
+2026-01-20 20:49:01,641 - INFO - ------------------------------------------------------------
+2026-01-20 20:49:01,643 - INFO - ============================================================
+2026-01-20 20:49:01,643 - INFO - 🧪 Starting test: test_user_creation_with_correct_data
+2026-01-20 20:49:01,643 - INFO - ============================================================
+2026-01-20 20:49:02,046 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:49:02,047 - INFO - Sending OTP email with subject: Your YITP Verification Code: 707324
+2026-01-20 20:49:02,048 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:49:02,049 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:49:02,049 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:49:02,055 - INFO - ✅ PASS - User Creation with Correct Data: User created with correct data, inactive status: True
+2026-01-20 20:49:02,194 - INFO - ✅ Completed test: test_user_creation_with_correct_data
+2026-01-20 20:49:02,194 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:52,665 - ERROR - Could not initialize storage class: 'DefaultStorage' object is not callable
+2026-01-20 20:51:55,159 - INFO - ============================================================
+2026-01-20 20:51:55,159 - INFO - 🧪 Starting test: test_complete_registration_journey
+2026-01-20 20:51:55,159 - INFO - ============================================================
+2026-01-20 20:51:55,478 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:55,482 - INFO - Sending OTP email with subject: Your YITP Verification Code: 714274
+2026-01-20 20:51:55,483 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:55,489 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:55,489 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:55,517 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:55,520 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:55,520 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:55,524 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:51:55,524 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:55,524 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:51:55,524 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:51:55,524 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:51:55,547 - INFO - ❌ FAIL - Complete Registration Journey: Steps: Registration(False), User/OTP(True), Email(True), Verification(True), Activation(True), Redirect(True)
+2026-01-20 20:51:55,573 - INFO - ✅ Completed test: test_complete_registration_journey
+2026-01-20 20:51:55,573 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:55,574 - INFO - ============================================================
+2026-01-20 20:51:55,574 - INFO - 🧪 Starting test: test_admin_notification_email
+2026-01-20 20:51:55,574 - INFO - ============================================================
+2026-01-20 20:51:55,863 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:55,864 - INFO - Sending OTP email with subject: Your YITP Verification Code: 006541
+2026-01-20 20:51:55,864 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:55,864 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:55,864 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:55,869 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:55,872 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:55,872 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:55,873 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:51:55,873 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:55,873 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:51:55,873 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:51:55,873 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:51:55,875 - INFO - ✅ PASS - Admin Notification Email: Admin notification sent: True
+2026-01-20 20:51:55,891 - INFO - ✅ Completed test: test_admin_notification_email
+2026-01-20 20:51:55,891 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:55,893 - INFO - ============================================================
+2026-01-20 20:51:55,893 - INFO - 🧪 Starting test: test_welcome_email_after_verification
+2026-01-20 20:51:55,893 - INFO - ============================================================
+2026-01-20 20:51:56,183 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:56,184 - INFO - Sending OTP email with subject: Your YITP Verification Code: 999707
+2026-01-20 20:51:56,184 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:56,184 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:56,184 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:56,188 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:56,191 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:56,191 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:56,192 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:51:56,192 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:56,193 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:51:56,193 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:51:56,193 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:51:56,194 - INFO - ✅ PASS - Welcome Email After Verification: Welcome email sent: True
+2026-01-20 20:51:56,210 - INFO - ✅ Completed test: test_welcome_email_after_verification
+2026-01-20 20:51:56,211 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:56,212 - INFO - ============================================================
+2026-01-20 20:51:56,212 - INFO - 🧪 Starting test: test_otp_verification_with_invalid_user_id
+2026-01-20 20:51:56,212 - INFO - ============================================================
+2026-01-20 20:51:56,289 - INFO - OTP verification attempt: user_id=99999, code_length=6
+2026-01-20 20:51:56,289 - ERROR - OTP verification failed - user not found: user_id=99999
+2026-01-20 20:51:56,293 - ERROR - Internal Server Error: /verify-otp/
+Traceback (most recent call last):
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 151, in verify_otp_view
+    user = User.objects.get(id=user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/otp_views.py", line 156, in verify_otp_view
+    return redirect('users:register')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/urls/resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'register' not found. 'register' is not a valid view function or pattern name.
+2026-01-20 20:51:56,299 - INFO - ✅ Completed test: test_otp_verification_with_invalid_user_id
+2026-01-20 20:51:56,299 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:56,301 - INFO - ============================================================
+2026-01-20 20:51:56,301 - INFO - 🧪 Starting test: test_otp_verification_with_missing_user_id
+2026-01-20 20:51:56,301 - INFO - ============================================================
+2026-01-20 20:51:56,336 - INFO - OTP verification attempt: user_id=None, code_length=6
+2026-01-20 20:51:56,337 - WARNING - OTP verification failed - missing fields: {'user_id': None, 'username': None, 'otp_code_length': 0, 'timestamp': '2026-01-20T17:51:56.337056+00:00'}
+2026-01-20 20:51:56,338 - INFO - ❌ FAIL - OTP Verification with Missing User ID: Missing user ID properly handled
+2026-01-20 20:51:56,339 - INFO - ✅ Completed test: test_otp_verification_with_missing_user_id
+2026-01-20 20:51:56,339 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:56,340 - INFO - ============================================================
+2026-01-20 20:51:56,341 - INFO - 🧪 Starting test: test_registration_with_email_failure
+2026-01-20 20:51:56,341 - INFO - ============================================================
+2026-01-20 20:51:56,639 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:56,639 - INFO - Sending OTP email with subject: Your YITP Verification Code: 956170
+2026-01-20 20:51:56,639 - INFO - Test environment detected via command line or environment
+2026-01-20 20:51:56,639 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:56,643 - INFO - ❌ FAIL - Registration with Email Failure: User created and activated despite email failure: False
+2026-01-20 20:51:56,660 - INFO - ✅ Completed test: test_registration_with_email_failure
+2026-01-20 20:51:56,661 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:56,662 - INFO - ============================================================
+2026-01-20 20:51:56,662 - INFO - 🧪 Starting test: test_authenticated_user_redirect_from_registration
+2026-01-20 20:51:56,662 - INFO - ============================================================
+2026-01-20 20:51:56,955 - INFO - ✅ PASS - Authenticated User Redirect from Registration: Authenticated user redirected from registration (Status: 302)
+2026-01-20 20:51:56,956 - INFO - ✅ Completed test: test_authenticated_user_redirect_from_registration
+2026-01-20 20:51:56,956 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:56,957 - INFO - ============================================================
+2026-01-20 20:51:56,957 - INFO - 🧪 Starting test: test_welcome_page_redirect_with_session_flag
+2026-01-20 20:51:56,957 - INFO - ============================================================
+2026-01-20 20:51:57,249 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:57,249 - INFO - Sending OTP email with subject: Your YITP Verification Code: 692632
+2026-01-20 20:51:57,249 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:57,249 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:57,250 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:57,254 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:57,257 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:57,257 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:57,258 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:51:57,258 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:57,258 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:51:57,258 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:51:57,258 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:51:57,266 - INFO - ✅ PASS - Welcome Page Redirect with Session Flag: Redirected to welcome page: True
+2026-01-20 20:51:57,282 - INFO - ✅ Completed test: test_welcome_page_redirect_with_session_flag
+2026-01-20 20:51:57,282 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:57,284 - INFO - ============================================================
+2026-01-20 20:51:57,284 - INFO - 🧪 Starting test: test_multiple_otp_invalidation
+2026-01-20 20:51:57,284 - INFO - ============================================================
+2026-01-20 20:51:57,536 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2026-01-20 20:51:57,537 - INFO - Sending OTP email with subject: Your YITP Verification Code: 177400
+2026-01-20 20:51:57,537 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:57,537 - INFO - ✅ Test email sent via Django backend to ['multipleotpuser@example.com']
+2026-01-20 20:51:57,538 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2026-01-20 20:51:57,538 - INFO - Preparing to send OTP email to multipleotpuser@example.com
+2026-01-20 20:51:57,538 - INFO - Sending OTP email with subject: Your YITP Verification Code: 343518
+2026-01-20 20:51:57,538 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:57,539 - INFO - ✅ Test email sent via Django backend to ['multipleotpuser@example.com']
+2026-01-20 20:51:57,539 - INFO - ✅ OTP email sent successfully to multipleotpuser@example.com
+2026-01-20 20:51:57,539 - INFO - ✅ PASS - Multiple OTP Invalidation: First OTP invalidated: True, Second OTP valid: True
+2026-01-20 20:51:57,541 - INFO - ✅ Completed test: test_multiple_otp_invalidation
+2026-01-20 20:51:57,541 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:57,542 - INFO - ============================================================
+2026-01-20 20:51:57,542 - INFO - 🧪 Starting test: test_otp_email_delivery
+2026-01-20 20:51:57,542 - INFO - ============================================================
+2026-01-20 20:51:57,833 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:57,833 - INFO - Sending OTP email with subject: Your YITP Verification Code: 101397
+2026-01-20 20:51:57,833 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:57,834 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:57,834 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:57,837 - INFO - ✅ PASS - OTP Email Delivery: Email sent to testuser@example.com, subject: Your YITP Verification Code: 101397
+2026-01-20 20:51:57,853 - INFO - ✅ Completed test: test_otp_email_delivery
+2026-01-20 20:51:57,854 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:57,855 - INFO - ============================================================
+2026-01-20 20:51:57,855 - INFO - 🧪 Starting test: test_otp_generation_and_storage
+2026-01-20 20:51:57,855 - INFO - ============================================================
+2026-01-20 20:51:58,143 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:58,144 - INFO - Sending OTP email with subject: Your YITP Verification Code: 415815
+2026-01-20 20:51:58,144 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:58,144 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:58,144 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:58,148 - INFO - ✅ PASS - OTP Generation and Storage: OTP generated: 415815, expires: 2026-01-20 21:11:58.143528+00:00
+2026-01-20 20:51:58,164 - INFO - ✅ Completed test: test_otp_generation_and_storage
+2026-01-20 20:51:58,164 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:58,166 - INFO - ============================================================
+2026-01-20 20:51:58,166 - INFO - 🧪 Starting test: test_expired_otp_verification
+2026-01-20 20:51:58,166 - INFO - ============================================================
+2026-01-20 20:51:58,455 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:58,455 - WARNING - OTP verification failed - expired: {'user_id': 2, 'username': 'expiredotpuser', 'otp_code_length': 6, 'timestamp': '2026-01-20T17:51:58.455982+00:00'}
+2026-01-20 20:51:58,457 - INFO - ❌ FAIL - Expired OTP Verification: User remains inactive: True, Expired OTP rejected
+2026-01-20 20:51:58,458 - INFO - ✅ Completed test: test_expired_otp_verification
+2026-01-20 20:51:58,458 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:58,460 - INFO - ============================================================
+2026-01-20 20:51:58,460 - INFO - 🧪 Starting test: test_invalid_otp_verification
+2026-01-20 20:51:58,460 - INFO - ============================================================
+2026-01-20 20:51:58,749 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:58,750 - INFO - Sending OTP email with subject: Your YITP Verification Code: 324014
+2026-01-20 20:51:58,750 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:58,750 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:58,750 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:58,754 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:58,755 - WARNING - OTP verification failed - code not found: {'user_id': 2, 'username': 'testuser', 'otp_code_length': 6, 'timestamp': '2026-01-20T17:51:58.755554+00:00'}
+2026-01-20 20:51:58,757 - INFO - ❌ FAIL - Invalid OTP Verification: User remains inactive: True, Error message shown
+2026-01-20 20:51:58,773 - INFO - ✅ Completed test: test_invalid_otp_verification
+2026-01-20 20:51:58,773 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:58,775 - INFO - ============================================================
+2026-01-20 20:51:58,775 - INFO - 🧪 Starting test: test_valid_otp_verification
+2026-01-20 20:51:58,775 - INFO - ============================================================
+2026-01-20 20:51:59,065 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:59,066 - INFO - Sending OTP email with subject: Your YITP Verification Code: 056602
+2026-01-20 20:51:59,066 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,066 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:59,066 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:59,071 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:59,074 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,074 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:59,075 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:51:59,075 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,075 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:51:59,075 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:51:59,075 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:51:59,083 - INFO - ✅ PASS - Valid OTP Verification: User activated: True, OTP used: True, Redirected to welcome: True
+2026-01-20 20:51:59,099 - INFO - ✅ Completed test: test_valid_otp_verification
+2026-01-20 20:51:59,099 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:59,101 - INFO - ============================================================
+2026-01-20 20:51:59,101 - INFO - 🧪 Starting test: test_automatic_login_after_verification
+2026-01-20 20:51:59,101 - INFO - ============================================================
+2026-01-20 20:51:59,440 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:59,441 - INFO - Sending OTP email with subject: Your YITP Verification Code: 442271
+2026-01-20 20:51:59,441 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,441 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:59,441 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:59,445 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:59,448 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,449 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:59,450 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:51:59,450 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,450 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:51:59,450 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:51:59,450 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:51:59,458 - INFO - ✅ PASS - Automatic Login After Verification: User logged in: True, Correct user: True
+2026-01-20 20:51:59,474 - INFO - ✅ Completed test: test_automatic_login_after_verification
+2026-01-20 20:51:59,474 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:59,475 - INFO - ============================================================
+2026-01-20 20:51:59,475 - INFO - 🧪 Starting test: test_profile_email_verification_status
+2026-01-20 20:51:59,475 - INFO - ============================================================
+2026-01-20 20:51:59,766 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:51:59,767 - INFO - Sending OTP email with subject: Your YITP Verification Code: 433320
+2026-01-20 20:51:59,767 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,767 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:59,767 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:51:59,772 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:51:59,775 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,776 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:51:59,777 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:51:59,777 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:51:59,777 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:51:59,777 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:51:59,777 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:51:59,780 - INFO - ✅ PASS - Profile Email Verification Status: Email verification status: True
+2026-01-20 20:51:59,796 - INFO - ✅ Completed test: test_profile_email_verification_status
+2026-01-20 20:51:59,796 - INFO - ------------------------------------------------------------
+2026-01-20 20:51:59,797 - INFO - ============================================================
+2026-01-20 20:51:59,797 - INFO - 🧪 Starting test: test_session_flag_management
+2026-01-20 20:51:59,797 - INFO - ============================================================
+2026-01-20 20:52:00,087 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:52:00,088 - INFO - Sending OTP email with subject: Your YITP Verification Code: 233444
+2026-01-20 20:52:00,088 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:00,088 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:00,088 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:52:00,093 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:52:00,096 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:00,096 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:00,097 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:52:00,097 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:00,097 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:52:00,097 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:52:00,097 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:52:00,099 - INFO - ✅ PASS - Session Flag Management: OTP flag set: True, Timestamp set: True
+2026-01-20 20:52:00,116 - INFO - ✅ Completed test: test_session_flag_management
+2026-01-20 20:52:00,116 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:00,117 - INFO - ============================================================
+2026-01-20 20:52:00,117 - INFO - 🧪 Starting test: test_profile_completion_calculation
+2026-01-20 20:52:00,117 - INFO - ============================================================
+2026-01-20 20:52:00,408 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:52:00,409 - INFO - Sending OTP email with subject: Your YITP Verification Code: 376756
+2026-01-20 20:52:00,409 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:00,409 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:00,409 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:52:00,414 - INFO - OTP verification attempt: user_id=2, code_length=6
+2026-01-20 20:52:00,417 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:00,417 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:00,418 - INFO - Sending OTP verification admin notification for user: testuser@example.com
+2026-01-20 20:52:00,418 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:00,418 - INFO - ✅ Test email sent via Django backend to ['youthimpactglobal3@gmail.com']
+2026-01-20 20:52:00,418 - INFO - ✅ OTP verification admin notification sent successfully for user: testuser@example.com
+2026-01-20 20:52:00,418 - INFO - OTP verification successful: user_id=2, username=testuser
+2026-01-20 20:52:00,421 - INFO - ✅ PASS - Profile Completion Calculation: Profile completion calculated: 66.67%
+2026-01-20 20:52:00,437 - INFO - ✅ Completed test: test_profile_completion_calculation
+2026-01-20 20:52:00,437 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:00,439 - INFO - ============================================================
+2026-01-20 20:52:00,439 - INFO - 🧪 Starting test: test_duplicate_email_validation
+2026-01-20 20:52:00,439 - INFO - ============================================================
+2026-01-20 20:52:00,732 - INFO - ✅ PASS - Duplicate Email Validation: Duplicate email properly rejected
+2026-01-20 20:52:00,733 - INFO - ✅ Completed test: test_duplicate_email_validation
+2026-01-20 20:52:00,733 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:00,734 - INFO - ============================================================
+2026-01-20 20:52:00,734 - INFO - 🧪 Starting test: test_duplicate_username_validation
+2026-01-20 20:52:00,734 - INFO - ============================================================
+2026-01-20 20:52:01,023 - INFO - ✅ PASS - Duplicate Username Validation: Duplicate username properly rejected
+2026-01-20 20:52:01,042 - INFO - ✅ Completed test: test_duplicate_username_validation
+2026-01-20 20:52:01,042 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:01,044 - INFO - ============================================================
+2026-01-20 20:52:01,044 - INFO - 🧪 Starting test: test_heard_about_persists_to_profile
+2026-01-20 20:52:01,044 - INFO - ============================================================
+2026-01-20 20:52:01,338 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:52:01,338 - INFO - Sending OTP email with subject: Your YITP Verification Code: 735618
+2026-01-20 20:52:01,338 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:01,339 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:01,339 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:52:01,344 - INFO - ✅ PASS - Heard About Persistence: Referral source saved: chatgpt, redirected to OTP: True
+2026-01-20 20:52:01,361 - INFO - ✅ Completed test: test_heard_about_persists_to_profile
+2026-01-20 20:52:01,361 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:01,362 - INFO - ============================================================
+2026-01-20 20:52:01,362 - INFO - 🧪 Starting test: test_missing_heard_about_validation
+2026-01-20 20:52:01,362 - INFO - ============================================================
+2026-01-20 20:52:01,401 - INFO - ✅ PASS - Missing Heard About Validation: Missing referral source properly rejected
+2026-01-20 20:52:01,402 - INFO - ✅ Completed test: test_missing_heard_about_validation
+2026-01-20 20:52:01,402 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:01,403 - INFO - ============================================================
+2026-01-20 20:52:01,403 - INFO - 🧪 Starting test: test_password_mismatch_validation
+2026-01-20 20:52:01,403 - INFO - ============================================================
+2026-01-20 20:52:01,440 - INFO - ✅ PASS - Password Mismatch Validation: Password mismatch properly rejected
+2026-01-20 20:52:01,442 - INFO - ✅ Completed test: test_password_mismatch_validation
+2026-01-20 20:52:01,442 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:01,443 - INFO - ============================================================
+2026-01-20 20:52:01,443 - INFO - 🧪 Starting test: test_registration_form_access
+2026-01-20 20:52:01,443 - INFO - ============================================================
+2026-01-20 20:52:01,480 - INFO - ✅ PASS - Registration Form Access: Registration form accessible (Status: 200)
+2026-01-20 20:52:01,481 - INFO - ✅ Completed test: test_registration_form_access
+2026-01-20 20:52:01,481 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:01,482 - INFO - ============================================================
+2026-01-20 20:52:01,482 - INFO - 🧪 Starting test: test_required_fields_validation
+2026-01-20 20:52:01,482 - INFO - ============================================================
+2026-01-20 20:52:01,521 - INFO - ✅ PASS - Required Fields Validation: Missing required fields properly rejected
+2026-01-20 20:52:01,522 - INFO - ✅ Completed test: test_required_fields_validation
+2026-01-20 20:52:01,522 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:01,523 - INFO - ============================================================
+2026-01-20 20:52:01,523 - INFO - 🧪 Starting test: test_valid_registration_submission
+2026-01-20 20:52:01,524 - INFO - ============================================================
+2026-01-20 20:52:01,870 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:52:01,870 - INFO - Sending OTP email with subject: Your YITP Verification Code: 415146
+2026-01-20 20:52:01,871 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:01,871 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:01,871 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:52:01,874 - INFO - ✅ PASS - Valid Registration Submission: User created: True, Redirected to OTP: True
+2026-01-20 20:52:01,920 - INFO - ✅ Completed test: test_valid_registration_submission
+2026-01-20 20:52:01,920 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:01,922 - INFO - ============================================================
+2026-01-20 20:52:01,922 - INFO - 🧪 Starting test: test_profile_creation_during_registration
+2026-01-20 20:52:01,922 - INFO - ============================================================
+2026-01-20 20:52:02,210 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:52:02,211 - INFO - Sending OTP email with subject: Your YITP Verification Code: 352945
+2026-01-20 20:52:02,211 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:02,211 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:02,211 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:52:02,215 - INFO - ✅ PASS - Profile Creation During Registration: Profile created with phone: +1234567890
+2026-01-20 20:52:02,231 - INFO - ✅ Completed test: test_profile_creation_during_registration
+2026-01-20 20:52:02,231 - INFO - ------------------------------------------------------------
+2026-01-20 20:52:02,232 - INFO - ============================================================
+2026-01-20 20:52:02,232 - INFO - 🧪 Starting test: test_user_creation_with_correct_data
+2026-01-20 20:52:02,233 - INFO - ============================================================
+2026-01-20 20:52:02,524 - INFO - Preparing to send OTP email to testuser@example.com
+2026-01-20 20:52:02,524 - INFO - Sending OTP email with subject: Your YITP Verification Code: 004466
+2026-01-20 20:52:02,524 - INFO - Test environment detected, using Django email backend directly
+2026-01-20 20:52:02,525 - INFO - ✅ Test email sent via Django backend to ['testuser@example.com']
+2026-01-20 20:52:02,525 - INFO - ✅ OTP email sent successfully to testuser@example.com
+2026-01-20 20:52:02,529 - INFO - ✅ PASS - User Creation with Correct Data: User created with correct data, inactive status: True
+2026-01-20 20:52:02,546 - INFO - ✅ Completed test: test_user_creation_with_correct_data
+2026-01-20 20:52:02,546 - INFO - ------------------------------------------------------------

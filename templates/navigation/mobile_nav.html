@@ -145,6 +145,7 @@
     if (!drawer) return;
     const toggleDrawer = (open) => {
         drawer.setAttribute('data-open', open ? 'true' : 'false');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
     };
     if (openBtn) openBtn.addEventListener('click', () => toggleDrawer(true));
     if (closeBtn) closeBtn.addEventListener('click', () => toggleDrawer(false));
