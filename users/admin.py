@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django import forms
-from .models import SponsorshipRequest, OTPVerification, Profile
+from .models import SponsorshipRequest, OTPVerification, Profile, Referral
 
 
 # Status Update Form for Admin Actions
@@ -535,7 +535,8 @@ class OTPVerificationAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     list_display = [
         'user_info', 'email_verification_status', 'location_display_admin',
-        'payment_status_badge', 'profile_completion_display', 'last_activity'
+        'payment_status_badge', 'profile_completion_display', 'last_activity',
+        'personal_referral_code'
     ]
     search_fields = [
         'user__username', 'user__email', 'user__first_name', 'user__last_name',
@@ -548,7 +549,8 @@ class ProfileAdmin(admin.ModelAdmin):
     ordering = ['-user__date_joined']
     readonly_fields = [
         'payment_confirmed_at', 'verification_reminder_count', 'last_reminder_sent',
-        'profile_completion_percentage', 'created_at', 'updated_at'
+        'profile_completion_percentage', 'created_at', 'updated_at',
+        'personal_referral_code'
     ]
     list_per_page = 50
 
@@ -559,7 +561,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('👤 User Information', {
-            'fields': ('user', 'phone_number', 'bio', 'image'),
+            'fields': ('user', 'phone_number', 'bio', 'image', 'personal_referral_code'),
             'classes': ('wide',)
         }),
         ('✅ Email Verification', {
@@ -1473,6 +1475,14 @@ class ModuleInstructorAdmin(admin.ModelAdmin):
             )
         return '-'
     permissions_summary.short_description = 'Permissions'
+
+
+@admin.register(Referral)
+class ReferralAdmin(admin.ModelAdmin):
+    list_display = ('code', 'campaign', 'attributed_user', 'session_id', 'starts_at', 'ends_at', 'created_at')
+    search_fields = ('code', 'campaign', 'session_id', 'attributed_user__username', 'attributed_user__email')
+    list_filter = ('campaign', 'created_at', 'starts_at', 'ends_at')
+    ordering = ('-created_at',)
 
 
 # Customize admin site headers for better branding

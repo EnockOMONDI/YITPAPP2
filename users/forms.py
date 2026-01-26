@@ -257,9 +257,16 @@ class UserProfileForm(forms.ModelForm):
 class ProfileDetailsForm(forms.ModelForm):
     """Form for updating extended YITP profile attributes"""
 
+    heard_about = forms.ChoiceField(
+        choices=Profile.HEARD_ABOUT_CHOICES,
+        required=False,
+        label='How did you find us?',
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     class Meta:
         model = Profile
-        fields = ['bio', 'phone_number', 'country', 'city', 'timezone_name', 'image']
+        fields = ['bio', 'phone_number', 'country', 'city', 'timezone_name', 'image', 'heard_about']
         labels = {
             'bio': 'About you',
             'phone_number': 'Phone number',
@@ -267,6 +274,7 @@ class ProfileDetailsForm(forms.ModelForm):
             'city': 'City',
             'timezone_name': 'Timezone',
             'image': 'Profile photo',
+            'heard_about': 'How did you find us?',
         }
         widgets = {
             'bio': forms.Textarea(attrs={
@@ -293,6 +301,9 @@ class ProfileDetailsForm(forms.ModelForm):
             'image': forms.FileInput(attrs={
                 'class': 'form-control'
             }),
+            'heard_about': forms.Select(attrs={
+                'class': 'form-control'
+            }),
         }
 
     def clean_phone_number(self):
@@ -305,6 +316,18 @@ class ProfileDetailsForm(forms.ModelForm):
                 raise ValidationError('Phone number must be between 7 and 15 digits.')
             return cleaned_phone
         return phone
+
+    def clean_heard_about(self):
+        """
+        Keep optional for existing users: if left blank, preserve the current value
+        (defaults to model's existing setting, typically 'other').
+        """
+        value = self.cleaned_data.get('heard_about')
+        if value:
+            return value
+        if self.instance and self.instance.heard_about:
+            return self.instance.heard_about
+        return 'other'
 
 
 class AdminUserCreationForm(forms.Form):

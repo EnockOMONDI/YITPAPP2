@@ -50,6 +50,13 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio = models.TextField(default='Edit your Bio!')
     phone_number = models.CharField(max_length=20, blank=True, null=True, help_text="Contact phone number")
+    personal_referral_code = models.CharField(
+        max_length=64,
+        unique=True,
+        null=True,
+        blank=True,
+        help_text="User-specific referral code for sharing registration links"
+    )
     heard_about = models.CharField(
         max_length=50,
         choices=HEARD_ABOUT_CHOICES,
@@ -261,6 +268,8 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         """Override save to automatically update profile completion percentage"""
+        if not self.personal_referral_code:
+            self.personal_referral_code = self.generate_personal_referral_code()
         # Calculate completion percentage before saving
         self.profile_completion_percentage = self.calculate_profile_completion()
         super().save(*args, **kwargs)
@@ -528,6 +537,20 @@ class Profile(models.Model):
         self.profile_completion_percentage = self.calculate_profile_completion()
         self.save(update_fields=['profile_completion_percentage', 'updated_at'])
 
+    def generate_personal_referral_code(self):
+        """
+        Generate a short, unique referral code.
+        Uses retries to avoid collisions on the unique constraint.
+        """
+        import secrets
+        alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+        for _ in range(5):
+            candidate = ''.join(secrets.choice(alphabet) for _ in range(10))
+            if not Profile.objects.filter(personal_referral_code=candidate).exists():
+                return candidate
+        # Fallback to a longer token if collisions persist
+        return secrets.token_urlsafe(12)
+
     def needs_verification_reminder(self):
         """Check if user needs a verification reminder email"""
         from datetime import timedelta
@@ -774,7 +797,27 @@ class OTPVerification(models.Model):
 
     def is_valid(self):
         return not self.is_used and not self.is_expired() and not self.is_verified
-    
+
+
+class Referral(models.Model):
+    code = models.CharField(max_length=100)
+    campaign = models.CharField(max_length=100, blank=True, null=True)
+    landing_page = models.CharField(max_length=255, blank=True, null=True)
+    session_id = models.CharField(max_length=100, blank=True, null=True)
+    attributed_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='referrals')
+    starts_at = models.DateTimeField(blank=True, null=True)
+    ends_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Referral"
+        verbose_name_plural = "Referrals"
+
+    def __str__(self):
+        return f"Referral {self.code} ({self.attributed_user or 'unassigned'})"
+
 class Editpage(models.Model):
     SECTION_CHOICES = [
         ('hnew', 'Home | heading 1'),

@@ -780,7 +780,7 @@
                 </div>
 
                 <!-- Quick Actions -->
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <div class="profile-card">
                         <h3 class="section-title">Quick Actions</h3>
 
@@ -822,6 +822,22 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Referrals -->
+                <div class="col-lg-3">
+                    <div class="profile-card">
+                        <h3 class="section-title">Referrals</h3>
+                        <div class="info-item">
+                            <span class="info-label">Your code:</span>
+                            <span class="info-value">{{ profile.personal_referral_code }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Your link:</span>
+                            <span class="info-value" style="word-break: break-all;">{{ personal_referral_link }}</span>
+                        </div>
+                        <small class="text-muted d-block mt-2">Share this link to invite others. Registrations will be tagged to you.</small>
                     </div>
                 </div>
             </div>

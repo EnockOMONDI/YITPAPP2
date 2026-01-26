@@ -1,10 +1,12 @@
-# Registration Update Report - 2026-01-20
+# Registration Update Report - 2025-12-28 (Updated 2025-12-29)
 
 ## What we changed
 - Added a new dropdown on the sign-up form asking “How did you hear about us?” with options like Google, ChatGPT, social channels, and “Other”.
 - Made this question required for new sign-ups and kept the rest of the registration steps the same.
 - Saved the chosen answer on each user’s profile with a safe default of “Other” so existing users are not affected.
 - Created a database update to store this answer going forward.
+- Added referral tracking: capture `?ref=` on signup, log to a `Referral` model with session/landing page, attach to the user after registration, and support optional promo windows (start/end).
+- Generated a personal referral code per user, exposed it read-only on the profile overview with a shareable `/register/?ref=` link, and surfaced referral details (including personal codes and promo window fields) in admin.
 
 ## Tests we ran
 - Command: `python manage.py test tests.test_user_registration_journey`
@@ -27,4 +29,7 @@
 
 ## Notes
 - The failures above were already present in the broader registration/OTP flow and are unrelated to the new “How did you hear about us?” change. They need follow-up fixes in the OTP error-handling paths.
+- Referral links are now logged and attributed; personal referral codes are visible on the profile overview. Promo timing fields are available for time-bound codes.
+
+## Prioritynexttask
 - We plan to add this question to the user dashboard so existing users can update their answer later. No impact on current users until that UI is added.

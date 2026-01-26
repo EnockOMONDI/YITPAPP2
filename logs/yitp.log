@@ -39721,3 +39721,102 @@ INFO 2026-01-20 22:03:35,563 autoreload 68371 8573369024 Watching for file chang
 INFO 2026-01-20 22:06:14,783 autoreload 3422 8573369024 Watching for file changes with StatReloader
 INFO 2026-01-20 22:13:41,093 basehttp 3422 6204796928 "GET /register/ HTTP/1.1" 200 18024
 INFO 2026-01-20 22:15:14,947 basehttp 3422 6204796928 "GET /register/ HTTP/1.1" 200 18455
+INFO 2026-01-20 23:37:13,717 autoreload 76701 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:38:46,635 basehttp 76701 6132559872 "POST /register/ HTTP/1.1" 302 0
+INFO 2026-01-20 23:38:46,655 basehttp 76701 6132559872 "GET /login/ HTTP/1.1" 200 15555
+INFO 2026-01-20 23:38:57,847 basehttp 76701 6132559872 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-01-20 23:38:57,864 basehttp 76701 6132559872 "GET / HTTP/1.1" 302 0
+INFO 2026-01-20 23:38:57,920 basehttp 76701 6132559872 "GET /profile/ HTTP/1.1" 200 93050
+INFO 2026-01-20 23:38:58,428 basehttp 76701 6132559872 "GET /static/assets/fonts/inter/Inter-Regular.woff2 HTTP/1.1" 200 177
+INFO 2026-01-20 23:39:06,452 basehttp 76701 6132559872 "GET /profile/edit/?next=/profile/ HTTP/1.1" 200 40131
+INFO 2026-01-20 23:39:56,523 basehttp 76701 6132559872 "GET /profile/ HTTP/1.1" 200 92534
+INFO 2026-01-20 23:40:06,660 basehttp 76701 6132559872 "POST /profile/request-data/ HTTP/1.1" 302 0
+INFO 2026-01-20 23:40:06,747 basehttp 76701 6132559872 "GET /profile/?section=settings HTTP/1.1" 200 77631
+INFO 2026-01-20 23:40:21,648 basehttp 76701 6132559872 "GET /profile/ HTTP/1.1" 200 92533
+INFO 2026-01-20 23:45:22,888 autoreload 76701 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2026-01-20 23:45:24,519 autoreload 24110 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:45:59,097 autoreload 24110 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/admin.py changed, reloading.
+INFO 2026-01-20 23:46:19,056 autoreload 30626 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:46:46,167 autoreload 30626 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2026-01-20 23:46:53,181 autoreload 36317 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:47:00,399 autoreload 36317 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/views.py changed, reloading.
+INFO 2026-01-20 23:47:08,646 autoreload 36757 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:52:30,369 autoreload 36757 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/models.py changed, reloading.
+INFO 2026-01-20 23:52:45,764 autoreload 14512 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:55:45,383 autoreload 14512 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/users/admin.py changed, reloading.
+INFO 2026-01-20 23:56:00,285 autoreload 49607 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:58:39,173 autoreload 88414 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-20 23:58:49,531 basehttp 88414 6193508352 "GET /profile/ HTTP/1.1" 200 93423
+INFO 2026-01-20 23:59:11,084 basehttp 88414 6193508352 "GET /profile/edit/?next=/profile/ HTTP/1.1" 200 40131
+INFO 2026-01-20 23:59:15,509 basehttp 88414 6193508352 "GET /profile/ HTTP/1.1" 200 93423
+INFO 2026-01-21 00:01:55,736 basehttp 88414 6193508352 "GET /profile/ HTTP/1.1" 200 94978
+INFO 2026-01-21 00:11:54,990 basehttp 88414 6210334720 "GET /login/ HTTP/1.1" 302 0
+INFO 2026-01-21 00:11:54,993 basehttp 88414 6193508352 - Broken pipe from ('127.0.0.1', 63039)
+INFO 2026-01-21 00:11:55,062 basehttp 88414 6210334720 "GET /profile/ HTTP/1.1" 200 94978
+INFO 2026-01-21 00:11:58,439 basehttp 88414 6210334720 "GET / HTTP/1.1" 200 76128
+INFO 2026-01-21 00:12:13,461 basehttp 88414 6210334720 "GET /logout/ HTTP/1.1" 200 12678
+INFO 2026-01-21 00:12:19,823 basehttp 88414 6210334720 "GET / HTTP/1.1" 200 72769
+INFO 2026-01-21 00:12:37,624 basehttp 88414 6210334720 "GET /login/ HTTP/1.1" 200 14940
+INFO 2026-01-21 00:12:43,204 basehttp 88414 6210334720 "GET /register/ HTTP/1.1" 200 18455
+INFO 2026-01-21 00:14:09,643 basehttp 88414 6210334720 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-01-21 00:14:09,698 basehttp 88414 6210334720 "GET / HTTP/1.1" 302 0
+INFO 2026-01-21 00:14:09,758 basehttp 88414 6210334720 "GET /profile/ HTTP/1.1" 200 95493
+INFO 2026-01-21 00:14:20,465 basehttp 88414 6210334720 "GET /profile/edit/?next=/profile/ HTTP/1.1" 200 40131
+INFO 2026-01-21 00:15:42,597 basehttp 88414 6210334720 "GET /profile/ HTTP/1.1" 200 94976
+INFO 2026-01-21 00:17:24,569 basehttp 88414 6210334720 "GET /logout/ HTTP/1.1" 200 12678
+INFO 2026-01-21 00:17:32,762 basehttp 88414 6210334720 "GET /login/ HTTP/1.1" 200 14940
+INFO 2026-01-21 00:17:36,640 basehttp 88414 6210334720 "GET /register/ HTTP/1.1" 200 18455
+INFO 2026-01-21 00:19:44,352 basehttp 88414 6210334720 "GET /login/ HTTP/1.1" 200 14940
+INFO 2026-01-21 00:19:50,695 basehttp 88414 6210334720 "GET /register/ HTTP/1.1" 200 18455
+INFO 2026-01-21 00:47:11,985 basehttp 88414 6193508352 "GET /logout/ HTTP/1.1" 200 12129
+INFO 2026-01-21 00:47:15,984 basehttp 88414 6193508352 "GET /profile/ HTTP/1.1" 302 0
+INFO 2026-01-21 00:47:16,015 basehttp 88414 6193508352 "GET / HTTP/1.1" 200 72769
+INFO 2026-01-21 00:47:19,994 basehttp 88414 6193508352 "GET /web_courses_list/ HTTP/1.1" 200 112508
+INFO 2026-01-21 00:47:21,362 basehttp 88414 6193508352 "GET /static/assets/img/hero/sylvester.jpeg HTTP/1.1" 200 68707
+INFO 2026-01-21 00:47:21,365 basehttp 88414 6243987456 "GET /static/assets/img/hero/levin.jpeg HTTP/1.1" 200 61761
+INFO 2026-01-21 00:47:21,365 basehttp 88414 6210334720 "GET /static/assets/img/hero/ruth.jpeg HTTP/1.1" 200 97374
+INFO 2026-01-21 00:47:21,370 basehttp 88414 6277640192 "GET /static/assets/fonts/ElegantIcons.woff HTTP/1.1" 200 63664
+INFO 2026-01-21 00:47:21,373 basehttp 88414 6260813824 "GET /static/assets/img/hero/lilian.jpeg HTTP/1.1" 200 63171
+INFO 2026-01-21 00:47:21,382 basehttp 88414 6227161088 "GET /static/assets/img/hero/meshack.jpeg HTTP/1.1" 200 188051
+INFO 2026-01-21 00:47:32,816 basehttp 88414 6227161088 "GET /registration2/ HTTP/1.1" 302 0
+INFO 2026-01-21 00:47:32,859 basehttp 88414 6227161088 "GET /register/ HTTP/1.1" 200 18455
+INFO 2026-01-21 00:47:37,458 basehttp 88414 6227161088 "GET /login/ HTTP/1.1" 200 14940
+INFO 2026-01-21 00:47:52,351 basehttp 88414 6227161088 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-01-21 00:47:52,373 basehttp 88414 6227161088 "GET / HTTP/1.1" 302 0
+INFO 2026-01-21 00:47:52,418 basehttp 88414 6227161088 "GET /profile/ HTTP/1.1" 200 95493
+INFO 2026-01-21 21:17:55,487 autoreload 42212 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-26 08:43:59,269 autoreload 43549 8573369024 Watching for file changes with StatReloader
+ERROR 2026-01-26 08:44:14,933 exception 43549 6192345088 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2026-01-26 08:44:14,956 log 43549 6192345088 Bad Request: /
+WARNING 2026-01-26 08:44:14,958 basehttp 43549 6192345088 "GET / HTTP/1.1" 400 8967
+INFO 2026-01-26 08:45:53,073 autoreload 43549 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2026-01-26 08:46:07,130 autoreload 70134 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-26 08:46:14,676 basehttp 70134 6138064896 "GET / HTTP/1.1" 301 0
+INFO 2026-01-26 08:46:14,681 basehttp 70134 6138064896 code 400, message Bad request version ('\x0e³\x1bu\x12\x8e\x03Ü¬')
+ERROR 2026-01-26 08:46:14,682 basehttp 70134 6138064896 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2026-01-26 08:46:14,683 basehttp 70134 6138064896 code 400, message Bad request version ('**\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sêê\x00\x00\x00')
+ERROR 2026-01-26 08:46:14,683 basehttp 70134 6138064896 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2026-01-26 08:47:09,222 autoreload 81455 8573369024 Watching for file changes with StatReloader
+INFO 2026-01-26 08:47:20,886 basehttp 81455 6201356288 code 400, message Bad request version ("\x80ÞgÇ$'\x07ÀKøÎÈVÎ\x80\x1b¼)\x00\x17\x00\x00\x00-\x00\x02\x01\x01\x00\x12\x00\x00\x00#\x00\x00\x00")
+ERROR 2026-01-26 08:47:20,886 basehttp 81455 6201356288 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2026-01-26 08:47:20,888 basehttp 81455 6201356288 code 400, message Bad request version ('ÛvX\x06\x95SQ\x9c\x00=.\x86XR)Fb\x07')
+INFO 2026-01-26 08:47:20,888 basehttp 81455 6235009024 code 400, message Bad request version (']É\x1a+\x9e\x00')
+ERROR 2026-01-26 08:47:20,892 basehttp 81455 6201356288 You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2026-01-26 08:47:20,904 basehttp 81455 6235009024 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2026-01-26 08:47:20,908 basehttp 81455 6201356288 code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03')
+ERROR 2026-01-26 08:47:20,909 basehttp 81455 6201356288 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2026-01-26 08:47:51,065 autoreload 81455 8573369024 /Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/blog/settings.py changed, reloading.
+INFO 2026-01-26 08:47:59,626 autoreload 91562 8573369024 Watching for file changes with StatReloader

@@ -19,7 +19,7 @@ from django.utils.http import urlsafe_base64_encode, url_has_allowed_host_and_sc
 from django.utils.encoding import force_bytes
 from django.db.models import Count, Sum, Q, Avg, Prefetch
 from django.http import HttpResponse
-from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile
+from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile, Referral
 from .forms import SponsorshipRequestForm, UserProfileForm, ProfileDetailsForm, AdminUserCreationForm
 from .otp_views import send_otp_for_registration
 from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification, test_email_configuration, send_html_email
@@ -243,6 +243,27 @@ def register(request):
                 profile.heard_about = heard_about
             profile.save()
 
+            # Attach referral to this user if present
+            try:
+                ref_code = request.session.get('ref_code')
+                session_id = request.session.session_key
+                if ref_code and session_id:
+                    referral = Referral.objects.filter(
+                        session_id=session_id,
+                        attributed_user__isnull=True
+                    ).order_by('-created_at').first()
+                    if referral is None:
+                        referral = Referral.objects.create(
+                            code=ref_code[:100],
+                            session_id=session_id,
+                            landing_page=request.get_full_path()
+                        )
+                    referral.attributed_user = user
+                    referral.save(update_fields=['attributed_user'])
+            except Exception:
+                # Keep registration flow intact even if referral logging fails
+                pass
+
             # Send OTP for email verification
             try:
                 otp_record, email_sent = send_otp_for_registration(user)
@@ -278,6 +299,21 @@ def register(request):
             messages.error(request, 'An error occurred during registration. Please try again.')
             return render(request, 'signup.html')
     else:
+        ref_code = request.GET.get('ref')
+        if ref_code:
+            try:
+                if not request.session.session_key:
+                    request.session.save()
+                # Persist ref code in session and log a referral event
+                request.session['ref_code'] = ref_code[:100]
+                Referral.objects.create(
+                    code=ref_code[:100],
+                    landing_page=request.get_full_path(),
+                    session_id=request.session.session_key
+                )
+            except Exception:
+                # Do not block registration page if referral logging fails
+                pass
         return render(request, 'signup.html')
 
 def login(request):
@@ -382,6 +418,11 @@ def unified_profile(request, section='overview'):
     except:
         profile, created = Profile.objects.get_or_create(user=user)
 
+    # Ensure personal referral code exists for display
+    if not profile.personal_referral_code:
+        profile.personal_referral_code = profile.generate_personal_referral_code()
+        profile.save(update_fields=['personal_referral_code'])
+
     section_override = request.GET.get('section')
     if section_override:
         section = section_override
@@ -395,6 +436,9 @@ def unified_profile(request, section='overview'):
         'user': user,
         'profile': profile,
         'active_section': section,
+        'personal_referral_link': request.build_absolute_uri(
+            f"{reverse('register')}?ref={profile.personal_referral_code}"
+        ),
     }
 
     # Get user enrollments with related data
@@ -2389,16 +2433,18 @@ def export_users_csv(request):
     response['Content-Disposition'] = 'attachment; filename="yitp_users_export.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['ID', 'Username', 'Email', 'First Name', 'Last Name', 'Date Joined', 'Last Login', 'Is Active'])
+    writer.writerow(['ID', 'Username', 'Email', 'First Name', 'Last Name', 'Phone Number', 'Date Joined', 'Last Login', 'Is Active'])
 
-    users = User.objects.all().order_by('-date_joined')
+    users = User.objects.select_related('profile').all().order_by('-date_joined')
     for user in users:
+        phone_number = getattr(getattr(user, 'profile', None), 'phone_number', '') or ''
         writer.writerow([
             user.id,
             user.username,
             user.email,
             user.first_name,
             user.last_name,
+            phone_number,
             user.date_joined.strftime('%Y-%m-%d %H:%M:%S'),
             user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login else 'Never',
             'Yes' if user.is_active else 'No'
