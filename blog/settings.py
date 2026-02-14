@@ -261,13 +261,20 @@ if IS_PRODUCTION:
         }
     }
 else:
-    # Development: SQLite Database populated from production snapshots
-    SQLITE_DEV_PATH = BASE_DIR / 'db.dev.sqlite3'
-    print(f"📊 Using SQLite database for development at {SQLITE_DEV_PATH}")
+    # Development/local: Use the same Supabase/PostgreSQL settings as production (DB_* env vars)
+    print("📊 Using Supabase/PostgreSQL database for development/local")
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': SQLITE_DEV_PATH,
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT'),
+            'OPTIONS': {
+                'sslmode': 'require',
+                'connect_timeout': 30,
+            },
         }
     }
 
@@ -500,7 +507,8 @@ CKEDITOR_5_CONFIGS = {
 }
 
 # CKEditor 5 file upload settings
-CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.default_storage"
+# Use a concrete storage class path to avoid default_storage instance errors.
+CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 CKEDITOR_5_UPLOAD_PATH = "uploads/"
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
@@ -987,7 +995,7 @@ print(f"🚀 YITP LMS CONFIGURATION SUMMARY")
 print("=" * 60)
 print(f"🔧 Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
 print(f"🐛 Debug Mode: {DEBUG}")
-print(f"📊 Database: {'PostgreSQL (Neon)' if IS_PRODUCTION else 'SQLite (Local)'}")
+print("📊 Database: PostgreSQL (Supabase)")
 print(f"📧 Email Backend: {'Gmail SMTP' if IS_PRODUCTION else 'Console'}")
 print(f"🔒 Security: {'Production (HTTPS)' if IS_PRODUCTION else 'Development (HTTP)'}")
 print(f"📁 Static Files: {'Production (Collected)' if IS_PRODUCTION else 'Development (Direct)'}")
@@ -997,7 +1005,7 @@ print("=" * 60)
 # Environment switching instructions
 if IS_DEVELOPMENT:
     print("💡 DEVELOPMENT MODE ACTIVE")
-    print("   • Using SQLite database for local development")
+    print("   • Using PostgreSQL (Supabase) database for local development")
     print("   • Using console email backend (emails printed to terminal)")
     print("   • Security settings relaxed for HTTP development server")
     print("   • Static files served directly by Django")
@@ -1008,7 +1016,7 @@ if IS_DEVELOPMENT:
     print("   • Or ensure production environment variables are set")
 else:
     print("🚀 PRODUCTION MODE ACTIVE")
-    print("   • Using PostgreSQL database (Neon)")
+    print("   • Using PostgreSQL database (Supabase)")
     print("   • Using Gmail SMTP for email delivery")
     print("   • Production security settings enabled")
     print("   • Static files collected for deployment")
