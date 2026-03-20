@@ -105,10 +105,14 @@
 - GraphQL endpoint (`/graphql/`) is wired through `GraphQLView` (see `blog/urls.py`) to expose schema data for downstream integrations.
 
 ## Integrations & External Services
+- **Supabase**: Production PostgreSQL hosting backs the live database connection; credentials are supplied through `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, and `DB_PORT` in `render.yaml` and consumed by `blog/settings.py`.
+- **Render.com**: Primary application hosting and deployment platform; `render.yaml` defines the web service, build command (`./build.sh`), start command (`gunicorn blog.wsgi:application`), and environment variable inventory.
 - **Mailtrap**: Transactional email delivery via HTTP API (`MAILTRAP_API_TOKEN`, `DEFAULT_FROM_EMAIL`, SDK wrapper in `users/mailtrap_service.py`).
 - **Safaricom M-Pesa**: STK push, callbacks, and query URLs assembled in `blog/settings.py`; API invocation lives in `payments/payment_service.py`.
 - **PayPal**: Live REST credentials from environment variables (`render.yaml`) used by `payments/paypal_service.py` for access tokens, order creation, capture, and webhook verification.
-- **Uploadcare**: Image fields in `blogapp` and `users` leverage `pyuploadcare` for asset handling.
+- **Uploadcare**: Image fields in `blogapp` and `users` leverage `pyuploadcare` for asset handling, and course/media workflows reference Uploadcare CDN URLs for thumbnails and uploaded documents.
+- **Cloudinary / External Media CDN URLs**: The codebase does not currently include a dedicated Cloudinary SDK integration, but lesson delivery supports externally hosted media URLs. Admin and course-builder flows allow manual pasting of video and audio URLs (`courses.models.Lesson.video_url`, `audio_url`) and document links, so Cloudinary-hosted assets can be delivered this way if the team uses Cloudinary operationally.
+- **YouTube / Vimeo**: Lesson and course-builder media fields explicitly support pasted YouTube and Vimeo video URLs for embedded or direct playback.
 - **TinyMCE / CKEditor 5**: Rich editor support for course builder, blog posts, and CMS sections via `TINYMCE_API_KEY` and `django_ckeditor_5` fields.
 - **Graphene-Django**: GraphQL interface exposed at `/graphql/` for broader integrations.
 - **WhiteNoise**: Static asset serving within Django middleware for Render deployments.
