@@ -39912,3 +39912,216 @@ INFO 2026-02-14 07:18:09,187 basehttp 27445 6325039104 "GET /static/assets/fonts
 INFO 2026-02-14 07:18:26,233 basehttp 27445 6325039104 "GET /welcome HTTP/1.1" 301 0
 INFO 2026-02-14 07:18:29,829 basehttp 27445 6128578560 "GET /welcome/ HTTP/1.1" 200 59314
 INFO 2026-02-14 07:18:38,820 basehttp 27445 6128578560 "GET /lms/courses/ HTTP/1.1" 200 66255
+INFO 2026-02-14 08:10:23,649 autoreload 40006 8485501632 Watching for file changes with StatReloader
+INFO 2026-02-14 08:10:28,422 basehttp 40006 6198718464 "GET /lms/courses/ HTTP/1.1" 200 66255
+INFO 2026-02-14 08:10:35,348 basehttp 40006 6198718464 "GET /lms/courses/youth-impact-training-programme-yitp/ HTTP/1.1" 200 88459
+INFO 2026-02-14 08:10:35,375 basehttp 40006 6198718464 "GET /static/css/yitp-course-branding.css HTTP/1.1" 200 15187
+WARNING 2026-02-14 08:13:11,665 basehttp 40006 6215544832 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-02-14 08:13:13,998 log 40006 6198718464 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:13:13,999 basehttp 40006 6198718464 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2026-02-14 08:13:58,963 basehttp 40006 6198718464 "GET /profile/ HTTP/1.1" 200 93739
+WARNING 2026-02-14 08:13:59,140 basehttp 40006 6215544832 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:13:59,176 basehttp 40006 6215544832 "GET /static/assets/js/bootstrap.bundle.min.js.map HTTP/1.1" 404 1870
+WARNING 2026-02-14 08:13:59,342 basehttp 40006 6215544832 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-02-14 08:14:00,790 log 40006 6198718464 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:14:00,791 basehttp 40006 6198718464 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2026-02-14 08:14:04,203 basehttp 40006 6215544832 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:14:04,205 basehttp 40006 6198718464 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-02-14 08:14:04,267 basehttp 40006 6198718464 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:14:05,923 log 40006 6232371200 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:14:05,924 basehttp 40006 6232371200 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2026-02-14 08:14:07,679 log 40006 6232371200 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:14:07,680 basehttp 40006 6232371200 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2026-02-14 08:14:08,476 basehttp 40006 6198718464 "GET /lms/courses/dashboard/ HTTP/1.1" 200 63930
+WARNING 2026-02-14 08:14:08,545 basehttp 40006 6232371200 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:14:08,695 basehttp 40006 6215544832 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-02-14 08:14:10,283 log 40006 6198718464 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:14:10,284 basehttp 40006 6198718464 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2026-02-14 08:14:16,561 basehttp 40006 6198718464 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-02-14 08:14:16,562 basehttp 40006 6215544832 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:14:16,602 basehttp 40006 6198718464 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:14:18,340 log 40006 6232371200 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:14:18,340 basehttp 40006 6232371200 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2026-02-14 08:14:20,112 log 40006 6232371200 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:14:20,112 basehttp 40006 6232371200 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2026-02-14 08:21:32,348 enrollment_service 40006 6198718464 New enrollment created: topaj12864@newtrea.com -> Youth Impact Training
+INFO 2026-02-14 08:21:32,724 enrollment_service 40006 6198718464 Enrollment confirmation email sent to topaj12864@newtrea.com with payment context: None
+INFO 2026-02-14 08:21:35,477 enrollment_service 40006 6198718464 Enrollment admin notification sent for topaj12864@newtrea.com -> Youth Impact Training with payment context: None
+INFO 2026-02-14 08:21:36,188 basehttp 40006 6198718464 "GET /lms/courses/youth-impact-training-programme-yitp/start/ HTTP/1.1" 302 0
+INFO 2026-02-14 08:21:43,149 basehttp 40006 6198718464 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 137128
+WARNING 2026-02-14 08:21:59,879 basehttp 40006 6215544832 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-02-14 08:21:59,948 basehttp 40006 6215544832 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:22:02,052 log 40006 6198718464 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:22:02,053 basehttp 40006 6198718464 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+WARNING 2026-02-14 08:22:14,745 basehttp 40006 6215544832 "GET /static/assets/css/style.css.map HTTP/1.1" 404 1831
+WARNING 2026-02-14 08:22:14,755 basehttp 40006 6232371200 "GET /static/assets/js/swiper-bundle.min.js.map HTTP/1.1" 404 1861
+WARNING 2026-02-14 08:22:16,953 log 40006 6198718464 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2026-02-14 08:22:16,954 basehttp 40006 6198718464 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 11811
+INFO 2026-02-14 08:23:00,072 basehttp 40006 6198718464 "GET /lms/assessments/quizzes/37/take/ HTTP/1.1" 200 104327
+INFO 2026-02-14 08:23:25,015 basehttp 40006 6198718464 "POST /lms/courses/youth-impact-training-programme-yitp/lessons/103/complete/ HTTP/1.1" 200 430
+INFO 2026-02-14 08:23:27,051 basehttp 40006 6215544832 "POST /lms/courses/youth-impact-training-programme-yitp/lessons/103/complete/ HTTP/1.1" 200 430
+INFO 2026-02-14 08:23:28,019 basehttp 40006 6232371200 "POST /lms/courses/youth-impact-training-programme-yitp/lessons/103/complete/ HTTP/1.1" 200 430
+INFO 2026-02-14 08:23:46,607 basehttp 40006 6198718464 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 137128
+INFO 2026-02-14 08:36:48,567 basehttp 40006 6198718464 "GET /lms/courses/youth-impact-training-programme-yitp/lessons/103/ HTTP/1.1" 200 136890
+INFO 2026-02-14 08:37:00,594 basehttp 40006 6198718464 "GET /lms/progress/achievements/ HTTP/1.1" 200 61477
+INFO 2026-02-14 08:37:14,065 basehttp 40006 6198718464 "GET /lms/communication/ HTTP/1.1" 200 61429
+INFO 2026-02-14 08:37:14,103 basehttp 40006 6198718464 "GET /static/css/yitp-communication.css HTTP/1.1" 200 9712
+WARNING 2026-02-14 08:37:22,065 log 40006 6198718464 Not Found: /lms/courses/my-courses/
+WARNING 2026-02-14 08:37:22,066 basehttp 40006 6198718464 "GET /lms/courses/my-courses/ HTTP/1.1" 404 12195
+INFO 2026-02-14 08:37:24,537 basehttp 40006 6198718464 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2026-02-14 08:37:40,100 basehttp 40006 6198718464 "GET /profile/ HTTP/1.1" 200 98904
+INFO 2026-02-14 08:38:14,726 basehttp 40006 6198718464 "GET /lms/courses/dashboard/ HTTP/1.1" 200 68777
+INFO 2026-02-14 08:38:34,638 basehttp 40006 6198718464 "GET /certificates/my-certificates/ HTTP/1.1" 200 63482
+INFO 2026-02-14 08:40:33,780 basehttp 40006 6198718464 "GET /profile/ HTTP/1.1" 200 98904
+ERROR 2026-02-14 08:41:08,526 log 40006 6198718464 Internal Server Error: /lms/progress/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/views/generic/base.py", line 226, in get
+    context = self.get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/djsean/Desktop/APPS2026/YITP2025/YITPAPP/progress/views.py", line 44, in get_context_data
+    ).aggregate(total=Count('duration_minutes'))['total'] or 0
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 604, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 459, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/aggregates.py", line 65, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/expressions.py", line 854, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 2014, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1867, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'duration_minutes' into field. Choices are: activities, course, course_id, duration, ended_at, id, lesson, lesson_id, started_at, student, student_id
+ERROR 2026-02-14 08:41:08,533 basehttp 40006 6198718464 "GET /lms/progress/ HTTP/1.1" 500 160175
+INFO 2026-02-14 08:41:24,354 basehttp 40006 6198718464 "GET /lms/communication/ HTTP/1.1" 200 61429
+INFO 2026-02-14 08:41:31,942 basehttp 40006 6198718464 "GET /lms/progress/achievements/ HTTP/1.1" 200 61477
+INFO 2026-02-14 09:03:30,817 basehttp 40006 6198718464 "GET /lms/progress/achievements/ HTTP/1.1" 200 70118
+INFO 2026-02-14 09:04:09,224 basehttp 40006 6198718464 "GET /profile/ HTTP/1.1" 200 100080
+INFO 2026-02-14 09:04:09,227 basehttp 40006 6198718464 - Broken pipe from ('127.0.0.1', 61642)
+INFO 2026-02-14 09:04:13,051 basehttp 40006 6215544832 "GET /lms/courses/dashboard/ HTTP/1.1" 200 69440
+INFO 2026-02-14 09:05:11,351 basehttp 40006 6215544832 "GET /certificates/my-certificates/ HTTP/1.1" 200 65889
+INFO 2026-02-14 09:05:31,749 basehttp 40006 6232371200 "GET /certificates/download/gpdCQvImX58I5OJbl4DGNb9mQ3gRi1B8XRm4dfiHlaI/ HTTP/1.1" 302 0
+INFO 2026-02-14 09:05:37,055 basehttp 40006 6232371200 "GET /certificates/verify/gpdCQvImX58I5OJbl4DGNb9mQ3gRi1B8XRm4dfiHlaI/ HTTP/1.1" 200 66323
+INFO 2026-02-14 09:05:57,180 basehttp 40006 6232371200 "GET /certificates/download/gpdCQvImX58I5OJbl4DGNb9mQ3gRi1B8XRm4dfiHlaI/ HTTP/1.1" 302 0
+INFO 2026-02-14 09:06:02,201 basehttp 40006 6232371200 "GET /certificates/verify/gpdCQvImX58I5OJbl4DGNb9mQ3gRi1B8XRm4dfiHlaI/ HTTP/1.1" 200 66323
+INFO 2026-02-14 09:06:56,787 basehttp 40006 6232371200 "GET /lms/courses/dashboard/ HTTP/1.1" 200 69440
+ERROR 2026-02-14 09:07:36,586 log 40006 6198718464 Internal Server Error: /certificates/detail/gpdCQvImX58I5OJbl4DGNb9mQ3gRi1B8XRm4dfiHlaI/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: SSL connection has been closed unexpectedly
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/template/defaulttags.py", line 325, in render
+    if match:
+       ^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 414, in __bool__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: SSL connection has been closed unexpectedly
+
+INFO 2026-02-14 09:07:36,593 basehttp 40006 6198718464 - Broken pipe from ('127.0.0.1', 61650)
+INFO 2026-02-14 09:09:30,060 basehttp 40006 6215544832 - Broken pipe from ('127.0.0.1', 61683)
