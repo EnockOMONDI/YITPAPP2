@@ -22,10 +22,16 @@ credentials/
 *.sqlite3
 *.db
 db.sqlite3
+db.dev.sqlite3
 db_development.sqlite3
+db_test.sqlite3
 db_production.sqlite3
+db_backup_*.sqlite3
 *.sql
 *.dump
+data_exports/
+*.xlsx
+*.xls
 tmp/
 
 # =============================================================================
@@ -122,3 +128,21 @@ YITP_SECURITY_AUDIT_REPORT.md
 YITP_DEVELOPMENT_STATUS_ENHANCEMENT_COMPLETE.md
 *_AUDIT_*.md
 *_SECURITY_*.md
+
+# =============================================================================
+# INTERNAL OPS / BUSINESS / TRAINING CONTENT
+# =============================================================================
+PROJECT_OWNERS_REPORT.md
+Developer.md
+onboarding.md
+email_instructions.pdf
+YITP_Complete_Answer_Key.pdf
+courseunits/
+lessonsforcloudinary/
+static/module2/pdf/
+docs/dev-db-sync.md
+docs/PAYPAL_WEBHOOK_CONFIGURATION.md
+docs/production_database_integration.md
+docs/system_status_page_implementation.md
+docs/instructor_login_experience.md
+docs/instructor_workflow_automation.md
