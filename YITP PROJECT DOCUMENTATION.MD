@@ -4,6 +4,7 @@
 
 ## Table of Contents
 1. [Overview](#overview)
+2. [Installing and First time running the project](#installing)
 2. [Runtime & Deployment](#runtime--deployment)
 3. [Application & Service Inventory](#application--service-inventory)
 4. [Cross-Cutting Capabilities](#cross-cutting-capabilities)
@@ -12,13 +13,92 @@
 7. [Operational Considerations](#operational-considerations)
 8. [Sample Environment](#sample-environment)
 
-## Overview
-- Monolithic Django project that powers the public marketing site, LMS, payments, analytics, instructor tooling, and communication features.
+# Overview
+- Monolithic Python Django Django==5.0.14 project that powers the public marketing site, LMS, payments, analytics, instructor tooling, and communication features.
 - The Django project package is `blog`; domain apps live at the repository root, including `users`, `courses`, `progress`, `assessments`, `payments`, `analytics`, `communication`, `content`, `certificates`, `blogapp`, `events`, `yitp`, and `course_builder`.
 - The platform is tuned for East African delivery: default timezone is `Africa/Nairobi`, M-Pesa is supported, and payment/course flows assume a learner-facing LMS plus internal operational dashboards.
 - The admin layer is enhanced with `unfold`, alongside `django_ckeditor_5`, `import_export`, `taggit`, `graphene_django`, `crispy_forms`, `corsheaders`, and Django REST Framework.
 
-## Runtime & Deployment
+# How To Run This Project
+This is a Django project with local development driven by `manage.py`, dependencies from `requirements.txt`, and environment variables loaded through `python-decouple` in `blog/settings.py`.
+
+### 1. Prerequisites
+- Python 3.11+ recommended.
+- `pip` and virtualenv support.
+- Optional: SQLite tools if you want to inspect the bundled dev databases directly.
+
+### 2. Create and activate a virtual environment
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+- Copy `.env.example` to `.env`.
+- At minimum, verify or set:
+  - `DJANGO_ENV=development`
+  - `SECRET_KEY`
+  - `DEBUG`
+  - `SITE_URL`
+  - `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`
+  - `MAILTRAP_API_TOKEN`
+  - `MPESA_*`
+  - `PAYPAL_*`
+  - `TINYMCE_API_KEY`
+  - `UPLOADCARE_PUBLIC_KEY`, `UPLOADCARE_SECRET_KEY`
+  - `DEFAULT_FROM_EMAIL`, `ADMIN_EMAIL`
+
+### 5. Prepare the database
+- The repository already includes local SQLite snapshots such as `db.dev.sqlite3` and `db_test.sqlite3`.
+- `blog/settings.py` switches environment behavior automatically, so confirm your `.env` matches the mode you want to run.
+- Apply migrations if needed:
+```bash
+python manage.py migrate
+```
+
+### 6. Collect static files
+```bash
+python manage.py collectstatic --noinput
+```
+
+### 7. Run Django locally
+```bash
+python manage.py runserver
+```
+
+Then open:
+- `http://127.0.0.1:8000/` for the public site
+- `http://127.0.0.1:8000/admin/` for admin
+- `http://127.0.0.1:8000/profile/` for learner dashboards
+- `http://127.0.0.1:8000/payments/` for payment flows
+
+### 8. Useful checks
+```bash
+python manage.py check
+python manage.py test
+```
+
+Targeted suites called out elsewhere in this repo include:
+- `python manage.py test tests.test_user_registration_journey`
+- `python manage.py test tests.test_payment_integration tests.test_paypal_integration tests.test_payment_verification_workflow`
+- `python manage.py test tests.test_trial_system`
+- `python manage.py test tests.test_course_enrollment_journey`
+
+### 9. Production-style run notes
+- Render uses `./build.sh` during deploys and starts the app with:
+```bash
+gunicorn blog.wsgi:application
+```
+- Production hosting is on Render.com with PostgreSQL on Supabase, so local runs may require swapping production credentials for safe dev values.
+
+
+# Runtime & Deployment
 ### Environment detection
 - `blog/settings.py` uses `detect_environment()` to determine production vs development from `DJANGO_ENV`, hosting env vars, CLI context, and `DEBUG`.
 - Environment selection controls `DEBUG`, `ALLOWED_HOSTS`, cookie security, SSL redirect, HSTS, and custom error page behavior.
@@ -48,7 +128,7 @@
 - Payment, enrollment, certificate, and general Django logging are configured separately.
 - `users/views.py` also exposes system-status-style diagnostics and deployment metadata views for admin use.
 
-## Application & Service Inventory
+# Application & Service Inventory
 | Component | Responsibilities | Key References |
 | --- | --- | --- |
 | `users` | Registration, login, OTP verification, profile management, sponsorship workflows, instructor dashboards, magic link auth, timezone handling, email utilities | `users/models.py`, `users/views.py`, `users/otp_views.py`, `users/auth_views.py`, `users/magic_link_views.py`, `users/email_utils.py` |
@@ -65,7 +145,7 @@
 | `analytics` | Payment analytics, user payment behavior, course revenue analytics, dashboard APIs | `analytics/models.py`, `analytics/views.py`, `analytics/services.py` |
 | `course_builder` | Instructor-facing course builder, templates, reusable content blocks, question bank, autosave sessions | `course_builder/models.py`, `course_builder/views.py` |
 
-## Cross-Cutting Capabilities
+# Cross-Cutting Capabilities
 ### Authentication and identity
 - Registration and login logic is custom and lives mainly in `users/views.py`.
 - OTP verification is implemented in `users/otp_views.py` using `users.models.OTPVerification`.
@@ -104,7 +184,7 @@
 - `analytics` computes daily payment summaries and longer-term behavior metrics.
 - The system stores both aggregate snapshots and per-user/per-course analytics records.
 
-## Integrations & External Services
+# Integrations & External Services
 - **Render**: deployment target using `render.yaml`.
 - **PostgreSQL**: primary database in hosted environments.
 - **Mailtrap**: transactional email delivery through HTTP API wrappers in `users/mailtrap_service.py`.
@@ -115,7 +195,7 @@
 - **Graphene-Django**: GraphQL endpoint exposed at `/graphql/`.
 - **WhiteNoise**: static file serving in deployed environments.
 
-## Representative Data Flows
+# Representative Data Flows
 ### 1. Registration and OTP verification
 1. User submits registration form handled in `users/views.py`.
 2. A Django `User` plus linked `Profile` is created.
@@ -146,7 +226,7 @@
 3. User behavior and course revenue analytics can be updated in the same run.
 4. Dashboard/API views expose these records to staff-facing templates and JSON consumers.
 
-## Operational Considerations
+# Operational Considerations
 - Sensitive configuration should only be supplied through environment variables.
 - The repository currently contains deployment files that reference real-looking values; those should be treated as compromised if they are active anywhere and rotated outside the codebase.
 - Recurring operational work is implemented through Django management commands rather than Celery or another queue.
@@ -154,7 +234,7 @@
 - The codebase is tightly coupled across apps. `users`, `progress`, `courses`, `assessments`, and `payments` import from each other heavily, so changes should be tested end-to-end rather than in isolation.
 - The admin interface is customized with Unfold and role-driven permissions, so role testing matters during handover.
 
-## Sample Environment
+# Sample Environment
 The following is a redacted example only. It is not the live environment.
 
 ```env
@@ -207,3 +287,5 @@ UPLOADCARE_SECRET_KEY=uploadcare_secret_key
 - `certificates/` - certificate verification, detail, and download pages.
 
 This document is based on the current repository state and should be refreshed whenever architecture, integrations, or operational jobs change.
+
+
