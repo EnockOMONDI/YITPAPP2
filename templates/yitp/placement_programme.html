@@ -1,0 +1,644 @@
+{% extends 'unified/base.html' %} {% load static %} 
+{% block title %}Placement Opportunities Programme (POP) — Youth Impact Global{% endblock %} 
+{% block extra_css %}
+
+<style>
+  /* ─── POP Page Styles ─── */
+  :root {
+    --yitp-orange: #ff5d15;
+    --yitp-purple: #341c67;
+    --yitp-body: #6d6e75;
+    --yitp-heading: #1a1a2e;
+    --yitp-bg-light: #f8f9fa;
+  }
+
+  .mp-section-tag {
+    display: block;
+    color: var(--yitp-orange);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: none;
+    margin-bottom: 15px;
+  }
+
+  .mp-h2 {
+    color: var(--yitp-heading);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 25px;
+  }
+
+  .mp-body {
+    color: var(--yitp-body);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  /* Breadcrumb */
+  .mp-breadcrumb {
+    margin-bottom: 20px;
+  }
+  .mp-breadcrumb ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .mp-breadcrumb ul li {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .mp-breadcrumb ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .mp-breadcrumb ul li:not(:last-child)::after {
+    content: "/";
+    margin-left: 10px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Feature list item */
+  .mp-feature-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 25px;
+    background: #fff;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  .mp-feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  }
+  .mp-feature-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 93, 21, 0.1);
+    color: var(--yitp-orange);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .mp-feature-item h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--yitp-heading);
+    margin-bottom: 8px;
+  }
+  .mp-feature-item p {
+    font-size: 0.95rem;
+    color: var(--yitp-body);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Stat cards premium */
+  .mp-stats-section {
+    background: var(--yitp-purple);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .mp-stat-item-premium {
+    text-align: center;
+    padding: 50px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    backdrop-filter: blur(5px);
+  }
+  .mp-stat-item-premium:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 93, 21, 0.5);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  .mp-stat-number-premium {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--yitp-orange);
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .mp-stat-label-premium {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
+  .mp-stat-desc-premium {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Process step cards */
+  .mp-process-step {
+    position: relative;
+    padding-left: 80px;
+    margin-bottom: 40px;
+  }
+  .mp-process-step::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 50px;
+    bottom: -40px;
+    width: 2px;
+    background: rgba(255, 93, 21, 0.2);
+    border-style: dashed;
+  }
+  .mp-process-step:last-child::before {
+    display: none;
+  }
+  .mp-step-number {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border: 2px solid var(--yitp-orange);
+    color: var(--yitp-orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+  .mp-process-step:hover .mp-step-number {
+    background: var(--yitp-orange);
+    color: #fff;
+  }
+  .mp-process-step h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--yitp-heading);
+    margin-bottom: 12px;
+  }
+  .mp-process-step p {
+    font-size: 1rem;
+    color: var(--yitp-body);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* CTA */
+  .mp-cta-box {
+    background: var(--yitp-purple);
+    border-radius: 30px;
+    padding: 80px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mp-cta-box h2 {
+    color: #fff;
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+  }
+  .mp-cta-box p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+  }
+
+  .mp-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--yitp-orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 18px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  .mp-cta-btn:hover {
+    background: #fff;
+    color: var(--yitp-orange);
+    transform: translateY(-5px);
+  }
+  .mp-cta-btn-white {
+    background: #fff;
+    color: var(--yitp-purple);
+  }
+  .mp-cta-btn-white:hover {
+    background: var(--yitp-orange);
+    color: #fff;
+  }
+</style>
+{% endblock %} 
+
+{% block content %}
+
+
+<!-- ───────────────────────────────────────────────
+     HERO / BREADCRUMB
+──────────────────────────────────────────────── -->
+<section
+  class="page__title-area pt-150 pb-120 d-flex align-items-center"
+  style="
+    background: linear-gradient(135deg, var(--yitp-purple) 0%, #25124d 100%);
+    position: relative;
+    overflow: hidden;
+  "
+>
+  <div class="container" style="position: relative; z-index: 2">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-center">
+        <div class="mp-breadcrumb">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'yitp:web_courses_list' %}">Programmes</a></li>
+            <li>Placement Opportunities Programme</li>
+          </ul>
+        </div>
+
+        <h1
+          style="
+            color: #fff;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+          "
+        >
+          Placement Opportunities
+          <span style="color: var(--yitp-orange)">Programme - POP</span>
+        </h1>
+
+        <p
+          style="
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+          "
+        >
+          Bridging the gap between graduation and career success through
+          strategic placements and professional immersion.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────
+     ABOUT SECTION
+──────────────────────────────────────────────── -->
+<section style="background: #fff; padding: 120px 0">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <!-- Text -->
+      <div class="col-lg-6 order-2 order-lg-1">
+        <span class="mp-section-tag">After Training, What's Next?</span>
+
+        <h2 class="mp-h2">
+          Completing the<br />
+          <span style="color: var(--yitp-orange)">empowerment cycle.</span>
+        </h2>
+
+        <p class="mp-body">
+          The Youth Impact Global is proud to be running the Placement
+          Opportunities Programme - POP, an initiative that aims to help young
+          people access opportunities within and outside our network.
+        </p>
+
+        <p class="mp-body" style="margin-bottom: 40px">
+          POP aims to create informed and valuable employees with an
+          entrepreneurial mindset to thrive in the corporate world. We solve the
+          unemployment crisis through a strategic three-tier placement model.
+        </p>
+
+        <!-- Feature items -->
+        <div class="mp-feature-item">
+          <div class="mp-feature-icon">
+            <i class="fas fa-user-clock"></i>
+          </div>
+          <div>
+            <h5>Internships (3–6 Months)</h5>
+            <p>
+              Short-term skill testing and workplace immersion focused on
+              practical experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="mp-feature-item">
+          <div class="mp-feature-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div>
+            <h5>Strategic Apprenticeships</h5>
+            <p>
+              6–12 month structured "earn-while-you-learn" models for technical
+              roles.
+            </p>
+          </div>
+        </div>
+
+        <div class="mp-feature-item">
+          <div class="mp-feature-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div>
+            <h5>Job Placement</h5>
+            <p>
+              Permanent roles for high-growth local sectors and international
+              labour placement.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="col-lg-6 order-1 order-lg-2">
+        <div style="position: relative">
+          <div
+            style="
+              border-radius: 24px;
+              overflow: hidden;
+              box-shadow: 0 30px 70px rgba(26, 26, 46, 0.15);
+              position: relative;
+              z-index: 2;
+            "
+          >
+            <img
+              src="{% static 'assets/img/about/pop2.webp' %}"
+              alt="Young professional in a modern office"
+              style="
+                width: 100%;
+                height: 600px;
+                object-fit: cover;
+                display: block;
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────
+     PARTNERSHIP BENEFITS (STATS/PREMIUM)
+──────────────────────────────────────────────── -->
+<section class="mp-stats-section">
+  <div class="container">
+    <div
+      class="row justify-content-center text-center"
+      style="margin-bottom: 60px"
+    >
+      <div class="col-lg-8">
+        <span class="mp-section-tag" style="color: rgba(255, 255, 255, 0.8)"
+          >Why Partner With Us?</span
+        >
+        <h2 class="mp-h2" style="color: #fff">
+          Premium benefits for our partners
+        </h2>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="mp-stat-item-premium">
+          <span class="mp-stat-number-premium"
+            ><i class="fas fa-award"></i
+          ></span>
+          <h5 class="mp-stat-label-premium">Accredited Excellence</h5>
+          <p class="mp-stat-desc-premium">
+            Direct access to certified placement pathways that meet
+            international standards.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="mp-stat-item-premium">
+          <span class="mp-stat-number-premium"
+            ><i class="fas fa-shield-alt"></i
+          ></span>
+          <h5 class="mp-stat-label-premium">De-Risked Hiring</h5>
+          <p class="mp-stat-desc-premium">
+            Every candidate is pre-vetted and soft-skill certified by Youth
+            Impact Global.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="mp-stat-item-premium">
+          <span class="mp-stat-number-premium"
+            ><i class="fas fa-university"></i
+          ></span>
+          <h5 class="mp-stat-label-premium">Government Aligned</h5>
+          <p class="mp-stat-desc-premium">
+            Supporting national mandates with significant CSR and ESG advantages
+            for partners.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────
+     WORKFLOW PROCESS
+──────────────────────────────────────────────── -->
+<section style="background: #fff; padding: 120px 0">
+  <div class="container">
+    <div
+      class="row justify-content-center text-center"
+      style="margin-bottom: 80px"
+    >
+      <div class="col-lg-8">
+        <span class="mp-section-tag">Our 4-D Workflow</span>
+        <h2 class="mp-h2">A systematic approach to talent delivery</h2>
+        <p class="mp-body">
+          We ensure a seamless transition from training to placement through our
+          proven process.
+        </p>
+      </div>
+    </div>
+
+    <div class="row align-items-center g-5">
+      <!-- Steps column -->
+      <div class="col-lg-6">
+        <div style="padding-left: 20px">
+          <div class="mp-process-step">
+            <div class="mp-step-number">01</div>
+            <h5>Diagnose</h5>
+            <p>
+              We analyze your company’s specific labour shortages and
+              organizational needs first.
+            </p>
+          </div>
+
+          <div class="mp-process-step">
+            <div class="mp-step-number">02</div>
+            <h5>Design</h5>
+            <p>
+              We tailor the training curriculum for our youth cohort to match
+              your specific tools and culture.
+            </p>
+          </div>
+
+          <div class="mp-process-step">
+            <div class="mp-step-number">03</div>
+            <h5>Deploy</h5>
+            <p>
+              Seamless onboarding, including all legal, NEA, and governmental
+              compliance management.
+            </p>
+          </div>
+
+          <div class="mp-process-step">
+            <div class="mp-step-number">04</div>
+            <h5>Deliver</h5>
+            <p>
+              Ongoing performance monitoring to ensure the talent scales and
+              grows with your business.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image column -->
+      <div class="col-lg-6">
+        <div
+          style="
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.1);
+          "
+        >
+          <img
+            src="{% static 'assets/img/about/pop1.webp' %}"
+            alt="Team collaborating on a project"
+            style="
+              width: 100%;
+              height: 600px;
+              object-fit: cover;
+              display: block;
+            "
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────
+     DEMAND-DRIVEN MODEL
+──────────────────────────────────────────────── -->
+<section style="background: var(--yitp-bg-light); padding: 100px 0">
+  <div class="container">
+    <div
+      class="row justify-content-center text-center"
+      style="margin-bottom: 60px"
+    >
+      <div class="col-lg-8">
+        <span class="mp-section-tag">High Success Rates</span>
+        <h2 class="mp-h2">The Demand-Driven Model</h2>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="mp-feature-item" style="height: 100%">
+          <div class="mp-feature-icon">01</div>
+          <div>
+            <h5>Identify Gaps</h5>
+            <p>
+              We access the partner to identify specific labour gaps and
+              placement opportunities.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="mp-feature-item" style="height: 100%">
+          <div class="mp-feature-icon">02</div>
+          <div>
+            <h5>Train & Polish</h5>
+            <p>
+              YITP trains and selects candidates that meet skill gaps, culture
+              fit, and soft skills.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="mp-feature-item" style="height: 100%">
+          <div class="mp-feature-icon">03</div>
+          <div>
+            <h5>Final Placement</h5>
+            <p>
+              Secure placement and ongoing post-hire support to ensure long-term
+              stability.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────
+     CTA BANNER
+──────────────────────────────────────────────── -->
+<section style="background: #fff; padding: 120px 0">
+  <div class="container">
+    <div class="mp-cta-box">
+      <h2>Ready for the next step?</h2>
+      <p>
+        The Placement Opportunities Programme (POP) is open to all youth seeking
+        opportunities. All you need to do is register and train with us.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a
+          href="{% url 'yitp:registration' %}"
+          class="mp-cta-btn mp-cta-btn-white"
+        >
+          Register & Train <i class="fas fa-arrow-right"></i>
+        </a>
+        <a
+          href="{% url 'yitp:contact' %}"
+          class="mp-cta-btn"
+          style="background: transparent; border: 2px solid #fff"
+        >
+          Partner With Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
