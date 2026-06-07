@@ -10,6 +10,28 @@ import secrets
 import string
 
 
+class LoginForm(forms.Form):
+    """Clean, optimized form for user authentication"""
+    username = forms.CharField(
+        label='Username or Email',
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Username or Email',
+            'class': 'form-control',
+            'autofocus': True
+        })
+    )
+    password = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Password',
+            'class': 'form-control',
+            'id': 'id_password'
+        })
+    )
+    remember = forms.BooleanField(required=False, label='Remember Me')
+
+
+
 class SponsorshipRequestForm(forms.ModelForm):
     """Form for submitting sponsorship requests"""
     

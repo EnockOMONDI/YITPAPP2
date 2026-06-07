@@ -105,10 +105,14 @@
 - GraphQL endpoint (`/graphql/`) is wired through `GraphQLView` (see `blog/urls.py`) to expose schema data for downstream integrations.
 
 ## Integrations & External Services
+- **Supabase**: Production PostgreSQL hosting backs the live database connection; credentials are supplied through `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, and `DB_PORT` in `render.yaml` and consumed by `blog/settings.py`.
+- **Render.com**: Primary application hosting and deployment platform; `render.yaml` defines the web service, build command (`./build.sh`), start command (`gunicorn blog.wsgi:application`), and environment variable inventory.
 - **Mailtrap**: Transactional email delivery via HTTP API (`MAILTRAP_API_TOKEN`, `DEFAULT_FROM_EMAIL`, SDK wrapper in `users/mailtrap_service.py`).
 - **Safaricom M-Pesa**: STK push, callbacks, and query URLs assembled in `blog/settings.py`; API invocation lives in `payments/payment_service.py`.
 - **PayPal**: Live REST credentials from environment variables (`render.yaml`) used by `payments/paypal_service.py` for access tokens, order creation, capture, and webhook verification.
-- **Uploadcare**: Image fields in `blogapp` and `users` leverage `pyuploadcare` for asset handling.
+- **Uploadcare**: Image fields in `blogapp` and `users` leverage `pyuploadcare` for asset handling, and course/media workflows reference Uploadcare CDN URLs for thumbnails and uploaded documents.
+- **Cloudinary / External Media CDN URLs**: The codebase does not currently include a dedicated Cloudinary SDK integration, but lesson delivery supports externally hosted media URLs. Admin and course-builder flows allow manual pasting of video and audio URLs (`courses.models.Lesson.video_url`, `audio_url`) and document links, so Cloudinary-hosted assets can be delivered this way if the team uses Cloudinary operationally.
+- **YouTube / Vimeo**: Lesson and course-builder media fields explicitly support pasted YouTube and Vimeo video URLs for embedded or direct playback.
 - **TinyMCE / CKEditor 5**: Rich editor support for course builder, blog posts, and CMS sections via `TINYMCE_API_KEY` and `django_ckeditor_5` fields.
 - **Graphene-Django**: GraphQL interface exposed at `/graphql/` for broader integrations.
 - **WhiteNoise**: Static asset serving within Django middleware for Render deployments.
@@ -172,3 +176,81 @@ The primary routes are declared in `blog/urls.py` and the individual app `urls.p
   - `certificates/` → verification/download pages.
 - `favicon.ico` – Redirect to the bundled site icon.
 - Static/media routes are appended via `static(settings.MEDIA_URL, ...)` for media downloads when `DEBUG` is enabled.
+
+## How To Run This Project
+This is a Django project with local development driven by `manage.py`, dependencies from `requirements.txt`, and environment variables loaded through `python-decouple` in `blog/settings.py`.
+
+### 1. Prerequisites
+- Python 3.11+ recommended.
+- `pip` and virtualenv support.
+- Optional: SQLite tools if you want to inspect the bundled dev databases directly.
+
+### 2. Create and activate a virtual environment
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+- Copy `.env.example` to `.env`.
+- At minimum, verify or set:
+  - `DJANGO_ENV=development`
+  - `SECRET_KEY`
+  - `DEBUG`
+  - `SITE_URL`
+  - `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`
+  - `MAILTRAP_API_TOKEN`
+  - `MPESA_*`
+  - `PAYPAL_*`
+  - `TINYMCE_API_KEY`
+  - `UPLOADCARE_PUBLIC_KEY`, `UPLOADCARE_SECRET_KEY`
+  - `DEFAULT_FROM_EMAIL`, `ADMIN_EMAIL`
+
+### 5. Prepare the database
+- The repository already includes local SQLite snapshots such as `db.dev.sqlite3` and `db_test.sqlite3`.
+- `blog/settings.py` switches environment behavior automatically, so confirm your `.env` matches the mode you want to run.
+- Apply migrations if needed:
+```bash
+python manage.py migrate
+```
+
+### 6. Collect static files
+```bash
+python manage.py collectstatic --noinput
+```
+
+### 7. Run Django locally
+```bash
+python manage.py runserver
+```
+
+Then open:
+- `http://127.0.0.1:8000/` for the public site
+- `http://127.0.0.1:8000/admin/` for admin
+- `http://127.0.0.1:8000/profile/` for learner dashboards
+- `http://127.0.0.1:8000/payments/` for payment flows
+
+### 8. Useful checks
+```bash
+python manage.py check
+python manage.py test
+```
+
+Targeted suites called out elsewhere in this repo include:
+- `python manage.py test tests.test_user_registration_journey`
+- `python manage.py test tests.test_payment_integration tests.test_paypal_integration tests.test_payment_verification_workflow`
+- `python manage.py test tests.test_trial_system`
+- `python manage.py test tests.test_course_enrollment_journey`
+
+### 9. Production-style run notes
+- Render uses `./build.sh` during deploys and starts the app with:
+```bash
+gunicorn blog.wsgi:application
+```
+- Production hosting is on Render.com with PostgreSQL on Supabase, so local runs may require swapping production credentials for safe dev values.

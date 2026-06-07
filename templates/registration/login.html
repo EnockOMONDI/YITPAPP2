@@ -1,4 +1,4 @@
-{% extends 'yitp/basenonav.html' %}
+{% extends 'yitp/baseauth.html' %}
 {% load static %}
 
 {% block title %}Login - Youth Impact Training Programme{% endblock %}
@@ -9,6 +9,8 @@
     background: linear-gradient(135deg, #2b1857, #4b2b8a);
     min-height: 100vh;
     padding: 100px 0 60px 0;
+    display: flex;
+    align-items: center;
 }
 
 .login-panel {
@@ -16,6 +18,8 @@
     border-radius: 24px;
     overflow: hidden;
     box-shadow: 0 30px 80px rgba(10, 10, 20, 0.8);
+    margin: 0 auto;
+    width: 100%;
 }
 
 .login-showcase {
@@ -35,137 +39,193 @@
     color: #341C67;
 }
 
-.login-showcase p {
-    opacity: 0.95;
-    color: #4b2b8a;
-}
-
 .login__wrapper {
     padding: 3rem;
     color: #f8fafc;
 }
 
 .login__header h2,
-.login__header p,
-.login__options label,
-.register-link p,
-.register-link a {
-    color: white !important;
-}
-.register-link a {
+.login__header p {
     color: white !important;
 }
 
 .login__form-input {
     position: relative;
-    color: white !important;
-
+    margin-bottom: 20px;
 }
 
 .login__form-input input {
     width: 100%;
-    padding: 15px 15px 15px 3rem;
+    padding: 15px 15px 15px 3.5rem;
     border: 2px solid rgba(99, 102, 241, 0.35);
     border-radius: 12px;
+    background: white;
     color: #341C67 !important;
-    margin: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
 .login__form-input input:focus {
     border-color: #ff5d15;
-    box-shadow: 0 0 0 0.2rem rgba(255, 93, 21, 0.2);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 93, 21, 0.15);
 }
 
-.login__form-input i {
+.login__form-input > i {
     position: absolute;
-    left: 1rem;
+    left: 1.25rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #341C67;
+    color: #4b2b8a;
+    font-size: 1.1rem;
     pointer-events: none;
+    z-index: 10;
+}
+
+.btn-toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #4b2b8a;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.btn-toggle-password:hover {
+    color: #ff5d15;
+}
+
+.login__options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.remember-me input {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff5d15;
+    cursor: pointer;
 }
 
 .primary-btn {
-   background-color :#ff5d15 ;
-        border: none;
-        border-radius: 10px;
-        padding: 0.75rem 2rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
-        width: 100%;
-        margin-bottom: 1rem;
+    background-color: #ff5d15;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.primary-btn:hover {
+    background-color: #e44d00;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 93, 21, 0.3);
 }
 
 .social-divider {
-    border-top: 1px solid rgba(255,255,255,0.2);
-    margin: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 30px 0;
+    position: relative;
+}
+
+.social-divider::after {
+    content: "OR";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #0d1228;
+    padding: 0 15px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .google-btn {
     width: 100%;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     background: transparent;
-    color: #fff;
-    padding: 0.85rem 1rem;
+    color: white;
+    padding: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.google-btn:hover {
-    background: rgba(255,255,255,0.08);
-    color: #ff6b08;
-}
-
-.google-btn.disabled {
-    opacity: 0.45;
-    filter: blur(0.3px);
+    gap: 12px;
     cursor: not-allowed;
-    pointer-events: none;
-}
-
-.social-note {
-    text-align: center;
-    color: rgba(255,255,255,0.75);
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
+    opacity: 0.6;
 }
 
 .auth-links {
-    margin-top: 1.5rem;
+    margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
 .auth-links a {
-    color: #ff5d15;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
     text-decoration: none;
-    border: 1px solid rgba(255,93,21,0.4);
-    border-radius: 14px;
-    padding: 0.9rem 1rem;
-    background: rgba(255,255,255,0.05);
+    color: white;
     transition: all 0.2s ease;
 }
 
 .auth-links a:hover {
-    color: #ffa067;
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,93,21,0.6);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ff5d15;
 }
-.login__options .forgot-password,
-.register-link a {
-    color: #f8fafc;
+
+.auth-links i {
+    color: #ff5d15;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 1.2rem;
 }
-.login__options .forgot-password:hover,
-.register-link a:hover {
-    color: #ff6600;
+
+.auth-links small {
+    display: block;
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+.error-message {
+    background: rgba(220, 38, 38, 0.15);
+    border-left: 4px solid #ef4444;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    color: #fca5a5;
+    font-size: 0.95rem;
 }
 
 .auth-quote-author {
@@ -176,12 +236,8 @@
 }
 
 @media (max-width: 992px) {
-    .login-panel { border-radius: 18px; }
-    .login-showcase { padding: 3rem 2rem; }
-}
-
-@media (max-width: 576px) {
-    .login__wrapper { padding: 2.5rem; }
+    .login-showcase { display: none; }
+    .login-panel { max-width: 550px; }
 }
 </style>
 {% endblock %}
@@ -189,93 +245,115 @@
 {% block content %}
 <section class="login__area">
     <div class="container">
-        <div class="row login-panel align-items-stretch">
-            <div class="col-lg-6 login-showcase">
-                <div class="mb-4">
-                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="YITP" style="height: 48px;">
-                </div>
-                <h1>“Education is the most powerful weapon which you can use to change the world.”</h1>
-                <div class="auth-quote-author">— Nelson Mandela</div>
-            </div>
-            <div class="col-lg-6 p-0">
-                <div class="login__wrapper">
-                    <div class="login__header text-center mb-40">
-                        <h2 style="color: #ffffff; font-size: 32px; font-weight: 700; margin-bottom: 15px;">Welcome Back</h2>
-                        <p style="color: #ffffff; margin: 0;">Sign in to your Youth Impact Training Programme account</p>
+        <div class="row">
+            <div class="col-12">
+                <div class="login-panel d-flex">
+                    <div class="login-showcase col-lg-6">
+                        <div class="mb-5">
+                            <img src="{% static 'assets/img/logo/youthImpact.png' %}" alt="YITP" style="height: 50px;">
+                        </div>
+                        <h1>“Education is the most powerful weapon which you can use to change the world.”</h1>
+                        <div class="auth-quote-author">— Nelson Mandela</div>
                     </div>
-
-                    <!-- Display Form Errors -->
-                    {% if form.non_field_errors %}
-                        <div class="error-message">
-                            <i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>
-                            {% for error in form.non_field_errors %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-
-                    <form method="post" class="login__form">
-                        {% csrf_token %}
-                        
-                        <div class="login__form-input">
-                            <input type="text" name="username" placeholder="Username or Email" required 
-                                   value="{{ form.username.value|default:'' }}"
-                                   class="{% if form.username.errors %}error{% endif %}">
-                            <i class="fas fa-user"></i>
-                            {% if form.username.errors %}
-                                <div class="error-message" style="margin-top: 8px; margin-bottom: 0;">
-                                    {% for error in form.username.errors %}{{ error }}{% endfor %}
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <div class="login__form-input">
-                            <input type="password" name="password" placeholder="Password" required
-                                   class="{% if form.password.errors %}error{% endif %}">
-                            <i class="fas fa-lock"></i>
-                            {% if form.password.errors %}
-                                <div class="error-message" style="margin-top: 8px; margin-bottom: 0;">
-                                    {% for error in form.password.errors %}{{ error }}{% endfor %}
-                                </div>
-                            {% endif %}
-                        </div>
-<br>
-                      
-
-                        <button type="submit" class="e-btn e-btn-3 primary-btn">
-                            <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
-                            Sign In
-                        </button>
-
-                        <div class="social-divider"></div>
-
-                        <button type="button" class="google-btn disabled" tabindex="-1">
-                            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="height: 20px;opacity:0.75;">
-                            <div class="text-start">
-                                <strong>Continue with Google</strong>
-                                <small style="display:block;color:rgba(255,255,255,0.7);font-size:0.8rem;">Coming soon</small>
+                    <div class="col-lg-6 col-12">
+                        <div class="login__wrapper">
+                            <div class="login__header text-center mb-4">
+                                <h2 class="mb-2">Welcome Back</h2>
+                                <p>Sign in to your YITP account to continue learning</p>
                             </div>
-                        </button>
 
-                        {% if next %}
-                            <input type="hidden" name="next" value="{{ next }}">
-                        {% endif %}
-                    
-                    </form>
+                            {% if form.non_field_errors %}
+                                <div class="error-message">
+                                    {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+                                </div>
+                            {% endif %}
 
-                    <div class="auth-links">
-                        <a href="{% url 'password_reset' %}">
-                            <i class="fas fa-key me-2"></i>Forgot your password?<br>
-                            <small class="d-block text-white-50">Reset it in under a minute.</small>
-                        </a>
-                        <a href="{% url 'register' %}">
-                            <i class="fas fa-user-plus me-2"></i>Don’t have an account?<br>
-                            <small class="d-block text-white-50">Create one and start learning.</small>
-                        </a>
+                            <form method="post" class="login__form" autocomplete="off">
+                                {% csrf_token %}
+                                
+                                <div class="login__form-input">
+                                    {{ form.username }}
+                                    <i class="fas fa-user"></i>
+                                    {% if form.username.errors %}
+                                        <div class="mt-1 text-danger small">{% for error in form.username.errors %}{{ error }}{% endfor %}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="login__form-input">
+                                    {{ form.password }}
+                                    <i class="fas fa-lock"></i>
+                                    <button type="button" id="togglePassword" class="btn-toggle-password" aria-label="Toggle password">
+                                        <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                                    </button>
+                                    {% if form.password.errors %}
+                                        <div class="mt-1 text-danger small">{% for error in form.password.errors %}{{ error }}{% endfor %}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="login__options">
+                                    <label class="remember-me">
+                                        <input type="checkbox" name="remember" {% if form.remember.value %}checked{% endif %}>
+                                        <span>Remember Me</span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="primary-btn">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    Sign In
+                                </button>
+
+                                <div class="social-divider"></div>
+
+                                <button type="button" class="google-btn" disabled>
+                                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="height: 18px;">
+                                    <span>Continue with Google (Coming Soon)</span>
+                                </button>
+
+                                {% if next %}
+                                    <input type="hidden" name="next" value="{{ next }}">
+                                {% endif %}
+                            </form>
+
+                            <div class="auth-links">
+                                <a href="{% url 'password_reset' %}">
+                                    <i class="fas fa-key"></i>
+                                    <strong>Forgot Password?</strong>
+                                    <small>Reset it securely</small>
+                                </a>
+                                <a href="{% url 'register' %}">
+                                    <i class="fas fa-user-plus"></i>
+                                    <strong>New Here?</strong>
+                                    <small>Join YITP today</small>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('id_password');
+        const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+
+        if (togglePassword && passwordInput && togglePasswordIcon) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                if (type === 'password') {
+                    togglePasswordIcon.classList.remove('fa-eye-slash');
+                    togglePasswordIcon.classList.add('fa-eye');
+                } else {
+                    togglePasswordIcon.classList.remove('fa-eye');
+                    togglePasswordIcon.classList.add('fa-eye-slash');
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}

@@ -2481,8 +2481,66 @@ function submitLessonDiscussion() {
         });
 }
 
+// ---------------------------
+// Video Progress Tracking (Local Storage - Zero Server Load)
+// ---------------------------
+function initializeVideoTracking() {
+    const videoElements = document.querySelectorAll('video');
+    const lessonId = '{{ lesson.id }}';
+    const storageKey = `yitp_video_progress_lesson_${lessonId}`;
+
+    videoElements.forEach(video => {
+        // 1. Check if we have saved progress for this video
+        const savedTime = localStorage.getItem(storageKey);
+        
+        if (savedTime) {
+            // Wait for metadata to load before setting time
+            video.addEventListener('loadedmetadata', () => {
+                const timeToSet = parseFloat(savedTime);
+                // Only resume if we're not at the very end of the video
+                if (timeToSet > 0 && timeToSet < video.duration - 2) {
+                    video.currentTime = timeToSet;
+                }
+            }, { once: true });
+        }
+
+        // 2. Save progress periodically as they watch (every 5 seconds)
+        // We use timeupdate, but throttle the localStorage writes to avoid performance hits
+        let lastSaveTime = 0;
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+            
+            // Save if 5 seconds have passed or if the video is ending
+            if (currentTime - lastSaveTime > 5 || video.ended) {
+                // Don't save if they are at the very beginning
+                if (currentTime > 2) {
+                    localStorage.setItem(storageKey, currentTime.toString());
+                    lastSaveTime = currentTime;
+                }
+            }
+        });
+        
+        // Save immediately when paused or when window is closed
+        video.addEventListener('pause', () => {
+            localStorage.setItem(storageKey, video.currentTime.toString());
+        });
+        
+        window.addEventListener('beforeunload', () => {
+            if (!video.paused) {
+                localStorage.setItem(storageKey, video.currentTime.toString());
+            }
+        });
+        
+        // Clear progress when video completes so they can rewatch from the beginning next time
+        video.addEventListener('ended', () => {
+            localStorage.removeItem(storageKey);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initializeLessonDiscussion();
+    initializeVideoTracking();
 });
 </script>
 

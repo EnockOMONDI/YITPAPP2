@@ -1,73 +1,107 @@
 {% extends 'yitp/base.html' %}
 {% load static %}
 
+{% block title %}Placement Opportunities Programme — Youth Impact Global{% endblock %}
+
 {% block content %}
-
-
-<section class="page__title-area pt-120 pb-90">
-    <div class="page__title-shape">
-      
-    </div>
+<section class="page__title-area pt-120 pb-90" style="background: var(--yitp-soft-gray); min-height: 100vh;">
     <style>
-      body {
-          font-family: Arial, sans-serif;
-          margin: 40px;
-          background-color: #f8f9fa;
-          color: #333;
-      }
       .course-container {
           max-width: 900px;
-          margin: 0 auto;
-          background: #fff;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          margin: 40px auto;
+          background: #ffffff;
+          padding: 40px;
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-soft);
+          border: 1px solid rgba(26, 46, 83, 0.06);
       }
-      h1, h2, h3 {
-          color: #341C67;
+      .course-container h1 {
+          color: var(--yitp-navy);
+          font-weight: 800;
+          margin-bottom: 10px;
       }
-      h1 {
-          text-align: center;
+      .course-objective {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          color: var(--yitp-slate);
+          margin-bottom: 30px;
+          border-bottom: 2px solid var(--yitp-soft-gray);
+          padding-bottom: 20px;
       }
       .module {
-          margin-top: 20px;
-          padding: 15px;
-          background: #f1f1f1;
-          border-left: 5px solid #007bff;
-          border-radius: 5px;
+          margin-top: 25px;
+          padding: 24px;
+          background: #ffffff;
+          border-left: 4px solid var(--yitp-orange);
+          border-radius: var(--radius-md);
+          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+          border-top: 1px solid rgba(0,0,0,0.02);
+          border-right: 1px solid rgba(0,0,0,0.02);
+          border-bottom: 1px solid rgba(0,0,0,0.02);
       }
       .module h3 {
-          margin-bottom: 5px;
+          color: var(--yitp-navy);
+          font-weight: 700;
+          font-size: 1.3rem;
+          margin-bottom: 12px;
       }
-      ul {
-          list-style-type: none;
-          padding: 0;
+      .module ul {
+          padding-left: 0;
+          list-style: none;
       }
-      ul li {
-          padding: 5px 0;
+      .module ul li {
+          position: relative;
+          padding-left: 24px;
+          margin-bottom: 8px;
+          color: var(--yitp-gray);
+      }
+      .module ul li::before {
+          content: "\f00c";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          position: absolute;
+          left: 0;
+          color: var(--yitp-orange);
       }
       .activity {
-          background: #dff9fb;
-          padding: 10px;
-          border-left: 5px solid #17a2b8;
-          border-radius: 5px;
-          margin-top: 10px;
+          background: rgba(255, 93, 21, 0.05);
+          padding: 16px;
+          border-radius: 8px;
+          margin-top: 15px;
+          border-left: 3px solid var(--yitp-light-orange);
+          color: var(--yitp-navy);
+          font-weight: 500;
       }
       .resources, .outcomes {
           margin-top: 30px;
-          padding: 15px;
-          background: #eef2f3;
-          border-left: 5px solid #28a745;
-          border-radius: 5px;
+          padding: 24px;
+          background: var(--yitp-soft-gray);
+          border-radius: var(--radius-md);
+          border: 1px solid rgba(0,0,0,0.04);
+      }
+      .resources h3, .outcomes h3 {
+          color: var(--yitp-navy);
+          font-weight: 700;
+          font-size: 1.25rem;
+          margin-bottom: 15px;
+      }
+      .resources ul, .outcomes ul {
+          padding-left: 20px;
+          list-style-type: disc;
+          color: var(--yitp-gray);
+      }
+      .resources ul li, .outcomes ul li {
+          margin-bottom: 8px;
+      }
+      .register-cta-wrap {
+          text-align: center;
+          margin-top: 40px;
       }
   </style>
-</head>
-<body>
 
 <div class="course-container">
-  <h1>CV Writing</h1>
-  <p><strong>Unit Title:</strong> CV Writing</p>
-  <p><strong>Objective:</strong> Equip participants with the knowledge and skills to create an effective CV and cover letter that enhances job application success.</p>
+  <h1>CV Writing &amp; Professional Growth</h1>
+  <p class="course-objective"><strong>Objective:</strong> Equip participants with the knowledge and skills to create an effective CV and cover letter that enhances job application success.</p>
 
   <div class="module">
       <h3>Topic 1: Introduction to CVs</h3>
@@ -194,11 +228,11 @@
           <li>Confidence in submitting job applications with well-crafted documents.</li>
       </ul>
   </div>
-  <br><br><a href= "{% url 'yitp:registration2' %}" class="e-btn">Register for the course</a>
+  <div class="register-cta-wrap">
+    <a href="{% url 'register' %}" class="e-btn">
+      <i class="fas fa-user-plus me-2"></i> Register for the Placement Opportunities Programme
+    </a>
+  </div>
 </div>
- </section>
-
-
-     
-   
-   {% endblock %}
+</section>
+{% endblock %}

@@ -30,6 +30,7 @@ urlpatterns = [
     path('coursedetail4/', views.coursedetail4, name='coursedetail4'),
     path('coursedetail5/', views.coursedetail5, name='coursedetail5'),
     path('coursedetail6/', views.coursedetail6, name='coursedetail6'),
+    path('placement-programme/', views.placement_programme, name='placement_programme'),
 
     # SEO URLs
     path('sitemap.xml', views.sitemap_xml, name='sitemap'),

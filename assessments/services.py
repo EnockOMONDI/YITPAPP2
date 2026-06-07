@@ -82,26 +82,33 @@ class QuizValidationService:
         Returns:
             dict: Quiz status information
         """
-        quiz = lesson.quizzes.filter(is_published=True).first()
+        # Optimize by checking prefetched quizzes first, avoiding DB hit
+        if hasattr(lesson, '_prefetched_objects_cache') and 'quizzes' in lesson._prefetched_objects_cache:
+            quiz = next((q for q in lesson.quizzes.all() if q.is_published), None)
+        else:
+            quiz = lesson.quizzes.filter(is_published=True).first()
+
         if not quiz:
             return {
                 'has_quiz': False,
                 'quiz_required': False
             }
         
-        attempts = QuizAttempt.objects.filter(
+        # Evaluate attempts query as a list to perform subsequent checks in memory
+        attempts = list(QuizAttempt.objects.filter(
             student=user,
             quiz=quiz
-        ).order_by('-started_at')
+        ).order_by('-started_at'))
         
-        best_attempt = attempts.filter(is_passed=True).order_by('-score').first()
-        latest_attempt = attempts.first()
+        best_attempt = next((a for a in attempts if a.is_passed), None)
+        latest_attempt = attempts[0] if attempts else None
         last_attempt_id = latest_attempt.id if latest_attempt else None
         review_url = reverse('assessments:quiz_results', kwargs={'attempt_id': last_attempt_id}) if last_attempt_id else None
         
+        attempts_count = len(attempts)
         can_attempt = (
             best_attempt is None and
-            (quiz.max_attempts == 0 or attempts.count() < quiz.max_attempts)
+            (quiz.max_attempts == 0 or attempts_count < quiz.max_attempts)
         )
 
         return {
@@ -109,7 +116,7 @@ class QuizValidationService:
             'quiz_required': True,
             'quiz': quiz,
             'quiz_url': reverse('assessments:take_quiz', kwargs={'quiz_id': quiz.id}),
-            'attempts_count': attempts.count(),
+            'attempts_count': attempts_count,
             'max_attempts': quiz.max_attempts,
             'can_attempt': can_attempt,
             'has_passed': best_attempt is not None,

@@ -42,8 +42,11 @@ class MessageAdmin(admin.ModelAdmin):
     actions = ['mark_as_read', 'mark_as_unread', 'archive_messages']
 
     def get_queryset(self, request):
-        """Filter messages based on instructor role"""
-        qs = super().get_queryset(request).select_related('sender', 'recipient')
+        """Filter messages based on instructor role with prefetching"""
+        qs = super().get_queryset(request).select_related(
+            'sender__instructor_profile',
+            'recipient__instructor_profile'
+        )
 
         # System admins see all messages
         if request.user.is_superuser:
@@ -168,14 +171,63 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = ['user', 'notification_type', 'title', 'created_at', 'is_read']
     list_filter = ['notification_type', 'is_read', 'created_at']
     search_fields = ['user__username', 'title', 'message']
+    list_select_related = ['user']
     readonly_fields = ['created_at']
     ordering = ['-created_at']
+    list_per_page = 25
 
-# Simple admin registrations for other models
-admin.site.register(Forum)
-admin.site.register(Topic)
-admin.site.register(Reply)
-admin.site.register(Feedback)
-admin.site.register(Announcement)
-admin.site.register(StudyGroup)
-admin.site.register(StudyGroupMembership)
+@admin.register(Forum)
+class ForumAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'course', 'created_by', 'is_moderated', 'is_active', 'created_at']
+    list_filter = ['is_moderated', 'is_active', 'course']
+    search_fields = ['title', 'description', 'course__title', 'created_by__username']
+    list_select_related = ['course', 'created_by']
+    list_per_page = 25
+
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'forum', 'created_by', 'is_pinned', 'is_locked', 'view_count', 'reply_count', 'created_at']
+    list_filter = ['is_pinned', 'is_locked', 'forum__course']
+    search_fields = ['title', 'content', 'forum__title', 'created_by__username']
+    list_select_related = ['forum__course', 'created_by']
+    list_per_page = 25
+
+@admin.register(Reply)
+class ReplyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'topic', 'created_by', 'parent_reply', 'is_solution', 'like_count', 'created_at']
+    list_filter = ['is_solution', 'topic__forum__course']
+    search_fields = ['content', 'topic__title', 'created_by__username']
+    list_select_related = ['topic__forum__course', 'created_by', 'parent_reply']
+    list_per_page = 25
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ['id', 'content_type', 'object_id', 'feedback_type', 'rating', 'given_by', 'received_by', 'created_at']
+    list_filter = ['feedback_type', 'content_type', 'rating']
+    search_fields = ['comment', 'given_by__username', 'received_by__username']
+    list_select_related = ['given_by', 'received_by']
+    list_per_page = 25
+
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'course', 'priority', 'is_published', 'publish_date', 'created_by']
+    list_filter = ['priority', 'is_published', 'course']
+    search_fields = ['title', 'content', 'course__title', 'created_by__username']
+    list_select_related = ['course', 'created_by']
+    list_per_page = 25
+
+@admin.register(StudyGroup)
+class StudyGroupAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'course', 'is_public', 'max_members', 'created_by', 'created_at']
+    list_filter = ['is_public', 'course']
+    search_fields = ['name', 'description', 'course__title', 'created_by__username']
+    list_select_related = ['course', 'created_by']
+    list_per_page = 25
+
+@admin.register(StudyGroupMembership)
+class StudyGroupMembershipAdmin(admin.ModelAdmin):
+    list_display = ['id', 'study_group', 'user', 'role', 'joined_at']
+    list_filter = ['role', 'study_group__course']
+    search_fields = ['study_group__name', 'user__username', 'user__first_name', 'user__last_name']
+    list_select_related = ['study_group__course', 'user']
+    list_per_page = 25

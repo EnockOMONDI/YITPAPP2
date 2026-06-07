@@ -16,43 +16,43 @@ services:
 
       # Supabase PostgreSQL Database Configuration
       - key: DB_NAME
-        value: postgres
+        sync: false
       - key: DB_USER
-        value: postgres.ovywuanlidncuecjlyve
+        sync: false
       - key: DB_PASSWORD
-        value: "_zi4DD9LBKAc@Pk"
+        sync: false
       - key: DB_HOST
-        value: aws-0-eu-west-1.pooler.supabase.com
+        sync: false
       - key: DB_PORT
-        value: 6543
+        sync: false
 
       # Email Configuration (Mailtrap API - MIGRATED FROM GMAIL SMTP)
       - key: MAILTRAP_API_TOKEN
-        value: "8d7b07aba3b511ad40cd57c48ad773e1"
+        sync: false
       - key: DEFAULT_FROM_EMAIL
-        value: "admin@youthimpactglobal.com"
+        sync: false
 
       # M-Pesa API Configuration
       - key: MPESA_CONSUMER_KEY
-        value: "UMi2MLMFIdaOS8vRFiWLG40CJ4GzWAGAHbwFROxe473iZ6gQ"
+        sync: false
       - key: MPESA_CONSUMER_SECRET
-        value: "2K3IJkdE7uxLJm9Nis3mhO3TZHqmowc0ndI9abTGxGJ4gcAdvdAZ5C9tx9wrAWRp"
+        sync: false
       - key: MPESA_ENVIRONMENT
-        value: "sandbox"
+        sync: false
       - key: MPESA_SHORTCODE
-        value: "174379"
+        sync: false
       - key: MPESA_PASSKEY
-        value: "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
+        sync: false
 
       # PayPal API Configuration - LIVE PRODUCTION
       - key: PAYPAL_CLIENT_ID
-        value: "AcZ8rCsyFeympsh1tPzIEpPorEPtmGT40qZkS-YsE6pxxtMyqJ18BjfriE07hiGxOEMnBom_H6VoWdD9"
+        sync: false
       - key: PAYPAL_CLIENT_SECRET
-        value: "EEvqKEvfY7ZqDfO067JliUSGcJKzWo_8HWjWPp7xxEvfX6FXlyfNFIDFhMhq4IahEgH_FMPBpyTMFyca"
+        sync: false
       - key: PAYPAL_MODE
-        value: "live"
+        sync: false
       - key: PAYPAL_WEBHOOK_ID
-        value: "86J87791JU267113S"  
+        sync: false
 
       # Site Configuration
       - key: SITE_URL
@@ -60,11 +60,11 @@ services:
 
       # Admin Configuration
       - key: ADMIN_EMAIL
-        value: "info@youthimpactglobal.com"
+        sync: false
 
       # TinyMCE Configuration
       - key: TINYMCE_API_KEY
-        value: "qu2jb8k2dyah1y5pjdglgob206f26juotj3u82hzd7mvyz1x"
+        sync: false
 
       # Static Files Configuration
       - key: STATIC_URL
