@@ -464,6 +464,9 @@ def coursedetail6(request):
 
     return render(request, 'yitp/coursedetail6.html')
 
+def placement_programme(request):
+    return render(request, 'yitp/placement_programme.html')
+
 
 @cache_page(60 * 60 * 24)  # Cache for 24 hours
 @require_http_methods(["GET"])

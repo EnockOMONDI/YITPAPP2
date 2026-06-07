@@ -169,11 +169,11 @@ class Course(models.Model):
     
     @property
     def total_modules(self):
-        return self.modules.count()
+        return len(self.modules.all())
     
     @property
     def total_lessons(self):
-        return sum(module.lessons.count() for module in self.modules.all())
+        return sum(len(module.lessons.all()) for module in self.modules.all())
     
     @property
     def enrolled_students_count(self):
@@ -422,6 +422,57 @@ class Lesson(models.Model):
                     return False, f"You must complete '{previous_lesson.title}' before accessing this lesson."
             except LessonProgress.DoesNotExist:
                 return False, f"You must complete '{previous_lesson.title}' before accessing this lesson."
+
+        return True, "Lesson is accessible."
+
+    def is_accessible_with_context(self, user, enrollment, trial_access_data=None, prev_progress_map=None, previous_lesson=None, is_first=None):
+        """
+        Optimized version of is_accessible_for_user that accepts pre-fetched data to avoid N+1 queries.
+        
+        Args:
+            user: User object
+            enrollment: Pre-fetched Enrollment object
+            trial_access_data: Pre-calculated trial access dict from TrialAccessService
+            prev_progress_map: Dictionary mapping lesson.id to LessonProgress status
+            previous_lesson: Pre-fetched previous Lesson object
+            is_first: Boolean indicating if this is the first lesson
+        """
+        if not enrollment:
+            return False, "You must be enrolled in this course to access lessons."
+
+        # Check trial access
+        if trial_access_data and trial_access_data['is_trial_user']:
+            if not trial_access_data['can_access']:
+                return False, trial_access_data['reason']
+
+        # Check if it's the first lesson
+        if is_first is None:
+            is_first = self.is_first_lesson_in_course()
+            
+        if is_first:
+            return True, "First lesson is always accessible."
+
+        # Check previous lesson progress
+        if previous_lesson is None:
+            previous_lesson = self.get_previous_lesson()
+            
+        if previous_lesson:
+            # Check the map first to save a DB query
+            if prev_progress_map is not None:
+                status = prev_progress_map.get(previous_lesson.id)
+                if status != 'completed':
+                    return False, f"You must complete '{previous_lesson.title}' before accessing this lesson."
+            else:
+                from progress.models import LessonProgress
+                try:
+                    prev_progress = LessonProgress.objects.get(
+                        enrollment=enrollment,
+                        lesson=previous_lesson
+                    )
+                    if prev_progress.status != 'completed':
+                        return False, f"You must complete '{previous_lesson.title}' before accessing this lesson."
+                except LessonProgress.DoesNotExist:
+                    return False, f"You must complete '{previous_lesson.title}' before accessing this lesson."
 
         return True, "Lesson is accessible."
 

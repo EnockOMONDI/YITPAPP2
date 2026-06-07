@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.urls import reverse
 from django.contrib import messages
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User
+from django.contrib import auth
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.password_validation import validate_password
@@ -20,7 +21,7 @@ from django.utils.encoding import force_bytes
 from django.db.models import Count, Sum, Q, Avg, Prefetch
 from django.http import HttpResponse
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest, Profile, Referral
-from .forms import SponsorshipRequestForm, UserProfileForm, ProfileDetailsForm, AdminUserCreationForm
+from .forms import LoginForm, SponsorshipRequestForm, UserProfileForm, ProfileDetailsForm, AdminUserCreationForm
 from .otp_views import send_otp_for_registration
 from .email_utils import send_login_notification, send_sponsorship_confirmation_email, send_sponsorship_admin_notification, test_email_configuration, send_html_email
 
@@ -317,82 +318,92 @@ def register(request):
         return render(request, 'signup.html')
 
 def login(request):
+    import logging
+    logger = logging.getLogger(__name__)
+
     # Redirect if user is already logged in
     if request.user.is_authenticated:
         return redirect('yitp:home')
 
+    form = LoginForm(request.POST or None)
+    
     if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
-        password = request.POST.get('password', '')
-        remember_me = request.POST.get('remember')
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            remember_me = form.cleaned_data.get('remember')
 
-        # Basic validation
-        if not username or not password:
-            messages.error(request, 'Please enter both username and password.')
-            return render(request, 'registration/login.html')
-
-        # Try to authenticate with username first
-        user = auth.authenticate(username=username, password=password)
-
-        # If username authentication fails, try with email
-        if user is None:
             try:
-                user_obj = User.objects.get(email=username)
-                user = auth.authenticate(username=user_obj.username, password=password)
-            except User.DoesNotExist:
-                pass
+                # Single pass authentication using optimized EmailOrUsernameBackend
+                user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            if user.is_active:
-                auth.login(request, user)
+                if user is not None:
+                    if user.is_active:
+                        auth_login(request, user)
+                        
+                        # Session expiry based on 'Remember Me'
+                        if not remember_me:
+                            request.session.set_expiry(0)
 
-                # Send login notification email (non-blocking)
-                import threading
-                def send_notification_async():
-                    try:
-                        send_login_notification(user, request)
-                    except Exception as e:
-                        # Log but don't fail login
-                        import logging
-                        logger = logging.getLogger(__name__)
-                        logger.error(f"Login notification failed: {str(e)}")
+                        # Send login notification email (background thread)
+                        import threading
+                        
+                        # Extract metadata needed for notification before thread starts
+                        # to avoid accessing the closed request object in the background
+                        meta_data = {
+                            'HTTP_X_FORWARDED_FOR': request.META.get('HTTP_X_FORWARDED_FOR'),
+                            'REMOTE_ADDR': request.META.get('REMOTE_ADDR'),
+                            'HTTP_USER_AGENT': request.META.get('HTTP_USER_AGENT'),
+                        }
 
-                # Start email sending in background thread with timeout
-                notification_thread = threading.Thread(target=send_notification_async, daemon=True)
-                notification_thread.start()
+                        def send_notification_async(u_id, meta):
+                            try:
+                                # We create a mock request-like object for the notification utility
+                                from django.http import HttpRequest
+                                mock_request = HttpRequest()
+                                mock_request.META = meta
+                                
+                                u_obj = User.objects.get(id=u_id)
+                                send_login_notification(u_obj, mock_request)
+                            except Exception as e:
+                                logger.error(f"Login notification error: {str(e)}")
 
-                # Handle remember me functionality
-                if not remember_me:
-                    request.session.set_expiry(0)  # Session expires when browser closes
+                        threading.Thread(
+                            target=send_notification_async, 
+                            args=(user.id, meta_data), 
+                            daemon=True
+                        ).start()
 
-                # Get next URL or redirect based on user type
-                next_url = request.POST.get('next') or request.GET.get('next')
-                if next_url:
-                    return redirect(next_url)
+                        # Redirect logic
+                        next_url = request.POST.get('next') or request.GET.get('next')
+                        if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                            return redirect(next_url)
+                        
+                        # Instructor dashboard redirect
+                        if hasattr(user, 'instructor_profile'):
+                            try:
+                                instructor = user.instructor_profile
+                                if instructor.is_verified and instructor.is_active:
+                                    messages.success(request, f'Welcome back, {user.get_full_name() or user.username}!')
+                                    return redirect('users:instructor_dashboard')
+                            except Exception:
+                                pass
+
+                        messages.success(request, f'Welcome back, {user.first_name or user.username}!')
+                        return redirect('yitp:home')
+                    else:
+                        messages.error(request, 'Your account has been disabled.')
                 else:
-                    # Check if user is an instructor and redirect appropriately
-                    try:
-                        instructor_profile = user.instructor_profile
-                        if instructor_profile.is_verified and instructor_profile.is_active:
-                            messages.success(
-                                request,
-                                f'Welcome back, {user.get_full_name()}! You\'re logged in as {instructor_profile.get_instructor_role_display()}.'
-                            )
-                            return redirect('users:instructor_dashboard')
-                    except:
-                        pass
-
-                    # Default redirect for non-instructors
-                    messages.success(request, f'Welcome back, {user.first_name or user.username}!')
-                    return redirect('yitp:home')
-            else:
-                messages.error(request, 'Your account has been disabled. Please contact support.')
-                return render(request, 'registration/login.html')
+                    messages.error(request, 'Invalid username/email or password.')
+            except Exception as e:
+                logger.error(f"Login error: {str(e)}")
+                messages.error(request, 'An unexpected error occurred. Please try again.')
         else:
-            messages.error(request, 'Invalid username/email or password. Please try again.')
-            return render(request, 'registration/login.html')
-    else:
-        return render(request, 'registration/login.html')
+            # Form validation failed
+            pass
+    
+    return render(request, 'registration/login.html', {'form': form})
+
 
 def logout(request):
     if request.user.is_authenticated:
@@ -442,14 +453,18 @@ def unified_profile(request, section='overview'):
     }
 
     # Get user enrollments with related data
-    enrollments = Enrollment.objects.filter(student=user).select_related('course').prefetch_related('lesson_progress')
+    enrollments = Enrollment.objects.filter(student=user).select_related('course__category').prefetch_related(
+        'lesson_progress',
+        'course__modules__lessons'
+    )
     context['enrollments'] = enrollments
 
     # Basic statistics
-    context['total_enrollments'] = enrollments.count()
-    context['completed_courses'] = enrollments.filter(status='completed').count()
-    context['active_courses'] = enrollments.filter(status='active').count()
-    context['dropped_courses'] = enrollments.filter(status='dropped').count()
+    enrollments_list = list(enrollments)
+    context['total_enrollments'] = len(enrollments_list)
+    context['completed_courses'] = len([e for e in enrollments_list if e.status == 'completed'])
+    context['active_courses'] = len([e for e in enrollments_list if e.status == 'active'])
+    context['dropped_courses'] = len([e for e in enrollments_list if e.status == 'dropped'])
 
     # Learning analytics for LMS sections
     if section in ['overview', 'lms', 'courses', 'analytics']:
@@ -464,12 +479,12 @@ def unified_profile(request, section='overview'):
         context['total_study_sessions'] = study_sessions.count()
 
         # Learning streak calculation
-        recent_activity = LessonProgress.objects.filter(
+        recent_activity_list = list(LessonProgress.objects.filter(
             enrollment__student=user,
             completed_at__isnull=False
-        ).order_by('-completed_at')
+        ).order_by('-completed_at'))
 
-        context['learning_streak'] = calculate_learning_streak(recent_activity)
+        context['learning_streak'] = calculate_learning_streak(recent_activity_list)
 
         # Recent achievements
         recent_achievements = Achievement.objects.filter(student=user).order_by('-earned_at')[:5]
@@ -478,16 +493,21 @@ def unified_profile(request, section='overview'):
 
         # Course progress details
         course_progress = []
-        for enrollment in enrollments:
+        for enrollment in enrollments_list:
+            lesson_progresses = list(enrollment.lesson_progress.all())
+            completed_count = len([lp for lp in lesson_progresses if lp.status == 'completed'])
+            can_continue = any(lp.status in ['not_started', 'in_progress'] for lp in lesson_progresses)
+            next_lesson = next((lp for lp in lesson_progresses if lp.status in ['not_started', 'in_progress']), None)
+
             progress_data = {
                 'enrollment': enrollment,
                 'course': enrollment.course,
                 'progress_percentage': enrollment.progress_percentage,
                 'total_lessons': enrollment.course.total_lessons,
-                'completed_lessons': enrollment.lesson_progress.filter(status='completed').count(),
+                'completed_lessons': completed_count,
                 'last_accessed': enrollment.last_accessed,
-                'can_continue': enrollment.lesson_progress.filter(status__in=['not_started', 'in_progress']).exists(),
-                'next_lesson': enrollment.lesson_progress.filter(status__in=['not_started', 'in_progress']).first(),
+                'can_continue': can_continue,
+                'next_lesson': next_lesson,
             }
             course_progress.append(progress_data)
         context['course_progress'] = course_progress
@@ -556,7 +576,9 @@ def unified_profile(request, section='overview'):
 
 def calculate_learning_streak(recent_activity):
     """Calculate consecutive days of learning activity"""
-    if not recent_activity.exists():
+    # Ensure it's a list/sequence to avoid multiple query evaluations
+    activities = list(recent_activity) if not isinstance(recent_activity, list) else recent_activity
+    if not activities:
         return 0
 
     from datetime import date, timedelta
@@ -566,7 +588,7 @@ def calculate_learning_streak(recent_activity):
 
     # Group activities by date
     activity_dates = set()
-    for activity in recent_activity:
+    for activity in activities:
         activity_dates.add(activity.completed_at.date())
 
     # Count consecutive days backwards from today
@@ -584,7 +606,7 @@ def get_payment_history(user):
     payment_history = []
 
     # Get payments from Payment model (primary source)
-    payments = Payment.objects.filter(user=user).order_by('-created_at')
+    payments = Payment.objects.filter(user=user).select_related('course').order_by('-created_at')
 
     for payment in payments:
         payment_history.append({

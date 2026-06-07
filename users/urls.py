@@ -1,5 +1,5 @@
 from django.urls import path
-from blogapp import views
+from django.views.generic import RedirectView
 from . import views
 from . import instructor_views
 from . import auth_views
@@ -10,11 +10,12 @@ from .magic_link_views import magic_login_view, magic_link_status_view, validate
 app_name = 'users'
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('aboutus/', views.aboutus, name='aboutus'),
-    path('programs/', views.programs, name='programs'),
-    path('ourteam/', views.ourteam, name='ourteam'),
-    path('contactus/', views.contactus, name='contactus'),
+    # Redirect legacy marketing URLs to the modern yitp app versions
+    path('', RedirectView.as_view(url='/', permanent=True), name='home'),
+    path('aboutus/', RedirectView.as_view(url='/about/', permanent=True), name='aboutus'),
+    path('programs/', RedirectView.as_view(url='/web_courses_list/', permanent=True), name='programs'),
+    path('ourteam/', RedirectView.as_view(url='/team/', permanent=True), name='ourteam'),
+    path('contactus/', RedirectView.as_view(url='/contact/', permanent=True), name='contactus'),
     path('test-email/', views.test_email_delivery, name='test_email'),
 
     # Enhanced Authentication URLs
@@ -72,6 +73,3 @@ urlpatterns = [
     path('superuser/create-user/', views.superuser_create_user, name='superuser_create_user'),
 
 ]
-
-
-# Updated: 2025-09-08T01:13:26.981407

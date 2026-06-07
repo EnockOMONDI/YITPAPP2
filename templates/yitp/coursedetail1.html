@@ -1,165 +1,564 @@
-{% extends 'yitp/base.html' %}
-{% load static %}
+{% extends 'unified/base.html' %} {% load static %} {% block title %}Mentorship
+Programme — Youth Impact Global{% endblock %} {% block extra_css %}
+<style>
+  /* ─── MP Page Styles ─── */
+  :root {
+    --yitp-orange: #ff5d15;
+    --yitp-purple: #341c67;
+    --yitp-body: #6d6e75;
+    --yitp-heading: #1a1a2e;
+    --yitp-bg-light: #f8f9fa;
+  }
 
-{% block content %}
+  .mp-section-tag {
+    display: block;
+    color: var(--yitp-orange);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: none;
+    margin-bottom: 15px;
+  }
 
+  .mp-h2 {
+    color: var(--yitp-heading);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 25px;
+  }
 
-<section class="page__title-area pt-120 pb-90">
-    <div class="page__title-shape">
-      
+  .mp-body {
+    color: var(--yitp-body);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  /* Breadcrumb */
+  .mp-breadcrumb {
+    margin-bottom: 20px;
+  }
+  .mp-breadcrumb ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .mp-breadcrumb ul li {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .mp-breadcrumb ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .mp-breadcrumb ul li:not(:last-child)::after {
+    content: "/";
+    margin-left: 10px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Feature list item */
+  .mp-feature-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 25px;
+    background: #fff;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  .mp-feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  }
+  .mp-feature-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 93, 21, 0.1);
+    color: var(--yitp-orange);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .mp-feature-item h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--yitp-heading);
+    margin-bottom: 8px;
+  }
+  .mp-feature-item p {
+    font-size: 0.95rem;
+    color: var(--yitp-body);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Stat cards premium */
+  .mp-stats-section {
+    background: var(--yitp-purple);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .mp-stat-item-premium {
+    text-align: center;
+    padding: 50px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    backdrop-filter: blur(5px);
+  }
+  .mp-stat-item-premium:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 93, 21, 0.5);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  .mp-stat-number-premium {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--yitp-orange);
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .mp-stat-label-premium {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
+  .mp-stat-desc-premium {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Process step cards */
+  .mp-process-step {
+    position: relative;
+    padding-left: 80px;
+    margin-bottom: 40px;
+  }
+  .mp-process-step::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 50px;
+    bottom: -40px;
+    width: 2px;
+    background: rgba(255, 93, 21, 0.2);
+    border-style: dashed;
+  }
+  .mp-process-step:last-child::before {
+    display: none;
+  }
+  .mp-step-number {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border: 2px solid var(--yitp-orange);
+    color: var(--yitp-orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+  .mp-process-step:hover .mp-step-number {
+    background: var(--yitp-orange);
+    color: #fff;
+  }
+  .mp-process-step h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--yitp-heading);
+    margin-bottom: 12px;
+  }
+  .mp-process-step p {
+    font-size: 1rem;
+    color: var(--yitp-body);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* CTA */
+  .mp-cta-box {
+    background: var(--yitp-purple);
+    border-radius: 30px;
+    padding: 80px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mp-cta-box h2 {
+    color: #fff;
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+  }
+  .mp-cta-box p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+  }
+
+  .mp-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--yitp-orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 18px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  .mp-cta-btn:hover {
+    background: #fff;
+    color: var(--yitp-orange);
+    transform: translateY(-5px);
+  }
+  .mp-cta-btn-white {
+    background: #fff;
+    color: var(--yitp-purple);
+  }
+  .mp-cta-btn-white:hover {
+    background: var(--yitp-orange);
+    color: #fff;
+  }
+</style>
+{% endblock %} {% block content %}
+
+<!-- ───────────────────────────────────────────────
+     HERO / BREADCRUMB
+──────────────────────────────────────────────── -->
+<section
+  class="page__title-area pt-150 pb-120 d-flex align-items-center"
+  style="
+    background: linear-gradient(135deg, var(--yitp-purple) 0%, #25124d 100%);
+    position: relative;
+    overflow: hidden;
+  "
+>
+  <div class="container" style="position: relative; z-index: 2">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-center">
+        <div class="mp-breadcrumb">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'yitp:web_courses_list' %}">Programmes</a></li>
+            <li>Mentorship Programme</li>
+          </ul>
+        </div>
+
+        <h1
+          style="
+            color: #fff;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+          "
+        >
+          Mentorship <span style="color: var(--yitp-orange)">Programme</span>
+        </h1>
+
+        <p
+          style="
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+          "
+        >
+          Addressing the obstacles hindering young people from entrepreneurial
+          and innovation breakthroughs — one mentor at a time.
+        </p>
+      </div>
     </div>
-    <style>
-      body {
-          font-family: Arial, sans-serif;
-          margin: 40px;
-          background-color: #f8f9fa;
-          color: #333;
-      }
-      .course-container {
-          max-width: 900px;
-          margin: 0 auto;
-          background: #fff;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      h1, h2, h3 {
-          color: #341C67;
-      }
-      h1 {
-          text-align: center;
-      }
-      .module {
-          margin-top: 20px;
-          padding: 15px;
-          background: #f1f1f1;
-          border-left: 5px solid #007bff;
-          border-radius: 5px;
-      }
-      .module h3 {
-          margin-bottom: 5px;
-      }
-      ul {
-          list-style-type: none;
-          padding: 0;
-      }
-      ul li {
-          padding: 5px 0;
-      }
-      .activity {
-          background: #dff9fb;
-          padding: 10px;
-          border-left: 5px solid #17a2b8;
-          border-radius: 5px;
-          margin-top: 10px;
-      }
-      .resources, .outcomes {
-          margin-top: 30px;
-          padding: 15px;
-          background: #eef2f3;
-          border-left: 5px solid #28a745;
-          border-radius: 5px;
-      }
-  </style>
-</head>
-<body>
+  </div>
+</section>
 
-<div class="course-container">
-  <h1>Entrepreneurship Skills and Business Alignment (ESBA)</h1>
-  <p><strong>Unit Title:</strong> Entrepreneurship Skills and Business Alignment (ESBA)</p>
-  <p><strong>Objective:</strong> Equip participants with foundational entrepreneurship skills and business management strategies for starting, running, and sustaining a successful business.</p>
+<!-- ───────────────────────────────────────────────
+     ABOUT SECTION
+──────────────────────────────────────────────── -->
+<section style="background: #fff; padding: 120px 0">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <!-- Text -->
+      <div class="col-lg-6 order-2 order-lg-1">
+        <span class="mp-section-tag">About The Programme</span>
 
-  <div class="module">
-      <h3>Topic 1: Starting a Business</h3>
-      <p><strong>Objective:</strong> Understand the essential steps in launching a business.</p>
-      <ul>
-          <li>Definitions of Entrepreneurship</li>
-          <li>Ideation: Generating and selecting business ideas</li>
-          <li>Business Plan Development</li>
-          <li>Business Structures (Types & Sizes)</li>
-          <li>Understanding Basic Financial Statements</li>
-      </ul>
-      <div class="activity">
-          <strong>Activity:</strong> Develop a draft business plan based on your business idea.
+        <h2 class="mp-h2">
+          Great ideas deserve the right
+          <span style="color: var(--yitp-orange)">guidance to succeed.</span>
+        </h2>
+
+        <p class="mp-body">
+          Our Mentorship Programme (MP) is an impactful initiative designed to
+          bridge the gap between brilliant ideas and sustainable business
+          success. Most young people have great ideas — but why do those ideas
+          fail to grow into successful business products? We provide the
+          strategic mentorship needed to master business basics and build for
+          the long term.
+        </p>
+
+        <!-- Feature items -->
+        <div class="mp-feature-item">
+          <div class="mp-feature-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div>
+            <h5>Up to One Year of Mentorship</h5>
+            <p>
+              Our mentors walk with you through every stage of building your
+              business, offering continuous support and advice.
+            </p>
+          </div>
+        </div>
+
+        <div class="mp-feature-item">
+          <div class="mp-feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div>
+            <h5>Flexible Weekly Sessions</h5>
+            <p>
+              Choose between online and physical sessions with schedules that
+              respect your existing commitments.
+            </p>
+          </div>
+        </div>
       </div>
-  </div>
 
-  <div class="module">
-      <h3>Topic 2: Building & Actualizing a Business</h3>
-      <p><strong>Objective:</strong> Learn the key elements in turning a business plan into a reality.</p>
-      <ul>
-          <li>Choosing the Right Business Premises</li>
-          <li>Alternative Ways to Source Capital</li>
-          <li>Identifying & Hiring the Right Skills & Labor</li>
-          <li>Understanding Business Licensing & Regulatory Compliance</li>
-      </ul>
-      <div class="activity">
-          <strong>Activity:</strong> Group discussion on common funding sources for startups.
+      <!-- Image -->
+      <div class="col-lg-6 order-1 order-lg-2">
+        <div style="position: relative">
+          <div
+            style="
+              border-radius: 24px;
+              overflow: hidden;
+              box-shadow: 0 30px 70px rgba(26, 26, 46, 0.15);
+              position: relative;
+              z-index: 2;
+            "
+          >
+            <img
+              src="{% static 'assets/img/about/abt2.webp' %}"
+              alt="Mentorship session at Youth Impact Global"
+              style="
+                width: 100%;
+                height: 550px;
+                object-fit: cover;
+                display: block;
+              "
+            />
+          </div>
+        </div>
       </div>
+    </div>
   </div>
+</section>
 
-  <div class="module">
-      <h3>Topic 3: Business Management</h3>
-      <p><strong>Objective:</strong> Explore the fundamental disciplines of managing a business effectively.</p>
-      <ul>
-          <li>Strategic Planning</li>
-          <li>Financial Management</li>
-          <li>Marketing & Sales Strategies</li>
-          <li>Operations Management</li>
-          <li>Human Resource Management</li>
-          <li>Technology & Equipment Integration</li>
-          <li>Effective Business Communication</li>
-      </ul>
-      <div class="activity">
-          <strong>Activity:</strong> Create a simple business budget and marketing plan.
+<!-- ───────────────────────────────────────────────
+     STATS SECTION
+──────────────────────────────────────────────── -->
+<section class="mp-stats-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="mp-stat-item-premium">
+          <span class="mp-stat-number-premium">1 yr</span>
+          <h5 class="mp-stat-label-premium">Duration</h5>
+          <p class="mp-stat-desc-premium">
+            A comprehensive one-year journey to build and scale your business
+            with expert help.
+          </p>
+        </div>
       </div>
-  </div>
 
-  <div class="module">
-      <h3>Topic 4: Business Sustainability</h3>
-      <p><strong>Objective:</strong> Understand how to ensure long-term business success.</p>
-      <ul>
-          <li>Meeting Customer Needs</li>
-          <li>Industry Dynamics & Competitive Advantage</li>
-          <li>Innovation & Authenticity in Business</li>
-          <li>Avoiding Complacency & Striving for Operational Excellence</li>
-          <li>Integrity & Business Ethics</li>
-          <li>Flexibility in Business Strategies</li>
-          <li>Building Brand Loyalty & Customer Retention</li>
-      </ul>
-      <div class="activity">
-          <strong>Activity:</strong> Identify key risks in business and how to mitigate them.
+      <div class="col-lg-3 col-md-6">
+        <div class="mp-stat-item-premium">
+          <span class="mp-stat-number-premium">5</span>
+          <h5 class="mp-stat-label-premium">Focus Areas</h5>
+          <p class="mp-stat-desc-premium">
+            Covering Mindset, Entrepreneurship, Leadership, Talent, and
+            practical Business Mentorship.
+          </p>
+        </div>
       </div>
-  </div>
 
-  <div class="resources">
-      <h3>📚 Learning Resources</h3>
-      <ul>
-          <li>Case studies on successful entrepreneurs</li>
-          <li>Business strategy insights from Harvard Business Review</li>
-          <li>Recommended Books:
-              <ul>
-                  <li>The Lean Startup by Eric Ries</li>
-                  <li>Rich Dad Poor Dad by Robert Kiyosaki</li>
-                  <li>Blue Ocean Strategy by W. Chan Kim & Renée Mauborgne</li>
-              </ul>
-          </li>
-      </ul>
-  </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="mp-stat-item-premium">
+          <span class="mp-stat-number-premium">100%</span>
+          <h5 class="mp-stat-label-premium">Commitment</h5>
+          <p class="mp-stat-desc-premium">
+            Dedicated one-on-one support from mentors who are invested in your
+            personal growth.
+          </p>
+        </div>
+      </div>
 
-  <div class="outcomes">
-      <h3>🎯 Course Outcomes</h3>
-      <ul>
-          <li>Ability to create a structured business plan.</li>
-          <li>Knowledge of financial planning and business structures.</li>
-          <li>Understanding of marketing, sales, and business management principles.</li>
-          <li>Strategies for business sustainability and growth.</li>
-      </ul>
+      <div class="col-lg-3 col-md-6">
+        <div class="mp-stat-item-premium">
+          <span class="mp-stat-number-premium">2×</span>
+          <h5 class="mp-stat-label-premium">Sessions</h5>
+          <p class="mp-stat-desc-premium">
+            Bi-weekly sessions tailored to your schedule, available both
+            virtually and in-person.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-<br>
-<br>
-<br><br><a href= "{% url 'yitp:registration2' %}" class="e-btn">Register for the course</a>
-</div>
- </section>
+</section>
+
+<!-- ───────────────────────────────────────────────
+     LEARNING JOURNEY (Focus Areas)
+──────────────────────────────────────────────── -->
+<section style="background: #fff; padding: 120px 0">
+  <div class="container">
+    <div
+      class="row justify-content-center text-center"
+      style="margin-bottom: 80px"
+    >
+      <div class="col-lg-8">
+        <span class="mp-section-tag">What You Will Learn</span>
+        <h2 class="mp-h2">Five core focus areas to transform your future</h2>
+        <p class="mp-body">
+          Our curriculum is designed to provide a holistic approach to personal
+          and professional development.
+        </p>
+      </div>
+    </div>
+
+    <div class="row align-items-center g-5">
+      <!-- Image column -->
+      <div class="col-lg-6">
+        <div
+          style="
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.1);
+          "
+        >
+          <img
+            src="{% static 'assets/img/about/abt1.webp' %}"
+            alt="Mentors and mentees working together"
+            style="
+              width: 100%;
+              height: 650px;
+              object-fit: cover;
+              display: block;
+            "
+          />
+        </div>
+      </div>
+
+      <!-- Steps column -->
+      <div class="col-lg-6">
+        <div style="padding-left: 20px">
+          <div class="mp-process-step">
+            <div class="mp-step-number">01</div>
+            <h5>Mindset Transformation</h5>
+            <p>
+              Unlocking self-awareness, purpose and personal initiative. We help
+              you shift from a fixed mindset to a growth mindset that drives
+              real results.
+            </p>
+          </div>
+
+          <div class="mp-process-step">
+            <div class="mp-step-number">02</div>
+            <h5>Entrepreneurship & Innovation</h5>
+            <p>
+              Generating viable ideas and implementing sustainable strategies.
+              From ideation to execution, we cover all the essentials.
+            </p>
+          </div>
+
+          <div class="mp-process-step">
+            <div class="mp-step-number">03</div>
+            <h5>Leadership Development</h5>
+            <p>
+              Instilling accountability, vision and team stewardship skills that
+              will help you lead with confidence and clarity.
+            </p>
+          </div>
+
+          <div class="mp-process-step">
+            <div class="mp-step-number">04</div>
+            <h5>Talent Activation</h5>
+            <p>
+              Harnessing your natural strengths and aligning them with the right
+              career and business routes to maximise your impact.
+            </p>
+          </div>
+
+          <div class="mp-process-step">
+            <div class="mp-step-number">05</div>
+            <h5>Business Mentorship</h5>
+            <p>
+              One-on-one expert guidance to establish, manage and sustain your
+              business operations for the long term.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────
+     CTA BANNER
+──────────────────────────────────────────────── -->
+<section style="background: #fff; padding: 0 0 120px 0">
+  <div class="container">
+    <div class="mp-cta-box">
+      <h2>Ready to start your journey?</h2>
+      <p>
+        Connect with experienced mentors and fast-track your path to sustainable
+        business growth. Join the Mentorship Programme today.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="{% url 'register' %}" class="mp-cta-btn mp-cta-btn-white">
+          Join Programme <i class="fas fa-arrow-right"></i>
+        </a>
+        <a
+          href="{% url 'yitp:contact' %}"
+          class="mp-cta-btn"
+          style="background: transparent; border: 2px solid #fff"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock %}

@@ -41,7 +41,7 @@ def detect_environment():
     """
 
     # Method 1: Explicit environment variable (highest priority)
-    env_setting = os.environ.get('DJANGO_ENV', '').lower()
+    env_setting = config('DJANGO_ENV', default='').lower()
     if env_setting == 'production':
         return True
     elif env_setting == 'development':
@@ -76,7 +76,7 @@ IS_PRODUCTION = detect_environment()
 IS_DEVELOPMENT = not IS_PRODUCTION
 
 # Environment indicator
-print(f"🔧 YITP Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
+print(f"[!] YITP Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
 
 # =============================================================================
 # CORE DJANGO SETTINGS
@@ -89,7 +89,7 @@ else:
     SECRET_KEY = config('SECRET_KEY', default='yitp-dev-key-not-for-production-use-only')
 
 # Debug Mode
-DEBUG = not IS_PRODUCTION
+DEBUG = config('DEBUG', default=not IS_PRODUCTION, cast=bool)
 
 # Custom Error Pages Configuration
 # Enable custom error pages in production
@@ -123,12 +123,12 @@ TINYMCE_API_KEY = config('TINYMCE_API_KEY')
 
 if IS_PRODUCTION:
     # Production Security Settings
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = config('SECURE_HSTS_SECONDS', default=31536000, cast=int)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = config('SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True, cast=bool)
+    SECURE_HSTS_PRELOAD = config('SECURE_HSTS_PRELOAD', default=True, cast=bool)
+    SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=True, cast=bool)
+    SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=True, cast=bool)
+    CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=True, cast=bool)
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
@@ -210,7 +210,16 @@ MIDDLEWARE = [
 if IS_DEVELOPMENT:
     # Remove security middleware that might interfere with development
     MIDDLEWARE = [m for m in MIDDLEWARE if 'SecurityMiddleware' not in m]
-    print("🔧 Removed SecurityMiddleware for development")
+    print("[!] Removed SecurityMiddleware for development")
+
+# Force Django Debug Toolbar when DEBUG is true, even if simulating production locally
+if DEBUG:
+    if 'debug_toolbar' not in INSTALLED_APPS:
+        INSTALLED_APPS.append('debug_toolbar')
+    if 'debug_toolbar.middleware.DebugToolbarMiddleware' not in MIDDLEWARE:
+        MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    INTERNAL_IPS = ['127.0.0.1', 'localhost']
+    print("[!] Enabled Django Debug Toolbar (DEBUG is True)")
 
 ROOT_URLCONF = 'blog.urls'
 
@@ -245,7 +254,7 @@ WHITENOISE_MANIFEST_STRICT = False
 
 if IS_PRODUCTION:
     # Production: PostgreSQL (Supabase) Database
-    print("📊 Using PostgreSQL database for production")
+    print("[*] Using PostgreSQL database for production")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -261,20 +270,12 @@ if IS_PRODUCTION:
         }
     }
 else:
-    # Development/local: Use the same Supabase/PostgreSQL settings as production (DB_* env vars)
-    print("📊 Using Supabase/PostgreSQL database for development/local")
+    # Development/local: Default to SQLite for ease of setup
+    print("[*] Using SQLite database for development/local")
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
-            'OPTIONS': {
-                'sslmode': 'require',
-                'connect_timeout': 30,
-            },
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
@@ -294,6 +295,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+
+AUTHENTICATION_BACKENDS = [
+    'users.backends.EmailOrUsernameBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 
@@ -335,7 +342,7 @@ STATICFILES_FINDERS = [
 
 if IS_PRODUCTION:
     # Production: Collect static files for deployment
-    print("📁 Using production static files configuration")
+    print("[+] Using production static files configuration")
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
@@ -344,7 +351,7 @@ if IS_PRODUCTION:
         os.makedirs(STATIC_ROOT, exist_ok=True)
 else:
     # Development: Serve static files directly
-    print("📁 Using development static files configuration")
+    print("[+] Using development static files configuration")
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Still needed for collectstatic
 
     # Ensure staticfiles directory exists to prevent warnings
@@ -684,7 +691,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 if IS_PRODUCTION:
     # Production: Mailtrap API Configuration
-    print("📧 Using Mailtrap API for production email")
+    print("[@] Using Mailtrap API for production email")
 
     # Mailtrap API Configuration
     MAILTRAP_API_TOKEN = config('MAILTRAP_API_TOKEN')
@@ -698,7 +705,7 @@ if IS_PRODUCTION:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_TIMEOUT = 30
 
-    print(f"✅ Mailtrap API configured with from email: {DEFAULT_FROM_EMAIL}")
+    print(f"Mailtrap API configured with from email: {DEFAULT_FROM_EMAIL}")
 
     # Legacy Gmail SMTP settings (commented out for reference)
     # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -710,7 +717,7 @@ if IS_PRODUCTION:
     # EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 else:
     # Development: Console Email Backend
-    print("📧 Using console email backend for development")
+    print("[@] Using console email backend for development")
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = 'development@yitp.local'
     EMAIL_TIMEOUT = 10
@@ -991,41 +998,41 @@ export SITE_URL="https://yourdomain.com"
 # =============================================================================
 
 print("=" * 60)
-print(f"🚀 YITP LMS CONFIGURATION SUMMARY")
+print(f"[*] YITP LMS CONFIGURATION SUMMARY")
 print("=" * 60)
-print(f"🔧 Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
-print(f"🐛 Debug Mode: {DEBUG}")
-print("📊 Database: PostgreSQL (Supabase)")
-print(f"📧 Email Backend: {'Gmail SMTP' if IS_PRODUCTION else 'Console'}")
-print(f"🔒 Security: {'Production (HTTPS)' if IS_PRODUCTION else 'Development (HTTP)'}")
-print(f"📁 Static Files: {'Production (Collected)' if IS_PRODUCTION else 'Development (Direct)'}")
-print(f"🌐 Allowed Hosts: {ALLOWED_HOSTS}")
+print(f"[!] Environment: {'PRODUCTION' if IS_PRODUCTION else 'DEVELOPMENT'}")
+print(f"[-] Debug Mode: {DEBUG}")
+print(f"[*] Database: {'PostgreSQL' if IS_PRODUCTION else 'SQLite'}")
+print(f"[@] Email Backend: {'Gmail SMTP' if IS_PRODUCTION else 'Console'}")
+print(f"[#] Security: {'Production (HTTPS)' if IS_PRODUCTION else 'Development (HTTP)'}")
+print(f"[+] Static Files: {'Production (Collected)' if IS_PRODUCTION else 'Development (Direct)'}")
+print(f"[%] Allowed Hosts: {ALLOWED_HOSTS}")
 print("=" * 60)
 
 # Environment switching instructions
 if IS_DEVELOPMENT:
-    print("💡 DEVELOPMENT MODE ACTIVE")
+    print("DEVELOPMENT MODE ACTIVE")
     print("   • Using PostgreSQL (Supabase) database for local development")
     print("   • Using console email backend (emails printed to terminal)")
     print("   • Security settings relaxed for HTTP development server")
     print("   • Static files served directly by Django")
     print("")
-    print("🚀 To switch to PRODUCTION mode:")
+    print("To switch to PRODUCTION mode:")
     print("   • Set environment variable: export DJANGO_ENV=production")
     print("   • Or deploy to production platform (Render, Heroku, etc.)")
     print("   • Or ensure production environment variables are set")
 else:
-    print("🚀 PRODUCTION MODE ACTIVE")
+    print("PRODUCTION MODE ACTIVE")
     print("   • Using PostgreSQL database (Supabase)")
     print("   • Using Gmail SMTP for email delivery")
     print("   • Production security settings enabled")
     print("   • Static files collected for deployment")
     print("")
-    print("🛠️ To switch to DEVELOPMENT mode:")
+    print("To switch to DEVELOPMENT mode:")
     print("   • Set environment variable: export DJANGO_ENV=development")
     print("   • Or run locally with: python manage.py runserver")
     print("   • Or unset production environment variables")
 
 print("=" * 60)
-print("✅ YITP LMS: CONFIGURATION COMPLETE")
+print("DONE: YITP LMS: CONFIGURATION COMPLETE")
 print("=" * 60)

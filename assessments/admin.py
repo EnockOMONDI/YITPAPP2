@@ -266,5 +266,51 @@ admin.site.register(SelfAssessment)
 admin.site.register(PeerReview)
 admin.site.register(GradingScale)
 admin.site.register(AssessmentTemplate)
-admin.site.register(AssignmentSubmission)
-admin.site.register(SelfAssessmentResponse)
+
+
+@admin.register(AssignmentSubmission)
+class AssignmentSubmissionAdmin(admin.ModelAdmin):
+    """Optimized admin for assignment submissions"""
+    list_display = ['id', 'student_name', 'assignment_title', 'status', 'grade', 'submitted_at', 'is_late']
+    list_filter = ['status', 'is_late', 'assignment__lesson__module__course']
+    search_fields = [
+        'student__email', 'student__username', 'student__first_name', 'student__last_name',
+        'assignment__title', 'assignment__lesson__module__course__title'
+    ]
+    list_select_related = ['student', 'assignment__lesson__module__course', 'graded_by']
+    list_per_page = 25
+    ordering = ['-submitted_at']
+
+    def student_name(self, obj):
+        return obj.student.get_full_name() or obj.student.username
+    student_name.short_description = 'Student'
+    student_name.admin_order_field = 'student__username'
+
+    def assignment_title(self, obj):
+        return obj.assignment.title
+    assignment_title.short_description = 'Assignment'
+    assignment_title.admin_order_field = 'assignment__title'
+
+
+@admin.register(SelfAssessmentResponse)
+class SelfAssessmentResponseAdmin(admin.ModelAdmin):
+    """Optimized admin for self-assessment responses"""
+    list_display = ['id', 'student_name', 'assessment_title', 'score', 'completed_at']
+    list_filter = ['assessment']
+    search_fields = [
+        'user__email', 'user__username', 'user__first_name', 'user__last_name',
+        'assessment__title'
+    ]
+    list_select_related = ['user', 'assessment']
+    list_per_page = 25
+    ordering = ['-completed_at']
+
+    def student_name(self, obj):
+        return obj.user.get_full_name() or obj.user.username
+    student_name.short_description = 'Student'
+    student_name.admin_order_field = 'user__username'
+
+    def assessment_title(self, obj):
+        return obj.assessment.title
+    assessment_title.short_description = 'Self Assessment'
+    assessment_title.admin_order_field = 'assessment__title'

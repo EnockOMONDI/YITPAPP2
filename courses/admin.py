@@ -59,6 +59,8 @@ class CourseAdmin(admin.ModelAdmin):
         'created_at', 'instructor', 'reviewed_by'
     ]
     search_fields = ['title', 'description', 'instructor__email', 'instructor__first_name', 'instructor__last_name']
+    list_select_related = ['instructor__instructor_profile', 'category', 'reviewed_by']
+    list_per_page = 25
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ['created_at', 'updated_at', 'enrollment_count_display', 'submitted_for_review_at', 'reviewed_at']
     filter_horizontal = []
@@ -94,7 +96,7 @@ class CourseAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         """Filter courses based on instructor role"""
-        qs = super().get_queryset(request)
+        qs = super().get_queryset(request).select_related('instructor__instructor_profile', 'category', 'reviewed_by')
 
         # System admins see all courses
         if request.user.is_superuser:
@@ -287,6 +289,8 @@ class ModuleAdmin(admin.ModelAdmin):
     ]
     list_filter = ['is_published', 'course', 'course__instructor', 'created_at']
     search_fields = ['title', 'description', 'course__title', 'course__instructor__first_name']
+    list_select_related = ['course']
+    list_per_page = 25
     readonly_fields = ['created_at', 'updated_at', 'lesson_count_display']
     inlines = [LessonInline, ModuleInstructorInline]
     ordering = ['course', 'sort_order']
@@ -310,7 +314,7 @@ class ModuleAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         """Filter modules based on instructor role"""
-        qs = super().get_queryset(request)
+        qs = super().get_queryset(request).select_related('course')
 
         # System admins see all modules
         if request.user.is_superuser:
@@ -375,6 +379,8 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ('title', 'module', 'content_type', 'sort_order', 'is_published', 'is_mandatory')
     list_filter = ('content_type', 'is_published', 'is_mandatory', 'module__course')
     search_fields = ('title', 'content', 'module__title')
+    list_select_related = ['module__course']
+    list_per_page = 25
     readonly_fields = ('created_at', 'updated_at')
     ordering = ('module', 'sort_order')
     
@@ -416,6 +422,8 @@ class CourseTaggingAdmin(admin.ModelAdmin):
     list_display = ('course', 'tag', 'created_at')
     list_filter = ('tag', 'created_at')
     search_fields = ('course__title', 'tag__name')
+    list_select_related = ('course', 'tag')
+    list_per_page = 25
 
 
 @admin.register(CourseReview)
@@ -426,4 +434,6 @@ class CourseReviewAdmin(admin.ModelAdmin):
     list_display = ('course', 'student', 'rating', 'is_published', 'created_at')
     list_filter = ('rating', 'is_published', 'created_at')
     search_fields = ('course__title', 'student__email', 'review_text')
+    list_select_related = ('course', 'student')
+    list_per_page = 25
     readonly_fields = ('created_at', 'updated_at')

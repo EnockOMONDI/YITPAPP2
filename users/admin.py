@@ -533,6 +533,7 @@ class OTPVerificationAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
+    list_select_related = ['user']
     list_display = [
         'user_info', 'email_verification_status', 'location_display_admin',
         'payment_status_badge', 'profile_completion_display', 'last_activity',

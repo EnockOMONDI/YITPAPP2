@@ -74,13 +74,14 @@ class TrialAccessService:
             return None
     
     @staticmethod
-    def can_access_lesson(user, lesson):
+    def can_access_lesson(user, lesson, enrollment=None):
         """
         Check if user can access a specific lesson based on trial boundaries
         
         Args:
             user: User object
             lesson: Lesson object
+            enrollment: Optional pre-fetched Enrollment object
             
         Returns:
             dict: {
@@ -90,6 +91,42 @@ class TrialAccessService:
                 'lesson_position': int or None
             }
         """
+        # If enrollment is pre-fetched, we can determine trial status immediately
+        if enrollment is not None:
+            if enrollment.enrollment_type != 'trial':
+                return {
+                    'can_access': True,
+                    'reason': 'User has regular course enrollment',
+                    'is_trial_user': False,
+                    'lesson_position': None
+                }
+            else:
+                # Trial enrollment is already provided
+                trial_enrollment = enrollment
+                can_access = trial_enrollment.can_access_lesson_in_trial(lesson)
+                
+                # Get lesson position for context
+                course_lessons = lesson.module.course.get_ordered_lessons()
+                try:
+                    lesson_position = list(course_lessons).index(lesson) + 1
+                except ValueError:
+                    lesson_position = None
+                
+                if can_access:
+                    return {
+                        'can_access': True,
+                        'reason': f'Trial access granted (lesson {lesson_position})',
+                        'is_trial_user': True,
+                        'lesson_position': lesson_position
+                    }
+                else:
+                    return {
+                        'can_access': False,
+                        'reason': 'Trial limit reached. Please purchase the course to continue.',
+                        'is_trial_user': True,
+                        'lesson_position': lesson_position
+                    }
+
         # Get user's trial status
         trial_status = TrialAccessService.get_user_trial_status(user)
         
